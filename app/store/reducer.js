@@ -1,0 +1,96 @@
+// import {
+//   createEntityAdapter,
+//   createSlice
+// } from '@reduxjs/toolkit';
+// import { PopulateRestaurantList } from './thunks';
+
+// export const restaurantAdapter = createEntityAdapter({
+//   sortComparer: (a, b) => a.restaurant.localeCompare(b.restaurant),
+// });
+// export const Reducer = createSlice({
+//   name: 'restaurant',
+//   initialState:
+//     restaurantAdapter.getInitialState({
+//       loading: 'idle',
+//     }),
+//   reducers: {
+//     restaurantAdded: restaurantAdapter.addOne,
+//     restaurantLoading(state, action) {
+//       if (state.loading === 'idle') {
+//         state.loading = 'pending';
+//       }
+//     },
+//     restaurantUpdated: restaurantAdapter.updateOne,
+//   },
+//   extraReducers: builder => {
+//     builder.addCase(PopulateRestaurantList.fulfilled, (state, payload) => {
+//       if (state.loading === 'pending') {
+//         restaurantAdapter.setAll(state, payload);
+//         state.loading = 'idle';
+//       }
+//       return state;
+//     });
+//   }
+// });
+
+// export const { restaurantAdded, restaurantUpdated, restaurantLoading } = Reducer.actions;
+// export default Reducer.reducer;
+
+
+import {
+  createEntityAdapter,
+  createSlice
+} from '@reduxjs/toolkit';
+import { AddOne, PopulateRestaurantList } from './thunks';
+
+export const restaurantAdapter = createEntityAdapter({
+  sortComparer: (a, b) => a.restaurant.localeCompare(b.restaurant),
+});
+export const Reducer = createSlice({
+  name: 'restaurant',
+  initialState: {
+    RESTAURANT: restaurantAdapter.getInitialState({
+      loading: 'idle',
+    }),
+    USER: {
+      ID: 1,
+      NAME: "Kasim",
+      AGE: 21,
+      EMAIL: "Mohamad@gmail.com",
+      PHONE: "0123456789",
+      RestaurantId: [1, 2, 3]
+    }
+  },
+
+  reducers: {
+    restaurantAdded: restaurantAdapter.addOne,
+    restaurantLoading(state, action) {
+      if (state.RESTAURANT.loading === 'idle') {
+        state.RESTAURANT.loading = 'pending';
+      }
+    },
+    restaurantUpdated: restaurantAdapter.updateOne,
+  },
+  extraReducers: builder => {
+    builder.addCase(PopulateRestaurantList.fulfilled, (state, payload) => {
+      if (state.RESTAURANT.loading === 'pending') {
+        restaurantAdapter.setAll(state.RESTAURANT, payload);
+        state.RESTAURANT.loading = 'idle';
+      }
+      return state;
+    });
+    builder.addCase(AddOne.fulfilled, (state, payload) => {
+      if (state.RESTAURANT.loading === 'pending') {
+        console.log(payload)
+        restaurantAdapter.addOne(state.RESTAURANT, payload);
+        state.RESTAURANT.loading = 'idle';
+      }
+      return state;
+    });
+  }
+});
+
+export const { restaurantAdded, restaurantUpdated, restaurantLoading } = Reducer.actions;
+export default Reducer.reducer;
+
+

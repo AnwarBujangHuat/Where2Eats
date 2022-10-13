@@ -1,0 +1,20 @@
+export const ConstString = { // name it to routes
+  HOME: 'Home',
+  LOGIN: 'Login',
+  REGISTER: 'Register',
+  RESTAURANT: 'Restaurant',
+  ROULETTE: 'Roulette',
+  PROFILE:'Profile',
+  BOTTOM: 'Bottom',
+  MENU: 'Menu',
+  QUOTES: 'What would you like to eat today?',
+  MENU_BOOK: 'Setup Your Menu Book',
+  WESTERN: 'Western',
+  MALAY: 'Malay',
+  CHINESE: 'Chinese',
+  INDIAN: 'Indian',
+  BORNEO: 'Borneo',
+  JAPANESE: 'Japanese',
+  DRINKS: 'Drinks',
+  DESSERT: 'Dessert'
+};
