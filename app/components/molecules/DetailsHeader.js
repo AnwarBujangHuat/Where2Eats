@@ -1,5 +1,4 @@
 import {
-  Dimensions,
   Image,
   ImageBackground,
   StyleSheet,
@@ -12,38 +11,22 @@ import addImage from '../../assets/addImage.png';
 import logoIcon from '../../assets/Logo.png';
 
 import { RateLabel } from '../atoms/RateLabel';
-import { Colors } from '../../Colors';
-import { SearchButton } from '../atoms/SearchButton';
 
-const { width } = Dimensions.get('window');
-
-export const DetailsHeader = ({
-  image, back, disabled, rating, rate = false, onPress, goToRating,
-  onSearch,
-  onChangeText,
-  onPressSearch,
-}) => {
+export const DetailsHeader = ({ image, back, disabled, rate = false }) => {
   const changeLogo = () => {};
+  const changeImage = () => {};
   return (
     <View style={styles.container}>
-      <TouchableOpacity onPress={onPress} disabled={disabled}>
+      <TouchableOpacity onPress={changeImage} disabled={disabled}>
         <ImageBackground
           source={image !== undefined ? { uri: image } : addImage}//image ? image : addImage
-          style={{
-            height: '100%', resizeMode: 'cover'
-          }}>
+          style={{ height: '100%', resizeMode: 'cover' }}>
           <View style={styles.rowContainer}>
-            <View style={{ width: width * 0.8, flexDirection: 'row' }}>
+            <View style={{ width: '80%' }}>
               <BackButton onPress={back}></BackButton>
-              {disabled &&
-                <SearchButton onSearch={onSearch} onChangeText={onChangeText} onPress={onPressSearch}></SearchButton>
-              }
             </View>
-            {rate &&
-              <RateLabel rating={rating} goToRating={goToRating} />
-            }
+            {rate && <RateLabel rating={4.1} />}
           </View>
-
           <TouchableOpacity style={styles.logoContainer} disabled={disabled} onPress={changeLogo}>
             <Image style={styles.icons} source={logoIcon} />
           </TouchableOpacity>
@@ -55,7 +38,8 @@ export const DetailsHeader = ({
 const styles = StyleSheet.create({
   rowContainer: {
     flexDirection: 'row',
-    marginTop: 10,
+    alignContent: 'center',
+    marginTop: 40,
   },
   logoContainer: {
     alignSelf: 'flex-start',
@@ -63,25 +47,15 @@ const styles = StyleSheet.create({
     borderRadius: 80,
     padding: 15,
     marginStart: '3%',
-    elevation: 5,
     shadowOffset: { width: -2, height: -4 },
     shadowColor: '$primaryColor',
     shadowOpacity: 0.1,
     shadowRadius: 2,
-    marginTop: 90,
+    marginTop: '25%',
   },
   container: {
+    height: '30%',
     zIndex: 2,
-    height: 220,
-    shadowRadius: 2,
-    shadowOffset: {
-      width: 0,
-      height: 3,
-    },
-    shadowColor: Colors.primaryColor,
-    shadowOpacity: .2,
-    borderBottomColor: Colors.primaryColor,
-    elevation: 10,
   },
   icons: {
     height: 80,

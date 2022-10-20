@@ -1,17 +1,16 @@
 import React from 'react';
 import {
+  Button,
   Dimensions,
+  ImageBackground,
+  Modal,
   SafeAreaView,
+  StyleSheet,
   Text,
-  TouchableOpacity,
   View
 } from 'react-native';
-import FastImage from 'react-native-fast-image';
-import Modal from 'react-native-modal';
-
 import nasiAyam from '../../assets/NasiAyam.jpg';
 import EStyleSheet from 'react-native-extended-stylesheet';
-import { Colors } from '../../Colors';
 
 const { width } = Dimensions.get('window');
 
@@ -24,37 +23,24 @@ export const ModalMenuDetails = ({ closeModal, isModalVisible, foodItem }) => {
         <SafeAreaView style={styles.screen}>
           <Modal animationType="none"
                  transparent visible={isModalVisible}
-                 presentationStyle="overFullScreen"
-                 onBackdropPress={closeModal}
-                 onDismiss={closeModal}>
-            <View style={styles.modalView}>
-              <FastImage
-                resizeMode={FastImage.resizeMode.cover}
-                source={image !== undefined ? {
-                  uri: image,
-                  priority: FastImage.priority.high,
-                } : nasiAyam}
-                style={
-                  {
-                    height: 270,
-                  }}>
-
-              </FastImage>
-              <View style={styles.container}>
-                <Text style={styles.header}>{name}</Text>
-                <Text style={styles.price}>{'RM' + price}</Text>
-                <Text style={styles.desc}>{desc}</Text>
+                 presentationStyle="overFullScreen">
+            <View style={styles.viewWrapper}>
+              <View style={styles.modalView}>
+                <ImageBackground
+                  source={image !== undefined ? { uri: image } : nasiAyam}
+                  style={
+                    {
+                      height: 200,
+                      resizeMode: 'contain',
+                    }}>
+                </ImageBackground>
+                <View style={styles.container}>
+                  <Text style={styles.header}>{name}</Text>
+                  <Text style={styles.price}>{'RM' + price}</Text>
+                  <Text style={styles.desc}>{desc}</Text>
+                </View>
+                <Button title="OK" color={EStyleSheet.value('$primaryColor')} onPress={closeModal} />
               </View>
-              <TouchableOpacity style={{
-                backgroundColor: 'transparent',
-                alignContent: 'center',
-                alignSelf: 'center',
-                paddingTop: 5,
-                minHeight: 30,
-              }} onPress={closeModal}>
-                <Text style={{ color: Colors.primaryColor, fontSize: 18, alignSelf: 'center' }}>OK</Text>
-              </TouchableOpacity>
-              {/*<Button title="OK" color={Colors.primaryColor} onPress={closeModal} />*/}
             </View>
           </Modal>
         </SafeAreaView>
@@ -93,19 +79,27 @@ const styles = EStyleSheet.create({
     justifyContent: 'center',
     backgroundColor: 'transparent',
   },
+  viewWrapper: {
+    flex: 1,
+    alignItems: 'center',
+    backgroundColor: 'rgba(0, 0, 0, 0.2)',
+    shadowOffset: { width: -2, height: 10 },
+    shadowColor: '$primaryColor',
+    shadowOpacity: 0.2,
+    shadowRadius: 3,
+  },
   modalView: {
     paddingBottom: 10,
     justifyContent: 'center',
     position: 'absolute',
-    alignSelf: 'center',
+    top: '30%',
+    left: '50%',
+    elevation: 5,
+    transform: [{ translateX: -(width * 0.4) },
+      { translateY: -90 }],
     width: width * 0.8,
     backgroundColor: '$backGroundColor',
-    borderRadius: 10,
-    shadowOffset: { width: -2, height: 6 },
-    shadowColor: EStyleSheet.value('$primaryColor'),
-    shadowOpacity: 0.2,
-    shadowRadius: 3,
-    elevation: 10,
+    borderRadius: 10
   },
   header: {
     fontSize: 18,

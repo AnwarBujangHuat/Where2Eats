@@ -1,11 +1,12 @@
 import {
   Image,
+  StyleSheet,
   TouchableOpacity,
   View
 } from 'react-native';
 import React from 'react';
 import rouletteIcon from '../../assets/bet.png';
-
+import { Colors } from '../../Colors';
 import EStyleSheet from 'react-native-extended-stylesheet';
 
 export const FloatingActionButton = ({ onPress }) => {

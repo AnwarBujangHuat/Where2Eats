@@ -1,63 +1,41 @@
 import React from 'react';
+
 import {
   Dimensions,
   FlatList,
-  KeyboardAvoidingView,
-  Platform,
-  SafeAreaView,
+  StyleSheet,
   Text,
   TouchableOpacity,
   View
 } from 'react-native';
 import { DetailsHeader } from '../../components/molecules/DetailsHeader';
-import { Const } from '../../Const';
+import { ConstFoodCategory } from '../home/ConstFoodCategory';
 import { ImageButton } from '../../components/atoms/ImageButton';
 import { InputField } from '../../components/atoms/InputField';
 import EStyleSheet from 'react-native-extended-stylesheet';
-import { ModalLocation } from '../../components/molecules/ModalLocation';
+
 
 export const RegisterComponents = props => {
   const {
     selectedTypes,
-    restaurantName,
-    restaurantDesc,
-    restaurantLocation,
-    initialIndex,
     goToMenu,
     goBack,
     setName,
     setDescription,
-    categorySelected,
-    launchImageLibrary,
-    imageUri,
-    updateRestaurantInfo,
-    editorMode,
-    addLocation,
-    openLocationModal,
-    closeLocationModal,
-    isModalOpen
+    categorySelected
   } = props;
   return (
-    <SafeAreaView style={styles.container}>
-      <DetailsHeader back={goBack} disabled={false} onPress={launchImageLibrary} image={imageUri} />
+    <View style={styles.container}>
+      <DetailsHeader back={goBack} disabled={false} />
       <View style={styles.inputContainer}>
         <Text style={styles.header}>{'Restaurant Name'}</Text>
-        <InputField placeholder={'Please Input Name'} multiline={false} onChange={(text) => setName(text)}
-                    value={restaurantName} />
+        <InputField placeholder={'Please Input Name'} multiline={false} onChange={(text) => setName(text)} />
         <Text style={styles.header}>{'Description'}</Text>
         <InputField placeholder={'Please Input Description'} multiline={true}
-                    onChange={(text) => setDescription(text)} value={restaurantDesc} />
+                    onChange={(text) => setDescription(text)} />
         <Text style={styles.header}>{'Category'}</Text>
         <FlatList
-          style={{ maxHeight: 60 }}
-          data={Const}
-          onScrollToIndexFailed={info => {
-            const wait = new Promise(resolve => setTimeout(resolve, 500));
-            wait.then(() => {
-              Const.current?.scrollToIndex({ index: info.index, animated: true });
-            });
-          }}
-          initialScrollIndex={initialIndex ?? 0}
+          data={ConstFoodCategory}
           renderItem={({ item }) => {
             return (
               <ImageButton item={item} onPress={() => categorySelected({ item })} selected={selectedTypes} />
@@ -69,22 +47,17 @@ export const RegisterComponents = props => {
         <Text style={styles.header}>{'Location'}</Text>
         <TouchableOpacity
           style={styles.buttonLocation}
-          onPress={openLocationModal}>
+          onPress={() => console.log('j')}>
           <Text style={{ color: EStyleSheet.value('$primaryColor'), fontWeight: 'bold' }}>Location</Text>
         </TouchableOpacity>
-        <Text style={styles.desc}>{restaurantLocation}</Text>
-        <ModalLocation isModalVisible={isModalOpen} submitLocation={addLocation} closeModal={closeLocationModal} />
+        <Text style={styles.desc}>{'Location inserted'}</Text>
       </View>
-
-      <KeyboardAvoidingView behavior={Platform.OS === 'ios' ? 'padding' : 'height'}>
-        <TouchableOpacity
-          style={styles.button}
-          onPress={editorMode ? updateRestaurantInfo : goToMenu}>
-          <Text style={styles.buttonText}>{editorMode ? 'Update Restaurant Info' : 'goToMenu'}</Text>
-        </TouchableOpacity>
-      </KeyboardAvoidingView>
-
-    </SafeAreaView>
+      <TouchableOpacity
+        style={styles.button}
+        onPress={goToMenu}>
+        <Text style={styles.buttonText}>Go to Menu</Text>
+      </TouchableOpacity>
+    </View>
   );
 };
 const styles = EStyleSheet.create({
@@ -122,13 +95,13 @@ const styles = EStyleSheet.create({
     borderRadius: 5,
     width: Dimensions.get('screen').width - 30,
     textTransform: 'uppercase',
-    bottom: 10,
-    // position: 'absolute',
+    bottom: 30,
+    position: 'absolute',
     marginHorizontal: 15,
   },
   buttonText: {
     fontSize: 16,
-    color: 'white',
+    color: '$secondaryTextColor',
     fontWeight: 'bold',
   },
   buttonLocation: {
@@ -141,7 +114,6 @@ const styles = EStyleSheet.create({
   },
   inputContainer: {
     marginTop: 30,
-    height: '60%',
     marginHorizontal: 15,
   },
   desc: {

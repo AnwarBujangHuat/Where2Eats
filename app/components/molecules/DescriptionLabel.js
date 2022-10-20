@@ -1,21 +1,19 @@
 import {
   Image,
+  StyleSheet,
   Text,
-  TouchableOpacity,
   View
 } from 'react-native';
 import React from 'react';
 import locationIcon from '../../assets/location.png';
 import EStyleSheet from 'react-native-extended-stylesheet';
 
-export const DescriptionLabel = ({ name, location, icon, onPress }) => {
+export const DescriptionLabel = ({ name, location, icon }) => {
   return (
     <View style={styles.container}>
       <View style={{ flexDirection: 'row' }}>
         <Text style={styles.title}>{name}</Text>
-        <TouchableOpacity onPress={onPress}>
-          <Image style={styles.icon} source={icon}></Image>
-        </TouchableOpacity>
+        <Image style={styles.icon} source={icon}></Image>
       </View>
       <View style={{ flexDirection: 'row' }}>
         <Image style={styles.locationIcon} source={locationIcon}></Image>
@@ -27,7 +25,7 @@ export const DescriptionLabel = ({ name, location, icon, onPress }) => {
 const styles = EStyleSheet.create({
   container: {
     backgroundColor: '$secondaryBackGroundColor',
-    shadowOffset: { width: -2, height: 6 },
+    shadowOffset: { width: -2, height: 8 },
     shadowColor: '$primaryColor',
     shadowOpacity: 0.3,
     shadowRadius: 4,
@@ -35,8 +33,8 @@ const styles = EStyleSheet.create({
     paddingBottom: 20,
     paddingStart: 15,
     marginBottom: 15,
-    zIndex: 0,
-    elevation: 15,
+    zIndex: 1
+
   },
   title: {
     fontSize: 20,
@@ -47,7 +45,6 @@ const styles = EStyleSheet.create({
   desc: {
     color: '$secondaryTextColor',
     paddingTop: 5,
-    maxWidth:'90%',
     fontSize: 14,
   },
   icon: {
@@ -56,9 +53,10 @@ const styles = EStyleSheet.create({
     alignSelf: 'center',
   },
   locationIcon: {
-    width: 14,
-    height: 14,
+    width: 11,
+    height: 11,
+    alignSelf: 'center',
+    marginTop: 5,
     marginEnd: 5,
-    marginTop:5,
   }
 });

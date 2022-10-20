@@ -1,14 +1,17 @@
 import React from 'react';
 
-import { TextInput } from 'react-native';
+import {
+  StyleSheet,
+  TextInput
+} from 'react-native';
+import { Colors } from '../../Colors';
 import EStyleSheet from 'react-native-extended-stylesheet';
 
-export const InputField = ({ placeholder, multiline, onChange, value }) => {
+export const InputField = ({ placeholder, multiline, onChange }) => {
   return (
     <TextInput
       style={styles.input}
       placeholder={placeholder}
-      value={value}
       multiline={multiline}
       onChangeText={(text) => onChange(text)}
       overflow="hidden"
@@ -28,6 +31,7 @@ const styles = EStyleSheet.create({
     textAlignVertical: 'center',
     backgroundColor: '$secondaryBackGroundColor',
     borderRadius: 5,
+    marginVertical: 10,
     paddingVertical: 15,
   },
 });

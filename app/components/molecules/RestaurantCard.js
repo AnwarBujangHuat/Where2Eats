@@ -2,16 +2,18 @@ import * as React from 'react';
 import {
   Dimensions,
   Image,
+  ImageBackground,
+  StyleSheet,
   Text,
   TouchableWithoutFeedback,
   View,
 } from 'react-native';
 import { RateLabel } from '../atoms/RateLabel';
 import locationIcon from '../../assets/location.png';
-import { icons } from '../../Const';
+import res1 from '../../assets/res1.jpg';
+import { ConstFoodCategory } from '../../screens/home/ConstFoodCategory';
+import { Colors } from '../../Colors';
 import EStyleSheet from 'react-native-extended-stylesheet';
-import addImage from '../../assets/addImage.png';
-import FastImage from 'react-native-fast-image';
 
 export const RestaurantCard = ({ onPress, name, category, address, description, rate, image }) => {
   return (
@@ -19,27 +21,22 @@ export const RestaurantCard = ({ onPress, name, category, address, description, 
       <TouchableWithoutFeedback onPress={onPress}>
         <View style={styles.card}>
           <View>
-            <FastImage
-              source={image ? {
-                uri: image,
-                priority: FastImage.priority.normal,
-              } : addImage}
+            <ImageBackground
+              source={image !== undefined ? { uri: image } : res1}
               style={{ height: 140, marginBottom: 5, resizeMode: 'contain', }}>
               <RateLabel rating={rate} />
-            </FastImage>
+            </ImageBackground>
           </View>
           <View style={{ flexDirection: 'row' }}>
             <View style={styles.titleContainer}>
               <Text style={styles.title}>{name}</Text>
-              <Text
-                numberOfLines={2}
-                style={styles.desc}>{category + ' - ' + description}</Text>
+              <Text style={styles.desc}>{category + ' - ' + description}</Text>
               <View style={styles.containerIcon}>
                 <Image style={styles.icon} source={locationIcon} />
                 <Text style={styles.desc}>{address}</Text>
               </View>
             </View>
-            <Image source={category ? icons[category] : icons.def}
+            <Image source={ConstFoodCategory.find(icons => icons.title === category).icon}
                    style={styles.iconCategory} />
           </View>
         </View>
@@ -75,14 +72,8 @@ const styles = EStyleSheet.create(
       backgroundColor: '$secondaryBackGroundColor',
       borderRadius: 10,
       width: Dimensions.get('screen').width - 30,
-      height: 250,
       overflow: 'hidden',
       paddingBottom: 10,
-      shadowOffset: { width: -2, height: 4 },
-      shadowColor: '$primaryColor',
-      shadowOpacity: 0.2,
-      shadowRadius: 3,
-      elevation: 10,
 
     },
     titleContainer: {

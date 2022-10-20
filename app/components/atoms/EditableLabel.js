@@ -1,11 +1,13 @@
 import {
   Dimensions,
   Image,
+  StyleSheet,
   Text,
   TouchableOpacity,
   View
 } from 'react-native';
 import React from 'react';
+import { Colors } from '../../Colors';
 import editIcon from '../../assets/editing.png';
 import EStyleSheet from 'react-native-extended-stylesheet';
 
@@ -51,13 +53,13 @@ const styles = EStyleSheet.create({
     flexDirection: 'row',
     minHeight: 80,
     borderRadius: 5,
+    marginVertical: 2,
     padding: 10,
     backgroundColor: '$backGroundColor',
     shadowOffset: { width: -2, height: 2 },
     shadowColor: '$primaryColor',
     shadowOpacity: 0.2,
     shadowRadius: 3,
-    elevation: 5,
     alignItems: 'center',
   }
 });

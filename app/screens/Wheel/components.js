@@ -5,6 +5,7 @@ import {
   FlatList,
   Image,
   SafeAreaView,
+  StyleSheet,
   Text as RNText,
   View
 } from 'react-native';
@@ -57,11 +58,12 @@ export const WheelComponents = props => {
   let angle = 0;
   _angle.addListener(event => {
     angle = event.value;
+    setisEnabled(false);
   });
   const makeWheel = () => {
     const data = Array.from({ length: numberOfSegments }).fill(1);
     const arcs = d3Shape.pie()(data);
-    const colorRepeater = Math.floor(2);
+    const colorRepeater = Math.floor(2 / 1);
     let colorPalettes = colorPalette;
     if (colorRepeater >= 1) {
       for (let i = 0; i < colorRepeater; i++) {
@@ -78,16 +80,17 @@ export const WheelComponents = props => {
       };
     });
   };
-  const _wheelPaths = makeWheel();
 
+  const _wheelPaths = makeWheel();
   const _onPan = ({ nativeEvent }) => {
-    const { velocityY, velocityX } = nativeEvent;
+    const { velocityY, velocityX, velocity } = nativeEvent;
 
     if (nativeEvent.state === State.ACTIVE) {
       velocityX > 0 ? setDirection('Left') : setDirection('Right');
-      setisEnabled(false);
     }
     if (nativeEvent.state === State.END) {
+      // console.log(velocityX + " " + velocity)
+
       Animated.decay(_angle, {
         velocity: velocityY / 1000,
         deceleration: 0.999,
@@ -120,6 +123,7 @@ export const WheelComponents = props => {
       return 0;
     }
   };
+
   const _renderKnob = () => {
     const knobSize = 30;
     const YOLO =
@@ -165,14 +169,14 @@ export const WheelComponents = props => {
   const _renderSvgWheel = () => {
     return (
       <>
-        <SafeAreaView style={{ flex: 1, }}>
+        < SafeAreaView style={{ flex: 1 }}>
           <View style={styles.rowContainer}>
             <BackButton onPress={goBackHome}></BackButton>
             <RNText style={styles.title}>{'Wheel Of Fortune'}</RNText>
           </View>
           <View style={{
             flexDirection: 'row',
-            alignContent: 'center', alignSelf: 'center', alignItems: 'center',
+            alignContent: 'center', alignSelf: 'center', alignItems: 'center'
           }}>
             <Image style={{ height: 50, width: 57, resizeMode: 'cover', marginBottom: 9 }}
                    source={{ uri: 'https://c.tenor.com/MRX_0O8RtnkAAAAi/arrow.gif' }} />
@@ -290,10 +294,10 @@ const styles = EStyleSheet.create({
   wheel: {
     alignItems: 'center',
     justifyContent: 'center',
-    elevation: 5,
-    shadowOffset: { width: -2, height: 2 },
+    shadowOffset: { width: -2, height: 6 },
     shadowColor: '$primaryColor',
-    shadowOpacity: 0.6,
-    shadowRadius: 3,
+    shadowOpacity: 0.4,
+    shadowRadius: 4,
+    elevation: 30,
   },
 });

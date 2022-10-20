@@ -3,11 +3,13 @@ import {
   Dimensions,
   Modal,
   SafeAreaView,
+  StyleSheet,
   Text,
   TextInput,
   TouchableOpacity,
   View
 } from 'react-native';
+import { Colors } from '../../Colors';
 import EStyleSheet from 'react-native-extended-stylesheet';
 
 const { width } = Dimensions.get('window');
@@ -108,7 +110,11 @@ const styles = EStyleSheet.create({
     padding: 20,
     justifyContent: 'center',
     position: 'absolute',
-    alignSelf: 'center',
+    top: '30%',
+    left: '50%',
+    elevation: 5,
+    transform: [{ translateX: -(width * 0.4) },
+      { translateY: -90 }],
     width: width * 0.8,
     backgroundColor: '$secondaryBackGroundColor',
     borderRadius: 7,

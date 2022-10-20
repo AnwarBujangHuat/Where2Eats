@@ -2,11 +2,12 @@ import * as React from 'react';
 import {
   Dimensions,
   Image,
+  StyleSheet,
   Text,
   TouchableWithoutFeedback,
   View,
 } from 'react-native';
-import { icons } from '../../Const';
+import { ConstFoodCategory } from '../../screens/home/ConstFoodCategory';
 import EStyleSheet from 'react-native-extended-stylesheet';
 
 export const ItemListRestaurant = ({ onPress, name, category, index }) => {
@@ -18,7 +19,7 @@ export const ItemListRestaurant = ({ onPress, name, category, index }) => {
             <View style={styles.titleContainer}>
               <Text style={styles.title}>{index + 1 + '. ' + name}</Text>
             </View>
-            <Image source={category ? icons[category] : icons.def}
+            <Image source={ConstFoodCategory.find(icons => icons.title === category).icon}
                    style={styles.iconCategory} />
           </View>
         </View>
@@ -43,6 +44,7 @@ const styles = EStyleSheet.create(
       shadowColor: '$primaryColor',
       shadowOpacity: 0.2,
       shadowRadius: 3,
+      elevation: 10,
     },
     card: {
       backgroundColor: '$secondaryBackGroundColor',
@@ -50,11 +52,6 @@ const styles = EStyleSheet.create(
       width: Dimensions.get('screen').width - 50,
       overflow: 'hidden',
       padding: 5,
-      shadowOffset: { width: -2, height: 6 },
-      shadowColor: EStyleSheet.value('$primaryColor'),
-      shadowOpacity: 0.2,
-      shadowRadius: 3,
-      elevation: 5,
     },
     titleContainer: {
       padding: 10,

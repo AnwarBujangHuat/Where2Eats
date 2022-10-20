@@ -11,9 +11,3 @@ export const getLatestIndex = createSelector(state => state.restaurant.RESTAURAN
 
 export const getUser = createSelector(state => state, state => state.restaurant.USER);
 export const getTheme = createSelector(state => state, state => state.restaurant.THEME);
-export const getInfo = createSelector(state => state.restaurant, items => (
-  {
-    EMAIL: items.EMAIL,
-    PASSWORD: items.PASSWORD
-  }
-));

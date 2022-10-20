@@ -1,27 +1,27 @@
 import {
   Image,
+  StyleSheet,
   TextInput,
   View
 } from 'react-native';
 import React from 'react';
+import { Colors } from '../../Colors';
 import EStyleSheet from 'react-native-extended-stylesheet';
 
-export const InputFieldLogins = ({ testID,onChangeText1, defvalue, source, secret, hint }) => {
+export const InputFieldLogins = ({ onChangeText1, defvalue, source, secret }) => {
   return (
     <View style={styles.section}>
       <Image style={styles.icons} source={source} />
       <TextInput
-        testID={testID}
         style={styles.input}
-        placeholder={hint}
-        value={defvalue}
+        placeholder={defvalue}
         clearButtonMode={'always'}
         onChangeText={(text) => onChangeText1(text)}
         overflow="hidden"
         placeholderTextColor={EStyleSheet.value('$secondaryTextColor')}
         keyboardAppearance="dark"
         secureTextEntry={secret}
-        color={EStyleSheet.value('$secondaryTextColor')}
+        color={EStyleSheet.value('$primaryTextColor')}
         autoCorrect={false} />
     </View>
 
@@ -33,11 +33,6 @@ const styles = EStyleSheet.create({
     flexDirection: 'row',
     borderRadius: 10,
     marginVertical: 10,
-    shadowOffset: { width: -2, height: 4 },
-    shadowColor: '$primaryColor',
-    shadowOpacity: 0.2,
-    shadowRadius: 3,
-    elevation: 10,
   },
   input: {
     fontSize: 14,

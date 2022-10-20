@@ -1,9 +1,11 @@
 import {
+  StyleSheet,
   Text,
   TouchableOpacity,
   View
 } from 'react-native';
 import React from 'react';
+import { Colors } from '../../Colors';
 import EStyleSheet from 'react-native-extended-stylesheet';
 
 export const IconButton = ({ title, onPress, buttontitle }) => {

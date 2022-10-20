@@ -2,18 +2,18 @@ import React from 'react';
 import {
   Dimensions,
   FlatList,
+  Modal,
   SafeAreaView,
+  StyleSheet,
   Text,
   TouchableOpacity,
   View
 } from 'react-native';
-import Modal from 'react-native-modal';
-
 import EStyleSheet from 'react-native-extended-stylesheet';
 
 const { width } = Dimensions.get('window');
 
-export const ModalMenuButton = ({ isModalVisible, onPress, closeModal }) => {
+export const ModalMenuButton = ({ isModalVisible, onPress }) => {
   const MENU_OPTIONS = [
     {
       id: 1,
@@ -25,7 +25,7 @@ export const ModalMenuButton = ({ isModalVisible, onPress, closeModal }) => {
     },
     {
       id: 3,
-      title: 'Log Out',
+      title: 'Settings',
     },
 
   ];
@@ -36,26 +36,21 @@ export const ModalMenuButton = ({ isModalVisible, onPress, closeModal }) => {
         <SafeAreaView>
           <Modal animationType="fade"
                  transparent visible={isModalVisible}
-                 style={{
-                   position: 'absolute',
-                   top: 20,
-                   left: -10,
-                 }}
-                 onBackdropPress={() => closeModal()}
-          >
-            <View
-              style={styles.modalView}>
-              <FlatList
-                data={MENU_OPTIONS}
-                renderItem={({ item }) => {
-                  return (
-                    <TouchableOpacity
-                      onPress={() => onPress(item.id)}>
-                      <Text style={styles.buttonText}>{item.title}</Text>
-                    </TouchableOpacity>
-                  );
-                }}
-                showsHorizontalScrollIndicator={false} />
+                 presentationStyle="overFullScreen">
+            <View style={styles.viewWrapper}>
+              <View style={styles.modalView}>
+                <FlatList
+                  data={MENU_OPTIONS}
+                  renderItem={({ item }) => {
+                    return (
+                      <TouchableOpacity
+                        onPress={() => onPress(item.id)}>
+                        <Text style={styles.buttonText}>{item.title}</Text>
+                      </TouchableOpacity>
+                    );
+                  }}
+                  showsHorizontalScrollIndicator={false} />
+              </View>
             </View>
           </Modal>
         </SafeAreaView>
@@ -91,11 +86,12 @@ const styles = EStyleSheet.create({
 
   },
   modalView: {
-    paddingVertical: 20,
+    padding: 20,
     justifyContent: 'center',
     radius: 20,
     elevation: 5,
-    backgroundColor: '$ModalBackground',
+    width: width * 0.5,
+    backgroundColor: '$secondaryBackGroundColor',
     borderRadius: 7,
   },
 

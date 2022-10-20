@@ -1,6 +1,5 @@
 import { ConstString } from './Strings';
-
-export const Colors = 'Light' === ConstString.LIGHT ? {
+export const Colors = "Light" === ConstString.LIGHT ? {
   primaryColor: '#7835FF',
   secondaryColor: '#05000f',
   tertiaryColor: '#6d5a75',
@@ -29,7 +28,7 @@ export const Colors = 'Light' === ConstString.LIGHT ? {
   lightBackground: '#f4eafe',
   secondaryPurple: '#8e7dc4'
 };
-export const DarkTheme = {
+export const DarkTheme={
   $theme: 'Dark',
   $primaryColor: '#915bff',
   $secondaryColor: '#1a004f',
@@ -43,11 +42,9 @@ export const DarkTheme = {
   $backGroundColor: '#1A1125',
   $greyBackground: '#1d1233',
   $lightBackground: '#f4eafe',
-  $secondaryPurple: '#8e7dc4',
-  $ModalBackground: '#1d1233',
-
-};
-export const LightTheme = {
+  $secondaryPurple: '#8e7dc4'
+}
+export const LightTheme={
   $theme: 'Light',
   $primaryColor: '#7835FF',
   $secondaryColor: '#05000f',
@@ -60,7 +57,6 @@ export const LightTheme = {
   $backGroundColor: '#fefefe',
   $secondaryBackGroundColor: '#fff',
   $greyBackground: '#F5F5F5',
-  $secondaryPurple: '#8e7dc4',
   $lightBackground: '#f4eafe',
-  $ModalBackground: '#1a004f'
-};
+  $secondaryPurple: '#8e7dc4'
+}

@@ -1,29 +1,26 @@
-import * as React from 'react';
+import React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { NavStack } from './app/navigation/NavStack';
-import { useSelector } from 'react-redux';
-import { StatusBar } from 'react-native';
-import { getTheme } from './app/store/selector';
-import EStyleSheet from 'react-native-extended-stylesheet';
-import { ConstString } from './app/Strings';
+import store from './app/store/store';
 import {
-  DarkTheme,
-  LightTheme
-} from './app/Colors';
+  Provider,
+  useSelector
+} from 'react-redux';
+import { ColorThemes } from './app/Colors';
+import { getTheme } from './app/store/selector';
 
-export default function App () {
-  const theme = useSelector(getTheme);
-  EStyleSheet.build(theme === ConstString.LIGHT ? LightTheme : DarkTheme);
+const App = () => {
+
 
   return (
-    <NavigationContainer>
-      <StatusBar
-        barStyle={theme === ConstString.LIGHT ? 'dark-content' : 'light-content'}
-      />
-      <NavStack />
-    </NavigationContainer>
+    <Provider store={store}>
+      <NavigationContainer>
+        <NavStack />
+      </NavigationContainer>
+    </Provider>
   );
-}
+};
 
+export default App;
 
 
