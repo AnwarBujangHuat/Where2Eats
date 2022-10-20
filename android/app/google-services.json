@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "452192891402",
+    "project_id": "where2eat-e075f",
+    "storage_bucket": "where2eat-e075f.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:452192891402:android:993b39bea50b8bfc2265f3",
+        "android_client_info": {
+          "package_name": "com.where2eat"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "452192891402-kgn2clt4jq4qekchd3o58qupldgc7v77.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.where2eat",
+            "certificate_hash": "e6b195c6497140d1be80858ea96095ff6c699ced"
+          }
+        },
+        {
+          "client_id": "452192891402-uii6gg7t201tb4a08ihqo1b18jqghh68.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBrjPF5MisGjWFTJsnaePXWkuER4dtlbkA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "452192891402-uii6gg7t201tb4a08ihqo1b18jqghh68.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "452192891402-hp99o81mdl4jno876jeo1o20odfr3kgr.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "org.reactjs.native.example.Where2Eat",
+                "app_store_id": "12345678"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
