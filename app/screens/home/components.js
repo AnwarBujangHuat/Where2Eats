@@ -1,7 +1,6 @@
 import React from 'react';
 import {
   FlatList,
-  Modal,
   SafeAreaView,
   StyleSheet,
   View
@@ -14,11 +13,12 @@ import { ConstFoodCategory } from './ConstFoodCategory';
 import { ImageButton } from '../../components/atoms/ImageButton';
 import { RestaurantCard } from '../../components/molecules/RestaurantCard';
 import { FloatingActionButton } from '../../components/atoms/FloatingActionButtom';
-import { ModalMenuDetails } from '../../components/molecules/ModalMenuDetails';
 import { ModalMenuButton } from '../../components/molecules/ModalMenuButton';
-import { Colors } from '../../Colors';
-
-
+import {
+  Colors,
+  ColorThemes
+} from '../../Colors';
+import EStyleSheet from 'react-native-extended-stylesheet';
 export const HomeComponents = props => {
   const {
     selectedTypes,
@@ -30,11 +30,11 @@ export const HomeComponents = props => {
     openMenu,
     goToRestaurant,
     closeModal,
+    reRender
   } = props;
-
   return (
     <SafeAreaView style={styles.container}>
-      <Header source={personIcon} onPress={openMenu}></Header>
+      <Header source={personIcon} onPress={openMenu} reRender={reRender}></Header>
       {isOpenMenu &&
         <ModalMenuButton isModalVisible={isOpenMenu} onPress={closeModal} />}
       <SearchBar placeholder={'Search'} onChangeText={onSearch} source={search} />
@@ -65,12 +65,22 @@ export const HomeComponents = props => {
     </SafeAreaView>
   );
 };
-const styles = StyleSheet.create({
+// const styles = StyleSheet.create({
+//   container: {
+//     flex: 1,
+//     backgroundColor: ColorThemes().backGroundColor,
+//   },
+//   buttonContainer: {
+//     marginStart: 10,
+//   }
+// });
+const styles = EStyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: Colors.backGroundColor,
+    backgroundColor: '$backGroundColor',
   },
   buttonContainer: {
     marginStart: 10,
   }
 });
+

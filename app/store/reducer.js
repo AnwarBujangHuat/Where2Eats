@@ -41,7 +41,12 @@ import {
   createEntityAdapter,
   createSlice
 } from '@reduxjs/toolkit';
-import { AddOne, PopulateRestaurantList } from './thunks';
+import {
+  AddOne,
+  changeTheme,
+  PopulateRestaurantList
+} from './thunks';
+import { ConstString } from '../Strings';
 
 export const restaurantAdapter = createEntityAdapter({
   sortComparer: (a, b) => a.restaurant.localeCompare(b.restaurant),
@@ -54,17 +59,18 @@ export const Reducer = createSlice({
     }),
     USER: {
       ID: 1,
-      NAME: "Kasim",
+      NAME: 'Kasim',
       AGE: 21,
-      EMAIL: "Mohamad@gmail.com",
-      PHONE: "0123456789",
+      EMAIL: 'Mohamad@gmail.com',
+      PHONE: '0123456789',
       RestaurantId: [1, 2, 3]
-    }
+    },
+    THEME:ConstString.LIGHT
   },
 
   reducers: {
-    restaurantAdded: restaurantAdapter.addOne,
-    restaurantLoading(state, action) {
+    // restaurantAdded: restaurantAdapter.addOne,
+    restaurantLoading (state, action) {
       if (state.RESTAURANT.loading === 'idle') {
         state.RESTAURANT.loading = 'pending';
       }
@@ -81,12 +87,15 @@ export const Reducer = createSlice({
     });
     builder.addCase(AddOne.fulfilled, (state, payload) => {
       if (state.RESTAURANT.loading === 'pending') {
-        console.log(payload)
         restaurantAdapter.addOne(state.RESTAURANT, payload);
         state.RESTAURANT.loading = 'idle';
       }
       return state;
     });
+    builder.addCase(changeTheme.fulfilled,(state, { payload })=>{
+      state.THEME=payload
+      return state;
+    })
   }
 });
 

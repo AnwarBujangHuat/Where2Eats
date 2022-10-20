@@ -4,7 +4,7 @@ import React, {
 } from 'react';
 import { HomeComponents } from './components';
 import { ConstString } from '../../Strings';
-import { getRestaurant, getUser, } from '../../store/selector';
+import { getRestaurant, } from '../../store/selector';
 import {
   useDispatch,
   useSelector
@@ -20,8 +20,9 @@ export const Home = ({ navigation }) => {
   const [selectedTypes, setSelectedTypes] = useState([]);
   const [isOpenMenu, setOpenMenu] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');
+  const [isRender, setisRender] = useState(false);
   useEffect(() => {
-    if (restaurant.length === 0 || restaurant.length === undefined) {
+    if (restaurant.length === 0) {
       dispatch(restaurantLoading());
       dispatch(PopulateRestaurantList(defaultValue));
     }
@@ -29,21 +30,20 @@ export const Home = ({ navigation }) => {
   }, [restaurant]);
 
   const setRestaurant = (category) => {
-    if (selectedTypes.includes(category)) {
-      const tempSelected = selectedTypes.filter(item => item !== category);
-      setSelectedTypes(tempSelected);
+    const isRestaurantIncluded = selectedTypes.includes(category);
+    const tempSelected = isRestaurantIncluded ? selectedTypes.filter(item => item !== category) : [category, ...selectedTypes];
+    setSelectedTypes(tempSelected);
+    if (tempSelected.length <= 0) return setCurrentRestaurant(restaurant);
+
+    if (isRestaurantIncluded) {
       const updateRestaurant = currentRestaurant.filter(currentRestaurant => currentRestaurant.category !== category);
       setCurrentRestaurant(updateRestaurant);
-      if (tempSelected.length <= 0) {
-        setCurrentRestaurant(restaurant);
-      }
     } else {
-      const temp = [category, ...selectedTypes];
-      setSelectedTypes(temp);
       const updateRestaurant = restaurant.filter(currentRestaurant => currentRestaurant.category === category);
-      const tempRestaurant = selectedTypes.length < 1 ? [...updateRestaurant] : [...updateRestaurant, ...currentRestaurant];
+      const tempRestaurant = selectedTypes.length === 0 ? [...updateRestaurant] : [...updateRestaurant, ...currentRestaurant];
       setCurrentRestaurant(tempRestaurant);
     }
+
   };
   const onSearch = (text) => {
     setSearchQuery(text);
@@ -57,14 +57,19 @@ export const Home = ({ navigation }) => {
     navigation.navigate(ConstString.ROULETTE, currentRestaurant);
   };
   const openMenu = () => {
-    setOpenMenu(!isOpenMenu)
+    setOpenMenu(!isOpenMenu);
   };
   const closeModal = (id) => {
-    id === 1 ? navigation.navigate(ConstString.REGISTER) : navigation.navigate(ConstString.PROFILE)
-    setOpenMenu(false)
-  }
+    id === 1 ? navigation.navigate(ConstString.REGISTER) : navigation.navigate(ConstString.PROFILE);
+    setOpenMenu(false);
+  };
   const goToRestaurant = (id) => {
     navigation.navigate(ConstString.RESTAURANT, { id });
+  };
+  const reRender = () => {
+    setTimeout(function() {setisRender(!isRender);}, 100);
+
+
   };
   const props = {
     selectedTypes,
@@ -77,6 +82,7 @@ export const Home = ({ navigation }) => {
     openMenu,
     goToRestaurant,
     closeModal,
+    reRender,
   };
   return (<HomeComponents{...props} />);
 };

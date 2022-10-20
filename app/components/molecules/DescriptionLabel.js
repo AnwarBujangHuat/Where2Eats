@@ -6,7 +6,7 @@ import {
 } from 'react-native';
 import React from 'react';
 import locationIcon from '../../assets/location.png';
-import { Colors } from '../../Colors';
+import EStyleSheet from 'react-native-extended-stylesheet';
 
 export const DescriptionLabel = ({ name, location, icon }) => {
   return (
@@ -22,11 +22,11 @@ export const DescriptionLabel = ({ name, location, icon }) => {
     </View>
   );
 };
-const styles = StyleSheet.create({
+const styles = EStyleSheet.create({
   container: {
-    backgroundColor: Colors.secondaryBackGroundColor,
+    backgroundColor: '$secondaryBackGroundColor',
     shadowOffset: { width: -2, height: 8 },
-    shadowColor: Colors.primaryColor,
+    shadowColor: '$primaryColor',
     shadowOpacity: 0.3,
     shadowRadius: 4,
     paddingTop: 40,
@@ -40,10 +40,11 @@ const styles = StyleSheet.create({
     fontSize: 20,
     fontWeight: 'bold',
     width: '88%',
-    color: Colors.primaryTextColor
+    color: '$primaryTextColor'
   },
   desc: {
-    color: Colors.secondaryTextColor, paddingTop: 5,
+    color: '$secondaryTextColor',
+    paddingTop: 5,
     fontSize: 14,
   },
   icon: {

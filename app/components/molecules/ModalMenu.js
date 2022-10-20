@@ -13,6 +13,7 @@ import {
 import { Colors } from '../../Colors';
 import addIcon from '../../assets/plus.png';
 import * as ImagePicker from 'react-native-image-picker';
+import EStyleSheet from 'react-native-extended-stylesheet';
 
 const { width } = Dimensions.get('window');
 
@@ -61,8 +62,8 @@ export const ModalMenu = props => {
         { props } &&
         <SafeAreaView style={styles.screen}>
           <Modal animationType="slide"
-            transparent visible={isModalVisible}
-            presentationStyle="overFullScreen">
+                 transparent visible={isModalVisible}
+                 presentationStyle="overFullScreen">
             <View style={styles.viewWrapper}>
               <View style={styles.modalView}>
                 <Text style={styles.header}>{'Item Name'}</Text>
@@ -70,7 +71,7 @@ export const ModalMenu = props => {
                   style={styles.textInput}
                   placeholder={'Enter Item Name'}
                   clearButtonMode={'always'}
-                  placeholderTextColor={Colors.secondaryTextColor}
+                  placeholderTextColor={EStyleSheet.value('$secondaryTextColor')}
                   onChangeText={setItemName}
                   overflow="hidden"
                   keyboardAppearance="dark"
@@ -81,7 +82,7 @@ export const ModalMenu = props => {
                   placeholder={'Enter Description'}
                   multiline={true}
                   onChangeText={setItemDesc}
-                  placeholderTextColor={Colors.secondaryTextColor}
+                  placeholderTextColor={EStyleSheet.value('$secondaryTextColor')}
                   overflow="hidden"
                   keyboardAppearance="dark"
                   autoCorrect={false} />
@@ -90,7 +91,7 @@ export const ModalMenu = props => {
                   style={styles.textInput}
                   placeholder={'Enter Price RM'}
                   clearButtonMode={'always'}
-                  placeholderTextColor={Colors.secondaryTextColor}
+                  placeholderTextColor={EStyleSheet.value('$secondaryTextColor')}
                   onChangeText={setItemPrice}
                   keyboardType={'numeric'}
                   overflow="hidden"
@@ -117,19 +118,19 @@ export const ModalMenu = props => {
     </>
   );
 };
-const styles = StyleSheet.create({
+const styles = EStyleSheet.create({
   changeButton:
-  {
-    position: 'absolute',
-    left: 0,
-    fontWeight: 'bold',
-    fontSize: 12,
-    color: Colors.primaryTextColor,
-    backgroundColor: Colors.secondaryBackGroundColor,
-    padding: 5,
-  },
+    {
+      position: 'absolute',
+      left: 0,
+      fontWeight: 'bold',
+      fontSize: 12,
+      color: '$primaryTextColor',
+      backgroundColor: '$secondaryBackGroundColor',
+      padding: 5,
+    },
   button: {
-    backgroundColor: Colors.lightPrimaryColor,
+    backgroundColor: '$lightPrimaryColor',
     alignItems: 'center',
     padding: 10,
     borderRadius: 10,
@@ -138,16 +139,16 @@ const styles = StyleSheet.create({
   },
   buttonText: {
     fontSize: 16,
-    color: 'white',
+    color: '$secondaryTextColor',
     fontWeight: 'normal',
   },
   container: {
     alignSelf: 'flex-start',
-    backgroundColor: Colors.primaryColor,
+    backgroundColor: '$primaryColor',
     borderRadius: 10,
     marginTop: 10,
     shadowOffset: { width: -2, height: 4 },
-    shadowColor: Colors.primaryColor,
+    shadowColor: '$primaryColor',
     shadowOpacity: 0.2,
     shadowRadius: 3,
     elevation: 10,
@@ -175,7 +176,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     backgroundColor: 'rgba(0, 0, 0, 0.2)',
     shadowOffset: { width: -2, height: 2 },
-    shadowColor: Colors.primaryColor,
+    shadowColor: '$primaryColor',
     shadowOpacity: 0.2,
     shadowRadius: 3,
   },
@@ -187,20 +188,20 @@ const styles = StyleSheet.create({
     left: '50%',
     elevation: 5,
     transform: [{ translateX: -(width * 0.4) },
-    { translateY: -90 }],
+      { translateY: -90 }],
     width: width * 0.8,
-    backgroundColor: Colors.backGroundColor,
+    backgroundColor: '$backGroundColor',
     borderRadius: 7,
   },
   textInput: {
     fontSize: 14,
     fontWeight: 'normal',
     borderWidth: 1,
-    color: Colors.secondaryTextColor,
-    borderBottomColor: Colors.primaryColor,
-    borderColor: Colors.backGroundColor,
+    color: '$secondaryTextColor',
+    borderBottomColor: '$primaryColor',
+    borderColor: '$backGroundColor',
     textAlignVertical: 'center',
-    backgroundColor: Colors.secondaryBackGroundColor,
+    backgroundColor: '$secondaryBackGroundColor',
     borderRadius: 5,
     marginBottom: 10,
     paddingVertical: 15,
@@ -208,9 +209,9 @@ const styles = StyleSheet.create({
   header: {
     fontSize: 16,
     fontWeight: 'bold',
-    color: Colors.tertiaryColor,
+    color: '$tertiaryColor',
     shadowOffset: { width: -2, height: 1 },
-    shadowColor: Colors.primaryColor,
+    shadowColor: '$primaryColor',
     shadowOpacity: 0.1,
     shadowRadius: 2,
   },
@@ -218,11 +219,11 @@ const styles = StyleSheet.create({
     fontSize: 14,
     fontWeight: 'normal',
     borderWidth: 1,
-    borderBottomColor: Colors.primaryColor,
-    color: Colors.secondaryTextColor,
-    borderColor: Colors.backGroundColor,
+    borderBottomColor: '$primaryColor',
+    color: '$secondaryTextColor',
+    borderColor: '$backGroundColor',
     textAlignVertical: 'center',
-    backgroundColor: Colors.secondaryBackGroundColor,
+    backgroundColor: '$secondaryBackGroundColor',
     borderRadius: 5,
     marginVertical: 10,
     paddingVertical: 15,

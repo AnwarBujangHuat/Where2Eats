@@ -6,8 +6,8 @@ import {
   TouchableWithoutFeedback,
   View,
 } from 'react-native';
-import { Colors } from '../../Colors';
 import nasiAyam from '../../assets/NasiAyam.jpg';
+import EStyleSheet from 'react-native-extended-stylesheet';
 
 export const FoodCard = ({ onPress, name, price, image, desc }) => {
   return (
@@ -16,7 +16,6 @@ export const FoodCard = ({ onPress, name, price, image, desc }) => {
         <View style={styles.card}>
           <View>
             <ImageBackground
-              // source={image}
               source={(image !== undefined) ? { uri: image } : nasiAyam}
               style={
                 {
@@ -40,7 +39,7 @@ export const FoodCard = ({ onPress, name, price, image, desc }) => {
 
   );
 };
-const styles = StyleSheet.create(
+const styles = EStyleSheet.create(
   {
     iconCategory: {
       width: 25,
@@ -51,13 +50,13 @@ const styles = StyleSheet.create(
       justifyContent: 'center',
       margin: 10,
       shadowOffset: { width: -2, height: 4 },
-      shadowColor: Colors.primaryColor,
+      shadowColor: '$primaryColor',
       shadowOpacity: 0.2,
       shadowRadius: 3,
       elevation: 10,
     },
     card: {
-      backgroundColor: Colors.secondaryBackGroundColor,
+      backgroundColor: '$secondaryBackGroundColor',
       borderRadius: 10,
       width: 220,
       height: 250,
@@ -69,13 +68,13 @@ const styles = StyleSheet.create(
       padding: 10,
     },
     desc: {
-      color: Colors.secondaryTextColor, paddingTop: 5,
+      color: '$secondaryTextColor', paddingTop: 5,
       fontSize: 12,
     },
     title: {
       fontSize: 18,
       fontWeight: 'bold',
-      color: Colors.primaryTextColor,
+      color: '$primaryTextColor',
     },
     containerIcon: {
       flexDirection: 'row',
@@ -87,7 +86,7 @@ const styles = StyleSheet.create(
       margin: 5,
       paddingHorizontal: 5,
       paddingVertical: 5,
-      backgroundColor: Colors.backGroundColor,
+      backgroundColor: '$backGroundColor',
       alignItems: 'center',
       alignSelf: 'flex-start',
       marginStart: 10,
@@ -95,7 +94,7 @@ const styles = StyleSheet.create(
     },
     textPrice: {
       padding: 2,
-      color: Colors.secondaryTextColor,
+      color: '$secondaryTextColor',
       fontWeight: 'bold',
       fontSize: 12,
     },

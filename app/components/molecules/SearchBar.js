@@ -8,7 +8,7 @@ import {
   View
 } from 'react-native';
 import React from 'react';
-import { Colors } from '../../Colors';
+import EStyleSheet from 'react-native-extended-stylesheet';
 
 
 export const SearchBar = ({ onChangeText, placeholder, source }) => {
@@ -20,10 +20,10 @@ export const SearchBar = ({ onChangeText, placeholder, source }) => {
           style={styles.input}
           placeholder={placeholder}
           clearButtonMode={'while-editing'}
-          placeholderTextColor={Colors.primaryTextColor}
+          placeholderTextColor={EStyleSheet.value('$primaryTextColor')}
           onChangeText={onChangeText}
           autoCorrect={false}
-          color={Colors.primaryTextColor}
+          color={EStyleSheet.value('$primaryTextColor')}
           overflow="hidden"
           keyboardAppearance="dark"
         />
@@ -37,9 +37,9 @@ export const SearchBar = ({ onChangeText, placeholder, source }) => {
     </SafeAreaView>
   );
 };
-const styles = StyleSheet.create({
+const styles = EStyleSheet.create({
   searchbar: {
-    backgroundColor: Colors.secondaryBackGroundColor,
+    backgroundColor: '$secondaryBackGroundColor',
     flexDirection: 'row',
     borderRadius: 10,
     marginVertical: 10,
@@ -47,13 +47,13 @@ const styles = StyleSheet.create({
     width: '85%',
     padding: 5,
     shadowOffset: { width: -2, height: 4 },
-    shadowColor: Colors.primaryColor,
+    shadowColor: '$primaryColor',
     shadowOpacity: 0.2,
     shadowRadius: 3,
     elevation: 10,
   },
   text: {
-    color: Colors.primaryTextColor,
+    color: '$primaryTextColor',
     fontSize: 14,
     fontWeight: 'bold'
   },
@@ -71,18 +71,18 @@ const styles = StyleSheet.create({
   icons: {
     flexDirection: 'row',
     alignSelf: 'center',
-    tintColor: Colors.primaryTextColor,
     height: 20,
     width: 20,
     marginRight: 0,
     marginTop: 10,
     marginBottom: 10,
     marginLeft: 10,
+    tintColor: '$primaryColor',
   },
   sortButton: {
     alignItems: 'center',
     fontSize: 14,
-    backgroundColor: Colors.secondaryBackGroundColor,
+    backgroundColor: '$secondaryBackGroundColor',
     padding: 10,
     borderRadius: 10,
   }

@@ -1,44 +1,109 @@
 import {
+  Animated,
+  Dimensions,
+  Easing,
   Image,
   StyleSheet,
   Text,
   TouchableOpacity,
   View
 } from 'react-native';
-import React from 'react';
+import React, {
+  useRef,
+  useState
+} from 'react';
 import { ConstString } from '../../Strings';
-import { Colors } from '../../Colors';
+import {
+  Colors,
+  DarkTheme,
+  LightTheme
+} from '../../Colors';
+import LottieView from 'lottie-react-native';
+// import ThemeButton from '../../assets/dark.json';
+import ThemeButton from '../../assets/lightNdark.json';
+import {
+  useDispatch,
+  useSelector
+} from 'react-redux';
+import { changeTheme } from '../../store/thunks';
+import EStyleSheet from 'react-native-extended-stylesheet';
+import { getTheme } from '../../store/selector';
 
-export const Header = ({ source, onPress }) => {
+const { width } = Dimensions.get('window');
+const currentTheme=EStyleSheet.value('$theme');
+let theme;
+let color;
+
+export const Header = ({ source, onPress,reRender }) => {
+  const animationProgress = useRef(new Animated.Value(currentTheme === ConstString.LIGHT ? .5 : 0));
+  const [isCurrentTheme, setCurrentTheme] = useState(currentTheme);
+  const dispatch = useDispatch();
+  const onChangeTheme = () => {
+    if(isCurrentTheme===ConstString.LIGHT){
+      Animated.timing(animationProgress.current, {
+        toValue: 1 ,
+        duration: 500,
+        easing: Easing.linear,
+        useNativeDriver: true
+      }).start();
+      color=ConstString.DARK
+      setCurrentTheme(ConstString.DARK)
+      theme=DarkTheme
+    }
+    else if(isCurrentTheme===ConstString.DARK){
+      Animated.timing(animationProgress.current, {
+        toValue: 0.5,
+        duration: 500,
+        easing: Easing.linear,
+        useNativeDriver: true
+      }).start();
+      color=ConstString.LIGHT
+      theme=LightTheme
+    }
+    setCurrentTheme(color)
+    EStyleSheet.build(theme);
+    dispatch(changeTheme(color));
+    reRender()
+  };
+
   return (
     <View style={styles.section}>
       <TouchableOpacity onPress={onPress}>
         <Image style={styles.icons} source={source} />
       </TouchableOpacity>
       <Text style={styles.title}>{ConstString.QUOTES}</Text>
+      <TouchableOpacity onPress={onChangeTheme}>
+        <LottieView style={styles.lottieButton} source={ThemeButton}
+                    progress={animationProgress.current}
+        />
+      </TouchableOpacity>
     </View>
 
   );
 };
-const styles = StyleSheet.create({
+const styles = EStyleSheet.create({
   section: {
     flexDirection: 'row',
-    borderRadius: 10,
+    maxHeight: width * 0.15,
     alignItems: 'center'
   },
   icons: {
-    alignSelf: 'center',
     height: 35,
     width: 35,
-    margin: 10,
     marginStart: 20,
-    backgroundColor: Colors.secondaryBackGroundColor,
     borderRadius: 40,
+  },
+  lottieButton:{
+    height: width * .2,
+    width: width * .2,
+    right:10,
   },
   title: {
     fontSize: 15,
-    color: Colors.primaryTextColor,
+    color: '$primaryTextColor',
     fontWeight: 'bold',
-    alignSelf: 'center',
+    marginStart: 10,
+    width:width * 0.65
   },
+
 });

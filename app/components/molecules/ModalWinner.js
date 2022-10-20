@@ -10,11 +10,11 @@ import {
   TouchableOpacity,
   View
 } from 'react-native';
-import { Colors } from '../../Colors';
 import logoIcon from '../../assets/Logo.png';
 import locationIcon from '../../assets/location.png';
 
 import { ConstFoodCategory } from '../../screens/home/ConstFoodCategory';
+import EStyleSheet from 'react-native-extended-stylesheet';
 
 const { width } = Dimensions.get('window');
 export const ModalWinner = ({ isModalVisible, closeModal, selectedRestaurant, goToMenu, isFinished }) => {
@@ -22,14 +22,19 @@ export const ModalWinner = ({ isModalVisible, closeModal, selectedRestaurant, go
   const spinAgain = () => {
     closeModal();
   };
+  const findIcon = () => {
+    const icon = ConstFoodCategory.find(icons => icons.title === (category !== null ? category : 'Western'));
+    try {return icon.icon;}
+    catch(Exception) {return ConstFoodCategory[0].icon;}
+  };
   return (
     <>
       {
         isModalVisible &&
         <SafeAreaView style={styles.screen}>
           <Modal animationType="none"
-            transparent visible={isModalVisible}
-            presentationStyle="overFullScreen"
+                 transparent visible={isModalVisible}
+                 presentationStyle="overFullScreen"
           >
             <View style={styles.viewWrapper}>
               <View style={styles.modalView}>
@@ -44,7 +49,7 @@ export const ModalWinner = ({ isModalVisible, closeModal, selectedRestaurant, go
                 <View style={{ flexDirection: 'row', paddingVertical: 10, }}>
                   <Text style={styles.header}>{restaurant}</Text>
                   <Image
-                    source={ConstFoodCategory.find(icons => icons.title === (category === null ? category : 'Western')).icon}
+                    source={findIcon()}
                     style={styles.iconCategory} />
                 </View>
 
@@ -82,15 +87,15 @@ export const ModalWinner = ({ isModalVisible, closeModal, selectedRestaurant, go
     </>
   );
 };
-const styles = StyleSheet.create({
+const styles = EStyleSheet.create({
   buttonTextSpin: {
     fontSize: 16,
-    color: Colors.tertiaryColor,
+    color: '$tertiaryColor',
     fontWeight: 'normal',
   },
   buttonTextMenu: {
     fontSize: 16,
-    color: Colors.primaryColor,
+    color: '$primaryColor',
     fontWeight: 'normal',
   },
   container: {
@@ -115,14 +120,14 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     backgroundColor: 'rgba(0, 0, 0, 0.2)',
     shadowOffset: { width: -2, height: 2 },
-    shadowColor: Colors.primaryColor,
+    shadowColor: '$primaryColor',
     shadowOpacity: 0.2,
     shadowRadius: 3,
   },
   title: {
     fontSize: 18,
     fontWeight: 'bold',
-    color: Colors.primaryColor,
+    color: '$primaryColor',
   },
   modalView: {
     paddingBottom: 5,
@@ -132,28 +137,28 @@ const styles = StyleSheet.create({
     left: '50%',
     elevation: 5,
     transform: [{ translateX: -(width * 0.4) },
-    { translateY: -90 }],
+      { translateY: -90 }],
     width: width * 0.8,
-    backgroundColor: Colors.secondaryBackGroundColor,
+    backgroundColor: '$secondaryBackGroundColor',
     borderRadius: 10
   },
   button: {
-    backgroundColor: Colors.secondaryBackGroundColor,
+    backgroundColor: '$secondaryBackGroundColor',
     alignItems: 'center',
     padding: 5,
     width: '50%',
-    borderColor: Colors.secondaryBackGroundColor,
-    borderRightColor: Colors.primaryColor,
+    borderColor: '$secondaryBackGroundColor',
+    borderRightColor: '$primaryColor',
     borderWidth: .5,
     textTransform: 'uppercase',
     marginTop: 15,
   },
   buttonVisit: {
-    backgroundColor: Colors.secondaryBackGroundColor,
+    backgroundColor: '$secondaryBackGroundColor',
     alignItems: 'center',
     padding: 5,
     width: '50%',
-    borderColor: Colors.secondaryBackGroundColor,
+    borderColor: '$secondaryBackGroundColor',
     borderWidth: .5,
     textTransform: 'uppercase',
     marginTop: 15,
@@ -161,25 +166,25 @@ const styles = StyleSheet.create({
   header: {
     fontSize: 20,
     fontWeight: 'bold',
-    color: Colors.primaryColor,
+    color: '$primaryColor',
     shadowOffset: { width: -2, height: 1 },
-    shadowColor: Colors.primaryColor,
+    shadowColor: '$primaryColor',
     shadowOpacity: 0.1,
     shadowRadius: 2,
     paddingStart: 10,
     width: '90%'
   },
   price: {
-    color: Colors.tertiaryColor, marginVertical: 5,
+    color: '$tertiaryColor', marginVertical: 5,
     fontSize: 14, fontWeight: 'bold', textAlign: 'justify'
   },
   desc: {
-    color: Colors.tertiaryTextColor, paddingEnd: 5, marginTop: 5,
+    color: '$tertiaryTextColor', paddingEnd: 5, marginTop: 5,
     fontSize: 14, fontWeight: 'normal', textAlign: 'justify'
   },
   descContainer: { paddingHorizontal: 10, },
   address: {
-    color: Colors.tertiaryColor, paddingEnd: 5, marginTop: 5,
+    color: '$tertiaryColor', paddingEnd: 5, marginTop: 5,
     fontSize: 12, fontWeight: 'normal', textAlign: 'justify'
   },
   logoContainer: {
@@ -189,7 +194,7 @@ const styles = StyleSheet.create({
     padding: 15,
     marginStart: '5%',
     marginTop: '40%',
-    borderColor: Colors.primaryColor
+    borderColor: '$primaryColor'
   },
   logoIcon: {
     height: 60,

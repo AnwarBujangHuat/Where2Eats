@@ -13,6 +13,7 @@ import locationIcon from '../../assets/location.png';
 import res1 from '../../assets/res1.jpg';
 import { ConstFoodCategory } from '../../screens/home/ConstFoodCategory';
 import { Colors } from '../../Colors';
+import EStyleSheet from 'react-native-extended-stylesheet';
 
 export const RestaurantCard = ({ onPress, name, category, address, description, rate, image }) => {
   return (
@@ -36,7 +37,7 @@ export const RestaurantCard = ({ onPress, name, category, address, description, 
               </View>
             </View>
             <Image source={ConstFoodCategory.find(icons => icons.title === category).icon}
-              style={styles.iconCategory} />
+                   style={styles.iconCategory} />
           </View>
         </View>
       </TouchableWithoutFeedback>
@@ -44,7 +45,7 @@ export const RestaurantCard = ({ onPress, name, category, address, description, 
 
   );
 };
-const styles = StyleSheet.create(
+const styles = EStyleSheet.create(
   {
     icon: {
       width: 11,
@@ -62,13 +63,13 @@ const styles = StyleSheet.create(
       justifyContent: 'center',
       margin: 15,
       shadowOffset: { width: -2, height: 4 },
-      shadowColor: Colors.primaryColor,
+      shadowColor: '$primaryColor',
       shadowOpacity: 0.2,
       shadowRadius: 3,
       elevation: 10,
     },
     card: {
-      backgroundColor: Colors.secondaryBackGroundColor,
+      backgroundColor: '$secondaryBackGroundColor',
       borderRadius: 10,
       width: Dimensions.get('screen').width - 30,
       overflow: 'hidden',
@@ -80,13 +81,14 @@ const styles = StyleSheet.create(
       width: '90%'
     },
     desc: {
-      color: Colors.secondaryTextColor, paddingTop: 5,
+      color: '$secondaryTextColor',
+      paddingTop: 5,
       fontSize: 12,
     },
     title: {
       fontSize: 18,
       fontWeight: 'bold',
-      color: Colors.primaryTextColor,
+      color: '$primaryTextColor',
     },
     containerIcon: {
       flexDirection: 'row',

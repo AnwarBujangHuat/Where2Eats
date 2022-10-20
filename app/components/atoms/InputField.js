@@ -5,6 +5,7 @@ import {
   TextInput
 } from 'react-native';
 import { Colors } from '../../Colors';
+import EStyleSheet from 'react-native-extended-stylesheet';
 
 export const InputField = ({ placeholder, multiline, onChange }) => {
   return (
@@ -14,21 +15,21 @@ export const InputField = ({ placeholder, multiline, onChange }) => {
       multiline={multiline}
       onChangeText={(text) => onChange(text)}
       overflow="hidden"
-      color={Colors.secondaryTextColor}
-      placeholderTextColor={Colors.secondaryTextColor}
+      color={EStyleSheet.value('$secondaryTextColor')}
+      placeholderTextColor={EStyleSheet.value('$secondaryTextColor')}
       keyboardAppearance="dark"
       autoCorrect={false} />);
 };
-const styles = StyleSheet.create({
+const styles = EStyleSheet.create({
   input: {
     fontSize: 14,
     fontWeight: 'normal',
     borderWidth: 1,
     paddingHorizontal: 5,
-    borderBottomColor: Colors.primaryColor,
-    borderColor: Colors.secondaryBackGroundColor,
+    borderBottomColor: '$primaryColor',
+    borderColor: '$secondaryBackGroundColor',
     textAlignVertical: 'center',
-    backgroundColor: Colors.secondaryBackGroundColor,
+    backgroundColor: '$secondaryBackGroundColor',
     borderRadius: 5,
     marginVertical: 10,
     paddingVertical: 15,

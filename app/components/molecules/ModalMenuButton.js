@@ -3,12 +3,13 @@ import {
   Dimensions,
   FlatList,
   Modal,
+  SafeAreaView,
   StyleSheet,
   Text,
   TouchableOpacity,
   View
 } from 'react-native';
-import { Colors } from '../../Colors';
+import EStyleSheet from 'react-native-extended-stylesheet';
 
 const { width } = Dimensions.get('window');
 
@@ -32,10 +33,10 @@ export const ModalMenuButton = ({ isModalVisible, onPress }) => {
     <>
       {
         { isModalVisible } &&
-        <View>
+        <SafeAreaView>
           <Modal animationType="fade"
-            transparent visible={isModalVisible}
-            presentationStyle="overFullScreen">
+                 transparent visible={isModalVisible}
+                 presentationStyle="overFullScreen">
             <View style={styles.viewWrapper}>
               <View style={styles.modalView}>
                 <FlatList
@@ -52,14 +53,14 @@ export const ModalMenuButton = ({ isModalVisible, onPress }) => {
               </View>
             </View>
           </Modal>
-        </View>
+        </SafeAreaView>
       }
     </>
   );
 };
-const styles = StyleSheet.create({
+const styles = EStyleSheet.create({
   button: {
-    backgroundColor: Colors.lightPrimaryColor,
+    backgroundColor: '$lightPrimaryColor',
     alignItems: 'center',
     padding: 10,
     borderRadius: 10,
@@ -69,19 +70,8 @@ const styles = StyleSheet.create({
   buttonText: {
     fontSize: 16,
     padding: 10,
-    color: Colors.primaryTextColor,
+    color: '$primaryTextColor',
     fontWeight: 'normal',
-  },
-  container: {
-    alignSelf: 'flex-start',
-    backgroundColor: Colors.primaryColor,
-    borderRadius: 10,
-    marginTop: 10,
-    shadowOffset: { width: -2, height: 4 },
-    shadowColor: Colors.primaryColor,
-    shadowOpacity: 0.2,
-    shadowRadius: 3,
-    elevation: 10,
   },
   image: {
     width: width * 0.7
@@ -98,11 +88,10 @@ const styles = StyleSheet.create({
   modalView: {
     padding: 20,
     justifyContent: 'center',
-    top: 30,
     radius: 20,
     elevation: 5,
     width: width * 0.5,
-    backgroundColor: Colors.greyBackground,
+    backgroundColor: '$secondaryBackGroundColor',
     borderRadius: 7,
   },
 

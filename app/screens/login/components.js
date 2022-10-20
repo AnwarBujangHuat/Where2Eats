@@ -29,9 +29,9 @@ export const LoginComponents = props => {
       <View style={styles.inputContainer}>
         <Text style={styles.title}>Sign In</Text>
         <InputFieldLogins defvalue={'Email'} onChangeText1={onChangeInputEmail} source={email}
-          secret={false} />
+                          secret={false} />
         <InputFieldLogins defvalue={'Password'} onChangeText1={onChangeInputPassword} source={password}
-          secret={true} />
+                          secret={true} />
         <TouchableOpacity style={styles.buttonDone} onPress={verifyUser}>
           <Text style={{ color: Colors.whitTextColor, textAlign: 'center' }}>Login</Text>
         </TouchableOpacity>

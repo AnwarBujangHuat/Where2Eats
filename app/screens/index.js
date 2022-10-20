@@ -1,4 +1,4 @@
-export * from './login/Login';
+export * from './login';
 export * from './home/Home';
 export * from './register/Register';
 export * from './register/SetupMenu';

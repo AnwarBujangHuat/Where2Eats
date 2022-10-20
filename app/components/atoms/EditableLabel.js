@@ -1,15 +1,16 @@
 import {
   Dimensions,
+  Image,
   StyleSheet,
   Text,
   TouchableOpacity,
-  View,
-  Image
+  View
 } from 'react-native';
 import React from 'react';
 import { Colors } from '../../Colors';
 import editIcon from '../../assets/editing.png';
-import profileIcon from '../../assets/profile.png';
+import EStyleSheet from 'react-native-extended-stylesheet';
+
 const { width } = Dimensions.get('window');
 
 export const EditableLabel = ({ onPress, title, information, icon }) => {
@@ -24,28 +25,28 @@ export const EditableLabel = ({ onPress, title, information, icon }) => {
         <Image style={styles.icon} source={editIcon}></Image>
       </TouchableOpacity>
     </View>
-  </View>)
+  </View>);
 };
-const styles = StyleSheet.create({
+const styles = EStyleSheet.create({
   icon: {
     width: 20,
     height: 20,
     marginVertical: 10,
     marginHorizontal: 5,
-    tintColor: Colors.primaryColor
+    tintColor: '$primaryColor'
   },
   header: {
-    color: Colors.secondaryTextColor,
+    color: '$secondaryTextColor',
     fontSize: 12,
     marginBottom: 5,
   },
   information: {
-    color: Colors.primaryTextColor,
+    color: '$primaryTextColor',
     fontSize: 16,
   },
   textContainer: {
     paddingStart: 10,
-    width: "80%",
+    width: '80%',
     alignContent: 'center'
   },
   label: {
@@ -54,9 +55,9 @@ const styles = StyleSheet.create({
     borderRadius: 5,
     marginVertical: 2,
     padding: 10,
-    backgroundColor: Colors.backGroundColor,
+    backgroundColor: '$backGroundColor',
     shadowOffset: { width: -2, height: 2 },
-    shadowColor: Colors.primaryColor,
+    shadowColor: '$primaryColor',
     shadowOpacity: 0.2,
     shadowRadius: 3,
     alignItems: 'center',

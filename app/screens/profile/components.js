@@ -1,10 +1,10 @@
 import React from 'react';
 import {
+  FlatList,
   Image,
   SafeAreaView,
   StyleSheet,
   Text as RNText,
-  FlatList,
   TouchableOpacity,
   View
 } from 'react-native';
@@ -13,6 +13,7 @@ import { Colors } from '../../Colors';
 import personIcon from '../../assets/programmer.png';
 import { EditableLabel } from '../../components/atoms/EditableLabel';
 import { ModalEdit } from '../../components/molecules/ModalEdit';
+import EStyleSheet from 'react-native-extended-stylesheet';
 
 export const ProfileComponents = props => {
 
@@ -45,7 +46,8 @@ export const ProfileComponents = props => {
           renderItem={({ item, index }) => {
             return (
               <EditableLabel
-                title={item.title} information={item.information} onPress={() => editInformation(item.id)} icon={item.icon} index={index}
+                title={item.title} information={item.information} onPress={() => editInformation(item.id)}
+                icon={item.icon} index={index}
               ></EditableLabel>);
           }}
           showsHorizontalScrollIndicator={false}
@@ -53,15 +55,16 @@ export const ProfileComponents = props => {
       </View>
       {
         isModalVisible &&
-        <ModalEdit isModalVisible={isModalVisible} closeModal={closeModal} Title={selectedInfo} setUpdatedInfo={setUpdatedInfo}
-          onDone={onDone} />
+        <ModalEdit isModalVisible={isModalVisible} closeModal={closeModal} Title={selectedInfo}
+                   setUpdatedInfo={setUpdatedInfo}
+                   onDone={onDone} />
       }
     </SafeAreaView>
   );
 };
-const styles = StyleSheet.create({
+const styles = EStyleSheet.create({
   backGround: {
-    backgroundColor: Colors.backGroundColor,
+    backgroundColor: '$backGroundColor',
     flex: 1,
   },
   rowContainer: {
@@ -72,7 +75,7 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 16,
     fontWeight: 'bold',
-    color: Colors.primaryTextColor,
+    color: '$primaryTextColor',
     margin: 10,
   },
   profileImage: {
@@ -80,7 +83,7 @@ const styles = StyleSheet.create({
     height: 120,
     width: 120,
     borderRadius: 60,
-    backgroundColor: Colors.secondaryBackGroundColor,
+    backgroundColor: '$secondaryBackGroundColor',
   },
 
 });

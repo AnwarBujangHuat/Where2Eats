@@ -6,7 +6,7 @@ import {
 } from 'react-native';
 import React from 'react';
 import backButton from '../../assets/back.png';
-import { Colors } from '../../Colors';
+import EStyleSheet from 'react-native-extended-stylesheet';
 
 export const BackButton = ({ onPress }) => {
   return (
@@ -18,14 +18,14 @@ export const BackButton = ({ onPress }) => {
 
   );
 };
-const styles = StyleSheet.create({
+const styles = EStyleSheet.create({
   container: {
     alignSelf: 'flex-start',
-    backgroundColor: Colors.secondaryBackGroundColor,
+    backgroundColor: '$secondaryBackGroundColor',
     borderRadius: 40,
     padding: 10,
     shadowOffset: { width: -2, height: 4 },
-    shadowColor: Colors.primaryColor,
+    shadowColor: '$primaryColor',
     shadowOpacity: 0.2,
     shadowRadius: 3,
     elevation: 10,

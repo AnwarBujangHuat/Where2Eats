@@ -23,9 +23,9 @@ import {
   PanGestureHandler,
   State
 } from 'react-native-gesture-handler';
-import { Colors } from '../../Colors';
 import color from 'randomcolor';
 import { snap } from '@popmotion/popcorn';
+import EStyleSheet from 'react-native-extended-stylesheet';
 
 const { width } = Dimensions.get('screen');
 const knobFill = color({ hue: 'purple' });
@@ -83,31 +83,33 @@ export const WheelComponents = props => {
 
   const _wheelPaths = makeWheel();
   const _onPan = ({ nativeEvent }) => {
+    const { velocityY, velocityX, velocity } = nativeEvent;
+
     if (nativeEvent.state === State.ACTIVE) {
-      nativeEvent.velocityX > 0 ? setDirection('Left') : setDirection('Right');
-      // console.log(State.velocityX)
+      velocityX > 0 ? setDirection('Left') : setDirection('Right');
     }
     if (nativeEvent.state === State.END) {
-      const { velocityY } = nativeEvent;
+      // console.log(velocityX + " " + velocity)
+
       Animated.decay(_angle, {
         velocity: velocityY / 1000,
         deceleration: 0.999,
         useNativeDriver: true
       }).start(() => {
-        _angle.setValue(angle % oneTurn);
-        const snapTo = snap(oneTurn / numberOfSegments);
-        Animated.timing(_angle, {
-          toValue: snapTo(angle),
-          duration: 200,
-          useNativeDriver: true
-        }).start(() => {
-          const winnerIndex = _getWinnerIndex();
-          setisEnabled(true);
-          setFinished(true);
-          setModalVisible(true);
-          setSelectedRestaurant(restaurant[winnerIndex]);
-        });
-      }
+          _angle.setValue(angle % oneTurn);
+          const snapTo = snap(oneTurn / numberOfSegments);
+          Animated.timing(_angle, {
+            toValue: snapTo(angle),
+            duration: 200,
+            useNativeDriver: true
+          }).start(() => {
+            const winnerIndex = _getWinnerIndex();
+            setisEnabled(true);
+            setFinished(true);
+            setModalVisible(true);
+            setSelectedRestaurant(restaurant[winnerIndex]);
+          });
+        }
       );
     }
   };
@@ -177,10 +179,10 @@ export const WheelComponents = props => {
             alignContent: 'center', alignSelf: 'center', alignItems: 'center'
           }}>
             <Image style={{ height: 50, width: 57, resizeMode: 'cover', marginBottom: 9 }}
-              source={{ uri: 'https://c.tenor.com/MRX_0O8RtnkAAAAi/arrow.gif' }} />
+                   source={{ uri: 'https://c.tenor.com/MRX_0O8RtnkAAAAi/arrow.gif' }} />
             <RNText style={styles.title}>{'Swipe To The LEFT or RIGHT'}</RNText>
             <Image style={{ height: 50, width: 57, transform: [{ rotate: '180deg' }], marginTop: 9 }}
-              source={{ uri: 'https://c.tenor.com/MRX_0O8RtnkAAAAi/arrow.gif' }} />
+                   source={{ uri: 'https://c.tenor.com/MRX_0O8RtnkAAAAi/arrow.gif' }} />
           </View>
           <View style={styles.wheel}>
             {_renderKnob()}
@@ -233,7 +235,7 @@ export const WheelComponents = props => {
           {
             isModalVisible && isEnabled &&
             <ModalWinner closeModal={closeModal} isModalVisible={isModalVisible} goToMenu={goToMenu}
-              selectedRestaurant={selectedRestaurant} isFinished={isFinished} />
+                         selectedRestaurant={selectedRestaurant} isFinished={isFinished} />
           }
         </SafeAreaView>
       </ >
@@ -248,9 +250,9 @@ export const WheelComponents = props => {
       </View>
     </PanGestureHandler>);
 };
-const styles = StyleSheet.create({
+const styles = EStyleSheet.create({
   container: {
-    backgroundColor: Colors.backGroundColor,
+    backgroundColor: '$backGroundColor',
     flex: 1,
     justifyContent: 'center',
   },
@@ -286,14 +288,14 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 16,
     fontWeight: 'bold',
-    color: Colors.primaryTextColor,
+    color: '$primaryTextColor',
     margin: 10,
   },
   wheel: {
     alignItems: 'center',
     justifyContent: 'center',
     shadowOffset: { width: -2, height: 6 },
-    shadowColor: Colors.primaryColor,
+    shadowColor: '$primaryColor',
     shadowOpacity: 0.4,
     shadowRadius: 4,
     elevation: 30,
