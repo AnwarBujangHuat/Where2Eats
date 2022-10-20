@@ -11,7 +11,6 @@ import addImage from '../../assets/addImage.png';
 import logoIcon from '../../assets/Logo.png';
 
 import { RateLabel } from '../atoms/RateLabel';
-import { Colors } from '../../Colors';
 
 export const DetailsHeader = ({ image, back, disabled, rate = false }) => {
   const changeLogo = () => {};
@@ -49,7 +48,7 @@ const styles = StyleSheet.create({
     padding: 15,
     marginStart: '3%',
     shadowOffset: { width: -2, height: -4 },
-    shadowColor: Colors.primaryColor,
+    shadowColor: '$primaryColor',
     shadowOpacity: 0.1,
     shadowRadius: 2,
     marginTop: '25%',

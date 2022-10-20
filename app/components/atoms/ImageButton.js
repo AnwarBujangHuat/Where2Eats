@@ -7,9 +7,10 @@ import {
 } from 'react-native';
 import React from 'react';
 import { Colors } from '../../Colors';
+import EStyleSheet from 'react-native-extended-stylesheet';
 
 export const ImageButton = ({ onPress, item, selected }) => {
-  let backGroundColor = selected.includes(item.title) ? '#894eff' : Colors.secondaryBackGroundColor;
+  let backGroundColor = selected.includes(item.title) ? '#894eff' : EStyleSheet.value('$secondaryBackGroundColor');
   let color = selected.includes(item.title) ? Colors.whitTextColor : Colors.primaryColor;
   return (
     <View>
@@ -20,7 +21,7 @@ export const ImageButton = ({ onPress, item, selected }) => {
         padding: 10,
         backgroundColor: backGroundColor,
         shadowOffset: { width: -2, height: 4 },
-        shadowColor: Colors.primaryColor,
+        shadowColor: EStyleSheet.value('$primaryColor'),
         shadowOpacity: 0.2,
         shadowRadius: 3,
         elevation: 10,
@@ -39,7 +40,7 @@ export const ImageButton = ({ onPress, item, selected }) => {
 
   );
 };
-const styles = StyleSheet.create({
+const styles = EStyleSheet.create({
   icon: {
     width: 25,
     height: 25,

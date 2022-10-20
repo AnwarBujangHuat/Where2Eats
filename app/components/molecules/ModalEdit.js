@@ -1,7 +1,6 @@
-import React, { useState } from 'react';
+import React from 'react';
 import {
   Dimensions,
-  Image,
   Modal,
   SafeAreaView,
   StyleSheet,
@@ -11,9 +10,11 @@ import {
   View
 } from 'react-native';
 import { Colors } from '../../Colors';
+import EStyleSheet from 'react-native-extended-stylesheet';
+
 const { width } = Dimensions.get('window');
 
-export const ModalEdit = ({ isModalVisible, CloseModal, onDone, Title, setUpdatedInfo }) => {
+export const ModalEdit = ({ isModalVisible, closeModal, onDone, Title, setUpdatedInfo }) => {
 
   return (
     <>
@@ -21,8 +22,8 @@ export const ModalEdit = ({ isModalVisible, CloseModal, onDone, Title, setUpdate
         isModalVisible &&
         <SafeAreaView style={styles.screen}>
           <Modal animationType="slide"
-            transparent visible={isModalVisible}
-            presentationStyle="overFullScreen">
+                 transparent visible={isModalVisible}
+                 presentationStyle="overFullScreen">
             <View style={styles.viewWrapper}>
               <View style={styles.modalView}>
                 <Text style={styles.header}>{'Change ' + Title}</Text>
@@ -30,7 +31,7 @@ export const ModalEdit = ({ isModalVisible, CloseModal, onDone, Title, setUpdate
                   style={styles.textInput}
                   placeholder={'Enter ' + Title}
                   clearButtonMode={'always'}
-                  placeholderTextColor={Colors.secondaryTextColor}
+                  placeholderTextColor={EStyleSheet.value('$secondaryTextColor')}
                   onChangeText={(text) => setUpdatedInfo(text)}
                   overflow="hidden"
                   keyboardAppearance="dark"
@@ -40,7 +41,7 @@ export const ModalEdit = ({ isModalVisible, CloseModal, onDone, Title, setUpdate
                 }}>
                   <TouchableOpacity
                     style={styles.button}
-                    onPress={CloseModal}>
+                    onPress={closeModal}>
                     <Text style={styles.buttonTextSpin}>Cancel</Text>
                   </TouchableOpacity>
                   <TouchableOpacity
@@ -57,37 +58,37 @@ export const ModalEdit = ({ isModalVisible, CloseModal, onDone, Title, setUpdate
     </>
 
   );
-}
-const styles = StyleSheet.create({
+};
+const styles = EStyleSheet.create({
   button: {
-    backgroundColor: Colors.secondaryBackGroundColor,
+    backgroundColor: '$secondaryBackGroundColor',
     alignItems: 'center',
     padding: 5,
     width: '50%',
-    borderColor: Colors.secondaryBackGroundColor,
-    borderRightColor: Colors.primaryColor,
+    borderColor: '$secondaryBackGroundColor',
+    borderRightColor: '$primaryColor',
     borderWidth: .5,
     textTransform: 'uppercase',
     marginTop: 15,
   },
   buttonVisit: {
-    backgroundColor: Colors.secondaryBackGroundColor,
+    backgroundColor: '$secondaryBackGroundColor',
     alignItems: 'center',
     padding: 5,
     width: '50%',
-    borderColor: Colors.secondaryBackGroundColor,
+    borderColor: '$secondaryBackGroundColor',
     borderWidth: .5,
     textTransform: 'uppercase',
     marginTop: 15,
   },
   buttonTextSpin: {
     fontSize: 16,
-    color: Colors.tertiaryColor,
+    color: '$tertiaryColor',
     fontWeight: 'normal',
   },
   buttonTextMenu: {
     fontSize: 16,
-    color: Colors.primaryColor,
+    color: '$primaryColor',
     fontWeight: 'normal',
   },
   screen: {
@@ -101,7 +102,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     backgroundColor: 'rgba(0, 0, 0, 0.2)',
     shadowOffset: { width: -2, height: 2 },
-    shadowColor: Colors.primaryColor,
+    shadowColor: '$primaryColor',
     shadowOpacity: 0.2,
     shadowRadius: 3,
   },
@@ -113,20 +114,20 @@ const styles = StyleSheet.create({
     left: '50%',
     elevation: 5,
     transform: [{ translateX: -(width * 0.4) },
-    { translateY: -90 }],
+      { translateY: -90 }],
     width: width * 0.8,
-    backgroundColor: Colors.secondaryBackGroundColor,
+    backgroundColor: '$secondaryBackGroundColor',
     borderRadius: 7,
   },
   textInput: {
     fontSize: 14,
     fontWeight: 'normal',
     borderWidth: 1,
-    color: Colors.secondaryTextColor,
-    borderBottomColor: Colors.primaryColor,
-    borderColor: Colors.backGroundColor,
+    color: '$secondaryTextColor',
+    borderBottomColor: '$primaryColor',
+    borderColor: '$backGroundColor',
     textAlignVertical: 'center',
-    backgroundColor: Colors.secondaryBackGroundColor,
+    backgroundColor: '$secondaryBackGroundColor',
     borderRadius: 5,
     marginBottom: 10,
     paddingVertical: 15,
@@ -134,9 +135,9 @@ const styles = StyleSheet.create({
   header: {
     fontSize: 16,
     fontWeight: 'bold',
-    color: Colors.tertiaryColor,
+    color: '$tertiaryColor',
     shadowOffset: { width: -2, height: 1 },
-    shadowColor: Colors.primaryColor,
+    shadowColor: '$primaryColor',
     shadowOpacity: 0.1,
     shadowRadius: 2,
   },
@@ -144,11 +145,11 @@ const styles = StyleSheet.create({
     fontSize: 14,
     fontWeight: 'normal',
     borderWidth: 1,
-    borderBottomColor: Colors.primaryColor,
-    color: Colors.secondaryTextColor,
-    borderColor: Colors.backGroundColor,
+    borderBottomColor: '$primaryColor',
+    color: '$secondaryTextColor',
+    borderColor: '$backGroundColor',
     textAlignVertical: 'center',
-    backgroundColor: Colors.secondaryBackGroundColor,
+    backgroundColor: '$secondaryBackGroundColor',
     borderRadius: 5,
     marginVertical: 10,
     paddingVertical: 15,

@@ -9,8 +9,8 @@ import {
   Text,
   View
 } from 'react-native';
-import { Colors } from '../../Colors';
 import nasiAyam from '../../assets/NasiAyam.jpg';
+import EStyleSheet from 'react-native-extended-stylesheet';
 
 const { width } = Dimensions.get('window');
 
@@ -22,8 +22,8 @@ export const ModalMenuDetails = ({ closeModal, isModalVisible, foodItem }) => {
         isModalVisible &&
         <SafeAreaView style={styles.screen}>
           <Modal animationType="none"
-            transparent visible={isModalVisible}
-            presentationStyle="overFullScreen">
+                 transparent visible={isModalVisible}
+                 presentationStyle="overFullScreen">
             <View style={styles.viewWrapper}>
               <View style={styles.modalView}>
                 <ImageBackground
@@ -39,7 +39,7 @@ export const ModalMenuDetails = ({ closeModal, isModalVisible, foodItem }) => {
                   <Text style={styles.price}>{'RM' + price}</Text>
                   <Text style={styles.desc}>{desc}</Text>
                 </View>
-                <Button title="OK" color={Colors.primaryColor} onPress={closeModal} />
+                <Button title="OK" color={EStyleSheet.value('$primaryColor')} onPress={closeModal} />
               </View>
             </View>
           </Modal>
@@ -48,17 +48,17 @@ export const ModalMenuDetails = ({ closeModal, isModalVisible, foodItem }) => {
     </>
   );
 };
-const styles = StyleSheet.create({
+const styles = EStyleSheet.create({
   changeButton:
-  {
-    position: 'absolute',
-    left: 0,
-    fontWeight: 'bold',
-    fontSize: 12,
-    color: 'white',
-    backgroundColor: Colors.primaryColor,
-    padding: 5,
-  },
+    {
+      position: 'absolute',
+      left: 0,
+      fontWeight: 'bold',
+      fontSize: 12,
+      color: 'white',
+      backgroundColor: '$primaryColor',
+      padding: 5,
+    },
   buttonText: {
     fontSize: 16,
     color: 'white',
@@ -83,8 +83,8 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
     backgroundColor: 'rgba(0, 0, 0, 0.2)',
-    shadowOffset: { width: -2, height: 2 },
-    shadowColor: Colors.primaryColor,
+    shadowOffset: { width: -2, height: 10 },
+    shadowColor: '$primaryColor',
     shadowOpacity: 0.2,
     shadowRadius: 3,
   },
@@ -96,26 +96,26 @@ const styles = StyleSheet.create({
     left: '50%',
     elevation: 5,
     transform: [{ translateX: -(width * 0.4) },
-    { translateY: -90 }],
+      { translateY: -90 }],
     width: width * 0.8,
-    backgroundColor: Colors.backGroundColor,
+    backgroundColor: '$backGroundColor',
     borderRadius: 10
   },
   header: {
     fontSize: 18,
     fontWeight: 'bold',
-    color: Colors.primaryTextColor,
+    color: '$primaryTextColor',
     shadowOffset: { width: -2, height: 1 },
-    shadowColor: Colors.primaryColor,
+    shadowColor: '$primaryColor',
     shadowOpacity: 0.1,
     shadowRadius: 2,
   },
   price: {
-    color: Colors.tertiaryTextColor, marginVertical: 5,
+    color: '$tertiaryTextColor', marginVertical: 5,
     fontSize: 14, fontWeight: 'bold', textAlign: 'justify'
   },
   desc: {
-    color: Colors.tertiaryTextColor, paddingEnd: 5, marginTop: 5,
+    color: '$tertiaryTextColor', paddingEnd: 5, marginTop: 5,
     fontSize: 14, fontWeight: 'normal', textAlign: 'justify'
   },
 });

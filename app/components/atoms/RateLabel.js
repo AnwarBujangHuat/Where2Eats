@@ -8,6 +8,7 @@ import React from 'react';
 import startIcon from '../../assets/star.png';
 import startIcon2 from '../../assets/star2.png';
 import { Colors } from '../../Colors';
+import EStyleSheet from 'react-native-extended-stylesheet';
 
 export const RateLabel = ({ rating }) => {
   return (
@@ -17,7 +18,7 @@ export const RateLabel = ({ rating }) => {
     </View>
   );
 };
-const styles = StyleSheet.create({
+const styles = EStyleSheet.create({
   icon: {
     width: 15,
     height: 15,
@@ -28,7 +29,7 @@ const styles = StyleSheet.create({
     margin: 5,
     paddingHorizontal: 5,
     paddingVertical: 5,
-    backgroundColor: Colors.backGroundColor,
+    backgroundColor: '$backGroundColor',
     alignItems: 'center',
     alignSelf: 'flex-start',
     marginStart: 10,
@@ -36,7 +37,7 @@ const styles = StyleSheet.create({
   },
   textRate: {
     padding: 2,
-    color: Colors.secondaryTextColor,
+    color: '$secondaryTextColor',
     fontWeight: 'bold'
   },
 });

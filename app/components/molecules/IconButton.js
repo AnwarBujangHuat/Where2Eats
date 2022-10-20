@@ -6,6 +6,7 @@ import {
 } from 'react-native';
 import React from 'react';
 import { Colors } from '../../Colors';
+import EStyleSheet from 'react-native-extended-stylesheet';
 
 export const IconButton = ({ title, onPress, buttontitle }) => {
   return (
@@ -19,7 +20,7 @@ export const IconButton = ({ title, onPress, buttontitle }) => {
 
   );
 };
-const styles = StyleSheet.create({
+const styles = EStyleSheet.create({
   section: {
     flexDirection: 'row',
     borderRadius: 10,
@@ -27,11 +28,11 @@ const styles = StyleSheet.create({
     alignSelf: 'center',
   },
   buttonText: {
-    color: Colors.primaryTextColor,
+    color: '$primaryTextColor',
     textAlign: 'center'
   },
   title: {
-    color: Colors.secondaryTextColor,
+    color: '$secondaryTextColor',
     textAlign: 'center'
   }
 });

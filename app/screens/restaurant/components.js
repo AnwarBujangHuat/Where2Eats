@@ -10,8 +10,8 @@ import {
 import { DetailsHeader } from '../../components/molecules/DetailsHeader';
 import { DescriptionLabel } from '../../components/molecules/DescriptionLabel';
 import { FoodCard } from '../../components/molecules/FoodCard';
-import { Colors } from '../../Colors';
 import { ModalMenuDetails } from '../../components/molecules/ModalMenuDetails';
+import EStyleSheet from 'react-native-extended-stylesheet';
 
 export const RestaurantComponents = props => {
   const {
@@ -45,7 +45,7 @@ export const RestaurantComponents = props => {
               showsHorizontalScrollIndicator={false}
               renderItem={({ item }) => (
                 <FoodCard onPress={() => onPress(item)} name={item.name} price={item.price} desc={item.desc}
-                  image={item.image} />
+                          image={item.image} />
               )} />
           </>
         )
@@ -55,9 +55,9 @@ export const RestaurantComponents = props => {
     </View>
   );
 };
-const styles = StyleSheet.create({
+const styles = EStyleSheet.create({
   container: {
-    backgroundColor: Colors.backGroundColor,
+    backgroundColor: '$backGroundColor',
     paddingBottom: 20,
     flex: 1
   },
@@ -65,7 +65,7 @@ const styles = StyleSheet.create({
     fontSize: 18,
     fontWeight: 'bold',
     margin: 10,
-    color: Colors.primaryTextColor,
+    color: '$primaryTextColor',
   },
   icon: {
     width: 20,

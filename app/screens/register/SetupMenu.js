@@ -11,15 +11,12 @@ import {
   View
 } from 'react-native';
 import { ConstString } from '../../Strings';
-import { Colors } from '../../Colors';
 import { BackButton } from '../../components/atoms/BackButton';
 import SelectBox from 'react-native-multi-selectbox';
 import { xorBy } from 'lodash';
 import { FoodCard } from '../../components/molecules/FoodCard';
-import {
-  useDispatch,
-  useSelector
-} from 'react-redux'; import { restaurantAdded } from '../../store/reducer';
+import { useDispatch } from 'react-redux';
+import { restaurantLoading } from '../../store/reducer';
 import addIcon from '../../assets/plus.png';
 import { ModalMenu } from '../../components/molecules/ModalMenu';
 import mainDishIcon from '../../assets/mainDish.png';
@@ -27,10 +24,8 @@ import sideIcon from '../../assets/sides.png';
 import beveragesIcon from '../../assets/beverages.png';
 import dessertIcon from '../../assets/dessert.png';
 import appetizerIcon from '../../assets/appetizer.png';
-import { restaurantLoading } from '../../store/reducer';
-
-import { getRestaurant, getUser, } from '../../store/selector';
 import { AddOne } from '../../store/thunks';
+import EStyleSheet from 'react-native-extended-stylesheet';
 
 export const SetupMenu = ({ navigation, route }) => {
   const dispatch = useDispatch();
@@ -38,10 +33,6 @@ export const SetupMenu = ({ navigation, route }) => {
   const [selectedCategory, setSelectedCategory] = useState([]);
   const [isModalVisible, setModalVisible] = useState(false);
   const [Category, setCategory] = useState('');
-  const onPressFood = (item) => {
-    setFoodItem(item);
-    setModalVisible(!isModalVisible);
-  };
   const categoryList = [
     {
       item: 'Main Dish',
@@ -99,7 +90,7 @@ export const SetupMenu = ({ navigation, route }) => {
         <BackButton onPress={onPress}></BackButton>
         <Text style={styles.title}>{ConstString.MENU_BOOK}</Text>
       </View>
-      <Text style={{ marginTop: 20, fontSize: 16, fontWeight: 'bold', paddingStart: 15, color: Colors.tertiaryColor }}>Add
+      <Text style={{ marginTop: 20, fontSize: 16, fontWeight: 'bold', paddingStart: 15, color: EStyleSheet.value('$tertiaryColor') }}>Add
         Category</Text>
       <View style={styles.inputContainer}>
         <SelectBox
@@ -112,52 +103,52 @@ export const SetupMenu = ({ navigation, route }) => {
           onMultiSelect={(item) => setSelectedCategory(xorBy(selectedCategory, [item], 'id'))}
           onTapClose={(item) => setSelectedCategory(xorBy(selectedCategory, [item], 'id'))}
           isMulti
-          arrowIconColor={Colors.primaryColor}
-          searchIconColor={Colors.primaryColor}
-          toggleIconColor={Colors.primaryColor}
-          multiOptionContainerStyle={{ backgroundColor: Colors.primaryColor }}
-          multiOptionsLabelStyle={{ fontSize: 16, color: Colors.whitTextColor }}
-          selectedItemStyle={{ fontSize: 16, color: Colors.primaryTextColor }}
-          optionsLabelStyle={{ fontSize: 16, color: Colors.primaryTextColor }}
+          arrowIconColor={EStyleSheet.value('$primaryColor')}
+          searchIconColor={EStyleSheet.value('$primaryColor')}
+          toggleIconColor={EStyleSheet.value('$primaryColor')}
+          multiOptionContainerStyle={{ backgroundColor: EStyleSheet.value('$primaryColor' )}}
+          multiOptionsLabelStyle={{ fontSize: 16, color: EStyleSheet.value('$secondaryTextColor') }}
+          selectedItemStyle={{ fontSize: 16, color: EStyleSheet.value('$primaryTextColor' )}}
+          optionsLabelStyle={{ fontSize: 16, color: EStyleSheet.value('$primaryTextColor') }}
         />
       </View>
       <SectionList style={{ marginHorizontal: 10, marginTop: 20, marginBottom: 55, }}
-        sections={selectedCategory}
-        showsVerticalScrollIndicator={false}
-        keyExtractor={(item, index) => item + index}
-        renderItem={(item) => { return null; }}
-        stickySectionHeadersEnabled={false}
-        renderSectionHeader={({ section: { item, icon, data } }) => (
-          <>
-            <View style={{ flexDirection: 'row', alignItems: 'center', marginBottom: 10, }}>
-              <Text style={styles.header}>{item}</Text>
-              <Image style={styles.icon} source={icon}></Image>
-              <View style={{ flexDirection: 'row', right: 5, position: 'absolute' }}>
-                <TouchableOpacity style={styles.buttonContainer} onPress={() => {
-                  openModal({ item });
-                }}>
-                  <Image style={styles.addIcon} source={addIcon} />
-                  <Text style={{
-                    padding: 5,
-                    color: 'white',
-                    fontWeight: 'bold',
-                    fontSize: 12,
-                  }}>New Item</Text>
-                </TouchableOpacity>
-              </View>
-            </View>
-            <View style={{ flexDirection: 'row' }}>
-              <FlatList
-                data={data}
-                horizontal={true}
-                showsHorizontalScrollIndicator={false}
-                renderItem={({ item }) => (
-                  <FoodCard name={item.name} price={item.price} desc={item.desc}
-                    image={item.image} />
-                )} />
-            </View>
-          </>
-        )}
+                   sections={selectedCategory}
+                   showsVerticalScrollIndicator={false}
+                   keyExtractor={(item, index) => item + index}
+                   renderItem={(item) => { return null; }}
+                   stickySectionHeadersEnabled={false}
+                   renderSectionHeader={({ section: { item, icon, data } }) => (
+                     <>
+                       <View style={{ flexDirection: 'row', alignItems: 'center', marginBottom: 10, }}>
+                         <Text style={styles.header}>{item}</Text>
+                         <Image style={styles.icon} source={icon}></Image>
+                         <View style={{ flexDirection: 'row', right: 5, position: 'absolute' }}>
+                           <TouchableOpacity style={styles.buttonContainer} onPress={() => {
+                             openModal({ item });
+                           }}>
+                             <Image style={styles.addIcon} source={addIcon} />
+                             <Text style={{
+                               padding: 5,
+                               color: 'white',
+                               fontWeight: 'bold',
+                               fontSize: 12,
+                             }}>New Item</Text>
+                           </TouchableOpacity>
+                         </View>
+                       </View>
+                       <View style={{ flexDirection: 'row' }}>
+                         <FlatList
+                           data={data}
+                           horizontal={true}
+                           showsHorizontalScrollIndicator={false}
+                           renderItem={({ item }) => (
+                             <FoodCard name={item.name} price={item.price} desc={item.desc}
+                                       image={item.image} />
+                           )} />
+                       </View>
+                     </>
+                   )}
       />
       <TouchableOpacity
         style={styles.button}
@@ -167,29 +158,29 @@ export const SetupMenu = ({ navigation, route }) => {
       {
         isModalVisible &&
         <ModalMenu isModalVisible={isModalVisible} closeModal={closeModal} selectedCategory={selectedCategory}
-          setFinalMenu={setSelectedCategory} Category={Category} />
+                   setFinalMenu={setSelectedCategory} Category={Category} />
       }
     </SafeAreaView>
   );
 
 };
-const styles = StyleSheet.create({
+const styles = EStyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: Colors.backGroundColor,
+    backgroundColor: '$backGroundColor',
   },
   label: {
-    color: Colors.secondaryTextColor,
+    color: '$secondaryTextColor',
     fontSize: 13,
   },
   buttonContainer: {
     padding: 7,
     alignSelf: 'center',
     flexDirection: 'row',
-    backgroundColor: Colors.primaryColor,
+    backgroundColor: '$primaryColor',
     borderRadius: 20,
     shadowOffset: { width: -2, height: 4 },
-    shadowColor: Colors.primaryColor,
+    shadowColor: '$primaryColor',
     shadowOpacity: 0.2,
     shadowRadius: 3,
     elevation: 10,
@@ -209,7 +200,7 @@ const styles = StyleSheet.create({
     marginTop: 10,
     marginHorizontal: 20,
     shadowOffset: { width: -2, height: 2 },
-    shadowColor: Colors.primaryColor,
+    shadowColor: '$primaryColor',
     shadowOpacity: 0.2,
     shadowRadius: 3,
   },
@@ -217,10 +208,10 @@ const styles = StyleSheet.create({
     fontSize: 16,
     fontWeight: 'bold',
     margin: 10,
-    color: Colors.primaryTextColor,
+    color: '$primaryTextColor',
   },
   button: {
-    backgroundColor: Colors.lightPrimaryColor,
+    backgroundColor: '$lightPrimaryColor',
     alignItems: 'center',
     padding: 15,
     borderRadius: 10,
@@ -234,7 +225,7 @@ const styles = StyleSheet.create({
     fontSize: 16,
     fontWeight: 'bold',
     textAlign: 'center',
-    color: Colors.primaryTextColor,
+    color: '$primaryTextColor',
     alignSelf: 'center',
     marginStart: 10,
   },

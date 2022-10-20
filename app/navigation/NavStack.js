@@ -2,11 +2,11 @@ import { ConstString } from '../Strings';
 import {
   Home,
   Login,
+  Profile,
   Register,
   Restaurant,
   SetupMenu,
   WheelOfFortune,
-  Profile,
 } from '../screens';
 import BottomNavigationBar from './bottom/BottomNavigationBar';
 import React from 'react';
@@ -16,7 +16,7 @@ const Stack = createStackNavigator();
 export const NavStack = () => {
   return (
     <Stack.Navigator
-      initialRouteName={ConstString.HOME}
+      initialRouteName={ConstString.LOGIN}
       screenOptions={{
         headerShown: false
       }}>
@@ -28,7 +28,6 @@ export const NavStack = () => {
       <Stack.Screen name={ConstString.ROULETTE} component={WheelOfFortune} />
       <Stack.Screen name={ConstString.MENU} component={SetupMenu} />
       <Stack.Screen name={ConstString.PROFILE} component={Profile} />
-
     </Stack.Navigator>
   );
 };

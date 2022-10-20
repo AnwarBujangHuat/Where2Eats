@@ -12,8 +12,8 @@ import { DetailsHeader } from '../../components/molecules/DetailsHeader';
 import { ConstFoodCategory } from '../home/ConstFoodCategory';
 import { ImageButton } from '../../components/atoms/ImageButton';
 import { InputField } from '../../components/atoms/InputField';
+import EStyleSheet from 'react-native-extended-stylesheet';
 
-import { Colors } from '../../Colors';
 
 export const RegisterComponents = props => {
   const {
@@ -32,7 +32,7 @@ export const RegisterComponents = props => {
         <InputField placeholder={'Please Input Name'} multiline={false} onChange={(text) => setName(text)} />
         <Text style={styles.header}>{'Description'}</Text>
         <InputField placeholder={'Please Input Description'} multiline={true}
-          onChange={(text) => setDescription(text)} />
+                    onChange={(text) => setDescription(text)} />
         <Text style={styles.header}>{'Category'}</Text>
         <FlatList
           data={ConstFoodCategory}
@@ -48,7 +48,7 @@ export const RegisterComponents = props => {
         <TouchableOpacity
           style={styles.buttonLocation}
           onPress={() => console.log('j')}>
-          <Text style={{ color: Colors.primaryColor, fontWeight: 'bold' }}>Location</Text>
+          <Text style={{ color: EStyleSheet.value('$primaryColor'), fontWeight: 'bold' }}>Location</Text>
         </TouchableOpacity>
         <Text style={styles.desc}>{'Location inserted'}</Text>
       </View>
@@ -60,9 +60,9 @@ export const RegisterComponents = props => {
     </View>
   );
 };
-const styles = StyleSheet.create({
+const styles = EStyleSheet.create({
   container: {
-    backgroundColor: Colors.backGroundColor,
+    backgroundColor: '$backGroundColor',
     flex: 1,
   },
   descriptionInput: {
@@ -70,7 +70,7 @@ const styles = StyleSheet.create({
     fontWeight: 'normal',
     borderWidth: 1,
     paddingHorizontal: 5,
-    borderBottomColor: Colors.primaryColor,
+    borderBottomColor: '$primaryColor',
     borderColor: 'white',
     textAlignVertical: 'center',
     backgroundColor: 'white',
@@ -82,14 +82,14 @@ const styles = StyleSheet.create({
     fontSize: 16,
     fontWeight: 'bold',
     marginVertical: 10,
-    color: Colors.primaryTextColor,
+    color: '$primaryTextColor',
     shadowOffset: { width: -2, height: 2 },
-    shadowColor: Colors.primaryColor,
+    shadowColor: '$primaryColor',
     shadowOpacity: 0.2,
     shadowRadius: 3,
   },
   button: {
-    backgroundColor: Colors.lightPrimaryColor,
+    backgroundColor: '$lightPrimaryColor',
     alignItems: 'center',
     padding: 15,
     borderRadius: 5,
@@ -101,11 +101,11 @@ const styles = StyleSheet.create({
   },
   buttonText: {
     fontSize: 16,
-    color: 'white',
+    color: '$secondaryTextColor',
     fontWeight: 'bold',
   },
   buttonLocation: {
-    borderColor: Colors.lightPrimaryColor,
+    borderColor: '$lightPrimaryColor',
     borderWidth: 1,
     alignItems: 'center',
     padding: 15,
@@ -117,7 +117,8 @@ const styles = StyleSheet.create({
     marginHorizontal: 15,
   },
   desc: {
-    color: Colors.secondaryTextColor, paddingTop: 5,
+    color: '$secondaryTextColor',
+    paddingTop: 5,
     fontSize: 12,
     marginVertical: 5,
   },

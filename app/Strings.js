@@ -4,7 +4,7 @@ export const ConstString = { // name it to routes
   REGISTER: 'Register',
   RESTAURANT: 'Restaurant',
   ROULETTE: 'Roulette',
-  PROFILE:'Profile',
+  PROFILE: 'Profile',
   BOTTOM: 'Bottom',
   MENU: 'Menu',
   QUOTES: 'What would you like to eat today?',
@@ -16,5 +16,7 @@ export const ConstString = { // name it to routes
   BORNEO: 'Borneo',
   JAPANESE: 'Japanese',
   DRINKS: 'Drinks',
-  DESSERT: 'Dessert'
+  DESSERT: 'Dessert',
+  DARK:"Dark",
+  LIGHT:"Light"
 };
