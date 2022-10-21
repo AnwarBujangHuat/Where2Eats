@@ -16,6 +16,11 @@ import { Colors } from '../../Colors';
 import EStyleSheet from 'react-native-extended-stylesheet';
 
 export const RestaurantCard = ({ onPress, name, category, address, description, rate, image }) => {
+  const findIcon = () => {
+    const icon = ConstFoodCategory.find(icons => icons.title === (category !== null ? category : 'Western'));
+    try {return icon.icon;}
+    catch(Exception) {return ConstFoodCategory[0].icon;}
+  };
   return (
     <View style={styles.container}>
       <TouchableWithoutFeedback onPress={onPress}>
@@ -36,7 +41,7 @@ export const RestaurantCard = ({ onPress, name, category, address, description, 
                 <Text style={styles.desc}>{address}</Text>
               </View>
             </View>
-            <Image source={ConstFoodCategory.find(icons => icons.title === category).icon}
+            <Image source={findIcon()}
                    style={styles.iconCategory} />
           </View>
         </View>

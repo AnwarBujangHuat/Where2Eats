@@ -3,7 +3,6 @@ import {
   Dimensions,
   Easing,
   Image,
-  StyleSheet,
   Text,
   TouchableOpacity,
   View
@@ -14,65 +13,62 @@ import React, {
 } from 'react';
 import { ConstString } from '../../Strings';
 import {
-  Colors,
   DarkTheme,
   LightTheme
 } from '../../Colors';
 import LottieView from 'lottie-react-native';
 // import ThemeButton from '../../assets/dark.json';
 import ThemeButton from '../../assets/lightNdark.json';
-import {
-  useDispatch,
-  useSelector
-} from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { changeTheme } from '../../store/thunks';
 import EStyleSheet from 'react-native-extended-stylesheet';
-import { getTheme } from '../../store/selector';
 
 const { width } = Dimensions.get('window');
-const currentTheme=EStyleSheet.value('$theme');
+const currentTheme = EStyleSheet.value('$theme');
 let theme;
 let color;
 
-export const Header = ({ source, onPress,reRender }) => {
+export const Header = ({ source, onPress, reRender }) => {
   const animationProgress = useRef(new Animated.Value(currentTheme === ConstString.LIGHT ? .5 : 0));
   const [isCurrentTheme, setCurrentTheme] = useState(currentTheme);
+  const [isRender,setRender]=useState(false)
   const dispatch = useDispatch();
   const onChangeTheme = () => {
-    if(isCurrentTheme===ConstString.LIGHT){
+    if (isCurrentTheme === ConstString.LIGHT) {
       Animated.timing(animationProgress.current, {
-        toValue: 1 ,
+        toValue: 1,
         duration: 500,
         easing: Easing.linear,
         useNativeDriver: true
       }).start();
-      color=ConstString.DARK
-      setCurrentTheme(ConstString.DARK)
-      theme=DarkTheme
-    }
-    else if(isCurrentTheme===ConstString.DARK){
+      color = ConstString.DARK;
+      setCurrentTheme(ConstString.DARK);
+      theme = DarkTheme;
+    } else if (isCurrentTheme === ConstString.DARK) {
       Animated.timing(animationProgress.current, {
         toValue: 0.5,
         duration: 500,
         easing: Easing.linear,
         useNativeDriver: true
       }).start();
-      color=ConstString.LIGHT
-      theme=LightTheme
+      color = ConstString.LIGHT;
+      theme = LightTheme;
     }
-    setCurrentTheme(color)
+    setCurrentTheme(color);
     EStyleSheet.build(theme);
     dispatch(changeTheme(color));
-    reRender()
+    reRender();
+    //Disable Button for 2 Seconds after changing Theme
+    setRender(true)
+    setTimeout(()=>setRender(false),2000)
   };
-
   return (
     <View style={styles.section}>
       <TouchableOpacity onPress={onPress}>
         <Image style={styles.icons} source={source} />
       </TouchableOpacity>
       <Text style={styles.title}>{ConstString.QUOTES}</Text>
-      <TouchableOpacity onPress={onChangeTheme}>
+      <TouchableOpacity onPress={onChangeTheme} disabled={isRender}>
         <LottieView style={styles.lottieButton} source={ThemeButton}
                     progress={animationProgress.current}
         />
@@ -93,17 +89,17 @@ const styles = EStyleSheet.create({
     marginStart: 20,
     borderRadius: 40,
   },
-  lottieButton:{
+  lottieButton: {
     height: width * .2,
     width: width * .2,
-    right:10,
+    right: 10,
   },
   title: {
     fontSize: 15,
     color: '$primaryTextColor',
     fontWeight: 'bold',
     marginStart: 10,
-    width:width * 0.65
+    width: width * 0.65
   },
 
 });
