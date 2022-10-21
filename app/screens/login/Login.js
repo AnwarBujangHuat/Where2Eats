@@ -10,6 +10,7 @@ import {
   LightTheme
 } from '../../Colors';
 import { firebase } from '../../../src/firebase/config'
+import { defaultValue } from '../../store/defaultValue';
 
 
 let email;
@@ -28,6 +29,8 @@ export const Login = ({ navigation }) => {
   };
   const verifyUser = () => {
     navigation.navigate(ConstString.HOME);
+    const obj=defaultValue[1]
+    firebase.firestore().collection('Restaurants').doc('2').set(obj).then(()=>console.log("Done"))
 
     // try{
     //   firebase.auth().signInWithEmailAndPassword(email, password).then((response) => {
