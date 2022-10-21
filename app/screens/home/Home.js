@@ -24,7 +24,7 @@ export const Home = ({ navigation }) => {
   useEffect(() => {
     if (restaurant.length === 0) {
       dispatch(restaurantLoading());
-      dispatch(PopulateRestaurantList(defaultValue));
+      dispatch(PopulateRestaurantList());
     }
     setCurrentRestaurant(restaurant);
   }, [restaurant]);

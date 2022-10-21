@@ -78,13 +78,20 @@ export const Reducer = createSlice({
     restaurantUpdated: restaurantAdapter.updateOne,
   },
   extraReducers: builder => {
-    builder.addCase(PopulateRestaurantList.fulfilled, (state, payload) => {
+    builder.addCase(PopulateRestaurantList.fulfilled, (state, { payload }) => {
       if (state.RESTAURANT.loading === 'pending') {
         restaurantAdapter.setAll(state.RESTAURANT, payload);
         state.RESTAURANT.loading = 'idle';
       }
       return state;
     });
+    builder.addCase(PopulateRestaurantList.rejected, (state, { payload }) => {
+      if (state.RESTAURANT.loading === 'pending') {
+        state.RESTAURANT.loading = 'idle';
+      }
+      return state;
+    });
+
     builder.addCase(AddOne.fulfilled, (state, payload) => {
       if (state.RESTAURANT.loading === 'pending') {
         restaurantAdapter.addOne(state.RESTAURANT, payload);
