@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
 import {
+  Alert,
   Dimensions,
   FlatList,
   Image,
+  Platform,
   SafeAreaView,
   SectionList,
   StyleSheet,
@@ -19,13 +21,11 @@ import { useDispatch } from 'react-redux';
 import { restaurantLoading } from '../../store/reducer';
 import addIcon from '../../assets/plus.png';
 import { ModalMenu } from '../../components/molecules/ModalMenu';
-import mainDishIcon from '../../assets/mainDish.png';
-import sideIcon from '../../assets/sides.png';
-import beveragesIcon from '../../assets/beverages.png';
-import dessertIcon from '../../assets/dessert.png';
-import appetizerIcon from '../../assets/appetizer.png';
 import { AddOne } from '../../store/thunks';
 import EStyleSheet from 'react-native-extended-stylesheet';
+import { menuCategories } from './MenuCategories';
+import { storage } from 'firebase-admin';
+import { firebase } from '../../../src/firebase/config';
 
 export const SetupMenu = ({ navigation, route }) => {
   const dispatch = useDispatch();
@@ -35,36 +35,29 @@ export const SetupMenu = ({ navigation, route }) => {
   const [Category, setCategory] = useState('');
   const categoryList = [
     {
-      item: 'Main Dish',
+      item: ConstString.MAINDISH,
       data: [],
       id: 1,
-      icon: mainDishIcon,
     },
     {
-      item: 'Side Dish',
+      item: ConstString.SIDEDISH,
       data: [],
       id: 2,
-      icon: sideIcon,
-
     },
     {
-      item: 'Dessert',
+      item: ConstString.DESSERT,
       data: [],
       id: 3,
-      icon: dessertIcon,
     },
     {
-      item: 'Appetizer',
+      item: ConstString.APPETIZER,
       data: [],
       id: 4,
-      icon: appetizerIcon,
     },
     {
-      item: 'Beverages',
+      item: ConstString.BEVERAGES,
       data: [],
       id: 5,
-      icon: beveragesIcon,
-
     },
 
   ];
@@ -72,6 +65,7 @@ export const SetupMenu = ({ navigation, route }) => {
     item.food = selectedCategory;
     dispatch(restaurantLoading());
     dispatch(AddOne(item));
+    uploadImage()
     navigation.navigate(ConstString.HOME);
   };
   const onPress = () => {
@@ -83,6 +77,24 @@ export const SetupMenu = ({ navigation, route }) => {
   };
   const closeModal = () => {
     setModalVisible(!isModalVisible);
+  };
+  const menuIcon =(item)=> menuCategories.find(icons => icons.title === item).icon;
+  const uploadImage = async () => {
+    const { image } = item;
+    const filename = image.substring(image.lastIndexOf('/') + 1);
+    const uploadUri = Platform.OS === 'ios' ? image.replace('file://', '') : image;
+    const task = firebase.storage()
+    .ref(filename)
+    .put(uploadUri);
+    try {
+      await task;
+    } catch (e) {
+      console.error("Image Cannot Upload: "+e);
+    }
+    Alert.alert(
+      'Photo uploaded!',
+      'Your photo has been uploaded to Firebase Cloud Storage!'
+    );
   };
   return (
     <SafeAreaView style={styles.container}>
@@ -107,7 +119,7 @@ export const SetupMenu = ({ navigation, route }) => {
           searchIconColor={EStyleSheet.value('$primaryColor')}
           toggleIconColor={EStyleSheet.value('$primaryColor')}
           multiOptionContainerStyle={{ backgroundColor: EStyleSheet.value('$primaryColor' )}}
-          multiOptionsLabelStyle={{ fontSize: 16, color: EStyleSheet.value('$secondaryTextColor') }}
+          multiOptionsLabelStyle={{ fontSize: 16, color: "white"}}
           selectedItemStyle={{ fontSize: 16, color: EStyleSheet.value('$primaryTextColor' )}}
           optionsLabelStyle={{ fontSize: 16, color: EStyleSheet.value('$primaryTextColor') }}
         />
@@ -118,11 +130,11 @@ export const SetupMenu = ({ navigation, route }) => {
                    keyExtractor={(item, index) => item + index}
                    renderItem={(item) => { return null; }}
                    stickySectionHeadersEnabled={false}
-                   renderSectionHeader={({ section: { item, icon, data } }) => (
+                   renderSectionHeader={({ section: { item, data } }) => (
                      <>
                        <View style={{ flexDirection: 'row', alignItems: 'center', marginBottom: 10, }}>
                          <Text style={styles.header}>{item}</Text>
-                         <Image style={styles.icon} source={icon}></Image>
+                         <Image style={styles.icon} source={menuIcon(item)}></Image>
                          <View style={{ flexDirection: 'row', right: 5, position: 'absolute' }}>
                            <TouchableOpacity style={styles.buttonContainer} onPress={() => {
                              openModal({ item });

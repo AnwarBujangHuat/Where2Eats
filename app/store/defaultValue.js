@@ -16,8 +16,7 @@ export const defaultValue = [
     image: 'https://media-cdn.tripadvisor.com/media/photo-s/11/d9/57/69/spaghetti-western-steakhouse.jpg',
     food: [
       {
-        item: 'Main dishes',
-        icon: mainDishIcon,
+        title: ConstString.MAINDISH,
         data: [
           {
             name: 'Steak',
@@ -34,8 +33,7 @@ export const defaultValue = [
         ],
       },
       {
-        item: 'Sides',
-        icon: sideIcon,
+        title: ConstString.SIDEDISH,
         data: [
           {
             name: 'Lasagna',
@@ -52,8 +50,7 @@ export const defaultValue = [
         ],
       },
       {
-        item: 'Drinks',
-        icon: beveragesIcon,
+        title: ConstString.DRINKS,
         data: [
           {
             name: 'Black Coffee',
@@ -64,8 +61,7 @@ export const defaultValue = [
         ],
       },
       {
-        item: 'Dessert',
-        icon: dessertIcon,
+        title: ConstString.DESSERT,
         data: [
           {
             name: 'Chocolate Lava Cake',
@@ -77,7 +73,6 @@ export const defaultValue = [
       },
       {
         title: 'Appetizer',
-        icon: appetizerIcon,
         data: [
           {
             name: 'Mini Sandwiches',
@@ -99,8 +94,7 @@ export const defaultValue = [
     image: 'https://b.zmtcdn.com/data/pictures/8/2800008/91cdc3b07793f87665fef7fc52162cbf.jpg',
     food: [
       {
-        item: 'Main dishes',
-        icon: mainDishIcon,
+        title: ConstString.MAINDISH,
         data: [
           {
             name: 'Chicken Tika Masala',
@@ -111,8 +105,7 @@ export const defaultValue = [
         ],
       },
       {
-        item: 'Sides',
-        icon: sideIcon,
+        title: ConstString.SIDEDISH,
         data: [
           {
             name: 'Salad',
@@ -129,8 +122,7 @@ export const defaultValue = [
         ],
       },
       {
-        item: 'Drinks',
-        icon: beveragesIcon,
+        title: ConstString.DRINKS,
         data: [
           {
             name: 'Kaapi',
@@ -141,8 +133,7 @@ export const defaultValue = [
         ],
       },
       {
-        item: 'Dessert',
-        icon: dessertIcon,
+        title: ConstString.DESSERT,
         data: [
           {
             name: 'Gulab Jamun',
@@ -164,8 +155,7 @@ export const defaultValue = [
     image: 'https://i.pinimg.com/originals/03/64/5f/03645ffe29ad1debd4ec86ff149cd307.gif',
     food: [
       {
-        item: 'Main dishes',
-        icon: mainDishIcon,
+        title: ConstString.MAINDISH,
         data: [
           {
             name: 'Mee Tarik',
@@ -176,8 +166,7 @@ export const defaultValue = [
         ],
       },
       {
-        item: 'Drinks',
-        icon: beveragesIcon,
+        title: ConstString.DRINKS,
         data: [
           {
             name: 'Green Tea',
@@ -205,8 +194,7 @@ export const defaultValue = [
     image: 'https://mir-s3-cdn-cf.behance.net/project_modules/max_1200/5eeea355389655.59822ff824b72.gif',
     food: [
       {
-        item: 'Main dishes',
-        icon: mainDishIcon,
+        title: ConstString.MAINDISH,
         data: [
           {
             name: 'Nasi Ayam',
@@ -217,8 +205,7 @@ export const defaultValue = [
         ],
       },
       {
-        item: 'Sides',
-        icon: sideIcon,
+        title: ConstString.SIDEDISH,
         data: [
           {
             name: 'Keropok Lekor',
@@ -235,8 +222,7 @@ export const defaultValue = [
         ],
       },
       {
-        item: 'Dessert',
-        icon: dessertIcon,
+        title: ConstString.DESSERT,
         data: [
           {
             name: 'Akok',
@@ -258,8 +244,7 @@ export const defaultValue = [
     image: 'https://4.bp.blogspot.com/-Vxairv_g_yw/W2qHkgMqyaI/AAAAAAAAFGw/p0AF-NMFxAMcH-u-B0WeWzV6xKMjF4u2gCLcBGAs/s1600/20180807_212831.jpg',
     food: [
       {
-        item: 'Main dishes',
-        icon: mainDishIcon,
+        title: ConstString.MAINDISH,
         data: [
           {
             name: 'Laksa Sarawak',
@@ -276,8 +261,7 @@ export const defaultValue = [
         ],
       },
       {
-        item: 'Sides',
-        icon: sideIcon,
+        title: ConstString.SIDEDISH,
         data: [
           {
             name: 'Keropok Lekor',
@@ -294,8 +278,7 @@ export const defaultValue = [
         ],
       },
       {
-        item: 'Dessert',
-        icon: dessertIcon,
+        title: ConstString.DESSERT,
         data: [
           {
             name: 'Kek Lapis Sarawak',
@@ -317,8 +300,7 @@ export const defaultValue = [
     image: 'https://sushi-king.com/wp-content/uploads/2017/05/100th-outlet-600-x-350.jpg',
     food: [
       {
-        item: 'Main dishes',
-        icon: mainDishIcon,
+        title: ConstString.MAINDISH,
         data: [
           {
             name: 'Sushi',
@@ -335,8 +317,7 @@ export const defaultValue = [
         ],
       },
       {
-        item: 'Sides',
-        icon: sideIcon,
+        title: ConstString.SIDEDISH,
         data: [
           {
             name: 'Keropok Lekor',
@@ -353,8 +334,7 @@ export const defaultValue = [
         ],
       },
       {
-        item: 'Dessert',
-        icon: dessertIcon,
+        title: ConstString.DESSERT,
         data: [
           {
             name: 'Kek Lapis Sarawak',
@@ -376,8 +356,7 @@ export const defaultValue = [
     image: 'https://mir-s3-cdn-cf.behance.net/project_modules/max_1200/24f89969530077.5b84d93a88cb0.gif',
     food: [
       {
-        item: 'Main dishes',
-        icon: mainDishIcon,
+        title: ConstString.MAINDISH,
         data: [
           {
             name: 'Muffins',
@@ -388,8 +367,7 @@ export const defaultValue = [
         ],
       },
       {
-        item: 'Sides',
-        icon: sideIcon,
+        title: ConstString.SIDEDISH,
         data: [
           {
             name: 'Side Muffins',
@@ -406,8 +384,7 @@ export const defaultValue = [
         ],
       },
       {
-        item: 'Drinks',
-        icon: beveragesIcon,
+        title: ConstString.DRINKS,
         data: [
           {
             name: 'Milk',
@@ -429,8 +406,7 @@ export const defaultValue = [
     image: 'https://www.paradigmmall.com.my/images/store/food/mykori_store.jpg',
     food: [
       {
-        item: 'Main dishes',
-        icon: mainDishIcon,
+        title: ConstString.MAINDISH,
         data: [
           {
             name: 'Muffins',
@@ -441,8 +417,7 @@ export const defaultValue = [
         ],
       },
       {
-        item: 'Sides',
-        icon: sideIcon,
+        title: ConstString.SIDEDISH,
         data: [
           {
             name: 'Side Muffins',
@@ -459,8 +434,7 @@ export const defaultValue = [
         ],
       },
       {
-        item: 'Drinks',
-        icon: beveragesIcon,
+        title: ConstString.DRINKS,
         data: [
           {
             name: 'Honey',
