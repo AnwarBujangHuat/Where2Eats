@@ -8,7 +8,7 @@ import { ConstString } from '../Strings';
 export const defaultValue = [
   {
     id: 1,
-    restaurant: 'Westerner Restaurantr',
+    restaurant: 'r',
     category: ConstString.WESTERN,
     address: 'No.19 Jalan Kasim Gorilla',
     description: 'Founded in 1999 we strive to serve authentic western cuisine to Malaysian',

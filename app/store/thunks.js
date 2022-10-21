@@ -1,13 +1,21 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import { defaultValue } from './defaultValue';
+import { firebase } from '../../src/firebase/config';
 
 export const PopulateRestaurantList = createAsyncThunk('getRestaurantList', async(request, {
   dispatch,
   rejectWithValue
 }) => {
-  const result = defaultValue;
-  return defaultValue;
-  // if (!result.ok) return rejectWithValue(result);
+  try {
+    const restaurant = [];
+    await firebase.firestore().collection('Restaurants').get().then(querySnapshot => {
+      querySnapshot.forEach(documentSnapshot => {
+        restaurant.push(documentSnapshot.data());
+      });
+    });
+    return restaurant;
+  }
+  catch(e) {}
+
 });
 export const AddOne = createAsyncThunk('AddOneRestaurant', async(request, {
   dispatch,
@@ -30,6 +38,12 @@ export const updateUserField = createAsyncThunk('UpdateUserField', async(request
   rejectWithValue
 }) => {
   const result = request;
-
+  return result;
+});
+export const verifyUser = createAsyncThunk('VerifyUser', async(request, {
+  dispatch,
+  rejectWithValue
+}) => {
+  const result = request;
   return result;
 });
