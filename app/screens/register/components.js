@@ -101,7 +101,7 @@ const styles = EStyleSheet.create({
   },
   buttonText: {
     fontSize: 16,
-    color: '$secondaryTextColor',
+    color: 'white',
     fontWeight: 'bold',
   },
   buttonLocation: {

@@ -12,6 +12,7 @@ import { DescriptionLabel } from '../../components/molecules/DescriptionLabel';
 import { FoodCard } from '../../components/molecules/FoodCard';
 import { ModalMenuDetails } from '../../components/molecules/ModalMenuDetails';
 import EStyleSheet from 'react-native-extended-stylesheet';
+import { ConstString } from '../../Strings';
 
 export const RestaurantComponents = props => {
   const {
@@ -22,6 +23,7 @@ export const RestaurantComponents = props => {
     onBack,
     restaurantIcon,
     closeModal,
+    menuIcon,
   } = props;
   return (
     <View style={styles.container}>
@@ -33,11 +35,11 @@ export const RestaurantComponents = props => {
         renderItem={(item) => { return null; }}
         stickySectionHeadersEnabled={false}
         showsVerticalScrollIndicator={false}
-        renderSectionHeader={({ section: { item, icon, data } }) => (
+        renderSectionHeader={({ section: { title, data } }) => (
           <>
             <View style={{ flexDirection: 'row' }}>
-              <Text style={styles.header}>{item}</Text>
-              <Image style={styles.icon} source={icon}></Image>
+              <Text style={styles.header}>{title}</Text>
+              <Image style={styles.icon} source={menuIcon(title)}></Image>
             </View>
             <FlatList
               data={data}

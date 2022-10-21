@@ -18,5 +18,10 @@ export const ConstString = { // name it to routes
   DRINKS: 'Drinks',
   DESSERT: 'Dessert',
   DARK:"Dark",
-  LIGHT:"Light"
+  LIGHT:"Light",
+  MAINDISH:"Main Dish",
+  SIDEDISH:"Side Dish",
+  APPETIZER:"Appetizer",
+  BEVERAGES:"Beverages",
+
 };
