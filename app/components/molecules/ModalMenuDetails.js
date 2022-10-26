@@ -9,6 +9,8 @@ import {
   Text,
   View
 } from 'react-native';
+import FastImage from 'react-native-fast-image'
+
 import nasiAyam from '../../assets/NasiAyam.jpg';
 import EStyleSheet from 'react-native-extended-stylesheet';
 
@@ -26,14 +28,17 @@ export const ModalMenuDetails = ({ closeModal, isModalVisible, foodItem }) => {
                  presentationStyle="overFullScreen">
             <View style={styles.viewWrapper}>
               <View style={styles.modalView}>
-                <ImageBackground
-                  source={image !== undefined ? { uri: image } : nasiAyam}
+                <FastImage
+                  source={image !== undefined ? {
+                    uri: image,
+                    priority: FastImage.priority.high,
+                  } : nasiAyam}
                   style={
                     {
                       height: 200,
                       resizeMode: 'contain',
                     }}>
-                </ImageBackground>
+                </FastImage>
                 <View style={styles.container}>
                   <Text style={styles.header}>{name}</Text>
                   <Text style={styles.price}>{'RM' + price}</Text>

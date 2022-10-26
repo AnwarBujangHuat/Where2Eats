@@ -11,22 +11,14 @@ import addImage from '../../assets/addImage.png';
 import logoIcon from '../../assets/Logo.png';
 
 import { RateLabel } from '../atoms/RateLabel';
-import { firebase } from '../../../src/firebase/config';
-import { getStorage } from 'firebase-admin/storage';
 
-export const DetailsHeader = ({ image, back, disabled, rate = false }) => {
+export const DetailsHeader = ({ image, back, disabled, rate = false, onPress }) => {
   const changeLogo = () => {};
-  const changeImage = () => {};
-  let imageRef=undefined;
-  const storage=firebase.storage().ref("/").child("91cdc3b07793f87665fef7fc52162cbf.jpg").getDownloadURL().then((result)=>imageRef=result);
-  console.log(imageRef);
-  // const imageRef=firebase.ref(storage,image).getDownloadURL()
   return (
     <View style={styles.container}>
-      <TouchableOpacity onPress={changeImage} disabled={disabled}>
+      <TouchableOpacity onPress={onPress} disabled={disabled}>
         <ImageBackground
           source={image !== undefined ? { uri: image } : addImage}//image ? image : addImage
-          // source={image !== undefined ? addImage: addImage}//image ? image : addImage
           style={{ height: '100%', resizeMode: 'cover' }}>
           <View style={styles.rowContainer}>
             <View style={{ width: '80%' }}>

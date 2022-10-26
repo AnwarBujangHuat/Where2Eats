@@ -7,23 +7,23 @@ import appetizerIcon from '../../assets/appetizer.png';
 
 export const menuCategories = [
   {
-    title: ConstString.MAINDISH,
+    item: ConstString.MAINDISH,
     icon: mainDishIcon
   },
   {
-    title: ConstString.SIDEDISH,
+    item: ConstString.SIDEDISH,
     icon: sideIcon
   },
   {
-    title: ConstString.DESSERT,
+    item: ConstString.DESSERT,
     icon: dessertIcon
   },
   {
-    title: ConstString.APPETIZER,
+    item: ConstString.APPETIZER,
     icon: appetizerIcon
   },
   {
-    title: ConstString.DRINKS,
+    item: ConstString.DRINKS,
     icon: beveragesIcon
   },
 
