@@ -22,11 +22,13 @@ export const RegisterComponents = props => {
     goBack,
     setName,
     setDescription,
-    categorySelected
+    categorySelected,
+    launchImageLibrary,
+    imageUri
   } = props;
   return (
     <View style={styles.container}>
-      <DetailsHeader back={goBack} disabled={false} />
+      <DetailsHeader back={goBack} disabled={false} onPress={launchImageLibrary} image={imageUri}/>
       <View style={styles.inputContainer}>
         <Text style={styles.header}>{'Restaurant Name'}</Text>
         <InputField placeholder={'Please Input Name'} multiline={false} onChange={(text) => setName(text)} />

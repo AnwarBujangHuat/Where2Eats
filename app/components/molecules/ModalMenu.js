@@ -28,6 +28,10 @@ export const ModalMenu = props => {
   const launchImageLibrary = () => {
     ImagePicker.launchImageLibrary({
       storageOptions: {
+        quality:1,
+        maxWidth: 600,
+        maxHeight: 300,
+        allowsEditing: false,
         skipBackup: true,
         saveToPhotos: true,
         path: 'images',
@@ -38,7 +42,7 @@ export const ModalMenu = props => {
       } else {
         setImageUri(response.assets[0].uri);
       }
-    });
+    }).then();
   };
   const addItem = () => {
     if (itemName === '' && itemDesc === '') return alert('Please Complete Input');
@@ -139,7 +143,7 @@ const styles = EStyleSheet.create({
   },
   buttonText: {
     fontSize: 16,
-    color: '$secondaryTextColor',
+    color: 'white',
     fontWeight: 'normal',
   },
   container: {

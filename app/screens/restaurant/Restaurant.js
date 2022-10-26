@@ -4,6 +4,7 @@ import { useSelector } from 'react-redux';
 import { ConstFoodCategory } from '../home/ConstFoodCategory';
 import { getCurrentRestaurant } from '../../store/selector';
 import { RestaurantComponents } from './components';
+import { menuCategories } from '../register/MenuCategories';
 
 export const Restaurant = ({ navigation, route }) => {
   const [isModalVisible, setModalVisible] = useState(false);
@@ -16,6 +17,7 @@ export const Restaurant = ({ navigation, route }) => {
   const current = useSelector(getCurrentRestaurant(id));
   const onBack = () => navigation.navigate(ConstString.HOME);
   const restaurantIcon = ConstFoodCategory.find(icons => icons.title === current?.category).icon;
+  const menuIcon =(item)=> menuCategories.find(icons => icons.item === item).icon;
   const closeModal = () => setModalVisible(false);
   const props = {
     isModalVisible,
@@ -25,6 +27,7 @@ export const Restaurant = ({ navigation, route }) => {
     onBack,
     restaurantIcon,
     closeModal,
+    menuIcon
   };
   return (<RestaurantComponents {...props} />
   );

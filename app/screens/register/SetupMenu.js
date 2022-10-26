@@ -1,13 +1,10 @@
 import React, { useState } from 'react';
 import {
-  Alert,
   Dimensions,
   FlatList,
   Image,
-  Platform,
   SafeAreaView,
   SectionList,
-  StyleSheet,
   Text,
   TouchableOpacity,
   View
@@ -24,8 +21,8 @@ import { ModalMenu } from '../../components/molecules/ModalMenu';
 import { AddOne } from '../../store/thunks';
 import EStyleSheet from 'react-native-extended-stylesheet';
 import { menuCategories } from './MenuCategories';
-import { storage } from 'firebase-admin';
 import { firebase } from '../../../src/firebase/config';
+import { ModalUploading } from '../../components/molecules/ModalUploading';
 
 export const SetupMenu = ({ navigation, route }) => {
   const dispatch = useDispatch();
@@ -33,6 +30,7 @@ export const SetupMenu = ({ navigation, route }) => {
   const [selectedCategory, setSelectedCategory] = useState([]);
   const [isModalVisible, setModalVisible] = useState(false);
   const [Category, setCategory] = useState('');
+  const [isSuccessful, setIsSuccessful] = useState(true);
   const categoryList = [
     {
       item: ConstString.MAINDISH,
@@ -61,12 +59,24 @@ export const SetupMenu = ({ navigation, route }) => {
     },
 
   ];
+
   const addMenu = () => {
-    item.food = selectedCategory;
-    dispatch(restaurantLoading());
-    dispatch(AddOne(item));
-    uploadImage()
-    navigation.navigate(ConstString.HOME);
+    let totalCount=0;
+    uploadAsFile(item.image, 'profile').then();
+    item.food=selectedCategory;
+    item.food.forEach(
+      //run once for every category
+      (category, categoryIndex) => {
+        ++totalCount;
+        category.data.forEach((foodItem, foodItemIndex) => {
+          uploadAsFile(foodItem.image, 'menu', category.item, categoryIndex, foodItemIndex).then();
+        });
+      }
+    );
+    //imageCaching https://github.com/DylanVann/react-native-fast-image
+    if(totalCount===selectedCategory.length){
+      uploadFinish();
+    }
   };
   const onPress = () => {
     navigation.navigate(ConstString.REGISTER);
@@ -78,31 +88,70 @@ export const SetupMenu = ({ navigation, route }) => {
   const closeModal = () => {
     setModalVisible(!isModalVisible);
   };
-  const menuIcon =(item)=> menuCategories.find(icons => icons.title === item).icon;
-  const uploadImage = async () => {
-    const { image } = item;
-    const filename = image.substring(image.lastIndexOf('/') + 1);
-    const uploadUri = Platform.OS === 'ios' ? image.replace('file://', '') : image;
-    const task = firebase.storage()
-    .ref(filename)
-    .put(uploadUri);
-    try {
-      await task;
-    } catch (e) {
-      console.error("Image Cannot Upload: "+e);
-    }
-    Alert.alert(
-      'Photo uploaded!',
-      'Your photo has been uploaded to Firebase Cloud Storage!'
-    );
+  const menuIcon = (item) => menuCategories.find(icons => icons.item === item).icon;
+  const generateId = () => {
+    const id = () => {
+      return Math.floor((1 + Math.random()) * 0x10000).toString(16).substring(1);
+    };
+    return id() + id();
   };
+  const uploadAsFile = async(uri, folder, category, categoryIndex, foodItemIndex, progressCallback) => {
+    const response = await fetch(uri);
+    const blob = await response.blob();
+    let name = generateId() + 'media.jpg';
+    const pathName = folder === 'profile' ? item.id + '/' + folder + '/' + name : item.id + '/' + folder + '/' + category + '/' + name;
+    const metadata = {
+      contentType: 'image/jpeg',
+    };
+    const ref = firebase.storage().ref().child(pathName);
+    const task = ref.put(blob, metadata);
+    return new Promise((resolve, reject) => {
+      task.on(
+        'state_changed',
+        (snapshot) => {
+          progressCallback && progressCallback(snapshot.bytesTransferred / snapshot.totalBytes);
+          const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+        },
+        (error) => {
+           setIsSuccessful(false)
+          reject(error);
+        }, /* this is where you would put an error callback! */
+        () => {
+          task.snapshot.ref.getDownloadURL().then((fileUrl) => {
+              if (folder === 'profile') {
+                item.image = fileUrl;
+              }
+              // console.log(category+":"+fileUrl+" "+index)
+              else if (folder === 'menu') {
+                item.food[categoryIndex].data[foodItemIndex].image=fileUrl
+              }
+            }
+          );
+        }
+      );
+    });
+  };
+  const uploadFinish = () => {
+    setTimeout(() => {
+      dispatch(restaurantLoading());
+      dispatch(AddOne(item));
+      navigation.navigate(ConstString.HOME);
+    }, 2000);
+  };
+
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.rowContainer}>
         <BackButton onPress={onPress}></BackButton>
         <Text style={styles.title}>{ConstString.MENU_BOOK}</Text>
       </View>
-      <Text style={{ marginTop: 20, fontSize: 16, fontWeight: 'bold', paddingStart: 15, color: EStyleSheet.value('$tertiaryColor') }}>Add
+      <Text style={{
+        marginTop: 20,
+        fontSize: 16,
+        fontWeight: 'bold',
+        paddingStart: 15,
+        color: EStyleSheet.value('$tertiaryColor')
+      }}>Add
         Category</Text>
       <View style={styles.inputContainer}>
         <SelectBox
@@ -118,9 +167,9 @@ export const SetupMenu = ({ navigation, route }) => {
           arrowIconColor={EStyleSheet.value('$primaryColor')}
           searchIconColor={EStyleSheet.value('$primaryColor')}
           toggleIconColor={EStyleSheet.value('$primaryColor')}
-          multiOptionContainerStyle={{ backgroundColor: EStyleSheet.value('$primaryColor' )}}
-          multiOptionsLabelStyle={{ fontSize: 16, color: "white"}}
-          selectedItemStyle={{ fontSize: 16, color: EStyleSheet.value('$primaryTextColor' )}}
+          multiOptionContainerStyle={{ backgroundColor: EStyleSheet.value('$primaryColor') }}
+          multiOptionsLabelStyle={{ fontSize: 16, color: 'white' }}
+          selectedItemStyle={{ fontSize: 16, color: EStyleSheet.value('$primaryTextColor') }}
           optionsLabelStyle={{ fontSize: 16, color: EStyleSheet.value('$primaryTextColor') }}
         />
       </View>
@@ -169,12 +218,12 @@ export const SetupMenu = ({ navigation, route }) => {
       </TouchableOpacity>
       {
         isModalVisible &&
-        <ModalMenu isModalVisible={isModalVisible} closeModal={closeModal} selectedCategory={selectedCategory}
-                   setFinalMenu={setSelectedCategory} Category={Category} />
+        // <ModalMenu isModalVisible={isModalVisible} closeModal={closeModal} selectedCategory={selectedCategory}
+        //            setFinalMenu={setSelectedCategory} Category={Category} />
+        <ModalUploading isModalVisible={isModalVisible}/>
       }
     </SafeAreaView>
   );
-
 };
 const styles = EStyleSheet.create({
   container: {

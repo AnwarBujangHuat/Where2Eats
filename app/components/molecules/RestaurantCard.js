@@ -14,7 +14,9 @@ import res1 from '../../assets/res1.jpg';
 import { ConstFoodCategory } from '../../screens/home/ConstFoodCategory';
 import { Colors } from '../../Colors';
 import EStyleSheet from 'react-native-extended-stylesheet';
-
+import addImage from '../../assets/addImage.png';
+import { firebase } from '../../../src/firebase/config';
+let imageUrl;
 export const RestaurantCard = ({ onPress, name, category, address, description, rate, image }) => {
   const findIcon = () => {
     const icon = ConstFoodCategory.find(icons => icons.title === (category !== null ? category : 'Western'));
@@ -27,7 +29,7 @@ export const RestaurantCard = ({ onPress, name, category, address, description, 
         <View style={styles.card}>
           <View>
             <ImageBackground
-              source={image !== undefined ? { uri: image } : res1}
+              source={image!==undefined?{uri:image}:addImage}//image ? image : addImage
               style={{ height: 140, marginBottom: 5, resizeMode: 'contain', }}>
               <RateLabel rating={rate} />
             </ImageBackground>
