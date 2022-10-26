@@ -29,8 +29,8 @@ export const Login = ({ navigation }) => {
   };
   const verifyUser = () => {
     navigation.navigate(ConstString.HOME);
-    const obj=defaultValue[1]
-    firebase.firestore().collection('Restaurants').doc('2').set(obj).then(()=>console.log("Done"))
+    const obj=defaultValue[2]
+    // firebase.firestore().collection('Restaurants').doc('2').set(obj).then(()=>console.log("Done"))
 
     // try{
     //   firebase.auth().signInWithEmailAndPassword(email, password).then((response) => {

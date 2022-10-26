@@ -35,11 +35,11 @@ export const RestaurantComponents = props => {
         renderItem={(item) => { return null; }}
         stickySectionHeadersEnabled={false}
         showsVerticalScrollIndicator={false}
-        renderSectionHeader={({ section: { title, data } }) => (
+        renderSectionHeader={({ section: { item, data } }) => (
           <>
             <View style={{ flexDirection: 'row' }}>
-              <Text style={styles.header}>{title}</Text>
-              <Image style={styles.icon} source={menuIcon(title)}></Image>
+              <Text style={styles.header}>{item}</Text>
+              <Image style={styles.icon} source={menuIcon(item)}></Image>
             </View>
             <FlatList
               data={data}

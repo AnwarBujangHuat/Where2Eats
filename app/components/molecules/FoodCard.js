@@ -1,13 +1,12 @@
-import * as React from 'react';
+import React from 'react';
 import {
   ImageBackground,
-  StyleSheet,
   Text,
   TouchableWithoutFeedback,
   View,
 } from 'react-native';
-import nasiAyam from '../../assets/NasiAyam.jpg';
 import EStyleSheet from 'react-native-extended-stylesheet';
+import nasiAyam from '../../assets/salad.jpg';
 
 export const FoodCard = ({ onPress, name, price, image, desc }) => {
   return (
@@ -16,7 +15,7 @@ export const FoodCard = ({ onPress, name, price, image, desc }) => {
         <View style={styles.card}>
           <View>
             <ImageBackground
-              source={(image !== undefined) ? { uri: image } : nasiAyam}
+              source={image !== undefined ? { uri: image } : nasiAyam}//image ? image : addImage
               style={
                 {
                   height: 150,
