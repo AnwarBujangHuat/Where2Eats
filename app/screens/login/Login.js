@@ -28,7 +28,7 @@ export const Login = ({ navigation }) => {
     navigation.navigate('Register');
   };
   const verifyUser = () => {
-    navigation.navigate(ConstString.HOME);
+    navigation.navigate(ConstString.MODAL);
     const obj=defaultValue[2]
     // firebase.firestore().collection('Restaurants').doc('2').set(obj).then(()=>console.log("Done"))
 

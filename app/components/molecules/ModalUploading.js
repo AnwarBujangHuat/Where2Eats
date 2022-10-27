@@ -2,24 +2,38 @@ import React from 'react';
 import {
   Dimensions,
   Image,
-  ImageBackground,
   Modal,
   SafeAreaView,
-  StyleSheet,
   Text,
   TouchableOpacity,
   View
 } from 'react-native';
 import logoIcon from '../../assets/Logo.png';
-import locationIcon from '../../assets/location.png';
-
-import { ConstFoodCategory } from '../../screens/home/ConstFoodCategory';
 import EStyleSheet from 'react-native-extended-stylesheet';
 import LottieView from 'lottie-react-native';
 import Uploading from '../../assets/uploading.json';
+import Sleepy from '../../assets/sleepycat.json';
+import { ConstString } from '../../Strings';
+import Error from '../../assets/error.json';
 
 const { width } = Dimensions.get('window');
-export const ModalUploading = ({ isModalVisible, closeModal, isFinished }) => {
+let icon;
+let text;
+let showButton=false;
+export const ModalUploading = ({ isModalVisible, closeModal,goBack, action ,isSuccess}) => {
+  if (action === ConstString.GO_BACK) {
+    icon = Sleepy;
+    text = 'All Your Progress in This Page Will Be Lost';
+    showButton=true
+  } else {
+    icon = Uploading;
+    text = 'Please Wait While We Upload your Photos';
+    showButton=false
+  }
+  if(!isSuccess){
+    icon=Error;
+    text ='Opps There was an Error while Uploading your Photos';
+    showButton=true}
   return (
     <>
       {
@@ -31,31 +45,25 @@ export const ModalUploading = ({ isModalVisible, closeModal, isFinished }) => {
           >
             <View style={styles.viewWrapper}>
               <View style={styles.modalView}>
-                <LottieView style={styles.lottieButton} source={Uploading} autoPlay={true}
+                <LottieView style={styles.lottieButton} source={icon} autoPlay={true}
                 />
-                <View style={{ flexDirection: 'row', paddingVertical: 10, }}>
-                  <Text style={styles.header}>{"Uploading"}</Text>
-                </View>
-
+                <Text style={styles.header}>{text}</Text>
+                {showButton &&
                 <View style={{
                   flex: 1,
                   flexDirection: 'row',
                 }}>
-                  <TouchableOpacity
-                    style={styles.button}
-                    >
-                    <Text style={styles.buttonTextSpin}>{isFinished ? 'Spin Again' : 'Go Back'}</Text>
-                  </TouchableOpacity>
-                  <TouchableOpacity
-                    style={styles.buttonVisit}
-                    >
-                    <Text style={styles.buttonTextMenu}>Visit Restaurant</Text>
+                  { isSuccess &&
+                    <TouchableOpacity style={styles.button} onPress={goBack}>
+                      <Text style={styles.buttonTextGoBack}>Go Back</Text>
+                    </TouchableOpacity>
+                  }
+                  <TouchableOpacity style={styles.buttonVisit} onPress={closeModal}>
+                    <Text style={styles.buttonTextStay}>Stay</Text>
                   </TouchableOpacity>
                 </View>
+                }
               </View>
-              <TouchableOpacity style={styles.logoContainer}>
-                <Image style={styles.logoIcon} source={logoIcon} />
-              </TouchableOpacity>
             </View>
           </Modal>
         </SafeAreaView>
@@ -64,12 +72,12 @@ export const ModalUploading = ({ isModalVisible, closeModal, isFinished }) => {
   );
 };
 const styles = EStyleSheet.create({
-  buttonTextSpin: {
+  buttonTextGoBack: {
     fontSize: 16,
     color: '$tertiaryColor',
     fontWeight: 'normal',
   },
-  buttonTextMenu: {
+  buttonTextStay: {
     fontSize: 16,
     color: '$primaryColor',
     fontWeight: 'normal',
@@ -84,9 +92,9 @@ const styles = EStyleSheet.create({
     marginTop: 5,
     marginEnd: 5,
   },
-  lottieButton:{
-    width: 200,
-    height: 200,
+  lottieButton: {
+    width: width*.6,
+    height: width*.6,
   },
   screen: {
     flex: 1,
@@ -103,15 +111,10 @@ const styles = EStyleSheet.create({
     shadowOpacity: 0.2,
     shadowRadius: 3,
   },
-  title: {
-    fontSize: 18,
-    fontWeight: 'bold',
-    color: '$primaryColor',
-  },
   modalView: {
     paddingBottom: 5,
     justifyContent: 'center',
-    alignItems:'center',
+    alignItems: 'center',
     position: 'absolute',
     top: '35%',
     left: '50%',
@@ -144,15 +147,12 @@ const styles = EStyleSheet.create({
     marginTop: 15,
   },
   header: {
-    fontSize: 20,
+    fontSize: 17,
+    paddingBottom:10,
     fontWeight: 'bold',
+    textAlign: 'center',
     color: '$primaryColor',
-    shadowOffset: { width: -2, height: 1 },
-    shadowColor: '$primaryColor',
-    shadowOpacity: 0.1,
-    shadowRadius: 2,
-    paddingStart: 10,
-    width: '90%'
+    width: width*.7
   },
   desc: {
     color: '$tertiaryTextColor', paddingEnd: 5, marginTop: 5,
