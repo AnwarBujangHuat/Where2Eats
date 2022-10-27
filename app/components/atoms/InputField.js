@@ -31,7 +31,6 @@ const styles = EStyleSheet.create({
     textAlignVertical: 'center',
     backgroundColor: '$secondaryBackGroundColor',
     borderRadius: 5,
-    marginVertical: 10,
     paddingVertical: 15,
   },
 });

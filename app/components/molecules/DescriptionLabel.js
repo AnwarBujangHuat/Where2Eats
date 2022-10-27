@@ -33,7 +33,8 @@ const styles = EStyleSheet.create({
     paddingBottom: 20,
     paddingStart: 15,
     marginBottom: 15,
-    zIndex: 1
+    zIndex: 0,
+    elevation:10,
 
   },
   title: {

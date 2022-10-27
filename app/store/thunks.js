@@ -1,5 +1,6 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { firebase } from '../../src/firebase/config';
+import { defaultValue } from './defaultValue';
 
 export const PopulateRestaurantList = createAsyncThunk('getRestaurantList', async(request, {
   dispatch,
@@ -12,9 +13,10 @@ export const PopulateRestaurantList = createAsyncThunk('getRestaurantList', asyn
         restaurant.push(documentSnapshot.data());
       });
     });
-    return restaurant;
+    return restaurant.length>0?restaurant:defaultValue;
   }
-  catch(e) {}
+  catch(e) {
+  }
 
 });
 export const AddOne = createAsyncThunk('AddOneRestaurant', async(request, {

@@ -169,14 +169,14 @@ export const WheelComponents = props => {
   const _renderSvgWheel = () => {
     return (
       <>
-        < SafeAreaView style={{ flex: 1 }}>
+        <SafeAreaView style={{ flex: 1,  }}>
           <View style={styles.rowContainer}>
             <BackButton onPress={goBackHome}></BackButton>
             <RNText style={styles.title}>{'Wheel Of Fortune'}</RNText>
           </View>
           <View style={{
             flexDirection: 'row',
-            alignContent: 'center', alignSelf: 'center', alignItems: 'center'
+            alignContent: 'center', alignSelf: 'center', alignItems: 'center',
           }}>
             <Image style={{ height: 50, width: 57, resizeMode: 'cover', marginBottom: 9 }}
                    source={{ uri: 'https://c.tenor.com/MRX_0O8RtnkAAAAi/arrow.gif' }} />
@@ -294,10 +294,10 @@ const styles = EStyleSheet.create({
   wheel: {
     alignItems: 'center',
     justifyContent: 'center',
-    shadowOffset: { width: -2, height: 6 },
+    elevation: 5,
+    shadowOffset: { width: -2, height: 2 },
     shadowColor: '$primaryColor',
-    shadowOpacity: 0.4,
-    shadowRadius: 4,
-    elevation: 30,
+    shadowOpacity: 0.6,
+    shadowRadius: 3,
   },
 });

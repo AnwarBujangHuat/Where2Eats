@@ -1,18 +1,17 @@
 import React from 'react';
 import {
-  Button,
   Dimensions,
-  ImageBackground,
   Modal,
   SafeAreaView,
-  StyleSheet,
   Text,
+  TouchableOpacity,
   View
 } from 'react-native';
-import FastImage from 'react-native-fast-image'
+import FastImage from 'react-native-fast-image';
 
 import nasiAyam from '../../assets/NasiAyam.jpg';
 import EStyleSheet from 'react-native-extended-stylesheet';
+import { Colors } from '../../Colors';
 
 const { width } = Dimensions.get('window');
 
@@ -44,7 +43,16 @@ export const ModalMenuDetails = ({ closeModal, isModalVisible, foodItem }) => {
                   <Text style={styles.price}>{'RM' + price}</Text>
                   <Text style={styles.desc}>{desc}</Text>
                 </View>
-                <Button title="OK" color={EStyleSheet.value('$primaryColor')} onPress={closeModal} />
+                <TouchableOpacity style={{
+                  backgroundColor: 'transparent',
+                  alignContent: 'center',
+                  alignSelf: 'center',
+                  paddingTop: 5,
+                  minHeight: 30,
+                }} onPress={closeModal}>
+                  <Text style={{ color: Colors.primaryColor, fontSize: 18, alignSelf: 'center' }}>OK</Text>
+                </TouchableOpacity>
+                {/*<Button title="OK" color={Colors.primaryColor} onPress={closeModal} />*/}
               </View>
             </View>
           </Modal>
@@ -87,11 +95,6 @@ const styles = EStyleSheet.create({
   viewWrapper: {
     flex: 1,
     alignItems: 'center',
-    backgroundColor: 'rgba(0, 0, 0, 0.2)',
-    shadowOffset: { width: -2, height: 10 },
-    shadowColor: '$primaryColor',
-    shadowOpacity: 0.2,
-    shadowRadius: 3,
   },
   modalView: {
     paddingBottom: 10,
@@ -99,12 +102,16 @@ const styles = EStyleSheet.create({
     position: 'absolute',
     top: '30%',
     left: '50%',
-    elevation: 5,
     transform: [{ translateX: -(width * 0.4) },
       { translateY: -90 }],
     width: width * 0.8,
     backgroundColor: '$backGroundColor',
-    borderRadius: 10
+    borderRadius: 10,
+    shadowOffset: { width: -2, height: 6 },
+    shadowColor: EStyleSheet.value('$primaryColor'),
+    shadowOpacity: 0.2,
+    shadowRadius: 3,
+    elevation: 10,
   },
   header: {
     fontSize: 18,
