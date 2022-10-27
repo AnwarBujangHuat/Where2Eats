@@ -85,6 +85,11 @@ const styles = EStyleSheet.create(
       width: Dimensions.get('screen').width - 30,
       overflow: 'hidden',
       paddingBottom: 10,
+      shadowOffset: { width: -2, height: 4 },
+      shadowColor: '$primaryColor',
+      shadowOpacity: 0.2,
+      shadowRadius: 3,
+      elevation: 10,
 
     },
     titleContainer: {

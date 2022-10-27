@@ -38,7 +38,7 @@ const styles = StyleSheet.create({
   rowContainer: {
     flexDirection: 'row',
     alignContent: 'center',
-    marginTop: 40,
+    marginTop: 20,
   },
   logoContainer: {
     alignSelf: 'flex-start',
@@ -46,14 +46,15 @@ const styles = StyleSheet.create({
     borderRadius: 80,
     padding: 15,
     marginStart: '3%',
+    elevation:5,
     shadowOffset: { width: -2, height: -4 },
     shadowColor: '$primaryColor',
     shadowOpacity: 0.1,
     shadowRadius: 2,
-    marginTop: '25%',
+    marginTop: 60,
   },
   container: {
-    height: '30%',
+    height: 200,
     zIndex: 2,
   },
   icons: {

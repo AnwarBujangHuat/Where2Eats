@@ -126,10 +126,6 @@ const styles = EStyleSheet.create({
     flex: 1,
     alignItems: 'center',
     backgroundColor: 'rgba(0, 0, 0, 0.2)',
-    shadowOffset: { width: -2, height: 2 },
-    shadowColor: '$primaryColor',
-    shadowOpacity: 0.2,
-    shadowRadius: 3,
   },
   title: {
     fontSize: 18,
@@ -147,7 +143,12 @@ const styles = EStyleSheet.create({
       { translateY: -90 }],
     width: width * 0.8,
     backgroundColor: '$secondaryBackGroundColor',
-    borderRadius: 10
+    borderRadius: 10,
+    shadowOffset: { width: -2, height: 2 },
+    shadowColor: '$primaryColor',
+    shadowOpacity: 0.2,
+    shadowRadius: 3,
+
   },
   button: {
     backgroundColor: '$secondaryBackGroundColor',

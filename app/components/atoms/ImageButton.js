@@ -20,11 +20,11 @@ export const ImageButton = ({ onPress, item, selected }) => {
         margin: 5,
         padding: 10,
         backgroundColor: backGroundColor,
-        shadowOffset: { width: -2, height: 4 },
+        shadowOffset: { width: -2, height: 3 },
         shadowColor: EStyleSheet.value('$primaryColor'),
         shadowOpacity: 0.2,
         shadowRadius: 3,
-        elevation: 10,
+        elevation: 5,
         alignItems: 'center',
       }} onPress={onPress}>
         <Image source={item.icon} style={styles.icon}></Image>
