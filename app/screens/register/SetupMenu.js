@@ -23,12 +23,13 @@ import EStyleSheet from 'react-native-extended-stylesheet';
 import { menuCategories } from './MenuCategories';
 import { firebase } from '../../../src/firebase/config';
 import { ModalUploading } from '../../components/molecules/ModalUploading';
-
+let action;
 export const SetupMenu = ({ navigation, route }) => {
   const dispatch = useDispatch();
   const item = route.params || {}; //Teacher li
   const [selectedCategory, setSelectedCategory] = useState([]);
   const [isModalVisible, setModalVisible] = useState(false);
+  const [isActionModalVisible, setActionModal] = useState(false);
   const [Category, setCategory] = useState('');
   const [isSuccessful, setIsSuccessful] = useState(true);
   const categoryList = [
@@ -53,7 +54,7 @@ export const SetupMenu = ({ navigation, route }) => {
       id: 4,
     },
     {
-      item: ConstString.BEVERAGES,
+      item: ConstString.DRINKS,
       data: [],
       id: 5,
     },
@@ -61,6 +62,8 @@ export const SetupMenu = ({ navigation, route }) => {
   ];
 
   const addMenu = () => {
+    setActionModal(true)
+    action=ConstString.UPLOADING
     let totalCount=0;
     uploadAsFile(item.image, 'profile').then();
     item.food=selectedCategory;
@@ -74,11 +77,22 @@ export const SetupMenu = ({ navigation, route }) => {
       }
     );
     //imageCaching https://github.com/DylanVann/react-native-fast-image
-    if(totalCount===selectedCategory.length){
-      uploadFinish();
+    if(isSuccessful){
+      setTimeout(() => {
+        uploadFinish();
+      }, 5000);
     }
   };
-  const onPress = () => {
+
+  const onBackButton=()=>{
+    if(selectedCategory.length>0){
+      setActionModal(true)
+      action=ConstString.GO_BACK
+    }else{
+      navigation.navigate(ConstString.REGISTER);
+    }
+  }
+  const goBack = () => {
     navigation.navigate(ConstString.REGISTER);
   };
   const openModal = ({ item: category }) => {
@@ -88,7 +102,11 @@ export const SetupMenu = ({ navigation, route }) => {
   const closeModal = () => {
     setModalVisible(!isModalVisible);
   };
-  const menuIcon = (item) => menuCategories.find(icons => icons.item === item).icon;
+  const closeActionModal=()=>{
+    setActionModal(false)
+
+  }
+  const menuIcon = (item) => menuCategories.find(icons => icons.item === item).icon
   const generateId = () => {
     const id = () => {
       return Math.floor((1 + Math.random()) * 0x10000).toString(16).substring(1);
@@ -132,17 +150,16 @@ export const SetupMenu = ({ navigation, route }) => {
     });
   };
   const uploadFinish = () => {
-    setTimeout(() => {
       dispatch(restaurantLoading());
       dispatch(AddOne(item));
+      setActionModal(false)
       navigation.navigate(ConstString.HOME);
-    }, 2000);
-  };
 
+  };
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.rowContainer}>
-        <BackButton onPress={onPress}></BackButton>
+        <BackButton onPress={onBackButton}></BackButton>
         <Text style={styles.title}>{ConstString.MENU_BOOK}</Text>
       </View>
       <Text style={{
@@ -218,9 +235,13 @@ export const SetupMenu = ({ navigation, route }) => {
       </TouchableOpacity>
       {
         isModalVisible &&
-        // <ModalMenu isModalVisible={isModalVisible} closeModal={closeModal} selectedCategory={selectedCategory}
-        //            setFinalMenu={setSelectedCategory} Category={Category} />
-        <ModalUploading isModalVisible={isModalVisible}/>
+        <ModalMenu isModalVisible={isModalVisible} closeModal={closeModal} selectedCategory={selectedCategory}
+                   setFinalMenu={setSelectedCategory} Category={Category} />
+      }
+      {
+        isActionModalVisible &&
+        <ModalUploading isModalVisible={isActionModalVisible} closeModal={closeActionModal} action={action} goBack={goBack} isSuccess={isSuccessful}/>
+
       }
     </SafeAreaView>
   );

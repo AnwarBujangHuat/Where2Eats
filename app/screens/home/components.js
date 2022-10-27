@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {
   FlatList,
   SafeAreaView,
@@ -30,8 +30,11 @@ export const HomeComponents = props => {
     openMenu,
     goToRestaurant,
     closeModal,
-    reRender
+    reRender,
+    isFetching,
+    reFresh
   } = props;
+
   return (
     <SafeAreaView style={styles.container}>
       <Header source={personIcon} onPress={openMenu} reRender={reRender}></Header>
@@ -52,6 +55,8 @@ export const HomeComponents = props => {
       </View>
       <FlatList
         data={currentRestaurant}
+        onRefresh={reFresh}
+        refreshing={isFetching}
         renderItem={({ item }) => {
           return (
             <RestaurantCard
