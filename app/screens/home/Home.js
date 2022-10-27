@@ -16,15 +16,15 @@ import { PopulateRestaurantList } from '../../store/thunks';
 export const Home = ({ navigation }) => {
   const restaurant = useSelector(getRestaurant);
   const dispatch = useDispatch();
-  const [currentRestaurant, setCurrentRestaurant] = useState([]);
+  const [currentRestaurant, setCurrentRestaurant] = useState(restaurant);
   const [selectedTypes, setSelectedTypes] = useState([]);
   const [isOpenMenu, setOpenMenu] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');
   const [isRender, setisRender] = useState(false);
+  const[isFetching,setIsFetching]=useState(false)
   useEffect(() => {
     if (restaurant.length === 0) {
-      dispatch(restaurantLoading());
-      dispatch(PopulateRestaurantList());
+      fetchData()
     }
     setCurrentRestaurant(restaurant);
   }, [restaurant]);
@@ -43,8 +43,12 @@ export const Home = ({ navigation }) => {
       const tempRestaurant = selectedTypes.length === 0 ? [...updateRestaurant] : [...updateRestaurant, ...currentRestaurant];
       setCurrentRestaurant(tempRestaurant);
     }
-
   };
+  const fetchData=()=>{
+    dispatch(restaurantLoading());
+    dispatch(PopulateRestaurantList());
+    setIsFetching(false)
+  }
   const onSearch = (text) => {
     setSearchQuery(text);
     if (text === '') {
@@ -68,9 +72,11 @@ export const Home = ({ navigation }) => {
   };
   const reRender = () => {
     setTimeout(function() {setisRender(!isRender);}, 100);
-
-
   };
+  const reFresh=()=>{
+    setIsFetching(true)
+    fetchData()
+  }
   const props = {
     selectedTypes,
     currentRestaurant,
@@ -83,6 +89,8 @@ export const Home = ({ navigation }) => {
     goToRestaurant,
     closeModal,
     reRender,
+    reFresh,
+    isFetching
   };
   return (<HomeComponents{...props} />);
 };

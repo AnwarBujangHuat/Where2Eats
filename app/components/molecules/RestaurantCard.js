@@ -16,6 +16,8 @@ import { Colors } from '../../Colors';
 import EStyleSheet from 'react-native-extended-stylesheet';
 import addImage from '../../assets/addImage.png';
 import { firebase } from '../../../src/firebase/config';
+import FastImage from 'react-native-fast-image';
+
 let imageUrl;
 export const RestaurantCard = ({ onPress, name, category, address, description, rate, image }) => {
   const findIcon = () => {
@@ -28,11 +30,13 @@ export const RestaurantCard = ({ onPress, name, category, address, description, 
       <TouchableWithoutFeedback onPress={onPress}>
         <View style={styles.card}>
           <View>
-            <ImageBackground
-              source={image!==undefined?{uri:image}:addImage}//image ? image : addImage
+            <FastImage
+              source={image!==undefined?{uri:image,
+                priority: FastImage.priority.high,
+              }:addImage}//image ? image : addImage
               style={{ height: 140, marginBottom: 5, resizeMode: 'contain', }}>
               <RateLabel rating={rate} />
-            </ImageBackground>
+            </FastImage>
           </View>
           <View style={{ flexDirection: 'row' }}>
             <View style={styles.titleContainer}>

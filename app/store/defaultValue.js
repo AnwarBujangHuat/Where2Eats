@@ -1,14 +1,9 @@
-import mainDishIcon from '../assets/mainDish.png';
-import sideIcon from '../assets/sides.png';
-import beveragesIcon from '../assets/beverages.png';
-import dessertIcon from '../assets/dessert.png';
-import appetizerIcon from '../assets/appetizer.png';
 import { ConstString } from '../Strings';
 
 export const defaultValue = [
   {
     id: 1,
-    restaurant: 'r',
+    restaurant: 'Restaurant Westerner',
     category: ConstString.WESTERN,
     address: 'No.19 Jalan Kasim Gorilla',
     description: 'Founded in 1999 we strive to serve authentic western cuisine to Malaysian',
@@ -17,6 +12,7 @@ export const defaultValue = [
     food: [
       {
         item: ConstString.MAINDISH,
+        id: 1,
         data: [
           {
             name: 'Steak',
@@ -34,6 +30,7 @@ export const defaultValue = [
       },
       {
         item: ConstString.SIDEDISH,
+        id: 2,
         data: [
           {
             name: 'Lasagna',
@@ -51,6 +48,7 @@ export const defaultValue = [
       },
       {
         item: ConstString.DRINKS,
+        id: 5,
         data: [
           {
             name: 'Black Coffee',
@@ -62,6 +60,7 @@ export const defaultValue = [
       },
       {
         item: ConstString.DESSERT,
+        id: 3,
         data: [
           {
             name: 'Chocolate Lava Cake',
@@ -73,6 +72,7 @@ export const defaultValue = [
       },
       {
         item: ConstString.APPETIZER,
+
         data: [
           {
             name: 'Mini Sandwiches',
@@ -95,6 +95,7 @@ export const defaultValue = [
     food: [
       {
         item: ConstString.MAINDISH,
+        id: 1,
         data: [
           {
             name: 'Chicken Tika Masala',
@@ -106,6 +107,7 @@ export const defaultValue = [
       },
       {
         item: ConstString.SIDEDISH,
+        id: 2,
         data: [
           {
             name: 'Salad',
@@ -123,6 +125,7 @@ export const defaultValue = [
       },
       {
         item: ConstString.DRINKS,
+        id: 5,
         data: [
           {
             name: 'Kaapi',
@@ -134,6 +137,7 @@ export const defaultValue = [
       },
       {
         item: ConstString.DESSERT,
+        id: 3,
         data: [
           {
             name: 'Gulab Jamun',
@@ -156,6 +160,7 @@ export const defaultValue = [
     food: [
       {
         item: ConstString.MAINDISH,
+        id: 1,
         data: [
           {
             name: 'Mee Tarik',
@@ -167,6 +172,7 @@ export const defaultValue = [
       },
       {
         item: ConstString.DRINKS,
+        id: 5,
         data: [
           {
             name: 'Green Tea',
@@ -195,6 +201,7 @@ export const defaultValue = [
     food: [
       {
         item: ConstString.MAINDISH,
+        id: 1,
         data: [
           {
             name: 'Nasi Ayam',
@@ -206,6 +213,7 @@ export const defaultValue = [
       },
       {
         item: ConstString.SIDEDISH,
+        id: 2,
         data: [
           {
             name: 'Keropok Lekor',
@@ -223,6 +231,7 @@ export const defaultValue = [
       },
       {
         item: ConstString.DESSERT,
+        id: 3,
         data: [
           {
             name: 'Akok',
@@ -245,6 +254,7 @@ export const defaultValue = [
     food: [
       {
         item: ConstString.MAINDISH,
+        id: 1,
         data: [
           {
             name: 'Laksa Sarawak',
@@ -262,6 +272,7 @@ export const defaultValue = [
       },
       {
         item: ConstString.SIDEDISH,
+        id: 2,
         data: [
           {
             name: 'Keropok Lekor',
@@ -279,6 +290,7 @@ export const defaultValue = [
       },
       {
         item: ConstString.DESSERT,
+        id: 3,
         data: [
           {
             name: 'Kek Lapis Sarawak',
@@ -301,6 +313,7 @@ export const defaultValue = [
     food: [
       {
         item: ConstString.MAINDISH,
+        id: 1,
         data: [
           {
             name: 'Sushi',
@@ -318,6 +331,7 @@ export const defaultValue = [
       },
       {
         item: ConstString.SIDEDISH,
+        id: 2,
         data: [
           {
             name: 'Keropok Lekor',
@@ -335,6 +349,7 @@ export const defaultValue = [
       },
       {
         item: ConstString.DESSERT,
+        id: 3,
         data: [
           {
             name: 'Kek Lapis Sarawak',
@@ -357,6 +372,7 @@ export const defaultValue = [
     food: [
       {
         item: ConstString.MAINDISH,
+        id: 1,
         data: [
           {
             name: 'Muffins',
@@ -368,6 +384,7 @@ export const defaultValue = [
       },
       {
         item: ConstString.SIDEDISH,
+        id: 2,
         data: [
           {
             name: 'Side Muffins',
@@ -385,6 +402,7 @@ export const defaultValue = [
       },
       {
         item: ConstString.DRINKS,
+        id: 5,
         data: [
           {
             name: 'Milk',
@@ -407,6 +425,7 @@ export const defaultValue = [
     food: [
       {
         item: ConstString.MAINDISH,
+        id: 1,
         data: [
           {
             name: 'Muffins',
@@ -418,6 +437,7 @@ export const defaultValue = [
       },
       {
         item: ConstString.SIDEDISH,
+        id: 2,
         data: [
           {
             name: 'Side Muffins',
@@ -435,6 +455,7 @@ export const defaultValue = [
       },
       {
         item: ConstString.DRINKS,
+        id: 5,
         data: [
           {
             name: 'Honey',

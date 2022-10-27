@@ -2,16 +2,16 @@ import React from 'react';
 import {
   Dimensions,
   Image,
-  ImageBackground,
   Modal,
   SafeAreaView,
-  StyleSheet,
   Text,
   TouchableOpacity,
   View
 } from 'react-native';
 import logoIcon from '../../assets/Logo.png';
 import locationIcon from '../../assets/location.png';
+import FastImage from 'react-native-fast-image';
+
 
 import { ConstFoodCategory } from '../../screens/home/ConstFoodCategory';
 import EStyleSheet from 'react-native-extended-stylesheet';
@@ -38,14 +38,21 @@ export const ModalWinner = ({ isModalVisible, closeModal, selectedRestaurant, go
           >
             <View style={styles.viewWrapper}>
               <View style={styles.modalView}>
-                <ImageBackground
-                  source={image !== undefined ? { uri: image } : { uri: 'https://mir-s3-cdn-cf.behance.net/project_modules/max_1200/5eeea355389655.59822ff824b72.gif' }}
-                  style={
-                    {
-                      height: 200,
-                      resizeMode: 'contain',
-                    }}>
-                </ImageBackground>
+                <FastImage
+                  source={image !== undefined ? {
+                      uri: image,
+                      priority: FastImage.priority.high,
+                    } :
+                    { uri: 'https://mir-s3-cdn-cf.behance.net/project_modules/max_1200/5eeea355389655.59822ff824b72.gif'
+                    }
+                }
+                style={
+                {
+                  height: 200,
+                  resizeMode: 'contain',
+                }}>
+                </FastImage>
+
                 <View style={{ flexDirection: 'row', paddingVertical: 10, }}>
                   <Text style={styles.header}>{restaurant}</Text>
                   <Image
