@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import {
+  Alert,
   Dimensions,
   FlatList,
   Image,
@@ -72,7 +73,12 @@ export const SetupMenu = ({ navigation, route }) => {
       (category, categoryIndex) => {
         ++totalCount;
         category.data.forEach((foodItem, foodItemIndex) => {
-          uploadAsFile(foodItem.image, 'menu', category.item, categoryIndex, foodItemIndex).then();
+          if(foodItem.image!==undefined){
+            uploadAsFile(foodItem.image, 'menu', category.item, categoryIndex, foodItemIndex).then();
+          }
+          else{
+            showAlert(foodItem.name);
+          }
         });
       }
     );
@@ -83,6 +89,18 @@ export const SetupMenu = ({ navigation, route }) => {
       }, 5000);
     }
   };
+  const showAlert = (name) =>
+    Alert.alert(
+      name+" Was Not Found",
+      "Please Make Sure Image Exist",
+      [
+        {
+          text: "Okay",
+          onPress: () => setActionModal(false),
+          style: "cancel",
+        },
+      ],
+    );
 
   const onBackButton=()=>{
     if(selectedCategory.length>0){
@@ -317,6 +335,7 @@ const styles = EStyleSheet.create({
     fontWeight: 'bold',
   },
   rowContainer: {
+    marginTop:10,
     flexDirection: 'row',
     alignContent: 'center',
   },

@@ -4,6 +4,7 @@ import {
   Image,
   SafeAreaView,
   StyleSheet,
+  Text,
   Text as RNText,
   TouchableOpacity,
   View
@@ -27,7 +28,9 @@ export const ProfileComponents = props => {
     onDone,
     setUpdatedInfo
   } = props;
-
+const onPress=()=>{
+  console.log("My")
+}
   return (
     <SafeAreaView style={styles.backGround}>
       <View style={styles.rowContainer}>
@@ -52,6 +55,16 @@ export const ProfileComponents = props => {
           }}
           showsHorizontalScrollIndicator={false}
         />
+        <TouchableOpacity style={{
+          backgroundColor: Colors.primaryColor,
+          alignContent: 'center',
+          alignSelf: 'center',
+          padding:20,
+          borderRadius:20,
+          marginTop:20,
+        }} onPress={onPress}>
+          <Text style={{ color: 'white', fontSize: 16, alignSelf: 'center' }}>My Intern is Too Lazy</Text>
+        </TouchableOpacity>
       </View>
       {
         isModalVisible &&

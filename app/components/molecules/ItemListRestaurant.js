@@ -44,7 +44,6 @@ const styles = EStyleSheet.create(
       shadowColor: '$primaryColor',
       shadowOpacity: 0.2,
       shadowRadius: 3,
-      elevation: 10,
     },
     card: {
       backgroundColor: '$secondaryBackGroundColor',
@@ -52,6 +51,11 @@ const styles = EStyleSheet.create(
       width: Dimensions.get('screen').width - 50,
       overflow: 'hidden',
       padding: 5,
+      shadowOffset: { width: -2, height: 6 },
+      shadowColor: EStyleSheet.value('$primaryColor'),
+      shadowOpacity: 0.2,
+      shadowRadius: 3,
+      elevation: 5,
     },
     titleContainer: {
       padding: 10,
