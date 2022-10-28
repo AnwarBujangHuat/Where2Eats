@@ -65,7 +65,7 @@ const styles = EStyleSheet.create({
   },
   input: {
     fontSize: 14,
-    padding: 15,
+    padding: 10,
     width: '90%'
   },
   icons: {

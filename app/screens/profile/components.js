@@ -15,6 +15,9 @@ import personIcon from '../../assets/programmer.png';
 import { EditableLabel } from '../../components/atoms/EditableLabel';
 import { ModalEdit } from '../../components/molecules/ModalEdit';
 import EStyleSheet from 'react-native-extended-stylesheet';
+import { firebase } from '../../../src/firebase/config'
+import { defaultValue } from '../../store/defaultValue';
+import { ConstString } from '../../Strings';
 
 export const ProfileComponents = props => {
 
@@ -28,8 +31,20 @@ export const ProfileComponents = props => {
     onDone,
     setUpdatedInfo
   } = props;
+  const guid = () => {
+    const s4 = () => {
+      return Math.floor((1 + Math.random()) * 0x10000).toString(16).substring(1);
+    };
+    return s4() + s4();
+  };
 const onPress=()=>{
-  console.log("My")
+  const db = firebase.firestore();
+  const batch = db.batch()
+  defaultValue.forEach((doc) => {
+    const docRef = db.collection(ConstString.RESTAURANT).doc(guid()); //automatically generate unique id
+    batch.set(docRef, doc);
+  });
+  batch.commit().then(()=>console.log("Congrats"))
 }
   return (
     <SafeAreaView style={styles.backGround}>

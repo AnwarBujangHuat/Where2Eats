@@ -10,7 +10,7 @@ import {
   ModalScreen
 } from '../screens';
 import BottomNavigationBar from './bottom/BottomNavigationBar';
-import React from 'react';
+import * as React from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
 import {
   Animated,
@@ -19,17 +19,6 @@ import {
 
 const Stack = createStackNavigator();
 export const NavStack = () => {
-  const config = {
-    animation: 'spring',
-    config: {
-      stiffness: 1000,
-      damping: 500,
-      mass: 3,
-      overshootClamping: true,
-      restDisplacementThreshold: 0.01,
-      restSpeedThreshold: 0.01,
-    },
-  };
   const forFade = ({ current }) => ({
     cardStyle: {
       opacity: current.progress,
