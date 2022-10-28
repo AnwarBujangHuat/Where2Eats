@@ -25,7 +25,7 @@ export const DescriptionLabel = ({ name, location, icon }) => {
 const styles = EStyleSheet.create({
   container: {
     backgroundColor: '$secondaryBackGroundColor',
-    shadowOffset: { width: -2, height: 8 },
+    shadowOffset: { width: -2, height: 6 },
     shadowColor: '$primaryColor',
     shadowOpacity: 0.3,
     shadowRadius: 4,
@@ -34,7 +34,7 @@ const styles = EStyleSheet.create({
     paddingStart: 15,
     marginBottom: 15,
     zIndex: 0,
-    elevation:10,
+    elevation:15,
 
   },
   title: {

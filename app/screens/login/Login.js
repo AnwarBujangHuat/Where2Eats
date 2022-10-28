@@ -3,7 +3,10 @@ import * as React from 'react';
 import { LoginComponents } from './components';
 import { ConstString } from '../../Strings';
 import { useSelector } from 'react-redux';
-import { getTheme } from '../../store/selector';
+import {
+  getRestaurant,
+  getTheme
+} from '../../store/selector';
 import EStyleSheet from 'react-native-extended-stylesheet';
 import {
   DarkTheme,
@@ -30,21 +33,21 @@ export const Login = ({ navigation }) => {
   const verifyUser = () => {
     navigation.navigate(ConstString.MODAL);
     const obj=defaultValue[2]
-    // firebase.firestore().collection('Restaurants').doc('2').set(obj).then(()=>console.log("Done"))
+    firebase.firestore().collection('Restaurants').doc('2').set(obj).then(()=>console.log("Done"))
 
-    // try{
-    //   firebase.auth().signInWithEmailAndPassword(email, password).then((response) => {
-    //   const uid = response.user.uid;
-    //   const usersRef = firebase.firestore().collection('Users')
-    //     usersRef.doc(uid).get().then(firestoreDocument => {
-    //     if (!firestoreDocument.exists) return alert("User Not Found.")
-    //     const user = firestoreDocument.data();
-    //     const {AGE,EMAIL,NAME,PHONE}=user;
-    //     navigation.navigate(ConstString.HOME);
-    //     })
-    //   .catch(error => {return error});
-    //   }).catch(error => {return error})
-    // }catch(exception){}
+    try{
+      firebase.auth().signInWithEmailAndPassword(email, password).then((response) => {
+      const uid = response.user.uid;
+      const usersRef = firebase.firestore().collection('Users')
+        usersRef.doc(uid).get().then(firestoreDocument => {
+        if (!firestoreDocument.exists) return alert("User Not Found.")
+        const user = firestoreDocument.data();
+        const {AGE,EMAIL,NAME,PHONE}=user;
+        navigation.navigate(ConstString.HOME);
+        })
+      .catch(error => {return error});
+      }).catch(error => {return error})
+    }catch(exception){}
   };
   const props = {
     onChangeInputEmail,

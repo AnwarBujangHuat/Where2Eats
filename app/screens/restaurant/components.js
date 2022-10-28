@@ -2,6 +2,7 @@ import React from 'react';
 import {
   FlatList,
   Image,
+  SafeAreaView,
   SectionList,
   StyleSheet,
   Text,
@@ -26,7 +27,7 @@ export const RestaurantComponents = props => {
     menuIcon,
   } = props;
   return (
-    <View style={styles.container}>
+    <SafeAreaView style={styles.container}>
       <DetailsHeader image={current.image} back={onBack} disabled={true} rate={true} />
       <DescriptionLabel name={current.restaurant} location={current.address} icon={restaurantIcon} />
       <SectionList
@@ -54,7 +55,7 @@ export const RestaurantComponents = props => {
         } />
       {isModalVisible &&
         <ModalMenuDetails closeModal={closeModal} isModalVisible={isModalVisible} foodItem={foodItem} />}
-    </View>
+    </SafeAreaView>
   );
 };
 const styles = EStyleSheet.create({
