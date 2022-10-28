@@ -11,6 +11,7 @@ import addImage from '../../assets/addImage.png';
 import logoIcon from '../../assets/Logo.png';
 
 import { RateLabel } from '../atoms/RateLabel';
+import { Colors } from '../../Colors';
 
 export const DetailsHeader = ({ image, back, disabled, rate = false, onPress }) => {
   const changeLogo = () => {};
@@ -19,7 +20,8 @@ export const DetailsHeader = ({ image, back, disabled, rate = false, onPress }) 
       <TouchableOpacity onPress={onPress} disabled={disabled}>
         <ImageBackground
           source={image !== undefined ? { uri: image } : addImage}//image ? image : addImage
-          style={{ height: '100%', resizeMode: 'cover' }}>
+          style={{ height: '100%', resizeMode: 'cover'
+          }}>
           <View style={styles.rowContainer}>
             <View style={{ width: '80%' }}>
               <BackButton onPress={back}></BackButton>
@@ -37,8 +39,7 @@ export const DetailsHeader = ({ image, back, disabled, rate = false, onPress }) 
 const styles = StyleSheet.create({
   rowContainer: {
     flexDirection: 'row',
-    alignContent: 'center',
-    marginTop: 20,
+    marginTop: 10,
   },
   logoContainer: {
     alignSelf: 'flex-start',
@@ -51,11 +52,20 @@ const styles = StyleSheet.create({
     shadowColor: '$primaryColor',
     shadowOpacity: 0.1,
     shadowRadius: 2,
-    marginTop: 60,
+    marginTop: 90,
   },
   container: {
-    height: 200,
+    height: 220,
     zIndex: 2,
+    shadowRadius: 2,
+    shadowOffset: {
+      width: 0,
+      height: 3,
+    },
+    shadowColor: Colors.primaryColor,
+    shadowOpacity: .2,
+    borderBottomColor:Colors.primaryColor,
+    elevation:10,
   },
   icons: {
     height: 80,

@@ -29,7 +29,7 @@ const styles = EStyleSheet.create({
     shadowOpacity: 0.2,
     shadowRadius: 3,
     elevation: 10,
-    marginStart: 20,
+    marginStart: 10,
   },
   icons: {
     height: 20,

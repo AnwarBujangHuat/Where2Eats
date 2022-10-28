@@ -2,7 +2,7 @@ export const ConstString = { // name it to routes
   HOME: 'Home',
   LOGIN: 'Login',
   REGISTER: 'Register',
-  RESTAURANT: 'Restaurant',
+  RESTAURANT: 'Restaurants',
   ROULETTE: 'Roulette',
   PROFILE: 'Profile',
   BOTTOM: 'Bottom',

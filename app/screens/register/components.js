@@ -17,6 +17,7 @@ import { ConstFoodCategory } from '../home/ConstFoodCategory';
 import { ImageButton } from '../../components/atoms/ImageButton';
 import { InputField } from '../../components/atoms/InputField';
 import EStyleSheet from 'react-native-extended-stylesheet';
+import { Colors } from '../../Colors';
 
 export const RegisterComponents = props => {
   const {
@@ -103,7 +104,7 @@ const styles = EStyleSheet.create({
     borderRadius: 5,
     width: Dimensions.get('screen').width - 30,
     textTransform: 'uppercase',
-    // bottom: 30,
+    bottom: 10,
     // position: 'absolute',
     marginHorizontal: 15,
   },

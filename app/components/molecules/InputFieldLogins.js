@@ -33,8 +33,11 @@ const styles = EStyleSheet.create({
     flexDirection: 'row',
     borderRadius: 10,
     marginVertical: 10,
-    elevation:2,
-
+    shadowOffset: { width: -2, height: 4 },
+    shadowColor: '$primaryColor',
+    shadowOpacity: 0.2,
+    shadowRadius: 3,
+    elevation: 10,
   },
   input: {
     fontSize: 14,

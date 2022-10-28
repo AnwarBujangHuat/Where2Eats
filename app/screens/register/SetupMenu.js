@@ -24,6 +24,7 @@ import EStyleSheet from 'react-native-extended-stylesheet';
 import { menuCategories } from './MenuCategories';
 import { firebase } from '../../../src/firebase/config';
 import { ModalUploading } from '../../components/molecules/ModalUploading';
+
 let action;
 export const SetupMenu = ({ navigation, route }) => {
   const dispatch = useDispatch();
@@ -63,27 +64,26 @@ export const SetupMenu = ({ navigation, route }) => {
   ];
 
   const addMenu = () => {
-    setActionModal(true)
-    action=ConstString.UPLOADING
-    let totalCount=0;
+    setActionModal(true);
+    action = ConstString.UPLOADING;
+    let totalCount = 0;
     uploadAsFile(item.image, 'profile').then();
-    item.food=selectedCategory;
+    item.food = selectedCategory;
     item.food.forEach(
       //run once for every category
       (category, categoryIndex) => {
         ++totalCount;
         category.data.forEach((foodItem, foodItemIndex) => {
-          if(foodItem.image!==undefined){
+          if (foodItem.image !== undefined) {
             uploadAsFile(foodItem.image, 'menu', category.item, categoryIndex, foodItemIndex).then();
-          }
-          else{
+          } else {
             showAlert(foodItem.name);
           }
         });
       }
     );
     //imageCaching https://github.com/DylanVann/react-native-fast-image
-    if(isSuccessful){
+    if (isSuccessful) {
       setTimeout(() => {
         uploadFinish();
       }, 5000);
@@ -91,40 +91,41 @@ export const SetupMenu = ({ navigation, route }) => {
   };
   const showAlert = (name) =>
     Alert.alert(
-      name+" Was Not Found",
-      "Please Make Sure Image Exist",
+      name + ' Was Not Found',
+      'Please Make Sure Image Exist',
       [
         {
-          text: "Okay",
+          text: 'Okay',
           onPress: () => setActionModal(false),
-          style: "cancel",
+          style: 'cancel',
         },
       ],
     );
 
-  const onBackButton=()=>{
-    if(selectedCategory.length>0){
-      setActionModal(true)
-      action=ConstString.GO_BACK
-    }else{
-      navigation.navigate(ConstString.REGISTER);
+  const onBackButton = () => {
+    if (selectedCategory.length > 0) {
+      setActionModal(true);
+      action = ConstString.GO_BACK;
+    } else {
+      goBack();
     }
-  }
+  };
   const goBack = () => {
+    closeActionModal()
+    closeModal()
     navigation.navigate(ConstString.REGISTER);
   };
   const openModal = ({ item: category }) => {
-    setModalVisible(!isModalVisible);
+    setModalVisible(true);
     setCategory(category);
   };
   const closeModal = () => {
-    setModalVisible(!isModalVisible);
+    setModalVisible(false);
   };
-  const closeActionModal=()=>{
-    setActionModal(false)
-
-  }
-  const menuIcon = (item) => menuCategories.find(icons => icons.item === item).icon
+  const closeActionModal = () => {
+    setActionModal(false);
+  };
+  const menuIcon = (item) => menuCategories.find(icons => icons.item === item).icon;
   const generateId = () => {
     const id = () => {
       return Math.floor((1 + Math.random()) * 0x10000).toString(16).substring(1);
@@ -149,7 +150,7 @@ export const SetupMenu = ({ navigation, route }) => {
           const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
         },
         (error) => {
-           setIsSuccessful(false)
+          setIsSuccessful(false);
           reject(error);
         }, /* this is where you would put an error callback! */
         () => {
@@ -159,7 +160,7 @@ export const SetupMenu = ({ navigation, route }) => {
               }
               // console.log(category+":"+fileUrl+" "+index)
               else if (folder === 'menu') {
-                item.food[categoryIndex].data[foodItemIndex].image=fileUrl
+                item.food[categoryIndex].data[foodItemIndex].image = fileUrl;
               }
             }
           );
@@ -168,10 +169,10 @@ export const SetupMenu = ({ navigation, route }) => {
     });
   };
   const uploadFinish = () => {
-      dispatch(restaurantLoading());
-      dispatch(AddOne(item));
-      setActionModal(false)
-      navigation.navigate(ConstString.HOME);
+    dispatch(restaurantLoading());
+    dispatch(AddOne(item));
+    setActionModal(false);
+    navigation.navigate(ConstString.HOME);
 
   };
   return (
@@ -258,7 +259,8 @@ export const SetupMenu = ({ navigation, route }) => {
       }
       {
         isActionModalVisible &&
-        <ModalUploading isModalVisible={isActionModalVisible} closeModal={closeActionModal} action={action} goBack={goBack} isSuccess={isSuccessful}/>
+        <ModalUploading isModalVisible={isActionModalVisible} closeModal={closeActionModal} action={action}
+                        goBack={goBack} isSuccess={isSuccessful} />
 
       }
     </SafeAreaView>
@@ -335,7 +337,7 @@ const styles = EStyleSheet.create({
     fontWeight: 'bold',
   },
   rowContainer: {
-    marginTop:10,
+    marginTop: 10,
     flexDirection: 'row',
     alignContent: 'center',
   },
