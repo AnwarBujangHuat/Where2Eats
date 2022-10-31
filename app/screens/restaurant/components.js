@@ -12,6 +12,8 @@ import { DescriptionLabel } from '../../components/molecules/DescriptionLabel';
 import { FoodCard } from '../../components/molecules/FoodCard';
 import { ModalMenuDetails } from '../../components/molecules/ModalMenuDetails';
 import EStyleSheet from 'react-native-extended-stylesheet';
+import { ModalWinner } from '../../components/molecules/ModalWinner';
+import { FloatingActionButton } from '../../components/atoms/FloatingActionButtom';
 
 export const RestaurantComponents = props => {
   const {
@@ -23,11 +25,15 @@ export const RestaurantComponents = props => {
     restaurantIcon,
     closeModal,
     menuIcon,
+    isPreview,
+    closePreviewModal,
+    openPreviewModal,
+    goToRating
   } = props;
   return (
     <SafeAreaView style={styles.container}>
       <DetailsHeader image={current.image} back={onBack} disabled={true} rate={true} />
-      <DescriptionLabel name={current.restaurant} location={current.address} icon={restaurantIcon} />
+      <DescriptionLabel name={current.restaurant} location={current.address} icon={restaurantIcon} onPress={openPreviewModal}/>
       <SectionList
         sections={current.food}
         keyExtractor={(item, index) => item + index}
@@ -53,6 +59,12 @@ export const RestaurantComponents = props => {
         } />
       {isModalVisible &&
         <ModalMenuDetails closeModal={closeModal} isModalVisible={isModalVisible} foodItem={foodItem} />}
+      {isPreview&&
+        <ModalWinner closeModal={closePreviewModal} isModalVisible={isPreview}
+                     selectedRestaurant={current} isPreview={true}/>
+      }
+      <FloatingActionButton onPress={goToRating}></FloatingActionButton>
+
     </SafeAreaView>
   );
 };
