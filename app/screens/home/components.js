@@ -1,8 +1,7 @@
-import React, { useState } from 'react';
+import React from 'react';
 import {
   FlatList,
   SafeAreaView,
-  StyleSheet,
   View
 } from 'react-native';
 import { Header } from '../../components/molecules/Header';
@@ -14,15 +13,7 @@ import { ImageButton } from '../../components/atoms/ImageButton';
 import { RestaurantCard } from '../../components/molecules/RestaurantCard';
 import { FloatingActionButton } from '../../components/atoms/FloatingActionButtom';
 import { ModalMenuButton } from '../../components/molecules/ModalMenuButton';
-import {
-  Colors,
-  ColorThemes
-} from '../../Colors';
 import EStyleSheet from 'react-native-extended-stylesheet';
-import {
-  memo,
-  useEffect
-} from '@types/react';
 
 export const HomeComponents = props => {
   const {
@@ -39,14 +30,14 @@ export const HomeComponents = props => {
     isFetching,
     reFresh
   } = props;
-  const renderItem=({item})=>{
+  const renderItem = ({ item }) => {
     return (
       <RestaurantCard
         onPress={() => goToRestaurant(item.id)}
         name={item.restaurant} category={item.category}
         address={item.address} rate={item.rate} image={item.image} description={item.description}
       ></RestaurantCard>);
-  }
+  };
 
   return (
     <SafeAreaView style={styles.container}>
@@ -73,7 +64,7 @@ export const HomeComponents = props => {
         renderItem={renderItem}
         maxToRenderPerBatch={4}
         removeClippedSubviews={true}
-        keyExtractor={(item,index)=> index.toString()}
+        keyExtractor={(item, index) => index.toString()}
         showsHorizontalScrollIndicator={false} />
       <FloatingActionButton onPress={gotoRoulette}></FloatingActionButton>
     </SafeAreaView>

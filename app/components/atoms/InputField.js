@@ -1,10 +1,6 @@
 import React from 'react';
 
-import {
-  StyleSheet,
-  TextInput
-} from 'react-native';
-import { Colors } from '../../Colors';
+import { TextInput } from 'react-native';
 import EStyleSheet from 'react-native-extended-stylesheet';
 
 export const InputField = ({ placeholder, multiline, onChange }) => {

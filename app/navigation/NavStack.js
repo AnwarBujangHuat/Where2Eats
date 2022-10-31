@@ -2,20 +2,16 @@ import { ConstString } from '../Strings';
 import {
   Home,
   Login,
+  ModalScreen,
   Profile,
   Register,
   Restaurant,
   SetupMenu,
-  WheelOfFortune,
-  ModalScreen
+  WheelOfFortune
 } from '../screens';
 import BottomNavigationBar from './bottom/BottomNavigationBar';
 import * as React from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
-import {
-  Animated,
-  Easing
-} from 'react-native';
 
 const Stack = createStackNavigator();
 export const NavStack = () => {
@@ -29,14 +25,14 @@ export const NavStack = () => {
       initialRouteName={ConstString.LOGIN}
       screenOptions={{
         headerShown: false,
-        gestureEnabled:false,
+        gestureEnabled: false,
       }}>
-      <Stack.Screen name={ConstString.LOGIN} component={Login} options={{
-      }}/>
+      <Stack.Screen name={ConstString.LOGIN} component={Login} options={{}} />
       <Stack.Screen
         name={ConstString.MODAL}
         component={ModalScreen}
-        options={{ presentation: 'transparentModal',
+        options={{
+          presentation: 'transparentModal',
           cardStyleInterpolator: forFade
         }}
       />

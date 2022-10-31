@@ -28,10 +28,10 @@ export const Register = ({ navigation }) => {
       id: guid(),
       image: imageUri,
     };
-    (restaurantName === '' || restaurantDesc === '' || restaurantLocation === ''||imageUri===undefined) ? alert('Please Fill in All Information') : navigation.navigate(ConstString.MENU, tempObj);
+    (restaurantName === '' || restaurantDesc === '' || restaurantLocation === '' || imageUri === undefined) ? alert('Please Fill in All Information') : navigation.navigate(ConstString.MENU, tempObj);
   };
   const launchImageLibrary = () => {
-    launchImagePicker().then(result => setImageUri(result))
+    launchImagePicker().then(result => setImageUri(result));
   };
   const goBack = () => {
     navigation.navigate(ConstString.HOME);

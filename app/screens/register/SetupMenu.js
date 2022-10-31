@@ -137,7 +137,7 @@ export const SetupMenu = ({ navigation, route }) => {
     return id() + id();
   };
   const uploadAsFile = async(uri, folder, category, categoryIndex, foodItemIndex, progressCallback) => {
-    if(uri!==undefined) {
+    if (uri !== undefined) {
       const response = await fetch(uri);
       const blob = await response.blob();
       let name = generateId() + 'media.jpg';
@@ -172,8 +172,8 @@ export const SetupMenu = ({ navigation, route }) => {
           }
         );
       });
-    }else {
-      showAlert("Missing File"+ category)
+    } else {
+      showAlert('Missing File' + category);
     }
   };
   const uploadFinish = () => {

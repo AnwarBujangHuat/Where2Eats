@@ -1,6 +1,5 @@
 import {
   Image,
-  StyleSheet,
   Text,
   View
 } from 'react-native';
@@ -34,7 +33,7 @@ const styles = EStyleSheet.create({
     paddingStart: 15,
     marginBottom: 15,
     zIndex: 0,
-    elevation:15,
+    elevation: 15,
 
   },
   title: {

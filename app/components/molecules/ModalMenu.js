@@ -4,13 +4,11 @@ import {
   Image,
   Modal,
   SafeAreaView,
-  StyleSheet,
   Text,
   TextInput,
   TouchableOpacity,
   View
 } from 'react-native';
-import { Colors } from '../../Colors';
 import addIcon from '../../assets/plus.png';
 import * as ImagePicker from 'react-native-image-picker';
 import EStyleSheet from 'react-native-extended-stylesheet';
@@ -28,7 +26,7 @@ export const ModalMenu = props => {
   const launchImageLibrary = () => {
     ImagePicker.launchImageLibrary({
       storageOptions: {
-        quality:1,
+        quality: 1,
         maxWidth: 600,
         maxHeight: 300,
         allowsEditing: false,
@@ -45,7 +43,7 @@ export const ModalMenu = props => {
     }).then();
   };
   const addItem = () => {
-    if (itemName === '' || itemDesc === ''||imageUri===undefined||itemPrice==='') return alert('Please Complete Input');
+    if (itemName === '' || itemDesc === '' || imageUri === undefined || itemPrice === '') return alert('Please Complete Input');
     const menu = selectedCategory.filter(restaurant => restaurant.item === Category);
     const tempMenu = selectedCategory.filter(restaurant => restaurant.item !== Category);
     const newItem = {

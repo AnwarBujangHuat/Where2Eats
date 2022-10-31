@@ -17,13 +17,13 @@ export const ConstString = { // name it to routes
   JAPANESE: 'Japanese',
   DRINKS: 'Drinks',
   DESSERT: 'Dessert',
-  DARK:"Dark",
-  LIGHT:"Light",
-  MAINDISH:"Main Dish",
-  SIDEDISH:"Side Dish",
-  APPETIZER:"Appetizer",
-  BEVERAGES:"Beverages",
-  GO_BACK:'Go Back',
-  UPLOADING:'Uploading',
-  MODAL:'Modal'
+  DARK: 'Dark',
+  LIGHT: 'Light',
+  MAINDISH: 'Main Dish',
+  SIDEDISH: 'Side Dish',
+  APPETIZER: 'Appetizer',
+  BEVERAGES: 'Beverages',
+  GO_BACK: 'Go Back',
+  UPLOADING: 'Uploading',
+  MODAL: 'Modal'
 };

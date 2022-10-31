@@ -3,7 +3,6 @@ import {
   FlatList,
   Image,
   SafeAreaView,
-  StyleSheet,
   Text,
   Text as RNText,
   TouchableOpacity,
@@ -15,7 +14,7 @@ import personIcon from '../../assets/programmer.png';
 import { EditableLabel } from '../../components/atoms/EditableLabel';
 import { ModalEdit } from '../../components/molecules/ModalEdit';
 import EStyleSheet from 'react-native-extended-stylesheet';
-import { firebase } from '../../../src/firebase/config'
+import { firebase } from '../../../src/firebase/config';
 import { defaultValue } from '../../store/defaultValue';
 import { ConstString } from '../../Strings';
 
@@ -37,15 +36,15 @@ export const ProfileComponents = props => {
     };
     return s4() + s4();
   };
-const onPress=()=>{
-  const db = firebase.firestore();
-  const batch = db.batch()
-  defaultValue.forEach((doc) => {
-    const docRef = db.collection(ConstString.RESTAURANT).doc(guid()); //automatically generate unique id
-    batch.set(docRef, doc);
-  });
-  batch.commit().then(()=>console.log("Congrats"))
-}
+  const onPress = () => {
+    const db = firebase.firestore();
+    const batch = db.batch();
+    defaultValue.forEach((doc) => {
+      const docRef = db.collection(ConstString.RESTAURANT).doc(guid()); //automatically generate unique id
+      batch.set(docRef, doc);
+    });
+    batch.commit().then(() => console.log('Congrats'));
+  };
   return (
     <SafeAreaView style={styles.backGround}>
       <View style={styles.rowContainer}>
@@ -74,9 +73,9 @@ const onPress=()=>{
           backgroundColor: Colors.primaryColor,
           alignContent: 'center',
           alignSelf: 'center',
-          padding:20,
-          borderRadius:20,
-          marginTop:20,
+          padding: 20,
+          borderRadius: 20,
+          marginTop: 20,
         }} onPress={onPress}>
           <Text style={{ color: 'white', fontSize: 16, alignSelf: 'center' }}>My Intern is Too Lazy</Text>
         </TouchableOpacity>

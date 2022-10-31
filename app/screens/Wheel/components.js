@@ -5,7 +5,6 @@ import {
   FlatList,
   Image,
   SafeAreaView,
-  StyleSheet,
   Text as RNText,
   View
 } from 'react-native';
@@ -169,7 +168,7 @@ export const WheelComponents = props => {
   const _renderSvgWheel = () => {
     return (
       <>
-        <SafeAreaView style={{ flex: 1,  }}>
+        <SafeAreaView style={{ flex: 1, }}>
           <View style={styles.rowContainer}>
             <BackButton onPress={goBackHome}></BackButton>
             <RNText style={styles.title}>{'Wheel Of Fortune'}</RNText>
