@@ -28,22 +28,26 @@ export const Login = ({ navigation }) => {
   };
   const verifyUser = () => {
     navigation.navigate(ConstString.MODAL);
-    const obj = defaultValue[2];
-    firebase.firestore().collection('Restaurants').doc('2').set(obj).then(() => console.log('Done'));
-
-    try {
-      firebase.auth().signInWithEmailAndPassword(email, password).then((response) => {
-        const uid = response.user.uid;
-        const usersRef = firebase.firestore().collection('Users');
-        usersRef.doc(uid).get().then(firestoreDocument => {
-          if (!firestoreDocument.exists) return alert('User Not Found.');
-          const user = firestoreDocument.data();
-          const { AGE, EMAIL, NAME, PHONE } = user;
-          navigation.navigate(ConstString.HOME);
-        }).catch(error => {return error;});
-      }).catch(error => {return error;});
-    }
-    catch(exception) {}
+    // try {
+    //   firebase.auth().signInWithEmailAndPassword(email, password).then((response) => {
+    //     const uid = response.user.uid;
+    //     console.log({user: response.user})
+    //     console.log({profile: response.additionalUserInfo.profile})
+    //     const usersRef = firebase.firestore().collection('Users');
+    //     usersRef.doc(uid).get().then(firestoreDocument => {
+    //       if (!firestoreDocument.exists) return alert('User Not Found.');
+    //       const user = firestoreDocument.data();
+    //       const { AGE, EMAIL, NAME, PHONE } = user;
+    //       navigation.navigate(ConstString.MODAL);
+    //     }).catch(error => {
+    //       console.log({error})
+    //       return error;
+    //     });
+    //   }).catch(error => {
+    //     console.log({error})
+    //     return error;
+    //   });
+    // } catch(exception) {}
   };
   const props = {
     onChangeInputEmail,

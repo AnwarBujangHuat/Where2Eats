@@ -1,6 +1,5 @@
 import {
   Dimensions,
-  FlatList,
   Image,
   SafeAreaView,
   Text,
@@ -8,46 +7,25 @@ import {
   View
 } from 'react-native';
 import { Rating } from 'react-native-ratings';
+
 import React from 'react';
 import { BackButton } from '../../components/atoms/BackButton';
 import EStyleSheet from 'react-native-extended-stylesheet';
 import { RatingCard } from '../../components/molecules/RatingCard';
 import addIcon from '../../assets/plus.png';
-import { ModalGiveRating, } from '../../components/molecules/ModalGiveRating';
-import { BarChart } from 'react-native-chart-kit';
-import { RatingButton } from '../../components/atoms/RatingButton';
 
 export const RatingComponents = props => {
+  const firstTime = true;
   const {
     onBackButton,
-    restaurantInfo,
-    isModalRateOpen,
-    closeModal,
-    submit,
-    userReview,
-    isCurrentRating,
-    ratingCount,
-    openModal,
-    isFirstTimeRate,
-    restaurantList,
-    ratingChipButton,
-    onSelectedRating,
-    isSelectedRating
+    restaurantInfo
   } = props;
-  const RenderItem = ({ item }) => {
-    return (
-      <RatingButton rating={item} onPress={onSelectedRating} selected={isSelectedRating} />
-    );
-  };
-  const renderRateCard = ({ item }) => {
-    return (
-      <RatingCard userReview={item} />
-    );
-  };
   const SelfReview = () => {
     return (
-      !isFirstTimeRate ?
-        <RatingCard userReview={userReview} />
+      firstTime ?
+        <RatingCard title={'Mohamad Kasim Bin Abu'}
+                    description={'This cozy restaurant has left the best impressions! Hospitable hosts, delicious dishes, beautiful presentation, wide wine list and wonderful dessert. I recommend to everyone! I would like to come back here again and again.'}
+                    rating={4.6} timestamp={'10/31/2022, 1:17:51 PM'} />
         :
         <Text style={styles.reviewText}>No Review</Text>
     );
@@ -58,106 +36,48 @@ export const RatingComponents = props => {
         <BackButton onPress={onBackButton}></BackButton>
         <Text style={styles.header}>{restaurantInfo.restaurant + ' Customer Review'}</Text>
       </View>
-      <View style={{ marginHorizontal: 15 }}>
-        <View style={{ flexDirection: 'row' }}>
-          <View style={{ alignSelf: 'center', alignContent: 'center', paddingRight: 30 }}>
-            <Text style={styles.rating}> {isCurrentRating.toFixed(1)}
-            </Text>
-            <Rating
-              type="star"
-              fractions={1}
-              startingValue={isCurrentRating}
-              readonly={true}
-              showReadOnlyText={false}
-              tintColor={EStyleSheet.value('$backGroundColor')}
-              style={{ paddingStart: 10 }}
-              imageSize={18}
-              ratingTextColor={EStyleSheet.value('$secondaryTextColor')}
-            />
-            <View style={{ paddingStart: 10, }}>
-              <Text style={
-                {
-                  fontSize: 12,
-                  color: EStyleSheet.value('$secondaryTextColor'),
-                  paddingVertical: 5,
-                  alignSelf: 'flex-start'
-                }
-              }>
-                {restaurantInfo.rating.length + ' Reviews'}
-              </Text>
-            </View>
-
-          </View>
-          <BarChart
-            style={{
-              transform: [{ rotate: '90deg' }],
-              marginStart: 30,
-              paddingRight: 0,
-            }}
-            data={{
-              labels: [5, 4, 3, 2, 1],
-              datasets: [
-                {
-                  data: ratingCount ?? []
-                }
-              ]
-            }}
-            chartConfig={{
-              backgroundGradientFrom: 'transparent',
-              backgroundGradientFromOpacity: 0,
-              backgroundGradientTo: 'transparent',
-              fillShadowGradient: EStyleSheet.value('$secondaryTextColor'),
-              fillShadowGradientFrom: EStyleSheet.value('$secondaryTextColor'),
-              fillShadowGradientFromOpacity: 1,
-              fillShadowGradientOpacity: 1,
-              fillShadowGradientTo: EStyleSheet.value('$secondaryTextColor'),
-              fillShadowGradientToOffset: 1,
-              fillShadowGradientFromOffset: 1,
-              backgroundGradientToOpacity: 0,
-              color: (opacity = 1) => EStyleSheet.value('$secondaryTextColor'),
-              labelColor: (opacity = 1) => EStyleSheet.value('$secondaryTextColor'),
-              strokeWidth: 1,
-              barPercentage: 0.4,
-            }}
-            withHorizontalLabels={false}
-            width={120}
-            height={180}
-            verticalLabelRotation={270}
-            withInnerLines={false}
-            hideLegend
-          />
-        </View>
-
-        <View style={{ flexDirection: 'row', marginBottom: 10, }}>
+      <View style={{ marginTop: 20, marginHorizontal: 5, }}>
+        <Text style={styles.reviewHeader}>Overall Rating</Text>
+        <Rating
+          type="star"
+          fractions={1}
+          startingValue={3.7}
+          readonly={true}
+          showReadOnlyText={false}
+          showRating
+          ratingBackgroundColor={'#000'}
+          tintColor={EStyleSheet.value('$backGroundColor')}
+          imageSize={45}
+          ratingTextColor={EStyleSheet.value('$secondaryTextColor')}
+          style={styles.ratingContainer}
+        />
+        <View style={{flexDirection:'row'}}>
           <Text style={styles.header}>Your Review</Text>
-          <TouchableOpacity style={styles.buttonContainer} onPress={openModal}>
+          <TouchableOpacity style={styles.buttonContainer} onPress={() => {
+            console.log("hEl");
+          }}>
             <Image style={styles.addIcon} source={addIcon} />
             <Text style={{
               padding: 5,
               color: 'white',
               fontWeight: 'bold',
-              alignSelf: 'center',
+              alignSelf:'center',
               fontSize: 12,
-            }}>{!isFirstTimeRate ? 'Update Review' : 'Add Review'}</Text>
+            }}>Add Review</Text>
           </TouchableOpacity>
         </View>
+
         <SelfReview />
-        <FlatList
-          data={ratingChipButton}
-          renderItem={RenderItem}
-          horizontal={true}
-          style={{ marginVertical: 5, }}
-          showsHorizontalScrollIndicator={false}
-        />
-        <FlatList
-          data={restaurantList}
-          renderItem={renderRateCard}
-          showsHorizontalScrollIndicator={false}
-        />
+        {/*<AirbnbRating*/}
+        {/*  count={5}*/}
+        {/*  isDisabled={true}*/}
+        {/*  showRating={true}*/}
+        {/*  reviews={["Terrible", "Bad", "Meh", "OK", "Good", "Hmm...", "Very Good", "Wow", "Amazing", "Unbelievable", "Jesus"]}*/}
+        {/*  defaultRating={3}*/}
+        {/*  size={20}*/}
+        {/*/>*/}
       </View>
-      {isModalRateOpen &&
-        <ModalGiveRating closeModal={closeModal} isModalVisible={isModalRateOpen}
-                         submit={(text, newRate) => submit(text, newRate)} userReview={userReview} />}
+
     </SafeAreaView>);
 };
 const styles = EStyleSheet.create({
@@ -183,16 +103,13 @@ const styles = EStyleSheet.create({
   header: {
     fontSize: 17,
     fontWeight: 'bold',
-    alignSelf: 'center',
+    margin: 10,
     color: '$primaryTextColor',
-  },
-  rating: {
-    fontSize: 60,
-    color: '$secondaryTextColor',
   },
   reviewHeader: {
     fontSize: 18,
     fontWeight: 'bold',
+    margin: 10,
     color: '$primaryTextColor',
   },
   button: {
@@ -218,14 +135,14 @@ const styles = EStyleSheet.create({
     alignContent: 'center',
   },
   ratingContainer: {
-    alignSelf: 'center',
-    alignItems: 'center',
-    backgroundColor: 'white',
-    alignContent: 'center'
+    paddingVertical: 15,
+    backGroundColor: '$backGroundColor'
   },
+
   reviewText: {
     fontSize: 14,
     color: 'white',
+    marginStart: 10,
     fontWeight: 'bold',
   },
   buttonContainer: {
@@ -233,11 +150,11 @@ const styles = EStyleSheet.create({
     flexDirection: 'row',
     backgroundColor: '$primaryColor',
     borderRadius: 20,
-    shadowOffset: { width: -2, height: 2 },
+    shadowOffset: { width: -2, height: 4 },
     shadowColor: '$primaryColor',
     shadowOpacity: 0.2,
     shadowRadius: 3,
-    right: 0, position: 'absolute',
+    right: 5, position: 'absolute',
     elevation: 10,
   },
 });

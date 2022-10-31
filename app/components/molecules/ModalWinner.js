@@ -11,13 +11,11 @@ import {
 import logoIcon from '../../assets/Logo.png';
 import locationIcon from '../../assets/location.png';
 import FastImage from 'react-native-fast-image';
-
-
 import { icons } from '../../screens/home/ConstFoodCategory';
 import EStyleSheet from 'react-native-extended-stylesheet';
 
 const { width } = Dimensions.get('window');
-export const ModalWinner = ({ isModalVisible, closeModal, selectedRestaurant, goToMenu, isFinished }) => {
+export const ModalWinner = ({ isModalVisible, closeModal, selectedRestaurant, goToMenu, isFinished,isPreview }) => {
   const { restaurant, description, address, category, image } = selectedRestaurant;
   const spinAgain = () => {
     closeModal();
@@ -64,21 +62,25 @@ export const ModalWinner = ({ isModalVisible, closeModal, selectedRestaurant, go
                   </View>
                 </View>
 
-                <View style={{
-                  flex: 1,
-                  flexDirection: 'row',
-                }}>
-                  <TouchableOpacity
-                    style={styles.button}
-                    onPress={spinAgain}>
-                    <Text style={styles.buttonTextSpin}>{isFinished ? 'Spin Again' : 'Go Back'}</Text>
-                  </TouchableOpacity>
-                  <TouchableOpacity
-                    style={styles.buttonVisit}
-                    onPress={goToMenu}>
-                    <Text style={styles.buttonTextMenu}>Visit Restaurant</Text>
-                  </TouchableOpacity>
-                </View>
+                  <View style={{
+                    flex: 1,
+                    flexDirection: 'row',
+                    alignSelf:'center'
+                  }}>
+                      <TouchableOpacity
+                        style={styles.button}
+                        onPress={spinAgain}>
+                        <Text style={styles.buttonTextSpin}>{isFinished ? 'Spin Again' : 'Go Back'}</Text>
+                      </TouchableOpacity>
+                    {!isPreview &&
+                      <TouchableOpacity
+                      style={styles.buttonVisit}
+                      onPress={goToMenu}>
+                      <Text style={styles.buttonTextMenu}>Visit Restaurant</Text>
+                    </TouchableOpacity>}
+                  </View>
+
+
               </View>
               <TouchableOpacity style={styles.logoContainer}>
                 <Image style={styles.logoIcon} source={logoIcon} />
@@ -152,7 +154,6 @@ const styles = EStyleSheet.create({
     padding: 5,
     width: '50%',
     borderColor: '$secondaryBackGroundColor',
-    borderRightColor: '$primaryColor',
     borderWidth: .5,
     textTransform: 'uppercase',
     marginTop: 15,
@@ -162,6 +163,7 @@ const styles = EStyleSheet.create({
     alignItems: 'center',
     padding: 5,
     width: '50%',
+    borderLeftColor: '$primaryColor',
     borderColor: '$secondaryBackGroundColor',
     borderWidth: .5,
     textTransform: 'uppercase',
@@ -212,5 +214,7 @@ const styles = EStyleSheet.create({
   containerIcon: {
     flexDirection: 'row',
     marginTop: 5,
+    paddingBottom:5,
+
   },
 });

@@ -9,17 +9,24 @@ import { menuCategories } from '../register/MenuCategories';
 export const Restaurant = ({ navigation, route }) => {
   const [isModalVisible, setModalVisible] = useState(false);
   const [foodItem, setFoodItem] = useState();
+  const [isPreview,setIsPreview]=useState(false)
   const { id } = route.params || {};
   const onPress = (item) => {
     setFoodItem(item);
     setModalVisible(!isModalVisible);
   };
   const current = useSelector(getCurrentRestaurant(id));
+  const closePreviewModal=()=>{
+    setIsPreview(false)
+  }
   const onBack = () => navigation.navigate(ConstString.HOME);
   // const restaurantIcon = ConstFoodCategory.find(icons => icons.title === current?.category).icon;
   const restaurantIcon = current?.category ? icons[current?.category] : icons.def;
   const menuIcon = (item) => menuCategories.find(icons => icons.item === item).icon;
   const closeModal = () => setModalVisible(false);
+  const openPreviewModal=()=>setIsPreview(true)
+  const goToRating=()=>navigation.navigate(ConstString.RATINGS, { id });
+
   const props = {
     isModalVisible,
     foodItem,
@@ -28,7 +35,11 @@ export const Restaurant = ({ navigation, route }) => {
     onBack,
     restaurantIcon,
     closeModal,
-    menuIcon
+    menuIcon,
+    isPreview,
+    closePreviewModal,
+    openPreviewModal,
+    goToRating,
   };
   return (<RestaurantComponents {...props} />
   );

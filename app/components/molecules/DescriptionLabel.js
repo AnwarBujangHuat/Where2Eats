@@ -1,18 +1,21 @@
 import {
   Image,
   Text,
+  TouchableOpacity,
   View
 } from 'react-native';
 import React from 'react';
 import locationIcon from '../../assets/location.png';
 import EStyleSheet from 'react-native-extended-stylesheet';
 
-export const DescriptionLabel = ({ name, location, icon }) => {
+export const DescriptionLabel = ({ name, location, icon ,onPress}) => {
   return (
     <View style={styles.container}>
       <View style={{ flexDirection: 'row' }}>
         <Text style={styles.title}>{name}</Text>
-        <Image style={styles.icon} source={icon}></Image>
+        <TouchableOpacity onPress={onPress}>
+          <Image style={styles.icon} source={icon}></Image>
+        </TouchableOpacity>
       </View>
       <View style={{ flexDirection: 'row' }}>
         <Image style={styles.locationIcon} source={locationIcon}></Image>
