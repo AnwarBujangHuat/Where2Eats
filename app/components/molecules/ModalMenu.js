@@ -45,7 +45,7 @@ export const ModalMenu = props => {
     }).then();
   };
   const addItem = () => {
-    if (itemName === '' && itemDesc === '') return alert('Please Complete Input');
+    if (itemName === '' || itemDesc === ''||imageUri===undefined||itemPrice==='') return alert('Please Complete Input');
     const menu = selectedCategory.filter(restaurant => restaurant.item === Category);
     const tempMenu = selectedCategory.filter(restaurant => restaurant.item !== Category);
     const newItem = {

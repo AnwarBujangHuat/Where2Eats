@@ -68,9 +68,9 @@ export const SetupMenu = ({ navigation, route }) => {
     action = ConstString.UPLOADING;
     let totalCount = 0;
     uploadAsFile(item.image, 'profile').then();
+    // uploadAsFile(undefined, 'profile').then();
     item.food = selectedCategory;
     item.food.forEach(
-      //run once for every category
       (category, categoryIndex) => {
         ++totalCount;
         category.data.forEach((foodItem, foodItemIndex) => {
@@ -82,12 +82,16 @@ export const SetupMenu = ({ navigation, route }) => {
         });
       }
     );
-    //imageCaching https://github.com/DylanVann/react-native-fast-image
-    if (isSuccessful) {
-      setTimeout(() => {
+    setTimeout(() => {
+      if (isSuccessful) {
         uploadFinish();
-      }, 5000);
-    }
+      } else {
+        console.log(isSuccessful);
+      }
+
+    }, 5000);
+
+
   };
   const showAlert = (name) =>
     Alert.alert(
@@ -111,8 +115,8 @@ export const SetupMenu = ({ navigation, route }) => {
     }
   };
   const goBack = () => {
-    closeActionModal()
-    closeModal()
+    closeActionModal();
+    closeModal();
     navigation.navigate(ConstString.REGISTER);
   };
   const openModal = ({ item: category }) => {
@@ -133,40 +137,44 @@ export const SetupMenu = ({ navigation, route }) => {
     return id() + id();
   };
   const uploadAsFile = async(uri, folder, category, categoryIndex, foodItemIndex, progressCallback) => {
-    const response = await fetch(uri);
-    const blob = await response.blob();
-    let name = generateId() + 'media.jpg';
-    const pathName = folder === 'profile' ? item.id + '/' + folder + '/' + name : item.id + '/' + folder + '/' + category + '/' + name;
-    const metadata = {
-      contentType: 'image/jpeg',
-    };
-    const ref = firebase.storage().ref().child(pathName);
-    const task = ref.put(blob, metadata);
-    return new Promise((resolve, reject) => {
-      task.on(
-        'state_changed',
-        (snapshot) => {
-          progressCallback && progressCallback(snapshot.bytesTransferred / snapshot.totalBytes);
-          const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-        },
-        (error) => {
-          setIsSuccessful(false);
-          reject(error);
-        }, /* this is where you would put an error callback! */
-        () => {
-          task.snapshot.ref.getDownloadURL().then((fileUrl) => {
-              if (folder === 'profile') {
-                item.image = fileUrl;
+    if(uri!==undefined) {
+      const response = await fetch(uri);
+      const blob = await response.blob();
+      let name = generateId() + 'media.jpg';
+      const pathName = folder === 'profile' ? item.id + '/' + folder + '/' + name : item.id + '/' + folder + '/' + category + '/' + name;
+      const metadata = {
+        contentType: 'image/jpeg',
+      };
+      const ref = firebase.storage().ref().child(pathName);
+      const task = ref.put(blob, metadata);
+      return new Promise((resolve, reject) => {
+        task.on(
+          'state_changed',
+          (snapshot) => {
+            progressCallback && progressCallback(snapshot.bytesTransferred / snapshot.totalBytes);
+            const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+          },
+          (error) => {
+            setIsSuccessful(false);
+            reject(error);
+          }, /* this is where you would put an error callback! */
+          () => {
+            task.snapshot.ref.getDownloadURL().then((fileUrl) => {
+                if (folder === 'profile') {
+                  item.image = fileUrl;
+                }
+                // console.log(category+":"+fileUrl+" "+index)
+                else if (folder === 'menu') {
+                  item.food[categoryIndex].data[foodItemIndex].image = fileUrl;
+                }
               }
-              // console.log(category+":"+fileUrl+" "+index)
-              else if (folder === 'menu') {
-                item.food[categoryIndex].data[foodItemIndex].image = fileUrl;
-              }
-            }
-          );
-        }
-      );
-    });
+            );
+          }
+        );
+      });
+    }else {
+      showAlert("Missing File"+ category)
+    }
   };
   const uploadFinish = () => {
     dispatch(restaurantLoading());

@@ -19,6 +19,11 @@ import {
   ColorThemes
 } from '../../Colors';
 import EStyleSheet from 'react-native-extended-stylesheet';
+import {
+  memo,
+  useEffect
+} from '@types/react';
+
 export const HomeComponents = props => {
   const {
     selectedTypes,
@@ -34,6 +39,14 @@ export const HomeComponents = props => {
     isFetching,
     reFresh
   } = props;
+  const renderItem=({item})=>{
+    return (
+      <RestaurantCard
+        onPress={() => goToRestaurant(item.id)}
+        name={item.restaurant} category={item.category}
+        address={item.address} rate={item.rate} image={item.image} description={item.description}
+      ></RestaurantCard>);
+  }
 
   return (
     <SafeAreaView style={styles.container}>
@@ -57,17 +70,14 @@ export const HomeComponents = props => {
         data={currentRestaurant}
         onRefresh={reFresh}
         refreshing={isFetching}
-        renderItem={({ item }) => {
-          return (
-            <RestaurantCard
-              onPress={() => goToRestaurant(item.id)}
-              name={item.restaurant} category={item.category}
-              address={item.address} rate={item.rate} image={item.image} description={item.description}
-            ></RestaurantCard>);
-        }}
+        renderItem={renderItem}
+        maxToRenderPerBatch={4}
+        removeClippedSubviews={true}
+        keyExtractor={(item,index)=> index.toString()}
         showsHorizontalScrollIndicator={false} />
       <FloatingActionButton onPress={gotoRoulette}></FloatingActionButton>
     </SafeAreaView>
+
   );
 };
 // const styles = StyleSheet.create({

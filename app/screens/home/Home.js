@@ -22,13 +22,6 @@ export const Home = ({ navigation }) => {
   const [searchQuery, setSearchQuery] = useState('');
   const [isRender, setisRender] = useState(false);
   const[isFetching,setIsFetching]=useState(false)
-  useEffect(() => {
-    if (restaurant.length === 0) {
-      fetchData()
-    }
-    setCurrentRestaurant(restaurant);
-  }, [restaurant]);
-
   const setRestaurant = (category) => {
     const isRestaurantIncluded = selectedTypes.includes(category);
     const tempSelected = isRestaurantIncluded ? selectedTypes.filter(item => item !== category) : [category, ...selectedTypes];
@@ -64,7 +57,17 @@ export const Home = ({ navigation }) => {
     setOpenMenu(!isOpenMenu);
   };
   const closeModal = (id) => {
-    id === 1 ? navigation.navigate(ConstString.REGISTER) : navigation.navigate(ConstString.PROFILE);
+    switch(id){
+      case 1:
+        navigation.navigate(ConstString.REGISTER);
+        break;
+      case 2:
+        navigation.navigate(ConstString.PROFILE);
+        break;
+      case 3:
+        navigation.navigate(ConstString.LOGIN);
+        break;
+    }
     setOpenMenu(false);
   };
   const goToRestaurant = (id) => {
