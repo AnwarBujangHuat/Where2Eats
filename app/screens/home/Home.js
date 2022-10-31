@@ -1,7 +1,4 @@
-import React, {
-  useEffect,
-  useState
-} from 'react';
+import React, { useState } from 'react';
 import { HomeComponents } from './components';
 import { ConstString } from '../../Strings';
 import { getRestaurant, } from '../../store/selector';
@@ -10,7 +7,6 @@ import {
   useSelector
 } from 'react-redux';
 import { restaurantLoading } from '../../store/reducer';
-import { defaultValue } from '../../store/defaultValue';
 import { PopulateRestaurantList } from '../../store/thunks';
 
 export const Home = ({ navigation }) => {
@@ -21,7 +17,7 @@ export const Home = ({ navigation }) => {
   const [isOpenMenu, setOpenMenu] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');
   const [isRender, setisRender] = useState(false);
-  const[isFetching,setIsFetching]=useState(false)
+  const [isFetching, setIsFetching] = useState(false);
   const setRestaurant = (category) => {
     const isRestaurantIncluded = selectedTypes.includes(category);
     const tempSelected = isRestaurantIncluded ? selectedTypes.filter(item => item !== category) : [category, ...selectedTypes];
@@ -37,11 +33,11 @@ export const Home = ({ navigation }) => {
       setCurrentRestaurant(tempRestaurant);
     }
   };
-  const fetchData=()=>{
+  const fetchData = () => {
     dispatch(restaurantLoading());
     dispatch(PopulateRestaurantList());
-    setIsFetching(false)
-  }
+    setIsFetching(false);
+  };
   const onSearch = (text) => {
     setSearchQuery(text);
     if (text === '') {
@@ -57,7 +53,7 @@ export const Home = ({ navigation }) => {
     setOpenMenu(!isOpenMenu);
   };
   const closeModal = (id) => {
-    switch(id){
+    switch(id) {
       case 1:
         navigation.navigate(ConstString.REGISTER);
         break;
@@ -76,10 +72,10 @@ export const Home = ({ navigation }) => {
   const reRender = () => {
     setTimeout(function() {setisRender(!isRender);}, 100);
   };
-  const reFresh=()=>{
-    setIsFetching(true)
-    fetchData()
-  }
+  const reFresh = () => {
+    setIsFetching(true);
+    fetchData();
+  };
   const props = {
     selectedTypes,
     currentRestaurant,

@@ -13,7 +13,7 @@ export const PopulateRestaurantList = createAsyncThunk('getRestaurantList', asyn
         restaurant.push(documentSnapshot.data());
       });
     });
-    return restaurant.length>0?restaurant:defaultValue;
+    return restaurant.length > 0 ? restaurant : defaultValue;
   }
   catch(e) {
   }
@@ -23,8 +23,8 @@ export const AddOne = createAsyncThunk('AddOneRestaurant', async(request, {
   dispatch,
   rejectWithValue
 }) => {
-  const {id}=request
-  await firebase.firestore().collection('Restaurants').doc(id).set(request).then(()=>console.log("Done"))
+  const { id } = request;
+  await firebase.firestore().collection('Restaurants').doc(id).set(request).then(() => console.log('Done'));
   return request;
 });
 

@@ -13,10 +13,7 @@ import locationIcon from '../../assets/location.png';
 import FastImage from 'react-native-fast-image';
 
 
-import {
-  ConstFoodCategory,
-  icons
-} from '../../screens/home/ConstFoodCategory';
+import { icons } from '../../screens/home/ConstFoodCategory';
 import EStyleSheet from 'react-native-extended-stylesheet';
 
 const { width } = Dimensions.get('window');
@@ -41,20 +38,21 @@ export const ModalWinner = ({ isModalVisible, closeModal, selectedRestaurant, go
                       uri: image,
                       priority: FastImage.priority.high,
                     } :
-                    { uri: 'https://mir-s3-cdn-cf.behance.net/project_modules/max_1200/5eeea355389655.59822ff824b72.gif'
+                    {
+                      uri: 'https://mir-s3-cdn-cf.behance.net/project_modules/max_1200/5eeea355389655.59822ff824b72.gif'
                     }
-                }
-                style={
-                {
-                  height: 200,
-                  resizeMode: 'contain',
-                }}>
+                  }
+                  style={
+                    {
+                      height: 200,
+                      resizeMode: 'contain',
+                    }}>
                 </FastImage>
 
                 <View style={{ flexDirection: 'row', paddingVertical: 10, }}>
                   <Text style={styles.header}>{restaurant}</Text>
                   <Image
-                    source={category ? icons[category]:icons.def}
+                    source={category ? icons[category] : icons.def}
                     style={styles.iconCategory} />
                 </View>
 

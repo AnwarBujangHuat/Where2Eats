@@ -2,25 +2,16 @@ import * as React from 'react';
 import {
   Dimensions,
   Image,
-  ImageBackground,
-  StyleSheet,
   Text,
   TouchableWithoutFeedback,
   View,
 } from 'react-native';
 import { RateLabel } from '../atoms/RateLabel';
 import locationIcon from '../../assets/location.png';
-import res1 from '../../assets/res1.jpg';
-import {
-  ConstFoodCategory,
-  icons
-} from '../../screens/home/ConstFoodCategory';
-import { Colors } from '../../Colors';
+import { icons } from '../../screens/home/ConstFoodCategory';
 import EStyleSheet from 'react-native-extended-stylesheet';
 import addImage from '../../assets/addImage.png';
-import { firebase } from '../../../src/firebase/config';
 import FastImage from 'react-native-fast-image';
-import { useEffect } from 'react';
 
 let imageUrl;
 export const RestaurantCard = ({ onPress, name, category, address, description, rate, image }) => {
@@ -30,9 +21,10 @@ export const RestaurantCard = ({ onPress, name, category, address, description, 
         <View style={styles.card}>
           <View>
             <FastImage
-              source={image!==undefined?{uri:image,
+              source={image !== undefined ? {
+                uri: image,
                 priority: FastImage.priority.high,
-              }:addImage}//image ? image : addImage
+              } : addImage}//image ? image : addImage
               style={{ height: 140, marginBottom: 5, resizeMode: 'contain', }}>
               <RateLabel rating={rate} />
             </FastImage>
@@ -46,7 +38,7 @@ export const RestaurantCard = ({ onPress, name, category, address, description, 
                 <Text style={styles.desc}>{address}</Text>
               </View>
             </View>
-            <Image source={category ? icons[category]:icons.def}
+            <Image source={category ? icons[category] : icons.def}
                    style={styles.iconCategory} />
           </View>
         </View>

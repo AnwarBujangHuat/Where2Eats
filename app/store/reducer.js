@@ -65,7 +65,7 @@ export const Reducer = createSlice({
       PHONE: '0123456789',
       RestaurantId: [1, 2, 3]
     },
-    THEME:ConstString.LIGHT
+    THEME: ConstString.LIGHT
   },
 
   reducers: {
@@ -99,10 +99,10 @@ export const Reducer = createSlice({
       }
       return state;
     });
-    builder.addCase(changeTheme.fulfilled,(state, { payload })=>{
-      state.THEME=payload
+    builder.addCase(changeTheme.fulfilled, (state, { payload }) => {
+      state.THEME = payload;
       return state;
-    })
+    });
   }
 });
 

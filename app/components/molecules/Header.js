@@ -12,10 +12,6 @@ import React, {
   useState
 } from 'react';
 import { ConstString } from '../../Strings';
-import {
-  DarkTheme,
-  LightTheme
-} from '../../Colors';
 import LottieView from 'lottie-react-native';
 // import ThemeButton from '../../assets/dark.json';
 import ThemeButton from '../../assets/lightNdark.json';
@@ -31,7 +27,7 @@ let color;
 export const Header = ({ source, onPress, reRender }) => {
   const animationProgress = useRef(new Animated.Value(currentTheme === ConstString.LIGHT ? .5 : 0));
   const [isCurrentTheme, setCurrentTheme] = useState(currentTheme);
-  const [isRender,setRender]=useState(false)
+  const [isRender, setRender] = useState(false);
   const dispatch = useDispatch();
   const onChangeTheme = () => {
     if (isCurrentTheme === ConstString.LIGHT) {
@@ -57,8 +53,8 @@ export const Header = ({ source, onPress, reRender }) => {
     dispatch(changeTheme(color));
     reRender();
     //Disable Button for 2 Seconds after changing Theme
-    setRender(true)
-    setTimeout(()=>setRender(false),2000)
+    setRender(true);
+    setTimeout(() => setRender(false), 2000);
   };
   return (
     <View style={styles.section}>

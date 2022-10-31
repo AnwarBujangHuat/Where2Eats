@@ -4,7 +4,6 @@ import {
   FlatList,
   Modal,
   SafeAreaView,
-  StyleSheet,
   Text,
   TouchableOpacity,
   View

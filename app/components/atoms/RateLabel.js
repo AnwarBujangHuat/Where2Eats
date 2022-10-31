@@ -1,13 +1,11 @@
 import {
   Image,
-  StyleSheet,
   Text,
   View
 } from 'react-native';
 import React from 'react';
 import startIcon from '../../assets/star.png';
 import startIcon2 from '../../assets/star2.png';
-import { Colors } from '../../Colors';
 import EStyleSheet from 'react-native-extended-stylesheet';
 
 export const RateLabel = ({ rating }) => {

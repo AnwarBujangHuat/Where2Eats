@@ -4,7 +4,6 @@ import {
   Image,
   SafeAreaView,
   SectionList,
-  StyleSheet,
   Text,
   View,
 } from 'react-native';
@@ -13,7 +12,6 @@ import { DescriptionLabel } from '../../components/molecules/DescriptionLabel';
 import { FoodCard } from '../../components/molecules/FoodCard';
 import { ModalMenuDetails } from '../../components/molecules/ModalMenuDetails';
 import EStyleSheet from 'react-native-extended-stylesheet';
-import { ConstString } from '../../Strings';
 
 export const RestaurantComponents = props => {
   const {
