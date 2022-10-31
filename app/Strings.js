@@ -7,6 +7,7 @@ export const ConstString = { // name it to routes
   PROFILE: 'Profile',
   BOTTOM: 'Bottom',
   MENU: 'Menu',
+  RATINGS:"Ratings",
   QUOTES: 'What would you like to eat today?',
   MENU_BOOK: 'Setup Your Menu Book',
   WESTERN: 'Western',

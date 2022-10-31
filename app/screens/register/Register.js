@@ -2,8 +2,14 @@ import React, { useState } from 'react';
 import { ConstString } from '../../Strings';
 import { RegisterComponents } from './components';
 import { launchImagePicker } from '../../ImagePicker';
+import {
+  useDispatch,
+  useSelector
+} from 'react-redux';
+import { getUser } from '../../store/selector';
 
 export const Register = ({ navigation }) => {
+  const user=  useSelector(getUser)
   const [selectedTypes, setSelectedTypes] = useState('Western');
   const [restaurantName, setRestaurantName] = useState('');
   const [restaurantDesc, setRestaurantDesc] = useState('');
@@ -27,6 +33,9 @@ export const Register = ({ navigation }) => {
       rate: 4.6,
       id: guid(),
       image: imageUri,
+      userId:user.id,
+      createdAt:new Date().toLocaleString()
+
     };
     (restaurantName === '' || restaurantDesc === '' || restaurantLocation === '' || imageUri === undefined) ? alert('Please Fill in All Information') : navigation.navigate(ConstString.MENU, tempObj);
   };

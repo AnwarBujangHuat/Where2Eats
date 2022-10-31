@@ -7,7 +7,8 @@ import {
   Register,
   Restaurant,
   SetupMenu,
-  WheelOfFortune
+  WheelOfFortune,
+  Ratings
 } from '../screens';
 import BottomNavigationBar from './bottom/BottomNavigationBar';
 import * as React from 'react';
@@ -43,6 +44,8 @@ export const NavStack = () => {
       <Stack.Screen name={ConstString.ROULETTE} component={WheelOfFortune} />
       <Stack.Screen name={ConstString.MENU} component={SetupMenu} />
       <Stack.Screen name={ConstString.PROFILE} component={Profile} />
+      <Stack.Screen name={ConstString.RATINGS} component={Ratings} />
+
     </Stack.Navigator>
   );
 };
