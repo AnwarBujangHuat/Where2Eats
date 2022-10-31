@@ -25,7 +25,7 @@ export const ModalMenuButton = ({ isModalVisible, onPress }) => {
     },
     {
       id: 3,
-      title: 'Settings',
+      title: 'Log Out',
     },
 
   ];

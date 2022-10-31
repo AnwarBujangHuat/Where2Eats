@@ -7,7 +7,10 @@ import {
   TouchableWithoutFeedback,
   View,
 } from 'react-native';
-import { ConstFoodCategory } from '../../screens/home/ConstFoodCategory';
+import {
+  ConstFoodCategory,
+  icons
+} from '../../screens/home/ConstFoodCategory';
 import EStyleSheet from 'react-native-extended-stylesheet';
 
 export const ItemListRestaurant = ({ onPress, name, category, index }) => {
@@ -19,7 +22,7 @@ export const ItemListRestaurant = ({ onPress, name, category, index }) => {
             <View style={styles.titleContainer}>
               <Text style={styles.title}>{index + 1 + '. ' + name}</Text>
             </View>
-            <Image source={ConstFoodCategory.find(icons => icons.title === category).icon}
+            <Image source={category ? icons[category]:icons.def}
                    style={styles.iconCategory} />
           </View>
         </View>
