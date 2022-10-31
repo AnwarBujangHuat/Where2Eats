@@ -5,6 +5,14 @@ import beveragesIcon from '../../assets/beverages.png';
 import dessertIcon from '../../assets/dessert.png';
 import appetizerIcon from '../../assets/appetizer.png';
 
+export const menuIcons = {
+  [ConstString.MAINDISH]: mainDishIcon,
+  [ConstString.SIDEDISH]: sideIcon,
+  [ConstString.DESSERT]: dessertIcon,
+  [ConstString.APPETIZER]: appetizerIcon,
+  [ConstString.BEVERAGES]: beveragesIcon,
+  def: sideIcon
+};
 export const menuCategories = [
   {
     item: ConstString.MAINDISH,

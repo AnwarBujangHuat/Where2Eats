@@ -13,7 +13,10 @@ import locationIcon from '../../assets/location.png';
 import FastImage from 'react-native-fast-image';
 
 
-import { ConstFoodCategory } from '../../screens/home/ConstFoodCategory';
+import {
+  ConstFoodCategory,
+  icons
+} from '../../screens/home/ConstFoodCategory';
 import EStyleSheet from 'react-native-extended-stylesheet';
 
 const { width } = Dimensions.get('window');
@@ -21,11 +24,6 @@ export const ModalWinner = ({ isModalVisible, closeModal, selectedRestaurant, go
   const { restaurant, description, address, category, image } = selectedRestaurant;
   const spinAgain = () => {
     closeModal();
-  };
-  const findIcon = () => {
-    const icon = ConstFoodCategory.find(icons => icons.title === (category !== null ? category : 'Western'));
-    try {return icon.icon;}
-    catch(Exception) {return ConstFoodCategory[0].icon;}
   };
   return (
     <>
@@ -56,7 +54,7 @@ export const ModalWinner = ({ isModalVisible, closeModal, selectedRestaurant, go
                 <View style={{ flexDirection: 'row', paddingVertical: 10, }}>
                   <Text style={styles.header}>{restaurant}</Text>
                   <Image
-                    source={findIcon()}
+                    source={category ? icons[category]:icons.def}
                     style={styles.iconCategory} />
                 </View>
 

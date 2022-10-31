@@ -43,7 +43,6 @@ export const Header = ({ source, onPress, reRender }) => {
       }).start();
       color = ConstString.DARK;
       setCurrentTheme(ConstString.DARK);
-      theme = DarkTheme;
     } else if (isCurrentTheme === ConstString.DARK) {
       Animated.timing(animationProgress.current, {
         toValue: 0.5,
@@ -52,10 +51,9 @@ export const Header = ({ source, onPress, reRender }) => {
         useNativeDriver: true
       }).start();
       color = ConstString.LIGHT;
-      theme = LightTheme;
     }
     setCurrentTheme(color);
-    EStyleSheet.build(theme);
+    // EStyleSheet.build(theme);
     dispatch(changeTheme(color));
     reRender();
     //Disable Button for 2 Seconds after changing Theme
