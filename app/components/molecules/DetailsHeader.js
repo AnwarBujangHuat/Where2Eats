@@ -20,7 +20,8 @@ export const DetailsHeader = ({ image, back, disabled, rate = false, onPress }) 
       <TouchableOpacity onPress={onPress} disabled={disabled}>
         <ImageBackground
           source={image !== undefined ? { uri: image } : addImage}//image ? image : addImage
-          style={{ height: '100%', resizeMode: 'cover'
+          style={{
+            height: '100%', resizeMode: 'cover'
           }}>
           <View style={styles.rowContainer}>
             <View style={{ width: '80%' }}>
@@ -47,7 +48,7 @@ const styles = StyleSheet.create({
     borderRadius: 80,
     padding: 15,
     marginStart: '3%',
-    elevation:5,
+    elevation: 5,
     shadowOffset: { width: -2, height: -4 },
     shadowColor: '$primaryColor',
     shadowOpacity: 0.1,
@@ -64,8 +65,8 @@ const styles = StyleSheet.create({
     },
     shadowColor: Colors.primaryColor,
     shadowOpacity: .2,
-    borderBottomColor:Colors.primaryColor,
-    elevation:10,
+    borderBottomColor: Colors.primaryColor,
+    elevation: 10,
   },
   icons: {
     height: 80,

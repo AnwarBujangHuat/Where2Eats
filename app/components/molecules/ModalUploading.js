@@ -1,14 +1,12 @@
 import React from 'react';
 import {
   Dimensions,
-  Image,
   Modal,
   SafeAreaView,
   Text,
   TouchableOpacity,
   View
 } from 'react-native';
-import logoIcon from '../../assets/Logo.png';
 import EStyleSheet from 'react-native-extended-stylesheet';
 import LottieView from 'lottie-react-native';
 import Uploading from '../../assets/uploading.json';
@@ -19,21 +17,22 @@ import Error from '../../assets/error.json';
 const { width } = Dimensions.get('window');
 let icon;
 let text;
-let showButton=false;
-export const ModalUploading = ({ isModalVisible, closeModal,goBack, action ,isSuccess}) => {
+let showButton = false;
+export const ModalUploading = ({ isModalVisible, closeModal, goBack, action, isSuccess }) => {
   if (action === ConstString.GO_BACK) {
     icon = Sleepy;
     text = 'All Your Progress in This Page Will Be Lost';
-    showButton=true
+    showButton = true;
   } else {
     icon = Uploading;
     text = 'Please Wait While We Upload your Photos';
-    showButton=false
+    showButton = false;
   }
-  if(!isSuccess){
-    icon=Error;
-    text ='Opps There was an Error while Uploading your Photos';
-    showButton=true}
+  if (!isSuccess) {
+    icon = Error;
+    text = 'Opps There was an Error while Uploading your Photos';
+    showButton = true;
+  }
   return (
     <>
       {
@@ -49,19 +48,19 @@ export const ModalUploading = ({ isModalVisible, closeModal,goBack, action ,isSu
                 />
                 <Text style={styles.header}>{text}</Text>
                 {showButton &&
-                <View style={{
-                  flex: 1,
-                  flexDirection: 'row',
-                }}>
-                  { isSuccess &&
-                    <TouchableOpacity style={styles.button} onPress={goBack}>
-                      <Text style={styles.buttonTextGoBack}>Go Back</Text>
+                  <View style={{
+                    flex: 1,
+                    flexDirection: 'row',
+                  }}>
+                    {isSuccess &&
+                      <TouchableOpacity style={styles.button} onPress={goBack}>
+                        <Text style={styles.buttonTextGoBack}>Go Back</Text>
+                      </TouchableOpacity>
+                    }
+                    <TouchableOpacity style={styles.buttonVisit} onPress={closeModal}>
+                      <Text style={styles.buttonTextStay}>Stay</Text>
                     </TouchableOpacity>
-                  }
-                  <TouchableOpacity style={styles.buttonVisit} onPress={closeModal}>
-                    <Text style={styles.buttonTextStay}>Stay</Text>
-                  </TouchableOpacity>
-                </View>
+                  </View>
                 }
               </View>
             </View>
@@ -93,8 +92,8 @@ const styles = EStyleSheet.create({
     marginEnd: 5,
   },
   lottieButton: {
-    width: width*.6,
-    height: width*.6,
+    width: width * .6,
+    height: width * .6,
   },
   screen: {
     flex: 1,
@@ -148,11 +147,11 @@ const styles = EStyleSheet.create({
   },
   header: {
     fontSize: 17,
-    paddingBottom:10,
+    paddingBottom: 10,
     fontWeight: 'bold',
     textAlign: 'center',
     color: '$primaryColor',
-    width: width*.7
+    width: width * .7
   },
   desc: {
     color: '$tertiaryTextColor', paddingEnd: 5, marginTop: 5,

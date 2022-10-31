@@ -1,11 +1,9 @@
 import {
   Image,
-  StyleSheet,
   TextInput,
   View
 } from 'react-native';
 import React from 'react';
-import { Colors } from '../../Colors';
 import EStyleSheet from 'react-native-extended-stylesheet';
 
 export const InputFieldLogins = ({ onChangeText1, defvalue, source, secret }) => {

@@ -9,16 +9,16 @@ import fruitsIcon from '../../assets/fruit.png';
 import { ConstString } from '../../Strings';
 
 export const icons = {
-  [ConstString.WESTERN]:burgerIcon,
-  [ConstString.MALAY]:malayIcon,
-  [ConstString.CHINESE]:chineseIcon,
-  [ConstString.INDIAN]:indianIcon,
-  [ConstString.BORNEO]:borneoIcon,
-  [ConstString.JAPANESE]:japaneseIcon,
-  [ConstString.DRINKS]:drinksIcon,
-  [ConstString.DESSERT]:fruitsIcon,
-  def:burgerIcon
-}
+  [ConstString.WESTERN]: burgerIcon,
+  [ConstString.MALAY]: malayIcon,
+  [ConstString.CHINESE]: chineseIcon,
+  [ConstString.INDIAN]: indianIcon,
+  [ConstString.BORNEO]: borneoIcon,
+  [ConstString.JAPANESE]: japaneseIcon,
+  [ConstString.DRINKS]: drinksIcon,
+  [ConstString.DESSERT]: fruitsIcon,
+  def: burgerIcon
+};
 
 export const ConstFoodCategory = [
   {

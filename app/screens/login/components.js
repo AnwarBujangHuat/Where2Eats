@@ -2,7 +2,6 @@ import * as React from 'react';
 import {
   Image,
   SafeAreaView,
-  StyleSheet,
   Text,
   TouchableOpacity,
   View
@@ -37,7 +36,7 @@ export const LoginComponents = props => {
           <Text style={{ color: 'white', textAlign: 'center' }}>Login</Text>
         </TouchableOpacity>
         <TouchableOpacity style={styles.buttonForPass}>
-          <Text style={{ color:Colors.primaryColor, textAlign: 'center' }}>Forget Password</Text>
+          <Text style={{ color: Colors.primaryColor, textAlign: 'center' }}>Forget Password</Text>
         </TouchableOpacity>
         <IconButton title="Don't Have an Account? " buttontitle="Sign Up" onPress={goToSignIn}></IconButton>
       </View>
