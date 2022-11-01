@@ -18,6 +18,7 @@ import { FloatingActionButton } from '../../components/atoms/FloatingActionButto
 import rouletteIcon from '../../assets/bet.png';
 import addIcon from '../../assets/plus.png';
 import { Colors } from '../../Colors';
+import { defaultValue } from '../../store/defaultValue';
 
 export const RestaurantComponents = props => {
   const {
@@ -34,12 +35,13 @@ export const RestaurantComponents = props => {
     openPreviewModal,
     goToRating
   } = props;
+  const getCurrent=  current!==undefined?current:defaultValue[0];
   return (
     <SafeAreaView style={styles.container}>
-      <DetailsHeader image={current.image} back={onBack} disabled={true} rate={true} />
-      <DescriptionLabel name={current.restaurant} location={current.address} icon={restaurantIcon} onPress={openPreviewModal}/>
+      <DetailsHeader image={getCurrent.image} back={onBack} disabled={true} rate={true} />
+      <DescriptionLabel name={getCurrent.restaurant} location={getCurrent.address} icon={restaurantIcon} onPress={openPreviewModal}/>
       <SectionList
-        sections={current.food}
+        sections={getCurrent.food}
         keyExtractor={(item, index) => item + index}
         renderItem={(item) => { return null; }}
         stickySectionHeadersEnabled={false}

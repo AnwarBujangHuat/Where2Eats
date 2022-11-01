@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import {
   Dimensions,
+  Modal,
   SafeAreaView,
   Text,
   TextInput,
@@ -9,29 +10,14 @@ import {
 } from 'react-native';
 import EStyleSheet from 'react-native-extended-stylesheet';
 import { AirbnbRating } from 'react-native-ratings';
-import Cat from '../../assets/purplecat.json';
-import LottieView from 'lottie-react-native';
-import Modal from 'react-native-modal';
 
 const { width } = Dimensions.get('window');
 
 export const ModalGiveRating = ({ closeModal, isModalVisible, submit, userReview }) => {
-  const { review, rating, updatedAt, createdAt } = userReview || {};
-  const [textReview, setReview] = useState(review);
-  const [newRate, setRate] = useState(rating);
-  const [isUploading, setIsUploading] = useState(false);
-  let status;
-  const sendSubmission = () => {
-    setIsUploading(true);
-    submit(textReview, newRate);
-  };
-  if (updatedAt === undefined && createdAt === undefined) {
-    status = 'First Time';
-  } else if (updatedAt !== '') {
-    status = 'Updated At: ' + updatedAt;
-  } else {
-    status = 'Created At: ' + createdAt;
-  }
+  const { review, rating, timestamp } = userReview|| {};
+  const [textReview,setReview]=useState(review)
+  const [newRate,setRate]=useState(rating)
+
   return (
     <>
       {
@@ -39,37 +25,29 @@ export const ModalGiveRating = ({ closeModal, isModalVisible, submit, userReview
         <SafeAreaView style={styles.screen}>
           <Modal animationType="none"
                  transparent visible={isModalVisible}
-                 presentationStyle="overFullScreen"
-                 style={styles.viewWrapper}>
-            {isUploading ?
-              <View style={styles.modalView}>
-                <LottieView style={styles.lottieButton} source={Cat} autoPlay={true}
-                />
-                <Text style={styles.header}>{'Wait while we write your Review'}</Text>
-              </View>
-              :
+                 presentationStyle="overFullScreen">
+            <View style={styles.viewWrapper}>
               <View style={styles.modalView}>
                 <Text style={styles.header}>{'What\'s Your Review?'}</Text>
                 <AirbnbRating
                   count={5}
                   isDisabled={false}
                   showRating={true}
-                  onFinishRating={(rate) => setRate(rate)}
+                  onFinishRating={(rate)=>setRate(rate)}
                   reviews={['Terrible', 'Hmm...', 'OK', 'Quite Good', 'Excellent']}
-                  defaultRating={rating !== undefined ? rating : 1}
+                  defaultRating={rating!==undefined?rating:1}
                   ratingContainerStyle={{ marginVertical: 20, }}
                   size={30} />
                 <TextInput
                   style={styles.descriptionInput}
                   placeholder={'Enter Review'}
-                  value={textReview}
                   multiline={true}
                   onChangeText={setReview}
                   placeholderTextColor={EStyleSheet.value('$secondaryTextColor')}
                   overflow="hidden"
                   keyboardAppearance="dark"
                   autoCorrect={false} />
-                <Text style={styles.desc}>{status}</Text>
+                <Text style={styles.desc}>{timestamp!==undefined?"posted At: " + timestamp:"First Review"}</Text>
 
                 <View style={{
                   flexDirection: 'row',
@@ -84,13 +62,12 @@ export const ModalGiveRating = ({ closeModal, isModalVisible, submit, userReview
                   </TouchableOpacity>
                   <TouchableOpacity
                     style={styles.buttonVisit}
-                    onPress={sendSubmission}>
+                    onPress={()=>submit(textReview,newRate)}>
                     <Text style={styles.buttonTextMenu}>Submit</Text>
                   </TouchableOpacity>
                 </View>
               </View>
-            }
-
+            </View>
           </Modal>
         </SafeAreaView>
       }
@@ -161,15 +138,20 @@ const styles = EStyleSheet.create({
   },
   modalView: {
     paddingHorizontal: 10,
+    justifyContent: 'center',
     position: 'absolute',
-    alignSelf: 'center',
+    top: '30%',
+    left: '50%',
+    elevation: 5,
+    transform: [{ translateX: -(width * 0.45) },
+      { translateY: -90 }],
     width: width * 0.9,
     backgroundColor: '$secondaryBackGroundColor',
     borderRadius: 7,
   },
   header: {
     fontSize: 18,
-    paddingVertical: 20,
+    paddingTop: 20,
     fontWeight: 'bold',
     color: '$primaryTextColor',
     shadowOffset: { width: -2, height: 1 },
@@ -193,11 +175,6 @@ const styles = EStyleSheet.create({
     textAlignVertical: 'center',
     backgroundColor: '$secondaryBackGroundColor',
     paddingTop: 20,
-    paddingBottom: 10,
-  },
-  lottieButton: {
-    width: width * .6,
-    height: width * .6,
-    alignSelf: 'center',
+    paddingBottom:10,
   },
 });

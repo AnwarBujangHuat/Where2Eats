@@ -50,3 +50,16 @@ export const verifyUser = createAsyncThunk('VerifyUser', async(request, {
   const result = request;
   return result;
 });
+export const updateRating=createAsyncThunk("AddNewRating",async(request, {
+  dispatch,
+  rejectWithValue
+}) => {
+  const { userReview, ratingAverage} = request;
+  await firebase.firestore().collection('Restaurants').doc("12a3bd05").set({rating:request}).then((r)=>console.log(r))
+// Atomically remove a region from the "regions" array field.
+
+  // console.log(userReview+" "+ratingAverage)
+  // await firebase.firestore().collection('Restaurants').doc(id).set(request).then(() => console.log('Done'));
+  return request;
+});
+
