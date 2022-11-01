@@ -1,21 +1,32 @@
 import {
   Dimensions,
+  FlatList,
   Image,
   SafeAreaView,
+  ScrollView,
   Text,
   TouchableOpacity,
   View
 } from 'react-native';
 import { Rating } from 'react-native-ratings';
 
-import React from 'react';
+import React, { useState } from 'react';
 import { BackButton } from '../../components/atoms/BackButton';
 import EStyleSheet from 'react-native-extended-stylesheet';
 import { RatingCard } from '../../components/molecules/RatingCard';
 import addIcon from '../../assets/plus.png';
+import { ConstFoodCategory } from '../home/ConstFoodCategory';
+import { ImageButton } from '../../components/atoms/ImageButton';
+import { RatingButton } from '../../components/atoms/RatingButton';
 
 export const RatingComponents = props => {
   const firstTime = true;
+  const rating=["All","1","2","3","4","5"]
+  const [isSelectedRating,setSelectedRating]=useState()
+  const onSelectedRating=(item)=>{
+    setSelectedRating(item)
+  }
+  // const firstTime = true;
   const {
     onBackButton,
     restaurantInfo
@@ -30,13 +41,19 @@ export const RatingComponents = props => {
         <Text style={styles.reviewText}>No Review</Text>
     );
   };
+  const RenderItem=({item})=>{
+    return (
+      <RatingButton rating={item} onPress={onSelectedRating} selected={isSelectedRating}/>
+    );
+  }
   return (
     <SafeAreaView style={styles.container}>
+      <ScrollView>
       <View style={styles.rowContainer}>
         <BackButton onPress={onBackButton}></BackButton>
         <Text style={styles.header}>{restaurantInfo.restaurant + ' Customer Review'}</Text>
       </View>
-      <View style={{ marginTop: 20, marginHorizontal: 5, }}>
+      <View style={{ marginTop: 20, marginHorizontal: 15, }}>
         <Text style={styles.reviewHeader}>Overall Rating</Text>
         <Rating
           type="star"
@@ -51,7 +68,7 @@ export const RatingComponents = props => {
           ratingTextColor={EStyleSheet.value('$secondaryTextColor')}
           style={styles.ratingContainer}
         />
-        <View style={{flexDirection:'row'}}>
+        <View style={{flexDirection:'row', marginBottom:10,}}>
           <Text style={styles.header}>Your Review</Text>
           <TouchableOpacity style={styles.buttonContainer} onPress={() => {
             console.log("hEl");
@@ -66,8 +83,14 @@ export const RatingComponents = props => {
             }}>Add Review</Text>
           </TouchableOpacity>
         </View>
-
         <SelfReview />
+        <FlatList
+          data={rating}
+          renderItem={RenderItem}
+          horizontal={true}
+          style={{marginVertical:15,}}
+          showsHorizontalScrollIndicator={false}
+        />
         {/*<AirbnbRating*/}
         {/*  count={5}*/}
         {/*  isDisabled={true}*/}
@@ -77,7 +100,7 @@ export const RatingComponents = props => {
         {/*  size={20}*/}
         {/*/>*/}
       </View>
-
+      </ScrollView>
     </SafeAreaView>);
 };
 const styles = EStyleSheet.create({
@@ -103,13 +126,12 @@ const styles = EStyleSheet.create({
   header: {
     fontSize: 17,
     fontWeight: 'bold',
-    margin: 10,
+    alignSelf:'center',
     color: '$primaryTextColor',
   },
   reviewHeader: {
     fontSize: 18,
     fontWeight: 'bold',
-    margin: 10,
     color: '$primaryTextColor',
   },
   button: {
@@ -142,7 +164,6 @@ const styles = EStyleSheet.create({
   reviewText: {
     fontSize: 14,
     color: 'white',
-    marginStart: 10,
     fontWeight: 'bold',
   },
   buttonContainer: {
@@ -154,7 +175,7 @@ const styles = EStyleSheet.create({
     shadowColor: '$primaryColor',
     shadowOpacity: 0.2,
     shadowRadius: 3,
-    right: 5, position: 'absolute',
+    right: 0, position: 'absolute',
     elevation: 10,
   },
 });

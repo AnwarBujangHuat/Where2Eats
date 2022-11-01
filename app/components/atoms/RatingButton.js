@@ -10,8 +10,7 @@ import EStyleSheet from 'react-native-extended-stylesheet';
 import star from '../../assets/star2.png';
 
 export const RatingButton = ({ onPress, rating, selected }) => {
-  let backGroundColor = rating === selected ? '#894eff' : EStyleSheet.value('$secondaryBackGroundColor');
-  let color = rating === selected ? Colors.whitTextColor : Colors.primaryColor;
+  let backGroundColor = rating===selected ? '#894eff' : EStyleSheet.value('$secondaryBackGroundColor');
   return (
     <View>
       <TouchableOpacity style={{
@@ -26,13 +25,13 @@ export const RatingButton = ({ onPress, rating, selected }) => {
         shadowRadius: 3,
         elevation: 5,
         alignItems: 'center',
-      }} onPress={() => onPress(rating)}>
+      }} onPress={()=>onPress(rating)}>
         <Image source={star} style={styles.icon}></Image>
         <Text style={{
           padding: 5,
-          color: color,
+          color:'white',
           fontWeight: 'bold'
-        }}>{rating + ' Rating'}</Text>
+        }}>{rating+" Rating"}</Text>
       </TouchableOpacity>
     </View>
 
