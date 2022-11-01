@@ -51,11 +51,11 @@ const styles = EStyleSheet.create(
   {
     container: {
       justifyContent: 'center',
-      margin: 10,
       shadowOffset: { width: -2, height: 4 },
       shadowColor: '$primaryColor',
       shadowOpacity: 0.2,
       shadowRadius: 3,
+      marginTop:10,
       elevation: 10,
     },
     card: {
