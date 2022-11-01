@@ -5,6 +5,7 @@ import {
 } from 'react-native';
 import React from 'react';
 import rouletteIcon from '../../assets/bet.png';
+
 import EStyleSheet from 'react-native-extended-stylesheet';
 
 export const FloatingActionButton = ({ onPress }) => {
