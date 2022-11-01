@@ -20,23 +20,59 @@ import { ImageButton } from '../../components/atoms/ImageButton';
 import { RatingButton } from '../../components/atoms/RatingButton';
 
 export const RatingComponents = props => {
-  const firstTime = true;
   const rating=["All","1","2","3","4","5"]
-  const [isSelectedRating,setSelectedRating]=useState()
+  const dummyRating=[{
+    userId:1,
+    userName:"Mohamad Abu Lutut",
+    review:'This cozy restaurant has left the best impressions! Hospitable hosts, delicious dishes, beautiful presentation, wide wine list and wonderful dessert. I recommend to everyone! I would like to come back here again and again.',
+    rating:"5",
+    timestamp:'10/31/2022, 1:17:51 PM',
+    createdAt:'10/31/2022, 1:17:51 PM',
+    updatedAt:undefined
+  },{
+    userId:2,
+    userName:"Mohamad Abu Lutut Kanan",
+    review:"Sedap Wooo",
+    rating:"5",
+    timestamp:'10/31/2022, 1:17:51 PM',
+    createdAt:'10/31/2022, 1:17:51 PM',
+    updatedAt:undefined
+  },
+    {
+    userId:3,
+    userName:"Mohamad Abu Lutut Kiri",
+    review:'This cozy restaurant has left the best impressions! Hospitable hosts, delicious dishes, beautiful presentation, wide wine list and wonderful dessert. I recommend to everyone! I would like to come back here again and again.',
+    rating:"5",
+    timestamp:'10/31/2022, 1:17:51 PM',
+    createdAt:'10/31/2022, 1:17:51 PM',
+    updatedAt:undefined
+  },{
+    userId:4,
+    userName:"Mohamad Abu Lutut Depan Senget",
+    review:"Sedap Wooo",
+    rating:"5",
+    timestamp:'10/31/2022, 1:17:51 PM',
+    createdAt:'10/31/2022, 1:17:51 PM',
+    updatedAt:undefined
+  }]
+  const [isSelectedRating,setSelectedRating]=useState(rating[0])
   const onSelectedRating=(item)=>{
     setSelectedRating(item)
   }
-  // const firstTime = true;
+  const [isModalRateOpen,setModalRate]=useState(false)
   const {
     onBackButton,
     restaurantInfo
   } = props;
+  const userReviews=dummyRating.find(item=>item.userId===1);
+  const [userReview,setUserReview]=useState(userReviews)
+
   const SelfReview = () => {
     return (
-      firstTime ?
-        <RatingCard title={'Mohamad Kasim Bin Abu'}
-                    description={'This cozy restaurant has left the best impressions! Hospitable hosts, delicious dishes, beautiful presentation, wide wine list and wonderful dessert. I recommend to everyone! I would like to come back here again and again.'}
-                    rating={4.6} timestamp={'10/31/2022, 1:17:51 PM'} />
+      userReview!==undefined ?
+        <RatingCard userName={userReviews.userName}
+                    review={userReviews.review}
+                    rating={userReviews.rating} timestamp={userReviews.timestamp} />
         :
         <Text style={styles.reviewText}>No Review</Text>
     );
@@ -46,9 +82,15 @@ export const RatingComponents = props => {
       <RatingButton rating={item} onPress={onSelectedRating} selected={isSelectedRating}/>
     );
   }
+  const renderRateCard=({item})=>{
+    return(
+      <RatingCard userName={item.userName}
+                       review={item.review}
+                       rating={item.rating} timestamp={item.timestamp} />
+    )
+  }
   return (
     <SafeAreaView style={styles.container}>
-      <ScrollView>
       <View style={styles.rowContainer}>
         <BackButton onPress={onBackButton}></BackButton>
         <Text style={styles.header}>{restaurantInfo.restaurant + ' Customer Review'}</Text>
@@ -80,7 +122,7 @@ export const RatingComponents = props => {
               fontWeight: 'bold',
               alignSelf:'center',
               fontSize: 12,
-            }}>Add Review</Text>
+            }}>{userReviews!==undefined?"Update Review":"Add Review"}</Text>
           </TouchableOpacity>
         </View>
         <SelfReview />
@@ -88,9 +130,16 @@ export const RatingComponents = props => {
           data={rating}
           renderItem={RenderItem}
           horizontal={true}
-          style={{marginVertical:15,}}
+          style={{marginVertical:5,}}
+          showsHorizontalScrollIndicator={true}
+        />
+
+        <FlatList
+          data={dummyRating}
+          renderItem={renderRateCard}
           showsHorizontalScrollIndicator={false}
         />
+
         {/*<AirbnbRating*/}
         {/*  count={5}*/}
         {/*  isDisabled={true}*/}
@@ -100,7 +149,6 @@ export const RatingComponents = props => {
         {/*  size={20}*/}
         {/*/>*/}
       </View>
-      </ScrollView>
     </SafeAreaView>);
 };
 const styles = EStyleSheet.create({
