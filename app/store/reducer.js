@@ -58,8 +58,8 @@ export const Reducer = createSlice({
       loading: 'idle',
     }),
     USER: {
-      ID: 1,
-      NAME: 'Kasim',
+      ID: '5yGZTuwy98cXhrEsf4qS9AxzWel2\n',
+      NAME: 'Kasim Kaki Bangku',
       AGE: 21,
       EMAIL: 'Mohamad@gmail.com',
       PHONE: '0123456789',

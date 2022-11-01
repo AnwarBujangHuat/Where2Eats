@@ -14,8 +14,9 @@ import locationIcon from '../../assets/location.png';
 import { icons } from '../../screens/home/ConstFoodCategory';
 import { BackButton } from '../atoms/BackButton';
 
-export const RatingCard=({userName,review,rating,timestamp})=>{
+export const RatingCard=({userReview})=>{
   const image=undefined;
+  const{userName,review,rating,createdAt,updatedAt}=userReview||{};
   return(
     <View style={styles.container}>
         <View style={styles.card}>
@@ -35,7 +36,7 @@ export const RatingCard=({userName,review,rating,timestamp})=>{
             </FastImage>
             <View style={{flexDirection:'column',width: '65%' }}>
               <Text style={styles.title}>{userName}</Text>
-              <Text style={styles.timestampText}>{timestamp}</Text>
+              <Text style={styles.timestampText}>{updatedAt!==undefined?"Updated At: "+ updatedAt :"Created At: "+createdAt}</Text>
             </View>
             <RateLabel rating={rating} />
           </View>

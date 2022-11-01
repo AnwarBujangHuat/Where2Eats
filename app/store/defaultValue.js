@@ -2,7 +2,7 @@ import { ConstString } from '../Strings';
 
 export const defaultValue = [
   {
-    id: 1,
+    id: '5yGZTuwy98cXhrEsf4qS9AxzWel2',
     restaurant: 'Restaurant Westerner',
     category: ConstString.WESTERN,
     address: 'No.19 Jalan Kasim Gorilla',
