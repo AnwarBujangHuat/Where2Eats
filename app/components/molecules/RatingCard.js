@@ -14,7 +14,7 @@ import locationIcon from '../../assets/location.png';
 import { icons } from '../../screens/home/ConstFoodCategory';
 import { BackButton } from '../atoms/BackButton';
 
-export const RatingCard=({title,description,rating,timestamp})=>{
+export const RatingCard=({userName,review,rating,timestamp})=>{
   const image=undefined;
   return(
     <View style={styles.container}>
@@ -34,14 +34,14 @@ export const RatingCard=({title,description,rating,timestamp})=>{
                 resizeMode: 'contain', }}>
             </FastImage>
             <View style={{flexDirection:'column',width: '65%' }}>
-              <Text style={styles.title}>{title}</Text>
+              <Text style={styles.title}>{userName}</Text>
               <Text style={styles.timestampText}>{timestamp}</Text>
             </View>
             <RateLabel rating={rating} />
           </View>
 
           <View style={styles.descriptionContainer}>
-              <Text style={styles.desc}>{description}</Text>
+              <Text style={styles.desc}>{review}</Text>
             </View>
           </View>
     </View>
@@ -55,14 +55,14 @@ const styles = EStyleSheet.create(
       shadowColor: '$primaryColor',
       shadowOpacity: 0.2,
       shadowRadius: 3,
-      marginTop:10,
+      marginVertical:10,
       elevation: 10,
     },
     card: {
       backgroundColor: '$secondaryBackGroundColor',
       borderRadius: 10,
       width: Dimensions.get('screen').width - 30,
-      paddingVertical:10,
+      maxHeight:170,
     },
     descriptionContainer: {
       padding: 10,

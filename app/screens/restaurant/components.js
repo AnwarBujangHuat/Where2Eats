@@ -73,13 +73,7 @@ export const RestaurantComponents = props => {
           style={styles.fabContainer}
           onPress={goToRating}>
           <Image style={styles.addIcon} source={addIcon} />
-          <Text style={{
-            padding: 5,
-            color: 'white',
-            fontWeight: 'bold',
-            alignSelf:'center',
-            fontSize: 14,
-          }}>Reviews</Text>
+          <Text style={styles.fabText}>Reviews</Text>
         </TouchableOpacity>
       </View>
 
@@ -97,6 +91,13 @@ const styles = EStyleSheet.create({
     fontWeight: 'bold',
     margin: 10,
     color: '$primaryTextColor',
+  },
+  fabText:{
+    padding: 5,
+    color: '$secondaryTextColor',
+    fontWeight: 'bold',
+    alignSelf:'center',
+    fontSize: 14,
   },
   icon: {
     width: 20,
@@ -124,6 +125,7 @@ const styles = EStyleSheet.create({
     width: 10,
     height: 10,
     marginStart: 5,
+    tintColor:'$secondaryTextColor',
     alignSelf: 'center',
   },
 });
