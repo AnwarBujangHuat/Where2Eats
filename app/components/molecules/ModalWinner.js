@@ -79,8 +79,6 @@ export const ModalWinner = ({ isModalVisible, closeModal, selectedRestaurant, go
                       <Text style={styles.buttonTextMenu}>Visit Restaurant</Text>
                     </TouchableOpacity>}
                   </View>
-
-
               </View>
               <TouchableOpacity style={styles.logoContainer}>
                 <Image style={styles.logoIcon} source={logoIcon} />

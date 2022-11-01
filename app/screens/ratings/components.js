@@ -3,38 +3,45 @@ import {
   FlatList,
   Image,
   SafeAreaView,
-  ScrollView,
   Text,
   TouchableOpacity,
   View
 } from 'react-native';
 import { Rating } from 'react-native-ratings';
 
-import React, { useState } from 'react';
+import React, {
+  useEffect,
+  useState
+} from 'react';
 import { BackButton } from '../../components/atoms/BackButton';
 import EStyleSheet from 'react-native-extended-stylesheet';
 import { RatingCard } from '../../components/molecules/RatingCard';
 import addIcon from '../../assets/plus.png';
-import { ConstFoodCategory } from '../home/ConstFoodCategory';
-import { ImageButton } from '../../components/atoms/ImageButton';
 import { RatingButton } from '../../components/atoms/RatingButton';
+import { ModalGiveRating, } from '../../components/molecules/ModalGiveRating';
+import {
+  useDispatch,
+  useSelector
+} from 'react-redux';
+import { getUser } from '../../store/selector';
+import { updateRating } from '../../store/thunks';
+const rating=["All","1","2","3","4","5"]
 
 export const RatingComponents = props => {
-  const rating=["All","1","2","3","4","5"]
+  const userInfo=useSelector(getUser);
+  const dispatch=useDispatch();
   const dummyRating=[{
     userId:1,
     userName:"Mohamad Abu Lutut",
     review:'This cozy restaurant has left the best impressions! Hospitable hosts, delicious dishes, beautiful presentation, wide wine list and wonderful dessert. I recommend to everyone! I would like to come back here again and again.',
-    rating:"5",
-    timestamp:'10/31/2022, 1:17:51 PM',
+    rating:4,
     createdAt:'10/31/2022, 1:17:51 PM',
-    updatedAt:undefined
+    updatedAt:'10/31/2022, 1:17:51 PM'
   },{
     userId:2,
     userName:"Mohamad Abu Lutut Kanan",
     review:"Sedap Wooo",
-    rating:"5",
-    timestamp:'10/31/2022, 1:17:51 PM',
+    rating:4,
     createdAt:'10/31/2022, 1:17:51 PM',
     updatedAt:undefined
   },
@@ -42,37 +49,44 @@ export const RatingComponents = props => {
     userId:3,
     userName:"Mohamad Abu Lutut Kiri",
     review:'This cozy restaurant has left the best impressions! Hospitable hosts, delicious dishes, beautiful presentation, wide wine list and wonderful dessert. I recommend to everyone! I would like to come back here again and again.',
-    rating:"5",
-    timestamp:'10/31/2022, 1:17:51 PM',
+    rating:4,
     createdAt:'10/31/2022, 1:17:51 PM',
     updatedAt:undefined
   },{
     userId:4,
     userName:"Mohamad Abu Lutut Depan Senget",
     review:"Sedap Wooo",
-    rating:"5",
-    timestamp:'10/31/2022, 1:17:51 PM',
+    rating:5,
     createdAt:'10/31/2022, 1:17:51 PM',
     updatedAt:undefined
   }]
   const [isSelectedRating,setSelectedRating]=useState(rating[0])
-  const onSelectedRating=(item)=>{
-    setSelectedRating(item)
-  }
-  const [isModalRateOpen,setModalRate]=useState(false)
+  const onSelectedRating=(item)=>{setSelectedRating(item)}
   const {
     onBackButton,
     restaurantInfo
   } = props;
-  const userReviews=dummyRating.find(item=>item.userId===1);
-  const [userReview,setUserReview]=useState(userReviews)
+  const userReviews=dummyRating.find(item=>item.userId===0);
+  const [isModalRateOpen,setModalRate]=useState(false)
+  const [userReview,setUserReview]=useState(userReviews);
+  const index = dummyRating.indexOf(userReviews);
+  const [isFirstTimeRate,setFirstTime]=useState(true)
+  const [ratingAverage,setRatingAverage]=useState(3.5)
+  if (index > -1) {
+    dummyRating.splice(index, 1);
+  }
+  useEffect(()=>{
+    if(userReview!==undefined)
+      return setFirstTime(false)
+  },[])
 
+  const openModal=()=>{
+    setModalRate(true)
+  }
   const SelfReview = () => {
     return (
-      userReview!==undefined ?
-        <RatingCard userName={userReviews.userName}
-                    review={userReviews.review}
-                    rating={userReviews.rating} timestamp={userReviews.timestamp} />
+      !isFirstTimeRate?
+        <RatingCard userReview={userReview} />
         :
         <Text style={styles.reviewText}>No Review</Text>
     );
@@ -84,11 +98,35 @@ export const RatingComponents = props => {
   }
   const renderRateCard=({item})=>{
     return(
-      <RatingCard userName={item.userName}
-                       review={item.review}
-                       rating={item.rating} timestamp={item.timestamp} />
+      <RatingCard userReview={item} />
     )
   }
+  const submit=(text,newRate)=>{
+    const currentDate=new Date().toLocaleString();
+    const userReviewResult={
+      userId:userInfo.ID,
+      userName:userInfo.NAME,
+      review:text,
+      rating:newRate,
+      createdAt:isFirstTimeRate?currentDate:userReview.createdAt,
+      updatedAt:isFirstTimeRate?undefined:currentDate
+    }
+    setUserReview(userReviewResult)
+    setFirstTime(false);
+    dispatch(updateRating(userReviewResult))
+
+    calculateNewRate(newRate);
+    closeModal()
+  }
+  //Finish Upload to Firebase
+  const calculateNewRate=(newRate)=>{
+    const recalculateAverage=(dummyRating.reduce((r, c) => r + c.rating, 0) + newRate) / (dummyRating.length + 1);
+    // setRatingAverage(recalculateAverage);
+    dispatch(updateRating({userReview,recalculateAverage}))
+
+  }
+  const closeModal=()=>setModalRate(false)
+
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.rowContainer}>
@@ -100,7 +138,7 @@ export const RatingComponents = props => {
         <Rating
           type="star"
           fractions={1}
-          startingValue={3.7}
+          startingValue={ratingAverage}
           readonly={true}
           showReadOnlyText={false}
           showRating
@@ -112,9 +150,7 @@ export const RatingComponents = props => {
         />
         <View style={{flexDirection:'row', marginBottom:10,}}>
           <Text style={styles.header}>Your Review</Text>
-          <TouchableOpacity style={styles.buttonContainer} onPress={() => {
-            console.log("hEl");
-          }}>
+          <TouchableOpacity style={styles.buttonContainer} onPress={openModal}>
             <Image style={styles.addIcon} source={addIcon} />
             <Text style={{
               padding: 5,
@@ -122,7 +158,7 @@ export const RatingComponents = props => {
               fontWeight: 'bold',
               alignSelf:'center',
               fontSize: 12,
-            }}>{userReviews!==undefined?"Update Review":"Add Review"}</Text>
+            }}>{!isFirstTimeRate?"Update Review":"Add Review"}</Text>
           </TouchableOpacity>
         </View>
         <SelfReview />
@@ -139,15 +175,8 @@ export const RatingComponents = props => {
           renderItem={renderRateCard}
           showsHorizontalScrollIndicator={false}
         />
-
-        {/*<AirbnbRating*/}
-        {/*  count={5}*/}
-        {/*  isDisabled={true}*/}
-        {/*  showRating={true}*/}
-        {/*  reviews={["Terrible", "Bad", "Meh", "OK", "Good", "Hmm...", "Very Good", "Wow", "Amazing", "Unbelievable", "Jesus"]}*/}
-        {/*  defaultRating={3}*/}
-        {/*  size={20}*/}
-        {/*/>*/}
+        {isModalRateOpen&&
+        <ModalGiveRating closeModal={closeModal} isModalVisible={isModalRateOpen} submit={(text,newRate)=>submit(text,newRate)} userReview={userReview}/>}
       </View>
     </SafeAreaView>);
 };
