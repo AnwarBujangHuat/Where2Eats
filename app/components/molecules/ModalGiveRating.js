@@ -14,10 +14,20 @@ import { AirbnbRating } from 'react-native-ratings';
 const { width } = Dimensions.get('window');
 
 export const ModalGiveRating = ({ closeModal, isModalVisible, submit, userReview }) => {
-  const { review, rating, timestamp } = userReview|| {};
+  const { review, rating, updatedAt,createdAt } = userReview|| {};
   const [textReview,setReview]=useState(review)
   const [newRate,setRate]=useState(rating)
-
+  let status;
+  if(updatedAt===undefined&&createdAt===undefined)
+  {
+  status="First Time";
+  }
+  else if(updatedAt!==undefined){
+    status="Updated At: "+ updatedAt;
+  }
+  else{
+    status="Created At: "+ createdAt;
+  }
   return (
     <>
       {
@@ -41,13 +51,14 @@ export const ModalGiveRating = ({ closeModal, isModalVisible, submit, userReview
                 <TextInput
                   style={styles.descriptionInput}
                   placeholder={'Enter Review'}
+                  value={textReview}
                   multiline={true}
                   onChangeText={setReview}
                   placeholderTextColor={EStyleSheet.value('$secondaryTextColor')}
                   overflow="hidden"
                   keyboardAppearance="dark"
                   autoCorrect={false} />
-                <Text style={styles.desc}>{timestamp!==undefined?"posted At: " + timestamp:"First Review"}</Text>
+                <Text style={styles.desc}>{status}</Text>
 
                 <View style={{
                   flexDirection: 'row',

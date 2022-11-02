@@ -11,6 +11,7 @@ import star from '../../assets/star2.png';
 
 export const RatingButton = ({ onPress, rating, selected }) => {
   let backGroundColor = rating===selected ? '#894eff' : EStyleSheet.value('$secondaryBackGroundColor');
+  let color =rating===selected? Colors.whitTextColor : Colors.primaryColor;
   return (
     <View>
       <TouchableOpacity style={{
@@ -29,7 +30,7 @@ export const RatingButton = ({ onPress, rating, selected }) => {
         <Image source={star} style={styles.icon}></Image>
         <Text style={{
           padding: 5,
-          color:'white',
+          color:color,
           fontWeight: 'bold'
         }}>{rating+" Rating"}</Text>
       </TouchableOpacity>
