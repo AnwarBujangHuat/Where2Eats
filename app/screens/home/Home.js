@@ -1,4 +1,7 @@
-import React, { useState } from 'react';
+import React, {
+  useEffect,
+  useState
+} from 'react';
 import { HomeComponents } from './components';
 import { ConstString } from '../../Strings';
 import { getRestaurant, } from '../../store/selector';
@@ -47,12 +50,18 @@ export const Home = ({ navigation }) => {
     setCurrentRestaurant(updateRestaurant);
   };
   const gotoRoulette = () => {
+    resetHome();
     navigation.navigate(ConstString.ROULETTE, currentRestaurant);
   };
+  const resetHome=()=>{
+    setSelectedTypes([]);
+    setCurrentRestaurant(restaurant)
+  }
   const openMenu = () => {
     setOpenMenu(!isOpenMenu);
   };
   const closeModal = (id) => {
+    resetHome();
     switch(id) {
       case 1:
         navigation.navigate(ConstString.REGISTER);
@@ -67,6 +76,7 @@ export const Home = ({ navigation }) => {
     setOpenMenu(false);
   };
   const goToRestaurant = (id) => {
+    resetHome();
     navigation.navigate(ConstString.RESTAURANT, { id });
   };
   const reRender = () => {

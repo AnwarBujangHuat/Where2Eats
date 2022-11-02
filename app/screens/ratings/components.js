@@ -24,110 +24,96 @@ import {
   useSelector
 } from 'react-redux';
 import { getUser } from '../../store/selector';
-import { updateRating } from '../../store/thunks';
+import { PopulateRestaurantList } from '../../store/thunks';
 import { firebase } from '../../../src/firebase/config';
-import { arrayUnion,updateDoc,FieldValue,arrayRemove } from 'firebase/firestore';
-import { Colors } from '../../Colors';
-const rating=["All","1","2","3","4","5"]
+import {
+  arrayRemove,
+  arrayUnion
+} from 'firebase/firestore';
+import { restaurantLoading } from '../../store/reducer';
+
+const rating = ['All', '1', '2', '3', '4', '5'];
 
 export const RatingComponents = props => {
-  const userInfo=useSelector(getUser);
+  const userInfo = useSelector(getUser);
   const {
     onBackButton,
     restaurantInfo
   } = props;
-  // const dispatch=useDispatch();
-  // const dummyRating=[{
-  //   userId:1,
-  //   userName:"Mohamad Abu Lutut",
-  //   review:'This cozy restaurant has left the best impressions! Hospitable hosts, delicious dishes, beautiful presentation, wide wine list and wonderful dessert. I recommend to everyone! I would like to come back here again and again.',
-  //   rating:parseInt(4),
-  //   createdAt:'10/31/2022, 1:17:51 PM',
-  //   updatedAt:'10/31/2022, 1:17:51 PM'
-  // },{
-  //   userId:2,
-  //   userName:"Mohamad Abu Lutut Kanan",
-  //   review:"Sedap Wooo",
-  //   rating:parseInt(4),
-  //   createdAt:'10/31/2022, 1:17:51 PM',
-  // },
-  //   {
-  //   userId:3,
-  //   userName:"Mohamad Abu Lutut Kiri",
-  //   review:'This cozy restaurant has left the best impressions! Hospitable hosts, delicious dishes, beautiful presentation, wide wine list and wonderful dessert. I recommend to everyone! I would like to come back here again and again.',
-  //     rating:parseInt(4),
-  //   createdAt:'10/31/2022, 1:17:51 PM',
-  // },{
-  //   userId:4,
-  //   userName:"Mohamad Abu Lutut Depan Senget",
-  //   review:"Sedap Wooo",
-  //     rating:parseInt(5),
-  //   createdAt:'10/31/2022, 1:17:51 PM',
-  // }]
-  const restaurantsRating=restaurantInfo.rating;
-  const [isSelectedRating,setSelectedRating]=useState(rating[0])
-  const onSelectedRating=(item)=>{setSelectedRating(item)}
-  const userReviews=restaurantsRating.find(item=>item.userId===userInfo.ID);
+  const dispatch = useDispatch();
+  const restaurantsRating = [...restaurantInfo.rating??[]];
+  const [restaurantList, setRestaurantList] = useState(restaurantsRating);
+  const [isSelectedRating, setSelectedRating] = useState(rating[0]);
+  const onSelectedRating = (item) => {
+    if (item === rating[0]) {setRestaurantList(restaurantsRating);} else {
+      const updateRestaurant = restaurantsRating.filter(currentRestaurant => currentRestaurant.rating === parseInt(item));
+      setRestaurantList(updateRestaurant);
+    }
+    setSelectedRating(item);
+  };
+
+  const userReviews = restaurantsRating.find(item => item?.userId === userInfo.ID);
   const index = restaurantsRating.indexOf(userReviews);
-  const [isModalRateOpen,setModalRate]=useState(false)
-  const [userReview,setUserReview]=useState(userReviews);
-  const [isFirstTimeRate,setFirstTime]=useState(true)
-  const [isCurrentRating,setCurrentRating]=useState(restaurantInfo.rate)
+  const [isModalRateOpen, setModalRate] = useState(false);
+  const [userReview, setUserReview] = useState(userReviews);
+  const [isFirstTimeRate, setFirstTime] = useState(true);
+  const [isCurrentRating, setCurrentRating] = useState(restaurantInfo.rate ?? 3.5);
   if (index > -1) {
-    //Need to Splice First
     restaurantsRating.splice(index, 1);
   }
-  useEffect(()=>{
-    if(userReviews!==undefined)
-      return setFirstTime(false)
-  },[])
-
-  const openModal=()=>{
-    setModalRate(true)
-  }
+  useEffect(() => {
+    if (userReviews !== undefined) {
+      return setFirstTime(false);
+    }
+  }, []);
+  const openModal = () => {
+    setModalRate(true);
+  };
   const SelfReview = () => {
     return (
-      !isFirstTimeRate?
+      !isFirstTimeRate ?
         <RatingCard userReview={userReview} />
         :
         <Text style={styles.reviewText}>No Review</Text>
     );
   };
-  const RenderItem=({item})=>{
+  const RenderItem = ({ item }) => {
     return (
-      <RatingButton rating={item} onPress={onSelectedRating} selected={isSelectedRating}/>
+      <RatingButton rating={item} onPress={onSelectedRating} selected={isSelectedRating} />
     );
-  }
-  const renderRateCard=({item})=>{
-    return(
+  };
+
+
+  const renderRateCard = ({ item }) => {
+    return (
       <RatingCard userReview={item} />
-    )
-  }
-  const submit=(text,newRate)=>{
-    const currentDate=new Date().toLocaleString();
-    const userReviewResult={
-      userId:userInfo.ID,
-      userName:userInfo.NAME,
-      review:text,
-      rating:parseInt(newRate),
-      createdAt:isFirstTimeRate?currentDate:userReview.createdAt,
-      updatedAt:isFirstTimeRate?"":currentDate
-    }
-    const avg=(restaurantsRating.reduce((r, c) => r + c.rating, 0) + newRate) / (restaurantsRating.length + 1);
-    setCurrentRating(avg);
-    setUserReview(userReviewResult)
+    );
+  };
+  const submit = (text, newRate) => {
+    const currentDate = new Date().toLocaleString();
+    const userReviewResult = {
+      userId: userInfo.ID,
+      userName: userInfo.NAME,
+      review: text,
+      rating: parseInt(newRate),
+      createdAt: isFirstTimeRate ? currentDate : userReview.createdAt,
+      updatedAt: isFirstTimeRate ? '' : currentDate
+    };
+    const avg =Math.round( (restaurantsRating.reduce((r, c) => r + c.rating, 0) + newRate) / (restaurantsRating.length + 1)* 10) / 10;
+    setCurrentRating(avg !== undefined ? avg : 2.5);
+    setUserReview(userReviewResult);
     setFirstTime(false);
-    firebase.firestore().collection('Restaurants').doc("57456476").
-      update('rating',arrayRemove(userReviews!==undefined?userReviews:"")).done(()=>
-      firebase.firestore().collection('Restaurants').doc("57456476").
-      update('rating',arrayUnion(userReviewResult)),()=>console.log("Error"))
-
-    //update Rate
-
-    // dispatch(updateRating(userReviewResult))
-    closeModal()
-  }
-  const closeModal=()=>setModalRate(false)
+    firebase.firestore().collection('Restaurants').doc(restaurantInfo.id).
+      update('rating', arrayRemove(userReviews !== undefined ? userReviews : '')).done(() =>
+      firebase.firestore().collection('Restaurants').doc(restaurantInfo.id).
+        update('rating', arrayUnion(userReviewResult)).done(() =>
+        firebase.firestore().collection('Restaurants').doc(restaurantInfo.id).update('rate', avg).done(() => {
+          dispatch(restaurantLoading());
+          dispatch(PopulateRestaurantList());
+        }), () => console.log('Error')));
+    closeModal();
+  };
+  const closeModal = () => setModalRate(false);
 
   return (
     <SafeAreaView style={styles.container}>
@@ -135,7 +121,7 @@ export const RatingComponents = props => {
         <BackButton onPress={onBackButton}></BackButton>
         <Text style={styles.header}>{restaurantInfo.restaurant + ' Customer Review'}</Text>
       </View>
-      <View style={{  marginHorizontal: 15, }}>
+      <View style={{ marginHorizontal: 15, }}>
         <Rating
           type="star"
           fractions={1}
@@ -148,7 +134,7 @@ export const RatingComponents = props => {
           ratingTextColor={EStyleSheet.value('$secondaryTextColor')}
           style={styles.ratingContainer}
         />
-        <View style={{flexDirection:'row', marginBottom:10,}}>
+        <View style={{ flexDirection: 'row', marginBottom: 10, }}>
           <Text style={styles.header}>Your Review</Text>
           <TouchableOpacity style={styles.buttonContainer} onPress={openModal}>
             <Image style={styles.addIcon} source={addIcon} />
@@ -156,9 +142,9 @@ export const RatingComponents = props => {
               padding: 5,
               color: 'white',
               fontWeight: 'bold',
-              alignSelf:'center',
+              alignSelf: 'center',
               fontSize: 12,
-            }}>{!isFirstTimeRate?"Update Review":"Add Review"}</Text>
+            }}>{!isFirstTimeRate ? 'Update Review' : 'Add Review'}</Text>
           </TouchableOpacity>
         </View>
         <SelfReview />
@@ -166,17 +152,18 @@ export const RatingComponents = props => {
           data={rating}
           renderItem={RenderItem}
           horizontal={true}
-          style={{marginVertical:5,}}
+          style={{ marginVertical: 5, }}
           showsHorizontalScrollIndicator={true}
         />
 
         <FlatList
-          data={restaurantsRating}
+          data={restaurantList}
           renderItem={renderRateCard}
           showsHorizontalScrollIndicator={false}
         />
-        {isModalRateOpen&&
-        <ModalGiveRating closeModal={closeModal} isModalVisible={isModalRateOpen} submit={(text,newRate)=>submit(text,newRate)} userReview={userReview}/>}
+        {isModalRateOpen &&
+          <ModalGiveRating closeModal={closeModal} isModalVisible={isModalRateOpen}
+                           submit={(text, newRate) => submit(text, newRate)} userReview={userReview} />}
       </View>
     </SafeAreaView>);
 };
@@ -203,7 +190,7 @@ const styles = EStyleSheet.create({
   header: {
     fontSize: 17,
     fontWeight: 'bold',
-    alignSelf:'center',
+    alignSelf: 'center',
     color: '$primaryTextColor',
   },
   reviewHeader: {

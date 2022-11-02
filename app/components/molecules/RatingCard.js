@@ -36,7 +36,7 @@ export const RatingCard=({userReview})=>{
             </FastImage>
             <View style={{flexDirection:'column',width: '65%' }}>
               <Text style={styles.title}>{userName}</Text>
-              <Text style={styles.timestampText}>{updatedAt!==undefined?"Updated At: "+ updatedAt :"Created At: "+createdAt}</Text>
+              <Text style={styles.timestampText}>{updatedAt!==""?"Updated At: "+ updatedAt :"Created At: "+createdAt}</Text>
             </View>
             <RateLabel rating={rating} />
           </View>

@@ -30,10 +30,10 @@ export const Register = ({ navigation }) => {
       category: selectedTypes,
       address: restaurantLocation,
       description: restaurantDesc,
-      rate: 4.6,
+      rate: 5,
       id: guid(),
       image: imageUri,
-      userId:user.id,
+      userId:user.ID??1,
       createdAt:new Date().toLocaleString()
 
     };
