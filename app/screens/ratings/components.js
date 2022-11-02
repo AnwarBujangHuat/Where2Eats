@@ -25,58 +25,60 @@ import {
 } from 'react-redux';
 import { getUser } from '../../store/selector';
 import { updateRating } from '../../store/thunks';
+import { firebase } from '../../../src/firebase/config';
+import { arrayUnion,updateDoc,FieldValue,arrayRemove } from 'firebase/firestore';
+import { Colors } from '../../Colors';
 const rating=["All","1","2","3","4","5"]
 
 export const RatingComponents = props => {
   const userInfo=useSelector(getUser);
-  const dispatch=useDispatch();
-  const dummyRating=[{
-    userId:1,
-    userName:"Mohamad Abu Lutut",
-    review:'This cozy restaurant has left the best impressions! Hospitable hosts, delicious dishes, beautiful presentation, wide wine list and wonderful dessert. I recommend to everyone! I would like to come back here again and again.',
-    rating:4,
-    createdAt:'10/31/2022, 1:17:51 PM',
-    updatedAt:'10/31/2022, 1:17:51 PM'
-  },{
-    userId:2,
-    userName:"Mohamad Abu Lutut Kanan",
-    review:"Sedap Wooo",
-    rating:4,
-    createdAt:'10/31/2022, 1:17:51 PM',
-    updatedAt:undefined
-  },
-    {
-    userId:3,
-    userName:"Mohamad Abu Lutut Kiri",
-    review:'This cozy restaurant has left the best impressions! Hospitable hosts, delicious dishes, beautiful presentation, wide wine list and wonderful dessert. I recommend to everyone! I would like to come back here again and again.',
-    rating:4,
-    createdAt:'10/31/2022, 1:17:51 PM',
-    updatedAt:undefined
-  },{
-    userId:4,
-    userName:"Mohamad Abu Lutut Depan Senget",
-    review:"Sedap Wooo",
-    rating:5,
-    createdAt:'10/31/2022, 1:17:51 PM',
-    updatedAt:undefined
-  }]
-  const [isSelectedRating,setSelectedRating]=useState(rating[0])
-  const onSelectedRating=(item)=>{setSelectedRating(item)}
   const {
     onBackButton,
     restaurantInfo
   } = props;
-  const userReviews=dummyRating.find(item=>item.userId===0);
+  // const dispatch=useDispatch();
+  // const dummyRating=[{
+  //   userId:1,
+  //   userName:"Mohamad Abu Lutut",
+  //   review:'This cozy restaurant has left the best impressions! Hospitable hosts, delicious dishes, beautiful presentation, wide wine list and wonderful dessert. I recommend to everyone! I would like to come back here again and again.',
+  //   rating:parseInt(4),
+  //   createdAt:'10/31/2022, 1:17:51 PM',
+  //   updatedAt:'10/31/2022, 1:17:51 PM'
+  // },{
+  //   userId:2,
+  //   userName:"Mohamad Abu Lutut Kanan",
+  //   review:"Sedap Wooo",
+  //   rating:parseInt(4),
+  //   createdAt:'10/31/2022, 1:17:51 PM',
+  // },
+  //   {
+  //   userId:3,
+  //   userName:"Mohamad Abu Lutut Kiri",
+  //   review:'This cozy restaurant has left the best impressions! Hospitable hosts, delicious dishes, beautiful presentation, wide wine list and wonderful dessert. I recommend to everyone! I would like to come back here again and again.',
+  //     rating:parseInt(4),
+  //   createdAt:'10/31/2022, 1:17:51 PM',
+  // },{
+  //   userId:4,
+  //   userName:"Mohamad Abu Lutut Depan Senget",
+  //   review:"Sedap Wooo",
+  //     rating:parseInt(5),
+  //   createdAt:'10/31/2022, 1:17:51 PM',
+  // }]
+  const restaurantsRating=restaurantInfo.rating;
+  const [isSelectedRating,setSelectedRating]=useState(rating[0])
+  const onSelectedRating=(item)=>{setSelectedRating(item)}
+  const userReviews=restaurantsRating.find(item=>item.userId===userInfo.ID);
+  const index = restaurantsRating.indexOf(userReviews);
   const [isModalRateOpen,setModalRate]=useState(false)
   const [userReview,setUserReview]=useState(userReviews);
-  const index = dummyRating.indexOf(userReviews);
   const [isFirstTimeRate,setFirstTime]=useState(true)
-  const [ratingAverage,setRatingAverage]=useState(3.5)
+  const [isCurrentRating,setCurrentRating]=useState(restaurantInfo.rate)
   if (index > -1) {
-    dummyRating.splice(index, 1);
+    //Need to Splice First
+    restaurantsRating.splice(index, 1);
   }
   useEffect(()=>{
-    if(userReview!==undefined)
+    if(userReviews!==undefined)
       return setFirstTime(false)
   },[])
 
@@ -107,23 +109,23 @@ export const RatingComponents = props => {
       userId:userInfo.ID,
       userName:userInfo.NAME,
       review:text,
-      rating:newRate,
+      rating:parseInt(newRate),
       createdAt:isFirstTimeRate?currentDate:userReview.createdAt,
-      updatedAt:isFirstTimeRate?undefined:currentDate
+      updatedAt:isFirstTimeRate?"":currentDate
     }
+    const avg=(restaurantsRating.reduce((r, c) => r + c.rating, 0) + newRate) / (restaurantsRating.length + 1);
+    setCurrentRating(avg);
     setUserReview(userReviewResult)
     setFirstTime(false);
-    dispatch(updateRating(userReviewResult))
+    firebase.firestore().collection('Restaurants').doc("57456476").
+      update('rating',arrayRemove(userReviews!==undefined?userReviews:"")).done(()=>
+      firebase.firestore().collection('Restaurants').doc("57456476").
+      update('rating',arrayUnion(userReviewResult)),()=>console.log("Error"))
 
-    calculateNewRate(newRate);
+    //update Rate
+
+    // dispatch(updateRating(userReviewResult))
     closeModal()
-  }
-  //Finish Upload to Firebase
-  const calculateNewRate=(newRate)=>{
-    const recalculateAverage=(dummyRating.reduce((r, c) => r + c.rating, 0) + newRate) / (dummyRating.length + 1);
-    // setRatingAverage(recalculateAverage);
-    dispatch(updateRating({userReview,recalculateAverage}))
-
   }
   const closeModal=()=>setModalRate(false)
 
@@ -133,17 +135,15 @@ export const RatingComponents = props => {
         <BackButton onPress={onBackButton}></BackButton>
         <Text style={styles.header}>{restaurantInfo.restaurant + ' Customer Review'}</Text>
       </View>
-      <View style={{ marginTop: 20, marginHorizontal: 15, }}>
-        <Text style={styles.reviewHeader}>Overall Rating</Text>
+      <View style={{  marginHorizontal: 15, }}>
         <Rating
           type="star"
           fractions={1}
-          startingValue={ratingAverage}
+          startingValue={isCurrentRating}
           readonly={true}
           showReadOnlyText={false}
           showRating
-          ratingBackgroundColor={'#000'}
-          tintColor={EStyleSheet.value('$backGroundColor')}
+          tintColor={EStyleSheet.value('$primaryColor')}
           imageSize={45}
           ratingTextColor={EStyleSheet.value('$secondaryTextColor')}
           style={styles.ratingContainer}
@@ -171,7 +171,7 @@ export const RatingComponents = props => {
         />
 
         <FlatList
-          data={dummyRating}
+          data={restaurantsRating}
           renderItem={renderRateCard}
           showsHorizontalScrollIndicator={false}
         />
@@ -235,7 +235,6 @@ const styles = EStyleSheet.create({
   },
   ratingContainer: {
     paddingVertical: 15,
-    backGroundColor: '$backGroundColor'
   },
 
   reviewText: {
