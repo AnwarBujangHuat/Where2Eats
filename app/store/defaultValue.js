@@ -11,6 +11,20 @@ export const defaultValue = [
     image: 'https://media-cdn.tripadvisor.com/media/photo-s/11/d9/57/69/spaghetti-western-steakhouse.jpg',
     userId:"RpfohqbkAXN0NoOokrSWaT6Uteq2",
     createdAt:new Date().toLocaleString(),
+    rating:[{
+    userId:1,
+    userName:"Mohamad Abu Lutut",
+    review:'This cozy restaurant has left the best impressions! Hospitable hosts, delicious dishes, beautiful presentation, wide wine list and wonderful dessert. I recommend to everyone! I would like to come back here again and again.',
+    rating:parseInt(4),
+    createdAt:'10/31/2022, 1:17:51 PM',
+    updatedAt:'10/31/2022, 1:17:51 PM'
+  },{
+    userId:2,
+    userName:"Mohamad Abu Lutut Kanan",
+    review:"Sedap Wooo",
+    rating:parseInt(4),
+    createdAt:'10/31/2022, 1:17:51 PM',
+  },],
     food: [
       {
         item: ConstString.MAINDISH,
@@ -96,6 +110,20 @@ export const defaultValue = [
     image: 'https://b.zmtcdn.com/data/pictures/8/2800008/91cdc3b07793f87665fef7fc52162cbf.jpg',
         userId:"RpfohqbkAXN0NoOokrSWaT6Uteq2",
     createdAt:new Date().toLocaleString(),
+    rating:[{
+    userId:1,
+    userName:"Mohamad Abu Lutut",
+    review:'This cozy restaurant has left the best impressions! Hospitable hosts, delicious dishes, beautiful presentation, wide wine list and wonderful dessert. I recommend to everyone! I would like to come back here again and again.',
+    rating:parseInt(4),
+    createdAt:'10/31/2022, 1:17:51 PM',
+    updatedAt:'10/31/2022, 1:17:51 PM'
+  },{
+    userId:2,
+    userName:"Mohamad Abu Lutut Kanan",
+    review:"Sedap Wooo",
+    rating:parseInt(4),
+    createdAt:'10/31/2022, 1:17:51 PM',
+  },],
     food: [
       {
         item: ConstString.MAINDISH,
@@ -163,6 +191,20 @@ export const defaultValue = [
     image: 'https://i.pinimg.com/originals/03/64/5f/03645ffe29ad1debd4ec86ff149cd307.gif',
         userId:"RpfohqbkAXN0NoOokrSWaT6Uteq2",
     createdAt:new Date().toLocaleString(),
+    rating:[{
+    userId:1,
+    userName:"Mohamad Abu Lutut",
+    review:'This cozy restaurant has left the best impressions! Hospitable hosts, delicious dishes, beautiful presentation, wide wine list and wonderful dessert. I recommend to everyone! I would like to come back here again and again.',
+    rating:parseInt(4),
+    createdAt:'10/31/2022, 1:17:51 PM',
+    updatedAt:'10/31/2022, 1:17:51 PM'
+  },{
+    userId:2,
+    userName:"Mohamad Abu Lutut Kanan",
+    review:"Sedap Wooo",
+    rating:parseInt(4),
+    createdAt:'10/31/2022, 1:17:51 PM',
+  },],
     food: [
       {
         item: ConstString.MAINDISH,
@@ -206,6 +248,20 @@ export const defaultValue = [
     image: 'https://mir-s3-cdn-cf.behance.net/project_modules/max_1200/5eeea355389655.59822ff824b72.gif',
         userId:"RpfohqbkAXN0NoOokrSWaT6Uteq2",
     createdAt:new Date().toLocaleString(),
+    rating:[{
+    userId:1,
+    userName:"Mohamad Abu Lutut",
+    review:'This cozy restaurant has left the best impressions! Hospitable hosts, delicious dishes, beautiful presentation, wide wine list and wonderful dessert. I recommend to everyone! I would like to come back here again and again.',
+    rating:parseInt(4),
+    createdAt:'10/31/2022, 1:17:51 PM',
+    updatedAt:'10/31/2022, 1:17:51 PM'
+  },{
+    userId:2,
+    userName:"Mohamad Abu Lutut Kanan",
+    review:"Sedap Wooo",
+    rating:parseInt(4),
+    createdAt:'10/31/2022, 1:17:51 PM',
+  },],
     food: [
       {
         item: ConstString.MAINDISH,
@@ -261,6 +317,20 @@ export const defaultValue = [
     image: 'https://4.bp.blogspot.com/-Vxairv_g_yw/W2qHkgMqyaI/AAAAAAAAFGw/p0AF-NMFxAMcH-u-B0WeWzV6xKMjF4u2gCLcBGAs/s1600/20180807_212831.jpg',
         userId:"RpfohqbkAXN0NoOokrSWaT6Uteq2",
     createdAt:new Date().toLocaleString(),
+    rating:[{
+    userId:1,
+    userName:"Mohamad Abu Lutut",
+    review:'This cozy restaurant has left the best impressions! Hospitable hosts, delicious dishes, beautiful presentation, wide wine list and wonderful dessert. I recommend to everyone! I would like to come back here again and again.',
+    rating:parseInt(4),
+    createdAt:'10/31/2022, 1:17:51 PM',
+    updatedAt:'10/31/2022, 1:17:51 PM'
+  },{
+    userId:2,
+    userName:"Mohamad Abu Lutut Kanan",
+    review:"Sedap Wooo",
+    rating:parseInt(4),
+    createdAt:'10/31/2022, 1:17:51 PM',
+  },],
     food: [
       {
         item: ConstString.MAINDISH,
@@ -322,6 +392,20 @@ export const defaultValue = [
     image: 'https://sushi-king.com/wp-content/uploads/2017/05/100th-outlet-600-x-350.jpg',
         userId:"RpfohqbkAXN0NoOokrSWaT6Uteq2",
     createdAt:new Date().toLocaleString(),
+    rating:[{
+    userId:1,
+    userName:"Mohamad Abu Lutut",
+    review:'This cozy restaurant has left the best impressions! Hospitable hosts, delicious dishes, beautiful presentation, wide wine list and wonderful dessert. I recommend to everyone! I would like to come back here again and again.',
+    rating:parseInt(4),
+    createdAt:'10/31/2022, 1:17:51 PM',
+    updatedAt:'10/31/2022, 1:17:51 PM'
+  },{
+    userId:2,
+    userName:"Mohamad Abu Lutut Kanan",
+    review:"Sedap Wooo",
+    rating:parseInt(4),
+    createdAt:'10/31/2022, 1:17:51 PM',
+  },],
     food: [
       {
         item: ConstString.MAINDISH,
@@ -383,6 +467,20 @@ export const defaultValue = [
     image: 'https://mir-s3-cdn-cf.behance.net/project_modules/max_1200/24f89969530077.5b84d93a88cb0.gif',
         userId:"RpfohqbkAXN0NoOokrSWaT6Uteq2",
     createdAt:new Date().toLocaleString(),
+    rating:[{
+    userId:1,
+    userName:"Mohamad Abu Lutut",
+    review:'This cozy restaurant has left the best impressions! Hospitable hosts, delicious dishes, beautiful presentation, wide wine list and wonderful dessert. I recommend to everyone! I would like to come back here again and again.',
+    rating:parseInt(4),
+    createdAt:'10/31/2022, 1:17:51 PM',
+    updatedAt:'10/31/2022, 1:17:51 PM'
+  },{
+    userId:2,
+    userName:"Mohamad Abu Lutut Kanan",
+    review:"Sedap Wooo",
+    rating:parseInt(4),
+    createdAt:'10/31/2022, 1:17:51 PM',
+  },],
     food: [
       {
         item: ConstString.MAINDISH,
@@ -438,6 +536,20 @@ export const defaultValue = [
     image: 'https://www.paradigmmall.com.my/images/store/food/mykori_store.jpg',
         userId:"RpfohqbkAXN0NoOokrSWaT6Uteq2",
     createdAt:new Date().toLocaleString(),
+    rating:[{
+    userId:1,
+    userName:"Mohamad Abu Lutut",
+    review:'This cozy restaurant has left the best impressions! Hospitable hosts, delicious dishes, beautiful presentation, wide wine list and wonderful dessert. I recommend to everyone! I would like to come back here again and again.',
+    rating:parseInt(4),
+    createdAt:'10/31/2022, 1:17:51 PM',
+    updatedAt:'10/31/2022, 1:17:51 PM'
+  },{
+    userId:2,
+    userName:"Mohamad Abu Lutut Kanan",
+    review:"Sedap Wooo",
+    rating:parseInt(4),
+    createdAt:'10/31/2022, 1:17:51 PM',
+  },],
     food: [
       {
         item: ConstString.MAINDISH,
