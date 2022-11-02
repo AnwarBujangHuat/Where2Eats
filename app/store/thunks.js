@@ -55,7 +55,7 @@ export const updateRating=createAsyncThunk("AddNewRating",async(request, {
   rejectWithValue
 }) => {
   const { userReview, ratingAverage} = request;
-  await firebase.firestore().collection('Restaurants').doc("12a3bd05").set({rating:request}).then((r)=>console.log(r))
+  // await firebase.firestore().collection('DummyData').doc("Dummy").set({Rating:arrayUnion(request)}).then((r)=>console.log(r))
 // Atomically remove a region from the "regions" array field.
 
   // console.log(userReview+" "+ratingAverage)

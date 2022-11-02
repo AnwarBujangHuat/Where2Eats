@@ -3,7 +3,6 @@ import 'firebase/compat/auth';
 require('firebase/compat/auth');
 import 'firebase/compat/firestore';
 import 'firebase/compat/storage';
-
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
 const firebaseConfig = {
   apiKey: "AIzaSyCHCZuPLY7PuyG4vBTDYbQfsa2ZNEHwpRs",
