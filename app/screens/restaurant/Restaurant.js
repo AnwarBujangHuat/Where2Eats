@@ -26,7 +26,6 @@ export const Restaurant = ({ navigation, route }) => {
   const closeModal = () => setModalVisible(false);
   const openPreviewModal=()=>setIsPreview(true)
   const goToRating=()=>navigation.navigate(ConstString.RATINGS, { id });
-
   const props = {
     isModalVisible,
     foodItem,

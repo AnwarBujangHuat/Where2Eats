@@ -13,7 +13,7 @@ import logoIcon from '../../assets/Logo.png';
 import { RateLabel } from '../atoms/RateLabel';
 import { Colors } from '../../Colors';
 
-export const DetailsHeader = ({ image, back, disabled, rate = false, onPress }) => {
+export const DetailsHeader = ({ image, back, disabled, rating,rate = false, onPress ,goToRating}) => {
   const changeLogo = () => {};
   return (
     <View style={styles.container}>
@@ -27,7 +27,7 @@ export const DetailsHeader = ({ image, back, disabled, rate = false, onPress }) 
             <View style={{ width: '80%' }}>
               <BackButton onPress={back}></BackButton>
             </View>
-            {rate && <RateLabel rating={4.1} />}
+            {rate && <RateLabel rating={rating} goToRating={goToRating} />}
           </View>
           <TouchableOpacity style={styles.logoContainer} disabled={disabled} onPress={changeLogo}>
             <Image style={styles.icons} source={logoIcon} />

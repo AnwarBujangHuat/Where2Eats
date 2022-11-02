@@ -24,7 +24,7 @@ export const AddOne = createAsyncThunk('AddOneRestaurant', async(request, {
   rejectWithValue
 }) => {
   const { id } = request;
-  await firebase.firestore().collection('Restaurants').doc(id).set(request).then(() => console.log('Done'));
+  await firebase.firestore().collection('Restaurants').doc(id).set(request).done(() => console.log('Done'),(r)=>console.log(r));
   return request;
 });
 
