@@ -1,6 +1,10 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { firebase } from '../../src/firebase/config';
 import { defaultValue } from './defaultValue';
+import {
+  arrayRemove,
+  arrayUnion
+} from 'firebase/firestore';
 
 export const PopulateRestaurantList = createAsyncThunk('getRestaurantList', async(request, {
   dispatch,
@@ -54,12 +58,14 @@ export const updateRating=createAsyncThunk("AddNewRating",async(request, {
   dispatch,
   rejectWithValue
 }) => {
-  const { userReview, ratingAverage} = request;
-  // await firebase.firestore().collection('DummyData').doc("Dummy").set({Rating:arrayUnion(request)}).then((r)=>console.log(r))
-// Atomically remove a region from the "regions" array field.
+  const { id,userReview,userReviewResult,avg} = request;
+  await firebase.firestore().collection('Restaurants').doc(id).
+    update('rating', arrayRemove(userReview !== undefined ? userReview : '')).done(() =>
+    firebase.firestore().collection('Restaurants').doc(id).
+      update('rating', arrayUnion(userReviewResult)).done(() =>
+      firebase.firestore().collection('Restaurants').doc(id).update('rate', avg).done(() => {
+      }), () => console.log('Error')));
 
-  // console.log(userReview+" "+ratingAverage)
-  // await firebase.firestore().collection('Restaurants').doc(id).set(request).then(() => console.log('Done'));
   return request;
 });
 

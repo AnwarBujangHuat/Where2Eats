@@ -24,13 +24,12 @@ import {
   useSelector
 } from 'react-redux';
 import { getUser } from '../../store/selector';
-import { PopulateRestaurantList } from '../../store/thunks';
-import { firebase } from '../../../src/firebase/config';
 import {
-  arrayRemove,
-  arrayUnion
-} from 'firebase/firestore';
+  PopulateRestaurantList,
+  updateRating
+} from '../../store/thunks';
 import { restaurantLoading } from '../../store/reducer';
+import { BarChart } from 'react-native-chart-kit';
 
 const rating = ['All', '1', '2', '3', '4', '5'];
 
@@ -40,34 +39,100 @@ export const RatingComponents = props => {
     onBackButton,
     restaurantInfo
   } = props;
+  const arrayRating={
+    1:[],
+    2:[],
+    3:[],
+    4:[],
+    5:[],
+  }
+  const { id } = restaurantInfo;
   const dispatch = useDispatch();
-  const restaurantsRating = [...restaurantInfo.rating??[]];
+  const restaurantsRating = [...restaurantInfo.rating ?? []];
+  const overallRate = [...restaurantInfo.rating ?? []];
+  const [ratingCount,setRatingCount]=useState(arrayRating)
   const [restaurantList, setRestaurantList] = useState(restaurantsRating);
   const [isSelectedRating, setSelectedRating] = useState(rating[0]);
   const onSelectedRating = (item) => {
-    if (item === rating[0]) {setRestaurantList(restaurantsRating);} else {
-      const updateRestaurant = restaurantsRating.filter(currentRestaurant => currentRestaurant.rating === parseInt(item));
-      setRestaurantList(updateRestaurant);
+    let selectedRestaurantRate=[];
+    switch(item){
+      case "All":
+        selectedRestaurantRate=restaurantsRating
+        break;
+      case "1":
+        selectedRestaurantRate=ratingCount[1]
+        break;
+      case "2":
+        selectedRestaurantRate=ratingCount[2]
+        break;
+      case "3":
+        selectedRestaurantRate=ratingCount[3]
+        break;
+      case "4":
+        selectedRestaurantRate=ratingCount[4]
+        break;
+      case "5":
+        selectedRestaurantRate=ratingCount[5]
+        break;
     }
+    setRestaurantList(selectedRestaurantRate)
     setSelectedRating(item);
   };
-
-  const userReviews = restaurantsRating.find(item => item?.userId === userInfo.ID);
+  const userReviews = restaurantsRating.find(item => item?.userId === userInfo.ID) ?? '';
   const index = restaurantsRating.indexOf(userReviews);
   const [isModalRateOpen, setModalRate] = useState(false);
   const [userReview, setUserReview] = useState(userReviews);
   const [isFirstTimeRate, setFirstTime] = useState(true);
   const [isCurrentRating, setCurrentRating] = useState(restaurantInfo.rate ?? 3.5);
+
+  const sortRate=(restaurantsRating)=>{
+    // const ratings = restaurantsRating?.map(item=>item.rating)
+    // let rate =[]
+    // //loop five times for each rating level
+    // //filter corresponding and get the count
+    // for (let i = 0; i < 5; i++) {
+    // const temp= ratings.filter(item=>item===i+1).length
+    //   rate.push(temp)
+    // }
+    // console.log({rate,test})
+    // setRatingCount(rate.reverse())
+    restaurantsRating.forEach((obj,index)=>
+    {
+      const currentItem=restaurantsRating[index]
+      switch(obj.rating){
+        case 1:
+          arrayRating[1].push(currentItem)
+          break;
+        case 2:
+          arrayRating[2].push(currentItem)
+          break;
+        case 3:
+          arrayRating[3].push(currentItem)
+          break;
+        case 4:
+          arrayRating[4].push(currentItem)
+          break;
+        case 5:
+          arrayRating[5].push(currentItem)
+          break;
+      }
+    })
+    setRatingCount(arrayRating)
+  }
+  useEffect(() => {
+    if (userReviews !== '') {
+      setFirstTime(false);
+    }
+    sortRate(overallRate);
+  }, []);
   if (index > -1) {
     restaurantsRating.splice(index, 1);
   }
-  useEffect(() => {
-    if (userReviews !== undefined) {
-      return setFirstTime(false);
-    }
-  }, []);
   const openModal = () => {
     setModalRate(true);
+  };
+  const closeModal = () =>{
+    setModalRate(false);
   };
   const SelfReview = () => {
     return (
@@ -82,14 +147,12 @@ export const RatingComponents = props => {
       <RatingButton rating={item} onPress={onSelectedRating} selected={isSelectedRating} />
     );
   };
-
-
   const renderRateCard = ({ item }) => {
     return (
       <RatingCard userReview={item} />
     );
   };
-  const submit = (text, newRate) => {
+  const submit = (text, newRate = 1) => {
     const currentDate = new Date().toLocaleString();
     const userReviewResult = {
       userId: userInfo.ID,
@@ -99,21 +162,23 @@ export const RatingComponents = props => {
       createdAt: isFirstTimeRate ? currentDate : userReview.createdAt,
       updatedAt: isFirstTimeRate ? '' : currentDate
     };
-    const avg =Math.round( (restaurantsRating.reduce((r, c) => r + c.rating, 0) + newRate) / (restaurantsRating.length + 1)* 10) / 10;
+    const avg = Math.round((restaurantsRating.reduce((r, c) => r + c.rating, 0) + newRate) / (restaurantsRating.length + 1) * 10) / 10;
     setCurrentRating(avg !== undefined ? avg : 2.5);
-    setUserReview(userReviewResult);
     setFirstTime(false);
-    firebase.firestore().collection('Restaurants').doc(restaurantInfo.id).
-      update('rating', arrayRemove(userReviews !== undefined ? userReviews : '')).done(() =>
-      firebase.firestore().collection('Restaurants').doc(restaurantInfo.id).
-        update('rating', arrayUnion(userReviewResult)).done(() =>
-        firebase.firestore().collection('Restaurants').doc(restaurantInfo.id).update('rate', avg).done(() => {
+    dispatch(updateRating({ id, userReview, userReviewResult, avg })).then(() => {
+        setUserReview(userReviewResult);
+        setTimeout(() => {
           dispatch(restaurantLoading());
-          dispatch(PopulateRestaurantList());
-        }), () => console.log('Error')));
-    closeModal();
+          dispatch(PopulateRestaurantList()).then(()=>{
+            sortRate([...restaurantsRating,userReviewResult])
+            closeModal()
+          });
+        }, 3000);
+      },
+      () => {
+        console.log('There Was An Error While Sending Your Review');
+      });
   };
-  const closeModal = () => setModalRate(false);
 
   return (
     <SafeAreaView style={styles.container}>
@@ -121,19 +186,69 @@ export const RatingComponents = props => {
         <BackButton onPress={onBackButton}></BackButton>
         <Text style={styles.header}>{restaurantInfo.restaurant + ' Customer Review'}</Text>
       </View>
-      <View style={{ marginHorizontal: 15, }}>
-        <Rating
-          type="star"
-          fractions={1}
-          startingValue={isCurrentRating}
-          readonly={true}
-          showReadOnlyText={false}
-          showRating
-          tintColor={EStyleSheet.value('$primaryColor')}
-          imageSize={45}
-          ratingTextColor={EStyleSheet.value('$secondaryTextColor')}
-          style={styles.ratingContainer}
-        />
+      <View style={{marginHorizontal: 15}}>
+        <View style={{ flexDirection:'row'}}>
+          <View style={{alignSelf:'center',alignContent:'center', paddingRight: 30}}>
+          <Text style={styles.rating}> {isCurrentRating.toFixed(1)}
+          </Text>
+          <Rating
+            type="star"
+            fractions={1}
+            startingValue={isCurrentRating}
+            readonly={true}
+            showReadOnlyText={false}
+            tintColor={EStyleSheet.value('$backGroundColor')}
+            style={{paddingStart:10}}
+            imageSize={18}
+            ratingTextColor={EStyleSheet.value('$secondaryTextColor')}
+          />
+          <View style={{paddingStart:10,}}>
+            <Text style={{fontSize:12,color:EStyleSheet.value('$secondaryTextColor'),paddingVertical:5,alignSelf:'flex-start'}}> {restaurantsRating.length+(!isFirstTimeRate?1:0)+" Reviews"}
+            </Text>
+          </View>
+
+        </View>
+          <BarChart
+            style={{
+              transform: [{ rotate: '90deg'}],
+              marginStart:30,
+              paddingRight: 0,
+            }}
+            data={{
+              labels: [5,4,3,2,1],
+              datasets: [
+                {
+                  data: [ratingCount[5].length,ratingCount[4].length,ratingCount[3].length,ratingCount[2].length,ratingCount[1].length]
+                // data:ratingCount
+                }
+              ]
+            }}
+            chartConfig={{
+              backgroundGradientFrom: "transparent",
+              backgroundGradientFromOpacity: 0,
+              backgroundGradientTo: "transparent",
+              fillShadowGradient:EStyleSheet.value('$secondaryTextColor'),
+              fillShadowGradientFrom:EStyleSheet.value('$secondaryTextColor'),
+              fillShadowGradientFromOpacity:1,
+              fillShadowGradientOpacity:1,
+              fillShadowGradientTo:EStyleSheet.value('$secondaryTextColor'),
+              fillShadowGradientToOffset:1,
+              fillShadowGradientFromOffset:1,
+              backgroundGradientToOpacity: 0,
+              color: (opacity = 1) => EStyleSheet.value('$secondaryTextColor'),
+              labelColor: (opacity = 1) => EStyleSheet.value('$secondaryTextColor'),
+              strokeWidth: 1,
+              barPercentage: 0.4,
+            }}
+            withHorizontalLabels={false}
+            width={120} // from react-native
+            height={180}
+            verticalLabelRotation={270}
+            withInnerLines={false}
+            hideLegend
+          />
+        </View>
+
         <View style={{ flexDirection: 'row', marginBottom: 10, }}>
           <Text style={styles.header}>Your Review</Text>
           <TouchableOpacity style={styles.buttonContainer} onPress={openModal}>
@@ -153,7 +268,7 @@ export const RatingComponents = props => {
           renderItem={RenderItem}
           horizontal={true}
           style={{ marginVertical: 5, }}
-          showsHorizontalScrollIndicator={true}
+          showsHorizontalScrollIndicator={false}
         />
 
         <FlatList
@@ -161,10 +276,10 @@ export const RatingComponents = props => {
           renderItem={renderRateCard}
           showsHorizontalScrollIndicator={false}
         />
-        {isModalRateOpen &&
-          <ModalGiveRating closeModal={closeModal} isModalVisible={isModalRateOpen}
-                           submit={(text, newRate) => submit(text, newRate)} userReview={userReview} />}
       </View>
+      {isModalRateOpen &&
+        <ModalGiveRating closeModal={closeModal} isModalVisible={isModalRateOpen}
+                         submit={(text, newRate) => submit(text, newRate)} userReview={userReview} />}
     </SafeAreaView>);
 };
 const styles = EStyleSheet.create({
@@ -192,6 +307,10 @@ const styles = EStyleSheet.create({
     fontWeight: 'bold',
     alignSelf: 'center',
     color: '$primaryTextColor',
+  },
+  rating: {
+    fontSize: 60,
+    color: '$secondaryTextColor',
   },
   reviewHeader: {
     fontSize: 18,
@@ -221,9 +340,11 @@ const styles = EStyleSheet.create({
     alignContent: 'center',
   },
   ratingContainer: {
-    paddingVertical: 15,
+    alignSelf:'center',
+    alignItems:'center',
+    backgroundColor:'white',
+    alignContent:'center'
   },
-
   reviewText: {
     fontSize: 14,
     color: 'white',

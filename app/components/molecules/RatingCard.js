@@ -10,19 +10,17 @@ import EStyleSheet from 'react-native-extended-stylesheet';
 import FastImage from 'react-native-fast-image';
 import defaultAvatar from '../../assets/programmer.png';
 import { RateLabel } from '../atoms/RateLabel';
-import locationIcon from '../../assets/location.png';
-import { icons } from '../../screens/home/ConstFoodCategory';
-import { BackButton } from '../atoms/BackButton';
-
+import LottieView from 'lottie-react-native';
 export const RatingCard=({userReview})=>{
   const image=undefined;
   const{userName,review,rating,createdAt,updatedAt}=userReview||{};
   return(
     <View style={styles.container}>
         <View style={styles.card}>
-          <View style={{ flexDirection: 'row',alignItems:'center' }}>
+          <View style={{ flexDirection: 'row',alignItems:'center',marginStart:5, }}>
             <FastImage
-              source={image !== undefined ? {
+              source={
+              image !== undefined ? {
                 uri: image,
                 priority: FastImage.priority.high,
               } : defaultAvatar}//image ? image : addImage

@@ -10,6 +10,8 @@ import {
 } from 'react-native';
 import EStyleSheet from 'react-native-extended-stylesheet';
 import { AirbnbRating } from 'react-native-ratings';
+import Cat from '../../assets/purplecat.json';
+import LottieView from 'lottie-react-native';
 
 const { width } = Dimensions.get('window');
 
@@ -17,12 +19,17 @@ export const ModalGiveRating = ({ closeModal, isModalVisible, submit, userReview
   const { review, rating, updatedAt,createdAt } = userReview|| {};
   const [textReview,setReview]=useState(review)
   const [newRate,setRate]=useState(rating)
+  const [isUploading,setIsUploading]=useState(false)
   let status;
+  const sendSubmission=()=>{
+    setIsUploading(true);
+    submit(textReview,newRate);
+  }
   if(updatedAt===undefined&&createdAt===undefined)
   {
   status="First Time";
   }
-  else if(updatedAt!==undefined){
+  else if(updatedAt!==''){
     status="Updated At: "+ updatedAt;
   }
   else{
@@ -37,6 +44,14 @@ export const ModalGiveRating = ({ closeModal, isModalVisible, submit, userReview
                  transparent visible={isModalVisible}
                  presentationStyle="overFullScreen">
             <View style={styles.viewWrapper}>
+
+            {isUploading ?
+              <View style={styles.modalView}>
+                <LottieView style={styles.lottieButton} source={Cat} autoPlay={true}
+                />
+                <Text style={styles.header}>{"Wait while we write your Review"}</Text>
+              </View>
+              :
               <View style={styles.modalView}>
                 <Text style={styles.header}>{'What\'s Your Review?'}</Text>
                 <AirbnbRating
@@ -73,12 +88,14 @@ export const ModalGiveRating = ({ closeModal, isModalVisible, submit, userReview
                   </TouchableOpacity>
                   <TouchableOpacity
                     style={styles.buttonVisit}
-                    onPress={()=>submit(textReview,newRate)}>
+                    onPress={sendSubmission}>
                     <Text style={styles.buttonTextMenu}>Submit</Text>
                   </TouchableOpacity>
                 </View>
               </View>
-            </View>
+            }
+              </View>
+
           </Modal>
         </SafeAreaView>
       }
@@ -151,7 +168,7 @@ const styles = EStyleSheet.create({
     paddingHorizontal: 10,
     justifyContent: 'center',
     position: 'absolute',
-    top: '30%',
+    top: '20%',
     left: '50%',
     elevation: 5,
     transform: [{ translateX: -(width * 0.45) },
@@ -162,7 +179,7 @@ const styles = EStyleSheet.create({
   },
   header: {
     fontSize: 18,
-    paddingTop: 20,
+    paddingVertical: 20,
     fontWeight: 'bold',
     color: '$primaryTextColor',
     shadowOffset: { width: -2, height: 1 },
@@ -187,5 +204,10 @@ const styles = EStyleSheet.create({
     backgroundColor: '$secondaryBackGroundColor',
     paddingTop: 20,
     paddingBottom:10,
+  },
+  lottieButton: {
+    width: width * .6,
+    height: width * .6,
+    alignSelf:'center',
   },
 });
