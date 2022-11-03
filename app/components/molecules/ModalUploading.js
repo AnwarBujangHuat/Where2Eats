@@ -18,12 +18,12 @@ const { width } = Dimensions.get('window');
 let icon;
 let text;
 let showButton = false;
-export const ModalUploading = ({ isModalVisible, closeModal, goBack, action, isSuccess }) => {
+export const ModalUploading = ({ isModalVisible, closeModal, goBack, action, isSuccess=true }) => {
   if (action === ConstString.GO_BACK) {
     icon = Sleepy;
     text = 'All Your Progress in This Page Will Be Lost';
     showButton = true;
-  } else {
+  } else if(action===ConstString.UPLOADING){
     icon = Uploading;
     text = 'Please Wait While We Upload your Photos';
     showButton = false;
