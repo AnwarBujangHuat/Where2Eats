@@ -10,7 +10,7 @@ import startIcon2 from '../../assets/star2.png';
 import EStyleSheet from 'react-native-extended-stylesheet';
 
 export const RateLabel = ({ rating,goToRating }) => {
-  const restaurantRate=rating.toFixed(1);
+  const restaurantRate=rating?.toFixed(1);
   return (
     <TouchableOpacity onPress={goToRating}>
     <View style={styles.container}>
