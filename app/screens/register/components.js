@@ -18,6 +18,10 @@ import EStyleSheet from 'react-native-extended-stylesheet';
 export const RegisterComponents = props => {
   const {
     selectedTypes,
+    restaurantName,
+    restaurantDesc,
+    restaurantLocation,
+    initialIndex,
     goToMenu,
     goBack,
     setName,
@@ -31,14 +35,21 @@ export const RegisterComponents = props => {
       <DetailsHeader back={goBack} disabled={false} onPress={launchImageLibrary} image={imageUri} />
       <View style={styles.inputContainer}>
         <Text style={styles.header}>{'Restaurant Name'}</Text>
-        <InputField placeholder={'Please Input Name'} multiline={false} onChange={(text) => setName(text)} />
+        <InputField placeholder={'Please Input Name'} multiline={false} onChange={(text) => setName(text)} value={restaurantName} />
         <Text style={styles.header}>{'Description'}</Text>
         <InputField placeholder={'Please Input Description'} multiline={true}
-                    onChange={(text) => setDescription(text)} />
+                    onChange={(text) => setDescription(text)} value={restaurantDesc}/>
         <Text style={styles.header}>{'Category'}</Text>
         <FlatList
           style={{ maxHeight: 60 }}
           data={ConstFoodCategory}
+          onScrollToIndexFailed={info => {
+            const wait = new Promise(resolve => setTimeout(resolve, 500));
+            wait.then(() => {
+              ConstFoodCategory.current?.scrollToIndex({index: info.index, animated: true });
+            });
+          }}
+          initialScrollIndex={initialIndex??0}
           renderItem={({ item }) => {
             return (
               <ImageButton item={item} onPress={() => categorySelected({ item })} selected={selectedTypes} />
@@ -53,7 +64,7 @@ export const RegisterComponents = props => {
           onPress={() => console.log('j')}>
           <Text style={{ color: EStyleSheet.value('$primaryColor'), fontWeight: 'bold' }}>Location</Text>
         </TouchableOpacity>
-        <Text style={styles.desc}>{'Location inserted'}</Text>
+        <Text style={styles.desc}>{restaurantLocation}</Text>
       </View>
       <KeyboardAvoidingView behavior={Platform.OS === 'ios' ? 'padding' : 'height'}>
         <TouchableOpacity

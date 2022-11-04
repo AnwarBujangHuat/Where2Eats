@@ -15,7 +15,10 @@ import { BackButton } from '../../components/atoms/BackButton';
 import SelectBox from 'react-native-multi-selectbox';
 import { xorBy } from 'lodash';
 import { FoodCard } from '../../components/molecules/FoodCard';
-import { useDispatch } from 'react-redux';
+import {
+  useDispatch,
+  useSelector
+} from 'react-redux';
 import { restaurantLoading } from '../../store/reducer';
 import addIcon from '../../assets/plus.png';
 import { ModalMenu } from '../../components/molecules/ModalMenu';
@@ -24,17 +27,15 @@ import EStyleSheet from 'react-native-extended-stylesheet';
 import { menuCategories } from './MenuCategories';
 import { firebase } from '../../../src/firebase/config';
 import { ModalUploading } from '../../components/molecules/ModalUploading';
+import { getCurrentRestaurant } from '../../store/selector';
 
 let action;
 export const SetupMenu = ({ navigation, route }) => {
   const dispatch = useDispatch();
-  const item = route.params || {}; //Teacher li
-  const [selectedCategory, setSelectedCategory] = useState([]);
-  const [isModalVisible, setModalVisible] = useState(false);
-  const [isActionModalVisible, setActionModal] = useState(false);
-  const [Category, setCategory] = useState('');
-  const [isSuccessful, setIsSuccessful] = useState(true);
-  const categoryList = [
+  const { item, id } = route.params || {}; //Teacher li
+  const restaurantInfo=useSelector(getCurrentRestaurant(id))
+  const initialRestaurantMenu=[...restaurantInfo?.food]||[]
+  const categoryList = id!==undefined?initialRestaurantMenu: [
     {
       item: ConstString.MAINDISH,
       data: [],
@@ -62,34 +63,41 @@ export const SetupMenu = ({ navigation, route }) => {
     },
 
   ];
+  const [selectedCategory, setSelectedCategory] = useState(initialRestaurantMenu);
+  const [isModalVisible, setModalVisible] = useState(false);
+  const [isActionModalVisible, setActionModal] = useState(false);
+  const [Category, setCategory] = useState('');
+  const [isSuccessful, setIsSuccessful] = useState(true);
+  //setting Up initial Menu Items
 
   const addMenu = () => {
     setActionModal(true);
     action = ConstString.UPLOADING;
     let totalCount = 0;
-    uploadAsFile(item.image, 'profile').then();
-    // uploadAsFile(undefined, 'profile').then();
-    item.food = selectedCategory;
-    item.food.forEach(
-      (category, categoryIndex) => {
-        ++totalCount;
-        category.data.forEach((foodItem, foodItemIndex) => {
-          if (foodItem.image !== undefined) {
-            uploadAsFile(foodItem.image, 'menu', category.item, categoryIndex, foodItemIndex).then();
-          } else {
-            showAlert(foodItem.name);
-          }
-        });
-      }
-    );
-    setTimeout(() => {
-      if (isSuccessful) {
-        uploadFinish();
-      } else {
-        console.log(isSuccessful);
-      }
+    console.log(selectedCategory);
 
-    }, 5000);
+    // uploadAsFile(item.image, 'profile').then();
+    // item.food = selectedCategory;
+    // item.food.forEach(
+    //   (category, categoryIndex) => {
+    //     ++totalCount;
+    //     category.data.forEach((foodItem, foodItemIndex) => {
+    //       if (foodItem.image !== undefined) {
+    //         uploadAsFile(foodItem.image, 'menu', category.item, categoryIndex, foodItemIndex).then();
+    //       } else {
+    //         showAlert(foodItem.name);
+    //       }
+    //     });
+    //   }
+    // );
+    // setTimeout(() => {
+    //   if (isSuccessful) {
+    //     uploadFinish();
+    //   } else {
+    //     console.log(isSuccessful);
+    //   }
+    //
+    // }, 5000);
 
 
   };
@@ -117,7 +125,7 @@ export const SetupMenu = ({ navigation, route }) => {
   const goBack = () => {
     closeActionModal();
     closeModal();
-    navigation.navigate(ConstString.REGISTER);
+    navigation.navigate(ConstString.REGISTER,{id});
   };
   const openModal = ({ item: category }) => {
     setModalVisible(true);
@@ -157,13 +165,12 @@ export const SetupMenu = ({ navigation, route }) => {
           (error) => {
             setIsSuccessful(false);
             reject(error);
-          }, /* this is where you would put an error callback! */
+          },
           () => {
             task.snapshot.ref.getDownloadURL().then((fileUrl) => {
                 if (folder === 'profile') {
                   item.image = fileUrl;
                 }
-                // console.log(category+":"+fileUrl+" "+index)
                 else if (folder === 'menu') {
                   item.food[categoryIndex].data[foodItemIndex].image = fileUrl;
                 }
