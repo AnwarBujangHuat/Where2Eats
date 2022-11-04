@@ -26,5 +26,6 @@ export const ConstString = { // name it to routes
   BEVERAGES: 'Beverages',
   GO_BACK: 'Go Back',
   UPLOADING: 'Uploading',
-  MODAL: 'Modal'
+  MODAL: 'Modal',
+  EDIT:'Edit'
 };

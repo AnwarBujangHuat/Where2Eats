@@ -3,7 +3,6 @@ import React from 'react';
 import { FloatingAction } from 'react-native-floating-action';
 import Menu from '../../assets/cheeseburger.png';
 import Details from '../../assets/details.png';
-import Edit from '../../assets/edit.png';
 import EStyleSheet from 'react-native-extended-stylesheet';
 import { Colors } from '../../Colors';
 import { ConstString } from '../../Strings';
@@ -12,7 +11,7 @@ const actions = [
   {
     text: 'Restaurant Details',
     icon: Details,
-    name: ConstString.EDIT,
+    name: ConstString.MENU,
     position: 2,
     color: Colors.primaryTextColor,
     textBackground: Colors.primaryTextColor,
@@ -21,7 +20,7 @@ const actions = [
   {
     text: 'Menu',
     icon: Menu,
-    name: ConstString.MENU,
+    name: ConstString.EDIT,
     position: 1,
     color: Colors.primaryTextColor,
     textBackground: Colors.primaryTextColor,
@@ -31,14 +30,17 @@ const actions = [
 export const ExpandableFloatingButton = ({ onPressItem }) => {
   return (
     <View style={styles.fab}>
+
       <FloatingAction
         actions={actions}
-        buttonSize={60}
-        floatingIcon={Edit}
-        iconWidth={28}
-        iconHeight={28}
+        tintColor={'#fff'}
+        buttonSize={55}
+        // floatingIcon={Edit}
+        iconWidth={20}
+        iconHeight={20}
         color={Colors.primaryTextColor}
-        onPressItem={(item) => onPressItem({ item })} />
+        onPressItem={onPressItem}
+      />
     </View>
   );
 };

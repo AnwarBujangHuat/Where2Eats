@@ -3,11 +3,12 @@ import React from 'react';
 import { TextInput } from 'react-native';
 import EStyleSheet from 'react-native-extended-stylesheet';
 
-export const InputField = ({ placeholder, multiline, onChange }) => {
+export const InputField = ({ placeholder, multiline, onChange, value }) => {
   return (
     <TextInput
       style={styles.input}
       placeholder={placeholder}
+      value={value}
       multiline={multiline}
       onChangeText={(text) => onChange(text)}
       overflow="hidden"

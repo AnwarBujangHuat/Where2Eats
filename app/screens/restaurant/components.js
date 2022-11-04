@@ -15,7 +15,7 @@ import { ModalMenuDetails } from '../../components/molecules/ModalMenuDetails';
 import EStyleSheet from 'react-native-extended-stylesheet';
 import { ModalWinner } from '../../components/molecules/ModalWinner';
 import { defaultValue } from '../../store/defaultValue';
-
+import { ExpandableFloatingButton } from '../../components/atoms/ExpandableFloatingButton';
 export const RestaurantComponents = props => {
   const {
     isModalVisible,
@@ -29,7 +29,8 @@ export const RestaurantComponents = props => {
     isPreview,
     closePreviewModal,
     openPreviewModal,
-    goToRating
+    goToRating,
+    onPressItem
   } = props;
   const getCurrent=  current!==undefined?current:defaultValue[0];
   return (
@@ -56,9 +57,9 @@ export const RestaurantComponents = props => {
                 <FoodCard onPress={() => onPress(item)} name={item.name} price={item.price} desc={item.desc}
                           image={item.image} />
               )} />
-          </>
-        )
-        } />
+          </>)} />
+
+      <ExpandableFloatingButton onPressItem={onPressItem}/>
       {isModalVisible &&
         <ModalMenuDetails closeModal={closeModal} isModalVisible={isModalVisible} foodItem={foodItem} />}
       {isPreview&&
