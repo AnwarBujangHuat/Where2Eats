@@ -70,7 +70,7 @@ export const Register = ({ navigation,route }) => {
     launchImagePicker().then(result => setImageUri(result));
   };
   const goBack = () => {
-    navigation.navigate(ConstString.HOME);
+    navigation.goBack({id});
   };
   const setName = (text) => setRestaurantName(text);
   const setDescription = (text) => setRestaurantDesc(text);

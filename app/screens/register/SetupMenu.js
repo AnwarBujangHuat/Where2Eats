@@ -125,7 +125,8 @@ export const SetupMenu = ({ navigation, route }) => {
   const goBack = () => {
     closeActionModal();
     closeModal();
-    navigation.navigate(ConstString.REGISTER,{id});
+    navigation.goBack({id})
+    // navigation.navigate(ConstString.REGISTER,{id});
   };
   const openModal = ({ item: category }) => {
     setModalVisible(true);
