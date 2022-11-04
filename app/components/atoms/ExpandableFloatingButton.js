@@ -11,7 +11,7 @@ const actions = [
   {
     text: 'Restaurant Details',
     icon: Details,
-    name: ConstString.MENU,
+    name: ConstString.EDIT,
     position: 2,
     color: Colors.primaryTextColor,
     textBackground: Colors.primaryTextColor,
@@ -20,7 +20,7 @@ const actions = [
   {
     text: 'Menu',
     icon: Menu,
-    name: ConstString.EDIT,
+    name: ConstString.MENU,
     position: 1,
     color: Colors.primaryTextColor,
     textBackground: Colors.primaryTextColor,

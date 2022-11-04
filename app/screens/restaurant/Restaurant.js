@@ -27,7 +27,20 @@ export const Restaurant = ({ navigation, route }) => {
   const openPreviewModal=()=>setIsPreview(true)
   const goToRating=()=>navigation.navigate(ConstString.RATINGS, { id });
   const onPressItem=(item)=>{
-    navigation.navigate(ConstString.REGISTER,{id})
+    const tempObj = {
+      restaurant: current.restaurant,
+      category: current.category,
+      address: current.address,
+      description: current.description,
+      rate: current.rating,
+      id: current.id,
+      image: current.image,
+      userId:current.userId??1,
+      createdAt:current.createdAt
+    };
+    item===ConstString.EDIT?navigation.navigate(ConstString.REGISTER,{id}):
+    navigation.navigate(ConstString.MENU, { tempObj, id });
+
   }
   const props = {
     isModalVisible,
