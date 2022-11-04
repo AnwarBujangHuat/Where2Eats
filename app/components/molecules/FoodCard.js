@@ -1,14 +1,19 @@
 import React from 'react';
 import {
+  Image,
   ImageBackground,
   Text,
+  TouchableOpacity,
   TouchableWithoutFeedback,
   View,
 } from 'react-native';
 import EStyleSheet from 'react-native-extended-stylesheet';
 import nasiAyam from '../../assets/salad.jpg';
+import edit from '../../assets/editing.png';
+import Delete from '../../assets/bin.png';
+import { Colors } from '../../Colors';
 
-export const FoodCard = ({ onPress, name, price, image, desc }) => {
+export const FoodCard = ({ onPress, name, price, image, desc, editable=false,onPressDelete,onPressEdit }) => {
   return (
     <View style={styles.container}>
       <TouchableWithoutFeedback onPress={onPress}>
@@ -20,10 +25,31 @@ export const FoodCard = ({ onPress, name, price, image, desc }) => {
                 {
                   height: 150,
                   resizeMode: 'contain',
-                }}>
+                }}
+                blurRadius={editable?10:0}>
               <View style={styles.containerPrice}>
                 <Text style={styles.textPrice}>{'RM ' + price}</Text>
               </View>
+              {
+                editable&&
+                <View style={{
+                  flexDirection: 'row',
+                  paddingVertical: 5,
+                  marginTop:20,
+                  alignSelf: 'center',
+                }}>
+                  <TouchableOpacity style={styles.buttonDelete} onPress={onPressDelete}>
+                    <Image style={styles.iconButton} source={Delete} />
+                    <Text style={styles.textButton}>Delete</Text>
+                  </TouchableOpacity>
+
+                  <TouchableOpacity
+                    style={styles.buttonEdit} onPress={onPressEdit}>
+                    <Image style={styles.iconButton} source={edit} />
+                    <Text style={styles.textButton}>Edits</Text>
+                  </TouchableOpacity>
+                </View>
+              }
             </ImageBackground>
           </View>
           <View style={{ flexDirection: 'row' }}>
@@ -45,6 +71,13 @@ const styles = EStyleSheet.create(
       height: 25,
       alignSelf: 'center'
     },
+    iconButton: {
+      width: 16,
+      height: 16,
+      tintColor:'white',
+      marginStart: 5,
+      alignSelf: 'center',
+    },
     container: {
       justifyContent: 'center',
       margin: 10,
@@ -53,6 +86,13 @@ const styles = EStyleSheet.create(
       shadowOpacity: 0.2,
       shadowRadius: 3,
       elevation: 10,
+    },
+    textButton:{
+      padding: 5,
+      color: 'white',
+      fontWeight: 'bold',
+      alignSelf: 'center',
+      fontSize: 14,
     },
     card: {
       backgroundColor: '$secondaryBackGroundColor',
@@ -96,11 +136,28 @@ const styles = EStyleSheet.create(
       marginStart: 10,
       marginTop: 5,
     },
+
     textPrice: {
       padding: 2,
       color: '$secondaryTextColor',
       fontWeight: 'bold',
       fontSize: 12,
+    },
+     buttonEdit:{
+       flexDirection:'row',
+       paddingVertical: 5,
+       paddingHorizontal:10,
+       marginStart:5,
+       backgroundColor: Colors.primaryColor,
+       borderRadius:15,
+     },
+    buttonDelete:{
+      flexDirection:'row',
+      paddingVertical: 5,
+      paddingHorizontal:10,
+      marginEnd:5,
+      backgroundColor: 'red',
+      borderRadius:15,
     },
 
   });
