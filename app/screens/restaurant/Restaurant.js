@@ -26,6 +26,9 @@ export const Restaurant = ({ navigation, route }) => {
   const closeModal = () => setModalVisible(false);
   const openPreviewModal=()=>setIsPreview(true)
   const goToRating=()=>navigation.navigate(ConstString.RATINGS, { id });
+  const onPressItem=(item)=>{
+    navigation.navigate(ConstString.REGISTER,{id})
+  }
   const props = {
     isModalVisible,
     foodItem,
@@ -39,6 +42,7 @@ export const Restaurant = ({ navigation, route }) => {
     closePreviewModal,
     openPreviewModal,
     goToRating,
+    onPressItem
   };
   return (<RestaurantComponents {...props} />
   );
