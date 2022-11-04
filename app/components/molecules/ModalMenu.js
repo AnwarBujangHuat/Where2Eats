@@ -14,15 +14,11 @@ import * as ImagePicker from 'react-native-image-picker';
 import EStyleSheet from 'react-native-extended-stylesheet';
 
 const { width } = Dimensions.get('window');
-
-export const ModalMenu = props => {
-  const [itemName, setItemName] = useState('');
-  const [itemDesc, setItemDesc] = useState('');
-  const [itemPrice, setItemPrice] = useState('');
-  const [imageUri, setImageUri] = useState(undefined);
-
-  const { selectedCategory, Category, isModalVisible, closeModal, setFinalMenu } = props;
-
+export const ModalMenu = ({ selectedCategory, Category, isModalVisible, closeModal, setFinalMenu, foodItem ,updateFoodItem,editorMode=false}) => {
+  const [itemName, setItemName] = useState(foodItem!==undefined?foodItem.name:'');
+  const [itemDesc, setItemDesc] = useState(foodItem!==undefined?foodItem.desc:'');
+  const [itemPrice, setItemPrice] = useState(foodItem!==undefined?foodItem.price:'');
+  const [imageUri, setImageUri] = useState(foodItem!==undefined?foodItem.image:'');
   const launchImageLibrary = () => {
     ImagePicker.launchImageLibrary({
       storageOptions: {
@@ -43,25 +39,31 @@ export const ModalMenu = props => {
     }).then();
   };
   const addItem = () => {
-    if (itemName === '' || itemDesc === '' || imageUri === undefined || itemPrice === '') return alert('Please Complete Input');
-    const menu = selectedCategory.filter(restaurant => restaurant.item === Category);
-    const tempMenu = selectedCategory.filter(restaurant => restaurant.item !== Category);
     const newItem = {
       desc: itemDesc,
       image: imageUri,
       name: itemName,
       price: itemPrice,
+      category:editorMode===true?foodItem.category:Category,
     };
+    if (itemName === '' || itemDesc === '' || imageUri === undefined || itemPrice === '') return alert('Please Complete Input');
+    if(editorMode){
+      updateFoodItem(newItem)
+    }
+    else{
+    const menu = selectedCategory.filter(restaurant => restaurant.item === Category);
+    const tempMenu = selectedCategory.filter(restaurant => restaurant.item !== Category);
     menu[0].data = [...menu[0].data, newItem];
     //update whole Menu
     const finalMenu = [...tempMenu, menu[0]];
     setFinalMenu(finalMenu);
+  }
     closeModal();
   };
   return (
     <>
       {
-        { props } &&
+        { isModalVisible } &&
         <SafeAreaView style={styles.screen}>
           <Modal animationType="slide"
                  transparent visible={isModalVisible}
@@ -72,6 +74,7 @@ export const ModalMenu = props => {
                 <TextInput
                   style={styles.textInput}
                   placeholder={'Enter Item Name'}
+                  value={itemName}
                   clearButtonMode={'always'}
                   placeholderTextColor={EStyleSheet.value('$secondaryTextColor')}
                   onChangeText={setItemName}
@@ -83,6 +86,7 @@ export const ModalMenu = props => {
                   style={styles.descriptionInput}
                   placeholder={'Enter Description'}
                   multiline={true}
+                  value={itemDesc}
                   onChangeText={setItemDesc}
                   placeholderTextColor={EStyleSheet.value('$secondaryTextColor')}
                   overflow="hidden"
@@ -93,6 +97,7 @@ export const ModalMenu = props => {
                   style={styles.textInput}
                   placeholder={'Enter Price RM'}
                   clearButtonMode={'always'}
+                  value={itemPrice}
                   placeholderTextColor={EStyleSheet.value('$secondaryTextColor')}
                   onChangeText={setItemPrice}
                   keyboardType={'numeric'}
@@ -156,8 +161,8 @@ const styles = EStyleSheet.create({
     elevation: 10,
   },
   image: {
-    width: width * 0.7
-    , height: 150,
+    width: width * 0.8,
+    height: 180,
     borderRadius: 10,
   },
 
@@ -189,9 +194,9 @@ const styles = EStyleSheet.create({
     top: '30%',
     left: '50%',
     elevation: 5,
-    transform: [{ translateX: -(width * 0.4) },
+    transform: [{ translateX: -(width * 0.45) },
       { translateY: -90 }],
-    width: width * 0.8,
+    width: width * 0.9,
     backgroundColor: '$backGroundColor',
     borderRadius: 7,
   },

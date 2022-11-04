@@ -51,7 +51,7 @@ export const Register = ({ navigation,route }) => {
     return s4() + s4();
   };
   const goToMenu = () => {
-    const tempObj = {
+    const item = {
       restaurant: restaurantName,
       category: selectedTypes,
       address: restaurantLocation,
@@ -64,7 +64,7 @@ export const Register = ({ navigation,route }) => {
     };
     (restaurantName === '' || restaurantDesc === '' || restaurantLocation === '' || imageUri === undefined) ?
       alert('Please Fill in All Information') :
-      navigation.navigate(ConstString.MENU, { tempObj, id });
+      navigation.navigate(ConstString.MENU, { item, id });
   };
   const launchImageLibrary = () => {
     launchImagePicker().then(result => setImageUri(result));
