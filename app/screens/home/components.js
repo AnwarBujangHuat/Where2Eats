@@ -63,6 +63,7 @@ export const HomeComponents = props => {
         refreshing={isFetching}
         renderItem={renderItem}
         maxToRenderPerBatch={4}
+        initialNumToRender={3}
         removeClippedSubviews={true}
         keyExtractor={(item, index) => index.toString()}
         showsHorizontalScrollIndicator={false} />

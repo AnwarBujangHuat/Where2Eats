@@ -5,6 +5,7 @@ import {
   arrayRemove,
   arrayUnion
 } from 'firebase/firestore';
+import { ConstString } from '../Strings';
 
 export const PopulateRestaurantList = createAsyncThunk('getRestaurantList', async(request, {
   dispatch,
@@ -68,4 +69,24 @@ export const updateRating=createAsyncThunk("AddNewRating",async(request, {
 
   return request;
 });
+export const updateFoodItemFirebase=createAsyncThunk("UpdateFoodItem",async(request, {
+  dispatch,
+  rejectWithValue
+}) => {
+  const {id,foodItem} = request;
+  await firebase.firestore().collection('Restaurants').doc(id).
+    update('food', arrayRemove(foodItem !== undefined ? foodItem : '')).done(() =>
+      firebase.firestore().collection('Restaurants').doc(id).
+        update('food', arrayUnion(foodItem)).done());
 
+  return request;
+});
+export const addFoodItemFirebase=createAsyncThunk("AddFoodItem",async(request, {
+  dispatch,
+  rejectWithValue
+}) => {
+  const {id,newItem} = request;
+  await firebase.firestore().collection('Restaurants').doc(id).update('food[0].data',arrayUnion(newItem))
+    .then((r)=>console.log(r));
+  return request;
+});
