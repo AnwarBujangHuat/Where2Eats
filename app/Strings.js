@@ -27,5 +27,7 @@ export const ConstString = { // name it to routes
   GO_BACK: 'Go Back',
   UPLOADING: 'Uploading',
   MODAL: 'Modal',
-  EDIT:'Edit'
+  EDIT:'Edit',
+  UPDATE:'Update',
+  ADD:'Add'
 };

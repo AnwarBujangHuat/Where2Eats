@@ -85,8 +85,17 @@ export const addFoodItemFirebase=createAsyncThunk("AddFoodItem",async(request, {
   dispatch,
   rejectWithValue
 }) => {
-  const {id,newItem} = request;
-  await firebase.firestore().collection('Restaurants').doc(id).update('food[0].data',arrayUnion(newItem))
-    .then((r)=>console.log(r));
+  const {id,foodItem} = request;
+  await firebase.firestore().collection('Restaurants').doc(id).update('food',arrayUnion(foodItem))
+    .then();
+  return request;
+});
+export const removeFoodItemFirebase=createAsyncThunk("AddFoodItem",async(request, {
+  dispatch,
+  rejectWithValue
+}) => {
+  const {id,item} = request;
+  // await firebase.firestore().collection('Restaurants').doc(id).update('food',arrayRemove(item))
+  // .then();
   return request;
 });
