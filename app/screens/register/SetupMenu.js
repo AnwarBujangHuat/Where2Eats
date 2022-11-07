@@ -1,4 +1,7 @@
-import React, { useState } from 'react';
+import React, {
+  useEffect,
+  useState
+} from 'react';
 import {
   Alert,
   Dimensions,
@@ -72,10 +75,13 @@ export const SetupMenu = ({ navigation, route }) => {
   const dispatch = useDispatch();
   const { item, id } = route.params || {}; //Teacher li
   const currentID = id ?? item.id;
+  const restaurantInfo =id!==undefined? useSelector(getCurrentRestaurant(id)):{};
+  const [isRerender, setIsRender] = useState(false);
+
   //Make sure no unnecessary rerender happen !IMPORTANT
+  if(!isRerender){
   if (id !== undefined) {
     editorMode = true;
-    const restaurantInfo = useSelector(getCurrentRestaurant(id));
     const foodItemLists = [...restaurantInfo.food];
     foodItemLists.forEach(foodItems => {
       switch(foodItems.category) {
@@ -100,9 +106,9 @@ export const SetupMenu = ({ navigation, route }) => {
     initialCategory = [...cleaningUp];
     editorMode = true;
   } else {
-    restaurantInfo = {};
     initialCategory = [];
     editorMode = false;
+  }
   }
   const categoryList = initialRestaurantMenu;
   const [isModalMenuVisible, setIsModalMenuVisible] = useState(false);
@@ -112,7 +118,6 @@ export const SetupMenu = ({ navigation, route }) => {
   const [isActionModalVisible, setActionModal] = useState(false);
   const [Category, setCategory] = useState('');
   const [isSuccessful, setIsSuccessful] = useState(true);
-  const [isRerender, setIsRender] = useState(false);
   const addMenu = () => {
     setActionModal(true);
     action = ConstString.UPLOADING;
