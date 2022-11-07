@@ -60,11 +60,12 @@ export const Register = ({ navigation,route }) => {
       id: guid(),
       image: imageUri,
       userId:user.ID??1,
-      createdAt:new Date().toLocaleString()
+      createdAt:new Date().toLocaleString(),
+      food:[],
     };
     (restaurantName === '' || restaurantDesc === '' || restaurantLocation === '' || imageUri === undefined) ?
       alert('Please Fill in All Information') :
-      navigation.navigate(ConstString.MENU, { item, id });
+    navigation.navigate(ConstString.MENU, { item, id });
   };
   const launchImageLibrary = () => {
     launchImagePicker().then(result => setImageUri(result));

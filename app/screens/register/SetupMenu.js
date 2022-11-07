@@ -22,7 +22,11 @@ import {
 import { restaurantLoading } from '../../store/reducer';
 import addIcon from '../../assets/plus.png';
 import { ModalMenu } from '../../components/molecules/ModalMenu';
-import { AddOne } from '../../store/thunks';
+import {
+  addFoodItemFirebase,
+  AddOne,
+  updateFoodItemFirebase
+} from '../../store/thunks';
 import EStyleSheet from 'react-native-extended-stylesheet';
 import { menuCategories } from './MenuCategories';
 import { firebase } from '../../../src/firebase/config';
@@ -32,54 +36,75 @@ import { ModalMenuDetails } from '../../components/molecules/ModalMenuDetails';
 
 let action;
 let restaurantInfo;
-let initialRestaurantMenu;
 let initialCategory;
-let editorMode=false;
+let editorMode = false;
+
 export const SetupMenu = ({ navigation, route }) => {
+  let initialRestaurantMenu = [
+    {
+      item: ConstString.MAINDISH,
+      data: [],
+      id: 1,
+    },
+    {
+      item: ConstString.SIDEDISH,
+      data: [],
+      id: 2,
+    },
+    {
+      item: ConstString.DESSERT,
+      data: [],
+      id: 3,
+    },
+    {
+      item: ConstString.APPETIZER,
+      data: [],
+      id: 4,
+    },
+    {
+      item: ConstString.DRINKS,
+      data: [],
+      id: 5,
+    },
+
+  ];
   const dispatch = useDispatch();
   const { item, id } = route.params || {}; //Teacher li
-  if(id!==undefined){
-    restaurantInfo=useSelector(getCurrentRestaurant(id))
-    initialRestaurantMenu=[...restaurantInfo.food];
-    initialCategory=initialRestaurantMenu;
-    editorMode=true;
-  }else{
-    restaurantInfo={};
-    initialRestaurantMenu= [
-      {
-        item: ConstString.MAINDISH,
-        data: [],
-        id: 1,
-      },
-      {
-        item: ConstString.SIDEDISH,
-        data: [],
-        id: 2,
-      },
-      {
-        item: ConstString.DESSERT,
-        data: [],
-        id: 3,
-      },
-      {
-        item: ConstString.APPETIZER,
-        data: [],
-        id: 4,
-      },
-      {
-        item: ConstString.DRINKS,
-        data: [],
-        id: 5,
-      },
 
-    ];
-    initialCategory=[];
-    editorMode=false;
+  if (id !== undefined) {
+    const restaurantInfo=useSelector(getCurrentRestaurant(id))
+    const foodItemLists = [...restaurantInfo.food];
+    foodItemLists.forEach(foodItems => {
+      switch(foodItems.category) {
+        case ConstString.MAINDISH:
+          initialRestaurantMenu[0].data.push(foodItems);
+          break;
+        case ConstString.SIDEDISH:
+          initialRestaurantMenu[1].data.push(foodItems)
+          break;
+        case ConstString.DESSERT:
+          initialRestaurantMenu[2].data.push(foodItems)
+          break;
+        case ConstString.APPETIZER:
+          initialRestaurantMenu[3].data.push(foodItems)
+          break;
+        case ConstString.DRINKS:
+          initialRestaurantMenu[4].data.push(foodItems)
+          break;
+      }
+    });
+    const cleaningUp=initialRestaurantMenu.filter(item=>item.data.length>0)
+    initialCategory = [...cleaningUp];
+    editorMode = true;
+  } else {
+    restaurantInfo = {};
+    initialCategory = [];
+    editorMode = false;
   }
   const categoryList = initialRestaurantMenu;
-  const [isModalMenuVisible,setIsModalMenuVisible]=useState(false)
+  const [isModalMenuVisible, setIsModalMenuVisible] = useState(false);
   const [selectedCategory, setSelectedCategory] = useState(initialCategory);
-  const[selectedFoodItem,setSelectedFoodItem]=useState({})
+  const [selectedFoodItem, setSelectedFoodItem] = useState({});
   const [isModalVisible, setModalVisible] = useState(false);
   const [isActionModalVisible, setActionModal] = useState(false);
   const [Category, setCategory] = useState('');
@@ -89,13 +114,12 @@ export const SetupMenu = ({ navigation, route }) => {
     action = ConstString.UPLOADING;
     let totalCount = 0;
     uploadAsFile(item.image, 'profile').then();
-    item.food = selectedCategory;
-    item.food.forEach(
-      (category, categoryIndex) => {
+    selectedCategory.forEach(
+      (category) => {
         ++totalCount;
         category.data.forEach((foodItem, foodItemIndex) => {
           if (foodItem.image !== undefined) {
-            uploadAsFile(foodItem.image, 'menu', category.item, categoryIndex, foodItemIndex).then();
+            uploadAsFile(foodItem.image, 'menu', category.item, foodItemIndex,foodItem).then();
           } else {
             showAlert(foodItem.name);
           }
@@ -122,7 +146,6 @@ export const SetupMenu = ({ navigation, route }) => {
         },
       ],
     );
-
   const onBackButton = () => {
     if (selectedCategory.length > 0) {
       setActionModal(true);
@@ -134,7 +157,7 @@ export const SetupMenu = ({ navigation, route }) => {
   const goBack = () => {
     closeActionModal();
     closeModal();
-    navigation.goBack({id})
+    navigation.goBack({ id });
   };
   const openModal = ({ item: category }) => {
     setModalVisible(true);
@@ -153,7 +176,7 @@ export const SetupMenu = ({ navigation, route }) => {
     };
     return id() + id();
   };
-  const uploadAsFile = async(uri, folder, category, categoryIndex, foodItemIndex, progressCallback) => {
+  const uploadAsFile = async(uri, folder, category, foodItemIndex,foodItem, progressCallback) => {
     if (uri !== undefined) {
       const response = await fetch(uri);
       const blob = await response.blob();
@@ -179,9 +202,9 @@ export const SetupMenu = ({ navigation, route }) => {
             task.snapshot.ref.getDownloadURL().then((fileUrl) => {
                 if (folder === 'profile') {
                   item.image = fileUrl;
-                }
-                else if (folder === 'menu') {
-                  item.food[categoryIndex].data[foodItemIndex].image = fileUrl;
+                } else if (folder === 'menu') {
+                  foodItem.image=fileUrl;
+                  item.food.push(foodItem)
                 }
               }
             );
@@ -192,7 +215,6 @@ export const SetupMenu = ({ navigation, route }) => {
       showAlert('Missing File' + category);
     }
   };
-
   const uploadFinish = () => {
     dispatch(restaurantLoading());
     dispatch(AddOne(item));
@@ -200,24 +222,36 @@ export const SetupMenu = ({ navigation, route }) => {
     navigation.navigate(ConstString.HOME);
 
   };
-  const showMenuDetails=(item)=>{
-    setSelectedFoodItem(item)
-    setIsModalMenuVisible(true)
-  }
-  const closeMenuDetails=()=>setIsModalMenuVisible(false)
-  const onPressEdit=(item)=>{
-    setSelectedFoodItem(item)
-    setModalVisible(true)
+  const renderItem = ({ item }) => {
+    return (
+      <FoodCard onPress={() => showMenuDetails(item)} name={item.name} price={item.price} desc={item.desc}
+                image={item.image} editable={editorMode} onPressDelete={() => onPressDelete(item)}
+                onPressEdit={() => onPressEdit(item)} />
+    );
+  };
+  const showMenuDetails = (item) => {
+    setSelectedFoodItem(item);
+    setIsModalMenuVisible(true);
+  };
+  const closeMenuDetails = () => setIsModalMenuVisible(false);
+  const onPressEdit = (item) => {
+    dispatch(addFoodItemFirebase({ id }));
+    setSelectedFoodItem(item);
+    setCategory('')
+    setModalVisible(true);
     //Edit
-  }
-  const onPressDelete=(item)=>{
-    setSelectedFoodItem(item)
+  };
+  const onPressDelete = (item) => {
+    setSelectedFoodItem(item);
 
     //deleteITem
-  }
-  const updateFoodItem=(newItem)=>{
-    console.log("New Item"+newItem)
-  }
+  };
+  const updateFoodItem = (action, newItem) => {
+    dispatch(addFoodItemFirebase({ id,newItem }));
+
+    // dispatch(addFoodItemFirebase({ id, newItem }));
+
+  };
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.rowContainer}>
@@ -252,7 +286,7 @@ export const SetupMenu = ({ navigation, route }) => {
           optionsLabelStyle={{ fontSize: 16, color: EStyleSheet.value('$primaryTextColor') }}
         />
       </View>
-      <SectionList style={{ marginHorizontal: 10, marginTop: 20, marginBottom: id===undefined?55:10, }}
+      <SectionList style={{ marginHorizontal: 10, marginTop: 20, marginBottom: id === undefined ? 55 : 10, }}
                    sections={selectedCategory}
                    showsVerticalScrollIndicator={false}
                    keyExtractor={(item, index) => item + index}
@@ -282,14 +316,13 @@ export const SetupMenu = ({ navigation, route }) => {
                            data={data}
                            horizontal={true}
                            showsHorizontalScrollIndicator={false}
-                           renderItem={({ item }) => (
-                             <FoodCard onPress={() => showMenuDetails(item)} name={item.name} price={item.price} desc={item.desc}
-                                       image={item.image} editable={editorMode} onPressDelete={() =>onPressDelete(item)} onPressEdit={() =>onPressEdit(item)}/>                           )} />
+                           renderItem={renderItem}>
+                         </FlatList>
                        </View>
                      </>
                    )}
       />
-      {id===undefined &&
+      {id === undefined &&
         <TouchableOpacity
           style={styles.button}
           onPress={addMenu}>
@@ -299,7 +332,8 @@ export const SetupMenu = ({ navigation, route }) => {
       {
         isModalVisible &&
         <ModalMenu isModalVisible={isModalVisible} closeModal={closeModal} selectedCategory={selectedCategory}
-                   setFinalMenu={setSelectedCategory} Category={Category} foodItem={selectedFoodItem} updateFoodItem={updateFoodItem} editorMode={editorMode}/>
+                   setFinalMenu={setSelectedCategory} Category={Category} foodItem={selectedFoodItem}
+                   updateFoodItem={updateFoodItem} editorMode={editorMode} />
       }
       {
         isActionModalVisible &&
@@ -308,7 +342,8 @@ export const SetupMenu = ({ navigation, route }) => {
       }
       {
         isModalMenuVisible &&
-        <ModalMenuDetails closeModal={closeMenuDetails} isModalVisible={isModalMenuVisible} foodItem={selectedFoodItem} />
+        <ModalMenuDetails closeModal={closeMenuDetails} isModalVisible={isModalMenuVisible}
+                          foodItem={selectedFoodItem} />
       }
     </SafeAreaView>
   );

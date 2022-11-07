@@ -13,7 +13,8 @@ import { restaurantLoading } from '../../store/reducer';
 import { PopulateRestaurantList } from '../../store/thunks';
 
 export const Home = ({ navigation }) => {
-  const restaurant = useSelector(getRestaurant);
+  const initialRestaurant = useSelector(getRestaurant);
+  const restaurant=[...initialRestaurant]
   const dispatch = useDispatch();
   const [currentRestaurant, setCurrentRestaurant] = useState(restaurant);
   const [selectedTypes, setSelectedTypes] = useState([]);
