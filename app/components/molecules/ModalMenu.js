@@ -12,13 +12,24 @@ import {
 import addIcon from '../../assets/plus.png';
 import * as ImagePicker from 'react-native-image-picker';
 import EStyleSheet from 'react-native-extended-stylesheet';
+import { ConstString } from '../../Strings';
 
 const { width } = Dimensions.get('window');
-export const ModalMenu = ({ selectedCategory, Category, isModalVisible, closeModal, setFinalMenu, foodItem ,updateFoodItem,editorMode=false}) => {
-  const [itemName, setItemName] = useState(foodItem!==undefined?foodItem.name:'');
-  const [itemDesc, setItemDesc] = useState(foodItem!==undefined?foodItem.desc:'');
-  const [itemPrice, setItemPrice] = useState(foodItem!==undefined?foodItem.price:'');
-  const [imageUri, setImageUri] = useState(foodItem!==undefined?foodItem.image:'');
+export const ModalMenu = ({
+  selectedCategory,
+  Category,
+  isModalVisible,
+  closeModal,
+  setFinalMenu,
+  foodItem,
+  updateFoodItem,
+  editorMode = false
+}) => {
+  const [itemName, setItemName] = useState(Category === '' ? foodItem.name : '');
+  const [itemDesc, setItemDesc] = useState(Category === '' ? foodItem.desc : '');
+  const [itemPrice, setItemPrice] = useState(Category === '' ? foodItem.price : '');
+  const [imageUri, setImageUri] = useState(Category === '' ? foodItem.image : undefined);
+  let action = 'add';
   const launchImageLibrary = () => {
     ImagePicker.launchImageLibrary({
       storageOptions: {
@@ -44,20 +55,31 @@ export const ModalMenu = ({ selectedCategory, Category, isModalVisible, closeMod
       image: imageUri,
       name: itemName,
       price: itemPrice,
-      category:editorMode===true?foodItem.category:Category,
+      category: Category !== '' ? Category : foodItem.category,
     };
     if (itemName === '' || itemDesc === '' || imageUri === undefined || itemPrice === '') return alert('Please Complete Input');
-    if(editorMode){
-      updateFoodItem(newItem)
+    if (Category === '') {
+      updateFoodItem(action, newItem);
+    } else {
+      switch(Category) {
+        case ConstString.MAINDISH:
+          selectedCategory[0].data.push(newItem);
+          break;
+        case ConstString.SIDEDISH:
+          selectedCategory[1].data.push(newItem)
+          break;
+        case ConstString.DESSERT:
+          selectedCategory[2].data.push(newItem)
+          break;
+        case ConstString.APPETIZER:
+          selectedCategory[3].data.push(newItem)
+          break;
+        case ConstString.DRINKS:
+          selectedCategory[4].data.push(newItem)
+          break;
+      }
+      setFinalMenu(selectedCategory);
     }
-    else{
-    const menu = selectedCategory.filter(restaurant => restaurant.item === Category);
-    const tempMenu = selectedCategory.filter(restaurant => restaurant.item !== Category);
-    menu[0].data = [...menu[0].data, newItem];
-    //update whole Menu
-    const finalMenu = [...tempMenu, menu[0]];
-    setFinalMenu(finalMenu);
-  }
     closeModal();
   };
   return (

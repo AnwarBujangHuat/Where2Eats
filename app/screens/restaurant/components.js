@@ -22,6 +22,7 @@ export const RestaurantComponents = props => {
     foodItem,
     onPress,
     current,
+    cleaningUp,
     onBack,
     restaurantIcon,
     closeModal,
@@ -30,15 +31,16 @@ export const RestaurantComponents = props => {
     closePreviewModal,
     openPreviewModal,
     goToRating,
-    onPressItem
+    onPressItem,
+    initialRestaurantMenu
   } = props;
-  const getCurrent=  current!==undefined?current:defaultValue[0];
+  const getCurrent= current!==undefined?current:defaultValue[0];
   return (
     <SafeAreaView style={styles.container}>
       <DetailsHeader image={getCurrent.image} back={onBack} disabled={true} rate={true} goToRating={goToRating} rating={current.rate} />
       <DescriptionLabel name={getCurrent.restaurant} location={getCurrent.address} icon={restaurantIcon} onPress={openPreviewModal}/>
       <SectionList
-        sections={getCurrent.food}
+        sections={cleaningUp}
         keyExtractor={(item, index) => item + index}
         renderItem={(item) => { return null; }}
         stickySectionHeadersEnabled={false}
