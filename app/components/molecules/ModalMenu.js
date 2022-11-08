@@ -29,6 +29,7 @@ export const ModalMenu = ({
   const [itemDesc, setItemDesc] = useState(Category === '' ? foodItem.desc : '');
   const [itemPrice, setItemPrice] = useState(Category === '' ? foodItem.price : '');
   const [imageUri, setImageUri] = useState(Category === '' ? foodItem.image : undefined);
+  let reUpload=false;
   const launchImageLibrary = () => {
     ImagePicker.launchImageLibrary({
       storageOptions: {
@@ -44,6 +45,7 @@ export const ModalMenu = ({
       if (response.didCancel) {
         console.log('User cancelled image picker');
       } else {
+        reUpload=true;
         setImageUri(response.assets[0].uri);
       }
     }).then();
@@ -57,29 +59,14 @@ export const ModalMenu = ({
       category: Category !== '' ? Category : foodItem.category,
     };
     if (itemName === '' || itemDesc === '' || imageUri === undefined || itemPrice === '') return alert('Please Complete Input');
-    switch(Category) {
-      case ConstString.MAINDISH:
-        selectedCategory[0].data.push(newItem);
-        break;
-      case ConstString.SIDEDISH:
-        selectedCategory[1].data.push(newItem);
-        break;
-      case ConstString.DESSERT:
-        selectedCategory[2].data.push(newItem);
-        break;
-      case ConstString.APPETIZER:
-        selectedCategory[3].data.push(newItem);
-        break;
-      case ConstString.DRINKS:
-        selectedCategory[4].data.push(newItem);
-        break;
-    }
+    const Selected=selectedCategory.find(obj=>obj.item===Category)
+    Selected.data.push(newItem);
     setFinalMenu(selectedCategory);
     if (editorMode) {
       Category === '' ?
-        updateFoodItem(ConstString.UPDATE, newItem)
+        updateFoodItem(ConstString.UPDATE, newItem,reUpload)
         :
-        updateFoodItem(ConstString.ADD, newItem);
+        updateFoodItem(ConstString.ADD, newItem,false);
     }
     closeModal();
   };

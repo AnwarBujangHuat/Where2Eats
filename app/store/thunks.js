@@ -5,7 +5,6 @@ import {
   arrayRemove,
   arrayUnion
 } from 'firebase/firestore';
-import { ConstString } from '../Strings';
 
 export const PopulateRestaurantList = createAsyncThunk('getRestaurantList', async(request, {
   dispatch,
@@ -15,22 +14,44 @@ export const PopulateRestaurantList = createAsyncThunk('getRestaurantList', asyn
     const restaurant = [];
     await firebase.firestore().collection('Restaurants').get().then(querySnapshot => {
       querySnapshot.forEach(documentSnapshot => {
-        restaurant.push(documentSnapshot.data());
+        const temp = {id:documentSnapshot.id, ...documentSnapshot.data()}
+        restaurant.push(temp);
       });
     });
     return restaurant.length > 0 ? restaurant : defaultValue;
   }
   catch(e) {
   }
-
 });
 export const AddOne = createAsyncThunk('AddOneRestaurant', async(request, {
   dispatch,
   rejectWithValue
 }) => {
-  const { id } = request;
-  await firebase.firestore().collection('Restaurants').doc(id).set(request).done(() => console.log('Done'),(r)=>console.log(r));
-  return request;
+  try {
+    const response = await firebase.firestore().collection('Restaurants');
+    const result = await response.add(request)
+    // .then(
+    //   response=> {
+    //   console.log({path:'thunk-AddOne-done',data:{id:response.id,data:request}});
+    //   return {id:response.id,data:request};
+    //   })
+    return {id:result.id,data:request};
+  }
+  catch(e) {
+    console.log({path:'thunk-AddOne-catch',data:e})
+    // return rejectWithValue(e);
+  }
+  // firebase.firestore().collection('Restaurants').doc(id).set(request)
+  // .done(
+  //   _ => {
+  //     return rejectWithValue(request);
+  //     },
+  //   r => {
+  //     return rejectWithValue(r)
+  //   });
+  // const response = await requestAddOne(request);
+  // console.log({ path: 'store-addone-thunk', response });
+  // return response ? request : rejectWithValue();
 });
 
 export const changeTheme = createAsyncThunk('ChangeAppTheme', async(request, {
@@ -55,47 +76,46 @@ export const verifyUser = createAsyncThunk('VerifyUser', async(request, {
   const result = request;
   return result;
 });
-export const updateRating=createAsyncThunk("AddNewRating",async(request, {
+export const updateRating = createAsyncThunk('AddNewRating', async(request, {
   dispatch,
   rejectWithValue
 }) => {
-  const { id,userReview,userReviewResult,avg} = request;
+  const { id, userReview, userReviewResult, avg } = request;
   await firebase.firestore().collection('Restaurants').doc(id).
     update('rating', arrayRemove(userReview !== undefined ? userReview : '')).done(() =>
-    firebase.firestore().collection('Restaurants').doc(id).
-      update('rating', arrayUnion(userReviewResult)).done(() =>
-      firebase.firestore().collection('Restaurants').doc(id).update('rate', avg).done(() => {
-      }), () => console.log('Error')));
-
-  return request;
-});
-export const updateFoodItemFirebase=createAsyncThunk("UpdateFoodItem",async(request, {
-  dispatch,
-  rejectWithValue
-}) => {
-  const {id,foodItem} = request;
-  await firebase.firestore().collection('Restaurants').doc(id).
-    update('food', arrayRemove(foodItem !== undefined ? foodItem : '')).done(() =>
       firebase.firestore().collection('Restaurants').doc(id).
-        update('food', arrayUnion(foodItem)).done());
+        update('rating', arrayUnion(userReviewResult)).done(() =>
+        firebase.firestore().collection('Restaurants').doc(id).update('rate', avg).done(() => {
+          console.log('Success');
+        }), () => console.log('Error')));
 
   return request;
 });
-export const addFoodItemFirebase=createAsyncThunk("AddFoodItem",async(request, {
+export const updateFoodItemFirebase = createAsyncThunk('UpdateFoodItem', async(request, {
   dispatch,
   rejectWithValue
 }) => {
-  const {id,foodItem} = request;
-  await firebase.firestore().collection('Restaurants').doc(id).update('food',arrayUnion(foodItem))
-    .then();
+  const { id, newItem, initialFoodItem } = request;
+  await firebase.firestore().collection('Restaurants').doc(id).
+    update('food', arrayRemove(initialFoodItem !== undefined ? initialFoodItem : '')).done(() =>
+      firebase.firestore().collection('Restaurants').doc(id).
+        update('food', arrayUnion(newItem)).done());
+
   return request;
 });
-export const removeFoodItemFirebase=createAsyncThunk("AddFoodItem",async(request, {
+export const addFoodItemFirebase = createAsyncThunk('AddFoodItem', async(request, {
   dispatch,
   rejectWithValue
 }) => {
-  const {id,item} = request;
-  // await firebase.firestore().collection('Restaurants').doc(id).update('food',arrayRemove(item))
-  // .then();
+  const { id, foodItem } = request;
+  await firebase.firestore().collection('Restaurants').doc(id).update('food', arrayUnion(foodItem)).then();
+  return request;
+});
+export const removeFoodItemFirebase = createAsyncThunk('AddFoodItem', async(request, {
+  dispatch,
+  rejectWithValue
+}) => {
+  const { id, item } = request;
+  await firebase.firestore().collection('Restaurants').doc(id).update('food', arrayRemove(item)).done();
   return request;
 });

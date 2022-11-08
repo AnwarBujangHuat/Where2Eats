@@ -32,25 +32,23 @@ import { restaurantLoading } from '../../store/reducer';
 import { BarChart } from 'react-native-chart-kit';
 
 const rating = ['All', '1', '2', '3', '4', '5'];
-
 export const RatingComponents = props => {
   const userInfo = useSelector(getUser);
-  const {
-    onBackButton,
-    restaurantInfo
-  } = props;
   const arrayRating={
     1:[],
     2:[],
     3:[],
     4:[],
     5:[],
-  }
+  };
+
+  const {
+    onBackButton,
+    restaurantInfo
+  } = props;
   const { id } = restaurantInfo;
   const dispatch = useDispatch();
   const restaurantsRating = [...restaurantInfo.rating ?? []];
-  const overallRate = [...restaurantInfo.rating ?? []];
-  const [ratingCount,setRatingCount]=useState(arrayRating)
   const [restaurantList, setRestaurantList] = useState(restaurantsRating);
   const [isSelectedRating, setSelectedRating] = useState(rating[0]);
   const onSelectedRating = (item) => {
@@ -84,7 +82,19 @@ export const RatingComponents = props => {
   const [userReview, setUserReview] = useState(userReviews);
   const [isFirstTimeRate, setFirstTime] = useState(true);
   const [isCurrentRating, setCurrentRating] = useState(restaurantInfo.rate ?? 3.5);
+  const [ratingCount,setRatingCount]=useState(arrayRating)
+  const [isRender,setRerender]=useState(false);
 
+  useEffect(() => {
+    if (userReviews !== '') {
+      setFirstTime(false);
+    }
+    sortRate(restaurantsRating);
+    if (index > -1) {
+      restaurantsRating.splice(index, 1);
+    }
+
+  }, []);
   const sortRate=(restaurantsRating)=>{
     // const ratings = restaurantsRating?.map(item=>item.rating)
     // let rate =[]
@@ -118,15 +128,7 @@ export const RatingComponents = props => {
       }
     })
     setRatingCount(arrayRating)
-  }
-  useEffect(() => {
-    if (userReviews !== '') {
-      setFirstTime(false);
-    }
-    sortRate(overallRate);
-  }, []);
-  if (index > -1) {
-    restaurantsRating.splice(index, 1);
+    setRerender(true);
   }
   const openModal = () => {
     setModalRate(true);
