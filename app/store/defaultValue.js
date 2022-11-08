@@ -2,7 +2,6 @@ import { ConstString } from '../Strings';
 
 export const defaultValue = [
   {
-    id: '5yGZTuwy98cXhrEsf4qS9AxzWel2',
     restaurant: 'Restaurant Westerner',
     category: ConstString.WESTERN,
     address: 'No.19 Jalan Kasim Gorilla',
@@ -81,7 +80,7 @@ export const defaultValue = [
     ]
   },
   {
-    id: 2,
+
     restaurant: 'Bombay Palace',
     category: ConstString.INDIAN,
     address: 'No.19 Jalan Kasim Babun',
@@ -145,7 +144,7 @@ export const defaultValue = [
     ]
   },
   {
-    id: 3,
+
     restaurant: 'Mohd Chan Restaurant',
     category: ConstString.CHINESE,
     address: 'No.19 Jalan Kasim Babun',
@@ -195,7 +194,7 @@ export const defaultValue = [
     ]
   },
   {
-    id: 4,
+
     restaurant: 'Kedai Makan Moksu',
     category: ConstString.MALAY,
     address: 'No.19 Jalan Kasim Babun',
@@ -253,7 +252,7 @@ export const defaultValue = [
     ]
   },
   {
-    id: 5,
+
     restaurant: 'Kedai Dayang Sarawak',
     category: ConstString.BORNEO,
     address: 'No.19 Jalan Kasim Babun',
@@ -320,7 +319,7 @@ export const defaultValue = [
     ]
   },
   {
-    id: 6,
+
     restaurant: 'Sushi King',
     category: ConstString.JAPANESE,
     address: 'No.19 Jalan Kasim Babun',
@@ -386,7 +385,7 @@ export const defaultValue = [
     ]
   },
   {
-    id: 7,
+
     restaurant: 'Cat Cafe',
     category: 'Drinks',
     address: 'No.19 Jalan Kasim Babun',
@@ -443,7 +442,7 @@ export const defaultValue = [
     ]
   },
   {
-    id: 8,
+
     restaurant: 'My Kori',
     category: ConstString.DESSERT,
     address: 'No.19 Jalan Kasim Babun',
