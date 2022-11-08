@@ -80,7 +80,7 @@ export const Reducer = createSlice({
   extraReducers: builder => {
     builder.addCase(PopulateRestaurantList.fulfilled, (state, { payload }) => {
       if (state.RESTAURANT.loading === 'pending') {
-        restaurantAdapter.setAll(state.RESTAURANT, payload);
+        restaurantAdapter.addMany(state.RESTAURANT, payload);
         state.RESTAURANT.loading = 'idle';
       }
       return state;
@@ -92,13 +92,19 @@ export const Reducer = createSlice({
       return state;
     });
 
-    builder.addCase(AddOne.fulfilled, (state, payload) => {
+    builder.addCase(AddOne.fulfilled, (state, { meta, payload }) => {
       if (state.RESTAURANT.loading === 'pending') {
-        restaurantAdapter.addOne(state.RESTAURANT, payload);
+        console.log(payload)
+        const {id,data} = payload
+        const temp={id:id,...data}
+        restaurantAdapter.addOne(state.RESTAURANT, temp);
         state.RESTAURANT.loading = 'idle';
       }
       return state;
     });
+    builder.addCase(AddOne.rejected, (state, payload) => {
+      console.log({path: "store-addOne-rejected", state, payload})
+    })
     builder.addCase(changeTheme.fulfilled, (state, { payload }) => {
       state.THEME = payload;
       return state;

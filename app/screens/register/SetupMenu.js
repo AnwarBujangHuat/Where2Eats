@@ -29,7 +29,8 @@ import {
   addFoodItemFirebase,
   AddOne,
   PopulateRestaurantList,
-  removeFoodItemFirebase
+  removeFoodItemFirebase,
+  updateFoodItemFirebase
 } from '../../store/thunks';
 import EStyleSheet from 'react-native-extended-stylesheet';
 import { menuCategories } from './MenuCategories';
@@ -44,6 +45,7 @@ let initialCategory;
 let editorMode = false;
 
 export const SetupMenu = ({ navigation, route }) => {
+  const dispatch = useDispatch();
   let initialRestaurantMenu = [
     {
       item: ConstString.MAINDISH,
@@ -72,16 +74,13 @@ export const SetupMenu = ({ navigation, route }) => {
     },
 
   ];
-  const dispatch = useDispatch();
   const { item, id } = route.params || {}; //Teacher li
   const currentID = id ?? item.id;
   const restaurantInfo =id!==undefined? useSelector(getCurrentRestaurant(id)):{};
   const [isRerender, setIsRender] = useState(false);
-
   //Make sure no unnecessary rerender happen !IMPORTANT
   if(!isRerender){
   if (id !== undefined) {
-    editorMode = true;
     const foodItemLists = [...restaurantInfo.food];
     foodItemLists.forEach(foodItems => {
       switch(foodItems.category) {
@@ -219,6 +218,7 @@ export const SetupMenu = ({ navigation, route }) => {
                   dispatch(addFoodItemFirebase({ id, foodItem })).done(() => {
                     dispatch(restaurantLoading());
                     dispatch(PopulateRestaurantList());
+                    setIsRender(false)
                   });
 
                 }
@@ -233,7 +233,7 @@ export const SetupMenu = ({ navigation, route }) => {
   };
   const uploadFinish = () => {
     dispatch(restaurantLoading());
-    dispatch(AddOne(item));
+    dispatch(AddOne(item)).done();
     setActionModal(false);
     navigation.navigate(ConstString.HOME);
 
@@ -265,21 +265,22 @@ export const SetupMenu = ({ navigation, route }) => {
           initialRestaurantMenu[0].data.splice(index, 1);
           break;
         case ConstString.SIDEDISH:
-          initialRestaurantMenu[1].data.push(index, 1);
+          initialRestaurantMenu[1].data.splice(index, 1);
           break;
         case ConstString.DESSERT:
-          initialRestaurantMenu[2].data.push(index, 1);
+          initialRestaurantMenu[2].data.splice(index, 1);
           break;
         case ConstString.APPETIZER:
-          initialRestaurantMenu[3].data.push(index, 1);
+          initialRestaurantMenu[3].data.splice(index, 1);
           break;
         case ConstString.DRINKS:
-          initialRestaurantMenu[4].data.push(index, 1);
+          initialRestaurantMenu[4].data.splice(index, 1);
           break;
       }
+      dispatch(restaurantLoading());
+      dispatch(PopulateRestaurantList());
     }
-    setIsRender(true);
-
+    setTimeout(()=>    setIsRender(true),500)
   };
   const onPressDelete = (item) => {
     Alert.alert('This Cannot be UNDO!',
@@ -295,11 +296,23 @@ export const SetupMenu = ({ navigation, route }) => {
       { cancelable: true }
     );
   };
-  const updateFoodItem = (action, newItem) => {
+  const updateFoodItem = async(action, newItem, reUpload) => {
+    const initialFoodItem = selectedFoodItem ?? {};
     if (action === ConstString.ADD) {
-      uploadAsFile(newItem.image, 'menu', newItem.category, 0, newItem).then();
-    } else {
-
+      return uploadAsFile(newItem.image, 'menu', newItem.category, 0, newItem).then();
+    }
+    else {
+      if (reUpload) {
+        await uploadAsFile(newItem.image, 'menu', newItem.category, 0, newItem);
+        await dispatch(updateFoodItemFirebase({ id, newItem, initialFoodItem }));
+        return;
+      }
+      await dispatch(updateFoodItemFirebase({ id, newItem, initialFoodItem }));
+      setTimeout(async() => {
+        await dispatch(restaurantLoading());
+        await dispatch(PopulateRestaurantList());
+      }, 500);
+      setIsRender(!isRerender);
     }
 
   };
@@ -350,6 +363,7 @@ export const SetupMenu = ({ navigation, route }) => {
                          <Image style={styles.icon} source={menuIcon(item)}></Image>
                          <View style={{ flexDirection: 'row', right: 5, position: 'absolute' }}>
                            <TouchableOpacity style={styles.buttonContainer} onPress={() => {
+                             // console.log({item})
                              openModal({ item });
                            }}>
                              <Image style={styles.addIcon} source={addIcon} />

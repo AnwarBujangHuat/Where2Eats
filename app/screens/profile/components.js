@@ -40,8 +40,8 @@ export const ProfileComponents = props => {
     const db = firebase.firestore();
     const batch = db.batch();
     defaultValue.forEach((doc) => {
-      const docRef = db.collection(ConstString.RESTAURANT).doc(guid()); //automatically generate unique id
-      batch.set(docRef, doc);
+      const docRef = db.collection(ConstString.RESTAURANT).doc(); //automatically generate unique id
+      batch.set(docRef,doc);
     });
     batch.commit().then(() => console.log('Congrats'));
   };
