@@ -59,10 +59,12 @@ export const ModalMenu = ({
       category: Category !== '' ? Category : foodItem.category,
     };
     if (itemName === '' || itemDesc === '' || imageUri === undefined || itemPrice === '') return alert('Please Complete Input');
-    const Selected=selectedCategory.find(obj=>obj.item===Category)
-    Selected.data.push(newItem);
-    setFinalMenu(selectedCategory);
-    if (editorMode) {
+    if(!editorMode){
+      const Selected=selectedCategory.find(obj=>obj.item===Category)
+      Selected.data.push(newItem);
+      setFinalMenu(selectedCategory);
+    }
+    else if (editorMode) {
       Category === '' ?
         updateFoodItem(ConstString.UPDATE, newItem,reUpload)
         :

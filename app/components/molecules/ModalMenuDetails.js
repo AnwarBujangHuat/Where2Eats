@@ -28,15 +28,16 @@ export const ModalMenuDetails = ({ closeModal, isModalVisible, foodItem }) => {
             <View style={styles.viewWrapper}>
               <View style={styles.modalView}>
                 <FastImage
+                  resizeMode={FastImage.resizeMode.cover}
                   source={image !== undefined ? {
                     uri: image,
                     priority: FastImage.priority.high,
                   } : nasiAyam}
                   style={
                     {
-                      height: 200,
-                      resizeMode: 'contain',
+                      height: 270,
                     }}>
+
                 </FastImage>
                 <View style={styles.container}>
                   <Text style={styles.header}>{name}</Text>

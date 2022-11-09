@@ -9,133 +9,34 @@ import {
 } from 'react-native';
 import { Rating } from 'react-native-ratings';
 
-import React, {
-  useEffect,
-  useState
-} from 'react';
+import React from 'react';
 import { BackButton } from '../../components/atoms/BackButton';
 import EStyleSheet from 'react-native-extended-stylesheet';
 import { RatingCard } from '../../components/molecules/RatingCard';
 import addIcon from '../../assets/plus.png';
-import { RatingButton } from '../../components/atoms/RatingButton';
 import { ModalGiveRating, } from '../../components/molecules/ModalGiveRating';
-import {
-  useDispatch,
-  useSelector
-} from 'react-redux';
-import { getUser } from '../../store/selector';
-import {
-  PopulateRestaurantList,
-  updateRating
-} from '../../store/thunks';
-import { restaurantLoading } from '../../store/reducer';
 import { BarChart } from 'react-native-chart-kit';
 
-const rating = ['All', '1', '2', '3', '4', '5'];
 export const RatingComponents = props => {
-  const userInfo = useSelector(getUser);
-  const arrayRating={
-    1:[],
-    2:[],
-    3:[],
-    4:[],
-    5:[],
-  };
-
   const {
     onBackButton,
-    restaurantInfo
+    restaurantInfo,
+    userInfo,
+    isModalRateOpen,
+    closeModal,
+    submit,
+    userReview,
+    isCurrentRating,
+    restaurantRemove,
+    ratingCount,
+    openModal,
+    isFirstTimeRate,
+    RenderItem,
+    restaurantList,
+    renderRateCard,
+    rating
   } = props;
   const { id } = restaurantInfo;
-  const dispatch = useDispatch();
-  const restaurantsRating = [...restaurantInfo.rating ?? []];
-  const [restaurantList, setRestaurantList] = useState(restaurantsRating);
-  const [isSelectedRating, setSelectedRating] = useState(rating[0]);
-  const onSelectedRating = (item) => {
-    let selectedRestaurantRate=[];
-    switch(item){
-      case "All":
-        selectedRestaurantRate=restaurantsRating
-        break;
-      case "1":
-        selectedRestaurantRate=ratingCount[1]
-        break;
-      case "2":
-        selectedRestaurantRate=ratingCount[2]
-        break;
-      case "3":
-        selectedRestaurantRate=ratingCount[3]
-        break;
-      case "4":
-        selectedRestaurantRate=ratingCount[4]
-        break;
-      case "5":
-        selectedRestaurantRate=ratingCount[5]
-        break;
-    }
-    setRestaurantList(selectedRestaurantRate)
-    setSelectedRating(item);
-  };
-  const userReviews = restaurantsRating.find(item => item?.userId === userInfo.ID) ?? '';
-  const index = restaurantsRating.indexOf(userReviews);
-  const [isModalRateOpen, setModalRate] = useState(false);
-  const [userReview, setUserReview] = useState(userReviews);
-  const [isFirstTimeRate, setFirstTime] = useState(true);
-  const [isCurrentRating, setCurrentRating] = useState(restaurantInfo.rate ?? 3.5);
-  const [ratingCount,setRatingCount]=useState(arrayRating)
-  const [isRender,setRerender]=useState(false);
-
-  useEffect(() => {
-    if (userReviews !== '') {
-      setFirstTime(false);
-    }
-    sortRate(restaurantsRating);
-    if (index > -1) {
-      restaurantsRating.splice(index, 1);
-    }
-
-  }, []);
-  const sortRate=(restaurantsRating)=>{
-    // const ratings = restaurantsRating?.map(item=>item.rating)
-    // let rate =[]
-    // //loop five times for each rating level
-    // //filter corresponding and get the count
-    // for (let i = 0; i < 5; i++) {
-    // const temp= ratings.filter(item=>item===i+1).length
-    //   rate.push(temp)
-    // }
-    // console.log({rate,test})
-    // setRatingCount(rate.reverse())
-    restaurantsRating.forEach((obj,index)=>
-    {
-      const currentItem=restaurantsRating[index]
-      switch(obj.rating){
-        case 1:
-          arrayRating[1].push(currentItem)
-          break;
-        case 2:
-          arrayRating[2].push(currentItem)
-          break;
-        case 3:
-          arrayRating[3].push(currentItem)
-          break;
-        case 4:
-          arrayRating[4].push(currentItem)
-          break;
-        case 5:
-          arrayRating[5].push(currentItem)
-          break;
-      }
-    })
-    setRatingCount(arrayRating)
-    setRerender(true);
-  }
-  const openModal = () => {
-    setModalRate(true);
-  };
-  const closeModal = () =>{
-    setModalRate(false);
-  };
   const SelfReview = () => {
     return (
       !isFirstTimeRate ?
@@ -144,98 +45,68 @@ export const RatingComponents = props => {
         <Text style={styles.reviewText}>No Review</Text>
     );
   };
-  const RenderItem = ({ item }) => {
-    return (
-      <RatingButton rating={item} onPress={onSelectedRating} selected={isSelectedRating} />
-    );
-  };
-  const renderRateCard = ({ item }) => {
-    return (
-      <RatingCard userReview={item} />
-    );
-  };
-  const submit = (text, newRate = 1) => {
-    const currentDate = new Date().toLocaleString();
-    const userReviewResult = {
-      userId: userInfo.ID,
-      userName: userInfo.NAME,
-      review: text,
-      rating: parseInt(newRate),
-      createdAt: isFirstTimeRate ? currentDate : userReview.createdAt,
-      updatedAt: isFirstTimeRate ? '' : currentDate
-    };
-    const avg = Math.round((restaurantsRating.reduce((r, c) => r + c.rating, 0) + newRate) / (restaurantsRating.length + 1) * 10) / 10;
-    setCurrentRating(avg !== undefined ? avg : 2.5);
-    setFirstTime(false);
-    dispatch(updateRating({ id, userReview, userReviewResult, avg })).then(() => {
-        setUserReview(userReviewResult);
-        setTimeout(() => {
-          dispatch(restaurantLoading());
-          dispatch(PopulateRestaurantList()).then(()=>{
-            sortRate([...restaurantsRating,userReviewResult])
-            closeModal()
-          });
-        }, 3000);
-      },
-      () => {
-        console.log('There Was An Error While Sending Your Review');
-      });
-  };
-
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.rowContainer}>
         <BackButton onPress={onBackButton}></BackButton>
         <Text style={styles.header}>{restaurantInfo.restaurant + ' Customer Review'}</Text>
       </View>
-      <View style={{marginHorizontal: 15}}>
-        <View style={{ flexDirection:'row'}}>
-          <View style={{alignSelf:'center',alignContent:'center', paddingRight: 30}}>
-          <Text style={styles.rating}> {isCurrentRating.toFixed(1)}
-          </Text>
-          <Rating
-            type="star"
-            fractions={1}
-            startingValue={isCurrentRating}
-            readonly={true}
-            showReadOnlyText={false}
-            tintColor={EStyleSheet.value('$backGroundColor')}
-            style={{paddingStart:10}}
-            imageSize={18}
-            ratingTextColor={EStyleSheet.value('$secondaryTextColor')}
-          />
-          <View style={{paddingStart:10,}}>
-            <Text style={{fontSize:12,color:EStyleSheet.value('$secondaryTextColor'),paddingVertical:5,alignSelf:'flex-start'}}> {restaurantsRating.length+(!isFirstTimeRate?1:0)+" Reviews"}
+      <View style={{ marginHorizontal: 15 }}>
+        <View style={{ flexDirection: 'row' }}>
+          <View style={{ alignSelf: 'center', alignContent: 'center', paddingRight: 30 }}>
+            <Text style={styles.rating}> {isCurrentRating.toFixed(1)}
             </Text>
-          </View>
+            <Rating
+              type="star"
+              fractions={1}
+              startingValue={isCurrentRating}
+              readonly={true}
+              showReadOnlyText={false}
+              tintColor={EStyleSheet.value('$backGroundColor')}
+              style={{ paddingStart: 10 }}
+              imageSize={18}
+              ratingTextColor={EStyleSheet.value('$secondaryTextColor')}
+            />
+            <View style={{ paddingStart: 10, }}>
+              <Text style={
+                {
+                  fontSize: 12,
+                  color: EStyleSheet.value('$secondaryTextColor'),
+                  paddingVertical: 5,
+                  alignSelf: 'flex-start'
+                }
+              }>
+                {restaurantRemove.length + 1 + ' Reviews'}
+              </Text>
+            </View>
 
-        </View>
+          </View>
           <BarChart
             style={{
-              transform: [{ rotate: '90deg'}],
-              marginStart:30,
+              transform: [{ rotate: '90deg' }],
+              marginStart: 30,
               paddingRight: 0,
             }}
             data={{
-              labels: [5,4,3,2,1],
+              labels: [5, 4, 3, 2, 1],
               datasets: [
                 {
-                  data: [ratingCount[5].length,ratingCount[4].length,ratingCount[3].length,ratingCount[2].length,ratingCount[1].length]
-                // data:ratingCount
+                  data: [ratingCount[5].length, ratingCount[4].length, ratingCount[3].length, ratingCount[2].length, ratingCount[1].length]
+                  // data:ratingCount
                 }
               ]
             }}
             chartConfig={{
-              backgroundGradientFrom: "transparent",
+              backgroundGradientFrom: 'transparent',
               backgroundGradientFromOpacity: 0,
-              backgroundGradientTo: "transparent",
-              fillShadowGradient:EStyleSheet.value('$secondaryTextColor'),
-              fillShadowGradientFrom:EStyleSheet.value('$secondaryTextColor'),
-              fillShadowGradientFromOpacity:1,
-              fillShadowGradientOpacity:1,
-              fillShadowGradientTo:EStyleSheet.value('$secondaryTextColor'),
-              fillShadowGradientToOffset:1,
-              fillShadowGradientFromOffset:1,
+              backgroundGradientTo: 'transparent',
+              fillShadowGradient: EStyleSheet.value('$secondaryTextColor'),
+              fillShadowGradientFrom: EStyleSheet.value('$secondaryTextColor'),
+              fillShadowGradientFromOpacity: 1,
+              fillShadowGradientOpacity: 1,
+              fillShadowGradientTo: EStyleSheet.value('$secondaryTextColor'),
+              fillShadowGradientToOffset: 1,
+              fillShadowGradientFromOffset: 1,
               backgroundGradientToOpacity: 0,
               color: (opacity = 1) => EStyleSheet.value('$secondaryTextColor'),
               labelColor: (opacity = 1) => EStyleSheet.value('$secondaryTextColor'),
@@ -342,10 +213,10 @@ const styles = EStyleSheet.create({
     alignContent: 'center',
   },
   ratingContainer: {
-    alignSelf:'center',
-    alignItems:'center',
-    backgroundColor:'white',
-    alignContent:'center'
+    alignSelf: 'center',
+    alignItems: 'center',
+    backgroundColor: 'white',
+    alignContent: 'center'
   },
   reviewText: {
     fontSize: 14,
