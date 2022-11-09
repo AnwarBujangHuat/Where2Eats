@@ -7,3 +7,4 @@ export * from './restaurant/Restaurant';
 export * from './Wheel/WheelOfFortune';
 export * from './profile/Profile';
 export * from './ratings'
+export * from './register/SetupMenu';

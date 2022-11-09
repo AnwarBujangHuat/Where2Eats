@@ -44,12 +44,6 @@ export const Register = ({ navigation,route }) => {
   const [restaurantDesc, setRestaurantDesc] = useState(initialRestaurantDesc)??'';
   const [imageUri, setImageUri] = useState(initialRestaurantImage??undefined);
   const [restaurantLocation, setRestaurantLocation] = useState(initialRestaurantLocation??'');
-  const guid = () => {
-    const s4 = () => {
-      return Math.floor((1 + Math.random()) * 0x10000).toString(16).substring(1);
-    };
-    return s4() + s4();
-  };
   const goToMenu = () => {
     const item = {
       restaurant: restaurantName,
@@ -68,7 +62,7 @@ export const Register = ({ navigation,route }) => {
     navigation.navigate(ConstString.MENU, { item, id });
   };
   const launchImageLibrary = () => {
-    launchImagePicker().then(result => setImageUri(result));
+    launchImagePicker().then(result => setImageUri(result==="cancel"?undefined:result));
   };
   const goBack = () => {
     navigation.goBack({id});

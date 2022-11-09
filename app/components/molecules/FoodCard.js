@@ -12,6 +12,7 @@ import nasiAyam from '../../assets/salad.jpg';
 import edit from '../../assets/editing.png';
 import Delete from '../../assets/bin.png';
 import { Colors } from '../../Colors';
+import FastImage from 'react-native-fast-image';
 
 export const FoodCard = ({ onPress, name, price, image, desc, editable=false,onPressDelete,onPressEdit }) => {
   return (
@@ -23,10 +24,10 @@ export const FoodCard = ({ onPress, name, price, image, desc, editable=false,onP
               source={image !== undefined ? { uri: image } : nasiAyam}//image ? image : addImage
               style={
                 {
-                  height: 150,
-                  resizeMode: 'contain',
+                  height: 160,
                 }}
-                blurRadius={editable?10:0}>
+              resizeMode={FastImage.resizeMode.cover}
+              blurRadius={editable?10:0}>
               <View style={styles.containerPrice}>
                 <Text style={styles.textPrice}>{'RM ' + price}</Text>
               </View>
@@ -98,7 +99,7 @@ const styles = EStyleSheet.create(
       backgroundColor: '$secondaryBackGroundColor',
       borderRadius: 10,
       width: 220,
-      height: 250,
+      height: 260,
       alignSelf: 'baseline',
       overflow: 'hidden',
       paddingBottom: 10,
