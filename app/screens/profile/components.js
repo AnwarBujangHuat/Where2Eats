@@ -30,12 +30,6 @@ export const ProfileComponents = props => {
     onDone,
     setUpdatedInfo
   } = props;
-  const guid = () => {
-    const s4 = () => {
-      return Math.floor((1 + Math.random()) * 0x10000).toString(16).substring(1);
-    };
-    return s4() + s4();
-  };
   const onPress = () => {
     const db = firebase.firestore();
     const batch = db.batch();
@@ -76,7 +70,8 @@ export const ProfileComponents = props => {
           padding: 20,
           borderRadius: 20,
           marginTop: 20,
-        }} onPress={onPress}>
+        }} onPress={onPress}
+        disabled={true}>
           <Text style={{ color: 'white', fontSize: 16, alignSelf: 'center' }}>My Intern is Too Lazy</Text>
         </TouchableOpacity>
       </View>

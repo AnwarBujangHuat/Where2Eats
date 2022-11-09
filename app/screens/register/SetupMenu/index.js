@@ -2,23 +2,46 @@ import React, {
   useEffect,
   useState
 } from 'react';
-import { Alert } from 'react-native';
+import {
+  Alert,
+  Dimensions,
+  FlatList,
+  Image,
+  SafeAreaView,
+  SectionList,
+  Text,
+  TouchableOpacity,
+  View
+} from 'react-native';
 import { ConstString } from '../../../Strings';
+import { BackButton } from '../../../components/atoms/BackButton';
+import SelectBox from 'react-native-multi-selectbox';
+import { xorBy } from 'lodash';
+import { FoodCard } from '../../../components/molecules/FoodCard';
 import {
   useDispatch,
   useSelector
 } from 'react-redux';
+import { restaurantLoading } from '../../../store/reducer';
+import addIcon from '../../../assets/plus.png';
+import { ModalMenu } from '../../../components/molecules/ModalMenu';
 import {
   addFoodItemFirebase,
   AddOne,
+  PopulateRestaurantList,
   removeFoodItemFirebase,
   updateFoodItemFirebase
 } from '../../../store/thunks';
-import { icons } from '../../../Const';
+import EStyleSheet from 'react-native-extended-stylesheet';
+import { menuCategories } from '../MenuCategories';
 import { firebase } from '../../../../src/firebase/config';
+import { ModalUploading } from '../../../components/molecules/ModalUploading';
 import { getCurrentRestaurant } from '../../../store/selector';
-import { SetupMenuComponents } from './components';
-
+import { ModalMenuDetails } from '../../../components/molecules/ModalMenuDetails';
+let action;
+let initialCategory;
+let restaurantInfo;
+// let editorMode = false;
 export const SetupMenu = ({ navigation, route }) => {
   const dispatch = useDispatch();
   const categories = [
@@ -27,61 +50,118 @@ export const SetupMenu = ({ navigation, route }) => {
     { id: 3, item: ConstString.DESSERT },
     { id: 4, item: ConstString.APPETIZER },
     { id: 5, item: ConstString.DRINKS },
-  ];
-  const { item, id } = route.params || {};
+  ]
+  // let initialRestaurantMenu = [
+  //   {
+  //     item: ConstString.MAINDISH,
+  //     data: [],
+  //     id: 1,
+  //   },
+  //   {
+  //     item: ConstString.SIDEDISH,
+  //     data: [],
+  //     id: 2,
+  //   },
+  //   {
+  //     item: ConstString.DESSERT,
+  //     data: [],
+  //     id: 3,
+  //   },
+  //   {
+  //     item: ConstString.APPETIZER,
+  //     data: [],
+  //     id: 4,
+  //   },
+  //   {
+  //     item: ConstString.DRINKS,
+  //     data: [],
+  //     id: 5,
+  //   },
+  //
+  // ];
+  const { item, id } = route.params || {}; //Teacher li
   const editorMode = !!id;
-  let action;//clear - on back
   const restaurantInfo = useSelector(getCurrentRestaurant(id));
-  const foodItemLists = editorMode ? [...restaurantInfo?.food] : [];
-  const [foodList, setFoodList] = useState(foodItemLists);
+  const foodItemLists= restaurantInfo ? [...restaurantInfo?.food] : [];
   const [selectedCategory, setSelectedCategory] = useState(categories);
+
   const [isModalMenuVisible, setIsModalMenuVisible] = useState(false);
   const [isModalVisible, setModalVisible] = useState(false);
   const [selectedFoodItem, setSelectedFoodItem] = useState({});
   const [isActionModalVisible, setActionModal] = useState(false);
-  const [onSearch, setOnSearch] = useState(false);
   const [Category, setCategory] = useState('');
+
   const [isSuccessful, setIsSuccessful] = useState(true);
-  const [Menu, setMenu] = useState([]);
+  // const categoryList = initialRestaurantMenu;
+  const [isRerender, setIsRender] = useState(false);
 
-  useEffect(() => {
-    selectedCat();
-  }, [foodList]);
+  // const sortFoodItem=()=>{
+  //   foodItemLists.forEach(foodItems => {
+  //     switch(foodItems.category) {
+  //       case ConstString.MAINDISH:
+  //         initialRestaurantMenu[0].data.push(foodItems);
+  //         break;
+  //       case ConstString.SIDEDISH:
+  //         initialRestaurantMenu[1].data.push(foodItems);
+  //         break;
+  //       case ConstString.DESSERT:
+  //         initialRestaurantMenu[2].data.push(foodItems);
+  //         break;
+  //       case ConstString.APPETIZER:
+  //         initialRestaurantMenu[3].data.push(foodItems);
+  //         break;
+  //       case ConstString.DRINKS:
+  //         initialRestaurantMenu[4].data.push(foodItems);
+  //         break;
+  //     }
+  //   });
+  // }
+  useEffect(()=>{
+    // editorMode = currentID !== undefined;
+    // sortFoodItem()
+    // const cleaningUp = initialRestaurantMenu.filter(item => item.data.length > 0);
+    // setSelectedCategory([...cleaningUp])
+    const tempCategory = categories.filter( category => foodItemLists.find( food => food.category === category.item))
+    setSelectedCategory(tempCategory)
+  },[])
 
-  useEffect(() => {
-    setFoodList(foodItemLists);
-  }, [restaurantInfo]);
-
-  const selectedCat = () => {
-    const tempCategory = categories.filter(category => foodList.find(food => food.category === category.item));
-    setSelectedCategory(tempCategory);
+  const addMenu = () => {
+    setActionModal(true);
+    action = ConstString.UPLOADING;
+    let totalCount = 0;
+    uploadAsFile(item.image, 'profile').then();
+    selectedCategory.forEach(
+      (category) => {
+        ++totalCount;
+        category.data.forEach((foodItem, foodItemIndex) => {
+          if (foodItem.image !== undefined) {
+            uploadAsFile(foodItem.image, 'menu', category.item, foodItemIndex, foodItem).then();
+          } else {
+            showAlert(foodItem.name);
+          }
+        });
+      }
+    );
+    setTimeout(() => {
+      if (isSuccessful) {
+        uploadFinish();
+      } else {
+        console.log(isSuccessful);
+      }
+    }, 5000);
   };
-  const showAlert = (action, foodItem, result) => {
-    result === ConstString.SUCCESS ?
-      Alert.alert(
-        'Congratulation',
-        foodItem + ' is Successfully ' + action,
-        [
-          {
-            onPress: () => closeModal(),
-            text: 'Okay',
-          },
-        ],
-      )
-      :
-      //Error Handling Alert
-      Alert.alert(
-        'Sorry',
-        foodItem + ' cannot be ' + action,
-        [
-          {
-            onPress: () => closeModal(),
-            text: 'Okay',
-          },
-        ],
-      );
-
-  };
+  const showAlert = (name) =>
+    Alert.alert(
+      name + ' Was Not Found',
+      'Please Make Sure Image Exist',
+      [
+        {
+          text: 'Okay',
+          onPress: () => setActionModal(false),
+          style: 'cancel',
+        },
+      ],
+    );
   const onBackButton = () => {
     if (selectedCategory.length > 0 && !editorMode) {
       setActionModal(true);
@@ -95,59 +175,30 @@ export const SetupMenu = ({ navigation, route }) => {
     closeModal();
     navigation.goBack({ id });
   };
-  const closeModal = () => setModalVisible(false);
-  const closeActionModal = () => setActionModal(false);
-  const menuIcon = (item) => icons[item] ?? icons?.def;
+  const openModal = ({ item: category }) => {
+    setModalVisible(true);
+    setCategory(category);
+  };
+  const closeModal = () => {
+    setModalVisible(false);
+  };
+  const closeActionModal = () => {
+    setActionModal(false);
+  };
+  const menuIcon = (item) => menuCategories.find(icons => icons.item === item).icon;
   const generateId = () => {
     const id = () => {
       return Math.floor((1 + Math.random()) * 0x10000).toString(16).substring(1);
     };
     return id() + id();
   };
-  const showMenuDetails = (item) => {
-    setSelectedFoodItem(item);
-    setIsModalMenuVisible(true);
-  };
-  const closeMenuDetails = () => setIsModalMenuVisible(false);
-
-  //Upload new Restaurant to Firebase
-  const uploadMenu = async() => {
-    setActionModal(true);
-    action = ConstString.UPLOADING;
-    const resultUploadImageProfile = await uploadAsFile(item.image, 'profile');
-    const { data, error } = resultUploadImageProfile;
-    if (error) return showAlert(ConstString.ADD, 'Profile Image', ConstString.FAILED);
-    item.image = data;
-
-    //Looping thru all foodItem Added
-    for (const foodItem of Menu) {
-      if (foodItem.image) {
-        const resultUploadImage = await uploadAsFile(foodItem.image, 'menu', foodItem.category, 0, foodItem);
-        const { data, error } = resultUploadImage;
-        if (error) return showAlert(ConstString.ADD, foodItem.name, ConstString.FAILED);
-        foodItem.image = data;
-      }
-    }
-    await uploadFinish();
-  };
-  const uploadFinish = async() => {
-    item.food = Menu;
-    const addRestaurantResult = await dispatch(AddOne(item));
-    const { result } = addRestaurantResult;
-    if (result) return showAlert(ConstString.ADD, item.restaurant, ConstString.FAILED);
-    setActionModal(false);
-    navigation.navigate(ConstString.HOME);
-  };
-  //Upload Image to Firebase
-  const uploadAsFile = async(uri, folder, category, index, foodItem, imageName, progressCallback) => {
+  const uploadAsFile = async(uri, folder, category, foodItemIndex, foodItem, progressCallback) => {
     if (uri !== undefined) {
       const response = await fetch(uri);
       const blob = await response.blob();
-      const imageIndex = imageName?.indexOf('media.jpg');
-      const name = imageName ? imageName.slice(imageIndex - 8, imageIndex) + 'media.jpg' : generateId() + 'media.jpg';
-      // const date = '_' + new Date().getTime();
-      const restaurantName = editorMode ? restaurantInfo.restaurant : item.restaurant;
-      const pathName = folder === 'profile' ? restaurantName + '/' + folder + '/' + 'profilemedia.jpg' : restaurantName + '/' + folder + '/' + category + '/' + name;
+      let name = generateId() + 'media.jpg';
+      const date="_"+new Date().getTime();
+      const pathName = folder === 'profile' ? id + '/' + folder + '/' + name : item.restaurant+date + '/' + folder + '/' + category + '/' + name;
       const metadata = {
         contentType: 'image/jpeg',
       };
@@ -158,18 +209,26 @@ export const SetupMenu = ({ navigation, route }) => {
           'state_changed',
           (snapshot) => {
             progressCallback && progressCallback(snapshot.bytesTransferred / snapshot.totalBytes);
+            const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
           },
           (error) => {
+            setIsSuccessful(false);
             reject(error);
           },
           () => {
             task.snapshot.ref.getDownloadURL().then((fileUrl) => {
                 if (folder === 'profile') {
-                  resolve({ type: 'profile', data: fileUrl });
-                  // item.image = fileUrl;
-                } else {
-                  resolve({ type: 'menu', data: fileUrl });
-                  // Menu[index].image = fileUrl;
+                  item.image = fileUrl;
+                } else if (folder === 'menu' && !editorMode) {
+                  foodItem.image = fileUrl;
+                  item.food.push(foodItem);
+                } else if (editorMode && folder === 'menu') {
+                  foodItem.image = fileUrl;
+                  dispatch(addFoodItemFirebase({ id, foodItem })).done(() => {
+                    dispatch(restaurantLoading());
+                    dispatch(PopulateRestaurantList());
+                    setIsRender(false)
+                  });
                 }
               }
             );
@@ -180,156 +239,298 @@ export const SetupMenu = ({ navigation, route }) => {
       showAlert('Missing File' + category);
     }
   };
+  const uploadFinish = () => {
+    dispatch(restaurantLoading());
+    dispatch(AddOne(item)).done();
+    setActionModal(false);
+    navigation.navigate(ConstString.HOME);
 
-  //Add New Food Item
-  const onPressAdd = ({ item: category }) => {
-    setModalVisible(true);
-    setCategory(category);
   };
-  const addFoodItem = async(foodItem) => {
-    if (!editorMode) {
-      const temp = [...Menu, foodItem];
-      setMenu(temp);
-      closeModal();
-    } else {
-      const resultUploadImage = await uploadAsFile(foodItem.image, 'menu', foodItem.category, 0, foodItem);
-      const { data } = resultUploadImage;
-      foodItem.image = data;
-      const resultUploadFoodItem = await dispatch(addFoodItemFirebase({ id, foodItem }));
-      const { payload } = resultUploadFoodItem;
-      //If fail to add Firestore
-      if (!payload.result) return showAlert(ConstString.ADD, foodItem.name, ConstString.FAILED);
-
-      showAlert(ConstString.ADD, foodItem.name, ConstString.SUCCESS);
-    }
+  const renderItem = ({ item }) => {
+    return (
+      <FoodCard onPress={() => showMenuDetails(item)} name={item.name} price={item.price} desc={item.desc}
+                image={item.image} editable={editorMode} onPressDelete={() => onPressDelete(item)}
+                onPressEdit={() => onPressEdit(item)} />
+    );
   };
-
-  //Edit Existing Food Item
+  const showMenuDetails = (item) => {
+    setSelectedFoodItem(item);
+    setIsModalMenuVisible(true);
+  };
+  const closeMenuDetails = () => setIsModalMenuVisible(false);
   const onPressEdit = (item) => {
     setSelectedFoodItem(item);
     setCategory('');
     setModalVisible(true);
+    //Edit
   };
-  const updateFoodItem = async(action, foodItem, reUpload) => {
-    const initialFoodItem = selectedFoodItem ?? {};
-    const index = foodItemLists.indexOf(initialFoodItem);
-    //New restaurant update temp Menu
-    if (!editorMode) {
-      const menuIndex = Menu.indexOf(initialFoodItem);
-      Menu[menuIndex] = foodItem;
-      setMenu(Menu);
-      closeModal();
-    }
-    //update firestore Menu
-    else {
-      //update
-
-      //no need to upload new image
-      if (reUpload) {
-        const updateFoodItemResult = await dispatch(updateFoodItemFirebase({ id, foodItem, initialFoodItem, index }));
-        const { payload } = updateFoodItemResult;
-
-        //If fail to update Firestore
-        if (!payload.result) return showAlert(ConstString.UPDATE, foodItem.name, ConstString.FAILED);
-
-        showAlert(ConstString.UPDATE, foodItem.name, ConstString.SUCCESS);
-      } else {
-        //upload and replace foodItem image in firebase and storage
-        const resultUploadImage = await uploadAsFile(foodItem.image, 'menu', foodItem.category, 0, foodItem, initialFoodItem.image);
-        const { data } = resultUploadImage;
-        foodItem.image = data;
-
-        //upload new food Item to firestore
-        const resultUploadFoodItem = await dispatch(updateFoodItemFirebase({ id, foodItem, initialFoodItem, index }));
-        const { payload } = resultUploadFoodItem;
-
-        //If fail to update Firestore
-        if (!payload.result) return showAlert(ConstString.UPDATE, foodItem.name, ConstString.FAILED);
-
-        showAlert(ConstString.UPDATE, foodItem.name, ConstString.SUCCESS);
-      }
-    }
-  };
-
-  //Delete Food Item
+  // const removeFoodItem = (item) => {
+  //   const indexDelete = selectedCategory.find(cat => cat.item === item.category);
+  //   const index = indexDelete.data.indexOf(item);
+  //   if (index > -1) {
+  //     switch(item.category) {
+  //       case ConstString.MAINDISH:
+  //         initialRestaurantMenu[0].data.splice(index, 1);
+  //         break;
+  //       case ConstString.SIDEDISH:
+  //         initialRestaurantMenu[1].data.splice(index, 1);
+  //         break;
+  //       case ConstString.DESSERT:
+  //         initialRestaurantMenu[2].data.splice(index, 1);
+  //         break;
+  //       case ConstString.APPETIZER:
+  //         initialRestaurantMenu[3].data.splice(index, 1);
+  //         break;
+  //       case ConstString.DRINKS:
+  //         initialRestaurantMenu[4].data.splice(index, 1);
+  //         break;
+  //     }
+  //   }
+  //   setTimeout(()=>setIsRender(true),500)
+  // };
   const onPressDelete = (item) => {
+    const itemIndex = foodItemLists.indexOf(item);
     Alert.alert('This Cannot be UNDO!',
       'Do you wish to delete ' + item.name,
       [
         {
-          text: 'Delete', onPress: () => removeFoodItem(id, item)
-          , style: 'destructive'
+          text: 'Delete', onPress: () =>
+            dispatch(removeFoodItemFirebase({ id, item ,itemIndex })).done(), style: 'destructive'
         },
         { text: 'Cancel' },
       ],
       { cancelable: true }
     );
   };
-  const removeFoodItem = async(id, foodItem) => {
-    const index = foodItemLists.indexOf(foodItem);
-    if (!editorMode) {
-      const menuIndex = Menu.indexOf(selectedFoodItem);
-      const temp = [...Menu];
-      temp.splice(menuIndex, 1);
-      setMenu(temp);
-    } else {
-      const restaurantName = restaurantInfo?.restaurant;
-      const resultRemoveFoodItem = await dispatch(removeFoodItemFirebase({ id, foodItem, index, restaurantName }));
-      const { payload } = resultRemoveFoodItem;
-      //If fail to add Firestore
-      if (!payload.result) return showAlert(ConstString.DELETE, foodItem.name, ConstString.FAILED);
-
-      showAlert(ConstString.DELETE, foodItem.name, ConstString.SUCCESS);
+  const updateFoodItem = async(action, newItem, reUpload) => {
+    const initialFoodItem = selectedFoodItem ?? {};
+    if (action === ConstString.ADD) {
+      return uploadAsFile(newItem.image, 'menu', newItem.category, 0, newItem).then();
+    }
+    else {
+      if (reUpload) {
+        await uploadAsFile(newItem.image, 'menu', newItem.category, 0, newItem);
+        await dispatch(updateFoodItemFirebase({ id, newItem, initialFoodItem }));
+        return;
+      }
+      await dispatch(updateFoodItemFirebase({ id, newItem, initialFoodItem }));
+      setTimeout(async() => {
+        await dispatch(restaurantLoading());
+        await dispatch(PopulateRestaurantList());
+      }, 500);
+      setIsRender(!isRerender);
     }
 
   };
-
-  //Search
-  const onChangeText = (text) => {
-    if (!text) return setFoodList(foodItemLists);
-    const updateFoodList = foodItemLists.filter(item => item.name.toLowerCase().includes(text.toLowerCase()));
-    setFoodList(updateFoodList);
-
-  };
-  const onPressSearch = () => {
-    setOnSearch(!onSearch);
-    setFoodList([...restaurantInfo?.food]);
-    if (!onSearch) selectedCat();
-  };
-
-  const props = {
-    onBackButton,
-    categories,
-    selectedCategory,
-    setSelectedCategory,
-    menuIcon,
-    onPressAdd,
-    showMenuDetails,
-    editorMode,
-    onPressDelete,
-    onPressEdit,
-    foodItemLists,
-    Menu,
-    uploadMenu,
-    isModalVisible,
-    isActionModalVisible,
-    isModalMenuVisible,
-    closeModal,
-    addFoodItem,
-    Category,
-    selectedFoodItem,
-    updateFoodItem,
-    closeActionModal,
-    goBack,
-    isSuccessful,
-    closeMenuDetails,
-    action,
-    onSearch,
-    onChangeText,
-    onPressSearch,
-    foodList
-  };
   return (
-    <SetupMenuComponents {...props} />
+    <SafeAreaView style={styles.container}>
+      <View style={styles.rowContainer}>
+        <BackButton onPress={onBackButton}></BackButton>
+        <Text style={styles.title}>{ConstString.MENU_BOOK}</Text>
+      </View>
+      <Text style={{
+        marginTop: 20,
+        fontSize: 16,
+        fontWeight: 'bold',
+        paddingStart: 15,
+        color: EStyleSheet.value('$tertiaryColor')
+      }}>Add
+        Category</Text>
+      <View style={styles.inputContainer}>
+        <SelectBox
+          label="Select Menu Category"
+          options={categories}
+          labelStyle={styles.label}
+          inputFilterStyle={styles.label}
+          listEmptyLabelStyle={styles.label}
+          selectedValues={selectedCategory}
+          onMultiSelect={(item) => setSelectedCategory(xorBy(selectedCategory, [item], 'id'))}
+          onTapClose={(item) => setSelectedCategory(xorBy(selectedCategory, [item], 'id'))}
+          isMulti
+          arrowIconColor={EStyleSheet.value('$primaryColor')}
+          searchIconColor={EStyleSheet.value('$primaryColor')}
+          toggleIconColor={EStyleSheet.value('$primaryColor')}
+          multiOptionContainerStyle={{ backgroundColor: EStyleSheet.value('$primaryColor') }}
+          multiOptionsLabelStyle={{ fontSize: 16, color: 'white' }}
+          selectedItemStyle={{ fontSize: 16, color: EStyleSheet.value('$primaryTextColor') }}
+          optionsLabelStyle={{ fontSize: 16, color: EStyleSheet.value('$primaryTextColor') }}
+        />
+      </View>
+      {/*<SectionList style={{ marginHorizontal: 10, marginTop: 20, marginBottom: id === undefined ? 55 : 10, }}*/}
+      {/*             sections={selectedCategory}*/}
+      {/*             showsVerticalScrollIndicator={false}*/}
+      {/*             keyExtractor={(item, index) => item + index}*/}
+      {/*             renderItem={(item) => { return null; }}*/}
+      {/*             stickySectionHeadersEnabled={false}*/}
+      {/*             renderSectionHeader={({ section }) => {*/}
+      {/*               console.log({section})*/}
+      {/*               const {item} = section*/}
+      {/*               return  (*/}
+      {/*                 <>*/}
+      {/*                   <View style={{ flexDirection: 'row', alignItems: 'center', marginBottom: 10, }}>*/}
+      {/*                     <Text style={styles.header}>{item}</Text>*/}
+      {/*                     <Image style={styles.icon} source={menuIcon(item)}></Image>*/}
+      {/*                     <View style={{ flexDirection: 'row', right: 5, position: 'absolute' }}>*/}
+      {/*                       <TouchableOpacity style={styles.buttonContainer} onPress={() => {*/}
+      {/*                         // console.log({item})*/}
+      {/*                         openModal({ item });*/}
+      {/*                       }}>*/}
+      {/*                         <Image style={styles.addIcon} source={addIcon} />*/}
+      {/*                         <Text style={{*/}
+      {/*                           padding: 5,*/}
+      {/*                           color: 'white',*/}
+      {/*                           fontWeight: 'bold',*/}
+      {/*                           fontSize: 12,*/}
+      {/*                         }}>New Item</Text>*/}
+      {/*                       </TouchableOpacity>*/}
+      {/*                     </View>*/}
+      {/*                   </View>*/}
+      {/*                   <View>*/}
+      {/*                     <FlatList*/}
+      {/*                       data={foodItemLists.filter(foods => foods.category === item)}*/}
+      {/*                       horizontal={true}*/}
+      {/*                       showsHorizontalScrollIndicator={false}*/}
+      {/*                       renderItem={renderItem}>*/}
+      {/*                     </FlatList>*/}
+      {/*                   </View>*/}
+      {/*                 </>*/}
+      {/*               )}*/}
+      {/*             }*/}
+      {/*/>*/}
+      <FlatList
+        data={selectedCategory}
+        keyExtractor={(item) => item.id}
+        renderItem={({ item }) => {
+        const category = item.item
+        return  (
+          <>
+            <View style={{ flexDirection: 'row', alignItems: 'center', marginBottom: 10, }}>
+              <Text style={styles.header}>{category}</Text>
+              <Image style={styles.icon} source={menuIcon(category)}></Image>
+              <View style={{ flexDirection: 'row', right: 5, position: 'absolute' }}>
+                <TouchableOpacity style={styles.buttonContainer} onPress={() => {
+                  openModal({ item:category });
+                }}>
+                  <Image style={styles.addIcon} source={addIcon} />
+                  <Text style={{
+                    padding: 5,
+                    color: 'white',
+                    fontWeight: 'bold',
+                    fontSize: 12,
+                  }}>New Item</Text>
+                </TouchableOpacity>
+              </View>
+            </View>
+            <View>
+              <FlatList
+                data={foodItemLists.filter(foods => foods.category === category)}
+                horizontal={true}
+                showsHorizontalScrollIndicator={false}
+                renderItem={renderItem}>
+              </FlatList>
+            </View>
+          </>
+        )}
+      } />
+      {id === undefined &&
+        <TouchableOpacity
+          style={styles.button}
+          onPress={addMenu}>
+          <Text style={styles.buttonText}>Finish Setup Store</Text>
+        </TouchableOpacity>
+      }
+      {
+        isModalVisible &&
+        <ModalMenu isModalVisible={isModalVisible} closeModal={closeModal} selectedCategory={selectedCategory}
+                   setFinalMenu={setSelectedCategory} Category={Category} foodItem={selectedFoodItem}
+                   updateFoodItem={updateFoodItem} editorMode={editorMode} />
+      }
+      {
+        isActionModalVisible &&
+        <ModalUploading isModalVisible={isActionModalVisible} closeModal={closeActionModal} action={action}
+                        goBack={goBack} isSuccess={isSuccessful} />
+      }
+      {
+        isModalMenuVisible &&
+        <ModalMenuDetails closeModal={closeMenuDetails} isModalVisible={isModalMenuVisible}
+                          foodItem={selectedFoodItem} />
+      }
+    </SafeAreaView>
   );
 };
+const styles = EStyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: '$backGroundColor',
+  },
+  label: {
+    color: '$secondaryTextColor',
+    fontSize: 13,
+  },
+  buttonContainer: {
+    padding: 7,
+    alignSelf: 'center',
+    flexDirection: 'row',
+    backgroundColor: '$primaryColor',
+    borderRadius: 20,
+    shadowOffset: { width: -2, height: 4 },
+    shadowColor: '$primaryColor',
+    shadowOpacity: 0.2,
+    shadowRadius: 3,
+    elevation: 10,
+  },
+  icon: {
+    width: 25,
+    height: 25,
+    alignSelf: 'center',
+  },
+  addIcon: {
+    width: 10,
+    height: 10,
+    marginStart: 5,
+    alignSelf: 'center',
+  },
+  inputContainer: {
+    marginTop: 10,
+    marginHorizontal: 20,
+    shadowOffset: { width: -2, height: 2 },
+    shadowColor: '$primaryColor',
+    shadowOpacity: 0.2,
+    shadowRadius: 3,
+  },
+  header: {
+    fontSize: 16,
+    fontWeight: 'bold',
+    margin: 10,
+    color: '$primaryTextColor',
+  },
+  button: {
+    backgroundColor: '$lightPrimaryColor',
+    alignItems: 'center',
+    padding: 15,
+    borderRadius: 10,
+    width: Dimensions.get('screen').width - 30,
+    textTransform: 'uppercase',
+    bottom: 30,
+    position: 'absolute',
+    marginHorizontal: 15,
+  },
+  title: {
+    fontSize: 16,
+    fontWeight: 'bold',
+    textAlign: 'center',
+    color: '$primaryTextColor',
+    alignSelf: 'center',
+    marginStart: 10,
+  },
+  buttonText: {
+    fontSize: 16,
+    color: 'white',
+    fontWeight: 'bold',
+  },
+  rowContainer: {
+    marginTop: 10,
+    flexDirection: 'row',
+    alignContent: 'center',
+  },
+});

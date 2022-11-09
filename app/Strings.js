@@ -29,5 +29,7 @@ export const ConstString = { // name it to routes
   MODAL: 'Modal',
   EDIT:'Edit',
   UPDATE:'Update',
-  ADD:'Add'
+  ADD:'Add',
+  SUCCESS:'Success',
+  FAILED:'Failed'
 };
