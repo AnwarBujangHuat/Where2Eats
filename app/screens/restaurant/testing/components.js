@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import {
   FlatList,
   Image,
@@ -6,24 +6,24 @@ import {
   Text,
   View,
 } from 'react-native';
-import { DetailsHeader } from '../../components/molecules/DetailsHeader';
-import { DescriptionLabel } from '../../components/molecules/DescriptionLabel';
-import { FoodCard } from '../../components/molecules/FoodCard';
-import { ModalMenuDetails } from '../../components/molecules/ModalMenuDetails';
+import { DetailsHeader } from '../../../components/molecules/DetailsHeader';
+import { DescriptionLabel } from '../../../components/molecules/DescriptionLabel';
+import { FoodCard } from '../../../components/molecules/FoodCard';
+import { ModalMenuDetails } from '../../../components/molecules/ModalMenuDetails';
 import EStyleSheet from 'react-native-extended-stylesheet';
-import { ModalWinner } from '../../components/molecules/ModalWinner';
-import { defaultValue } from '../../store/defaultValue';
-import { ExpandableFloatingButton } from '../../components/atoms/ExpandableFloatingButton';
-import { ConstString } from '../../Strings';
+import { ModalWinner } from '../../../components/molecules/ModalWinner';
+import { defaultValue } from '../../../store/defaultValue';
+import { ExpandableFloatingButton } from '../../../components/atoms/ExpandableFloatingButton';
+import { ConstString } from '../../../Strings';
 
-export const RestaurantComponents = props => {
+export const SortedRestaurantComponents = props => {
   const {
     isModalVisible,
     foodItem,
     current,
     onPress,
-    foodItemList,
-    selectedCategory,
+    // foodItemList,
+    // selectedCategory,
     onBack,
     restaurantIcon,
     closeModal,
@@ -34,14 +34,42 @@ export const RestaurantComponents = props => {
     goToRating,
     onPressItem,
   } = props;
-  // const foodItemList=defaultValue[1].food
-  // const selectedCategory=[
-  //   { id: 1, item: ConstString.MAINDISH },
-  //   { id: 2, item: ConstString.SIDEDISH },
-  //   { id: 3, item: ConstString.DESSERT },
-  //   { id: 4, item: ConstString.APPETIZER },
-  //   { id: 5, item: ConstString.DRINKS },
-  // ]
+  const foodItemList = defaultValue[1].food;
+  const selectedCategory = [
+    { id: 1, item: ConstString.MAINDISH },
+    { id: 2, item: ConstString.SIDEDISH },
+    { id: 3, item: ConstString.DESSERT },
+    { id: 4, item: ConstString.APPETIZER },
+    { id: 5, item: ConstString.DRINKS },
+  ];
+  let menu = {
+    'Main Dish': [],
+    'Side Dish': [],
+    'Dessert': [],
+    'Appetizer': [],
+    'Drinks': []
+  };
+  foodItemList.forEach(food => {
+    console.log({path:"foodItem-ForEach",data:food.category})
+    switch(food.category) {
+      case ConstString.MAINDISH:
+        menu[ConstString.MAINDISH].push(food);
+        break;
+      case ConstString.SIDEDISH:
+        menu[ConstString.SIDEDISH].push(food);
+        break;
+      case ConstString.DESSERT:
+        menu[ConstString.DESSERT].push(food);
+        break;
+      case ConstString.APPETIZER:
+        menu[ConstString.APPETIZER].push(food);
+        break;
+      case ConstString.DRINKS:
+        menu[ConstString.DRINKS].push(food);
+        break;
+    }
+  });
+
   const renderItem = ({ item }) => {
     return (
       <FoodCard onPress={() => onPress(item)} name={item.name} price={item.price} desc={item.desc}
@@ -49,14 +77,13 @@ export const RestaurantComponents = props => {
     );
   };
   const renderMenu=(category)=>{
-    return foodItemList.filter(foods => foods.category === category)
-    // return foodItemList.filter(foods => console.log(foods.category))
+    return menu[category]
   }
   return (
     <SafeAreaView style={styles.container}>
       <DetailsHeader image={current.image} back={onBack} disabled={true} rate={true} goToRating={goToRating}
                      rating={current.rate} />
-      <DescriptionLabel name={current.restaurant} location={current.address} icon={restaurantIcon}
+      <DescriptionLabel name={'Sorted: ' + current.restaurant} location={current.address} icon={restaurantIcon}
                         onPress={openPreviewModal} />
       <FlatList
         data={selectedCategory}

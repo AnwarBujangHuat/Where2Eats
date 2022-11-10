@@ -2,17 +2,18 @@ import React from 'react';
 import {
   Dimensions,
   FlatList,
-  Modal,
   SafeAreaView,
   Text,
   TouchableOpacity,
   View
 } from 'react-native';
+import Modal from 'react-native-modal';
+
 import EStyleSheet from 'react-native-extended-stylesheet';
 
 const { width } = Dimensions.get('window');
 
-export const ModalMenuButton = ({ isModalVisible, onPress }) => {
+export const ModalMenuButton = ({ isModalVisible, onPress,closeModal}) => {
   const MENU_OPTIONS = [
     {
       id: 1,
@@ -35,9 +36,14 @@ export const ModalMenuButton = ({ isModalVisible, onPress }) => {
         <SafeAreaView>
           <Modal animationType="fade"
                  transparent visible={isModalVisible}
-                 presentationStyle="overFullScreen">
-            <View style={styles.viewWrapper}>
-              <View style={styles.modalView}>
+                 style={{position:'absolute',
+                   top:20,
+                   left:-10,
+                 }}
+                 onBackdropPress={()=>closeModal()}
+                 >
+            <View
+              style={styles.modalView}>
                 <FlatList
                   data={MENU_OPTIONS}
                   renderItem={({ item }) => {
@@ -50,7 +56,6 @@ export const ModalMenuButton = ({ isModalVisible, onPress }) => {
                   }}
                   showsHorizontalScrollIndicator={false} />
               </View>
-            </View>
           </Modal>
         </SafeAreaView>
       }
@@ -85,12 +90,11 @@ const styles = EStyleSheet.create({
 
   },
   modalView: {
-    padding: 20,
+    paddingVertical: 20,
     justifyContent: 'center',
     radius: 20,
     elevation: 5,
-    width: width * 0.5,
-    backgroundColor: '$secondaryBackGroundColor',
+    backgroundColor: '$ModalBackground',
     borderRadius: 7,
   },
 

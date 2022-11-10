@@ -43,7 +43,9 @@ export const DarkTheme = {
   $backGroundColor: '#1A1125',
   $greyBackground: '#1d1233',
   $lightBackground: '#f4eafe',
-  $secondaryPurple: '#8e7dc4'
+  $secondaryPurple: '#8e7dc4',
+  $ModalBackground: '#1d1233',
+
 };
 export const LightTheme = {
   $theme: 'Light',
@@ -59,5 +61,5 @@ export const LightTheme = {
   $secondaryBackGroundColor: '#fff',
   $greyBackground: '#F5F5F5',
   $lightBackground: '#f4eafe',
-  $secondaryPurple: '#8e7dc4'
+  $ModalBackground: '#1a004f'
 };

@@ -12,6 +12,7 @@ import {
   getUser
 } from '../../store/selector';
 import { ConstFoodCategory } from '../home/ConstFoodCategory';
+import { Alert } from 'react-native';
 
 let initialRestaurantname;
 let initialRestaurantDesc;
@@ -61,8 +62,30 @@ export const Register = ({ navigation,route }) => {
       alert('Please Fill in All Information') :
     navigation.navigate(ConstString.MENU, { item, id });
   };
-  const launchImageLibrary = () => {
-    launchImagePicker().then(result => setImageUri(result==="cancel"?undefined:result));
+  const launchImageLibrary = async() => {
+    const response= await launchImagePicker()
+    //* Exit if response empty *//
+    if(!response) return Alert.alert('Please Pick Image in JPG or PNG format',
+      '',
+      [
+        { text: 'Okay' },
+      ],
+      { cancelable: true }
+    );
+
+    //* Exit if there's error *//
+    const { errorCode, assets } = response
+    if(errorCode || assets === []) return Alert.alert('Please Pick Image in JPG or PNG format',
+      '',
+      [
+        { text: 'Okay' },
+      ],
+      { cancelable: true }
+    );
+
+    //* Code proccessing *//
+    setImageUri(assets[0].uri)
+
   };
   const goBack = () => {
     navigation.goBack({id});
