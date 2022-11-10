@@ -22,7 +22,6 @@ import {
   useDispatch,
   useSelector
 } from 'react-redux';
-import { restaurantLoading } from '../../../store/reducer';
 import addIcon from '../../../assets/plus.png';
 import { ModalMenu } from '../../../components/molecules/ModalMenu';
 import {
@@ -38,10 +37,6 @@ import { firebase } from '../../../../src/firebase/config';
 import { ModalUploading } from '../../../components/molecules/ModalUploading';
 import { getCurrentRestaurant } from '../../../store/selector';
 import { ModalMenuDetails } from '../../../components/molecules/ModalMenuDetails';
-let action;
-let initialCategory;
-let restaurantInfo;
-// let editorMode = false;
 export const SetupMenu = ({ navigation, route }) => {
   const dispatch = useDispatch();
   const categories = [
@@ -51,107 +46,47 @@ export const SetupMenu = ({ navigation, route }) => {
     { id: 4, item: ConstString.APPETIZER },
     { id: 5, item: ConstString.DRINKS },
   ]
-  // let initialRestaurantMenu = [
-  //   {
-  //     item: ConstString.MAINDISH,
-  //     data: [],
-  //     id: 1,
-  //   },
-  //   {
-  //     item: ConstString.SIDEDISH,
-  //     data: [],
-  //     id: 2,
-  //   },
-  //   {
-  //     item: ConstString.DESSERT,
-  //     data: [],
-  //     id: 3,
-  //   },
-  //   {
-  //     item: ConstString.APPETIZER,
-  //     data: [],
-  //     id: 4,
-  //   },
-  //   {
-  //     item: ConstString.DRINKS,
-  //     data: [],
-  //     id: 5,
-  //   },
-  //
-  // ];
-  const { item, id } = route.params || {}; //Teacher li
+  const { item, id } = route.params || {};
   const editorMode = !!id;
+  let action;
   const restaurantInfo = useSelector(getCurrentRestaurant(id));
-  const foodItemLists= restaurantInfo ? [...restaurantInfo?.food] : [];
+  const foodItemLists= editorMode ? [...restaurantInfo?.food] : [];
   const [selectedCategory, setSelectedCategory] = useState(categories);
-
   const [isModalMenuVisible, setIsModalMenuVisible] = useState(false);
   const [isModalVisible, setModalVisible] = useState(false);
   const [selectedFoodItem, setSelectedFoodItem] = useState({});
   const [isActionModalVisible, setActionModal] = useState(false);
   const [Category, setCategory] = useState('');
-
   const [isSuccessful, setIsSuccessful] = useState(true);
-  // const categoryList = initialRestaurantMenu;
-  const [isRerender, setIsRender] = useState(false);
-
-  // const sortFoodItem=()=>{
-  //   foodItemLists.forEach(foodItems => {
-  //     switch(foodItems.category) {
-  //       case ConstString.MAINDISH:
-  //         initialRestaurantMenu[0].data.push(foodItems);
-  //         break;
-  //       case ConstString.SIDEDISH:
-  //         initialRestaurantMenu[1].data.push(foodItems);
-  //         break;
-  //       case ConstString.DESSERT:
-  //         initialRestaurantMenu[2].data.push(foodItems);
-  //         break;
-  //       case ConstString.APPETIZER:
-  //         initialRestaurantMenu[3].data.push(foodItems);
-  //         break;
-  //       case ConstString.DRINKS:
-  //         initialRestaurantMenu[4].data.push(foodItems);
-  //         break;
-  //     }
-  //   });
-  // }
+  const [Menu,setMenu]=useState([])
   useEffect(()=>{
-    // editorMode = currentID !== undefined;
-    // sortFoodItem()
-    // const cleaningUp = initialRestaurantMenu.filter(item => item.data.length > 0);
-    // setSelectedCategory([...cleaningUp])
     const tempCategory = categories.filter( category => foodItemLists.find( food => food.category === category.item))
     setSelectedCategory(tempCategory)
-  },[])
-
-  const addMenu = () => {
+  },[]);
+  const addFoodItem=(foodItem)=>{
+    const temp=[...Menu,foodItem];
+    setMenu(temp)
+  }
+  const uploadMenu = () => {
     setActionModal(true);
     action = ConstString.UPLOADING;
-    let totalCount = 0;
     uploadAsFile(item.image, 'profile').then();
-    selectedCategory.forEach(
-      (category) => {
-        ++totalCount;
-        category.data.forEach((foodItem, foodItemIndex) => {
-          if (foodItem.image !== undefined) {
-            uploadAsFile(foodItem.image, 'menu', category.item, foodItemIndex, foodItem).then();
-          } else {
-            showAlert(foodItem.name);
-          }
-        });
+    Menu.forEach(
+      (foodItem,index) => {
+        if (foodItem.image !== undefined) {
+          uploadAsFile(foodItem.image, 'menu', foodItem.category, index, foodItem).then();
+        } else {
+          showAlert(foodItem.name);
+        }
       }
     );
     setTimeout(() => {
       if (isSuccessful) {
         uploadFinish();
-      } else {
-        console.log(isSuccessful);
       }
     }, 5000);
   };
-  const showAlert = (name) =>
-    Alert.alert(
+  const showAlert = (name) => Alert.alert(
       name + ' Was Not Found',
       'Please Make Sure Image Exist',
       [
@@ -192,13 +127,14 @@ export const SetupMenu = ({ navigation, route }) => {
     };
     return id() + id();
   };
-  const uploadAsFile = async(uri, folder, category, foodItemIndex, foodItem, progressCallback) => {
+  const uploadAsFile = async(uri, folder, category, index, foodItem, progressCallback) => {
     if (uri !== undefined) {
       const response = await fetch(uri);
       const blob = await response.blob();
       let name = generateId() + 'media.jpg';
       const date="_"+new Date().getTime();
-      const pathName = folder === 'profile' ? id + '/' + folder + '/' + name : item.restaurant+date + '/' + folder + '/' + category + '/' + name;
+      const restaurantName=(editorMode?restaurantInfo.restaurant:item.restaurant)+date
+      const pathName = folder === 'profile' ? restaurantName + '/' + folder + '/' + name : restaurantName + '/' + folder + '/' + category + '/' + name;
       const metadata = {
         contentType: 'image/jpeg',
       };
@@ -209,7 +145,6 @@ export const SetupMenu = ({ navigation, route }) => {
           'state_changed',
           (snapshot) => {
             progressCallback && progressCallback(snapshot.bytesTransferred / snapshot.totalBytes);
-            const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
           },
           (error) => {
             setIsSuccessful(false);
@@ -220,15 +155,10 @@ export const SetupMenu = ({ navigation, route }) => {
                 if (folder === 'profile') {
                   item.image = fileUrl;
                 } else if (folder === 'menu' && !editorMode) {
-                  foodItem.image = fileUrl;
-                  item.food.push(foodItem);
+                  Menu[index].image=fileUrl
                 } else if (editorMode && folder === 'menu') {
                   foodItem.image = fileUrl;
-                  dispatch(addFoodItemFirebase({ id, foodItem })).done(() => {
-                    dispatch(restaurantLoading());
-                    dispatch(PopulateRestaurantList());
-                    setIsRender(false)
-                  });
+                  dispatch(addFoodItemFirebase({ id, foodItem }))
                 }
               }
             );
@@ -240,7 +170,7 @@ export const SetupMenu = ({ navigation, route }) => {
     }
   };
   const uploadFinish = () => {
-    dispatch(restaurantLoading());
+    item.food=Menu
     dispatch(AddOne(item)).done();
     setActionModal(false);
     navigation.navigate(ConstString.HOME);
@@ -253,6 +183,13 @@ export const SetupMenu = ({ navigation, route }) => {
                 onPressEdit={() => onPressEdit(item)} />
     );
   };
+  const renderMenu=(category)=>{
+    return editorMode?
+      foodItemLists.filter(foods => foods.category === category)
+      :
+      Menu.filter(foods => foods.category === category)
+
+  }
   const showMenuDetails = (item) => {
     setSelectedFoodItem(item);
     setIsModalMenuVisible(true);
@@ -262,40 +199,18 @@ export const SetupMenu = ({ navigation, route }) => {
     setSelectedFoodItem(item);
     setCategory('');
     setModalVisible(true);
-    //Edit
   };
-  // const removeFoodItem = (item) => {
-  //   const indexDelete = selectedCategory.find(cat => cat.item === item.category);
-  //   const index = indexDelete.data.indexOf(item);
-  //   if (index > -1) {
-  //     switch(item.category) {
-  //       case ConstString.MAINDISH:
-  //         initialRestaurantMenu[0].data.splice(index, 1);
-  //         break;
-  //       case ConstString.SIDEDISH:
-  //         initialRestaurantMenu[1].data.splice(index, 1);
-  //         break;
-  //       case ConstString.DESSERT:
-  //         initialRestaurantMenu[2].data.splice(index, 1);
-  //         break;
-  //       case ConstString.APPETIZER:
-  //         initialRestaurantMenu[3].data.splice(index, 1);
-  //         break;
-  //       case ConstString.DRINKS:
-  //         initialRestaurantMenu[4].data.splice(index, 1);
-  //         break;
-  //     }
-  //   }
-  //   setTimeout(()=>setIsRender(true),500)
-  // };
   const onPressDelete = (item) => {
     const itemIndex = foodItemLists.indexOf(item);
     Alert.alert('This Cannot be UNDO!',
       'Do you wish to delete ' + item.name,
       [
         {
-          text: 'Delete', onPress: () =>
-            dispatch(removeFoodItemFirebase({ id, item ,itemIndex })).done(), style: 'destructive'
+          text: 'Delete', onPress: async() =>{
+            const result=await dispatch(removeFoodItemFirebase({ id, item ,itemIndex }));
+            console.log(result)
+          }
+          , style: 'destructive'
         },
         { text: 'Cancel' },
       ],
@@ -314,11 +229,6 @@ export const SetupMenu = ({ navigation, route }) => {
         return;
       }
       await dispatch(updateFoodItemFirebase({ id, newItem, initialFoodItem }));
-      setTimeout(async() => {
-        await dispatch(restaurantLoading());
-        await dispatch(PopulateRestaurantList());
-      }, 500);
-      setIsRender(!isRerender);
     }
 
   };
@@ -356,50 +266,10 @@ export const SetupMenu = ({ navigation, route }) => {
           optionsLabelStyle={{ fontSize: 16, color: EStyleSheet.value('$primaryTextColor') }}
         />
       </View>
-      {/*<SectionList style={{ marginHorizontal: 10, marginTop: 20, marginBottom: id === undefined ? 55 : 10, }}*/}
-      {/*             sections={selectedCategory}*/}
-      {/*             showsVerticalScrollIndicator={false}*/}
-      {/*             keyExtractor={(item, index) => item + index}*/}
-      {/*             renderItem={(item) => { return null; }}*/}
-      {/*             stickySectionHeadersEnabled={false}*/}
-      {/*             renderSectionHeader={({ section }) => {*/}
-      {/*               console.log({section})*/}
-      {/*               const {item} = section*/}
-      {/*               return  (*/}
-      {/*                 <>*/}
-      {/*                   <View style={{ flexDirection: 'row', alignItems: 'center', marginBottom: 10, }}>*/}
-      {/*                     <Text style={styles.header}>{item}</Text>*/}
-      {/*                     <Image style={styles.icon} source={menuIcon(item)}></Image>*/}
-      {/*                     <View style={{ flexDirection: 'row', right: 5, position: 'absolute' }}>*/}
-      {/*                       <TouchableOpacity style={styles.buttonContainer} onPress={() => {*/}
-      {/*                         // console.log({item})*/}
-      {/*                         openModal({ item });*/}
-      {/*                       }}>*/}
-      {/*                         <Image style={styles.addIcon} source={addIcon} />*/}
-      {/*                         <Text style={{*/}
-      {/*                           padding: 5,*/}
-      {/*                           color: 'white',*/}
-      {/*                           fontWeight: 'bold',*/}
-      {/*                           fontSize: 12,*/}
-      {/*                         }}>New Item</Text>*/}
-      {/*                       </TouchableOpacity>*/}
-      {/*                     </View>*/}
-      {/*                   </View>*/}
-      {/*                   <View>*/}
-      {/*                     <FlatList*/}
-      {/*                       data={foodItemLists.filter(foods => foods.category === item)}*/}
-      {/*                       horizontal={true}*/}
-      {/*                       showsHorizontalScrollIndicator={false}*/}
-      {/*                       renderItem={renderItem}>*/}
-      {/*                     </FlatList>*/}
-      {/*                   </View>*/}
-      {/*                 </>*/}
-      {/*               )}*/}
-      {/*             }*/}
-      {/*/>*/}
       <FlatList
         data={selectedCategory}
         keyExtractor={(item) => item.id}
+        style={{marginTop:10}}
         renderItem={({ item }) => {
         const category = item.item
         return  (
@@ -423,7 +293,7 @@ export const SetupMenu = ({ navigation, route }) => {
             </View>
             <View>
               <FlatList
-                data={foodItemLists.filter(foods => foods.category === category)}
+                data={renderMenu(category)}
                 horizontal={true}
                 showsHorizontalScrollIndicator={false}
                 renderItem={renderItem}>
@@ -432,17 +302,17 @@ export const SetupMenu = ({ navigation, route }) => {
           </>
         )}
       } />
-      {id === undefined &&
+      {!editorMode &&
         <TouchableOpacity
           style={styles.button}
-          onPress={addMenu}>
+          onPress={uploadMenu}>
           <Text style={styles.buttonText}>Finish Setup Store</Text>
         </TouchableOpacity>
       }
       {
         isModalVisible &&
-        <ModalMenu isModalVisible={isModalVisible} closeModal={closeModal} selectedCategory={selectedCategory}
-                   setFinalMenu={setSelectedCategory} Category={Category} foodItem={selectedFoodItem}
+        <ModalMenu isModalVisible={isModalVisible} closeModal={closeModal}
+                   addFoodItem={addFoodItem} Category={Category} foodItem={selectedFoodItem}
                    updateFoodItem={updateFoodItem} editorMode={editorMode} />
       }
       {

@@ -1,54 +1,44 @@
 import React, { useState } from 'react';
 import {
+  Alert,
   Dimensions,
   Image,
-  Modal,
   SafeAreaView,
   Text,
   TextInput,
   TouchableOpacity,
   View
 } from 'react-native';
+import Modal from 'react-native-modal';
 import addIcon from '../../assets/plus.png';
 import * as ImagePicker from 'react-native-image-picker';
 import EStyleSheet from 'react-native-extended-stylesheet';
 import { ConstString } from '../../Strings';
+import { launchImagePicker } from '../../ImagePicker';
+import { removeFoodItemFirebase } from '../../store/thunks';
 
 const { width } = Dimensions.get('window');
 export const ModalMenu = ({
-  selectedCategory,
-  Category,
-  isModalVisible,
-  closeModal,
-  setFinalMenu,
-  foodItem,
-  updateFoodItem,
-  editorMode = false
+  Category, isModalVisible, closeModal, addFoodItem, foodItem, updateFoodItem, editorMode = false
 }) => {
   const [itemName, setItemName] = useState(Category === '' ? foodItem.name : '');
   const [itemDesc, setItemDesc] = useState(Category === '' ? foodItem.desc : '');
   const [itemPrice, setItemPrice] = useState(Category === '' ? foodItem.price : '');
   const [imageUri, setImageUri] = useState(Category === '' ? foodItem.image : undefined);
   let reUpload=false;
-  const launchImageLibrary = () => {
-    ImagePicker.launchImageLibrary({
-      storageOptions: {
-        quality: 1,
-        maxWidth: 600,
-        maxHeight: 300,
-        allowsEditing: false,
-        skipBackup: true,
-        saveToPhotos: true,
-        path: 'images',
-      },
-    }, (response) => {
-      if (response.didCancel) {
-        console.log('User cancelled image picker');
-      } else {
-        reUpload=true;
-        setImageUri(response.assets[0].uri);
-      }
-    }).then();
+  const launchImageLibrary = async() => {
+    const response= await launchImagePicker()
+    if(response.errorCode===undefined){
+      setImageUri(response.assets[0].uri)
+    }else{
+      Alert.alert('Please Pick Image in JPG or PNG format',
+        '',
+        [
+          { text: 'Okay' },
+        ],
+        { cancelable: true }
+      );
+    }
   };
   const addItem = () => {
     const newItem = {
@@ -60,9 +50,7 @@ export const ModalMenu = ({
     };
     if (itemName === '' || itemDesc === '' || imageUri === undefined || itemPrice === '') return alert('Please Complete Input');
     if(!editorMode){
-      const Selected=selectedCategory.find(obj=>obj.item===Category)
-      Selected.data.push(newItem);
-      setFinalMenu(selectedCategory);
+      addFoodItem(newItem)
     }
     else if (editorMode) {
       Category === '' ?
@@ -79,8 +67,8 @@ export const ModalMenu = ({
         <SafeAreaView style={styles.screen}>
           <Modal animationType="slide"
                  transparent visible={isModalVisible}
-                 presentationStyle="overFullScreen">
-            <View style={styles.viewWrapper}>
+                 onBackdropPress={()=>closeModal()}
+                 onDismiss={closeModal}>
               <View style={styles.modalView}>
                 <Text style={styles.header}>{'Item Name'}</Text>
                 <TextInput
@@ -130,7 +118,6 @@ export const ModalMenu = ({
                   <Text style={styles.buttonText}>Add Item</Text>
                 </TouchableOpacity>
               </View>
-            </View>
           </Modal>
         </SafeAreaView>
       }
@@ -190,15 +177,7 @@ const styles = EStyleSheet.create({
     justifyContent: 'center',
     backgroundColor: 'transparent',
   },
-  viewWrapper: {
-    flex: 1,
-    alignItems: 'center',
-    backgroundColor: 'rgba(0, 0, 0, 0.2)',
-    shadowOffset: { width: -2, height: 2 },
-    shadowColor: '$primaryColor',
-    shadowOpacity: 0.2,
-    shadowRadius: 3,
-  },
+
   modalView: {
     padding: 20,
     justifyContent: 'center',

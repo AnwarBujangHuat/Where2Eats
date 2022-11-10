@@ -8,7 +8,6 @@ import {
   View
 } from 'react-native';
 import { Rating } from 'react-native-ratings';
-
 import React from 'react';
 import { BackButton } from '../../components/atoms/BackButton';
 import EStyleSheet from 'react-native-extended-stylesheet';
@@ -21,7 +20,6 @@ export const RatingComponents = props => {
   const {
     onBackButton,
     restaurantInfo,
-    userInfo,
     isModalRateOpen,
     closeModal,
     submit,
@@ -36,7 +34,6 @@ export const RatingComponents = props => {
     renderRateCard,
     rating
   } = props;
-  const { id } = restaurantInfo;
   const SelfReview = () => {
     return (
       !isFirstTimeRate ?
@@ -91,8 +88,7 @@ export const RatingComponents = props => {
               labels: [5, 4, 3, 2, 1],
               datasets: [
                 {
-                  data: [ratingCount[5].length, ratingCount[4].length, ratingCount[3].length, ratingCount[2].length, ratingCount[1].length]
-                  // data:ratingCount
+                  data: ratingCount ?? []
                 }
               ]
             }}
