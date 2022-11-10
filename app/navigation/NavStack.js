@@ -8,7 +8,7 @@ import {
   Restaurant,
   SetupMenu,
   WheelOfFortune,
-  Ratings
+  Ratings,
 } from '../screens';
 import BottomNavigationBar from './bottom/BottomNavigationBar';
 import * as React from 'react';
@@ -37,7 +37,7 @@ export const NavStack = () => {
           cardStyleInterpolator: forFade
         }}
       />
-      <Stack.Screen name={ConstString.BOTTOM} component={BottomNavigationBar} />
+      {/*<Stack.Screen name={ConstString.BOTTOM} component={BottomNavigationBar} />*/}
       <Stack.Screen name={ConstString.HOME} component={Home} options={{ cardStyleInterpolator: forFade }} />
       <Stack.Screen name={ConstString.REGISTER} component={Register} />
       <Stack.Screen name={ConstString.RESTAURANT} component={Restaurant} />

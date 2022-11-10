@@ -17,9 +17,7 @@ export const restaurantAdapter = createEntityAdapter({
 export const Reducer = createSlice({
   name: 'restaurant',
   initialState: {
-    RESTAURANT: restaurantAdapter.getInitialState({
-      loading: 'idle',
-    }),
+    RESTAURANT: restaurantAdapter.getInitialState(),
     USER: {
       ID: '5yGZTuwy98cXhrEsf4qS9AxzWel2\n',
       NAME: 'Kasim Kaki Bangku',
@@ -31,36 +29,22 @@ export const Reducer = createSlice({
     THEME: ConstString.LIGHT
   },
   reducers: {
-    // restaurantAdded: restaurantAdapter.addOne,
-    restaurantLoading (state, action) {
-      if (state.RESTAURANT.loading === 'idle') {
-        state.RESTAURANT.loading = 'pending';
-      }
-    },
     restaurantUpdated: restaurantAdapter.updateOne,
   },
   extraReducers: builder => {
     builder.addCase(PopulateRestaurantList.fulfilled, (state, { payload }) => {
-      if (state.RESTAURANT.loading === 'pending') {
-        restaurantAdapter.addMany(state.RESTAURANT, payload);
-        state.RESTAURANT.loading = 'idle';
-      }
+      const {restaurantList}=payload
+      restaurantAdapter.addMany(state.RESTAURANT, restaurantList);
       return state;
     });
     builder.addCase(PopulateRestaurantList.rejected, (state, { payload }) => {
-      if (state.RESTAURANT.loading === 'pending') {
-        restaurantAdapter.addOne(state.RESTAURANT, payload);
-        state.RESTAURANT.loading = 'idle';
-      }
+      restaurantAdapter.addOne(state.RESTAURANT, payload);
       return state;
     });
     builder.addCase(AddOne.fulfilled, (state, { meta, payload }) => {
-      if (state.RESTAURANT.loading === 'pending') {
-        const { id, data } = payload;
-        const temp = { id: id, ...data };
-        restaurantAdapter.addOne(state.RESTAURANT, temp);
-        state.RESTAURANT.loading = 'idle';
-      }
+      const { id, data } = payload;
+      const temp = { id: id, ...data };
+      restaurantAdapter.addOne(state.RESTAURANT, temp);
       return state;
     });
     builder.addCase(AddOne.rejected, (state, payload) => {
@@ -81,10 +65,9 @@ export const Reducer = createSlice({
       });
     });
     builder.addCase(updateRating.rejected, (state, payload) => {
-      console.log({ path: 'store-addOne-rejected', state, payload });
     });
     builder.addCase(removeFoodItemFirebase.fulfilled, (state, { meta, payload }) => {
-      const { id, item, itemIndex} = payload;
+      const { id, itemIndex} = payload;
       const foodArray = [...state.RESTAURANT.entities[id].food];
       if(itemIndex>-1){
         foodArray.splice(itemIndex,1)
@@ -101,10 +84,8 @@ export const Reducer = createSlice({
     builder.addCase(removeFoodItemFirebase.rejected, (state, payload) => {
       console.log({ path: 'store-addOne-rejected', state, payload });
     });
-
   }
 });
-export const { restaurantAdded, restaurantUpdated, restaurantLoading } = Reducer.actions;
 export default Reducer.reducer;
 
 
