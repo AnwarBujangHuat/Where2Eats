@@ -56,8 +56,18 @@ export const Reducer = createSlice({
       return state;
     });
     builder.addCase(updateRating.fulfilled, (state, { meta, payload }) => {
-      const { id: restaurantId, avg: rate, userReviewResult: ratings, restaurantRemove } = payload;
-      const updatedRating = [...restaurantRemove, ratings];
+      const { id: restaurantId, avg: rate, userReviewResult: ratings, index } = payload;
+      const restaurantRatings = [...state.RESTAURANT.entities[restaurantId].rating];
+      let updatedRating = restaurantRatings;
+      //if Exist then Replace
+      if (index > -1) {
+        updatedRating[index] = ratings;
+      }
+      //else Add
+      else {
+        updatedRating =
+          [...restaurantRatings, ratings];
+      }
       restaurantAdapter.updateOne(state.RESTAURANT, {
         id: restaurantId, changes: {
           rate: rate,

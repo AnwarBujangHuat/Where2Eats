@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import {
   Dimensions,
-  Modal,
   SafeAreaView,
   Text,
   TextInput,
@@ -12,28 +11,26 @@ import EStyleSheet from 'react-native-extended-stylesheet';
 import { AirbnbRating } from 'react-native-ratings';
 import Cat from '../../assets/purplecat.json';
 import LottieView from 'lottie-react-native';
+import Modal from 'react-native-modal';
 
 const { width } = Dimensions.get('window');
 
 export const ModalGiveRating = ({ closeModal, isModalVisible, submit, userReview }) => {
-  const { review, rating, updatedAt,createdAt } = userReview|| {};
-  const [textReview,setReview]=useState(review)
-  const [newRate,setRate]=useState(rating)
-  const [isUploading,setIsUploading]=useState(false)
+  const { review, rating, updatedAt, createdAt } = userReview || {};
+  const [textReview, setReview] = useState(review);
+  const [newRate, setRate] = useState(rating);
+  const [isUploading, setIsUploading] = useState(false);
   let status;
-  const sendSubmission=()=>{
+  const sendSubmission = () => {
     setIsUploading(true);
-    submit(textReview,newRate);
-  }
-  if(updatedAt===undefined&&createdAt===undefined)
-  {
-  status="First Time";
-  }
-  else if(updatedAt!==''){
-    status="Updated At: "+ updatedAt;
-  }
-  else{
-    status="Created At: "+ createdAt;
+    submit(textReview, newRate);
+  };
+  if (updatedAt === undefined && createdAt === undefined) {
+    status = 'First Time';
+  } else if (updatedAt !== '') {
+    status = 'Updated At: ' + updatedAt;
+  } else {
+    status = 'Created At: ' + createdAt;
   }
   return (
     <>
@@ -42,14 +39,13 @@ export const ModalGiveRating = ({ closeModal, isModalVisible, submit, userReview
         <SafeAreaView style={styles.screen}>
           <Modal animationType="none"
                  transparent visible={isModalVisible}
-                 presentationStyle="overFullScreen">
-            <View style={styles.viewWrapper}>
-
+                 presentationStyle="overFullScreen"
+                 style={styles.viewWrapper}>
             {isUploading ?
               <View style={styles.modalView}>
                 <LottieView style={styles.lottieButton} source={Cat} autoPlay={true}
                 />
-                <Text style={styles.header}>{"Wait while we write your Review"}</Text>
+                <Text style={styles.header}>{'Wait while we write your Review'}</Text>
               </View>
               :
               <View style={styles.modalView}>
@@ -58,9 +54,9 @@ export const ModalGiveRating = ({ closeModal, isModalVisible, submit, userReview
                   count={5}
                   isDisabled={false}
                   showRating={true}
-                  onFinishRating={(rate)=>setRate(rate)}
+                  onFinishRating={(rate) => setRate(rate)}
                   reviews={['Terrible', 'Hmm...', 'OK', 'Quite Good', 'Excellent']}
-                  defaultRating={rating!==undefined?rating:1}
+                  defaultRating={rating !== undefined ? rating : 1}
                   ratingContainerStyle={{ marginVertical: 20, }}
                   size={30} />
                 <TextInput
@@ -94,7 +90,6 @@ export const ModalGiveRating = ({ closeModal, isModalVisible, submit, userReview
                 </View>
               </View>
             }
-              </View>
 
           </Modal>
         </SafeAreaView>
@@ -166,9 +161,8 @@ const styles = EStyleSheet.create({
   },
   modalView: {
     paddingHorizontal: 10,
-    justifyContent: 'center',
     position: 'absolute',
-    alignSelf:'center',
+    alignSelf: 'center',
     width: width * 0.9,
     backgroundColor: '$secondaryBackGroundColor',
     borderRadius: 7,
@@ -199,11 +193,11 @@ const styles = EStyleSheet.create({
     textAlignVertical: 'center',
     backgroundColor: '$secondaryBackGroundColor',
     paddingTop: 20,
-    paddingBottom:10,
+    paddingBottom: 10,
   },
   lottieButton: {
     width: width * .6,
     height: width * .6,
-    alignSelf:'center',
+    alignSelf: 'center',
   },
 });
