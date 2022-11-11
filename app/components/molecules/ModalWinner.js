@@ -2,7 +2,6 @@ import React from 'react';
 import {
   Dimensions,
   Image,
-  Modal,
   SafeAreaView,
   Text,
   TouchableOpacity,
@@ -13,9 +12,10 @@ import locationIcon from '../../assets/location.png';
 import FastImage from 'react-native-fast-image';
 import { icons } from '../../screens/home/ConstFoodCategory';
 import EStyleSheet from 'react-native-extended-stylesheet';
+import Modal from 'react-native-modal';
 
 const { width } = Dimensions.get('window');
-export const ModalWinner = ({ isModalVisible, closeModal, selectedRestaurant, goToMenu, isFinished,isPreview }) => {
+export const ModalWinner = ({ isModalVisible, closeModal, selectedRestaurant, goToMenu, isFinished, isPreview }) => {
   const { restaurant, description, address, category, image } = selectedRestaurant;
   const spinAgain = () => {
     closeModal();
@@ -28,62 +28,60 @@ export const ModalWinner = ({ isModalVisible, closeModal, selectedRestaurant, go
           <Modal animationType="none"
                  transparent visible={isModalVisible}
                  presentationStyle="overFullScreen"
-          >
-            <View style={styles.viewWrapper}>
-              <View style={styles.modalView}>
-                <FastImage
-                  source={image !== undefined ? {
-                      uri: image,
-                      priority: FastImage.priority.high,
-                    } :
-                    {
-                      uri: 'https://mir-s3-cdn-cf.behance.net/project_modules/max_1200/5eeea355389655.59822ff824b72.gif'
-                    }
+                 style={styles.viewWrapper}>
+            <View style={styles.modalView}>
+              <FastImage
+                source={image !== undefined ? {
+                    uri: image,
+                    priority: FastImage.priority.high,
+                  } :
+                  {
+                    uri: 'https://mir-s3-cdn-cf.behance.net/project_modules/max_1200/5eeea355389655.59822ff824b72.gif'
                   }
-                  style={
-                    {
-                      height: 200,
-                      resizeMode: 'contain',
-                    }}>
-                </FastImage>
-
-                <View style={{ flexDirection: 'row', paddingVertical: 10, }}>
-                  <Text style={styles.header}>{restaurant}</Text>
-                  <Image
-                    source={category ? icons[category] : icons.def}
-                    style={styles.iconCategory} />
-                </View>
-
-                <View style={styles.descContainer}>
-                  <Text style={styles.desc}>{category + ' - ' + description}</Text>
-                  <View style={styles.containerIcon}>
-                    <Image style={styles.icon} source={locationIcon} />
-                    <Text style={styles.address}>{address}</Text>
-                  </View>
-                </View>
-
-                  <View style={{
-                    flex: 1,
-                    flexDirection: 'row',
-                    alignSelf:'center'
+                }
+                style={
+                  {
+                    height: 200,
+                    resizeMode: 'contain',
                   }}>
-                      <TouchableOpacity
-                        style={styles.button}
-                        onPress={spinAgain}>
-                        <Text style={styles.buttonTextSpin}>{isFinished ? 'Spin Again' : 'Go Back'}</Text>
-                      </TouchableOpacity>
-                    {!isPreview &&
-                      <TouchableOpacity
-                      style={styles.buttonVisit}
-                      onPress={goToMenu}>
-                      <Text style={styles.buttonTextMenu}>Visit Restaurant</Text>
-                    </TouchableOpacity>}
-                  </View>
+              </FastImage>
+
+              <View style={{ flexDirection: 'row', paddingVertical: 10, }}>
+                <Text style={styles.header}>{restaurant}</Text>
+                <Image
+                  source={category ? icons[category] : icons.def}
+                  style={styles.iconCategory} />
               </View>
-              <TouchableOpacity style={styles.logoContainer}>
-                <Image style={styles.logoIcon} source={logoIcon} />
-              </TouchableOpacity>
+
+              <View style={styles.descContainer}>
+                <Text style={styles.desc}>{category + ' - ' + description}</Text>
+                <View style={styles.containerIcon}>
+                  <Image style={styles.icon} source={locationIcon} />
+                  <Text style={styles.address}>{address}</Text>
+                </View>
+              </View>
+
+              <View style={{
+                flex: 1,
+                flexDirection: 'row',
+                alignSelf: 'center'
+              }}>
+                <TouchableOpacity
+                  style={styles.button}
+                  onPress={spinAgain}>
+                  <Text style={styles.buttonTextSpin}>{isFinished ? 'Spin Again' : 'Go Back'}</Text>
+                </TouchableOpacity>
+                {!isPreview &&
+                  <TouchableOpacity
+                    style={styles.buttonVisit}
+                    onPress={goToMenu}>
+                    <Text style={styles.buttonTextMenu}>Visit Restaurant</Text>
+                  </TouchableOpacity>}
+              </View>
             </View>
+            <TouchableOpacity style={styles.logoContainer}>
+              <Image style={styles.logoIcon} source={logoIcon} />
+            </TouchableOpacity>
           </Modal>
         </SafeAreaView>
       }
@@ -121,7 +119,6 @@ const styles = EStyleSheet.create({
   viewWrapper: {
     flex: 1,
     alignItems: 'center',
-    backgroundColor: 'rgba(0, 0, 0, 0.2)',
   },
   title: {
     fontSize: 18,
@@ -132,11 +129,8 @@ const styles = EStyleSheet.create({
     paddingBottom: 5,
     justifyContent: 'center',
     position: 'absolute',
-    top: '35%',
-    left: '50%',
     elevation: 5,
-    transform: [{ translateX: -(width * 0.4) },
-      { translateY: -90 }],
+    alignSelf:'center',
     width: width * 0.8,
     backgroundColor: '$secondaryBackGroundColor',
     borderRadius: 10,
@@ -196,9 +190,9 @@ const styles = EStyleSheet.create({
     backgroundColor: 'white',
     borderRadius: 80,
     padding: 15,
-    marginStart: '5%',
-    marginTop: '40%',
-    borderColor: '$primaryColor'
+    borderColor: '$primaryColor',
+    position: 'absolute',
+    top: '22%'
   },
   logoIcon: {
     height: 60,
@@ -212,7 +206,6 @@ const styles = EStyleSheet.create({
   containerIcon: {
     flexDirection: 'row',
     marginTop: 5,
-    paddingBottom:5,
-
+    paddingBottom: 5,
   },
 });

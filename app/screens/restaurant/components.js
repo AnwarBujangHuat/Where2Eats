@@ -12,17 +12,14 @@ import { FoodCard } from '../../components/molecules/FoodCard';
 import { ModalMenuDetails } from '../../components/molecules/ModalMenuDetails';
 import EStyleSheet from 'react-native-extended-stylesheet';
 import { ModalWinner } from '../../components/molecules/ModalWinner';
-import { defaultValue } from '../../store/defaultValue';
 import { ExpandableFloatingButton } from '../../components/atoms/ExpandableFloatingButton';
-import { ConstString } from '../../Strings';
 
 export const RestaurantComponents = props => {
   const {
     isModalVisible,
     foodItem,
-    current,
+    restaurantInfo,
     onPress,
-    foodItemList,
     selectedCategory,
     onBack,
     restaurantIcon,
@@ -32,31 +29,23 @@ export const RestaurantComponents = props => {
     closePreviewModal,
     openPreviewModal,
     goToRating,
-    onPressItem,
+    onPressFloatingButton,
   } = props;
-  // const foodItemList=defaultValue[1].food
-  // const selectedCategory=[
-  //   { id: 1, item: ConstString.MAINDISH },
-  //   { id: 2, item: ConstString.SIDEDISH },
-  //   { id: 3, item: ConstString.DESSERT },
-  //   { id: 4, item: ConstString.APPETIZER },
-  //   { id: 5, item: ConstString.DRINKS },
-  // ]
   const renderItem = ({ item }) => {
     return (
       <FoodCard onPress={() => onPress(item)} name={item.name} price={item.price} desc={item.desc}
                 image={item.image} />
     );
   };
-  const renderMenu=(category)=>{
-    return foodItemList.filter(foods => foods.category === category)
-    // return foodItemList.filter(foods => console.log(foods.category))
-  }
+  const renderMenu = (category) => {
+    return foodItemList.filter(foods => foods.category === category);
+  };
+  const { restaurant, address, rate, image,food:foodItemList}=restaurantInfo
   return (
     <SafeAreaView style={styles.container}>
-      <DetailsHeader image={current.image} back={onBack} disabled={true} rate={true} goToRating={goToRating}
-                     rating={current.rate} />
-      <DescriptionLabel name={current.restaurant} location={current.address} icon={restaurantIcon}
+      <DetailsHeader image={image} back={onBack} disabled={true} rate={true} goToRating={goToRating}
+                     rating={rate} />
+      <DescriptionLabel name={restaurant} location={address} icon={restaurantIcon}
                         onPress={openPreviewModal} />
       <FlatList
         data={selectedCategory}
@@ -81,12 +70,12 @@ export const RestaurantComponents = props => {
           );
         }
         } />
-      <ExpandableFloatingButton onPressItem={onPressItem} />
+      <ExpandableFloatingButton onPressItem={onPressFloatingButton} />
       {isModalVisible &&
         <ModalMenuDetails closeModal={closeModal} isModalVisible={isModalVisible} foodItem={foodItem} />}
       {isPreview &&
         <ModalWinner closeModal={closePreviewModal} isModalVisible={isPreview}
-                     selectedRestaurant={current} isPreview={true} />
+                     selectedRestaurant={restaurantInfo} isPreview={true} />
       }
     </SafeAreaView>
   );
