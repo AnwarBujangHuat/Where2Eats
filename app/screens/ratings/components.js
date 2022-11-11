@@ -15,6 +15,7 @@ import { RatingCard } from '../../components/molecules/RatingCard';
 import addIcon from '../../assets/plus.png';
 import { ModalGiveRating, } from '../../components/molecules/ModalGiveRating';
 import { BarChart } from 'react-native-chart-kit';
+import { RatingButton } from '../../components/atoms/RatingButton';
 
 export const RatingComponents = props => {
   const {
@@ -29,11 +30,21 @@ export const RatingComponents = props => {
     ratingCount,
     openModal,
     isFirstTimeRate,
-    RenderItem,
     restaurantList,
-    renderRateCard,
-    rating
+    rating,
+    onSelectedRating,
+    isSelectedRating
   } = props;
+  const RenderItem = ({ item }) => {
+    return (
+      <RatingButton rating={item} onPress={onSelectedRating} selected={isSelectedRating} />
+    );
+  };
+  const renderRateCard = ({ item }) => {
+    return (
+      <RatingCard userReview={item} />
+    );
+  };
   const SelfReview = () => {
     return (
       !isFirstTimeRate ?
@@ -110,7 +121,7 @@ export const RatingComponents = props => {
               barPercentage: 0.4,
             }}
             withHorizontalLabels={false}
-            width={120} // from react-native
+            width={120}
             height={180}
             verticalLabelRotation={270}
             withInnerLines={false}
@@ -139,7 +150,6 @@ export const RatingComponents = props => {
           style={{ marginVertical: 5, }}
           showsHorizontalScrollIndicator={false}
         />
-
         <FlatList
           data={restaurantList}
           renderItem={renderRateCard}
@@ -224,7 +234,7 @@ const styles = EStyleSheet.create({
     flexDirection: 'row',
     backgroundColor: '$primaryColor',
     borderRadius: 20,
-    shadowOffset: { width: -2, height: 4 },
+    shadowOffset: { width: -2, height: 2 },
     shadowColor: '$primaryColor',
     shadowOpacity: 0.2,
     shadowRadius: 3,

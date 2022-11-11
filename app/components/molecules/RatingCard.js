@@ -20,10 +20,10 @@ export const RatingCard=({userReview})=>{
           <View style={{ flexDirection: 'row',alignItems:'center',marginStart:5, }}>
             <FastImage
               source={
-              image !== undefined ? {
+              image ? {
                 uri: image,
                 priority: FastImage.priority.high,
-              } : defaultAvatar}//image ? image : addImage
+              } : defaultAvatar}
               style={{
                 height: 35,
                 width: 35,
@@ -50,7 +50,7 @@ const styles = EStyleSheet.create(
   {
     container: {
       justifyContent: 'center',
-      shadowOffset: { width: -2, height: 4 },
+      shadowOffset: { width: 1, height: 2 },
       shadowColor: '$primaryColor',
       shadowOpacity: 0.2,
       shadowRadius: 3,

@@ -16,19 +16,20 @@ import { Alert, } from 'react-native';
 import { RatingCard } from '../../components/molecules/RatingCard';
 import { RatingButton } from '../../components/atoms/RatingButton';
 import { updateRating } from '../../store/thunks';
+
 export const Ratings = ({ navigation, route }) => {
   const rating = ['All', '1', '2', '3', '4', '5'];
   const { id } = route.params || {};
+  const dispatch = useDispatch();
   const userInfo = useSelector(getUser);
   const restaurantInfo = useSelector(getCurrentRestaurant(id));
-  const onBackButton = () => navigation.navigate(ConstString.RESTAURANT, { id });
-  const dispatch = useDispatch();
   const restaurantsRating = [...restaurantInfo.rating ?? []];
   const [restaurantRemove, setRestaurantRemove] = useState([]);
   const [restaurantList, setRestaurantList] = useState(restaurantsRating);
   const [isSelectedRating, setSelectedRating] = useState(rating[0]);
   const onSelectedRating = (item) => {
-    const selectedRestaurantRate = item !== 'All' ? restaurantRemove.filter(rate => rate.rating === parseInt(item)) : restaurantRemove;
+    const selectedRestaurantRate = item !== 'All'
+      ? restaurantRemove.filter(rate => rate.rating === parseInt(item)) : restaurantRemove;
     setRestaurantList(selectedRestaurantRate);
     setSelectedRating(item);
   };
@@ -39,27 +40,28 @@ export const Ratings = ({ navigation, route }) => {
   const [ratingCount, setRatingCount] = useState();
   const userReviews = restaurantsRating.find(item => item?.userId === userInfo.ID) ?? '';
   const index = restaurantsRating.indexOf(userReviews);
+  const getTotalCount = (restaurantsRating) => {
+    const temp = [];
+    rating.forEach((rating) => {
+      if (rating !== 'All') {
+        const totalCount = restaurantsRating.reduce((acc, cur) => cur.rating === parseInt(rating) ? ++acc : acc, 0);
+        temp.push(totalCount);
+      }
+    });
+    setRatingCount(temp.reverse());
+  };
   useEffect(() => {
     if (userReviews !== '') {
       setFirstTime(false);
     }
     setUserReview(userReviews);
-    getTotalCount(restaurantsRating)
+    getTotalCount(restaurantsRating);
     if (index > -1) {
       restaurantsRating.splice(index, 2);
     }
     setRestaurantRemove(restaurantsRating);
   }, [restaurantInfo]);
-  const getTotalCount=(restaurantsRating)=>{
-    const temp=[]
-    rating.forEach((rating)=>{
-        if(rating!=="All"){
-          const totalCount=restaurantsRating.reduce((acc, cur) => cur.rating === parseInt(rating) ? ++acc : acc, 0);
-          temp.push(totalCount)
-        }
-    })
-    setRatingCount(temp.reverse())
-  }
+  const onBackButton = () => navigation.navigate(ConstString.RESTAURANT, { id });
   const openModal = () => {
     setModalRate(true);
   };
@@ -74,16 +76,6 @@ export const Ratings = ({ navigation, route }) => {
       );
     }
   };
-  const RenderItem = ({ item }) => {
-    return (
-      <RatingButton rating={item} onPress={onSelectedRating} selected={isSelectedRating} />
-    );
-  };
-  const renderRateCard = ({ item }) => {
-    return (
-      <RatingCard userReview={item} />
-    );
-  };
   const submit = async(text, newRate = 1) => {
     const currentDate = new Date().toLocaleString();
     const userReviewResult = {
@@ -96,9 +88,9 @@ export const Ratings = ({ navigation, route }) => {
     };
     const avg = Math.round((restaurantsRating.reduce((r, c) => r + c.rating, 0) + newRate) / (restaurantsRating.length + 1) * 10) / 10;
     setCurrentRating(avg !== undefined ? avg : 2.5);
-      const result = await dispatch(updateRating({ id, userReview, userReviewResult, avg, restaurantRemove }));
-      const {error}=result
-      closeModal(error?ConstString.FAILED:ConstString.SUCCESS);
+    const result = await dispatch(updateRating({ id, userReview, userReviewResult, avg, restaurantRemove }));
+    const { error } = result;
+    closeModal(error ? ConstString.FAILED : ConstString.SUCCESS);
 
   };
   const props = {
@@ -113,10 +105,10 @@ export const Ratings = ({ navigation, route }) => {
     ratingCount,
     openModal,
     isFirstTimeRate,
-    RenderItem,
     restaurantList,
-    renderRateCard,
-    rating
+    rating,
+    onSelectedRating,
+    isSelectedRating
   };
   return (<RatingComponents {...props} />);
 };

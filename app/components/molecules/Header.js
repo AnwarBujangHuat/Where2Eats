@@ -29,7 +29,7 @@ export const Header = ({ source, onPress, reRender }) => {
   const [isCurrentTheme, setCurrentTheme] = useState(currentTheme);
   const [isRender, setRender] = useState(false);
   const dispatch = useDispatch();
-  const onChangeTheme = () => {
+  const onChangeTheme = async() => {
     if (isCurrentTheme === ConstString.LIGHT) {
       Animated.timing(animationProgress.current, {
         toValue: 1,
@@ -49,8 +49,7 @@ export const Header = ({ source, onPress, reRender }) => {
       color = ConstString.LIGHT;
     }
     setCurrentTheme(color);
-    // EStyleSheet.build(theme);
-    dispatch(changeTheme(color));
+    await dispatch(changeTheme(color));
     reRender();
     //Disable Button for 2 Seconds after changing Theme
     setRender(true);

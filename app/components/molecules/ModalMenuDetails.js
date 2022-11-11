@@ -1,13 +1,13 @@
 import React from 'react';
 import {
   Dimensions,
-  Modal,
   SafeAreaView,
   Text,
   TouchableOpacity,
   View
 } from 'react-native';
 import FastImage from 'react-native-fast-image';
+import Modal from 'react-native-modal';
 
 import nasiAyam from '../../assets/NasiAyam.jpg';
 import EStyleSheet from 'react-native-extended-stylesheet';
@@ -24,8 +24,8 @@ export const ModalMenuDetails = ({ closeModal, isModalVisible, foodItem }) => {
         <SafeAreaView style={styles.screen}>
           <Modal animationType="none"
                  transparent visible={isModalVisible}
-                 presentationStyle="overFullScreen">
-            <View style={styles.viewWrapper}>
+                 onBackdropPress={()=>closeModal()}
+                 onDismiss={closeModal}>
               <View style={styles.modalView}>
                 <FastImage
                   resizeMode={FastImage.resizeMode.cover}
@@ -55,7 +55,6 @@ export const ModalMenuDetails = ({ closeModal, isModalVisible, foodItem }) => {
                 </TouchableOpacity>
                 {/*<Button title="OK" color={Colors.primaryColor} onPress={closeModal} />*/}
               </View>
-            </View>
           </Modal>
         </SafeAreaView>
       }
@@ -93,18 +92,11 @@ const styles = EStyleSheet.create({
     justifyContent: 'center',
     backgroundColor: 'transparent',
   },
-  viewWrapper: {
-    flex: 1,
-    alignItems: 'center',
-  },
   modalView: {
     paddingBottom: 10,
     justifyContent: 'center',
     position: 'absolute',
-    top: '30%',
-    left: '50%',
-    transform: [{ translateX: -(width * 0.4) },
-      { translateY: -90 }],
+    alignSelf:'center',
     width: width * 0.8,
     backgroundColor: '$backGroundColor',
     borderRadius: 10,
