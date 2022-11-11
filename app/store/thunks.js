@@ -82,7 +82,6 @@ export const updateRating = createAsyncThunk('AddNewRating', async(request, {
   if (!successUpdateAvg) return rejectWithValue({ errorMessage: 'error updating new average' }); // handle error
 
   return request;
-  // return rejectWithValue({errorMessage: "error updating new average"})
 });
 const requestUpdateRestaurant = (id, field, value) => new Promise((myResolve) => {
   restaurantCollectionRef
