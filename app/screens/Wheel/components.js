@@ -62,7 +62,7 @@ export const WheelComponents = props => {
   const makeWheel = () => {
     const data = Array.from({ length: numberOfSegments }).fill(1);
     const arcs = d3Shape.pie()(data);
-    const colorRepeater = Math.floor(2 / 1);
+    const colorRepeater = Math.floor(2);
     let colorPalettes = colorPalette;
     if (colorRepeater >= 1) {
       for (let i = 0; i < colorRepeater; i++) {
@@ -82,14 +82,12 @@ export const WheelComponents = props => {
 
   const _wheelPaths = makeWheel();
   const _onPan = ({ nativeEvent }) => {
-    const { velocityY, velocityX, velocity } = nativeEvent;
+    const { velocityY, velocityX } = nativeEvent;
 
     if (nativeEvent.state === State.ACTIVE) {
       velocityX > 0 ? setDirection('Left') : setDirection('Right');
     }
     if (nativeEvent.state === State.END) {
-      // console.log(velocityX + " " + velocity)
-
       Animated.decay(_angle, {
         velocity: velocityY / 1000,
         deceleration: 0.999,
