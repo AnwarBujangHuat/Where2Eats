@@ -33,12 +33,13 @@ export const Reducer = createSlice({
   },
   extraReducers: builder => {
     builder.addCase(PopulateRestaurantList.fulfilled, (state, { payload }) => {
-      const {restaurantList}=payload
-      restaurantAdapter.addMany(state.RESTAURANT, restaurantList);
+      const { restaurantList } = payload;
+      restaurantAdapter.upsertMany(state.RESTAURANT, restaurantList);
       return state;
     });
     builder.addCase(PopulateRestaurantList.rejected, (state, { payload }) => {
-      restaurantAdapter.addOne(state.RESTAURANT, payload);
+      //Check if Restaurant List Is Empty
+      if (state.RESTAURANT?.length < 0) return restaurantAdapter.addOne(state.RESTAURANT, payload);
       return state;
     });
     builder.addCase(AddOne.fulfilled, (state, { meta, payload }) => {
@@ -67,10 +68,10 @@ export const Reducer = createSlice({
     builder.addCase(updateRating.rejected, (state, payload) => {
     });
     builder.addCase(removeFoodItemFirebase.fulfilled, (state, { meta, payload }) => {
-      const { id, itemIndex} = payload;
+      const { id, itemIndex } = payload;
       const foodArray = [...state.RESTAURANT.entities[id].food];
-      if(itemIndex>-1){
-        foodArray.splice(itemIndex,1)
+      if (itemIndex > -1) {
+        foodArray.splice(itemIndex, 1);
         restaurantAdapter.updateOne(state.RESTAURANT, {
           id: id,
           changes: {

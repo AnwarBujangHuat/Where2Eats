@@ -7,6 +7,8 @@ import {
   useSelector
 } from 'react-redux';
 import { PopulateRestaurantList } from '../../store/thunks';
+import { Alert } from 'react-native';
+
 export const Home = ({ navigation }) => {
   const fetchRestaurant = useSelector(getRestaurant);
   const dispatch = useDispatch();
@@ -18,11 +20,11 @@ export const Home = ({ navigation }) => {
   const [isFetching, setIsFetching] = useState(false);
 
   const onClickCategoryChip = (category) => {
+    //check if category item is already selected
     const isRestaurantIncluded = selectedTypes.includes(category);
     const tempSelected = isRestaurantIncluded ? selectedTypes.filter(item => item !== category) : [category, ...selectedTypes];
     setSelectedTypes(tempSelected);
     if (tempSelected.length <= 0) return setCurrentRestaurant(restaurant);
-
     if (isRestaurantIncluded) {
       const updateRestaurant = currentRestaurant.filter(currentRestaurant => currentRestaurant.category !== category);
       setCurrentRestaurant(updateRestaurant);
@@ -34,9 +36,17 @@ export const Home = ({ navigation }) => {
   };
   const reFresh = async() => {
     setIsFetching(true);
-    const response=await dispatch(PopulateRestaurantList());
-    console.log(response)
-    setIsFetching(false);  };
+    const response = await dispatch(PopulateRestaurantList());
+    const { payload } = response;
+    if (!payload.result) {
+      return Alert.alert('There Was An Error While Refreshing',
+        'Opps',
+        { text: 'OK' },
+        { cancelable: true });
+    }
+    setIsFetching(false);
+
+  };
   const onSearch = (text) => {
     if (!text) return setCurrentRestaurant(restaurant);
     const updateRestaurant = restaurant.filter(item => item.restaurant.toLowerCase().includes(text.toLowerCase()));
@@ -50,7 +60,7 @@ export const Home = ({ navigation }) => {
     setSelectedTypes([]);
     setCurrentRestaurant(restaurant);
   };
-  const openMenu = () =>  setOpenMenu(!isOpenMenu);
+  const openMenu = () => setOpenMenu(!isOpenMenu);
   const closeModal = () => setOpenMenu(false);
   const onNavigate = (id) => {
     resetHome();
@@ -71,24 +81,22 @@ export const Home = ({ navigation }) => {
     resetHome();
     navigation.navigate(ConstString.RESTAURANT, { id });
   };
-  const reRender = () => {
-    setTimeout(()=>setIsRender(!isRender), 100);
-  };
+  const reRender = () => setIsRender(!isRender);
 
   const props = {
     selectedTypes,
     currentRestaurant,
-    isOpenMenu,
-    closeModal,
-    onNavigate,
     onClickCategoryChip,
+    isOpenMenu,
     onSearch,
     gotoRoulette,
     openMenu,
     goToRestaurant,
-    reRender,
+    closeModal,
+    onNavigate,
+    isFetching,
     reFresh,
-    isFetching
+    reRender
   };
   return (<HomeComponents{...props} />);
 };
