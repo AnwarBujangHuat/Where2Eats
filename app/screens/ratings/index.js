@@ -13,15 +13,13 @@ import {
   getUser
 } from '../../store/selector';
 import { Alert, } from 'react-native';
-import { RatingCard } from '../../components/molecules/RatingCard';
-import { RatingButton } from '../../components/atoms/RatingButton';
 import { updateRating } from '../../store/thunks';
 
 export const Ratings = ({ navigation, route }) => {
   const rating = ['All', '1', '2', '3', '4', '5'];
   const { id } = route.params || {};
   const dispatch = useDispatch();
-  const userInfo = useSelector(getUser);
+  const {NAME,ID} = useSelector(getUser);
   const restaurantInfo = useSelector(getCurrentRestaurant(id));
   const restaurantsRating = [...restaurantInfo.rating ?? []];
   const [restaurantRemove, setRestaurantRemove] = useState([]);
@@ -38,7 +36,7 @@ export const Ratings = ({ navigation, route }) => {
   const [isFirstTimeRate, setFirstTime] = useState(true);
   const [isCurrentRating, setCurrentRating] = useState(restaurantInfo.rate ?? 3.5);
   const [ratingCount, setRatingCount] = useState();
-  const userReviews = restaurantsRating.find(item => item?.userId === userInfo.ID) ?? '';
+  const userReviews = restaurantsRating.find(item => item?.userId === ID) ?? '';
   const index = restaurantsRating.indexOf(userReviews);
   const getTotalCount = (restaurantsRating) => {
     const temp = [];
@@ -51,11 +49,11 @@ export const Ratings = ({ navigation, route }) => {
     setRatingCount(temp.reverse());
   };
   useEffect(() => {
-    if (userReviews !== '') {
+    if (userReviews) {
       setFirstTime(false);
+      setUserReview(userReviews);
     }
-    setUserReview(userReviews);
-    getTotalCount(restaurantsRating);
+    getTotalCount(restaurantInfo.rating);
     if (index > -1) {
       restaurantsRating.splice(index, 2);
     }
@@ -79,8 +77,8 @@ export const Ratings = ({ navigation, route }) => {
   const submit = async(text, newRate = 1) => {
     const currentDate = new Date().toLocaleString();
     const userReviewResult = {
-      userId: userInfo.ID,
-      userName: userInfo.NAME,
+      userId: ID,
+      userName: NAME,
       review: text,
       rating: parseInt(newRate),
       createdAt: isFirstTimeRate ? currentDate : userReview.createdAt,
@@ -88,7 +86,7 @@ export const Ratings = ({ navigation, route }) => {
     };
     const avg = Math.round((restaurantsRating.reduce((r, c) => r + c.rating, 0) + newRate) / (restaurantsRating.length + 1) * 10) / 10;
     setCurrentRating(avg !== undefined ? avg : 2.5);
-    const result = await dispatch(updateRating({ id, userReview, userReviewResult, avg, restaurantRemove }));
+    const result = await dispatch(updateRating({ id, userReview, userReviewResult, avg, index }));
     const { error } = result;
     closeModal(error ? ConstString.FAILED : ConstString.SUCCESS);
 
