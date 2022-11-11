@@ -115,11 +115,7 @@ const styles = EStyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     position: 'absolute',
-    top: '35%',
-    left: '50%',
-    elevation: 5,
-    transform: [{ translateX: -(width * 0.4) },
-      { translateY: -90 }],
+    alignSelf:'center',
     width: width * 0.8,
     backgroundColor: '$secondaryBackGroundColor',
     borderRadius: 10

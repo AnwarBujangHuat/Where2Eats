@@ -14,29 +14,26 @@ import Delete from '../../assets/bin.png';
 import { Colors } from '../../Colors';
 import FastImage from 'react-native-fast-image';
 
-export const FoodCard = ({ onPress, name, price, image, desc, editable=false,onPressDelete,onPressEdit }) => {
+export const FoodCard = ({ onPress, name, price, image, desc, editable = false, onPressDelete, onPressEdit }) => {
   return (
     <View style={styles.container}>
       <TouchableWithoutFeedback onPress={onPress}>
         <View style={styles.card}>
           <View>
             <ImageBackground
-              source={image !== undefined ? { uri: image } : nasiAyam}//image ? image : addImage
-              style={
-                {
-                  height: 160,
-                }}
+              source={image !== undefined ? { uri: image } : nasiAyam}
+              style={{ height: 160, }}
               resizeMode={FastImage.resizeMode.cover}
-              blurRadius={editable?10:0}>
+              blurRadius={editable ? 10 : 0}>
               <View style={styles.containerPrice}>
                 <Text style={styles.textPrice}>{'RM ' + price}</Text>
               </View>
               {
-                editable&&
+                editable &&
                 <View style={{
                   flexDirection: 'row',
                   paddingVertical: 5,
-                  marginTop:20,
+                  marginTop: 20,
                   alignSelf: 'center',
                 }}>
                   <TouchableOpacity style={styles.buttonDelete} onPress={onPressDelete}>
@@ -75,7 +72,7 @@ const styles = EStyleSheet.create(
     iconButton: {
       width: 16,
       height: 16,
-      tintColor:'white',
+      tintColor: 'white',
       marginStart: 5,
       alignSelf: 'center',
     },
@@ -88,7 +85,7 @@ const styles = EStyleSheet.create(
       shadowRadius: 3,
       elevation: 10,
     },
-    textButton:{
+    textButton: {
       padding: 5,
       color: 'white',
       fontWeight: 'bold',
@@ -144,21 +141,21 @@ const styles = EStyleSheet.create(
       fontWeight: 'bold',
       fontSize: 12,
     },
-     buttonEdit:{
-       flexDirection:'row',
-       paddingVertical: 5,
-       paddingHorizontal:10,
-       marginStart:5,
-       backgroundColor: Colors.primaryColor,
-       borderRadius:15,
-     },
-    buttonDelete:{
-      flexDirection:'row',
+    buttonEdit: {
+      flexDirection: 'row',
       paddingVertical: 5,
-      paddingHorizontal:10,
-      marginEnd:5,
+      paddingHorizontal: 10,
+      marginStart: 5,
+      backgroundColor: Colors.primaryColor,
+      borderRadius: 15,
+    },
+    buttonDelete: {
+      flexDirection: 'row',
+      paddingVertical: 5,
+      paddingHorizontal: 10,
+      marginEnd: 5,
       backgroundColor: 'red',
-      borderRadius:15,
+      borderRadius: 15,
     },
 
   });

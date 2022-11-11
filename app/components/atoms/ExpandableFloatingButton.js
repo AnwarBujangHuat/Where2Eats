@@ -3,6 +3,7 @@ import React from 'react';
 import { FloatingAction } from 'react-native-floating-action';
 import Menu from '../../assets/cheeseburger.png';
 import Details from '../../assets/details.png';
+import Edit from '../../assets/edit.png';
 import EStyleSheet from 'react-native-extended-stylesheet';
 import { Colors } from '../../Colors';
 import { ConstString } from '../../Strings';
@@ -30,17 +31,14 @@ const actions = [
 export const ExpandableFloatingButton = ({ onPressItem }) => {
   return (
     <View style={styles.fab}>
-
       <FloatingAction
         actions={actions}
-        tintColor={'#fff'}
-        buttonSize={55}
-        // floatingIcon={Edit}
-        iconWidth={20}
-        iconHeight={20}
+        buttonSize={60}
+        floatingIcon={Edit}
+        iconWidth={28}
+        iconHeight={28}
         color={Colors.primaryTextColor}
-        onPressItem={onPressItem}
-      />
+        onPressItem={(item)=>onPressItem({item})} />
     </View>
   );
 };
