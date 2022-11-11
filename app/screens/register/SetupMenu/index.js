@@ -45,10 +45,6 @@ export const SetupMenu = ({ navigation, route }) => {
     const tempCategory = categories.filter(category => foodItemLists.find(food => food.category === category.item));
     setSelectedCategory(tempCategory);
   }, []);
-  const addFoodItem = (foodItem) => {
-    const temp = [...Menu, foodItem];
-    setMenu(temp);
-  };
   const uploadMenu = () => {
     setActionModal(true);
     action = ConstString.UPLOADING;
@@ -92,16 +88,8 @@ export const SetupMenu = ({ navigation, route }) => {
     closeModal();
     navigation.goBack({ id });
   };
-  const openModal = ({ item: category }) => {
-    setModalVisible(true);
-    setCategory(category);
-  };
-  const closeModal = () => {
-    setModalVisible(false);
-  };
-  const closeActionModal = () => {
-    setActionModal(false);
-  };
+  const closeModal = () => setModalVisible(false);
+  const closeActionModal = () => setActionModal(false);
   const menuIcon = (item) => menuCategories.find(icons => icons.item === item).icon;
   const generateId = () => {
     const id = () => {
@@ -109,6 +97,20 @@ export const SetupMenu = ({ navigation, route }) => {
     };
     return id() + id();
   };
+  const uploadFinish = () => {
+    item.food = Menu;
+    dispatch(AddOne(item)).done();
+    setActionModal(false);
+    navigation.navigate(ConstString.HOME);
+
+  };
+  const showMenuDetails = (item) => {
+    setSelectedFoodItem(item);
+    setIsModalMenuVisible(true);
+  };
+  const closeMenuDetails = () => setIsModalMenuVisible(false);
+
+  //Upload Image to Firebase
   const uploadAsFile = async(uri, folder, category, index, foodItem, progressCallback) => {
     if (uri !== undefined) {
       const response = await fetch(uri);
@@ -151,39 +153,22 @@ export const SetupMenu = ({ navigation, route }) => {
       showAlert('Missing File' + category);
     }
   };
-  const uploadFinish = () => {
-    item.food = Menu;
-    dispatch(AddOne(item)).done();
-    setActionModal(false);
-    navigation.navigate(ConstString.HOME);
 
+  //Add New Food Item
+  const onPressAdd = ({ item: category }) => {
+    setModalVisible(true);
+    setCategory(category);
   };
-  const showMenuDetails = (item) => {
-    setSelectedFoodItem(item);
-    setIsModalMenuVisible(true);
+  const addFoodItem = (foodItem) => {
+    const temp = [...Menu, foodItem];
+    setMenu(temp);
   };
-  const closeMenuDetails = () => setIsModalMenuVisible(false);
+
+  //Edit Existing Food Item
   const onPressEdit = (item) => {
     setSelectedFoodItem(item);
     setCategory('');
     setModalVisible(true);
-  };
-  const onPressDelete = (item) => {
-    const itemIndex = foodItemLists.indexOf(item);
-    Alert.alert('This Cannot be UNDO!',
-      'Do you wish to delete ' + item.name,
-      [
-        {
-          text: 'Delete', onPress: async() => {
-            const result = await dispatch(removeFoodItemFirebase({ id, item, itemIndex }));
-            console.log(result);
-          }
-          , style: 'destructive'
-        },
-        { text: 'Cancel' },
-      ],
-      { cancelable: true }
-    );
   };
   const updateFoodItem = async(action, newItem, reUpload) => {
     const initialFoodItem = selectedFoodItem ?? {};
@@ -198,13 +183,32 @@ export const SetupMenu = ({ navigation, route }) => {
       await dispatch(updateFoodItemFirebase({ id, newItem, initialFoodItem }));
     }
   };
+
+  //Delete Food Item
+  const onPressDelete = (item) => {
+    const itemIndex = foodItemLists.indexOf(item);
+    Alert.alert('This Cannot be UNDO!',
+      'Do you wish to delete ' + item.name,
+      [
+        {
+          text: 'Delete', onPress: async() => {
+            const result = await dispatch(removeFoodItemFirebase({ id, item, itemIndex }));
+          }
+          , style: 'destructive'
+        },
+        { text: 'Cancel' },
+      ],
+      { cancelable: true }
+    );
+  };
+
   const props = {
     onBackButton,
     categories,
     selectedCategory,
     setSelectedCategory,
     menuIcon,
-    openModal,
+    onPressAdd,
     showMenuDetails,
     editorMode,
     onPressDelete,
