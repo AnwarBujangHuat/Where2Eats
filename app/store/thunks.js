@@ -5,6 +5,7 @@ import {
   arrayUnion
 } from 'firebase/firestore';
 import { ConstString } from '../Strings';
+const restaurantCollectionRef=firebase.firestore().collection(ConstString.RESTAURANT);
 const errorObj = {
   id: 0,
   restaurant: 'Error While Loading Restaurant List',
@@ -23,12 +24,12 @@ export const PopulateRestaurantList = createAsyncThunk('getRestaurantList', asyn
 }) => {
   const { onSuccess, data } = await requestFetchRestaurantList();
   if (!onSuccess) return rejectWithValue(data);
+  //send Restaurant Array
   return { result: onSuccess, restaurantList: data };
 });
 const requestFetchRestaurantList = () => new Promise((myResolve) => {
   const restaurant = [];
-  const collectionRef = firebase.firestore().collection(ConstString.RESTAURANT);
-  collectionRef.get().then(querySnapshot => {
+  restaurantCollectionRef.get().then(querySnapshot => {
     // if(querySnapshot.empty)return myResolve({ onSuccess: false, data: errorObj })
     querySnapshot.forEach(documentSnapshot => {
       const temp = { id: documentSnapshot.id, ...documentSnapshot.data() };
@@ -84,14 +85,15 @@ export const updateRating = createAsyncThunk('AddNewRating', async(request, {
   // return rejectWithValue({errorMessage: "error updating new average"})
 });
 const requestUpdateRestaurant = (id, field, value) => new Promise((myResolve) => {
-  firebase.firestore().collection('Restaurants').doc(id).update(field, value).done(() => myResolve({ onSuccess: true }), () => myResolve({ onSuccess: false }));
+  restaurantCollectionRef
+  .doc(id).update(field, value).done(() => myResolve({ onSuccess: true }), () => myResolve({ onSuccess: false }));
 });
 export const updateFoodItemFirebase = createAsyncThunk('UpdateFoodItem', async(request, {
   dispatch,
   rejectWithValue
 }) => {
   const { id, newItem, initialFoodItem } = request;
-  await firebase.firestore().collection('Restaurants').doc(id).
+  await restaurantCollectionRef.doc(id).
     update('food', arrayRemove(initialFoodItem !== undefined ? initialFoodItem : '')).done(() =>
       firebase.firestore().collection('Restaurants').doc(id).
         update('food', arrayUnion(newItem)).done());
@@ -104,7 +106,7 @@ export const addFoodItemFirebase = createAsyncThunk('AddFoodItem', async(request
 }) => {
   const { id, foodItem } = request;
   try {
-    await firebase.firestore().collection('Restaurants').doc(id).update('food', arrayUnion(foodItem)).then();
+    await restaurantCollectionRef.doc(id).update('food', arrayUnion(foodItem)).then();
   }
   catch(e) {
     rejectWithValue(e);

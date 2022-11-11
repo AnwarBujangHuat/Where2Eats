@@ -13,7 +13,6 @@ import EStyleSheet from 'react-native-extended-stylesheet';
 import addImage from '../../assets/addImage.png';
 import FastImage from 'react-native-fast-image';
 
-let imageUrl;
 export const RestaurantCard = ({ onPress, name, category, address, description, rate, image }) => {
   return (
     <View style={styles.container}>
@@ -21,10 +20,10 @@ export const RestaurantCard = ({ onPress, name, category, address, description, 
         <View style={styles.card}>
           <View>
             <FastImage
-              source={image !== undefined ? {
+              source={image ? {
                 uri: image,
-                priority: FastImage.priority.high,
-              } : addImage}//image ? image : addImage
+                priority: FastImage.priority.normal,
+              } : addImage}
               style={{ height: 140, marginBottom: 5, resizeMode: 'contain', }}>
               <RateLabel rating={rate} />
             </FastImage>
@@ -32,7 +31,9 @@ export const RestaurantCard = ({ onPress, name, category, address, description, 
           <View style={{ flexDirection: 'row' }}>
             <View style={styles.titleContainer}>
               <Text style={styles.title}>{name}</Text>
-              <Text style={styles.desc}>{category + ' - ' + description}</Text>
+              <Text
+                numberOfLines={2}
+                style={styles.desc}>{category + ' - ' + description}</Text>
               <View style={styles.containerIcon}>
                 <Image style={styles.icon} source={locationIcon} />
                 <Text style={styles.desc}>{address}</Text>
@@ -47,7 +48,6 @@ export const RestaurantCard = ({ onPress, name, category, address, description, 
 
   );
 };
-
 const styles = EStyleSheet.create(
   {
     icon: {
@@ -75,6 +75,7 @@ const styles = EStyleSheet.create(
       backgroundColor: '$secondaryBackGroundColor',
       borderRadius: 10,
       width: Dimensions.get('screen').width - 30,
+      height: 250,
       overflow: 'hidden',
       paddingBottom: 10,
       shadowOffset: { width: -2, height: 4 },

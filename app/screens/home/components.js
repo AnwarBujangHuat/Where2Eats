@@ -27,9 +27,9 @@ export const HomeComponents = props => {
     goToRestaurant,
     closeModal,
     onNavigate,
-    reRender,
     isFetching,
-    reFresh
+    reFresh,
+    reRender
   } = props;
   const renderItem = ({ item }) => {
     return (
@@ -65,7 +65,7 @@ export const HomeComponents = props => {
         maxToRenderPerBatch={4}
         initialNumToRender={3}
         removeClippedSubviews={true}
-        keyExtractor={(item, index) => index.toString()}
+        keyExtractor={(item, index) => index}
         showsHorizontalScrollIndicator={false} />
       <FloatingActionButton onPress={gotoRoulette}></FloatingActionButton>
     </SafeAreaView>
