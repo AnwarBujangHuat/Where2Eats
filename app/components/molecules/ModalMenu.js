@@ -28,17 +28,27 @@ export const ModalMenu = ({
   let reUpload=false;
   const launchImageLibrary = async() => {
     const response= await launchImagePicker()
-    if(response.errorCode===undefined){
-      setImageUri(response.assets[0].uri)
-    }else{
-      Alert.alert('Please Pick Image in JPG or PNG format',
-        '',
-        [
-          { text: 'Okay' },
-        ],
-        { cancelable: true }
-      );
-    }
+    //* Exit if response empty *//
+    if(!response) return Alert.alert('Please Pick Image in JPG or PNG format',
+      '',
+      [
+        { text: 'Okay' },
+      ],
+      { cancelable: true }
+    );
+
+    //* Exit if there's error *//
+    const { errorCode, assets } = response
+    if(errorCode || assets === []) return Alert.alert('Please Pick Image in JPG or PNG format',
+      '',
+      [
+        { text: 'Okay' },
+      ],
+      { cancelable: true }
+    );
+
+    //* Code proccessing *//
+    setImageUri(assets[0].uri)
   };
   const addItem = () => {
     const newItem = {

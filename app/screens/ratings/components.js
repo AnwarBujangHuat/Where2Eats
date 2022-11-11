@@ -26,12 +26,11 @@ export const RatingComponents = props => {
     submit,
     userReview,
     isCurrentRating,
-    restaurantRemove,
     ratingCount,
     openModal,
     isFirstTimeRate,
     restaurantList,
-    rating,
+    ratingChipButton,
     onSelectedRating,
     isSelectedRating
   } = props;
@@ -84,7 +83,7 @@ export const RatingComponents = props => {
                   alignSelf: 'flex-start'
                 }
               }>
-                {restaurantRemove.length + 1 + ' Reviews'}
+                {restaurantInfo.rating.length + ' Reviews'}
               </Text>
             </View>
 
@@ -144,7 +143,7 @@ export const RatingComponents = props => {
         </View>
         <SelfReview />
         <FlatList
-          data={rating}
+          data={ratingChipButton}
           renderItem={RenderItem}
           horizontal={true}
           style={{ marginVertical: 5, }}

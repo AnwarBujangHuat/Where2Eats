@@ -16,7 +16,7 @@ import { Alert, } from 'react-native';
 import { updateRating } from '../../store/thunks';
 
 export const Ratings = ({ navigation, route }) => {
-  const rating = ['All', '1', '2', '3', '4', '5'];
+  const ratingChipButton = ['All', '1', '2', '3', '4', '5'];
   const { id } = route.params || {};
   const dispatch = useDispatch();
   const {NAME,ID} = useSelector(getUser);
@@ -24,7 +24,7 @@ export const Ratings = ({ navigation, route }) => {
   const restaurantsRating = [...restaurantInfo.rating ?? []];
   const [restaurantRemove, setRestaurantRemove] = useState([]);
   const [restaurantList, setRestaurantList] = useState(restaurantsRating);
-  const [isSelectedRating, setSelectedRating] = useState(rating[0]);
+  const [isSelectedRating, setSelectedRating] = useState(ratingChipButton[0]);
   const onSelectedRating = (item) => {
     const selectedRestaurantRate = item !== 'All'
       ? restaurantRemove.filter(rate => rate.rating === parseInt(item)) : restaurantRemove;
@@ -40,7 +40,7 @@ export const Ratings = ({ navigation, route }) => {
   const index = restaurantsRating.indexOf(userReviews);
   const getTotalCount = (restaurantsRating) => {
     const temp = [];
-    rating.forEach((rating) => {
+    ratingChipButton.forEach((rating) => {
       if (rating !== 'All') {
         const totalCount = restaurantsRating.reduce((acc, cur) => cur.rating === parseInt(rating) ? ++acc : acc, 0);
         temp.push(totalCount);
@@ -86,8 +86,11 @@ export const Ratings = ({ navigation, route }) => {
     };
     const avg = Math.round((restaurantsRating.reduce((r, c) => r + c.rating, 0) + newRate) / (restaurantsRating.length + 1) * 10) / 10;
     setCurrentRating(avg !== undefined ? avg : 2.5);
+
+    //dispatch call to update firebase and redux
     const result = await dispatch(updateRating({ id, userReview, userReviewResult, avg, index }));
     const { error } = result;
+    //check error then Failed
     closeModal(error ? ConstString.FAILED : ConstString.SUCCESS);
 
   };
@@ -104,7 +107,7 @@ export const Ratings = ({ navigation, route }) => {
     openModal,
     isFirstTimeRate,
     restaurantList,
-    rating,
+    ratingChipButton,
     onSelectedRating,
     isSelectedRating
   };

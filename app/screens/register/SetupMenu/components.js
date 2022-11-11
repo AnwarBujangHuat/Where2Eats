@@ -24,12 +24,12 @@ import { ModalMenuDetails } from '../../../components/molecules/ModalMenuDetails
 import { FoodCard } from '../../../components/molecules/FoodCard';
 
 export const SetupMenuComponents=props=>{
-  const { onBackButton,
+  const {  onBackButton,
     categories,
     selectedCategory,
     setSelectedCategory,
     menuIcon,
-    openModal,
+    onPressAdd,
     showMenuDetails,
     editorMode,
     onPressDelete,
@@ -59,12 +59,14 @@ export const SetupMenuComponents=props=>{
   };
   const renderMenu=(category)=>{
     return editorMode?
+      //if Restaurant Exist and in Editor Mode then filter existing MENU
       foodItemLists.filter(foods => foods.category === category)
       :
+      //First time Create and not Editor Mode then show temp menu
       Menu.filter(foods => foods.category === category)
-
   }
   const renderSelectedCategory=()=>{
+    //Sort Category based on id to maintain position
     return selectedCategory.sort((a,b)=>{return a.id-b.id})
   }
   return (
@@ -114,7 +116,7 @@ export const SetupMenuComponents=props=>{
                 <Image style={styles.icon} source={menuIcon(category)}></Image>
                 <View style={{ flexDirection: 'row', right: 5, position: 'absolute' }}>
                   <TouchableOpacity style={styles.buttonContainer} onPress={() => {
-                    openModal({ item:category });
+                    onPressAdd({ item:category });
                   }}>
                     <Image style={styles.addIcon} source={addIcon} />
                     <Text style={{
