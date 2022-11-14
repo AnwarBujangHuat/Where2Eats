@@ -11,64 +11,63 @@ import {
 } from 'react-native';
 import Modal from 'react-native-modal';
 import addIcon from '../../assets/plus.png';
-import * as ImagePicker from 'react-native-image-picker';
 import EStyleSheet from 'react-native-extended-stylesheet';
 import { ConstString } from '../../Strings';
 import { launchImagePicker } from '../../ImagePicker';
-import { removeFoodItemFirebase } from '../../store/thunks';
 
 const { width } = Dimensions.get('window');
 export const ModalMenu = ({
   Category, isModalVisible, closeModal, addFoodItem, foodItem, updateFoodItem, editorMode = false
 }) => {
-  const [itemName, setItemName] = useState(Category === '' ? foodItem.name : '');
-  const [itemDesc, setItemDesc] = useState(Category === '' ? foodItem.desc : '');
-  const [itemPrice, setItemPrice] = useState(Category === '' ? foodItem.price : '');
-  const [imageUri, setImageUri] = useState(Category === '' ? foodItem.image : undefined);
-  let reUpload=false;
+  const [itemName, setItemName] = useState(!Category ? foodItem.name : '');
+  const [itemDesc, setItemDesc] = useState(!Category ? foodItem.desc : '');
+  const [itemPrice, setItemPrice] = useState(!Category ? foodItem.price : '');
+  const [imageUri, setImageUri] = useState(!Category ? foodItem.image : undefined);
+  let reUpload = false;
   const launchImageLibrary = async() => {
-    const response= await launchImagePicker()
+    const response = await launchImagePicker();
     //* Exit if response empty *//
-    if(!response) return Alert.alert('Please Pick Image in JPG or PNG format',
-      '',
-      [
-        { text: 'Okay' },
-      ],
-      { cancelable: true }
-    );
+    if (!response) {
+      return Alert.alert('Please Pick Image in JPG or PNG format',
+        '',
+        [
+          { text: 'Okay' },
+        ],
+        { cancelable: true }
+      );
+    }
 
     //* Exit if there's error *//
-    const { errorCode, assets } = response
-    if(errorCode || assets === []) return Alert.alert('Please Pick Image in JPG or PNG format',
-      '',
-      [
-        { text: 'Okay' },
-      ],
-      { cancelable: true }
-    );
+    const { errorCode, assets } = response;
+    if (errorCode || assets === []) {
+      return Alert.alert('Please Pick Image in JPG or PNG format',
+        '',
+        [
+          { text: 'Okay' },
+        ],
+        { cancelable: true }
+      );
+    }
 
     //* Code proccessing *//
-    setImageUri(assets[0].uri)
+    setImageUri(assets[0].uri);
+    reUpload = true;
   };
   const addItem = () => {
+    if (itemName === '' || itemDesc === '' || imageUri === undefined || itemPrice === '') return alert('Please Complete Input');
     const newItem = {
       desc: itemDesc,
       image: imageUri,
       name: itemName,
       price: itemPrice,
-      category: Category !== '' ? Category : foodItem.category,
+      category: Category ? Category : foodItem.category,
     };
-    if (itemName === '' || itemDesc === '' || imageUri === undefined || itemPrice === '') return alert('Please Complete Input');
-    if(!editorMode){
-      addFoodItem(newItem)
-    }
-    else if (editorMode) {
-      Category === '' ?
-        updateFoodItem(ConstString.UPDATE, newItem,reUpload)
-        :
-        updateFoodItem(ConstString.ADD, newItem,false);
-    }
-    closeModal();
+    // If user add new item to menu
+    if (Category) return addFoodItem(newItem);
+
+    // User update food item
+    //If User change image then upload new image to Firebase storage
+    updateFoodItem(ConstString.UPDATE, newItem, reUpload);
   };
   return (
     <>
@@ -77,57 +76,57 @@ export const ModalMenu = ({
         <SafeAreaView style={styles.screen}>
           <Modal animationType="slide"
                  transparent visible={isModalVisible}
-                 onBackdropPress={()=>closeModal()}
+                 onBackdropPress={() => closeModal()}
                  onDismiss={closeModal}>
-              <View style={styles.modalView}>
-                <Text style={styles.header}>{'Item Name'}</Text>
-                <TextInput
-                  style={styles.textInput}
-                  placeholder={'Enter Item Name'}
-                  value={itemName}
-                  clearButtonMode={'always'}
-                  placeholderTextColor={EStyleSheet.value('$secondaryTextColor')}
-                  onChangeText={setItemName}
-                  overflow="hidden"
-                  keyboardAppearance="dark"
-                  autoCorrect={false} />
-                <Text style={styles.header}>{'Description'}</Text>
-                <TextInput
-                  style={styles.descriptionInput}
-                  placeholder={'Enter Description'}
-                  multiline={true}
-                  value={itemDesc}
-                  onChangeText={setItemDesc}
-                  placeholderTextColor={EStyleSheet.value('$secondaryTextColor')}
-                  overflow="hidden"
-                  keyboardAppearance="dark"
-                  autoCorrect={false} />
-                <Text style={styles.header}>{'Price'}</Text>
-                <TextInput
-                  style={styles.textInput}
-                  placeholder={'Enter Price RM'}
-                  clearButtonMode={'always'}
-                  value={itemPrice}
-                  placeholderTextColor={EStyleSheet.value('$secondaryTextColor')}
-                  onChangeText={setItemPrice}
-                  keyboardType={'numeric'}
-                  overflow="hidden"
-                  keyboardAppearance="dark"
-                  autoCorrect={false} />
-                <Text style={styles.header}>{'Add Image'}</Text>
-                <TouchableOpacity onPress={launchImageLibrary} style={styles.container}>
-                  {imageUri === undefined ? <Image style={styles.icons} source={addIcon} /> :
-                    <View>
-                      <Image style={styles.image} source={{ uri: imageUri, }} />
-                      <Text style={styles.changeButton}>Change Image</Text>
-                    </View>}
-                </TouchableOpacity>
-                <TouchableOpacity
-                  style={styles.button}
-                  onPress={addItem}>
-                  <Text style={styles.buttonText}>Add Item</Text>
-                </TouchableOpacity>
-              </View>
+            <View style={styles.modalView}>
+              <Text style={styles.header}>{'Item Name'}</Text>
+              <TextInput
+                style={styles.textInput}
+                placeholder={'Enter Item Name'}
+                value={itemName}
+                clearButtonMode={'always'}
+                placeholderTextColor={EStyleSheet.value('$secondaryTextColor')}
+                onChangeText={setItemName}
+                overflow="hidden"
+                keyboardAppearance="dark"
+                autoCorrect={false} />
+              <Text style={styles.header}>{'Description'}</Text>
+              <TextInput
+                style={styles.descriptionInput}
+                placeholder={'Enter Description'}
+                multiline={true}
+                value={itemDesc}
+                onChangeText={setItemDesc}
+                placeholderTextColor={EStyleSheet.value('$secondaryTextColor')}
+                overflow="hidden"
+                keyboardAppearance="dark"
+                autoCorrect={false} />
+              <Text style={styles.header}>{'Price'}</Text>
+              <TextInput
+                style={styles.textInput}
+                placeholder={'Enter Price RM'}
+                clearButtonMode={'always'}
+                value={itemPrice}
+                placeholderTextColor={EStyleSheet.value('$secondaryTextColor')}
+                onChangeText={setItemPrice}
+                keyboardType={'numeric'}
+                overflow="hidden"
+                keyboardAppearance="dark"
+                autoCorrect={false} />
+              <Text style={styles.header}>{'Add Image'}</Text>
+              <TouchableOpacity onPress={launchImageLibrary} style={styles.container}>
+                {imageUri === undefined ? <Image style={styles.icons} source={addIcon} /> :
+                  <View>
+                    <Image style={styles.image} source={{ uri: imageUri, }} />
+                    <Text style={styles.changeButton}>Change Image</Text>
+                  </View>}
+              </TouchableOpacity>
+              <TouchableOpacity
+                style={styles.button}
+                onPress={addItem}>
+                <Text style={styles.buttonText}>Add Item</Text>
+              </TouchableOpacity>
+            </View>
           </Modal>
         </SafeAreaView>
       }
@@ -192,7 +191,7 @@ const styles = EStyleSheet.create({
     padding: 20,
     justifyContent: 'center',
     position: 'absolute',
-    alignSelf:'center',
+    alignSelf: 'center',
     width: width * 0.9,
     backgroundColor: '$backGroundColor',
     borderRadius: 7,

@@ -28,7 +28,9 @@ export const RegisterComponents = props => {
     setDescription,
     categorySelected,
     launchImageLibrary,
-    imageUri
+    imageUri,
+    updateRestaurantInfo,
+    editorMode
   } = props;
   return (
     <SafeAreaView style={styles.container}>
@@ -69,8 +71,8 @@ export const RegisterComponents = props => {
       <KeyboardAvoidingView behavior={Platform.OS === 'ios' ? 'padding' : 'height'}>
         <TouchableOpacity
           style={styles.button}
-          onPress={goToMenu}>
-          <Text style={styles.buttonText}>Go to Menu</Text>
+          onPress={editorMode?updateRestaurantInfo:goToMenu}>
+          <Text style={styles.buttonText}>{editorMode?"Update Restaurant Info":"goToMenu"}</Text>
         </TouchableOpacity>
       </KeyboardAvoidingView>
     </SafeAreaView>
