@@ -3,11 +3,14 @@ import {
   createSlice
 } from '@reduxjs/toolkit';
 import {
+  addFoodItemFirebase,
   AddOne,
   changeTheme,
   PopulateRestaurantList,
   removeFoodItemFirebase,
-  updateRating
+  updateFoodItemFirebase,
+  updateRating,
+  updateRestaurantInfoFirestore
 } from './thunks';
 import { ConstString } from '../Strings';
 
@@ -55,6 +58,22 @@ export const Reducer = createSlice({
       state.THEME = payload;
       return state;
     });
+
+    builder.addCase(addFoodItemFirebase.fulfilled, (state, { meta, payload }) => {
+      const { id:restaurantId, foodItem } = payload.data;
+      const restaurantFoodList = [...state.RESTAURANT.entities[restaurantId].food,foodItem];
+      restaurantAdapter.updateOne(state.RESTAURANT, {
+        id: restaurantId,
+        changes: {
+          food: restaurantFoodList,
+        }
+      });
+      return state;
+    });
+    builder.addCase(addFoodItemFirebase.rejected, (state, { meta, payload }) => {
+      console.log({path:"reducer AddFoodItemFirebase", data:"failed"})
+    });
+
     builder.addCase(updateRating.fulfilled, (state, { meta, payload }) => {
       const { id: restaurantId, avg: rate, userReviewResult: ratings, index } = payload;
       const restaurantRatings = [...state.RESTAURANT.entities[restaurantId].rating];
@@ -78,23 +97,65 @@ export const Reducer = createSlice({
     builder.addCase(updateRating.rejected, (state, payload) => {
     });
     builder.addCase(removeFoodItemFirebase.fulfilled, (state, { meta, payload }) => {
-      const { id, itemIndex } = payload;
+      const { id, index } = payload.data;
       const foodArray = [...state.RESTAURANT.entities[id].food];
-      if (itemIndex > -1) {
-        foodArray.splice(itemIndex, 1);
+      if (index > -1) {
+        foodArray.splice(index, 1);
         restaurantAdapter.updateOne(state.RESTAURANT, {
           id: id,
           changes: {
             food: foodArray,
           }
         });
-
       }
 
     });
-    builder.addCase(removeFoodItemFirebase.rejected, (state, payload) => {
-      console.log({ path: 'store-addOne-rejected', state, payload });
+    builder.addCase(updateRestaurantInfoFirestore.fulfilled, (state, { meta, payload }) => {
+      const {
+        id, restaurantName, selectedTypes, restaurantLocation, restaurantDesc, image
+      } = payload.data;
+      restaurantAdapter.updateOne(state.RESTAURANT, {
+        id: id,
+        changes: {
+          restaurant: restaurantName,
+          category: selectedTypes,
+          address: restaurantLocation,
+          description: restaurantDesc,
+          image: image,
+        }
+      });
+
     });
+
+    builder.addCase(updateRestaurantInfoFirestore.rejected, (state, { meta, payload }) => {
+      console.log("failed")
+    });
+    builder.addCase(removeFoodItemFirebase.rejected, (state, payload) => {
+      console.log({ path: 'store-removeOne-rejected', state, payload });
+    });
+
+    builder.addCase(updateFoodItemFirebase.fulfilled, (state, { meta, payload }) => {
+      const { id:restaurantId, foodItem,index } = payload.data;
+      const foodItemList = [...state.RESTAURANT.entities[restaurantId].food];
+      let updatedFoodItemList = foodItemList;
+      //if Exist then Replace
+      if (index > -1) {
+        updatedFoodItemList[index] = foodItem;
+      }
+      //else Add
+      else {
+        updatedFoodItemList =
+          [...foodItemList, foodItem];
+      }
+      restaurantAdapter.updateOne(state.RESTAURANT, {
+        id: restaurantId, changes: {
+          food: updatedFoodItemList,
+        }
+      });
+    });
+    builder.addCase(updateFoodItemFirebase.rejected, (state, payload) => {
+    });
+
   }
 });
 export default Reducer.reducer;

@@ -9,13 +9,14 @@ import { getCurrentRestaurant } from '../../store/selector';
 import { menuCategories } from '../register/MenuCategories';
 import { RestaurantComponents } from './components';
 
+const categories = [
+  { id: 1, item: ConstString.MAINDISH },
+  { id: 2, item: ConstString.SIDEDISH },
+  { id: 3, item: ConstString.DESSERT },
+  { id: 4, item: ConstString.APPETIZER },
+  { id: 5, item: ConstString.DRINKS }];
+
 export const Restaurant = ({ navigation, route }) => {
-  const categories = [
-    { id: 1, item: ConstString.MAINDISH },
-    { id: 2, item: ConstString.SIDEDISH },
-    { id: 3, item: ConstString.DESSERT },
-    { id: 4, item: ConstString.APPETIZER },
-    { id: 5, item: ConstString.DRINKS },];
   const { id } = route.params || {};
   const restaurantInfo = useSelector(getCurrentRestaurant(id));
   const { category, food: foodItemList } = restaurantInfo;
@@ -24,10 +25,12 @@ export const Restaurant = ({ navigation, route }) => {
   const [isPreview, setIsPreview] = useState(false);
   const [selectedCategory, setSelectedCategory] = useState([]);
   const restaurantIcon = category ? icons[category] : icons.def;
+
   useEffect(() => {
     const tempCategory = categories.filter(category => foodItemList.find(food => food.category === category.item));
     setSelectedCategory(tempCategory);
-  }, []);
+  }, [restaurantInfo]);
+
   const onPress = (item) => {
     setFoodItem(item);
     setModalVisible(!isModalVisible);
@@ -35,7 +38,7 @@ export const Restaurant = ({ navigation, route }) => {
   const closePreviewModal = () => {
     setIsPreview(false);
   };
-  const menuIcon = (item) => menuCategories.find(icons => icons.item === item).icon;
+  const menuIcon = (item) => menuCategories.find(icons => icons.item === item).icon; // icon mapping & make utils function
   const closeModal = () => setModalVisible(false);
   const openPreviewModal = () => setIsPreview(true);
   const goToRating = () => navigation.navigate(ConstString.RATINGS, { id });

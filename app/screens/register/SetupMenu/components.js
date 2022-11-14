@@ -53,7 +53,7 @@ export const SetupMenuComponents=props=>{
   const renderItem = ({ item }) => {
     return (
       <FoodCard onPress={() => showMenuDetails(item)} name={item.name} price={item.price} desc={item.desc}
-                image={item.image} editable={editorMode} onPressDelete={() => onPressDelete(item)}
+                image={item.image} editable={true} onPressDelete={() => onPressDelete(item)}
                 onPressEdit={() => onPressEdit(item)} />
     );
   };
@@ -66,7 +66,7 @@ export const SetupMenuComponents=props=>{
       Menu.filter(foods => foods.category === category)
   }
   const renderSelectedCategory=()=>{
-    //Sort Category based on id to maintain position
+    //Sort Category based on id to maintain order {Main Dish, Side Dish, Dessert, Appetizer, Drinks }
     return selectedCategory.sort((a,b)=>{return a.id-b.id})
   }
   return (
@@ -111,7 +111,7 @@ export const SetupMenuComponents=props=>{
           const category = item.item
           return  (
             <>
-              <View style={{ flexDirection: 'row', alignItems: 'center', marginBottom: 10, }}>
+              <View style={{ flexDirection: 'row', alignItems: 'center', marginBottom: 10,marginHorizontal:10 }}>
                 <Text style={styles.header}>{category}</Text>
                 <Image style={styles.icon} source={menuIcon(category)}></Image>
                 <View style={{ flexDirection: 'row', right: 5, position: 'absolute' }}>

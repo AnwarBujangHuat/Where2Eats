@@ -16,7 +16,6 @@ export const RateLabel = ({ rating,goToRating }) => {
     <View style={styles.container}>
         <Text style={styles.textRate}>{restaurantRate}</Text>
         <Image source={rating > 4.2 ? startIcon2 : startIcon} style={styles.icon}></Image>
-
     </View>
 </TouchableOpacity>
 
