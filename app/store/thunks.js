@@ -5,7 +5,8 @@ import {
   arrayUnion
 } from 'firebase/firestore';
 import { ConstString } from '../Strings';
-const restaurantCollectionRef=firebase.firestore().collection(ConstString.RESTAURANT);
+
+const restaurantCollectionRef = firebase.firestore().collection(ConstString.RESTAURANT);
 const errorObj = {
   id: 0,
   restaurant: 'Error While Loading Restaurant List',
@@ -15,7 +16,7 @@ const errorObj = {
   rate: 4.6,
   image: 'https://wallpaperaccess.com/full/4334504.jpg',
   userId: '0',
-  food:[],
+  food: [],
   createdAt: new Date().toLocaleString(),
 };
 export const PopulateRestaurantList = createAsyncThunk('getRestaurantList', async(request, {
@@ -23,7 +24,7 @@ export const PopulateRestaurantList = createAsyncThunk('getRestaurantList', asyn
   rejectWithValue
 }) => {
   const { onSuccess, data } = await requestFetchRestaurantList();
-  if (!onSuccess) return rejectWithValue(data);
+  if (!onSuccess) return rejectWithValue({ result: onSuccess });
   //send Restaurant Array
   return { result: onSuccess, restaurantList: data };
 });
@@ -36,10 +37,11 @@ const requestFetchRestaurantList = () => new Promise((myResolve) => {
       restaurant.push(temp);
     });
   }).done(() => myResolve({ onSuccess: true, data: restaurant }),
-    ()=>myResolve({ onSuccess: false, data: errorObj }));
+    () => myResolve({ onSuccess: false, data: errorObj }));
 
 
 });
+
 export const AddOne = createAsyncThunk('AddOneRestaurant', async(request, {
   dispatch,
   rejectWithValue
@@ -59,6 +61,7 @@ export const changeTheme = createAsyncThunk('ChangeAppTheme', async(request, {
 }) => {
   return request;
 });
+
 export const updateRating = createAsyncThunk('AddNewRating', async(request, {
   dispatch,
   rejectWithValue
@@ -84,47 +87,124 @@ export const updateRating = createAsyncThunk('AddNewRating', async(request, {
   return request;
 });
 const requestUpdateRestaurant = (id, field, value) => new Promise((myResolve) => {
-  restaurantCollectionRef
-  .doc(id).update(field, value).done(() => myResolve({ onSuccess: true }), () => myResolve({ onSuccess: false }));
+  restaurantCollectionRef.doc(id).update(field, value).done(() => myResolve({ onSuccess: true }), () => myResolve({ onSuccess: false }));
 });
+
 export const updateFoodItemFirebase = createAsyncThunk('UpdateFoodItem', async(request, {
   dispatch,
   rejectWithValue
 }) => {
-  const { id, newItem, initialFoodItem } = request;
-  await restaurantCollectionRef.doc(id).
-    update('food', arrayRemove(initialFoodItem !== undefined ? initialFoodItem : '')).done(() =>
-      firebase.firestore().collection('Restaurants').doc(id).
-        update('food', arrayUnion(newItem)).done());
+  const { id, foodItem, initialFoodItem, index } = request;
+  const resultRemove = await requestUpdateFoodItem(id, arrayRemove(initialFoodItem !== undefined ? initialFoodItem : ''));
+  const { onSuccess: onSuccessRemove } = resultRemove;
+  if (!onSuccessRemove) {
+    return rejectWithValue({
+      result: onSuccessRemove,
+      data: 'There was an error while removing the Food item'
+    });
+  }
 
-  return request;
+  const resultAdd = await requestUpdateFoodItem(id, arrayUnion(foodItem));
+  const { onSuccess: onSuccessAdd } = resultAdd;
+  if (!onSuccessAdd) {
+    return rejectWithValue({
+      result: onSuccessAdd,
+      data: 'There was an error while Adding the Food item'
+    });
+  }
+
+  return { result: onSuccessAdd, data: request };
 });
+const requestUpdateFoodItem = (id, action) => new Promise((resolve, reject) => {
+  restaurantCollectionRef.doc(id).update('food', action).done(
+    () => resolve({ onSuccess: true }),
+    () => resolve({ onSuccess: false })
+  );
+});
+
 export const addFoodItemFirebase = createAsyncThunk('AddFoodItem', async(request, {
   dispatch,
   rejectWithValue
 }) => {
   const { id, foodItem } = request;
-  try {
-    await restaurantCollectionRef.doc(id).update('food', arrayUnion(foodItem)).then();
-  }
-  catch(e) {
-    rejectWithValue(e);
-  }
-  return request;
+  const result = await requestAddNewFoodItem(id, foodItem);
+  const { onSuccess } = result;
+  if (!onSuccess) return rejectWithValue({ result: onSuccess });
+  return { result: onSuccess, data: request };
 });
-export const removeFoodItemFirebase = createAsyncThunk('AddFoodItem', async(request, {
+const requestAddNewFoodItem = (id, foodItem) => new Promise((resolve, reject) => {
+  restaurantCollectionRef.doc(id).update('food', arrayUnion(foodItem)).done(
+    () => resolve({ onSuccess: true }),
+    () => resolve({ onSuccess: false })
+  );
+});
+
+export const removeFoodItemFirebase = createAsyncThunk('RemoveFoodItem', async(request, {
   dispatch,
   rejectWithValue
 }) => {
   try {
-    const { id, item } = request;
-    // await firebase.firestore().collection('Restaurants').doc(id).update('food', arrayRemove(item)).done();
-    return request;
+    const { id, foodItem, restaurantName } = request;
+    const resultRemove = await requestRemoveFoodItem(id, foodItem);
+    const { onSuccess } = resultRemove;
+    if (!onSuccess) return rejectWithValue({ result: onSuccess, data: 'Cannot Delete Food Item' });
+
+    const resultRemoveImage = await requestDeleteFoodItemImage(id, foodItem, restaurantName);
+    const { onSuccess: onSuccessRemoveImage } = resultRemoveImage;
+    // if(!onSuccessRemoveImage) return rejectWithValue({result:onSuccessRemoveImage, data:"Cannot Delete Image Food Item"})
+
+    return { result: onSuccess, data: request };
+
   }
   catch(e) {
     return rejectWithValue(e);
   }
 });
+const requestRemoveFoodItem = (id, foodItem) => new Promise((resolve, reject) => {
+  restaurantCollectionRef.doc(id).update('food', arrayRemove(foodItem)).done(
+    () => resolve({ onSuccess: true }),
+    () => resolve({ onSuccess: false })
+  );
+});
+
+const requestDeleteFoodItemImage = (id, foodItem, restaurantName) => new Promise((resolve, reject) => {
+  const imageName = foodItem.image;
+  const imageIndex = imageName.indexOf('media.jpg');
+  const pathName = restaurantName + '/menu/' + foodItem.category + '/';
+  const image = imageName.slice(imageIndex - 8, imageIndex) + 'media.jpg';
+  firebase.storage().ref().child(pathName + image).delete().done(
+    () => resolve({ onSuccess: true })
+    , () => resolve({ onSuccess: false })
+  );
+});
+
+export const updateRestaurantInfoFirestore = createAsyncThunk('updateRestaurant', async(request, {
+  dispatch,
+  rejectWithValue
+}) => {
+  const {
+    id, restaurantName, selectedTypes, restaurantLocation, restaurantDesc, image
+  } = request;
+  // Guard Clause Technique
+  const { onSuccess: successUpdateInfo } = await requestUpdateRestaurantInfo(id, restaurantName, selectedTypes, restaurantLocation, restaurantDesc, image);
+  if (!successUpdateInfo) return rejectWithValue({ result:successUpdateInfo,data:'error updating restaurant Information' });
+
+  return {result:successUpdateInfo,data:request};
+});
+const requestUpdateRestaurantInfo = (id, restaurantName, selectedTypes, restaurantLocation, restaurantDesc, image) => new Promise((resolve, reject) => {
+  restaurantCollectionRef.doc(id).update(
+    {
+      restaurant: restaurantName,
+      category: selectedTypes,
+      address: restaurantLocation,
+      description: restaurantDesc,
+      image: image,
+    }).done(
+    () => resolve({ onSuccess: true }),
+    () => resolve({ onSuccess: false })
+  );
+});
+
 export const updateUserField = createAsyncThunk('UpdateUserField', async(request, {
   dispatch,
   rejectWithValue

@@ -30,6 +30,7 @@ export const ConstString = { // name it to routes
   EDIT:'Edit',
   UPDATE:'Update',
   ADD:'Add',
+  DELETE:"Delete",
   SUCCESS:'Success',
   FAILED:'Failed'
 };
