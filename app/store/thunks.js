@@ -7,6 +7,8 @@ import {
 import { ConstString } from '../Strings';
 
 const restaurantCollectionRef = firebase.firestore().collection(ConstString.RESTAURANT);
+const fcmCollectionRef = firebase.firestore().collection(ConstString.FCM);
+
 const errorObj = {
   id: 0,
   restaurant: 'Error While Loading Restaurant List',
@@ -187,9 +189,14 @@ export const updateRestaurantInfoFirestore = createAsyncThunk('updateRestaurant'
   } = request;
   // Guard Clause Technique
   const { onSuccess: successUpdateInfo } = await requestUpdateRestaurantInfo(id, restaurantName, selectedTypes, restaurantLocation, restaurantDesc, image);
-  if (!successUpdateInfo) return rejectWithValue({ result:successUpdateInfo,data:'error updating restaurant Information' });
+  if (!successUpdateInfo) {
+    return rejectWithValue({
+      result: successUpdateInfo,
+      data: 'error updating restaurant Information'
+    });
+  }
 
-  return {result:successUpdateInfo,data:request};
+  return { result: successUpdateInfo, data: request };
 });
 const requestUpdateRestaurantInfo = (id, restaurantName, selectedTypes, restaurantLocation, restaurantDesc, image) => new Promise((resolve, reject) => {
   restaurantCollectionRef.doc(id).update(
@@ -203,6 +210,101 @@ const requestUpdateRestaurantInfo = (id, restaurantName, selectedTypes, restaura
     () => resolve({ onSuccess: true }),
     () => resolve({ onSuccess: false })
   );
+});
+
+export const updateUserFCM = createAsyncThunk('updateUser', async(request, {
+  dispatch,
+  rejectWithValue
+}) => {
+  const {
+    userToken: token,
+    deviceId,
+    userId: uid
+  } = request;
+  const { onSuccess: successUpdateFCM } = await requestUpdateFCM(uid, token, deviceId);
+  if (!successUpdateFCM) return rejectWithValue({ result: successUpdateFCM, data: 'error updating user Information' });
+
+  return { result: successUpdateFCM, data: request };
+});
+
+const requestUpdateFCM = (uid, token, deviceId) => new Promise((resolve, reject) => {
+  fcmCollectionRef.doc(deviceId).set(
+    {
+      userId: uid,
+      fcmToken: token,
+    }
+    , { merge: true }).done(
+    () => resolve({ onSuccess: true }),
+    () => resolve({ onSuccess: false })
+  )
+  ;
+});
+export const verifyUserToken = createAsyncThunk('verifyToken', async(request, {
+  dispatch,
+  rejectWithValue
+}) => {
+  const {
+    token,
+    deviceId,
+  } = request;
+  const { onSuccess: userExistInDatabase, data } = await requestVerifyToken(token, deviceId);
+  if (!userExistInDatabase) return rejectWithValue({ result: userExistInDatabase, data: 'User Does not Exist' });
+
+  return { result: userExistInDatabase, data: data };
+});
+
+const requestVerifyToken = (token, deviceId) => new Promise((resolve, reject) => {
+  fcmCollectionRef
+  .where(firebase.firestore.FieldPath.documentId(), '==', deviceId)
+  .where('fcmToken', '==', token)
+  .get()
+  .then((querySnapshot) =>
+  {
+    //Check if no data return
+    if(querySnapshot.empty) return resolve({ onSuccess: false, data:"No data"})
+
+    //if match then execute
+    querySnapshot.forEach((doc) => {
+      return resolve({ onSuccess: true, data: doc.data() });
+    });
+
+
+  },
+  )
+  .catch((error) =>
+  {
+    return resolve({ onSuccess: false, data: 'No Data Found' })
+  });
+
+
+  // fcmCollectionRef.doc(deviceId).get().done(
+  //   (document) => {
+  //     const {fcmToken}=document.data();
+  //     if(fcmToken===token) return resolve({ onSuccess: true, data:document.data()})
+  //     resolve({ onSuccess: false, data:'No Data Found' })
+  //   }
+  // )
+});
+
+export const fetchUserInformation = createAsyncThunk('fetchUserIndfo', async(request, {
+  dispatch,
+  rejectWithValue
+}) => {
+  const {
+    userId: uid
+  } = request;
+  const { onSuccess: userExistInDatabase, data: userData } = await getUserInformation(uid);
+  if (!userExistInDatabase) return rejectWithValue({ result: userExistInDatabase, data: 'User Does not Exist' });
+
+  return { result: userExistInDatabase, data: userData };
+});
+const getUserInformation = (uid) => new Promise((resolve, reject) => {
+  firebase.firestore().collection('Users').doc(uid).get().done(
+    firestoreDocument => {
+      resolve({ onSuccess: true, data: firestoreDocument.data() });
+    }, () => {
+      resolve({ onSuccess: false, data: 'No User Data was Found' });
+    });
 });
 
 export const updateUserField = createAsyncThunk('UpdateUserField', async(request, {

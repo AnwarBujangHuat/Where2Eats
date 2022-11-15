@@ -8,7 +8,7 @@ import {
 } from 'react-native';
 import { RateLabel } from '../atoms/RateLabel';
 import locationIcon from '../../assets/location.png';
-import { icons } from '../../screens/home/ConstFoodCategory';
+import { icons } from '../../Const';
 import EStyleSheet from 'react-native-extended-stylesheet';
 import addImage from '../../assets/addImage.png';
 import FastImage from 'react-native-fast-image';

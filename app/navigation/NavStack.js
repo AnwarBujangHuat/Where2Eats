@@ -13,9 +13,19 @@ import {
 import BottomNavigationBar from './bottom/BottomNavigationBar';
 import * as React from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
+import { useSelector } from 'react-redux';
+import { getTheme } from '../store/selector';
+import EStyleSheet from 'react-native-extended-stylesheet';
+import {
+  DarkTheme,
+  LightTheme
+} from '../Colors';
 
 const Stack = createStackNavigator();
 export const NavStack = () => {
+  const theme = useSelector(getTheme);
+  EStyleSheet.build(theme === ConstString.LIGHT ? LightTheme : DarkTheme);
+
   const forFade = ({ current }) => ({
     cardStyle: {
       opacity: current.progress,
@@ -23,7 +33,7 @@ export const NavStack = () => {
   });
   return (
     <Stack.Navigator
-      initialRouteName={ConstString.LOGIN}
+      initialRouteName={ConstString.MODAL}
       screenOptions={{
         headerShown: false,
         gestureEnabled: false,

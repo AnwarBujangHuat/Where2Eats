@@ -4,9 +4,11 @@ import React, {
 } from 'react';
 import { ConstString } from '../../Strings';
 import { useSelector } from 'react-redux';
-import { icons } from '../home/ConstFoodCategory';
+import {
+  icons,
+  menuIcons
+} from '../../Const';
 import { getCurrentRestaurant } from '../../store/selector';
-import { menuCategories } from '../register/MenuCategories';
 import { RestaurantComponents } from './components';
 
 const categories = [
@@ -38,7 +40,7 @@ export const Restaurant = ({ navigation, route }) => {
   const closePreviewModal = () => {
     setIsPreview(false);
   };
-  const menuIcon = (item) => menuCategories.find(icons => icons.item === item).icon; // icon mapping & make utils function
+  const menuIcon = (item) => icons[item]??icons?.def
   const closeModal = () => setModalVisible(false);
   const openPreviewModal = () => setIsPreview(true);
   const goToRating = () => navigation.navigate(ConstString.RATINGS, { id });

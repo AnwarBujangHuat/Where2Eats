@@ -10,7 +10,7 @@ import {
   View
 } from 'react-native';
 import { DetailsHeader } from '../../components/molecules/DetailsHeader';
-import { ConstFoodCategory } from '../home/ConstFoodCategory';
+import { Const } from '../../Const';
 import { ImageButton } from '../../components/atoms/ImageButton';
 import { InputField } from '../../components/atoms/InputField';
 import EStyleSheet from 'react-native-extended-stylesheet';
@@ -44,11 +44,11 @@ export const RegisterComponents = props => {
         <Text style={styles.header}>{'Category'}</Text>
         <FlatList
           style={{ maxHeight: 60 }}
-          data={ConstFoodCategory}
+          data={Const}
           onScrollToIndexFailed={info => {
             const wait = new Promise(resolve => setTimeout(resolve, 500));
             wait.then(() => {
-              ConstFoodCategory.current?.scrollToIndex({index: info.index, animated: true });
+              Const.current?.scrollToIndex({index: info.index, animated: true });
             });
           }}
           initialScrollIndex={initialIndex??0}

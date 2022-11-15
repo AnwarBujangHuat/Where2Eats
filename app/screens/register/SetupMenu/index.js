@@ -14,7 +14,9 @@ import {
   removeFoodItemFirebase,
   updateFoodItemFirebase
 } from '../../../store/thunks';
-import { menuCategories } from '../MenuCategories';
+import {
+  icons
+} from '../../../Const';
 import { firebase } from '../../../../src/firebase/config';
 import { getCurrentRestaurant } from '../../../store/selector';
 import { SetupMenuComponents } from './components';
@@ -86,7 +88,7 @@ export const SetupMenu = ({ navigation, route }) => {
   };
   const closeModal = () => setModalVisible(false);
   const closeActionModal = () => setActionModal(false);
-  const menuIcon = (item) => menuCategories.find(icons => icons.item === item).icon;
+  const menuIcon = (item) => icons[item]??icons?.def
   const generateId = () => {
     const id = () => {
       return Math.floor((1 + Math.random()) * 0x10000).toString(16).substring(1);
