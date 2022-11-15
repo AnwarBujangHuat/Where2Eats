@@ -10,7 +10,8 @@ import {
   removeFoodItemFirebase,
   updateFoodItemFirebase,
   updateRating,
-  updateRestaurantInfoFirestore
+  updateRestaurantInfoFirestore,
+  updateUserFCM
 } from './thunks';
 import { ConstString } from '../Strings';
 
@@ -27,9 +28,9 @@ export const Reducer = createSlice({
       AGE: 21,
       EMAIL: 'Mohamad@gmail.com',
       PHONE: '0123456789',
-      RestaurantId: [1, 2, 3]
     },
-    THEME: ConstString.LIGHT
+    THEME: ConstString.LIGHT,
+    FCMTOKEN: ''
   },
   reducers: {
     restaurantUpdated: restaurantAdapter.updateOne,
@@ -130,6 +131,20 @@ export const Reducer = createSlice({
     builder.addCase(updateRestaurantInfoFirestore.rejected, (state, { meta, payload }) => {
       console.log("failed")
     });
+    builder.addCase(updateUserFCM.fulfilled, (state, { meta, payload }) => {
+      const{ userToken: token, userInformation, userId: uid } =payload.data;
+      const {NAME,AGE,EMAIL}=userInformation
+      state.FCMTOKEN = token;
+      state.USER=
+       {
+          ID: uid,
+          NAME: NAME,
+          AGE: AGE,
+          EMAIL: EMAIL,
+      }
+      return state;
+    });
+
     builder.addCase(removeFoodItemFirebase.rejected, (state, payload) => {
       console.log({ path: 'store-removeOne-rejected', state, payload });
     });

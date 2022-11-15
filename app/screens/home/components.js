@@ -8,7 +8,7 @@ import { Header } from '../../components/molecules/Header';
 import personIcon from '../../assets/programmer.png';
 import { SearchBar } from '../../components/molecules/SearchBar';
 import search from '../../assets/search.png';
-import { ConstFoodCategory } from './ConstFoodCategory';
+import { Const } from '../../Const';
 import { ImageButton } from '../../components/atoms/ImageButton';
 import { RestaurantCard } from '../../components/molecules/RestaurantCard';
 import { FloatingActionButton } from '../../components/atoms/FloatingActionButtom';
@@ -29,8 +29,10 @@ export const HomeComponents = props => {
     onNavigate,
     isFetching,
     reFresh,
-    reRender
+    reRender,
+    userName
   } = props;
+  const name = userName.trim().split(/\s+/);
   const renderItem = ({ item }) => {
     return (
       <RestaurantCard
@@ -41,13 +43,13 @@ export const HomeComponents = props => {
 
   return (
     <SafeAreaView style={styles.container}>
-      <Header source={personIcon} onPress={openMenu} reRender={reRender}></Header>
+      <Header source={personIcon} onPress={openMenu} reRender={reRender} title={'Welcome Back '+name[1]}></Header>
       {isOpenMenu &&
         <ModalMenuButton isModalVisible={isOpenMenu} onPress={onNavigate} closeModal={closeModal} />}
       <SearchBar placeholder={'Search'} onChangeText={onSearch} source={search} />
       <View style={styles.buttonContainer}>
         <FlatList
-          data={ConstFoodCategory}
+          data={Const}
           renderItem={({ item }) => {
             return (
               <ImageButton item={item} onPress={() => onClickCategoryChip(item.title)} selected={selectedTypes} />

@@ -24,7 +24,7 @@ const currentTheme = EStyleSheet.value('$theme');
 let theme;
 let color;
 
-export const Header = ({ source, onPress, reRender }) => {
+export const Header = ({ source, onPress, reRender,title}) => {
   const animationProgress = useRef(new Animated.Value(currentTheme === ConstString.LIGHT ? .5 : 0));
   const [isCurrentTheme, setCurrentTheme] = useState(currentTheme);
   const [isRender, setRender] = useState(false);
@@ -60,7 +60,7 @@ export const Header = ({ source, onPress, reRender }) => {
       <TouchableOpacity onPress={onPress}>
         <Image style={styles.icons} source={source} />
       </TouchableOpacity>
-      <Text style={styles.title}>{ConstString.QUOTES}</Text>
+      <Text style={styles.title}>{title}</Text>
       <TouchableOpacity onPress={onChangeTheme} disabled={isRender}>
         <LottieView style={styles.lottieButton} source={ThemeButton}
                     progress={animationProgress.current}

@@ -1,4 +1,7 @@
-import React from 'react';
+import React, {
+  useEffect,
+  useRef
+} from 'react';
 import {
   Animated,
   Dimensions,
@@ -54,10 +57,9 @@ export const WheelComponents = props => {
     oneTurn,
     numberOfSegments,
   } = props;
-  let angle = 0;
+  let angle=0
   _angle.addListener(event => {
     angle = event.value;
-    setisEnabled(false);
   });
   const makeWheel = () => {
     const data = Array.from({ length: numberOfSegments }).fill(1);
@@ -79,13 +81,14 @@ export const WheelComponents = props => {
       };
     });
   };
-
   const _wheelPaths = makeWheel();
+
   const _onPan = ({ nativeEvent }) => {
     const { velocityY, velocityX } = nativeEvent;
 
     if (nativeEvent.state === State.ACTIVE) {
       velocityX > 0 ? setDirection('Left') : setDirection('Right');
+      setisEnabled(false);
     }
     if (nativeEvent.state === State.END) {
       Animated.decay(_angle, {
@@ -120,7 +123,6 @@ export const WheelComponents = props => {
       return 0;
     }
   };
-
   const _renderKnob = () => {
     const knobSize = 30;
     const YOLO =

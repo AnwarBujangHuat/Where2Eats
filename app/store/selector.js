@@ -10,4 +10,6 @@ export const getCurrentRestaurant = (id) => createSelector(state => state.restau
 export const getLatestIndex = createSelector(state => state.restaurant.RESTAURANT, state => selectTotal(state));
 
 export const getUser = createSelector(state => state, state => state.restaurant.USER);
+export const getToken = createSelector(state => state, state => state.restaurant.FCMTOKEN);
+
 export const getTheme = createSelector(state => state, state => state.restaurant.THEME);
