@@ -4,8 +4,8 @@ export * from './home';
 export * from './register';
 export * from './register/SetupMenu';
 export * from './restaurant';
-export * from './Wheel/WheelOfFortune';
-export * from './profile/Profile';
+export * from './Wheel';
+export * from './profile';
 export * from './ratings'
 export * from './register/SetupMenu';
 

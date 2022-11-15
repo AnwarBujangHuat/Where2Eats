@@ -20,7 +20,7 @@ const persistConfig = {
   key: 'root',
   storage: AsyncStorage,
   stateReconciler: autoMergeLevel1,
-  whitelist: ['THEME'] // only navigation will be persisted
+  whitelist: ['THEME','FCMTOKEN'] // only navigation will be persisted
 };
 const _persistedReducer = persistReducer(persistConfig, Reducer);
 export default configureStore({

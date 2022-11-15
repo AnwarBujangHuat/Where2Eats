@@ -10,7 +10,7 @@ import {
   getCurrentRestaurant,
   getUser
 } from '../../store/selector';
-import { ConstFoodCategory } from '../home/ConstFoodCategory';
+import { Const } from '../../Const';
 import { Alert } from 'react-native';
 import { updateRestaurantInfoFirestore } from '../../store/thunks';
 import { firebase } from '../../../src/firebase/config';
@@ -33,7 +33,7 @@ export const Register = ({ navigation,route }) => {
     initialRestaurantLocation=restaurantInfo.address;
     initialRestaurantImage=restaurantInfo.image;
     initialRestaurantCategory=restaurantInfo.category;
-    initialIndex=ConstFoodCategory.findIndex(items=>{
+    initialIndex=Const.findIndex(items=>{
       return items.title === initialRestaurantCategory;
     })
   }else{

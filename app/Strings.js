@@ -32,5 +32,6 @@ export const ConstString = { // name it to routes
   ADD:'Add',
   DELETE:"Delete",
   SUCCESS:'Success',
-  FAILED:'Failed'
+  FAILED:'Failed',
+  FCM:'FCM'
 };

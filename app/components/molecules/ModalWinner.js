@@ -10,7 +10,7 @@ import {
 import logoIcon from '../../assets/Logo.png';
 import locationIcon from '../../assets/location.png';
 import FastImage from 'react-native-fast-image';
-import { icons } from '../../screens/home/ConstFoodCategory';
+import { icons } from '../../Const';
 import EStyleSheet from 'react-native-extended-stylesheet';
 import Modal from 'react-native-modal';
 
