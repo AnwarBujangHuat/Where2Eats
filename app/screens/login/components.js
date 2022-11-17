@@ -63,8 +63,8 @@ export const LoginComponents = props => {
         <TouchableOpacity style={styles.buttonForPass}>
           <Text style={{ color: Colors.primaryColor, textAlign: 'center' }}>Forget Password</Text>
         </TouchableOpacity>
-        <SocialButton onPress={()=>onGoogleButtonPress} icon={ConstString.GOOGLE} />
         <IconButton title="Don't Have an Account? " buttontitle="Sign Up" onPress={goToSignIn}></IconButton>
+        <SocialButton onPress={onGoogleButtonPress} icon={ConstString.GOOGLE} />
       </View>
     </SafeAreaView>
   );

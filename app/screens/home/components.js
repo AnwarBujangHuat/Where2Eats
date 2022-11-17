@@ -32,7 +32,6 @@ export const HomeComponents = props => {
     reRender,
     userName
   } = props;
-  const name = userName.trim().split(/\s+/);
   const renderItem = ({ item }) => {
     return (
       <RestaurantCard
@@ -43,7 +42,7 @@ export const HomeComponents = props => {
 
   return (
     <SafeAreaView style={styles.container}>
-      <Header source={personIcon} onPress={openMenu} reRender={reRender} title={'Welcome Back '+name[1]}></Header>
+      <Header source={personIcon} onPress={openMenu} reRender={reRender} title={'Welcome Back '}></Header>
       {isOpenMenu &&
         <ModalMenuButton isModalVisible={isOpenMenu} onPress={onNavigate} closeModal={closeModal} />}
       <SearchBar placeholder={'Search'} onChangeText={onSearch} source={search} />
