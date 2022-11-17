@@ -20,8 +20,8 @@ export const ModalScreen = ({ navigation }) => {
     const response = await dispatch(PopulateRestaurantList());
     const { payload } = response;
     if (!payload.result) {
-      return Alert.alert('Make Sure You Have Internet Connection',
-        'Opps',
+      return Alert.alert('Opps',
+        'Make Sure You Have Internet Connection',
         {
           text: 'OK',
           onPress: () => navigation.navigate(ConstString.LOGIN),
