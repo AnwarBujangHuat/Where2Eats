@@ -6,20 +6,21 @@ import {
 import React from 'react';
 import EStyleSheet from 'react-native-extended-stylesheet';
 
-export const InputFieldLogins = ({ onChangeText1, defvalue, source, secret }) => {
+export const InputFieldLogins = ({ onChangeText1, defvalue, source, secret,hint }) => {
   return (
     <View style={styles.section}>
       <Image style={styles.icons} source={source} />
       <TextInput
         style={styles.input}
-        placeholder={defvalue}
+        placeholder={hint}
+        value={defvalue}
         clearButtonMode={'always'}
         onChangeText={(text) => onChangeText1(text)}
         overflow="hidden"
         placeholderTextColor={EStyleSheet.value('$secondaryTextColor')}
         keyboardAppearance="dark"
         secureTextEntry={secret}
-        color={EStyleSheet.value('$primaryTextColor')}
+        color={EStyleSheet.value('$secondaryTextColor')}
         autoCorrect={false} />
     </View>
 

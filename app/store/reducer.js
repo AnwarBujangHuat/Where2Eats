@@ -7,6 +7,7 @@ import {
   AddOne,
   changeTheme,
   PopulateRestaurantList,
+  populateUserData,
   rememberMe,
   removeFoodItemFirebase,
   updateFoodItemFirebase,
@@ -144,6 +145,19 @@ export const Reducer = createSlice({
           AGE: AGE,
           EMAIL: EMAIL,
       }
+      return state;
+    });
+
+    builder.addCase(populateUserData.fulfilled, (state, { meta, payload }) => {
+      const{userInformation,  uid } =payload.data;
+      const {NAME,AGE,EMAIL}=userInformation
+      state.USER=
+        {
+          ID: uid,
+          NAME: NAME,
+          AGE: AGE,
+          EMAIL: EMAIL,
+        }
       return state;
     });
 

@@ -291,7 +291,7 @@ export const fetchUserInformation = createAsyncThunk('fetchUserIndfo', async(req
   rejectWithValue
 }) => {
   const {
-    userId: uid
+    uid
   } = request;
   const { onSuccess: userExistInDatabase, data: userData } = await getUserInformation(uid);
   if (!userExistInDatabase) return rejectWithValue({ result: userExistInDatabase, data: 'User Does not Exist' });
@@ -318,6 +318,13 @@ export const rememberMe = createAsyncThunk('RememberMe', async(request, {
   dispatch,
   rejectWithValue
 }) => {
-  const { EMAIL,PASSWORD } = request;
   return request;
+});
+
+
+export const populateUserData = createAsyncThunk('populateUserData', async(request, {
+  dispatch,
+  rejectWithValue
+}) => {
+  return {result:true,data:request};
 });
