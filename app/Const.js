@@ -12,7 +12,9 @@ import sideIcon from './assets/sides.png';
 import beveragesIcon from './assets/beverages.png';
 import dessertIcon from './assets/dessert.png';
 import appetizerIcon from './assets/appetizer.png';
-
+import facebookIcon from './assets/facebook.png';
+import twitterIcon from './assets/twitter.png';
+import googleIcon from './assets/google.png';
 export const icons = {
   [ConstString.WESTERN]: burgerIcon,
   [ConstString.MALAY]: malayIcon,
@@ -27,6 +29,9 @@ export const icons = {
   [ConstString.DESSERT]: dessertIcon,
   [ConstString.APPETIZER]: appetizerIcon,
   [ConstString.BEVERAGES]: beveragesIcon,
+  [ConstString.GOOGLE]: googleIcon,
+  [ConstString.TWITTER]: twitterIcon,
+  [ConstString.FACEBOOK]: facebookIcon,
   def: burgerIcon,
   defMenu: sideIcon
 

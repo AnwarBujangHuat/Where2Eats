@@ -33,5 +33,8 @@ export const ConstString = { // name it to routes
   DELETE:"Delete",
   SUCCESS:'Success',
   FAILED:'Failed',
-  FCM:'FCM'
+  FCM:'FCM',
+  FACEBOOK:'Facebook',
+  TWITTER:'Twitter',
+  GOOGLE:'Google'
 };
