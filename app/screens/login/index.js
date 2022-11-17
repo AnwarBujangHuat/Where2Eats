@@ -98,19 +98,27 @@ export const Login = ({ navigation }) => {
   const onGoogleButtonPress= async () =>{
     await GoogleSignin.hasPlayServices({ showPlayServicesUpdateDialog: true });
     try {
-      const { id, name, email, imageUri ,idToken} = await GoogleSignin.signIn();
-      firebase.auth().signInWithCredential(idToken).done()
+      const {
+        idToken,
+        accessToken,} = await GoogleSignin.signIn();
+      const credential = firebase.auth.GoogleAuthProvider.credential(
+        idToken,
+        accessToken,
+      );
+    const result=  await firebase.auth().signInWithCredential(credential);
+      if(!result)return showErrorAlert("We Did not Manage to Register You")
+
+      const{displayName,email,uid,imageUri}=result
       const userInfo = {
-        NAME: name,
+        userId:uid,
+        NAME: displayName,
         EMAIL: email,
         imageUri: imageUri
       };
-      await populateUser({ uid: id, userInformation: userInfo });
+      await populateUser({ uid, userInformation: userInfo });
 
     }
     catch(error) {
-
-      console.log(error);
     }
   }
 
