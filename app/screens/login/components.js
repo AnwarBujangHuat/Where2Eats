@@ -17,6 +17,7 @@ import { Colors } from '../../Colors';
 import EStyleSheet from 'react-native-extended-stylesheet';
 import { SocialButton } from '../../components/atoms/SocialButton';
 import { ConstString } from '../../Strings';
+import { GoogleSigninButton } from '@react-native-google-signin/google-signin';
 
 export const LoginComponents = props => {
   const {
@@ -24,7 +25,9 @@ export const LoginComponents = props => {
     onChangeInputPassword,
     goToSignIn,
     verifyUser,
-    onClickSignInOptions,
+    Email,
+    Password,
+    onGoogleButtonPress,
     onClickRememberMe,
     onRememberMe
   } = props;
@@ -35,21 +38,24 @@ export const LoginComponents = props => {
       </TouchableOpacity>
       <View style={styles.inputContainer}>
         <Text style={styles.title}>Sign In</Text>
-        <InputFieldLogins defvalue={'Email'} onChangeText1={onChangeInputEmail} source={email}
+        <InputFieldLogins hint={"Email"} defvalue={Email} onChangeText1={onChangeInputEmail} source={email}
                           secret={false} />
-        <InputFieldLogins defvalue={'Password'} onChangeText1={onChangeInputPassword} source={password}
+        <InputFieldLogins
+          hint={"Password"}
+          defvalue={Password} onChangeText1={onChangeInputPassword} source={password}
                           secret={true} />
         <View style={styles.checkboxContainer}>
           <CheckBox
             value={onRememberMe}
             onCheckColor={Colors.primaryColor}
             tintColor={Colors.primaryColor}
+            onTintColor={Colors.primaryColor}
             boxType={'square'}
             tintColors={Colors.primaryColor}
             onValueChange={onClickRememberMe}
             style={{ height: 15, width: 15 }}
           />
-          <Text style={{ color: Colors.primaryColor, textAlign: 'center',marginStart:10, }}>Remember Me</Text>
+          <Text style={{ color: EStyleSheet.value('$secondaryTextColor'), textAlign: 'center',marginStart:10, }}>Remember Me</Text>
         </View>
         <TouchableOpacity style={styles.buttonDone} onPress={verifyUser}>
           <Text style={{ color: 'white', textAlign: 'center'}}>Login</Text>
@@ -57,20 +63,8 @@ export const LoginComponents = props => {
         <TouchableOpacity style={styles.buttonForPass}>
           <Text style={{ color: Colors.primaryColor, textAlign: 'center' }}>Forget Password</Text>
         </TouchableOpacity>
+        <SocialButton onPress={()=>onGoogleButtonPress} icon={ConstString.GOOGLE} />
         <IconButton title="Don't Have an Account? " buttontitle="Sign Up" onPress={goToSignIn}></IconButton>
-
-        <FlatList
-          data={[ConstString.FACEBOOK, ConstString.TWITTER, ConstString.GOOGLE]}
-          style={{ maxHeight: 80, alignSelf: 'center' }}
-          contentContainerStyle={{ alignSelf: 'center' }}
-          renderItem={({ item }) => {
-            return (
-              <SocialButton item={item} onPress={() => onClickSignInOptions(item)} icon={item} />
-            );
-          }}
-          horizontal={true}
-          showsHorizontalScrollIndicator={false}
-        />
       </View>
     </SafeAreaView>
   );

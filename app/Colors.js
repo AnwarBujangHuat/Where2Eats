@@ -60,6 +60,7 @@ export const LightTheme = {
   $backGroundColor: '#fefefe',
   $secondaryBackGroundColor: '#fff',
   $greyBackground: '#F5F5F5',
+  $secondaryPurple: '#8e7dc4',
   $lightBackground: '#f4eafe',
   $ModalBackground: '#1a004f'
 };

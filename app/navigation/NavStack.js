@@ -33,6 +33,7 @@ export const NavStack = () => {
   });
   return (
     <Stack.Navigator
+      // initialRouteName={ConstString.MODAL}
       initialRouteName={ConstString.LOGIN}
       screenOptions={{
         headerShown: false,
