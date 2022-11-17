@@ -24,29 +24,26 @@ export const ModalMenu = ({
   const [itemPrice, setItemPrice] = useState(!Category ? foodItem.price : '');
   const [imageUri, setImageUri] = useState(!Category ? foodItem.image : undefined);
   let reUpload = false;
+  const showErrorAlert=({message})=>{
+    Alert.alert("Error",
+      message,
+      [
+        { text: 'Okay' },
+      ],
+      { cancelable: true }
+    );
+  }
   const launchImageLibrary = async() => {
     const response = await launchImagePicker();
     //* Exit if response empty *//
     if (!response) {
-      return Alert.alert('Please Pick Image in JPG or PNG format',
-        '',
-        [
-          { text: 'Okay' },
-        ],
-        { cancelable: true }
-      );
+      return showErrorAlert({message:'Please Pick Image in JPG or PNG format'})
     }
 
     //* Exit if there's error *//
     const { errorCode, assets } = response;
     if (errorCode || assets === []) {
-      return Alert.alert('Please Pick Image in JPG or PNG format',
-        '',
-        [
-          { text: 'Okay' },
-        ],
-        { cancelable: true }
-      );
+      return showErrorAlert({message:'Please Pick Image in JPG or PNG format'})
     }
 
     //* Code proccessing *//
@@ -54,7 +51,11 @@ export const ModalMenu = ({
     reUpload = true;
   };
   const addItem = () => {
-    if (itemName === '' || itemDesc === '' || imageUri === undefined || itemPrice === '') return alert('Please Complete Input');
+
+    if (itemName === '' || itemDesc === '' || imageUri === undefined || itemPrice === '') return showErrorAlert({message:'Please Complete Input'})
+
+    if(/[a-zA-Z]/.test(itemPrice))  return showErrorAlert({message:'Please Ensure Price is Only Numbers'})
+
     const newItem = {
       desc: itemDesc,
       image: imageUri,
