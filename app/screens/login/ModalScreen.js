@@ -27,8 +27,7 @@ const { width } = Dimensions.get('window');
 import {getDeviceId,getUniqueId} from 'react-native-device-info';
 
 export const ModalScreen = ({ navigation }) => {
-  //Check if User Logged In Previously
-
+  //Verify User Token
   const token=useSelector(getToken)
   const deviceId=getDeviceId();
   const dispatch = useDispatch();

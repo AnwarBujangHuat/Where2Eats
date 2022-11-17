@@ -1,7 +1,10 @@
 import React, { useState } from 'react';
 import { HomeComponents } from './components';
 import { ConstString } from '../../Strings';
-import { getRestaurant, } from '../../store/selector';
+import {
+  getRestaurant,
+  getUser,
+} from '../../store/selector';
 import {
   useDispatch,
   useSelector
@@ -11,6 +14,7 @@ import { Alert } from 'react-native';
 
 export const Home = ({ navigation }) => {
   const fetchRestaurant = useSelector(getRestaurant);
+  const { NAME:userName }=useSelector(getUser)
   const dispatch = useDispatch();
   const restaurant = [...fetchRestaurant];
   const [currentRestaurant, setCurrentRestaurant] = useState(restaurant);
@@ -96,7 +100,8 @@ export const Home = ({ navigation }) => {
     onNavigate,
     isFetching,
     reFresh,
-    reRender
+    reRender,
+    userName
   };
   return (<HomeComponents{...props} />);
 };

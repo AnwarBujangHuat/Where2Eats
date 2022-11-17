@@ -314,10 +314,10 @@ export const updateUserField = createAsyncThunk('UpdateUserField', async(request
   const result = request;
   return result;
 });
-export const verifyUser = createAsyncThunk('VerifyUser', async(request, {
+export const rememberMe = createAsyncThunk('RememberMe', async(request, {
   dispatch,
   rejectWithValue
 }) => {
-  const result = request;
-  return result;
+  const { EMAIL,PASSWORD } = request;
+  return request;
 });

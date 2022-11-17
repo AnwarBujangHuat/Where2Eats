@@ -1,5 +1,4 @@
 import {
-  Dimensions,
   Image,
   Text,
   TouchableOpacity,
@@ -9,37 +8,24 @@ import React from 'react';
 import EStyleSheet from 'react-native-extended-stylesheet';
 import { icons } from '../../Const';
 import { Colors } from '../../Colors';
-import TestIDs from '../../TestIDs';
 
-const { width } = Dimensions.get('window');
-
-export const SocialButton = ({ tesId,onPress, icon }) => {
+export const SocialButton = ({ onPress, icon }) => {
   return (
     <View>
-      <TouchableOpacity
-        testID={tesId}
-        style={{
+      <TouchableOpacity style={{
         flexDirection: 'row',
         borderRadius: 20,
-        marginTop: 15,
-        alignContent: 'center',
-        alignSelf: 'center',
-        alignItems: 'center',
+        margin: 5,
         padding: 15,
-        backgroundColor: EStyleSheet.value('$secondaryBackGroundColor'),
+        backgroundColor: 'white',
         shadowOffset: { width: -2, height: 3 },
-        shadowColor: Colors.primaryColor,
+        shadowColor: EStyleSheet.value('$primaryColor'),
         shadowOpacity: 0.2,
         shadowRadius: 3,
         elevation: 5,
+        alignItems: 'center',
       }} onPress={onPress}>
         <Image source={icons[icon]} style={styles.icon}></Image>
-        <Text style={{
-          marginStart: 10,
-          alignSelf: 'center',
-          color: EStyleSheet.value('$secondaryTextColor'),
-          fontWeight: 'bold',
-        }}>{'Sign in With Google'}</Text>
       </TouchableOpacity>
     </View>
 

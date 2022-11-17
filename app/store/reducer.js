@@ -7,6 +7,7 @@ import {
   AddOne,
   changeTheme,
   PopulateRestaurantList,
+  rememberMe,
   removeFoodItemFirebase,
   updateFoodItemFirebase,
   updateRating,
@@ -30,7 +31,8 @@ export const Reducer = createSlice({
       PHONE: '0123456789',
     },
     THEME: ConstString.LIGHT,
-    FCMTOKEN: ''
+    EMAIL: 'A177016@siswa.ukm.edu.my',
+    PASSWORD: '12345678'
   },
   reducers: {
     restaurantUpdated: restaurantAdapter.updateOne,
@@ -171,6 +173,13 @@ export const Reducer = createSlice({
     builder.addCase(updateFoodItemFirebase.rejected, (state, payload) => {
     });
 
+    builder.addCase(rememberMe.fulfilled, (state, {meta,payload}) => {
+      const {EMAIL,PASSWORD}=payload
+      state.PASSWORD=PASSWORD
+      state.EMAIL=EMAIL
+
+      return state;
+    });
   }
 });
 export default Reducer.reducer;
