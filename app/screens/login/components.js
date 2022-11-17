@@ -1,11 +1,13 @@
 import * as React from 'react';
 import {
+  FlatList,
   Image,
   SafeAreaView,
   Text,
   TouchableOpacity,
-  View
+  View,
 } from 'react-native';
+import CheckBox from '@react-native-community/checkbox';
 import Logo from '../../assets/Logo.png';
 import { InputFieldLogins } from '../../components/molecules/InputFieldLogins';
 import email from '../../assets/email.png';
@@ -13,6 +15,8 @@ import password from '../../assets/password.png';
 import { IconButton } from '../../components/molecules/IconButton';
 import { Colors } from '../../Colors';
 import EStyleSheet from 'react-native-extended-stylesheet';
+import { SocialButton } from '../../components/atoms/SocialButton';
+import { ConstString } from '../../Strings';
 
 export const LoginComponents = props => {
   const {
@@ -20,6 +24,9 @@ export const LoginComponents = props => {
     onChangeInputPassword,
     goToSignIn,
     verifyUser,
+    onClickSignInOptions,
+    onClickRememberMe,
+    onRememberMe
   } = props;
   return (
     <SafeAreaView style={styles.container}>
@@ -32,13 +39,38 @@ export const LoginComponents = props => {
                           secret={false} />
         <InputFieldLogins defvalue={'Password'} onChangeText1={onChangeInputPassword} source={password}
                           secret={true} />
+        <View style={styles.checkboxContainer}>
+          <CheckBox
+            value={onRememberMe}
+            onCheckColor={Colors.primaryColor}
+            tintColor={Colors.primaryColor}
+            boxType={'square'}
+            tintColors={Colors.primaryColor}
+            onValueChange={onClickRememberMe}
+            style={{ height: 15, width: 15 }}
+          />
+          <Text style={{ color: Colors.primaryColor, textAlign: 'center',marginStart:10, }}>Remember Me</Text>
+        </View>
         <TouchableOpacity style={styles.buttonDone} onPress={verifyUser}>
-          <Text style={{ color: 'white', textAlign: 'center' }}>Login</Text>
+          <Text style={{ color: 'white', textAlign: 'center'}}>Login</Text>
         </TouchableOpacity>
         <TouchableOpacity style={styles.buttonForPass}>
           <Text style={{ color: Colors.primaryColor, textAlign: 'center' }}>Forget Password</Text>
         </TouchableOpacity>
         <IconButton title="Don't Have an Account? " buttontitle="Sign Up" onPress={goToSignIn}></IconButton>
+
+        <FlatList
+          data={[ConstString.FACEBOOK, ConstString.TWITTER, ConstString.GOOGLE]}
+          style={{ maxHeight: 80, alignSelf: 'center' }}
+          contentContainerStyle={{ alignSelf: 'center' }}
+          renderItem={({ item }) => {
+            return (
+              <SocialButton item={item} onPress={() => onClickSignInOptions(item)} icon={item} />
+            );
+          }}
+          horizontal={true}
+          showsHorizontalScrollIndicator={false}
+        />
       </View>
     </SafeAreaView>
   );
@@ -72,12 +104,20 @@ const styles = EStyleSheet.create(
       backgroundColor: '$primaryColor',
       borderRadius: 10,
       padding: 15,
-      marginTop: 15,
+      marginTop: 20,
     },
     buttonForPass: {
       alignItems: 'center',
       borderRadius: 10,
       padding: 15,
       marginTop: 10,
+    },
+    checkboxContainer: {
+      flexDirection: "row",
+      margin:5,
+      alignItems:'center',
+    },
+    label: {
+      margin: 8,
     },
   });

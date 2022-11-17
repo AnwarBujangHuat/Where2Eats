@@ -1,6 +1,7 @@
 import firebase from 'firebase/compat/app'
 import 'firebase/compat/auth';
 require('firebase/compat/auth');
+import { GoogleSignin } from '@react-native-google-signin/google-signin';
 
 import 'firebase/compat/firestore';
 import 'firebase/compat/storage';
