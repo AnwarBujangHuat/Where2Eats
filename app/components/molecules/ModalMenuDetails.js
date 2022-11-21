@@ -22,7 +22,7 @@ export const ModalMenuDetails = ({ closeModal, isModalVisible, foodItem }) => {
       {
         isModalVisible &&
         <SafeAreaView style={styles.screen}>
-          <Modal animationType="none"
+          <View animationType="none"
                  transparent visible={isModalVisible}
                  onBackdropPress={()=>closeModal()}
                  onDismiss={closeModal}>
@@ -55,7 +55,7 @@ export const ModalMenuDetails = ({ closeModal, isModalVisible, foodItem }) => {
                 </TouchableOpacity>
                 {/*<Button title="OK" color={Colors.primaryColor} onPress={closeModal} />*/}
               </View>
-          </Modal>
+          </View>
         </SafeAreaView>
       }
     </>

@@ -1,4 +1,7 @@
-import React, { useState } from 'react';
+import React, {
+  useEffect,
+  useState
+} from 'react';
 import { HomeComponents } from './components';
 import { ConstString } from '../../Strings';
 import {
@@ -14,7 +17,7 @@ import { Alert } from 'react-native';
 
 export const Home = ({ navigation }) => {
   const fetchRestaurant = useSelector(getRestaurant);
-  const { NAME:userName }=useSelector(getUser)
+  const { NAME:userName, IMAGE }=useSelector(getUser)
   const dispatch = useDispatch();
   const restaurant = [...fetchRestaurant];
   const [currentRestaurant, setCurrentRestaurant] = useState(restaurant);
@@ -43,14 +46,17 @@ export const Home = ({ navigation }) => {
     const response = await dispatch(PopulateRestaurantList());
     const { payload } = response;
     if (!payload.result) {
-      return Alert.alert('There Was An Error While Refreshing',
-        'Opps',
-        { text: 'OK' },
-        { cancelable: true });
+      Alert.alert(payload.data,
+        '',
+        [{
+          text: "Ok",
+          onPress:goBack
+          ,}],
+        { cancelable: false });
     }
     setIsFetching(false);
-
   };
+  const goBack=()=> navigation.navigate(ConstString.LOGIN)
   const onSearch = (text) => {
     if (!text) return setCurrentRestaurant(restaurant);
     const updateRestaurant = restaurant.filter(item => item.restaurant.toLowerCase().includes(text.toLowerCase()));
@@ -86,7 +92,6 @@ export const Home = ({ navigation }) => {
     navigation.navigate(ConstString.RESTAURANT, { id });
   };
   const reRender = () => setIsRender(!isRender);
-
   const props = {
     selectedTypes,
     currentRestaurant,
@@ -101,7 +106,8 @@ export const Home = ({ navigation }) => {
     isFetching,
     reFresh,
     reRender,
-    userName
+    userName,
+    IMAGE
   };
   return (<HomeComponents{...props} />);
 };

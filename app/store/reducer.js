@@ -30,6 +30,7 @@ export const Reducer = createSlice({
       AGE: 21,
       EMAIL: 'Mohamad@gmail.com',
       PHONE: '0123456789',
+      IMAGE:''
     },
     THEME: ConstString.LIGHT,
     EMAIL: 'A177016@siswa.ukm.edu.my',
@@ -136,7 +137,7 @@ export const Reducer = createSlice({
     });
     builder.addCase(updateUserFCM.fulfilled, (state, { meta, payload }) => {
       const{ userToken: token, userInformation, userId: uid } =payload.data;
-      const {NAME,AGE,EMAIL}=userInformation
+      const {NAME,AGE,EMAIL,IMAGE}=userInformation
       state.FCMTOKEN = token;
       state.USER=
        {
@@ -144,19 +145,22 @@ export const Reducer = createSlice({
           NAME: NAME,
           AGE: AGE,
           EMAIL: EMAIL,
+          IMAGE:IMAGE
       }
       return state;
     });
 
     builder.addCase(populateUserData.fulfilled, (state, { meta, payload }) => {
       const{userInformation,  uid } =payload.data;
-      const {NAME,AGE,EMAIL}=userInformation
+      const {NAME,AGE,EMAIL,IMAGE}=userInformation
       state.USER=
         {
           ID: uid,
           NAME: NAME,
           AGE: AGE,
           EMAIL: EMAIL,
+          IMAGE:IMAGE
+
         }
       return state;
     });

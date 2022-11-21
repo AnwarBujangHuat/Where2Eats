@@ -56,8 +56,8 @@ const styles = StyleSheet.create({
     marginTop: 90,
   },
   container: {
+    zIndex:2,
     height: 220,
-    zIndex: 2,
     shadowRadius: 2,
     shadowOffset: {
       width: 0,
