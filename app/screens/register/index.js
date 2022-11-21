@@ -1,4 +1,7 @@
-import React, { useState } from 'react';
+import React, {
+  useEffect,
+  useState
+} from 'react';
 import { ConstString } from '../../Strings';
 import { RegisterComponents } from './components';
 import { launchImagePicker } from '../../ImagePicker';
@@ -15,40 +18,26 @@ import { Alert } from 'react-native';
 import { updateRestaurantInfoFirestore } from '../../store/thunks';
 import { firebase } from '../../../src/firebase/config';
 
-let initialRestaurantname;
-let initialRestaurantDesc;
-let initialRestaurantLocation;
-let initialRestaurantImage;
-let initialRestaurantCategory;
 let initialIndex=0;
 export const Register = ({ navigation,route }) => {
-  const { id } = route.params || {};
+  const { id ,location} = route.params || {};
   const dispatch = useDispatch();
   const editorMode = !!id;
+  const restaurantInfo=useSelector(getCurrentRestaurant(id))
+  const user=useSelector(getUser)
+  const [selectedTypes, setSelectedTypes] = useState(restaurantInfo?.category??ConstString.WESTERN);
+  const [restaurantName, setRestaurantName] = useState(restaurantInfo?.restaurant??'');
+  const [restaurantDesc, setRestaurantDesc] = useState(restaurantInfo?.description??'');
+  const [imageUri, setImageUri] = useState(restaurantInfo?.image??undefined);
+  const [restaurantLocation, setRestaurantLocation] = useState(restaurantInfo?.address??location);
   //initializing Variables
-  if(editorMode){
-    const restaurantInfo=useSelector(getCurrentRestaurant(id))
-    initialRestaurantname=restaurantInfo.restaurant;
-    initialRestaurantDesc=restaurantInfo.description;
-    initialRestaurantLocation=restaurantInfo.address;
-    initialRestaurantImage=restaurantInfo.image;
-    initialRestaurantCategory=restaurantInfo.category;
-    initialIndex=Const.findIndex(items=>{
-      return items.title === initialRestaurantCategory;
-    })
-  }else{
-    initialRestaurantname="";
-    initialRestaurantDesc='';
-    initialRestaurantLocation='Jalan Dato Barber';
-    initialRestaurantImage=undefined;
-    initialRestaurantCategory=ConstString.WESTERN;
-  }
-  const user=  useSelector(getUser)
-  const [selectedTypes, setSelectedTypes] = useState(initialRestaurantCategory??"Western");
-  const [restaurantName, setRestaurantName] = useState(initialRestaurantname??'');
-  const [restaurantDesc, setRestaurantDesc] = useState(initialRestaurantDesc)??'';
-  const [imageUri, setImageUri] = useState(initialRestaurantImage??undefined);
-  const [restaurantLocation, setRestaurantLocation] = useState(initialRestaurantLocation??'');
+  initialIndex=Const.findIndex(items=>{
+    return items.title === selectedTypes;
+  })
+  useEffect(()=>{
+    if(location)
+      return setRestaurantLocation(location);}
+  ,[location])
   let reUpload=false;
   const goToMenu = () => {
     const item = {
@@ -93,7 +82,6 @@ export const Register = ({ navigation,route }) => {
     setImageUri(assets[0].uri)
 
   };
-
   const showAlert = (result) => {
     result === ConstString.SUCCESS ?
       Alert.alert(
@@ -124,7 +112,7 @@ export const Register = ({ navigation,route }) => {
     navigation.goBack({id});
   };
   const updateRestaurantInfo=async()=>{
-    let image=initialRestaurantImage;
+    let image=restaurantInfo?.image;
     //Upload Image if image change
     if(!reUpload){
       const imageUploadResult= await uploadAsFile(imageUri,"profile");
@@ -138,7 +126,6 @@ export const Register = ({ navigation,route }) => {
     if(updateResult) return showAlert(ConstString.FAILED)
     showAlert(ConstString.SUCCESS)
   }
-
   const setName = (text) => setRestaurantName(text);
   const setDescription = (text) => setRestaurantDesc(text);
   const categorySelected = ({ item }) => setSelectedTypes(item.title);
@@ -147,7 +134,7 @@ export const Register = ({ navigation,route }) => {
       const response = await fetch(uri);
       const blob = await response.blob();
       const name = 'profilemedia.jpg'
-      const pathName =initialRestaurantname + '/' + folder + '/' + name
+      const pathName =restaurantName + '/' + folder + '/' + name
       const metadata = {
         contentType: 'image/jpeg',
       };
@@ -174,7 +161,7 @@ export const Register = ({ navigation,route }) => {
       showAlert('Missing File' + category);
     }
   };
-
+  const locationPicker=()=>navigation.navigate(ConstString.LOCATION,{id})
   const props = {
     selectedTypes,
     restaurantName,
@@ -189,7 +176,8 @@ export const Register = ({ navigation,route }) => {
     launchImageLibrary,
     imageUri,
     updateRestaurantInfo,
-    editorMode
+    editorMode,
+    locationPicker,
   };
   return (
     <RegisterComponents {...props} />

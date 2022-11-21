@@ -1,4 +1,5 @@
 import {
+  Dimensions,
   Image,
   SafeAreaView,
   Text,
@@ -8,6 +9,7 @@ import {
 } from 'react-native';
 import React from 'react';
 import EStyleSheet from 'react-native-extended-stylesheet';
+const { width } = Dimensions.get('window');
 
 
 export const SearchBar = ({ onChangeText, placeholder, source }) => {
@@ -28,10 +30,10 @@ export const SearchBar = ({ onChangeText, placeholder, source }) => {
         />
       </View>
       <View>
-        <TouchableOpacity style={styles.sortButton}
-        >
-          <Text style={styles.text}>{'Sort By'}</Text>
-        </TouchableOpacity>
+        {/*<TouchableOpacity style={styles.sortButton}*/}
+        {/*>*/}
+        {/*  <Text style={styles.text}>{'Sort By'}</Text>*/}
+        {/*</TouchableOpacity>*/}
       </View>
     </SafeAreaView>
   );
@@ -42,8 +44,7 @@ const styles = EStyleSheet.create({
     flexDirection: 'row',
     borderRadius: 10,
     marginVertical: 10,
-    marginRight: 10,
-    width: '85%',
+    width: width-30,
     padding: 5,
     shadowOffset: { width: -2, height: 4 },
     shadowColor: '$primaryColor',
@@ -60,7 +61,6 @@ const styles = EStyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     marginHorizontal: 15,
-    paddingEnd: 20,
   },
   input: {
     fontSize: 14,
@@ -72,17 +72,9 @@ const styles = EStyleSheet.create({
     alignSelf: 'center',
     height: 20,
     width: 20,
-    marginRight: 0,
     marginTop: 10,
     marginBottom: 10,
     marginLeft: 10,
     tintColor: '$primaryColor',
   },
-  sortButton: {
-    alignItems: 'center',
-    fontSize: 14,
-    backgroundColor: '$secondaryBackGroundColor',
-    padding: 10,
-    borderRadius: 10,
-  }
 });

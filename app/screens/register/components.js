@@ -14,6 +14,8 @@ import { Const } from '../../Const';
 import { ImageButton } from '../../components/atoms/ImageButton';
 import { InputField } from '../../components/atoms/InputField';
 import EStyleSheet from 'react-native-extended-stylesheet';
+import { Location } from '../location';
+import { ModalMenuDetails } from '../../components/molecules/ModalMenuDetails';
 
 export const RegisterComponents = props => {
   const {
@@ -30,7 +32,8 @@ export const RegisterComponents = props => {
     launchImageLibrary,
     imageUri,
     updateRestaurantInfo,
-    editorMode
+    editorMode,
+    locationPicker,
   } = props;
   return (
     <SafeAreaView style={styles.container}>
@@ -63,7 +66,7 @@ export const RegisterComponents = props => {
         <Text style={styles.header}>{'Location'}</Text>
         <TouchableOpacity
           style={styles.buttonLocation}
-          onPress={() => console.log('j')}>
+          onPress={locationPicker}>
           <Text style={{ color: EStyleSheet.value('$primaryColor'), fontWeight: 'bold' }}>Location</Text>
         </TouchableOpacity>
         <Text style={styles.desc}>{restaurantLocation}</Text>
@@ -75,6 +78,7 @@ export const RegisterComponents = props => {
           <Text style={styles.buttonText}>{editorMode?"Update Restaurant Info":"goToMenu"}</Text>
         </TouchableOpacity>
       </KeyboardAvoidingView>
+
     </SafeAreaView>
   );
 };

@@ -22,13 +22,13 @@ export const ModalScreen = ({ navigation }) => {
     if (!payload.result) {
       return Alert.alert('Opps',
         'Make Sure You Have Internet Connection',
-        {
+        [{
           text: 'OK',
           onPress: () => navigation.navigate(ConstString.LOGIN),
-        },
+        }],
         { cancelable: true });
     }
-    navigation.navigate(ConstString.HOME);
+    setTimeout(()=>navigation.navigate(ConstString.HOME),1000)
   };
 
   useEffect(() => {

@@ -56,7 +56,7 @@ export const Login = ({ navigation }) => {
     );
 
   };
-  const populateUser = async({ userId: uid, userInformation }) => {
+  const populateUser = async({ uid, userInformation }) => {
     //Uploading Record to Firestore
     const { payload } = await dispatch(populateUserData({ uid, userInformation }));
     const { result, data } = payload;
@@ -100,7 +100,8 @@ export const Login = ({ navigation }) => {
     try {
       const {
         idToken,
-        accessToken,} = await GoogleSignin.signIn();
+        accessToken,
+        } = await GoogleSignin.signIn();
       const credential = firebase.auth.GoogleAuthProvider.credential(
         idToken,
         accessToken,
@@ -108,12 +109,13 @@ export const Login = ({ navigation }) => {
     const result=  await firebase.auth().signInWithCredential(credential);
       if(!result)return showErrorAlert("We Did not Manage to Register You")
 
-      const{displayName,email,uid,imageUri}=result
+      const{name,email,picture}=result.additionalUserInfo.profile
+      const {uid}=result.user
       const userInfo = {
         userId:uid,
-        NAME: displayName,
+        NAME: name,
         EMAIL: email,
-        imageUri: imageUri
+        IMAGE: picture
       };
       await populateUser({ uid, userInformation: userInfo });
 
