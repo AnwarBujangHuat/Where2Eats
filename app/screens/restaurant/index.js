@@ -6,7 +6,6 @@ import { ConstString } from '../../Strings';
 import { useSelector } from 'react-redux';
 import {
   icons,
-  menuIcons
 } from '../../Const';
 import { getCurrentRestaurant } from '../../store/selector';
 import { RestaurantComponents } from './components';

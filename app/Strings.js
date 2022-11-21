@@ -36,5 +36,6 @@ export const ConstString = { // name it to routes
   FCM:'FCM',
   FACEBOOK:'Facebook',
   TWITTER:'Twitter',
-  GOOGLE:'Google'
+  GOOGLE:'Google',
+  LOCATION:'Location'
 };

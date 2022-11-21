@@ -89,6 +89,7 @@ const styles = EStyleSheet.create({
   },
   title: {
     fontSize: 15,
+    // color: '$secondaryTextColor',
     color: '$primaryTextColor',
     fontWeight: 'bold',
     marginStart: 10,

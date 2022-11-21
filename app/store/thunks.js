@@ -26,7 +26,7 @@ export const PopulateRestaurantList = createAsyncThunk('getRestaurantList', asyn
   rejectWithValue
 }) => {
   const { onSuccess, data } = await requestFetchRestaurantList();
-  if (!onSuccess) return rejectWithValue({ result: onSuccess });
+  if (!onSuccess) return rejectWithValue({ result: onSuccess, data:data });
   //send Restaurant Array
   return { result: onSuccess, restaurantList: data };
 });
@@ -38,10 +38,10 @@ const requestFetchRestaurantList = () => new Promise((myResolve) => {
       const temp = { id: documentSnapshot.id, ...documentSnapshot.data() };
       restaurant.push(temp);
     });
-  }).done(() => myResolve({ onSuccess: true, data: restaurant }),
+  })
+  .catch((e)=>myResolve({ onSuccess: false, data: 'Unverified User' }))
+  .done(() => myResolve({ onSuccess: true, data: restaurant }),
     () => myResolve({ onSuccess: false, data: errorObj }));
-
-
 });
 
 export const AddOne = createAsyncThunk('AddOneRestaurant', async(request, {
