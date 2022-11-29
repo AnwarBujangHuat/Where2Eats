@@ -14,9 +14,7 @@ import {
   removeFoodItemFirebase,
   updateFoodItemFirebase
 } from '../../../store/thunks';
-import {
-  icons
-} from '../../../Const';
+import { icons } from '../../../Const';
 import { firebase } from '../../../../src/firebase/config';
 import { getCurrentRestaurant } from '../../../store/selector';
 import { SetupMenuComponents } from './components';
@@ -35,18 +33,29 @@ export const SetupMenu = ({ navigation, route }) => {
   let action;//clear - on back
   const restaurantInfo = useSelector(getCurrentRestaurant(id));
   const foodItemLists = editorMode ? [...restaurantInfo?.food] : [];
+  const [foodList, setFoodList] = useState(foodItemLists);
   const [selectedCategory, setSelectedCategory] = useState(categories);
   const [isModalMenuVisible, setIsModalMenuVisible] = useState(false);
   const [isModalVisible, setModalVisible] = useState(false);
   const [selectedFoodItem, setSelectedFoodItem] = useState({});
   const [isActionModalVisible, setActionModal] = useState(false);
+  const [onSearch, setOnSearch] = useState(false);
   const [Category, setCategory] = useState('');
   const [isSuccessful, setIsSuccessful] = useState(true);
   const [Menu, setMenu] = useState([]);
+
   useEffect(() => {
-    const tempCategory = categories.filter(category => foodItemLists.find(food => food.category === category.item));
+    selectedCat()
+  }, [foodList]);
+
+  useEffect(() => {
+    setFoodList(foodItemLists)
+  }, [restaurantInfo]);
+
+  const selectedCat=()=>{
+    const tempCategory = categories.filter(category => foodList.find(food => food.category === category.item));
     setSelectedCategory(tempCategory);
-  }, []);
+  }
   const showAlert = (action, foodItem, result) => {
     result === ConstString.SUCCESS ?
       Alert.alert(
@@ -88,7 +97,7 @@ export const SetupMenu = ({ navigation, route }) => {
   };
   const closeModal = () => setModalVisible(false);
   const closeActionModal = () => setActionModal(false);
-  const menuIcon = (item) => icons[item]??icons?.def
+  const menuIcon = (item) => icons[item] ?? icons?.def;
   const generateId = () => {
     const id = () => {
       return Math.floor((1 + Math.random()) * 0x10000).toString(16).substring(1);
@@ -102,40 +111,40 @@ export const SetupMenu = ({ navigation, route }) => {
   const closeMenuDetails = () => setIsModalMenuVisible(false);
 
   //Upload new Restaurant to Firebase
-  const uploadMenu = async () => {
+  const uploadMenu = async() => {
     setActionModal(true);
     action = ConstString.UPLOADING;
     const resultUploadImageProfile = await uploadAsFile(item.image, 'profile');
     const { data, error } = resultUploadImageProfile;
-    if(error) return showAlert(ConstString.ADD,"Profile Image",ConstString.FAILED)
-    item.image=data
+    if (error) return showAlert(ConstString.ADD, 'Profile Image', ConstString.FAILED);
+    item.image = data;
 
     //Looping thru all foodItem Added
     for (const foodItem of Menu) {
       if (foodItem.image) {
         const resultUploadImage = await uploadAsFile(foodItem.image, 'menu', foodItem.category, 0, foodItem);
         const { data, error } = resultUploadImage;
-        if(error) return showAlert(ConstString.ADD,foodItem.name,ConstString.FAILED)
+        if (error) return showAlert(ConstString.ADD, foodItem.name, ConstString.FAILED);
         foodItem.image = data;
       }
     }
-   await uploadFinish()
+    await uploadFinish();
   };
   const uploadFinish = async() => {
     item.food = Menu;
-    const addRestaurantResult=await dispatch(AddOne(item))
-    const {result}=addRestaurantResult
-    if(result) return showAlert(ConstString.ADD,item.restaurant,ConstString.FAILED)
+    const addRestaurantResult = await dispatch(AddOne(item));
+    const { result } = addRestaurantResult;
+    if (result) return showAlert(ConstString.ADD, item.restaurant, ConstString.FAILED);
     setActionModal(false);
     navigation.navigate(ConstString.HOME);
   };
   //Upload Image to Firebase
-  const uploadAsFile = async(uri, folder, category, index, foodItem, imageName ,progressCallback) => {
+  const uploadAsFile = async(uri, folder, category, index, foodItem, imageName, progressCallback) => {
     if (uri !== undefined) {
       const response = await fetch(uri);
       const blob = await response.blob();
-      const imageIndex=imageName?.indexOf('media.jpg')
-      const name = imageName? imageName.slice(imageIndex-8,imageIndex)+ 'media.jpg': generateId() + 'media.jpg';
+      const imageIndex = imageName?.indexOf('media.jpg');
+      const name = imageName ? imageName.slice(imageIndex - 8, imageIndex) + 'media.jpg' : generateId() + 'media.jpg';
       // const date = '_' + new Date().getTime();
       const restaurantName = editorMode ? restaurantInfo.restaurant : item.restaurant;
       const pathName = folder === 'profile' ? restaurantName + '/' + folder + '/' + 'profilemedia.jpg' : restaurantName + '/' + folder + '/' + category + '/' + name;
@@ -181,7 +190,7 @@ export const SetupMenu = ({ navigation, route }) => {
     if (!editorMode) {
       const temp = [...Menu, foodItem];
       setMenu(temp);
-      closeModal()
+      closeModal();
     } else {
       const resultUploadImage = await uploadAsFile(foodItem.image, 'menu', foodItem.category, 0, foodItem);
       const { data } = resultUploadImage;
@@ -207,14 +216,12 @@ export const SetupMenu = ({ navigation, route }) => {
     //New restaurant update temp Menu
     if (!editorMode) {
       const menuIndex = Menu.indexOf(initialFoodItem);
-      Menu[menuIndex]=foodItem
+      Menu[menuIndex] = foodItem;
       setMenu(Menu);
-      closeModal()
+      closeModal();
     }
     //update firestore Menu
     else {
-    //   if (reUpload){
-    // }
       //update
 
       //no need to upload new image
@@ -226,8 +233,7 @@ export const SetupMenu = ({ navigation, route }) => {
         if (!payload.result) return showAlert(ConstString.UPDATE, foodItem.name, ConstString.FAILED);
 
         showAlert(ConstString.UPDATE, foodItem.name, ConstString.SUCCESS);
-      }
-      else{
+      } else {
         //upload and replace foodItem image in firebase and storage
         const resultUploadImage = await uploadAsFile(foodItem.image, 'menu', foodItem.category, 0, foodItem, initialFoodItem.image);
         const { data } = resultUploadImage;
@@ -251,7 +257,7 @@ export const SetupMenu = ({ navigation, route }) => {
       'Do you wish to delete ' + item.name,
       [
         {
-          text: 'Delete', onPress:() => removeFoodItem(id,item)
+          text: 'Delete', onPress: () => removeFoodItem(id, item)
           , style: 'destructive'
         },
         { text: 'Cancel' },
@@ -259,17 +265,16 @@ export const SetupMenu = ({ navigation, route }) => {
       { cancelable: true }
     );
   };
-  const removeFoodItem=async( id, foodItem)=>{
+  const removeFoodItem = async(id, foodItem) => {
     const index = foodItemLists.indexOf(foodItem);
     if (!editorMode) {
       const menuIndex = Menu.indexOf(selectedFoodItem);
-      const temp=[...Menu]
-      temp.splice(menuIndex,1)
+      const temp = [...Menu];
+      temp.splice(menuIndex, 1);
       setMenu(temp);
-    }
-    else{
-      const restaurantName=restaurantInfo?.restaurant
-      const resultRemoveFoodItem = await dispatch(removeFoodItemFirebase({ id, foodItem, index,restaurantName  }));
+    } else {
+      const restaurantName = restaurantInfo?.restaurant;
+      const resultRemoveFoodItem = await dispatch(removeFoodItemFirebase({ id, foodItem, index, restaurantName }));
       const { payload } = resultRemoveFoodItem;
       //If fail to add Firestore
       if (!payload.result) return showAlert(ConstString.DELETE, foodItem.name, ConstString.FAILED);
@@ -277,6 +282,19 @@ export const SetupMenu = ({ navigation, route }) => {
       showAlert(ConstString.DELETE, foodItem.name, ConstString.SUCCESS);
     }
 
+  };
+
+  //Search
+  const onChangeText = (text) => {
+    if (!text) return setFoodList(foodItemLists);
+    const updateFoodList = foodItemLists.filter(item => item.name.toLowerCase().includes(text.toLowerCase()));
+    setFoodList(updateFoodList);
+
+  };
+  const onPressSearch = () => {
+    setOnSearch(!onSearch)
+    setFoodList([...restaurantInfo?.food])
+    if(!onSearch) selectedCat()
   }
 
   const props = {
@@ -305,7 +323,11 @@ export const SetupMenu = ({ navigation, route }) => {
     goBack,
     isSuccessful,
     closeMenuDetails,
-    action
+    action,
+    onSearch,
+    onChangeText,
+    onPressSearch,
+    foodList
   };
   return (
     <SetupMenuComponents {...props} />

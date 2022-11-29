@@ -1,7 +1,9 @@
 import {
+  Dimensions,
   Image,
   ImageBackground,
   StyleSheet,
+  Text,
   TouchableOpacity,
   View
 } from 'react-native';
@@ -12,8 +14,14 @@ import logoIcon from '../../assets/Logo.png';
 
 import { RateLabel } from '../atoms/RateLabel';
 import { Colors } from '../../Colors';
+import { SearchButton } from '../atoms/SearchButton';
+import { ConstString } from '../../Strings';
+const { width } = Dimensions.get('window');
 
-export const DetailsHeader = ({ image, back, disabled, rating,rate = false, onPress ,goToRating}) => {
+export const DetailsHeader = ({ image, back, disabled, rating,rate = false, onPress ,goToRating,
+  onSearch,
+  onChangeText,
+  onPressSearch,}) => {
   const changeLogo = () => {};
   return (
     <View style={styles.container}>
@@ -24,11 +32,15 @@ export const DetailsHeader = ({ image, back, disabled, rating,rate = false, onPr
             height: '100%', resizeMode: 'cover'
           }}>
           <View style={styles.rowContainer}>
-            <View style={{ width: '80%' }}>
-              <BackButton onPress={back}></BackButton>
-            </View>
-            {rate && <RateLabel rating={rating} goToRating={goToRating} />}
+              <View style={{ width: width*0.8, flexDirection:'row'}}>
+                <BackButton onPress={back}></BackButton>
+                <SearchButton onSearch={onSearch} onChangeText={onChangeText} onPress={onPressSearch}></SearchButton>
+              </View>
+            {rate &&
+              <RateLabel rating={rating} goToRating={goToRating} />
+            }
           </View>
+
           <TouchableOpacity style={styles.logoContainer} disabled={disabled} onPress={changeLogo}>
             <Image style={styles.icons} source={logoIcon} />
           </TouchableOpacity>

@@ -16,6 +16,7 @@ import {
   updateUserFCM
 } from './thunks';
 import { ConstString } from '../Strings';
+import { defaultValue } from './defaultValue';
 
 export const restaurantAdapter = createEntityAdapter({
   sortComparer: (a, b) => a.restaurant.localeCompare(b.restaurant),
@@ -42,6 +43,7 @@ export const Reducer = createSlice({
   extraReducers: builder => {
     builder.addCase(PopulateRestaurantList.fulfilled, (state, { payload }) => {
       const { restaurantList } = payload;
+      // restaurantAdapter.addOne(state.RESTAURANT, defaultValue[0]);
       restaurantAdapter.upsertMany(state.RESTAURANT, restaurantList);
       return state;
     });
@@ -133,7 +135,6 @@ export const Reducer = createSlice({
     });
 
     builder.addCase(updateRestaurantInfoFirestore.rejected, (state, { meta, payload }) => {
-      console.log("failed")
     });
     builder.addCase(updateUserFCM.fulfilled, (state, { meta, payload }) => {
       const{ userToken: token, userInformation, userId: uid } =payload.data;
