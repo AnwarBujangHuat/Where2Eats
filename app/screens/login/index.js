@@ -21,27 +21,17 @@ import {
 import { GoogleSignin } from '../../../src/SignInOption/config';
 import { getInfo } from '../../store/selector';
 import { LoginManager, AccessToken } from 'react-native-fbsdk-next';
-
 // import { getAuth } from 'firebase-admin/auth';
 
 export const Login = ({ navigation }) => {
-  const [Email, setEmail] = useState('');
-  const [Password, setPassword] = useState('');
-  const [onRememberMe, setOnRememberMe] = useState(false);
   const { EMAIL, PASSWORD } = useSelector(getInfo);
+  const [Email, setEmail] = useState(EMAIL??'');
+  const [Password, setPassword] = useState(PASSWORD??'');
+  const [onRememberMe, setOnRememberMe] = useState(!!EMAIL);
   const dispatch = useDispatch();
-  useEffect(() => {
-    if (!EMAIL || !PASSWORD) return setOnRememberMe(false);
-    setEmail(EMAIL);
-    setPassword(PASSWORD);
-    setOnRememberMe(true);
-  }, []);
   const onChangeInputEmail = (text) => setEmail(text);
-
   const onChangeInputPassword = (text) => setPassword(text);
-
   const onClickRememberMe = () => setOnRememberMe(!onRememberMe);
-
   const goToSignIn = () => navigation.navigate('Register');
   const showErrorAlert = (error) => {
     //Error Handling Alert
@@ -63,7 +53,6 @@ export const Login = ({ navigation }) => {
     if (!result) return showErrorAlert(data);
     goToModal();
   };
-
   const verifyUser = async() => {
     const {
       onSuccess: onSuccessAuthentication,
@@ -84,7 +73,6 @@ export const Login = ({ navigation }) => {
 
   };
   const goToModal = () => navigation.navigate(ConstString.MODAL);
-
   const authenticateUser = (email, password) => new Promise((resolve, reject) => {
     firebase.auth().signInWithEmailAndPassword(email, password).done(
       (response) => {
@@ -93,8 +81,6 @@ export const Login = ({ navigation }) => {
       () => resolve({ onSuccess: false, data: 'User Does Not Exist in Our Database' })
     );
   });
-
-
   const onGoogleButtonPress= async () =>{
     await GoogleSignin.hasPlayServices({ showPlayServicesUpdateDialog: true });
     try {
@@ -123,7 +109,6 @@ export const Login = ({ navigation }) => {
     catch(error) {
     }
   }
-
   const props = {
     onChangeInputEmail,
     onChangeInputPassword,
@@ -135,6 +120,7 @@ export const Login = ({ navigation }) => {
     onClickRememberMe,
     onRememberMe
   };
+
   return (
     <LoginComponents {...props} />
   );

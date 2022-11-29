@@ -36,6 +36,7 @@ export const NavStack = () => {
     <Stack.Navigator
       // initialRouteName={ConstString.MODAL}
       initialRouteName={ConstString.LOGIN}
+      // initialRouteName={ConstString.HOME}
       screenOptions={{
         headerShown: false,
         gestureEnabled: false,

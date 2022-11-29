@@ -22,6 +22,7 @@ import { ModalMenu } from '../../../components/molecules/ModalMenu';
 import { ModalUploading } from '../../../components/molecules/ModalUploading';
 import { ModalMenuDetails } from '../../../components/molecules/ModalMenuDetails';
 import { FoodCard } from '../../../components/molecules/FoodCard';
+import { SearchButton } from '../../../components/atoms/SearchButton';
 
 export const SetupMenuComponents=props=>{
   const {  onBackButton,
@@ -49,7 +50,12 @@ export const SetupMenuComponents=props=>{
     goBack,
     isSuccessful,
     closeMenuDetails,
-    action }=props
+    onSearch,
+    onChangeText,
+    onPressSearch,
+    foodList,
+    action
+  }=props
   const renderItem = ({ item }) => {
     return (
       <FoodCard onPress={() => showMenuDetails(item)} name={item.name} price={item.price} desc={item.desc}
@@ -60,7 +66,7 @@ export const SetupMenuComponents=props=>{
   const renderMenu=(category)=>{
     return editorMode?
       //if Restaurant Exist and in Editor Mode then filter existing MENU
-      foodItemLists.filter(foods => foods.category === category)
+      foodList.filter(foods => foods.category === category)
       :
       //First time Create and not Editor Mode then show temp menu
       Menu.filter(foods => foods.category === category)
@@ -73,7 +79,10 @@ export const SetupMenuComponents=props=>{
     <SafeAreaView style={styles.container}>
       <View style={styles.rowContainer}>
         <BackButton onPress={onBackButton}></BackButton>
-        <Text style={styles.title}>{ConstString.MENU_BOOK}</Text>
+        <SearchButton onSearch={onSearch} onChangeText={onChangeText} onPress={onPressSearch}></SearchButton>
+        {!onSearch&&
+          <Text style={styles.title}>{ConstString.MENU_BOOK}</Text>
+        }
       </View>
       <Text style={{
         marginTop: 20,
@@ -227,8 +236,7 @@ const styles = EStyleSheet.create({
     fontWeight: 'bold',
     textAlign: 'center',
     color: '$primaryTextColor',
-    alignSelf: 'center',
-    marginStart: 10,
+    marginStart:10,
   },
   buttonText: {
     fontSize: 16,
@@ -236,8 +244,8 @@ const styles = EStyleSheet.create({
     fontWeight: 'bold',
   },
   rowContainer: {
-    marginTop: 10,
     flexDirection: 'row',
     alignContent: 'center',
+    alignItems:'center'
   },
 });

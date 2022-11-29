@@ -21,6 +21,7 @@ export const Restaurant = ({ navigation, route }) => {
   const { id } = route.params || {};
   const restaurantInfo = useSelector(getCurrentRestaurant(id));
   const { category, food: foodItemList } = restaurantInfo;
+  const [foodList, setFoodList] = useState(foodItemList);
   const [isModalVisible, setModalVisible] = useState(false);
   const [foodItem, setFoodItem] = useState();
   const [isPreview, setIsPreview] = useState(false);
@@ -28,9 +29,13 @@ export const Restaurant = ({ navigation, route }) => {
   const restaurantIcon = category ? icons[category] : icons.def;
 
   useEffect(() => {
-    const tempCategory = categories.filter(category => foodItemList.find(food => food.category === category.item));
-    setSelectedCategory(tempCategory);
+    setFoodList(restaurantInfo.food)
   }, [restaurantInfo]);
+
+  useEffect(() => {
+    const tempCategory = categories.filter(category => foodList.find(food => food.category === category.item));
+    setSelectedCategory(tempCategory);
+  }, [foodList]);
 
   const onPress = (item) => {
     setFoodItem(item);
@@ -51,6 +56,12 @@ export const Restaurant = ({ navigation, route }) => {
     //else go to Edit Menu Page
     navigation.navigate(ConstString.MENU, { id });
   };
+  //Search
+  const onChangeText = (text) => {
+    if (!text) return setFoodList(foodItemList);
+    const updateFoodList = foodList.filter(item => item.name.toLowerCase().includes(text.toLowerCase()));
+    setFoodList(updateFoodList);
+  };
   const props = {
     isModalVisible,
     foodItem,
@@ -66,6 +77,9 @@ export const Restaurant = ({ navigation, route }) => {
     openPreviewModal,
     goToRating,
     onPressFloatingButton,
+    foodItemList,
+    foodList,
+    onChangeText,
   };
   return (<RestaurantComponents {...props} />
   );

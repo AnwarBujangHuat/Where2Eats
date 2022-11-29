@@ -30,7 +30,10 @@ export const RestaurantComponents = props => {
     openPreviewModal,
     goToRating,
     onPressFloatingButton,
+    foodList,
+    onChangeText,
   } = props;
+  const { restaurant, address, rate, image,food:foodItemList}=restaurantInfo
   const renderItem = ({ item }) => {
     return (
       <FoodCard onPress={() => onPress(item)} name={item.name} price={item.price} desc={item.desc}
@@ -38,13 +41,12 @@ export const RestaurantComponents = props => {
     );
   };
   const renderMenu = (category) => {
-    return foodItemList.filter(foods => foods.category === category);
+    return foodList.filter(foods => foods.category === category);
   };
-  const { restaurant, address, rate, image,food:foodItemList}=restaurantInfo
   return (
     <SafeAreaView style={styles.container}>
       <DetailsHeader image={image} back={onBack} disabled={true} rate={true} goToRating={goToRating}
-                     rating={rate} />
+                     rating={rate} onSearch={true} onChangeText={onChangeText}/>
       <DescriptionLabel name={restaurant} location={address} icon={restaurantIcon}
                         onPress={openPreviewModal} />
       <FlatList
