@@ -5,6 +5,7 @@ import {
   arrayUnion
 } from 'firebase/firestore';
 import { ConstString } from '../Strings';
+import { defaultValue } from './defaultValue';
 
 const restaurantCollectionRef = firebase.firestore().collection(ConstString.RESTAURANT);
 const fcmCollectionRef = firebase.firestore().collection(ConstString.FCM);
