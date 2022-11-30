@@ -79,7 +79,9 @@ export const SetupMenuComponents=props=>{
     <SafeAreaView style={styles.container}>
       <View style={styles.rowContainer}>
         <BackButton onPress={onBackButton}></BackButton>
-        <SearchButton onSearch={onSearch} onChangeText={onChangeText} onPress={onPressSearch}></SearchButton>
+        {editorMode&&
+          <SearchButton onSearch={onSearch} onChangeText={onChangeText} onPress={onPressSearch}></SearchButton>
+        }
         {!onSearch&&
           <Text style={styles.title}>{ConstString.MENU_BOOK}</Text>
         }

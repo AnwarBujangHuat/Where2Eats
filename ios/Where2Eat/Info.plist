@@ -57,7 +57,9 @@
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>
 	<key>UIRequiredDeviceCapabilities</key>
-    <array>
+    <key>NSLocationAlwaysUsageDescription</key>
+    <string>Your location is required for xyz benefits for you</string>
+     <array>
 		<string>armv7</string>
 	</array>
 	<key>UISupportedInterfaceOrientations</key>

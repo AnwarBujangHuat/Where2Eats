@@ -1,37 +1,27 @@
 import React, { useState } from 'react';
 import {
+  Alert,
   Dimensions,
+  Image,
   SafeAreaView,
   Text,
+  TextInput,
   TouchableOpacity,
   View
 } from 'react-native';
 import Modal from 'react-native-modal';
+import addIcon from '../../assets/plus.png';
 import EStyleSheet from 'react-native-extended-stylesheet';
+import { ConstString } from '../../Strings';
+import { GooglePlacesAutocomplete } from 'react-native-google-places-autocomplete';
 import GooglePlacesInput from '../../GooglePlacesInput';
-import MapView, { Marker } from 'react-native-maps';
-import { Colors } from '../../Colors';
-
 const { width } = Dimensions.get('window');
 
-export const ModalLocation = ({ submitLocation, isModalVisible, closeModal }) => {
-  const [location, setLocation] = useState('Restaurant Location');
-  const [latLong,setLatLong]= useState({latitude:3.16,longitude:101.73})
-  const mapRef = React.createRef();
-  const onResult = ({ data, details }) => {
-    const { location:locInfo } = details.geometry;
-    const latitude = locInfo.lat;
-    const longitude = locInfo.lng;
-    mapRef.current.animateToRegion({
-      latitude,
-      longitude,
-      latitudeDelta: 0.001,
-      longitudeDelta: 0.001
-    })
-    setLatLong({latitude: latitude,longitude: longitude})
-    setLocation(data.description);
-
-  };
+export const ModalLocation =({ submitLocation, isModalVisible, closeModal })=>{
+  const [location,setLocation]=useState('Restaurant Location')
+  const onResult=({data,details})=>{
+    setLocation(data.description)
+  }
   return (
     <>
       {
@@ -42,37 +32,14 @@ export const ModalLocation = ({ submitLocation, isModalVisible, closeModal }) =>
                  onBackdropPress={() => closeModal()}
                  onDismiss={closeModal}>
             <View style={styles.modalView}>
-                <View style={{width:300,height:390, zIndex:2,alignSelf:'center'}}>
-                  <Text style={styles.header}>{'Pick Restaurant Location'}</Text>
-                  <Text style={styles.desc}>{location}</Text>
-                  <GooglePlacesInput onResult={onResult} />
-                </View>
-              <MapView
-                style={{ height: 280, width: 300, zIndex: 0,alignSelf:'center', position: 'absolute',top:'33%' }}
-                ref={mapRef}
-                initialRegion={{
-                  latitude: 3.16,
-                  longitude: 101.73,
-                  latitudeDelta: 0.001,
-                  longitudeDelta: 0.001,
-                }}
-                liteMode={true}
-              >
-                <Marker
-                  pinColor={Colors.primaryColor}
-                  coordinate={{
-                  latitude: latLong.latitude,
-                  longitude: latLong.longitude,
-                }}>
-                </Marker>
-              </MapView>
+              <Text style={styles.header}>{'Pick Restaurant Location'}</Text>
+              <Text style={styles.desc}>{location}</Text>
+              <GooglePlacesInput onResult={onResult}/>
               <TouchableOpacity
                 style={styles.button}
-                onPress={() => submitLocation(location)}>
+              onPress={()=>submitLocation(location)}>
                 <Text style={styles.buttonText}>Add Location</Text>
               </TouchableOpacity>
-
-
             </View>
           </Modal>
         </SafeAreaView>
@@ -88,7 +55,7 @@ const styles = EStyleSheet.create({
     padding: 10,
     borderRadius: 10,
     textTransform: 'uppercase',
-    marginTop: 40,
+    marginTop: 15,
   },
   buttonText: {
     fontSize: 16,
@@ -109,7 +76,6 @@ const styles = EStyleSheet.create({
   screen: {
     flex: 1,
     alignItems: 'center',
-    marginBottom:0,
     justifyContent: 'center',
     backgroundColor: 'transparent',
   },
@@ -117,13 +83,12 @@ const styles = EStyleSheet.create({
   modalView: {
     padding: 20,
     // height:width*.3,
-    height: 500,
+    height:300,
     justifyContent: 'center',
     position: 'absolute',
     alignSelf: 'center',
     width: width * 0.9,
     backgroundColor: '$backGroundColor',
-    // backgroundColor: '$primaryColor',
     borderRadius: 7,
   },
 
@@ -131,12 +96,12 @@ const styles = EStyleSheet.create({
     fontSize: 16,
     fontWeight: 'bold',
     color: '$tertiaryColor',
-    marginBottom: 5,
+    marginBottom:5,
   },
   desc: {
     color: '$secondaryTextColor',
+    paddingTop: 5,
     fontSize: 14,
-    height:50,
-    marginBottom: 10,
+    marginBottom:10,
   },
 });
