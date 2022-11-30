@@ -21,7 +21,8 @@ const { width } = Dimensions.get('window');
 export const DetailsHeader = ({ image, back, disabled, rating,rate = false, onPress ,goToRating,
   onSearch,
   onChangeText,
-  onPressSearch,}) => {
+  onPressSearch,
+}) => {
   const changeLogo = () => {};
   return (
     <View style={styles.container}>
@@ -34,7 +35,9 @@ export const DetailsHeader = ({ image, back, disabled, rating,rate = false, onPr
           <View style={styles.rowContainer}>
               <View style={{ width: width*0.8, flexDirection:'row'}}>
                 <BackButton onPress={back}></BackButton>
-                <SearchButton onSearch={onSearch} onChangeText={onChangeText} onPress={onPressSearch}></SearchButton>
+                {disabled&&
+                  <SearchButton onSearch={onSearch} onChangeText={onChangeText} onPress={onPressSearch}></SearchButton>
+                }
               </View>
             {rate &&
               <RateLabel rating={rating} goToRating={goToRating} />

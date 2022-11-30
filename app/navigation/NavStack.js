@@ -9,7 +9,6 @@ import {
   SetupMenu,
   WheelOfFortune,
   Ratings,
-  Location
 } from '../screens';
 import BottomNavigationBar from './bottom/BottomNavigationBar';
 import * as React from 'react';
@@ -34,8 +33,8 @@ export const NavStack = () => {
   });
   return (
     <Stack.Navigator
-      // initialRouteName={ConstString.MODAL}
-      initialRouteName={ConstString.LOGIN}
+      initialRouteName={ConstString.REGISTER}
+      // initialRouteName={ConstString.LOGIN}
       // initialRouteName={ConstString.HOME}
       screenOptions={{
         headerShown: false,
@@ -58,7 +57,6 @@ export const NavStack = () => {
       <Stack.Screen name={ConstString.MENU} component={SetupMenu} />
       <Stack.Screen name={ConstString.PROFILE} component={Profile} />
       <Stack.Screen name={ConstString.RATINGS} component={Ratings} />
-      <Stack.Screen name={ConstString.LOCATION} component={Location} />
 
     </Stack.Navigator>
   );
