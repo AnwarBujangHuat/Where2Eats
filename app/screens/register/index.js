@@ -45,7 +45,6 @@ export const Register = ({ navigation,route }) => {
       description: restaurantDesc,
       image: imageUri,
       rate: 5,
-      // rate: undefined,
       userId:user.ID??1,
       createdAt:new Date().toLocaleString(),
       food:[],
