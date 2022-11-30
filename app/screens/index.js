@@ -8,4 +8,3 @@ export * from './Wheel';
 export * from './profile';
 export * from './ratings'
 export * from './register/SetupMenu';
-export * from './location';

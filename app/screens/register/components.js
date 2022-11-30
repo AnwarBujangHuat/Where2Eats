@@ -14,8 +14,8 @@ import { Const } from '../../Const';
 import { ImageButton } from '../../components/atoms/ImageButton';
 import { InputField } from '../../components/atoms/InputField';
 import EStyleSheet from 'react-native-extended-stylesheet';
-import { Location } from '../location';
 import { ModalMenuDetails } from '../../components/molecules/ModalMenuDetails';
+import { ModalLocation } from '../../components/molecules/ModalLocation';
 
 export const RegisterComponents = props => {
   const {
@@ -33,7 +33,10 @@ export const RegisterComponents = props => {
     imageUri,
     updateRestaurantInfo,
     editorMode,
-    locationPicker,
+    addLocation,
+    openLocationModal,
+    closeLocationModal,
+    isModalOpen
   } = props;
   return (
     <SafeAreaView style={styles.container}>
@@ -66,11 +69,13 @@ export const RegisterComponents = props => {
         <Text style={styles.header}>{'Location'}</Text>
         <TouchableOpacity
           style={styles.buttonLocation}
-          onPress={locationPicker}>
+          onPress={openLocationModal}>
           <Text style={{ color: EStyleSheet.value('$primaryColor'), fontWeight: 'bold' }}>Location</Text>
         </TouchableOpacity>
         <Text style={styles.desc}>{restaurantLocation}</Text>
+        <ModalLocation isModalVisible={isModalOpen} submitLocation={addLocation} closeModal={closeLocationModal}/>
       </View>
+
       <KeyboardAvoidingView behavior={Platform.OS === 'ios' ? 'padding' : 'height'}>
         <TouchableOpacity
           style={styles.button}

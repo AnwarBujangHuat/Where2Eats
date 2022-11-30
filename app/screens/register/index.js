@@ -25,6 +25,7 @@ export const Register = ({ navigation,route }) => {
   const editorMode = !!id;
   const restaurantInfo=useSelector(getCurrentRestaurant(id))
   const user=useSelector(getUser)
+  const [isModalOpen,setOpenModal]=useState(false)
   const [selectedTypes, setSelectedTypes] = useState(restaurantInfo?.category??ConstString.WESTERN);
   const [restaurantName, setRestaurantName] = useState(restaurantInfo?.restaurant??'');
   const [restaurantDesc, setRestaurantDesc] = useState(restaurantInfo?.description??'');
@@ -34,10 +35,7 @@ export const Register = ({ navigation,route }) => {
   initialIndex=Const.findIndex(items=>{
     return items.title === selectedTypes;
   })
-  useEffect(()=>{
-    if(location)
-      return setRestaurantLocation(location);}
-  ,[location])
+
   let reUpload=false;
   const goToMenu = () => {
     const item = {
@@ -160,8 +158,20 @@ export const Register = ({ navigation,route }) => {
     } else {
       showAlert('Missing File' + category);
     }
+
   };
-  const locationPicker=()=>navigation.navigate(ConstString.LOCATION,{id})
+  const addLocation=(location)=>{
+    setRestaurantLocation(location)
+    closeLocationModal()
+  }
+  const  openLocationModal=()=>{
+    setOpenModal(true)
+
+  }
+  const closeLocationModal=()=>{
+    setOpenModal(false)
+
+  }
   const props = {
     selectedTypes,
     restaurantName,
@@ -177,7 +187,10 @@ export const Register = ({ navigation,route }) => {
     imageUri,
     updateRestaurantInfo,
     editorMode,
-    locationPicker,
+    addLocation,
+    openLocationModal,
+    closeLocationModal,
+    isModalOpen
   };
   return (
     <RegisterComponents {...props} />
