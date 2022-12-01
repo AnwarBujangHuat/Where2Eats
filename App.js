@@ -8,20 +8,28 @@ import {
 } from 'react-redux';
 import { persistStore } from 'redux-persist';
 import { PersistGate } from 'redux-persist/integration/react';
-let persistor = persistStore(store);
-const App = () => {
+import { StatusBar } from 'react-native';
+import { getTheme } from './app/store/selector';
+import EStyleSheet from 'react-native-extended-stylesheet';
+import { ConstString } from './app/Strings';
+import {
+  DarkTheme,
+  LightTheme
+} from './app/Colors';
+
+export default function App () {
+  const theme = useSelector(getTheme);
+  EStyleSheet.build(theme === ConstString.LIGHT ? LightTheme : DarkTheme);
+
   return (
-    <Provider store={store}>
-      <PersistGate persistor={persistor}>
-      <NavigationContainer>
-        <NavStack />
-      </NavigationContainer>
-      </PersistGate>
-
-    </Provider>
+    <NavigationContainer>
+      <StatusBar
+        barStyle={theme === ConstString.LIGHT ? 'dark-content' : 'light-content'}
+      />
+      <NavStack />
+    </NavigationContainer>
   );
-};
+}
 
-export default App;
 
 
