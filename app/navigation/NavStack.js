@@ -20,11 +20,10 @@ import {
   DarkTheme,
   LightTheme
 } from '../Colors';
+import { StatusBar } from 'react-native';
 
 const Stack = createStackNavigator();
 export const NavStack = () => {
-  const theme = useSelector(getTheme);
-  EStyleSheet.build(theme === ConstString.LIGHT ? LightTheme : DarkTheme);
 
   const forFade = ({ current }) => ({
     cardStyle: {
@@ -32,14 +31,15 @@ export const NavStack = () => {
     },
   });
   return (
+
     <Stack.Navigator
-      initialRouteName={ConstString.REGISTER}
-      // initialRouteName={ConstString.LOGIN}
+      initialRouteName={ConstString.LOGIN}
       // initialRouteName={ConstString.HOME}
       screenOptions={{
         headerShown: false,
         gestureEnabled: false,
       }}>
+
       <Stack.Screen name={ConstString.LOGIN} component={Login} options={{}} />
       <Stack.Screen
         name={ConstString.MODAL}
