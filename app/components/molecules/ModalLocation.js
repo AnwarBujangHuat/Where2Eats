@@ -9,13 +9,25 @@ import {
 import Modal from 'react-native-modal';
 import EStyleSheet from 'react-native-extended-stylesheet';
 import GooglePlacesInput from '../../GooglePlacesInput';
+import MapView from 'react-native-maps';
 
 const { width } = Dimensions.get('window');
 
 export const ModalLocation = ({ submitLocation, isModalVisible, closeModal }) => {
   const [location, setLocation] = useState('Restaurant Location');
+  const mapRef = React.createRef();
   const onResult = ({ data, details }) => {
+    const { location } = details.geometry;
+    const latitude = location.lat;
+    const longitude = location.lng;
+    mapRef.current.animateToRegion({
+      latitude,
+      longitude,
+      latitudeDelta: 0.1,
+      longitudeDelta: 0.1
+    })
     setLocation(data.description);
+
   };
   return (
     <>
@@ -27,14 +39,31 @@ export const ModalLocation = ({ submitLocation, isModalVisible, closeModal }) =>
                  onBackdropPress={() => closeModal()}
                  onDismiss={closeModal}>
             <View style={styles.modalView}>
-              <Text style={styles.header}>{'Pick Restaurant Location'}</Text>
-              <Text style={styles.desc}>{location}</Text>
-              <GooglePlacesInput onResult={onResult} />
+                <View style={{width:300,height:400, zIndex:2,alignSelf:'center'}}>
+                  <Text style={styles.header}>{'Pick Restaurant Location'}</Text>
+                  <Text style={styles.desc}>{location}</Text>
+                  <GooglePlacesInput onResult={onResult} />
+                </View>
+
+              <MapView
+                style={{ height: 280, width: 300, zIndex: 0,alignSelf:'center', position: 'absolute' }}
+                //specify our coordinates.
+                ref={mapRef}
+                initialRegion={{
+                  latitude: 6.86,
+                  longitude: 6.86,
+                  latitudeDelta: 0.0922,
+                  longitudeDelta: 0.0421,
+                }}
+                liteMode={true}
+              />
               <TouchableOpacity
                 style={styles.button}
                 onPress={() => submitLocation(location)}>
                 <Text style={styles.buttonText}>Add Location</Text>
               </TouchableOpacity>
+
+
             </View>
           </Modal>
         </SafeAreaView>
@@ -50,7 +79,7 @@ const styles = EStyleSheet.create({
     padding: 10,
     borderRadius: 10,
     textTransform: 'uppercase',
-    marginTop: 15,
+    marginTop: 40,
   },
   buttonText: {
     fontSize: 16,
@@ -71,6 +100,7 @@ const styles = EStyleSheet.create({
   screen: {
     flex: 1,
     alignItems: 'center',
+    marginBottom:0,
     justifyContent: 'center',
     backgroundColor: 'transparent',
   },
@@ -78,12 +108,13 @@ const styles = EStyleSheet.create({
   modalView: {
     padding: 20,
     // height:width*.3,
-    height: 300,
+    height: 500,
     justifyContent: 'center',
     position: 'absolute',
     alignSelf: 'center',
     width: width * 0.9,
     backgroundColor: '$backGroundColor',
+    // backgroundColor: '$primaryColor',
     borderRadius: 7,
   },
 

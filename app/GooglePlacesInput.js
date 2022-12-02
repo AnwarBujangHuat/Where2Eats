@@ -9,8 +9,8 @@ const GooglePlacesInput = ({ onResult }) => {
   return (
     <GooglePlacesAutocomplete
       styles={{
-        textInputContainer: {
-          backgroundColor: EStyleSheet.value('$secondaryBackGroundColor'),
+        container: {
+          zIndex: 1,
         },
         textInput: {
           height: 38,
@@ -19,7 +19,8 @@ const GooglePlacesInput = ({ onResult }) => {
         },
       }}
       placeholder="Searches"
-      onPress={(data, details = null) => {
+      fetchDetails={true}
+      onPress={(data, details = false) => {
         onResult({ data: data, details: details });
       }}
       query={{
