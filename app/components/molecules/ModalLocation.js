@@ -9,25 +9,26 @@ import {
 import Modal from 'react-native-modal';
 import EStyleSheet from 'react-native-extended-stylesheet';
 import GooglePlacesInput from '../../GooglePlacesInput';
-import MapView from 'react-native-maps';
+import MapView, { Marker } from 'react-native-maps';
+import { Colors } from '../../Colors';
 
 const { width } = Dimensions.get('window');
 
 export const ModalLocation = ({ submitLocation, isModalVisible, closeModal }) => {
   const [location, setLocation] = useState('Restaurant Location');
+  const [latLong,setLatLong]= useState({latitude:3.16,longitude:101.73})
   const mapRef = React.createRef();
   const onResult = ({ data, details }) => {
-    const { location } = details.geometry;
-    const latitude = location.lat;
-    const longitude = location.lng;
+    const { location:locInfo } = details.geometry;
+    const latitude = locInfo.lat;
+    const longitude = locInfo.lng;
     mapRef.current.animateToRegion({
       latitude,
       longitude,
-      // latitudeDelta: 0.0005,
-      // longitudeDelta: 0.0005
-      latitudeDelta: 0.0009,
-      longitudeDelta: 0.0009
+      latitudeDelta: 0.001,
+      longitudeDelta: 0.001
     })
+    setLatLong({latitude: latitude,longitude: longitude})
     setLocation(data.description);
 
   };
@@ -41,24 +42,30 @@ export const ModalLocation = ({ submitLocation, isModalVisible, closeModal }) =>
                  onBackdropPress={() => closeModal()}
                  onDismiss={closeModal}>
             <View style={styles.modalView}>
-                <View style={{width:300,height:400, zIndex:2,alignSelf:'center'}}>
+                <View style={{width:300,height:390, zIndex:2,alignSelf:'center'}}>
                   <Text style={styles.header}>{'Pick Restaurant Location'}</Text>
                   <Text style={styles.desc}>{location}</Text>
                   <GooglePlacesInput onResult={onResult} />
                 </View>
-
               <MapView
-                style={{ height: 280, width: 300, zIndex: 0,alignSelf:'center', position: 'absolute' }}
-                //specify our coordinates.
+                style={{ height: 280, width: 300, zIndex: 0,alignSelf:'center', position: 'absolute',top:'33%' }}
                 ref={mapRef}
                 initialRegion={{
-                  latitude: 6.86,
-                  longitude: 6.86,
-                  latitudeDelta: 0.0922,
-                  longitudeDelta: 0.0421,
+                  latitude: 3.16,
+                  longitude: 101.73,
+                  latitudeDelta: 0.001,
+                  longitudeDelta: 0.001,
                 }}
                 liteMode={true}
-              />
+              >
+                <Marker
+                  pinColor={Colors.primaryColor}
+                  coordinate={{
+                  latitude: latLong.latitude,
+                  longitude: latLong.longitude,
+                }}>
+                </Marker>
+              </MapView>
               <TouchableOpacity
                 style={styles.button}
                 onPress={() => submitLocation(location)}>
@@ -128,8 +135,8 @@ const styles = EStyleSheet.create({
   },
   desc: {
     color: '$secondaryTextColor',
-    paddingTop: 5,
     fontSize: 14,
+    height:50,
     marginBottom: 10,
   },
 });

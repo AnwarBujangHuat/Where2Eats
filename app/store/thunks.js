@@ -38,7 +38,7 @@ const requestFetchRestaurantList = () => new Promise((myResolve) => {
       const temp = { id: documentSnapshot.id, ...documentSnapshot.data() };
       restaurant.push(temp);
     });
-  }).catch((e) => myResolve({ onSuccess: false, data: 'Unverified User' })).done(() => myResolve({
+  }).catch((e) => myResolve({ onSuccess: false, data: 'Unverified User' })).then(() => myResolve({
       onSuccess: true,
       data: restaurant
     }),
@@ -90,7 +90,7 @@ export const updateRating = createAsyncThunk('AddNewRating', async(request, {
   return request;
 });
 const requestUpdateRestaurant = (id, field, value) => new Promise((myResolve) => {
-  restaurantCollectionRef.doc(id).update(field, value).done(() => myResolve({ onSuccess: true }), () => myResolve({ onSuccess: false }));
+  restaurantCollectionRef.doc(id).update(field, value).then(() => myResolve({ onSuccess: true }), () => myResolve({ onSuccess: false }));
 });
 
 export const updateFoodItemFirebase = createAsyncThunk('UpdateFoodItem', async(request, {
@@ -119,7 +119,7 @@ export const updateFoodItemFirebase = createAsyncThunk('UpdateFoodItem', async(r
   return { result: onSuccessAdd, data: request };
 });
 const requestUpdateFoodItem = (id, action) => new Promise((resolve, reject) => {
-  restaurantCollectionRef.doc(id).update('food', action).done(
+  restaurantCollectionRef.doc(id).update('food', action).then(
     () => resolve({ onSuccess: true }),
     () => resolve({ onSuccess: false })
   );
@@ -136,7 +136,7 @@ export const addFoodItemFirebase = createAsyncThunk('AddFoodItem', async(request
   return { result: onSuccess, data: request };
 });
 const requestAddNewFoodItem = (id, foodItem) => new Promise((resolve, reject) => {
-  restaurantCollectionRef.doc(id).update('food', arrayUnion(foodItem)).done(
+  restaurantCollectionRef.doc(id).update('food', arrayUnion(foodItem)).then(
     () => resolve({ onSuccess: true }),
     () => resolve({ onSuccess: false })
   );
@@ -164,7 +164,7 @@ export const removeFoodItemFirebase = createAsyncThunk('RemoveFoodItem', async(r
   }
 });
 const requestRemoveFoodItem = (id, foodItem) => new Promise((resolve, reject) => {
-  restaurantCollectionRef.doc(id).update('food', arrayRemove(foodItem)).done(
+  restaurantCollectionRef.doc(id).update('food', arrayRemove(foodItem)).then(
     () => resolve({ onSuccess: true }),
     () => resolve({ onSuccess: false })
   );
@@ -175,7 +175,7 @@ const requestDeleteFoodItemImage = (id, foodItem, restaurantName) => new Promise
   const imageIndex = imageName.indexOf('media.jpg');
   const pathName = restaurantName + '/menu/' + foodItem.category + '/';
   const image = imageName.slice(imageIndex - 8, imageIndex) + 'media.jpg';
-  firebase.storage().ref().child(pathName + image).delete().done(
+  firebase.storage().ref().child(pathName + image).delete().then(
     () => resolve({ onSuccess: true })
     , () => resolve({ onSuccess: false })
   );
@@ -207,7 +207,7 @@ const requestUpdateRestaurantInfo = (id, restaurantName, selectedTypes, restaura
       address: restaurantLocation,
       description: restaurantDesc,
       image: image,
-    }).done(
+    }).then(
     () => resolve({ onSuccess: true }),
     () => resolve({ onSuccess: false })
   );
@@ -234,7 +234,7 @@ const requestUpdateFCM = (uid, token, deviceId) => new Promise((resolve, reject)
       userId: uid,
       fcmToken: token,
     }
-    , { merge: true }).done(
+    , { merge: true }).then(
     () => resolve({ onSuccess: true }),
     () => resolve({ onSuccess: false })
   )
@@ -280,7 +280,7 @@ const requestVerifyToken = (token, deviceId) => new Promise((resolve, reject) =>
   // )
 });
 
-export const fetchUserInformation = createAsyncThunk('fetchUserIndfo', async(request, {
+export const fetchUserInformation = createAsyncThunk('fetchUserInfo', async(request, {
   dispatch,
   rejectWithValue
 }) => {
@@ -289,11 +289,11 @@ export const fetchUserInformation = createAsyncThunk('fetchUserIndfo', async(req
   } = request;
   const { onSuccess: userExistInDatabase, data: userData } = await getUserInformation(uid);
   if (!userExistInDatabase) return rejectWithValue({ result: userExistInDatabase, data: 'User Does not Exist' });
-
   return { result: userExistInDatabase, data: userData };
 });
 const getUserInformation = (uid) => new Promise((resolve, reject) => {
-  firebase.firestore().collection('Users').doc(uid).get().done(
+  firebase.firestore().collection('Users').doc(uid).get().catch().
+    then(
     firestoreDocument => {
       resolve({ onSuccess: true, data: firestoreDocument.data() });
     }, () => {
