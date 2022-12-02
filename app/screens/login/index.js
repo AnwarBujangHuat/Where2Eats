@@ -70,7 +70,8 @@ export const Login = ({ navigation }) => {
   };
   const goToModal = () => navigation.navigate(ConstString.MODAL);
   const authenticateUser = (email, password) => new Promise((resolve, reject) => {
-    firebase.auth().signInWithEmailAndPassword(email, password).done(
+    firebase.auth().signInWithEmailAndPassword(email, password).catch((e)=>console.log(e)).
+      then(
       (response) => {
         resolve({ onSuccess: true, data: response });
       },
