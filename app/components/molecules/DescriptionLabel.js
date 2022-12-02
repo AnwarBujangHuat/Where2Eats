@@ -8,7 +8,7 @@ import React from 'react';
 import locationIcon from '../../assets/location.png';
 import EStyleSheet from 'react-native-extended-stylesheet';
 
-export const DescriptionLabel = ({ name, location, icon ,onPress}) => {
+export const DescriptionLabel = ({ name, location, icon, onPress }) => {
   return (
     <View style={styles.container}>
       <View style={{ flexDirection: 'row' }}>
@@ -37,7 +37,6 @@ const styles = EStyleSheet.create({
     marginBottom: 15,
     zIndex: 0,
     elevation: 15,
-
   },
   title: {
     fontSize: 20,
@@ -48,6 +47,7 @@ const styles = EStyleSheet.create({
   desc: {
     color: '$secondaryTextColor',
     paddingTop: 5,
+    maxWidth:'90%',
     fontSize: 14,
   },
   icon: {
@@ -56,10 +56,9 @@ const styles = EStyleSheet.create({
     alignSelf: 'center',
   },
   locationIcon: {
-    width: 11,
-    height: 11,
-    alignSelf: 'center',
-    marginTop: 5,
+    width: 14,
+    height: 14,
     marginEnd: 5,
+    marginTop:5,
   }
 });

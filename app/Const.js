@@ -15,6 +15,7 @@ import appetizerIcon from './assets/appetizer.png';
 import facebookIcon from './assets/facebook.png';
 import twitterIcon from './assets/twitter.png';
 import googleIcon from './assets/google.png';
+
 export const icons = {
   [ConstString.WESTERN]: burgerIcon,
   [ConstString.MALAY]: malayIcon,

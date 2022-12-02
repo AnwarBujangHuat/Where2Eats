@@ -38,7 +38,7 @@ export const ExpandableFloatingButton = ({ onPressItem }) => {
         iconWidth={28}
         iconHeight={28}
         color={Colors.primaryTextColor}
-        onPressItem={(item)=>onPressItem({item})} />
+        onPressItem={(item) => onPressItem({ item })} />
     </View>
   );
 };

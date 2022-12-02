@@ -19,7 +19,7 @@ export const Ratings = ({ navigation, route }) => {
   const ratingChipButton = ['All', '1', '2', '3', '4', '5'];
   const { id } = route.params || {};
   const dispatch = useDispatch();
-  const {NAME,ID} = useSelector(getUser);
+  const { NAME, ID } = useSelector(getUser);
   const restaurantInfo = useSelector(getCurrentRestaurant(id));
   const restaurantsRating = [...restaurantInfo.rating ?? []];
   const [restaurantRemove, setRestaurantRemove] = useState([]);

@@ -1,13 +1,9 @@
-import React, {
-  useEffect,
-  useState
-} from 'react';
+import React from 'react';
 import {
   Dimensions,
   FlatList,
   Image,
   SafeAreaView,
-  SectionList,
   Text,
   TouchableOpacity,
   View
@@ -24,8 +20,9 @@ import { ModalMenuDetails } from '../../../components/molecules/ModalMenuDetails
 import { FoodCard } from '../../../components/molecules/FoodCard';
 import { SearchButton } from '../../../components/atoms/SearchButton';
 
-export const SetupMenuComponents=props=>{
-  const {  onBackButton,
+export const SetupMenuComponents = props => {
+  const {
+    onBackButton,
     categories,
     selectedCategory,
     setSelectedCategory,
@@ -55,7 +52,7 @@ export const SetupMenuComponents=props=>{
     onPressSearch,
     foodList,
     action
-  }=props
+  } = props;
   const renderItem = ({ item }) => {
     return (
       <FoodCard onPress={() => showMenuDetails(item)} name={item.name} price={item.price} desc={item.desc}
@@ -63,26 +60,26 @@ export const SetupMenuComponents=props=>{
                 onPressEdit={() => onPressEdit(item)} />
     );
   };
-  const renderMenu=(category)=>{
-    return editorMode?
+  const renderMenu = (category) => {
+    return editorMode ?
       //if Restaurant Exist and in Editor Mode then filter existing MENU
       foodList.filter(foods => foods.category === category)
       :
       //First time Create and not Editor Mode then show temp menu
-      Menu.filter(foods => foods.category === category)
-  }
-  const renderSelectedCategory=()=>{
+      Menu.filter(foods => foods.category === category);
+  };
+  const renderSelectedCategory = () => {
     //Sort Category based on id to maintain order {Main Dish, Side Dish, Dessert, Appetizer, Drinks }
-    return selectedCategory.sort((a,b)=>{return a.id-b.id})
-  }
+    return selectedCategory.sort((a, b) => {return a.id - b.id;});
+  };
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.rowContainer}>
         <BackButton onPress={onBackButton}></BackButton>
-        {editorMode&&
+        {editorMode &&
           <SearchButton onSearch={onSearch} onChangeText={onChangeText} onPress={onPressSearch}></SearchButton>
         }
-        {!onSearch&&
+        {!onSearch &&
           <Text style={styles.title}>{ConstString.MENU_BOOK}</Text>
         }
       </View>
@@ -117,17 +114,17 @@ export const SetupMenuComponents=props=>{
       <FlatList
         data={renderSelectedCategory()}
         keyExtractor={(item) => item.id}
-        style={{marginTop:10}}
+        style={{ marginTop: 10 }}
         renderItem={({ item }) => {
-          const category = item.item
-          return  (
+          const category = item.item;
+          return (
             <>
-              <View style={{ flexDirection: 'row', alignItems: 'center', marginBottom: 10,marginHorizontal:10 }}>
+              <View style={{ flexDirection: 'row', alignItems: 'center', marginBottom: 10, marginHorizontal: 10 }}>
                 <Text style={styles.header}>{category}</Text>
                 <Image style={styles.icon} source={menuIcon(category)}></Image>
                 <View style={{ flexDirection: 'row', right: 5, position: 'absolute' }}>
                   <TouchableOpacity style={styles.buttonContainer} onPress={() => {
-                    onPressAdd({ item:category });
+                    onPressAdd({ item: category });
                   }}>
                     <Image style={styles.addIcon} source={addIcon} />
                     <Text style={{
@@ -148,7 +145,8 @@ export const SetupMenuComponents=props=>{
                 </FlatList>
               </View>
             </>
-          )}
+          );
+        }
         } />
       {!editorMode &&
         <TouchableOpacity
@@ -238,7 +236,7 @@ const styles = EStyleSheet.create({
     fontWeight: 'bold',
     textAlign: 'center',
     color: '$primaryTextColor',
-    marginStart:10,
+    marginStart: 10,
   },
   buttonText: {
     fontSize: 16,
@@ -248,6 +246,6 @@ const styles = EStyleSheet.create({
   rowContainer: {
     flexDirection: 'row',
     alignContent: 'center',
-    alignItems:'center'
+    alignItems: 'center'
   },
 });

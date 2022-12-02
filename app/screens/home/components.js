@@ -43,7 +43,8 @@ export const HomeComponents = props => {
 
   return (
     <SafeAreaView style={styles.container}>
-    <Header source={IMAGE?{uri:IMAGE}:personIcon} onPress={openMenu} reRender={reRender} title={'Welcome Back '+userName}></Header>
+      <Header source={IMAGE ? { uri: IMAGE } : personIcon} onPress={openMenu} reRender={reRender}
+              title={'Welcome Back ' + userName}></Header>
       {isOpenMenu &&
         <ModalMenuButton isModalVisible={isOpenMenu} onPress={onNavigate} closeModal={closeModal} />}
       <SearchBar placeholder={'Search'} onChangeText={onSearch} source={search} />

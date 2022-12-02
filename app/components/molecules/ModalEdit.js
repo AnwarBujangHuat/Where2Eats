@@ -108,7 +108,7 @@ const styles = EStyleSheet.create({
     padding: 20,
     justifyContent: 'center',
     position: 'absolute',
-    alignSelf:'center',
+    alignSelf: 'center',
     width: width * 0.8,
     backgroundColor: '$secondaryBackGroundColor',
     borderRadius: 7,

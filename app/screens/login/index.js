@@ -1,8 +1,5 @@
 import * as React from 'react';
-import {
-  useEffect,
-  useState
-} from 'react';
+import { useState } from 'react';
 
 import { LoginComponents } from './components';
 import { ConstString } from '../../Strings';
@@ -20,13 +17,12 @@ import {
 } from '../../store/thunks';
 import { GoogleSignin } from '../../../src/SignInOption/config';
 import { getInfo } from '../../store/selector';
-import { LoginManager, AccessToken } from 'react-native-fbsdk-next';
 // import { getAuth } from 'firebase-admin/auth';
 
 export const Login = ({ navigation }) => {
   const { EMAIL, PASSWORD } = useSelector(getInfo);
-  const [Email, setEmail] = useState(EMAIL??'');
-  const [Password, setPassword] = useState(PASSWORD??'');
+  const [Email, setEmail] = useState(EMAIL ?? '');
+  const [Password, setPassword] = useState(PASSWORD ?? '');
   const [onRememberMe, setOnRememberMe] = useState(!!EMAIL);
   const dispatch = useDispatch();
   const onChangeInputEmail = (text) => setEmail(text);
@@ -81,24 +77,24 @@ export const Login = ({ navigation }) => {
       () => resolve({ onSuccess: false, data: 'User Does Not Exist in Our Database' })
     );
   });
-  const onGoogleButtonPress= async () =>{
+  const onGoogleButtonPress = async() => {
     await GoogleSignin.hasPlayServices({ showPlayServicesUpdateDialog: true });
     try {
       const {
         idToken,
         accessToken,
-        } = await GoogleSignin.signIn();
+      } = await GoogleSignin.signIn();
       const credential = firebase.auth.GoogleAuthProvider.credential(
         idToken,
         accessToken,
       );
-    const result=  await firebase.auth().signInWithCredential(credential);
-      if(!result)return showErrorAlert("We Did not Manage to Register You")
+      const result = await firebase.auth().signInWithCredential(credential);
+      if (!result) return showErrorAlert('We Did not Manage to Register You');
 
-      const{name,email,picture}=result.additionalUserInfo.profile
-      const {uid}=result.user
+      const { name, email, picture } = result.additionalUserInfo.profile;
+      const { uid } = result.user;
       const userInfo = {
-        userId:uid,
+        userId: uid,
         NAME: name,
         EMAIL: email,
         IMAGE: picture
@@ -108,7 +104,7 @@ export const Login = ({ navigation }) => {
     }
     catch(error) {
     }
-  }
+  };
   const props = {
     onChangeInputEmail,
     onChangeInputPassword,

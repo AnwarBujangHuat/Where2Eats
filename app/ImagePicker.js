@@ -15,7 +15,7 @@ export const launchImagePicker = () => {
           return 'cancel';
         }
         return response.assets !== undefined ? response.assets[0].uri : response;
-      })
+      });
   }
   catch(e) {
     return 'Error';

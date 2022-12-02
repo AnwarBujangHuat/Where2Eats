@@ -24,7 +24,7 @@ const currentTheme = EStyleSheet.value('$theme');
 let theme;
 let color;
 
-export const Header = ({ source, onPress, reRender,title}) => {
+export const Header = ({ source, onPress, reRender, title }) => {
   const animationProgress = useRef(new Animated.Value(currentTheme === ConstString.LIGHT ? .5 : 0));
   const [isCurrentTheme, setCurrentTheme] = useState(currentTheme);
   const [isRender, setRender] = useState(false);

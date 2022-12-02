@@ -2,9 +2,10 @@ import React from 'react';
 import { GooglePlacesAutocomplete } from 'react-native-google-places-autocomplete';
 import EStyleSheet from 'react-native-extended-stylesheet';
 import { Dimensions } from 'react-native';
+
 const { width } = Dimensions.get('window');
 
-const GooglePlacesInput = ({onResult}) => {
+const GooglePlacesInput = ({ onResult }) => {
   return (
     <GooglePlacesAutocomplete
       styles={{
@@ -17,13 +18,12 @@ const GooglePlacesInput = ({onResult}) => {
           fontSize: 16,
         },
       }}
-      placeholder='Searches'
+      placeholder="Searches"
       onPress={(data, details = null) => {
-       onResult({data:data,details:details});
+        onResult({ data: data, details: details });
       }}
       query={{
         key: 'AIzaSyCHCZuPLY7PuyG4vBTDYbQfsa2ZNEHwpRs',
-        language: 'en',
       }}
     />
   );
