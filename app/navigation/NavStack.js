@@ -24,7 +24,7 @@ export const NavStack = () => {
   return (
 
     <Stack.Navigator
-      initialRouteName={ConstString.LOGIN}
+      initialRouteName={ConstString.REGISTER}
       // initialRouteName={ConstString.HOME}
       screenOptions={{
         headerShown: false,
