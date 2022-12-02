@@ -28,7 +28,7 @@ export const ModalScreen = ({ navigation }) => {
         }],
         { cancelable: true });
     }
-    setTimeout(()=>navigation.navigate(ConstString.HOME),1000)
+    setTimeout(() => navigation.navigate(ConstString.HOME), 1000);
   };
 
   useEffect(() => {

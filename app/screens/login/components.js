@@ -1,6 +1,5 @@
 import * as React from 'react';
 import {
-  FlatList,
   Image,
   SafeAreaView,
   Text,
@@ -17,7 +16,6 @@ import { Colors } from '../../Colors';
 import EStyleSheet from 'react-native-extended-stylesheet';
 import { SocialButton } from '../../components/atoms/SocialButton';
 import { ConstString } from '../../Strings';
-import { GoogleSigninButton } from '@react-native-google-signin/google-signin';
 
 export const LoginComponents = props => {
   const {
@@ -38,12 +36,12 @@ export const LoginComponents = props => {
       </TouchableOpacity>
       <View style={styles.inputContainer}>
         <Text style={styles.title}>Sign In</Text>
-        <InputFieldLogins hint={"Email"} defvalue={Email} onChangeText1={onChangeInputEmail} source={email}
+        <InputFieldLogins hint={'Email'} defvalue={Email} onChangeText1={onChangeInputEmail} source={email}
                           secret={false} />
         <InputFieldLogins
-          hint={"Password"}
+          hint={'Password'}
           defvalue={Password} onChangeText1={onChangeInputPassword} source={password}
-                          secret={true} />
+          secret={true} />
         <View style={styles.checkboxContainer}>
           <CheckBox
             value={onRememberMe}
@@ -55,10 +53,11 @@ export const LoginComponents = props => {
             onValueChange={onClickRememberMe}
             style={{ height: 15, width: 15 }}
           />
-          <Text style={{ color: EStyleSheet.value('$secondaryTextColor'), textAlign: 'center',marginStart:10, }}>Remember Me</Text>
+          <Text style={{ color: EStyleSheet.value('$secondaryTextColor'), textAlign: 'center', marginStart: 10, }}>Remember
+            Me</Text>
         </View>
         <TouchableOpacity style={styles.buttonDone} onPress={verifyUser}>
-          <Text style={{ color: 'white', textAlign: 'center'}}>Login</Text>
+          <Text style={{ color: 'white', textAlign: 'center' }}>Login</Text>
         </TouchableOpacity>
         <TouchableOpacity style={styles.buttonForPass}>
           <Text style={{ color: Colors.primaryColor, textAlign: 'center' }}>Forget Password</Text>
@@ -107,9 +106,9 @@ const styles = EStyleSheet.create(
       marginTop: 10,
     },
     checkboxContainer: {
-      flexDirection: "row",
-      margin:5,
-      alignItems:'center',
+      flexDirection: 'row',
+      margin: 5,
+      alignItems: 'center',
     },
     label: {
       margin: 8,

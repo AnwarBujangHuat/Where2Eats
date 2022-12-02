@@ -35,7 +35,7 @@ export const ProfileComponents = props => {
     const batch = db.batch();
     defaultValue.forEach((doc) => {
       const docRef = db.collection(ConstString.RESTAURANT).doc(); //automatically generate unique id
-      batch.set(docRef,doc);
+      batch.set(docRef, doc);
     });
     batch.commit().then(() => console.log('Congrats'));
   };
@@ -71,7 +71,7 @@ export const ProfileComponents = props => {
           borderRadius: 20,
           marginTop: 20,
         }} onPress={onPress}
-        disabled={true}>
+                          disabled={true}>
           <Text style={{ color: 'white', fontSize: 16, alignSelf: 'center' }}>My Intern is Too Lazy</Text>
         </TouchableOpacity>
       </View>

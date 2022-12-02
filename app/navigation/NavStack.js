@@ -4,23 +4,14 @@ import {
   Login,
   ModalScreen,
   Profile,
+  Ratings,
   Register,
   Restaurant,
   SetupMenu,
   WheelOfFortune,
-  Ratings,
 } from '../screens';
-import BottomNavigationBar from './bottom/BottomNavigationBar';
 import * as React from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
-import { useSelector } from 'react-redux';
-import { getTheme } from '../store/selector';
-import EStyleSheet from 'react-native-extended-stylesheet';
-import {
-  DarkTheme,
-  LightTheme
-} from '../Colors';
-import { StatusBar } from 'react-native';
 
 const Stack = createStackNavigator();
 export const NavStack = () => {

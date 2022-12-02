@@ -1,7 +1,4 @@
-import React, {
-  useEffect,
-  useState
-} from 'react';
+import React, { useState } from 'react';
 import { HomeComponents } from './components';
 import { ConstString } from '../../Strings';
 import {
@@ -17,7 +14,7 @@ import { Alert } from 'react-native';
 
 export const Home = ({ navigation }) => {
   const fetchRestaurant = useSelector(getRestaurant);
-  const { NAME:userName, IMAGE }=useSelector(getUser)
+  const { NAME: userName, IMAGE } = useSelector(getUser);
   const dispatch = useDispatch();
   const restaurant = [...fetchRestaurant];
   const [currentRestaurant, setCurrentRestaurant] = useState(restaurant);
@@ -49,14 +46,15 @@ export const Home = ({ navigation }) => {
       Alert.alert(payload.data,
         '',
         [{
-          text: "Ok",
-          onPress:goBack
-          ,}],
+          text: 'Ok',
+          onPress: goBack
+          ,
+        }],
         { cancelable: false });
     }
     setIsFetching(false);
   };
-  const goBack=()=> navigation.navigate(ConstString.LOGIN)
+  const goBack = () => navigation.navigate(ConstString.LOGIN);
   const onSearch = (text) => {
     if (!text) return setCurrentRestaurant(restaurant);
     const updateRestaurant = restaurant.filter(item => item.restaurant.toLowerCase().includes(text.toLowerCase()));

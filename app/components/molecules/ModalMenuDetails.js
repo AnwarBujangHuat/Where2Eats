@@ -27,35 +27,35 @@ export const ModalMenuDetails = ({ closeModal, isModalVisible, foodItem }) => {
                  presentationStyle="overFullScreen"
                  onBackdropPress={closeModal}
                  onDismiss={closeModal}>
-              <View style={styles.modalView}>
-                <FastImage
-                  resizeMode={FastImage.resizeMode.cover}
-                  source={image !== undefined ? {
-                    uri: image,
-                    priority: FastImage.priority.high,
-                  } : nasiAyam}
-                  style={
-                    {
-                      height: 270,
-                    }}>
+            <View style={styles.modalView}>
+              <FastImage
+                resizeMode={FastImage.resizeMode.cover}
+                source={image !== undefined ? {
+                  uri: image,
+                  priority: FastImage.priority.high,
+                } : nasiAyam}
+                style={
+                  {
+                    height: 270,
+                  }}>
 
-                </FastImage>
-                <View style={styles.container}>
-                  <Text style={styles.header}>{name}</Text>
-                  <Text style={styles.price}>{'RM' + price}</Text>
-                  <Text style={styles.desc}>{desc}</Text>
-                </View>
-                <TouchableOpacity style={{
-                  backgroundColor: 'transparent',
-                  alignContent: 'center',
-                  alignSelf: 'center',
-                  paddingTop: 5,
-                  minHeight: 30,
-                }} onPress={closeModal}>
-                  <Text style={{ color: Colors.primaryColor, fontSize: 18, alignSelf: 'center' }}>OK</Text>
-                </TouchableOpacity>
-                {/*<Button title="OK" color={Colors.primaryColor} onPress={closeModal} />*/}
+              </FastImage>
+              <View style={styles.container}>
+                <Text style={styles.header}>{name}</Text>
+                <Text style={styles.price}>{'RM' + price}</Text>
+                <Text style={styles.desc}>{desc}</Text>
               </View>
+              <TouchableOpacity style={{
+                backgroundColor: 'transparent',
+                alignContent: 'center',
+                alignSelf: 'center',
+                paddingTop: 5,
+                minHeight: 30,
+              }} onPress={closeModal}>
+                <Text style={{ color: Colors.primaryColor, fontSize: 18, alignSelf: 'center' }}>OK</Text>
+              </TouchableOpacity>
+              {/*<Button title="OK" color={Colors.primaryColor} onPress={closeModal} />*/}
+            </View>
           </Modal>
         </SafeAreaView>
       }
@@ -97,7 +97,7 @@ const styles = EStyleSheet.create({
     paddingBottom: 10,
     justifyContent: 'center',
     position: 'absolute',
-    alignSelf:'center',
+    alignSelf: 'center',
     width: width * 0.8,
     backgroundColor: '$backGroundColor',
     borderRadius: 10,
