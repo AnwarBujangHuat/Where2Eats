@@ -45,17 +45,17 @@ export const SetupMenu = ({ navigation, route }) => {
   const [Menu, setMenu] = useState([]);
 
   useEffect(() => {
-    selectedCat()
+    selectedCat();
   }, [foodList]);
 
   useEffect(() => {
-    setFoodList(foodItemLists)
+    setFoodList(foodItemLists);
   }, [restaurantInfo]);
 
-  const selectedCat=()=>{
+  const selectedCat = () => {
     const tempCategory = categories.filter(category => foodList.find(food => food.category === category.item));
     setSelectedCategory(tempCategory);
-  }
+  };
   const showAlert = (action, foodItem, result) => {
     result === ConstString.SUCCESS ?
       Alert.alert(
@@ -292,10 +292,10 @@ export const SetupMenu = ({ navigation, route }) => {
 
   };
   const onPressSearch = () => {
-    setOnSearch(!onSearch)
-    setFoodList([...restaurantInfo?.food])
-    if(!onSearch) selectedCat()
-  }
+    setOnSearch(!onSearch);
+    setFoodList([...restaurantInfo?.food]);
+    if (!onSearch) selectedCat();
+  };
 
   const props = {
     onBackButton,

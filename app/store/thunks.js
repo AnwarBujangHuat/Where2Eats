@@ -5,7 +5,6 @@ import {
   arrayUnion
 } from 'firebase/firestore';
 import { ConstString } from '../Strings';
-import { defaultValue } from './defaultValue';
 
 const restaurantCollectionRef = firebase.firestore().collection(ConstString.RESTAURANT);
 const fcmCollectionRef = firebase.firestore().collection(ConstString.FCM);
@@ -27,7 +26,7 @@ export const PopulateRestaurantList = createAsyncThunk('getRestaurantList', asyn
   rejectWithValue
 }) => {
   const { onSuccess, data } = await requestFetchRestaurantList();
-  if (!onSuccess) return rejectWithValue({ result: onSuccess, data:data });
+  if (!onSuccess) return rejectWithValue({ result: onSuccess, data: data });
   //send Restaurant Array
   return { result: onSuccess, restaurantList: data };
 });
@@ -39,9 +38,10 @@ const requestFetchRestaurantList = () => new Promise((myResolve) => {
       const temp = { id: documentSnapshot.id, ...documentSnapshot.data() };
       restaurant.push(temp);
     });
-  })
-  .catch((e)=>myResolve({ onSuccess: false, data: 'Unverified User' }))
-  .done(() => myResolve({ onSuccess: true, data: restaurant }),
+  }).catch((e) => myResolve({ onSuccess: false, data: 'Unverified User' })).done(() => myResolve({
+      onSuccess: true,
+      data: restaurant
+    }),
     () => myResolve({ onSuccess: false, data: errorObj }));
 });
 
@@ -255,26 +255,19 @@ export const verifyUserToken = createAsyncThunk('verifyToken', async(request, {
 });
 
 const requestVerifyToken = (token, deviceId) => new Promise((resolve, reject) => {
-  fcmCollectionRef
-  .where(firebase.firestore.FieldPath.documentId(), '==', deviceId)
-  .where('fcmToken', '==', token)
-  .get()
-  .then((querySnapshot) =>
-  {
-    //Check if no data return
-    if(querySnapshot.empty) return resolve({ onSuccess: false, data:"No data"})
+  fcmCollectionRef.where(firebase.firestore.FieldPath.documentId(), '==', deviceId).where('fcmToken', '==', token).get().then((querySnapshot) => {
+      //Check if no data return
+      if (querySnapshot.empty) return resolve({ onSuccess: false, data: 'No data' });
 
-    //if match then execute
-    querySnapshot.forEach((doc) => {
-      return resolve({ onSuccess: true, data: doc.data() });
-    });
+      //if match then execute
+      querySnapshot.forEach((doc) => {
+        return resolve({ onSuccess: true, data: doc.data() });
+      });
 
 
-  },
-  )
-  .catch((error) =>
-  {
-    return resolve({ onSuccess: false, data: 'No Data Found' })
+    },
+  ).catch((error) => {
+    return resolve({ onSuccess: false, data: 'No Data Found' });
   });
 
 
@@ -327,5 +320,5 @@ export const populateUserData = createAsyncThunk('populateUserData', async(reque
   dispatch,
   rejectWithValue
 }) => {
-  return {result:true,data:request};
+  return { result: true, data: request };
 });

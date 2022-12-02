@@ -4,9 +4,7 @@ import React, {
 } from 'react';
 import { ConstString } from '../../Strings';
 import { useSelector } from 'react-redux';
-import {
-  icons,
-} from '../../Const';
+import { icons, } from '../../Const';
 import { getCurrentRestaurant } from '../../store/selector';
 import { RestaurantComponents } from './components';
 
@@ -29,7 +27,7 @@ export const Restaurant = ({ navigation, route }) => {
   const restaurantIcon = category ? icons[category] : icons.def;
 
   useEffect(() => {
-    setFoodList(restaurantInfo.food)
+    setFoodList(restaurantInfo.food);
   }, [restaurantInfo]);
 
   useEffect(() => {
@@ -44,7 +42,7 @@ export const Restaurant = ({ navigation, route }) => {
   const closePreviewModal = () => {
     setIsPreview(false);
   };
-  const menuIcon = (item) => icons[item]??icons?.def
+  const menuIcon = (item) => icons[item] ?? icons?.def;
   const closeModal = () => setModalVisible(false);
   const openPreviewModal = () => setIsPreview(true);
   const goToRating = () => navigation.navigate(ConstString.RATINGS, { id });

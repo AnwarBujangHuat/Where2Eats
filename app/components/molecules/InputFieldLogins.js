@@ -6,7 +6,7 @@ import {
 import React from 'react';
 import EStyleSheet from 'react-native-extended-stylesheet';
 
-export const InputFieldLogins = ({ onChangeText1, defvalue, source, secret,hint }) => {
+export const InputFieldLogins = ({ onChangeText1, defvalue, source, secret, hint }) => {
   return (
     <View style={styles.section}>
       <Image style={styles.icons} source={source} />

@@ -33,7 +33,7 @@ export const RestaurantComponents = props => {
     foodList,
     onChangeText,
   } = props;
-  const { restaurant, address, rate, image,food:foodItemList}=restaurantInfo
+  const { restaurant, address, rate, image, food: foodItemList } = restaurantInfo;
   const renderItem = ({ item }) => {
     return (
       <FoodCard onPress={() => onPress(item)} name={item.name} price={item.price} desc={item.desc}
@@ -46,7 +46,7 @@ export const RestaurantComponents = props => {
   return (
     <SafeAreaView style={styles.container}>
       <DetailsHeader image={image} back={onBack} disabled={true} rate={true} goToRating={goToRating}
-                     rating={rate} onSearch={true} onChangeText={onChangeText}/>
+                     rating={rate} onSearch={true} onChangeText={onChangeText} />
       <DescriptionLabel name={restaurant} location={address} icon={restaurantIcon}
                         onPress={openPreviewModal} />
       <FlatList

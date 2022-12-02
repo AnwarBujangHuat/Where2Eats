@@ -13,7 +13,7 @@ import EStyleSheet from 'react-native-extended-stylesheet';
 
 const { width } = Dimensions.get('window');
 
-export const ModalMenuButton = ({ isModalVisible, onPress,closeModal}) => {
+export const ModalMenuButton = ({ isModalVisible, onPress, closeModal }) => {
   const MENU_OPTIONS = [
     {
       id: 1,
@@ -36,26 +36,27 @@ export const ModalMenuButton = ({ isModalVisible, onPress,closeModal}) => {
         <SafeAreaView>
           <Modal animationType="fade"
                  transparent visible={isModalVisible}
-                 style={{position:'absolute',
-                   top:20,
-                   left:-10,
+                 style={{
+                   position: 'absolute',
+                   top: 20,
+                   left: -10,
                  }}
-                 onBackdropPress={()=>closeModal()}
-                 >
+                 onBackdropPress={() => closeModal()}
+          >
             <View
               style={styles.modalView}>
-                <FlatList
-                  data={MENU_OPTIONS}
-                  renderItem={({ item }) => {
-                    return (
-                      <TouchableOpacity
-                        onPress={() => onPress(item.id)}>
-                        <Text style={styles.buttonText}>{item.title}</Text>
-                      </TouchableOpacity>
-                    );
-                  }}
-                  showsHorizontalScrollIndicator={false} />
-              </View>
+              <FlatList
+                data={MENU_OPTIONS}
+                renderItem={({ item }) => {
+                  return (
+                    <TouchableOpacity
+                      onPress={() => onPress(item.id)}>
+                      <Text style={styles.buttonText}>{item.title}</Text>
+                    </TouchableOpacity>
+                  );
+                }}
+                showsHorizontalScrollIndicator={false} />
+            </View>
           </Modal>
         </SafeAreaView>
       }

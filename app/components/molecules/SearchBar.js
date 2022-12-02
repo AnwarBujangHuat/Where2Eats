@@ -2,13 +2,12 @@ import {
   Dimensions,
   Image,
   SafeAreaView,
-  Text,
   TextInput,
-  TouchableOpacity,
   View
 } from 'react-native';
 import React from 'react';
 import EStyleSheet from 'react-native-extended-stylesheet';
+
 const { width } = Dimensions.get('window');
 
 
@@ -44,7 +43,7 @@ const styles = EStyleSheet.create({
     flexDirection: 'row',
     borderRadius: 10,
     marginVertical: 10,
-    width: width-30,
+    width: width - 30,
     padding: 5,
     shadowOffset: { width: -2, height: 4 },
     shadowColor: '$primaryColor',

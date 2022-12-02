@@ -1,7 +1,4 @@
-import React, {
-  useEffect,
-  useRef
-} from 'react';
+import React from 'react';
 import {
   Animated,
   Dimensions,
@@ -57,7 +54,7 @@ export const WheelComponents = props => {
     oneTurn,
     numberOfSegments,
   } = props;
-  let angle=0
+  let angle = 0;
   _angle.addListener(event => {
     angle = event.value;
   });

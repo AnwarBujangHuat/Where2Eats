@@ -14,7 +14,6 @@ import { Const } from '../../Const';
 import { ImageButton } from '../../components/atoms/ImageButton';
 import { InputField } from '../../components/atoms/InputField';
 import EStyleSheet from 'react-native-extended-stylesheet';
-import { ModalMenuDetails } from '../../components/molecules/ModalMenuDetails';
 import { ModalLocation } from '../../components/molecules/ModalLocation';
 
 export const RegisterComponents = props => {
@@ -43,10 +42,11 @@ export const RegisterComponents = props => {
       <DetailsHeader back={goBack} disabled={false} onPress={launchImageLibrary} image={imageUri} />
       <View style={styles.inputContainer}>
         <Text style={styles.header}>{'Restaurant Name'}</Text>
-        <InputField placeholder={'Please Input Name'} multiline={false} onChange={(text) => setName(text)} value={restaurantName} />
+        <InputField placeholder={'Please Input Name'} multiline={false} onChange={(text) => setName(text)}
+                    value={restaurantName} />
         <Text style={styles.header}>{'Description'}</Text>
         <InputField placeholder={'Please Input Description'} multiline={true}
-                    onChange={(text) => setDescription(text)} value={restaurantDesc}/>
+                    onChange={(text) => setDescription(text)} value={restaurantDesc} />
         <Text style={styles.header}>{'Category'}</Text>
         <FlatList
           style={{ maxHeight: 60 }}
@@ -54,10 +54,10 @@ export const RegisterComponents = props => {
           onScrollToIndexFailed={info => {
             const wait = new Promise(resolve => setTimeout(resolve, 500));
             wait.then(() => {
-              Const.current?.scrollToIndex({index: info.index, animated: true });
+              Const.current?.scrollToIndex({ index: info.index, animated: true });
             });
           }}
-          initialScrollIndex={initialIndex??0}
+          initialScrollIndex={initialIndex ?? 0}
           renderItem={({ item }) => {
             return (
               <ImageButton item={item} onPress={() => categorySelected({ item })} selected={selectedTypes} />
@@ -73,14 +73,14 @@ export const RegisterComponents = props => {
           <Text style={{ color: EStyleSheet.value('$primaryColor'), fontWeight: 'bold' }}>Location</Text>
         </TouchableOpacity>
         <Text style={styles.desc}>{restaurantLocation}</Text>
-        <ModalLocation isModalVisible={isModalOpen} submitLocation={addLocation} closeModal={closeLocationModal}/>
+        <ModalLocation isModalVisible={isModalOpen} submitLocation={addLocation} closeModal={closeLocationModal} />
       </View>
 
       <KeyboardAvoidingView behavior={Platform.OS === 'ios' ? 'padding' : 'height'}>
         <TouchableOpacity
           style={styles.button}
-          onPress={editorMode?updateRestaurantInfo:goToMenu}>
-          <Text style={styles.buttonText}>{editorMode?"Update Restaurant Info":"goToMenu"}</Text>
+          onPress={editorMode ? updateRestaurantInfo : goToMenu}>
+          <Text style={styles.buttonText}>{editorMode ? 'Update Restaurant Info' : 'goToMenu'}</Text>
         </TouchableOpacity>
       </KeyboardAvoidingView>
 

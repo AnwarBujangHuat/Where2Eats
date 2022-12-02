@@ -2,50 +2,50 @@ import { ConstString } from '../Strings';
 
 export const defaultValue = [
   {
-    id:1,
+    id: 1,
     restaurant: 'Restaurant Westerner',
     category: ConstString.WESTERN,
     address: 'No.19 Jalan Kasim Gorilla',
     description: 'Founded in 1999 we strive to serve authentic western cuisine to Malaysian',
     rate: 4.6,
     image: 'https://media-cdn.tripadvisor.com/media/photo-s/11/d9/57/69/spaghetti-western-steakhouse.jpg',
-    userId:"RpfohqbkAXN0NoOokrSWaT6Uteq2",
-    createdAt:new Date().toLocaleString(),
-    rating:[{
-    userId:1,
-    userName:"Mohamad Abu Lutut",
-    review:'This cozy restaurant has left the best impressions! Hospitable hosts, delicious dishes, beautiful presentation, wide wine list and wonderful dessert. I recommend to everyone! I would like to come back here again and again.',
-    rating:parseInt(4),
-    createdAt:'10/31/2022, 1:17:51 PM',
-    updatedAt:'10/31/2022, 1:17:51 PM'
-  },{
-    userId:2,
-    userName:"Mohamad Abu Lutut Kanan",
-    review:"Sedap Wooo",
-    rating:parseInt(4),
-    createdAt:'10/31/2022, 1:17:51 PM',
-  },],
+    userId: 'RpfohqbkAXN0NoOokrSWaT6Uteq2',
+    createdAt: new Date().toLocaleString(),
+    rating: [{
+      userId: 1,
+      userName: 'Mohamad Abu Lutut',
+      review: 'This cozy restaurant has left the best impressions! Hospitable hosts, delicious dishes, beautiful presentation, wide wine list and wonderful dessert. I recommend to everyone! I would like to come back here again and again.',
+      rating: parseInt(4),
+      createdAt: '10/31/2022, 1:17:51 PM',
+      updatedAt: '10/31/2022, 1:17:51 PM'
+    }, {
+      userId: 2,
+      userName: 'Mohamad Abu Lutut Kanan',
+      review: 'Sedap Wooo',
+      rating: parseInt(4),
+      createdAt: '10/31/2022, 1:17:51 PM',
+    },],
     food: [
       {
         name: 'Steak',
         price: '15.00',
         desc: 'A steak is a thick cut of meat generally sliced across the muscle fibers, sometimes including a bone. It is normally grilled or fried.',
         image: 'https://i.pinimg.com/originals/86/32/1d/86321d62549d4659fff9ade7c90a2ebb.jpg',
-        category:ConstString.MAINDISH
+        category: ConstString.MAINDISH
       },
       {
         name: 'Fish N Chips',
         price: '15.00',
         desc: 'Fish and chips is a popular hot dish consisting of fried fish in crispy batter, served with chips. The dish originated in England',
         image: 'https://www.foodadvisor.my/attachments/8f4453ca28396b9ea08ecf65a75f9596f8268637/store/fill/800/500/816f0c9e486c1dc9d74ce0ea5805be1840638012c540d95a3352ccc7b764/featured_image.jpg',
-        category:ConstString.MAINDISH
+        category: ConstString.MAINDISH
       },
       {
         name: 'Lasagna',
         price: '13.00',
         desc: 'Lasagna is a type of pasta, possibly one of the oldest types, made of very wide, flat sheets.',
         image: 'https://static.toiimg.com/thumb/55369113.cms?imgsize=392784&width=800&height=800',
-        category:ConstString.SIDEDISH
+        category: ConstString.SIDEDISH
 
       },
       {
@@ -53,14 +53,14 @@ export const defaultValue = [
         price: '15.00',
         desc: 'Fish and chips is a popular hot dish consisting of fried fish in crispy batter, served with chips. The dish originated in England',
         image: 'https://www.foodadvisor.my/attachments/8f4453ca28396b9ea08ecf65a75f9596f8268637/store/fill/800/500/816f0c9e486c1dc9d74ce0ea5805be1840638012c540d95a3352ccc7b764/featured_image.jpg',
-        category:ConstString.MAINDISH
+        category: ConstString.MAINDISH
       },
       {
         name: 'Lasagna',
         price: '13.00',
         desc: 'Lasagna is a type of pasta, possibly one of the oldest types, made of very wide, flat sheets.',
         image: 'https://static.toiimg.com/thumb/55369113.cms?imgsize=392784&width=800&height=800',
-        category:ConstString.SIDEDISH
+        category: ConstString.SIDEDISH
 
       },
       {
@@ -68,14 +68,14 @@ export const defaultValue = [
         price: '15.00',
         desc: 'Fish and chips is a popular hot dish consisting of fried fish in crispy batter, served with chips. The dish originated in England',
         image: 'https://www.foodadvisor.my/attachments/8f4453ca28396b9ea08ecf65a75f9596f8268637/store/fill/800/500/816f0c9e486c1dc9d74ce0ea5805be1840638012c540d95a3352ccc7b764/featured_image.jpg',
-        category:ConstString.MAINDISH
+        category: ConstString.MAINDISH
       },
       {
         name: 'Lasagna',
         price: '13.00',
         desc: 'Lasagna is a type of pasta, possibly one of the oldest types, made of very wide, flat sheets.',
         image: 'https://static.toiimg.com/thumb/55369113.cms?imgsize=392784&width=800&height=800',
-        category:ConstString.SIDEDISH
+        category: ConstString.SIDEDISH
 
       },
       {
@@ -83,14 +83,14 @@ export const defaultValue = [
         price: '15.00',
         desc: 'Fish and chips is a popular hot dish consisting of fried fish in crispy batter, served with chips. The dish originated in England',
         image: 'https://www.foodadvisor.my/attachments/8f4453ca28396b9ea08ecf65a75f9596f8268637/store/fill/800/500/816f0c9e486c1dc9d74ce0ea5805be1840638012c540d95a3352ccc7b764/featured_image.jpg',
-        category:ConstString.MAINDISH
+        category: ConstString.MAINDISH
       },
       {
         name: 'Lasagna',
         price: '13.00',
         desc: 'Lasagna is a type of pasta, possibly one of the oldest types, made of very wide, flat sheets.',
         image: 'https://static.toiimg.com/thumb/55369113.cms?imgsize=392784&width=800&height=800',
-        category:ConstString.SIDEDISH
+        category: ConstString.SIDEDISH
 
       },
       {
@@ -98,14 +98,14 @@ export const defaultValue = [
         price: '15.00',
         desc: 'Fish and chips is a popular hot dish consisting of fried fish in crispy batter, served with chips. The dish originated in England',
         image: 'https://www.foodadvisor.my/attachments/8f4453ca28396b9ea08ecf65a75f9596f8268637/store/fill/800/500/816f0c9e486c1dc9d74ce0ea5805be1840638012c540d95a3352ccc7b764/featured_image.jpg',
-        category:ConstString.MAINDISH
+        category: ConstString.MAINDISH
       },
       {
         name: 'Lasagna',
         price: '13.00',
         desc: 'Lasagna is a type of pasta, possibly one of the oldest types, made of very wide, flat sheets.',
         image: 'https://static.toiimg.com/thumb/55369113.cms?imgsize=392784&width=800&height=800',
-        category:ConstString.SIDEDISH
+        category: ConstString.SIDEDISH
 
       },
       {
@@ -113,112 +113,42 @@ export const defaultValue = [
         price: '15.00',
         desc: 'Fish and chips is a popular hot dish consisting of fried fish in crispy batter, served with chips. The dish originated in England',
         image: 'https://www.foodadvisor.my/attachments/8f4453ca28396b9ea08ecf65a75f9596f8268637/store/fill/800/500/816f0c9e486c1dc9d74ce0ea5805be1840638012c540d95a3352ccc7b764/featured_image.jpg',
-        category:ConstString.MAINDISH
+        category: ConstString.MAINDISH
       },
       {
         name: 'Lasagna',
         price: '13.00',
         desc: 'Lasagna is a type of pasta, possibly one of the oldest types, made of very wide, flat sheets.',
         image: 'https://static.toiimg.com/thumb/55369113.cms?imgsize=392784&width=800&height=800',
-        category:ConstString.SIDEDISH
+        category: ConstString.SIDEDISH
 
-      },   {
+      }, {
         name: 'Fish N Chips',
         price: '15.00',
         desc: 'Fish and chips is a popular hot dish consisting of fried fish in crispy batter, served with chips. The dish originated in England',
         image: 'https://www.foodadvisor.my/attachments/8f4453ca28396b9ea08ecf65a75f9596f8268637/store/fill/800/500/816f0c9e486c1dc9d74ce0ea5805be1840638012c540d95a3352ccc7b764/featured_image.jpg',
-        category:ConstString.MAINDISH
+        category: ConstString.MAINDISH
       },
       {
         name: 'Lasagna',
         price: '13.00',
         desc: 'Lasagna is a type of pasta, possibly one of the oldest types, made of very wide, flat sheets.',
         image: 'https://static.toiimg.com/thumb/55369113.cms?imgsize=392784&width=800&height=800',
-        category:ConstString.SIDEDISH
+        category: ConstString.SIDEDISH
 
-      },   {
+      }, {
         name: 'Fish N Chips',
         price: '15.00',
         desc: 'Fish and chips is a popular hot dish consisting of fried fish in crispy batter, served with chips. The dish originated in England',
         image: 'https://www.foodadvisor.my/attachments/8f4453ca28396b9ea08ecf65a75f9596f8268637/store/fill/800/500/816f0c9e486c1dc9d74ce0ea5805be1840638012c540d95a3352ccc7b764/featured_image.jpg',
-        category:ConstString.MAINDISH
+        category: ConstString.MAINDISH
       },
       {
         name: 'Lasagna',
         price: '13.00',
         desc: 'Lasagna is a type of pasta, possibly one of the oldest types, made of very wide, flat sheets.',
         image: 'https://static.toiimg.com/thumb/55369113.cms?imgsize=392784&width=800&height=800',
-        category:ConstString.SIDEDISH
-
-      },
-      {
-        name: 'Black Coffee',
-        price: '4.00',
-        desc: 'Coffee is a drink prepared from roasted coffee beans, seeds of the Coffea plant species.',
-        image: 'https://ideas.ted.com/wp-content/uploads/sites/3/2022/07/FINAL_Coffee.jpg?resize=1536,922',
-        category: ConstString.DRINKS
-      },
-      {
-        name: 'Chocolate Lava Cake',
-        price: '6.00',
-        desc: 'Molten chocolate cake is a popular dessert that combines the elements of a chocolate cake and a soufflé. Its name derives from the dessert\'s liquid chocolate center',
-        image: 'https://food.fnr.sndimg.com/content/dam/images/food/fullset/2014/2/19/1/WU0701H_Molten-Chocolate-Cakes_s4x3.jpg.rend.hgtvcom.616.462.suffix/1485880987811.jpeg',
-        category: ConstString.DESSERT
-      },{
-        name: 'Fish N Chips',
-        price: '15.00',
-        desc: 'Fish and chips is a popular hot dish consisting of fried fish in crispy batter, served with chips. The dish originated in England',
-        image: 'https://www.foodadvisor.my/attachments/8f4453ca28396b9ea08ecf65a75f9596f8268637/store/fill/800/500/816f0c9e486c1dc9d74ce0ea5805be1840638012c540d95a3352ccc7b764/featured_image.jpg',
-        category:ConstString.MAINDISH
-      },
-      {
-        name: 'Lasagna',
-        price: '13.00',
-        desc: 'Lasagna is a type of pasta, possibly one of the oldest types, made of very wide, flat sheets.',
-        image: 'https://static.toiimg.com/thumb/55369113.cms?imgsize=392784&width=800&height=800',
-        category:ConstString.SIDEDISH
-
-      },   {
-        name: 'Fish N Chips',
-        price: '15.00',
-        desc: 'Fish and chips is a popular hot dish consisting of fried fish in crispy batter, served with chips. The dish originated in England',
-        image: 'https://www.foodadvisor.my/attachments/8f4453ca28396b9ea08ecf65a75f9596f8268637/store/fill/800/500/816f0c9e486c1dc9d74ce0ea5805be1840638012c540d95a3352ccc7b764/featured_image.jpg',
-        category:ConstString.MAINDISH
-      },
-      {
-        name: 'Black Coffee',
-        price: '4.00',
-        desc: 'Coffee is a drink prepared from roasted coffee beans, seeds of the Coffea plant species.',
-        image: 'https://ideas.ted.com/wp-content/uploads/sites/3/2022/07/FINAL_Coffee.jpg?resize=1536,922',
-        category: ConstString.DRINKS
-      },
-      {
-        name: 'Chocolate Lava Cake',
-        price: '6.00',
-        desc: 'Molten chocolate cake is a popular dessert that combines the elements of a chocolate cake and a soufflé. Its name derives from the dessert\'s liquid chocolate center',
-        image: 'https://food.fnr.sndimg.com/content/dam/images/food/fullset/2014/2/19/1/WU0701H_Molten-Chocolate-Cakes_s4x3.jpg.rend.hgtvcom.616.462.suffix/1485880987811.jpeg',
-        category: ConstString.DESSERT
-      },
-      {
-        name: 'Lasagna',
-        price: '13.00',
-        desc: 'Lasagna is a type of pasta, possibly one of the oldest types, made of very wide, flat sheets.',
-        image: 'https://static.toiimg.com/thumb/55369113.cms?imgsize=392784&width=800&height=800',
-        category:ConstString.SIDEDISH
-
-      },   {
-        name: 'Fish N Chips',
-        price: '15.00',
-        desc: 'Fish and chips is a popular hot dish consisting of fried fish in crispy batter, served with chips. The dish originated in England',
-        image: 'https://www.foodadvisor.my/attachments/8f4453ca28396b9ea08ecf65a75f9596f8268637/store/fill/800/500/816f0c9e486c1dc9d74ce0ea5805be1840638012c540d95a3352ccc7b764/featured_image.jpg',
-        category:ConstString.MAINDISH
-      },
-      {
-        name: 'Lasagna',
-        price: '13.00',
-        desc: 'Lasagna is a type of pasta, possibly one of the oldest types, made of very wide, flat sheets.',
-        image: 'https://static.toiimg.com/thumb/55369113.cms?imgsize=392784&width=800&height=800',
-        category:ConstString.SIDEDISH
+        category: ConstString.SIDEDISH
 
       },
       {
@@ -234,63 +164,26 @@ export const defaultValue = [
         desc: 'Molten chocolate cake is a popular dessert that combines the elements of a chocolate cake and a soufflé. Its name derives from the dessert\'s liquid chocolate center',
         image: 'https://food.fnr.sndimg.com/content/dam/images/food/fullset/2014/2/19/1/WU0701H_Molten-Chocolate-Cakes_s4x3.jpg.rend.hgtvcom.616.462.suffix/1485880987811.jpeg',
         category: ConstString.DESSERT
-      },{
+      }, {
         name: 'Fish N Chips',
         price: '15.00',
         desc: 'Fish and chips is a popular hot dish consisting of fried fish in crispy batter, served with chips. The dish originated in England',
         image: 'https://www.foodadvisor.my/attachments/8f4453ca28396b9ea08ecf65a75f9596f8268637/store/fill/800/500/816f0c9e486c1dc9d74ce0ea5805be1840638012c540d95a3352ccc7b764/featured_image.jpg',
-        category:ConstString.MAINDISH
+        category: ConstString.MAINDISH
       },
       {
         name: 'Lasagna',
         price: '13.00',
         desc: 'Lasagna is a type of pasta, possibly one of the oldest types, made of very wide, flat sheets.',
         image: 'https://static.toiimg.com/thumb/55369113.cms?imgsize=392784&width=800&height=800',
-        category:ConstString.SIDEDISH
+        category: ConstString.SIDEDISH
 
-      },
-      {
-        name: 'Black Coffee',
-        price: '4.00',
-        desc: 'Coffee is a drink prepared from roasted coffee beans, seeds of the Coffea plant species.',
-        image: 'https://ideas.ted.com/wp-content/uploads/sites/3/2022/07/FINAL_Coffee.jpg?resize=1536,922',
-        category: ConstString.DRINKS
-      },
-      {
-        name: 'Chocolate Lava Cake',
-        price: '6.00',
-        desc: 'Molten chocolate cake is a popular dessert that combines the elements of a chocolate cake and a soufflé. Its name derives from the dessert\'s liquid chocolate center',
-        image: 'https://food.fnr.sndimg.com/content/dam/images/food/fullset/2014/2/19/1/WU0701H_Molten-Chocolate-Cakes_s4x3.jpg.rend.hgtvcom.616.462.suffix/1485880987811.jpeg',
-        category: ConstString.DESSERT
-      },{
+      }, {
         name: 'Fish N Chips',
         price: '15.00',
         desc: 'Fish and chips is a popular hot dish consisting of fried fish in crispy batter, served with chips. The dish originated in England',
         image: 'https://www.foodadvisor.my/attachments/8f4453ca28396b9ea08ecf65a75f9596f8268637/store/fill/800/500/816f0c9e486c1dc9d74ce0ea5805be1840638012c540d95a3352ccc7b764/featured_image.jpg',
-        category:ConstString.MAINDISH
-      },
-      {
-        name: 'Lasagna',
-        price: '13.00',
-        desc: 'Lasagna is a type of pasta, possibly one of the oldest types, made of very wide, flat sheets.',
-        image: 'https://static.toiimg.com/thumb/55369113.cms?imgsize=392784&width=800&height=800',
-        category:ConstString.SIDEDISH
-
-      },
-      {
-        name: 'Fish N Chips',
-        price: '15.00',
-        desc: 'Fish and chips is a popular hot dish consisting of fried fish in crispy batter, served with chips. The dish originated in England',
-        image: 'https://www.foodadvisor.my/attachments/8f4453ca28396b9ea08ecf65a75f9596f8268637/store/fill/800/500/816f0c9e486c1dc9d74ce0ea5805be1840638012c540d95a3352ccc7b764/featured_image.jpg',
-        category:ConstString.MAINDISH
-      },
-      {
-        name: 'Lasagna',
-        price: '13.00',
-        desc: 'Lasagna is a type of pasta, possibly one of the oldest types, made of very wide, flat sheets.',
-        image: 'https://static.toiimg.com/thumb/55369113.cms?imgsize=392784&width=800&height=800',
-        category:ConstString.SIDEDISH
-
+        category: ConstString.MAINDISH
       },
       {
         name: 'Black Coffee',
@@ -307,18 +200,125 @@ export const defaultValue = [
         category: ConstString.DESSERT
       },
       {
+        name: 'Lasagna',
+        price: '13.00',
+        desc: 'Lasagna is a type of pasta, possibly one of the oldest types, made of very wide, flat sheets.',
+        image: 'https://static.toiimg.com/thumb/55369113.cms?imgsize=392784&width=800&height=800',
+        category: ConstString.SIDEDISH
+
+      }, {
         name: 'Fish N Chips',
         price: '15.00',
         desc: 'Fish and chips is a popular hot dish consisting of fried fish in crispy batter, served with chips. The dish originated in England',
         image: 'https://www.foodadvisor.my/attachments/8f4453ca28396b9ea08ecf65a75f9596f8268637/store/fill/800/500/816f0c9e486c1dc9d74ce0ea5805be1840638012c540d95a3352ccc7b764/featured_image.jpg',
-        category:ConstString.MAINDISH
+        category: ConstString.MAINDISH
       },
       {
         name: 'Lasagna',
         price: '13.00',
         desc: 'Lasagna is a type of pasta, possibly one of the oldest types, made of very wide, flat sheets.',
         image: 'https://static.toiimg.com/thumb/55369113.cms?imgsize=392784&width=800&height=800',
-        category:ConstString.SIDEDISH
+        category: ConstString.SIDEDISH
+
+      },
+      {
+        name: 'Black Coffee',
+        price: '4.00',
+        desc: 'Coffee is a drink prepared from roasted coffee beans, seeds of the Coffea plant species.',
+        image: 'https://ideas.ted.com/wp-content/uploads/sites/3/2022/07/FINAL_Coffee.jpg?resize=1536,922',
+        category: ConstString.DRINKS
+      },
+      {
+        name: 'Chocolate Lava Cake',
+        price: '6.00',
+        desc: 'Molten chocolate cake is a popular dessert that combines the elements of a chocolate cake and a soufflé. Its name derives from the dessert\'s liquid chocolate center',
+        image: 'https://food.fnr.sndimg.com/content/dam/images/food/fullset/2014/2/19/1/WU0701H_Molten-Chocolate-Cakes_s4x3.jpg.rend.hgtvcom.616.462.suffix/1485880987811.jpeg',
+        category: ConstString.DESSERT
+      }, {
+        name: 'Fish N Chips',
+        price: '15.00',
+        desc: 'Fish and chips is a popular hot dish consisting of fried fish in crispy batter, served with chips. The dish originated in England',
+        image: 'https://www.foodadvisor.my/attachments/8f4453ca28396b9ea08ecf65a75f9596f8268637/store/fill/800/500/816f0c9e486c1dc9d74ce0ea5805be1840638012c540d95a3352ccc7b764/featured_image.jpg',
+        category: ConstString.MAINDISH
+      },
+      {
+        name: 'Lasagna',
+        price: '13.00',
+        desc: 'Lasagna is a type of pasta, possibly one of the oldest types, made of very wide, flat sheets.',
+        image: 'https://static.toiimg.com/thumb/55369113.cms?imgsize=392784&width=800&height=800',
+        category: ConstString.SIDEDISH
+
+      },
+      {
+        name: 'Black Coffee',
+        price: '4.00',
+        desc: 'Coffee is a drink prepared from roasted coffee beans, seeds of the Coffea plant species.',
+        image: 'https://ideas.ted.com/wp-content/uploads/sites/3/2022/07/FINAL_Coffee.jpg?resize=1536,922',
+        category: ConstString.DRINKS
+      },
+      {
+        name: 'Chocolate Lava Cake',
+        price: '6.00',
+        desc: 'Molten chocolate cake is a popular dessert that combines the elements of a chocolate cake and a soufflé. Its name derives from the dessert\'s liquid chocolate center',
+        image: 'https://food.fnr.sndimg.com/content/dam/images/food/fullset/2014/2/19/1/WU0701H_Molten-Chocolate-Cakes_s4x3.jpg.rend.hgtvcom.616.462.suffix/1485880987811.jpeg',
+        category: ConstString.DESSERT
+      }, {
+        name: 'Fish N Chips',
+        price: '15.00',
+        desc: 'Fish and chips is a popular hot dish consisting of fried fish in crispy batter, served with chips. The dish originated in England',
+        image: 'https://www.foodadvisor.my/attachments/8f4453ca28396b9ea08ecf65a75f9596f8268637/store/fill/800/500/816f0c9e486c1dc9d74ce0ea5805be1840638012c540d95a3352ccc7b764/featured_image.jpg',
+        category: ConstString.MAINDISH
+      },
+      {
+        name: 'Lasagna',
+        price: '13.00',
+        desc: 'Lasagna is a type of pasta, possibly one of the oldest types, made of very wide, flat sheets.',
+        image: 'https://static.toiimg.com/thumb/55369113.cms?imgsize=392784&width=800&height=800',
+        category: ConstString.SIDEDISH
+
+      },
+      {
+        name: 'Fish N Chips',
+        price: '15.00',
+        desc: 'Fish and chips is a popular hot dish consisting of fried fish in crispy batter, served with chips. The dish originated in England',
+        image: 'https://www.foodadvisor.my/attachments/8f4453ca28396b9ea08ecf65a75f9596f8268637/store/fill/800/500/816f0c9e486c1dc9d74ce0ea5805be1840638012c540d95a3352ccc7b764/featured_image.jpg',
+        category: ConstString.MAINDISH
+      },
+      {
+        name: 'Lasagna',
+        price: '13.00',
+        desc: 'Lasagna is a type of pasta, possibly one of the oldest types, made of very wide, flat sheets.',
+        image: 'https://static.toiimg.com/thumb/55369113.cms?imgsize=392784&width=800&height=800',
+        category: ConstString.SIDEDISH
+
+      },
+      {
+        name: 'Black Coffee',
+        price: '4.00',
+        desc: 'Coffee is a drink prepared from roasted coffee beans, seeds of the Coffea plant species.',
+        image: 'https://ideas.ted.com/wp-content/uploads/sites/3/2022/07/FINAL_Coffee.jpg?resize=1536,922',
+        category: ConstString.DRINKS
+      },
+      {
+        name: 'Chocolate Lava Cake',
+        price: '6.00',
+        desc: 'Molten chocolate cake is a popular dessert that combines the elements of a chocolate cake and a soufflé. Its name derives from the dessert\'s liquid chocolate center',
+        image: 'https://food.fnr.sndimg.com/content/dam/images/food/fullset/2014/2/19/1/WU0701H_Molten-Chocolate-Cakes_s4x3.jpg.rend.hgtvcom.616.462.suffix/1485880987811.jpeg',
+        category: ConstString.DESSERT
+      },
+      {
+        name: 'Fish N Chips',
+        price: '15.00',
+        desc: 'Fish and chips is a popular hot dish consisting of fried fish in crispy batter, served with chips. The dish originated in England',
+        image: 'https://www.foodadvisor.my/attachments/8f4453ca28396b9ea08ecf65a75f9596f8268637/store/fill/800/500/816f0c9e486c1dc9d74ce0ea5805be1840638012c540d95a3352ccc7b764/featured_image.jpg',
+        category: ConstString.MAINDISH
+      },
+      {
+        name: 'Lasagna',
+        price: '13.00',
+        desc: 'Lasagna is a type of pasta, possibly one of the oldest types, made of very wide, flat sheets.',
+        image: 'https://static.toiimg.com/thumb/55369113.cms?imgsize=392784&width=800&height=800',
+        category: ConstString.SIDEDISH
 
       },
       {
@@ -326,7 +326,7 @@ export const defaultValue = [
         price: '15.00',
         desc: 'a cold dish of various mixtures of raw or cooked vegetables, usually seasoned with oil, vinegar, or other dressing and sometimes accompanied by meat, fish, or other ingredients.',
         image: 'https://images.immediate.co.uk/production/volatile/sites/30/2014/05/Epic-summer-salad-hub-2646e6e.jpg',
-        category:ConstString.SIDEDISH
+        category: ConstString.SIDEDISH
 
       },
       {
@@ -484,21 +484,21 @@ export const defaultValue = [
         price: '15.00',
         desc: 'A steak is a thick cut of meat generally sliced across the muscle fibers, sometimes including a bone. It is normally grilled or fried.',
         image: 'https://i.pinimg.com/originals/86/32/1d/86321d62549d4659fff9ade7c90a2ebb.jpg',
-        category:ConstString.MAINDISH
+        category: ConstString.MAINDISH
       },
       {
         name: 'Fish N Chips',
         price: '15.00',
         desc: 'Fish and chips is a popular hot dish consisting of fried fish in crispy batter, served with chips. The dish originated in England',
         image: 'https://www.foodadvisor.my/attachments/8f4453ca28396b9ea08ecf65a75f9596f8268637/store/fill/800/500/816f0c9e486c1dc9d74ce0ea5805be1840638012c540d95a3352ccc7b764/featured_image.jpg',
-        category:ConstString.MAINDISH
+        category: ConstString.MAINDISH
       },
       {
         name: 'Lasagna',
         price: '13.00',
         desc: 'Lasagna is a type of pasta, possibly one of the oldest types, made of very wide, flat sheets.',
         image: 'https://static.toiimg.com/thumb/55369113.cms?imgsize=392784&width=800&height=800',
-        category:ConstString.SIDEDISH
+        category: ConstString.SIDEDISH
 
       },
       {
@@ -506,14 +506,14 @@ export const defaultValue = [
         price: '15.00',
         desc: 'Fish and chips is a popular hot dish consisting of fried fish in crispy batter, served with chips. The dish originated in England',
         image: 'https://www.foodadvisor.my/attachments/8f4453ca28396b9ea08ecf65a75f9596f8268637/store/fill/800/500/816f0c9e486c1dc9d74ce0ea5805be1840638012c540d95a3352ccc7b764/featured_image.jpg',
-        category:ConstString.MAINDISH
+        category: ConstString.MAINDISH
       },
       {
         name: 'Lasagna',
         price: '13.00',
         desc: 'Lasagna is a type of pasta, possibly one of the oldest types, made of very wide, flat sheets.',
         image: 'https://static.toiimg.com/thumb/55369113.cms?imgsize=392784&width=800&height=800',
-        category:ConstString.SIDEDISH
+        category: ConstString.SIDEDISH
 
       },
       {
@@ -521,14 +521,14 @@ export const defaultValue = [
         price: '15.00',
         desc: 'Fish and chips is a popular hot dish consisting of fried fish in crispy batter, served with chips. The dish originated in England',
         image: 'https://www.foodadvisor.my/attachments/8f4453ca28396b9ea08ecf65a75f9596f8268637/store/fill/800/500/816f0c9e486c1dc9d74ce0ea5805be1840638012c540d95a3352ccc7b764/featured_image.jpg',
-        category:ConstString.MAINDISH
+        category: ConstString.MAINDISH
       },
       {
         name: 'Lasagna',
         price: '13.00',
         desc: 'Lasagna is a type of pasta, possibly one of the oldest types, made of very wide, flat sheets.',
         image: 'https://static.toiimg.com/thumb/55369113.cms?imgsize=392784&width=800&height=800',
-        category:ConstString.SIDEDISH
+        category: ConstString.SIDEDISH
 
       },
       {
@@ -536,14 +536,14 @@ export const defaultValue = [
         price: '15.00',
         desc: 'Fish and chips is a popular hot dish consisting of fried fish in crispy batter, served with chips. The dish originated in England',
         image: 'https://www.foodadvisor.my/attachments/8f4453ca28396b9ea08ecf65a75f9596f8268637/store/fill/800/500/816f0c9e486c1dc9d74ce0ea5805be1840638012c540d95a3352ccc7b764/featured_image.jpg',
-        category:ConstString.MAINDISH
+        category: ConstString.MAINDISH
       },
       {
         name: 'Lasagna',
         price: '13.00',
         desc: 'Lasagna is a type of pasta, possibly one of the oldest types, made of very wide, flat sheets.',
         image: 'https://static.toiimg.com/thumb/55369113.cms?imgsize=392784&width=800&height=800',
-        category:ConstString.SIDEDISH
+        category: ConstString.SIDEDISH
 
       },
       {
@@ -551,14 +551,14 @@ export const defaultValue = [
         price: '15.00',
         desc: 'Fish and chips is a popular hot dish consisting of fried fish in crispy batter, served with chips. The dish originated in England',
         image: 'https://www.foodadvisor.my/attachments/8f4453ca28396b9ea08ecf65a75f9596f8268637/store/fill/800/500/816f0c9e486c1dc9d74ce0ea5805be1840638012c540d95a3352ccc7b764/featured_image.jpg',
-        category:ConstString.MAINDISH
+        category: ConstString.MAINDISH
       },
       {
         name: 'Lasagna',
         price: '13.00',
         desc: 'Lasagna is a type of pasta, possibly one of the oldest types, made of very wide, flat sheets.',
         image: 'https://static.toiimg.com/thumb/55369113.cms?imgsize=392784&width=800&height=800',
-        category:ConstString.SIDEDISH
+        category: ConstString.SIDEDISH
 
       },
       {
@@ -566,112 +566,42 @@ export const defaultValue = [
         price: '15.00',
         desc: 'Fish and chips is a popular hot dish consisting of fried fish in crispy batter, served with chips. The dish originated in England',
         image: 'https://www.foodadvisor.my/attachments/8f4453ca28396b9ea08ecf65a75f9596f8268637/store/fill/800/500/816f0c9e486c1dc9d74ce0ea5805be1840638012c540d95a3352ccc7b764/featured_image.jpg',
-        category:ConstString.MAINDISH
+        category: ConstString.MAINDISH
       },
       {
         name: 'Lasagna',
         price: '13.00',
         desc: 'Lasagna is a type of pasta, possibly one of the oldest types, made of very wide, flat sheets.',
         image: 'https://static.toiimg.com/thumb/55369113.cms?imgsize=392784&width=800&height=800',
-        category:ConstString.SIDEDISH
+        category: ConstString.SIDEDISH
 
-      },   {
+      }, {
         name: 'Fish N Chips',
         price: '15.00',
         desc: 'Fish and chips is a popular hot dish consisting of fried fish in crispy batter, served with chips. The dish originated in England',
         image: 'https://www.foodadvisor.my/attachments/8f4453ca28396b9ea08ecf65a75f9596f8268637/store/fill/800/500/816f0c9e486c1dc9d74ce0ea5805be1840638012c540d95a3352ccc7b764/featured_image.jpg',
-        category:ConstString.MAINDISH
+        category: ConstString.MAINDISH
       },
       {
         name: 'Lasagna',
         price: '13.00',
         desc: 'Lasagna is a type of pasta, possibly one of the oldest types, made of very wide, flat sheets.',
         image: 'https://static.toiimg.com/thumb/55369113.cms?imgsize=392784&width=800&height=800',
-        category:ConstString.SIDEDISH
+        category: ConstString.SIDEDISH
 
-      },   {
+      }, {
         name: 'Fish N Chips',
         price: '15.00',
         desc: 'Fish and chips is a popular hot dish consisting of fried fish in crispy batter, served with chips. The dish originated in England',
         image: 'https://www.foodadvisor.my/attachments/8f4453ca28396b9ea08ecf65a75f9596f8268637/store/fill/800/500/816f0c9e486c1dc9d74ce0ea5805be1840638012c540d95a3352ccc7b764/featured_image.jpg',
-        category:ConstString.MAINDISH
+        category: ConstString.MAINDISH
       },
       {
         name: 'Lasagna',
         price: '13.00',
         desc: 'Lasagna is a type of pasta, possibly one of the oldest types, made of very wide, flat sheets.',
         image: 'https://static.toiimg.com/thumb/55369113.cms?imgsize=392784&width=800&height=800',
-        category:ConstString.SIDEDISH
-
-      },
-      {
-        name: 'Black Coffee',
-        price: '4.00',
-        desc: 'Coffee is a drink prepared from roasted coffee beans, seeds of the Coffea plant species.',
-        image: 'https://ideas.ted.com/wp-content/uploads/sites/3/2022/07/FINAL_Coffee.jpg?resize=1536,922',
-        category: ConstString.DRINKS
-      },
-      {
-        name: 'Chocolate Lava Cake',
-        price: '6.00',
-        desc: 'Molten chocolate cake is a popular dessert that combines the elements of a chocolate cake and a soufflé. Its name derives from the dessert\'s liquid chocolate center',
-        image: 'https://food.fnr.sndimg.com/content/dam/images/food/fullset/2014/2/19/1/WU0701H_Molten-Chocolate-Cakes_s4x3.jpg.rend.hgtvcom.616.462.suffix/1485880987811.jpeg',
-        category: ConstString.DESSERT
-      },{
-        name: 'Fish N Chips',
-        price: '15.00',
-        desc: 'Fish and chips is a popular hot dish consisting of fried fish in crispy batter, served with chips. The dish originated in England',
-        image: 'https://www.foodadvisor.my/attachments/8f4453ca28396b9ea08ecf65a75f9596f8268637/store/fill/800/500/816f0c9e486c1dc9d74ce0ea5805be1840638012c540d95a3352ccc7b764/featured_image.jpg',
-        category:ConstString.MAINDISH
-      },
-      {
-        name: 'Lasagna',
-        price: '13.00',
-        desc: 'Lasagna is a type of pasta, possibly one of the oldest types, made of very wide, flat sheets.',
-        image: 'https://static.toiimg.com/thumb/55369113.cms?imgsize=392784&width=800&height=800',
-        category:ConstString.SIDEDISH
-
-      },   {
-        name: 'Fish N Chips',
-        price: '15.00',
-        desc: 'Fish and chips is a popular hot dish consisting of fried fish in crispy batter, served with chips. The dish originated in England',
-        image: 'https://www.foodadvisor.my/attachments/8f4453ca28396b9ea08ecf65a75f9596f8268637/store/fill/800/500/816f0c9e486c1dc9d74ce0ea5805be1840638012c540d95a3352ccc7b764/featured_image.jpg',
-        category:ConstString.MAINDISH
-      },
-      {
-        name: 'Black Coffee',
-        price: '4.00',
-        desc: 'Coffee is a drink prepared from roasted coffee beans, seeds of the Coffea plant species.',
-        image: 'https://ideas.ted.com/wp-content/uploads/sites/3/2022/07/FINAL_Coffee.jpg?resize=1536,922',
-        category: ConstString.DRINKS
-      },
-      {
-        name: 'Chocolate Lava Cake',
-        price: '6.00',
-        desc: 'Molten chocolate cake is a popular dessert that combines the elements of a chocolate cake and a soufflé. Its name derives from the dessert\'s liquid chocolate center',
-        image: 'https://food.fnr.sndimg.com/content/dam/images/food/fullset/2014/2/19/1/WU0701H_Molten-Chocolate-Cakes_s4x3.jpg.rend.hgtvcom.616.462.suffix/1485880987811.jpeg',
-        category: ConstString.DESSERT
-      },
-      {
-        name: 'Lasagna',
-        price: '13.00',
-        desc: 'Lasagna is a type of pasta, possibly one of the oldest types, made of very wide, flat sheets.',
-        image: 'https://static.toiimg.com/thumb/55369113.cms?imgsize=392784&width=800&height=800',
-        category:ConstString.SIDEDISH
-
-      },   {
-        name: 'Fish N Chips',
-        price: '15.00',
-        desc: 'Fish and chips is a popular hot dish consisting of fried fish in crispy batter, served with chips. The dish originated in England',
-        image: 'https://www.foodadvisor.my/attachments/8f4453ca28396b9ea08ecf65a75f9596f8268637/store/fill/800/500/816f0c9e486c1dc9d74ce0ea5805be1840638012c540d95a3352ccc7b764/featured_image.jpg',
-        category:ConstString.MAINDISH
-      },
-      {
-        name: 'Lasagna',
-        price: '13.00',
-        desc: 'Lasagna is a type of pasta, possibly one of the oldest types, made of very wide, flat sheets.',
-        image: 'https://static.toiimg.com/thumb/55369113.cms?imgsize=392784&width=800&height=800',
-        category:ConstString.SIDEDISH
+        category: ConstString.SIDEDISH
 
       },
       {
@@ -687,63 +617,26 @@ export const defaultValue = [
         desc: 'Molten chocolate cake is a popular dessert that combines the elements of a chocolate cake and a soufflé. Its name derives from the dessert\'s liquid chocolate center',
         image: 'https://food.fnr.sndimg.com/content/dam/images/food/fullset/2014/2/19/1/WU0701H_Molten-Chocolate-Cakes_s4x3.jpg.rend.hgtvcom.616.462.suffix/1485880987811.jpeg',
         category: ConstString.DESSERT
-      },{
+      }, {
         name: 'Fish N Chips',
         price: '15.00',
         desc: 'Fish and chips is a popular hot dish consisting of fried fish in crispy batter, served with chips. The dish originated in England',
         image: 'https://www.foodadvisor.my/attachments/8f4453ca28396b9ea08ecf65a75f9596f8268637/store/fill/800/500/816f0c9e486c1dc9d74ce0ea5805be1840638012c540d95a3352ccc7b764/featured_image.jpg',
-        category:ConstString.MAINDISH
+        category: ConstString.MAINDISH
       },
       {
         name: 'Lasagna',
         price: '13.00',
         desc: 'Lasagna is a type of pasta, possibly one of the oldest types, made of very wide, flat sheets.',
         image: 'https://static.toiimg.com/thumb/55369113.cms?imgsize=392784&width=800&height=800',
-        category:ConstString.SIDEDISH
+        category: ConstString.SIDEDISH
 
-      },
-      {
-        name: 'Black Coffee',
-        price: '4.00',
-        desc: 'Coffee is a drink prepared from roasted coffee beans, seeds of the Coffea plant species.',
-        image: 'https://ideas.ted.com/wp-content/uploads/sites/3/2022/07/FINAL_Coffee.jpg?resize=1536,922',
-        category: ConstString.DRINKS
-      },
-      {
-        name: 'Chocolate Lava Cake',
-        price: '6.00',
-        desc: 'Molten chocolate cake is a popular dessert that combines the elements of a chocolate cake and a soufflé. Its name derives from the dessert\'s liquid chocolate center',
-        image: 'https://food.fnr.sndimg.com/content/dam/images/food/fullset/2014/2/19/1/WU0701H_Molten-Chocolate-Cakes_s4x3.jpg.rend.hgtvcom.616.462.suffix/1485880987811.jpeg',
-        category: ConstString.DESSERT
-      },{
+      }, {
         name: 'Fish N Chips',
         price: '15.00',
         desc: 'Fish and chips is a popular hot dish consisting of fried fish in crispy batter, served with chips. The dish originated in England',
         image: 'https://www.foodadvisor.my/attachments/8f4453ca28396b9ea08ecf65a75f9596f8268637/store/fill/800/500/816f0c9e486c1dc9d74ce0ea5805be1840638012c540d95a3352ccc7b764/featured_image.jpg',
-        category:ConstString.MAINDISH
-      },
-      {
-        name: 'Lasagna',
-        price: '13.00',
-        desc: 'Lasagna is a type of pasta, possibly one of the oldest types, made of very wide, flat sheets.',
-        image: 'https://static.toiimg.com/thumb/55369113.cms?imgsize=392784&width=800&height=800',
-        category:ConstString.SIDEDISH
-
-      },
-      {
-        name: 'Fish N Chips',
-        price: '15.00',
-        desc: 'Fish and chips is a popular hot dish consisting of fried fish in crispy batter, served with chips. The dish originated in England',
-        image: 'https://www.foodadvisor.my/attachments/8f4453ca28396b9ea08ecf65a75f9596f8268637/store/fill/800/500/816f0c9e486c1dc9d74ce0ea5805be1840638012c540d95a3352ccc7b764/featured_image.jpg',
-        category:ConstString.MAINDISH
-      },
-      {
-        name: 'Lasagna',
-        price: '13.00',
-        desc: 'Lasagna is a type of pasta, possibly one of the oldest types, made of very wide, flat sheets.',
-        image: 'https://static.toiimg.com/thumb/55369113.cms?imgsize=392784&width=800&height=800',
-        category:ConstString.SIDEDISH
-
+        category: ConstString.MAINDISH
       },
       {
         name: 'Black Coffee',
@@ -760,18 +653,125 @@ export const defaultValue = [
         category: ConstString.DESSERT
       },
       {
+        name: 'Lasagna',
+        price: '13.00',
+        desc: 'Lasagna is a type of pasta, possibly one of the oldest types, made of very wide, flat sheets.',
+        image: 'https://static.toiimg.com/thumb/55369113.cms?imgsize=392784&width=800&height=800',
+        category: ConstString.SIDEDISH
+
+      }, {
         name: 'Fish N Chips',
         price: '15.00',
         desc: 'Fish and chips is a popular hot dish consisting of fried fish in crispy batter, served with chips. The dish originated in England',
         image: 'https://www.foodadvisor.my/attachments/8f4453ca28396b9ea08ecf65a75f9596f8268637/store/fill/800/500/816f0c9e486c1dc9d74ce0ea5805be1840638012c540d95a3352ccc7b764/featured_image.jpg',
-        category:ConstString.MAINDISH
+        category: ConstString.MAINDISH
       },
       {
         name: 'Lasagna',
         price: '13.00',
         desc: 'Lasagna is a type of pasta, possibly one of the oldest types, made of very wide, flat sheets.',
         image: 'https://static.toiimg.com/thumb/55369113.cms?imgsize=392784&width=800&height=800',
-        category:ConstString.SIDEDISH
+        category: ConstString.SIDEDISH
+
+      },
+      {
+        name: 'Black Coffee',
+        price: '4.00',
+        desc: 'Coffee is a drink prepared from roasted coffee beans, seeds of the Coffea plant species.',
+        image: 'https://ideas.ted.com/wp-content/uploads/sites/3/2022/07/FINAL_Coffee.jpg?resize=1536,922',
+        category: ConstString.DRINKS
+      },
+      {
+        name: 'Chocolate Lava Cake',
+        price: '6.00',
+        desc: 'Molten chocolate cake is a popular dessert that combines the elements of a chocolate cake and a soufflé. Its name derives from the dessert\'s liquid chocolate center',
+        image: 'https://food.fnr.sndimg.com/content/dam/images/food/fullset/2014/2/19/1/WU0701H_Molten-Chocolate-Cakes_s4x3.jpg.rend.hgtvcom.616.462.suffix/1485880987811.jpeg',
+        category: ConstString.DESSERT
+      }, {
+        name: 'Fish N Chips',
+        price: '15.00',
+        desc: 'Fish and chips is a popular hot dish consisting of fried fish in crispy batter, served with chips. The dish originated in England',
+        image: 'https://www.foodadvisor.my/attachments/8f4453ca28396b9ea08ecf65a75f9596f8268637/store/fill/800/500/816f0c9e486c1dc9d74ce0ea5805be1840638012c540d95a3352ccc7b764/featured_image.jpg',
+        category: ConstString.MAINDISH
+      },
+      {
+        name: 'Lasagna',
+        price: '13.00',
+        desc: 'Lasagna is a type of pasta, possibly one of the oldest types, made of very wide, flat sheets.',
+        image: 'https://static.toiimg.com/thumb/55369113.cms?imgsize=392784&width=800&height=800',
+        category: ConstString.SIDEDISH
+
+      },
+      {
+        name: 'Black Coffee',
+        price: '4.00',
+        desc: 'Coffee is a drink prepared from roasted coffee beans, seeds of the Coffea plant species.',
+        image: 'https://ideas.ted.com/wp-content/uploads/sites/3/2022/07/FINAL_Coffee.jpg?resize=1536,922',
+        category: ConstString.DRINKS
+      },
+      {
+        name: 'Chocolate Lava Cake',
+        price: '6.00',
+        desc: 'Molten chocolate cake is a popular dessert that combines the elements of a chocolate cake and a soufflé. Its name derives from the dessert\'s liquid chocolate center',
+        image: 'https://food.fnr.sndimg.com/content/dam/images/food/fullset/2014/2/19/1/WU0701H_Molten-Chocolate-Cakes_s4x3.jpg.rend.hgtvcom.616.462.suffix/1485880987811.jpeg',
+        category: ConstString.DESSERT
+      }, {
+        name: 'Fish N Chips',
+        price: '15.00',
+        desc: 'Fish and chips is a popular hot dish consisting of fried fish in crispy batter, served with chips. The dish originated in England',
+        image: 'https://www.foodadvisor.my/attachments/8f4453ca28396b9ea08ecf65a75f9596f8268637/store/fill/800/500/816f0c9e486c1dc9d74ce0ea5805be1840638012c540d95a3352ccc7b764/featured_image.jpg',
+        category: ConstString.MAINDISH
+      },
+      {
+        name: 'Lasagna',
+        price: '13.00',
+        desc: 'Lasagna is a type of pasta, possibly one of the oldest types, made of very wide, flat sheets.',
+        image: 'https://static.toiimg.com/thumb/55369113.cms?imgsize=392784&width=800&height=800',
+        category: ConstString.SIDEDISH
+
+      },
+      {
+        name: 'Fish N Chips',
+        price: '15.00',
+        desc: 'Fish and chips is a popular hot dish consisting of fried fish in crispy batter, served with chips. The dish originated in England',
+        image: 'https://www.foodadvisor.my/attachments/8f4453ca28396b9ea08ecf65a75f9596f8268637/store/fill/800/500/816f0c9e486c1dc9d74ce0ea5805be1840638012c540d95a3352ccc7b764/featured_image.jpg',
+        category: ConstString.MAINDISH
+      },
+      {
+        name: 'Lasagna',
+        price: '13.00',
+        desc: 'Lasagna is a type of pasta, possibly one of the oldest types, made of very wide, flat sheets.',
+        image: 'https://static.toiimg.com/thumb/55369113.cms?imgsize=392784&width=800&height=800',
+        category: ConstString.SIDEDISH
+
+      },
+      {
+        name: 'Black Coffee',
+        price: '4.00',
+        desc: 'Coffee is a drink prepared from roasted coffee beans, seeds of the Coffea plant species.',
+        image: 'https://ideas.ted.com/wp-content/uploads/sites/3/2022/07/FINAL_Coffee.jpg?resize=1536,922',
+        category: ConstString.DRINKS
+      },
+      {
+        name: 'Chocolate Lava Cake',
+        price: '6.00',
+        desc: 'Molten chocolate cake is a popular dessert that combines the elements of a chocolate cake and a soufflé. Its name derives from the dessert\'s liquid chocolate center',
+        image: 'https://food.fnr.sndimg.com/content/dam/images/food/fullset/2014/2/19/1/WU0701H_Molten-Chocolate-Cakes_s4x3.jpg.rend.hgtvcom.616.462.suffix/1485880987811.jpeg',
+        category: ConstString.DESSERT
+      },
+      {
+        name: 'Fish N Chips',
+        price: '15.00',
+        desc: 'Fish and chips is a popular hot dish consisting of fried fish in crispy batter, served with chips. The dish originated in England',
+        image: 'https://www.foodadvisor.my/attachments/8f4453ca28396b9ea08ecf65a75f9596f8268637/store/fill/800/500/816f0c9e486c1dc9d74ce0ea5805be1840638012c540d95a3352ccc7b764/featured_image.jpg',
+        category: ConstString.MAINDISH
+      },
+      {
+        name: 'Lasagna',
+        price: '13.00',
+        desc: 'Lasagna is a type of pasta, possibly one of the oldest types, made of very wide, flat sheets.',
+        image: 'https://static.toiimg.com/thumb/55369113.cms?imgsize=392784&width=800&height=800',
+        category: ConstString.SIDEDISH
 
       },
       {
@@ -779,7 +779,7 @@ export const defaultValue = [
         price: '15.00',
         desc: 'a cold dish of various mixtures of raw or cooked vegetables, usually seasoned with oil, vinegar, or other dressing and sometimes accompanied by meat, fish, or other ingredients.',
         image: 'https://images.immediate.co.uk/production/volatile/sites/30/2014/05/Epic-summer-salad-hub-2646e6e.jpg',
-        category:ConstString.SIDEDISH
+        category: ConstString.SIDEDISH
 
       },
       {
@@ -942,22 +942,22 @@ export const defaultValue = [
     description: 'Bombay Palace Restaurant is an international group of Fine Dining North Indian Cuisine Restaurants.',
     rate: 4.6,
     image: 'https://b.zmtcdn.com/data/pictures/8/2800008/91cdc3b07793f87665fef7fc52162cbf.jpg',
-        userId:"RpfohqbkAXN0NoOokrSWaT6Uteq2",
-    createdAt:new Date().toLocaleString(),
-    rating:[{
-    userId:1,
-    userName:"Mohamad Abu Lutut",
-    review:'This cozy restaurant has left the best impressions! Hospitable hosts, delicious dishes, beautiful presentation, wide wine list and wonderful dessert. I recommend to everyone! I would like to come back here again and again.',
-    rating:parseInt(4),
-    createdAt:'10/31/2022, 1:17:51 PM',
-    updatedAt:'10/31/2022, 1:17:51 PM'
-  },{
-    userId:2,
-    userName:"Mohamad Abu Lutut Kanan",
-    review:"Sedap Wooo",
-    rating:parseInt(4),
-    createdAt:'10/31/2022, 1:17:51 PM',
-  },],
+    userId: 'RpfohqbkAXN0NoOokrSWaT6Uteq2',
+    createdAt: new Date().toLocaleString(),
+    rating: [{
+      userId: 1,
+      userName: 'Mohamad Abu Lutut',
+      review: 'This cozy restaurant has left the best impressions! Hospitable hosts, delicious dishes, beautiful presentation, wide wine list and wonderful dessert. I recommend to everyone! I would like to come back here again and again.',
+      rating: parseInt(4),
+      createdAt: '10/31/2022, 1:17:51 PM',
+      updatedAt: '10/31/2022, 1:17:51 PM'
+    }, {
+      userId: 2,
+      userName: 'Mohamad Abu Lutut Kanan',
+      review: 'Sedap Wooo',
+      rating: parseInt(4),
+      createdAt: '10/31/2022, 1:17:51 PM',
+    },],
     food: [
       {
         name: 'Chicken Tika Masala',
@@ -1006,22 +1006,22 @@ export const defaultValue = [
     description: 'Restaurant Mohd Chan - An all-Malaysian restaurant chain that delivers delightful comfort food at neighbourhood & friendly prices.',
     rate: 4.1,
     image: 'https://i.pinimg.com/originals/03/64/5f/03645ffe29ad1debd4ec86ff149cd307.gif',
-        userId:"RpfohqbkAXN0NoOokrSWaT6Uteq2",
-    createdAt:new Date().toLocaleString(),
-    rating:[{
-    userId:1,
-    userName:"Mohamad Abu Lutut",
-    review:'This cozy restaurant has left the best impressions! Hospitable hosts, delicious dishes, beautiful presentation, wide wine list and wonderful dessert. I recommend to everyone! I would like to come back here again and again.',
-    rating:parseInt(4),
-    createdAt:'10/31/2022, 1:17:51 PM',
-    updatedAt:'10/31/2022, 1:17:51 PM'
-  },{
-    userId:2,
-    userName:"Mohamad Abu Lutut Kanan",
-    review:"Sedap Wooo",
-    rating:parseInt(4),
-    createdAt:'10/31/2022, 1:17:51 PM',
-  },],
+    userId: 'RpfohqbkAXN0NoOokrSWaT6Uteq2',
+    createdAt: new Date().toLocaleString(),
+    rating: [{
+      userId: 1,
+      userName: 'Mohamad Abu Lutut',
+      review: 'This cozy restaurant has left the best impressions! Hospitable hosts, delicious dishes, beautiful presentation, wide wine list and wonderful dessert. I recommend to everyone! I would like to come back here again and again.',
+      rating: parseInt(4),
+      createdAt: '10/31/2022, 1:17:51 PM',
+      updatedAt: '10/31/2022, 1:17:51 PM'
+    }, {
+      userId: 2,
+      userName: 'Mohamad Abu Lutut Kanan',
+      review: 'Sedap Wooo',
+      rating: parseInt(4),
+      createdAt: '10/31/2022, 1:17:51 PM',
+    },],
     food: [
       {
         name: 'Mee Tarik',
@@ -1056,22 +1056,22 @@ export const defaultValue = [
     description: 'Founded in 1999 we strive to serve Tradisional Malaysian cuisine to Malaysian',
     rate: 4.1,
     image: 'https://mir-s3-cdn-cf.behance.net/project_modules/max_1200/5eeea355389655.59822ff824b72.gif',
-        userId:"RpfohqbkAXN0NoOokrSWaT6Uteq2",
-    createdAt:new Date().toLocaleString(),
-    rating:[{
-    userId:1,
-    userName:"Mohamad Abu Lutut",
-    review:'This cozy restaurant has left the best impressions! Hospitable hosts, delicious dishes, beautiful presentation, wide wine list and wonderful dessert. I recommend to everyone! I would like to come back here again and again.',
-    rating:parseInt(4),
-    createdAt:'10/31/2022, 1:17:51 PM',
-    updatedAt:'10/31/2022, 1:17:51 PM'
-  },{
-    userId:2,
-    userName:"Mohamad Abu Lutut Kanan",
-    review:"Sedap Wooo",
-    rating:parseInt(4),
-    createdAt:'10/31/2022, 1:17:51 PM',
-  },],
+    userId: 'RpfohqbkAXN0NoOokrSWaT6Uteq2',
+    createdAt: new Date().toLocaleString(),
+    rating: [{
+      userId: 1,
+      userName: 'Mohamad Abu Lutut',
+      review: 'This cozy restaurant has left the best impressions! Hospitable hosts, delicious dishes, beautiful presentation, wide wine list and wonderful dessert. I recommend to everyone! I would like to come back here again and again.',
+      rating: parseInt(4),
+      createdAt: '10/31/2022, 1:17:51 PM',
+      updatedAt: '10/31/2022, 1:17:51 PM'
+    }, {
+      userId: 2,
+      userName: 'Mohamad Abu Lutut Kanan',
+      review: 'Sedap Wooo',
+      rating: parseInt(4),
+      createdAt: '10/31/2022, 1:17:51 PM',
+    },],
     food: [
       {
         name: 'Nasi Ayam',
@@ -1114,22 +1114,22 @@ export const defaultValue = [
     description: 'Founded in 1999 we strive to serve Authentic Sarawakian cuisine to Malaysian',
     rate: 4.1,
     image: 'https://4.bp.blogspot.com/-Vxairv_g_yw/W2qHkgMqyaI/AAAAAAAAFGw/p0AF-NMFxAMcH-u-B0WeWzV6xKMjF4u2gCLcBGAs/s1600/20180807_212831.jpg',
-        userId:"RpfohqbkAXN0NoOokrSWaT6Uteq2",
-    createdAt:new Date().toLocaleString(),
-    rating:[{
-    userId:1,
-    userName:"Mohamad Abu Lutut",
-    review:'This cozy restaurant has left the best impressions! Hospitable hosts, delicious dishes, beautiful presentation, wide wine list and wonderful dessert. I recommend to everyone! I would like to come back here again and again.',
-    rating:parseInt(4),
-    createdAt:'10/31/2022, 1:17:51 PM',
-    updatedAt:'10/31/2022, 1:17:51 PM'
-  },{
-    userId:2,
-    userName:"Mohamad Abu Lutut Kanan",
-    review:"Sedap Wooo",
-    rating:parseInt(4),
-    createdAt:'10/31/2022, 1:17:51 PM',
-  },],
+    userId: 'RpfohqbkAXN0NoOokrSWaT6Uteq2',
+    createdAt: new Date().toLocaleString(),
+    rating: [{
+      userId: 1,
+      userName: 'Mohamad Abu Lutut',
+      review: 'This cozy restaurant has left the best impressions! Hospitable hosts, delicious dishes, beautiful presentation, wide wine list and wonderful dessert. I recommend to everyone! I would like to come back here again and again.',
+      rating: parseInt(4),
+      createdAt: '10/31/2022, 1:17:51 PM',
+      updatedAt: '10/31/2022, 1:17:51 PM'
+    }, {
+      userId: 2,
+      userName: 'Mohamad Abu Lutut Kanan',
+      review: 'Sedap Wooo',
+      rating: parseInt(4),
+      createdAt: '10/31/2022, 1:17:51 PM',
+    },],
     food: [
       {
         name: 'Laksa Sarawak',
@@ -1181,22 +1181,22 @@ export const defaultValue = [
     description: 'Founded in 1999 we strive to serve Authentic Japanese cuisine for ALL to enjoy',
     rate: 4.1,
     image: 'https://sushi-king.com/wp-content/uploads/2017/05/100th-outlet-600-x-350.jpg',
-        userId:"RpfohqbkAXN0NoOokrSWaT6Uteq2",
-    createdAt:new Date().toLocaleString(),
-    rating:[{
-    userId:1,
-    userName:"Mohamad Abu Lutut",
-    review:'This cozy restaurant has left the best impressions! Hospitable hosts, delicious dishes, beautiful presentation, wide wine list and wonderful dessert. I recommend to everyone! I would like to come back here again and again.',
-    rating:parseInt(4),
-    createdAt:'10/31/2022, 1:17:51 PM',
-    updatedAt:'10/31/2022, 1:17:51 PM'
-  },{
-    userId:2,
-    userName:"Mohamad Abu Lutut Kanan",
-    review:"Sedap Wooo",
-    rating:parseInt(4),
-    createdAt:'10/31/2022, 1:17:51 PM',
-  },],
+    userId: 'RpfohqbkAXN0NoOokrSWaT6Uteq2',
+    createdAt: new Date().toLocaleString(),
+    rating: [{
+      userId: 1,
+      userName: 'Mohamad Abu Lutut',
+      review: 'This cozy restaurant has left the best impressions! Hospitable hosts, delicious dishes, beautiful presentation, wide wine list and wonderful dessert. I recommend to everyone! I would like to come back here again and again.',
+      rating: parseInt(4),
+      createdAt: '10/31/2022, 1:17:51 PM',
+      updatedAt: '10/31/2022, 1:17:51 PM'
+    }, {
+      userId: 2,
+      userName: 'Mohamad Abu Lutut Kanan',
+      review: 'Sedap Wooo',
+      rating: parseInt(4),
+      createdAt: '10/31/2022, 1:17:51 PM',
+    },],
     food: [
       {
         name: 'Sushi',
@@ -1247,22 +1247,22 @@ export const defaultValue = [
     description: 'Potable liquid, especially one other than water, as tea, coffee, beer, or milk: The price of the meal includes a beverage.',
     rate: 4.1,
     image: 'https://mir-s3-cdn-cf.behance.net/project_modules/max_1200/24f89969530077.5b84d93a88cb0.gif',
-        userId:"RpfohqbkAXN0NoOokrSWaT6Uteq2",
-    createdAt:new Date().toLocaleString(),
-    rating:[{
-    userId:1,
-    userName:"Mohamad Abu Lutut",
-    review:'This cozy restaurant has left the best impressions! Hospitable hosts, delicious dishes, beautiful presentation, wide wine list and wonderful dessert. I recommend to everyone! I would like to come back here again and again.',
-    rating:parseInt(4),
-    createdAt:'10/31/2022, 1:17:51 PM',
-    updatedAt:'10/31/2022, 1:17:51 PM'
-  },{
-    userId:2,
-    userName:"Mohamad Abu Lutut Kanan",
-    review:"Sedap Wooo",
-    rating:parseInt(4),
-    createdAt:'10/31/2022, 1:17:51 PM',
-  },],
+    userId: 'RpfohqbkAXN0NoOokrSWaT6Uteq2',
+    createdAt: new Date().toLocaleString(),
+    rating: [{
+      userId: 1,
+      userName: 'Mohamad Abu Lutut',
+      review: 'This cozy restaurant has left the best impressions! Hospitable hosts, delicious dishes, beautiful presentation, wide wine list and wonderful dessert. I recommend to everyone! I would like to come back here again and again.',
+      rating: parseInt(4),
+      createdAt: '10/31/2022, 1:17:51 PM',
+      updatedAt: '10/31/2022, 1:17:51 PM'
+    }, {
+      userId: 2,
+      userName: 'Mohamad Abu Lutut Kanan',
+      review: 'Sedap Wooo',
+      rating: parseInt(4),
+      createdAt: '10/31/2022, 1:17:51 PM',
+    },],
     food: [
       {
         name: 'Muffins',
@@ -1304,22 +1304,22 @@ export const defaultValue = [
     description: 'Potable liquid, especially one other than water, as tea, coffee, beer, or milk: The price of the meal includes a beverage.',
     rate: 4.1,
     image: 'https://www.paradigmmall.com.my/images/store/food/mykori_store.jpg',
-        userId:"RpfohqbkAXN0NoOokrSWaT6Uteq2",
-    createdAt:new Date().toLocaleString(),
-    rating:[{
-    userId:1,
-    userName:"Mohamad Abu Lutut",
-    review:'This cozy restaurant has left the best impressions! Hospitable hosts, delicious dishes, beautiful presentation, wide wine list and wonderful dessert. I recommend to everyone! I would like to come back here again and again.',
-    rating:parseInt(4),
-    createdAt:'10/31/2022, 1:17:51 PM',
-    updatedAt:'10/31/2022, 1:17:51 PM'
-  },{
-    userId:2,
-    userName:"Mohamad Abu Lutut Kanan",
-    review:"Sedap Wooo",
-    rating:parseInt(4),
-    createdAt:'10/31/2022, 1:17:51 PM',
-  },],
+    userId: 'RpfohqbkAXN0NoOokrSWaT6Uteq2',
+    createdAt: new Date().toLocaleString(),
+    rating: [{
+      userId: 1,
+      userName: 'Mohamad Abu Lutut',
+      review: 'This cozy restaurant has left the best impressions! Hospitable hosts, delicious dishes, beautiful presentation, wide wine list and wonderful dessert. I recommend to everyone! I would like to come back here again and again.',
+      rating: parseInt(4),
+      createdAt: '10/31/2022, 1:17:51 PM',
+      updatedAt: '10/31/2022, 1:17:51 PM'
+    }, {
+      userId: 2,
+      userName: 'Mohamad Abu Lutut Kanan',
+      review: 'Sedap Wooo',
+      rating: parseInt(4),
+      createdAt: '10/31/2022, 1:17:51 PM',
+    },],
     food: [
       {
         name: 'Honey',
