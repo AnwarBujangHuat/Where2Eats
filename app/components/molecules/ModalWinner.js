@@ -180,7 +180,7 @@ const styles = EStyleSheet.create({
     color: '$tertiaryTextColor', paddingEnd: 5, marginTop: 5,
     fontSize: 14, fontWeight: 'normal', textAlign: 'justify'
   },
-  descContainer: { paddingHorizontal: 10, },
+  descContainer: { paddingHorizontal: 15, },
   address: {
     color: '$tertiaryColor', paddingEnd: 5, marginTop: 5,
     fontSize: 12, fontWeight: 'normal', textAlign: 'justify'

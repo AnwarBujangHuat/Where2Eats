@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">Where2Eat</string>
+    <string name="facebook_app_id">3344521325763509</string>
+    <string name="facebook_client_token">643a0c8d4703b21d3e837dd838f661d1</string>
+
+
 </resources>
