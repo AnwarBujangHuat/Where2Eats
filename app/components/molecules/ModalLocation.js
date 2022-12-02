@@ -23,8 +23,10 @@ export const ModalLocation = ({ submitLocation, isModalVisible, closeModal }) =>
     mapRef.current.animateToRegion({
       latitude,
       longitude,
-      latitudeDelta: 0.1,
-      longitudeDelta: 0.1
+      // latitudeDelta: 0.0005,
+      // longitudeDelta: 0.0005
+      latitudeDelta: 0.0009,
+      longitudeDelta: 0.0009
     })
     setLocation(data.description);
 
