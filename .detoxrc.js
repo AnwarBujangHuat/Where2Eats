@@ -1,4 +1,5 @@
 /** @type {Detox.DetoxConfig} */
+//https://wix.github.io/Detox/docs/next/introduction/project-setup
 module.exports = {
   testRunner: {
     args: {
