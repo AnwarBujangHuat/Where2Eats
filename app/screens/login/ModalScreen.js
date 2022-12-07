@@ -46,14 +46,14 @@ export const ModalScreen = ({ navigation }) => {
       alignItems: 'center',
       alignContent: 'center'
     }}>
-      {/*<LottieView*/}
-      {/*  source={Welcome}*/}
-      {/*  autoPlay={true}*/}
-      {/*  style={{*/}
-      {/*    height: width * .7,*/}
-      {/*    width: width * .7,*/}
-      {/*  }}*/}
-      {/*/>*/}
+      <LottieView
+        source={Welcome}
+        autoPlay={true}
+        style={{
+          height: width * .7,
+          width: width * .7,
+        }}
+      />
     </SafeAreaView>
   );
 };
