@@ -9,13 +9,16 @@ import React from 'react';
 import EStyleSheet from 'react-native-extended-stylesheet';
 import { icons } from '../../Const';
 import { Colors } from '../../Colors';
+import TestIDs from '../../TestIDs';
 
 const { width } = Dimensions.get('window');
 
-export const SocialButton = ({ onPress, icon }) => {
+export const SocialButton = ({ tesId,onPress, icon }) => {
   return (
     <View>
-      <TouchableOpacity style={{
+      <TouchableOpacity
+        testID={tesId}
+        style={{
         flexDirection: 'row',
         borderRadius: 20,
         marginTop: 15,
