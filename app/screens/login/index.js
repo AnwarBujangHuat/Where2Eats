@@ -36,7 +36,7 @@ export const Login = ({ navigation }) => {
       error,
       [
         {
-          text: 'Okay',
+          text: 'Okay'
         },
       ],
     );
@@ -70,12 +70,12 @@ export const Login = ({ navigation }) => {
   };
   const goToModal = () => navigation.navigate(ConstString.MODAL);
   const authenticateUser = (email, password) => new Promise((resolve, reject) => {
-    firebase.auth().signInWithEmailAndPassword(email, password).catch((e)=>console.log(e)).
+    firebase.auth().signInWithEmailAndPassword(email, password).
       then(
       (response) => {
         resolve({ onSuccess: true, data: response });
       },
-      () => resolve({ onSuccess: false, data: 'User Does Not Exist in Our Database' })
+      () => resolve({ onSuccess: false, data: "No Record Found" })
     );
   });
   const onGoogleButtonPress = async() => {

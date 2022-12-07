@@ -11,6 +11,7 @@ import { PopulateRestaurantList } from '../../store/thunks';
 import { useDispatch } from 'react-redux';
 import LottieView from 'lottie-react-native';
 import Welcome from '../../assets/welcome.json';
+import TestIDs from '../../TestIDs';
 
 const { width } = Dimensions.get('window');
 
@@ -36,21 +37,23 @@ export const ModalScreen = ({ navigation }) => {
   }, []);
 
   return (
-    <SafeAreaView style={{
+    <SafeAreaView
+      testID={TestIDs.ModalScreen}
+      style={{
       backgroundColor: Colors.secondaryPurple,
       justifyContent: 'center',
       flex: 1,
       alignItems: 'center',
       alignContent: 'center'
     }}>
-      <LottieView
-        source={Welcome}
-        autoPlay={true}
-        style={{
-          height: width * .7,
-          width: width * .7,
-        }}
-      />
+      {/*<LottieView*/}
+      {/*  source={Welcome}*/}
+      {/*  autoPlay={true}*/}
+      {/*  style={{*/}
+      {/*    height: width * .7,*/}
+      {/*    width: width * .7,*/}
+      {/*  }}*/}
+      {/*/>*/}
     </SafeAreaView>
   );
 };

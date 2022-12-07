@@ -16,6 +16,7 @@ import { Colors } from '../../Colors';
 import EStyleSheet from 'react-native-extended-stylesheet';
 import { SocialButton } from '../../components/atoms/SocialButton';
 import { ConstString } from '../../Strings';
+import TestIDs from '../../TestIDs';
 
 export const LoginComponents = props => {
   const {
@@ -36,14 +37,18 @@ export const LoginComponents = props => {
       </TouchableOpacity>
       <View style={styles.inputContainer}>
         <Text style={styles.title}>Sign In</Text>
-        <InputFieldLogins hint={'Email'} defvalue={Email} onChangeText1={onChangeInputEmail} source={email}
+        <InputFieldLogins
+          testID={TestIDs.IFEmail}
+          hint={'Email'} defvalue={Email} onChangeText1={onChangeInputEmail} source={email}
                           secret={false} />
         <InputFieldLogins
+          testID={TestIDs.IFPassword}
           hint={'Password'}
           defvalue={Password} onChangeText1={onChangeInputPassword} source={password}
-          secret={true} />
+          secret={false} />
         <View style={styles.checkboxContainer}>
           <CheckBox
+            testID={TestIDs.BtnRememberMe}
             value={onRememberMe}
             onCheckColor={Colors.primaryColor}
             tintColor={Colors.primaryColor}
@@ -53,17 +58,19 @@ export const LoginComponents = props => {
             onValueChange={onClickRememberMe}
             style={{ height: 15, width: 15 }}
           />
-          <Text style={{ color: EStyleSheet.value('$secondaryTextColor'), textAlign: 'center', marginStart: 10, }}>Remember
+          <Text style={{color: EStyleSheet.value('$secondaryTextColor'), textAlign: 'center', marginStart: 10, }}>Remember
             Me</Text>
         </View>
-        <TouchableOpacity style={styles.buttonDone} onPress={verifyUser}>
+        <TouchableOpacity
+          testID={TestIDs.BtnDone}
+          style={styles.buttonDone} onPress={verifyUser}>
           <Text style={{ color: 'white', textAlign: 'center' }}>Login</Text>
         </TouchableOpacity>
         <TouchableOpacity style={styles.buttonForPass}>
           <Text style={{ color: Colors.primaryColor, textAlign: 'center' }}>Forget Password</Text>
         </TouchableOpacity>
         <IconButton title="Don't Have an Account? " buttontitle="Sign Up" onPress={goToSignIn}></IconButton>
-        <SocialButton onPress={onGoogleButtonPress} icon={ConstString.GOOGLE} />
+        <SocialButton tesId={TestIDs.BtnSignInGoogle} onPress={onGoogleButtonPress} icon={ConstString.GOOGLE} />
       </View>
     </SafeAreaView>
   );

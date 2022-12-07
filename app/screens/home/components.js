@@ -14,6 +14,7 @@ import { RestaurantCard } from '../../components/molecules/RestaurantCard';
 import { FloatingActionButton } from '../../components/atoms/FloatingActionButtom';
 import { ModalMenuButton } from '../../components/molecules/ModalMenuButton';
 import EStyleSheet from 'react-native-extended-stylesheet';
+import TestIds from '../../TestIDs';
 
 export const HomeComponents = props => {
   const {
@@ -42,7 +43,9 @@ export const HomeComponents = props => {
   };
 
   return (
-    <SafeAreaView style={styles.container}>
+    <SafeAreaView
+      testID={TestIds.Home}
+      style={styles.container}>
       <Header source={IMAGE ? { uri: IMAGE } : personIcon} onPress={openMenu} reRender={reRender}
               title={'Welcome Back ' + userName}></Header>
       {isOpenMenu &&
