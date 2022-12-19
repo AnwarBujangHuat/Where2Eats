@@ -5,78 +5,93 @@ import {
   SafeAreaView,
   Text,
   TouchableOpacity,
-  View
+  View,
 } from 'react-native';
 import logoIcon from '../../assets/Logo.png';
 import locationIcon from '../../assets/location.png';
 import FastImage from 'react-native-fast-image';
-import { icons } from '../../Const';
+import {icons} from '../../Const';
 import EStyleSheet from 'react-native-extended-stylesheet';
 import Modal from 'react-native-modal';
 
-const { width } = Dimensions.get('window');
-export const ModalWinner = ({ isModalVisible, closeModal, selectedRestaurant, goToMenu, isFinished, isPreview }) => {
-  const { restaurant, description, address, category, image } = selectedRestaurant;
+const {width} = Dimensions.get('window');
+export const ModalWinner = ({
+  isModalVisible,
+  closeModal,
+  selectedRestaurant,
+  goToMenu,
+  isFinished,
+  isPreview,
+}) => {
+  const {restaurant, description, address, category, image} =
+    selectedRestaurant;
   const spinAgain = () => {
     closeModal();
   };
   return (
     <>
-      {
-        isModalVisible &&
+      {isModalVisible && (
         <SafeAreaView style={styles.screen}>
-          <Modal animationType="none"
-                 transparent visible={isModalVisible}
-                 presentationStyle="overFullScreen"
-                 style={styles.viewWrapper}>
+          <Modal
+            animationType="none"
+            transparent
+            visible={isModalVisible}
+            presentationStyle="overFullScreen"
+            style={styles.viewWrapper}>
             <View style={styles.modalView}>
               <FastImage
-                source={image !== undefined ? {
-                    uri: image,
-                    priority: FastImage.priority.high,
-                  } :
-                  {
-                    uri: 'https://mir-s3-cdn-cf.behance.net/project_modules/max_1200/5eeea355389655.59822ff824b72.gif'
-                  }
+                source={
+                  image !== undefined
+                    ? {
+                        uri: image,
+                        priority: FastImage.priority.high,
+                      }
+                    : {
+                        uri: 'https://mir-s3-cdn-cf.behance.net/project_modules/max_1200/5eeea355389655.59822ff824b72.gif',
+                      }
                 }
-                style={
-                  {
-                    height: 200,
-                    resizeMode: 'contain',
-                  }}>
-              </FastImage>
+                style={{
+                  height: 200,
+                  resizeMode: 'contain',
+                }}
+              />
 
-              <View style={{ flexDirection: 'row', paddingVertical: 10, }}>
+              <View style={{flexDirection: 'row', paddingVertical: 10}}>
                 <Text style={styles.header}>{restaurant}</Text>
                 <Image
                   source={category ? icons[category] : icons.def}
-                  style={styles.iconCategory} />
+                  style={styles.iconCategory}
+                />
               </View>
 
               <View style={styles.descContainer}>
-                <Text style={styles.desc}>{category + ' - ' + description}</Text>
+                <Text style={styles.desc}>
+                  {category + ' - ' + description}
+                </Text>
                 <View style={styles.containerIcon}>
                   <Image style={styles.icon} source={locationIcon} />
                   <Text style={styles.address}>{address}</Text>
                 </View>
               </View>
 
-              <View style={{
-                flex: 1,
-                flexDirection: 'row',
-                alignSelf: 'center'
-              }}>
-                <TouchableOpacity
-                  style={styles.button}
-                  onPress={spinAgain}>
-                  <Text style={styles.buttonTextSpin}>{isFinished ? 'Spin Again' : 'Go Back'}</Text>
+              <View
+                style={{
+                  flex: 1,
+                  flexDirection: 'row',
+                  alignSelf: 'center',
+                }}>
+                <TouchableOpacity style={styles.button} onPress={spinAgain}>
+                  <Text style={styles.buttonTextSpin}>
+                    {isFinished ? 'Spin Again' : 'Go Back'}
+                  </Text>
                 </TouchableOpacity>
-                {!isPreview &&
+                {!isPreview && (
                   <TouchableOpacity
                     style={styles.buttonVisit}
                     onPress={goToMenu}>
                     <Text style={styles.buttonTextMenu}>Visit Restaurant</Text>
-                  </TouchableOpacity>}
+                  </TouchableOpacity>
+                )}
               </View>
             </View>
             <TouchableOpacity style={styles.logoContainer}>
@@ -84,7 +99,7 @@ export const ModalWinner = ({ isModalVisible, closeModal, selectedRestaurant, go
             </TouchableOpacity>
           </Modal>
         </SafeAreaView>
-      }
+      )}
     </>
   );
 };
@@ -134,11 +149,10 @@ const styles = EStyleSheet.create({
     width: width * 0.8,
     backgroundColor: '$secondaryBackGroundColor',
     borderRadius: 10,
-    shadowOffset: { width: -2, height: 2 },
+    shadowOffset: {width: -2, height: 2},
     shadowColor: '$primaryColor',
     shadowOpacity: 0.2,
     shadowRadius: 3,
-
   },
   button: {
     backgroundColor: '$secondaryBackGroundColor',
@@ -146,7 +160,7 @@ const styles = EStyleSheet.create({
     padding: 5,
     width: '50%',
     borderColor: '$secondaryBackGroundColor',
-    borderWidth: .5,
+    borderWidth: 0.5,
     textTransform: 'uppercase',
     marginTop: 15,
   },
@@ -157,7 +171,7 @@ const styles = EStyleSheet.create({
     width: '50%',
     borderLeftColor: '$primaryColor',
     borderColor: '$secondaryBackGroundColor',
-    borderWidth: .5,
+    borderWidth: 0.5,
     textTransform: 'uppercase',
     marginTop: 15,
   },
@@ -165,25 +179,36 @@ const styles = EStyleSheet.create({
     fontSize: 20,
     fontWeight: 'bold',
     color: '$primaryColor',
-    shadowOffset: { width: -2, height: 1 },
+    shadowOffset: {width: -2, height: 1},
     shadowColor: '$primaryColor',
     shadowOpacity: 0.1,
     shadowRadius: 2,
     paddingStart: 10,
-    width: '90%'
+    width: '90%',
   },
   price: {
-    color: '$tertiaryColor', marginVertical: 5,
-    fontSize: 14, fontWeight: 'bold', textAlign: 'justify'
+    color: '$tertiaryColor',
+    marginVertical: 5,
+    fontSize: 14,
+    fontWeight: 'bold',
+    textAlign: 'justify',
   },
   desc: {
-    color: '$tertiaryTextColor', paddingEnd: 5, marginTop: 5,
-    fontSize: 14, fontWeight: 'normal', textAlign: 'justify'
+    color: '$tertiaryTextColor',
+    paddingEnd: 5,
+    marginTop: 5,
+    fontSize: 14,
+    fontWeight: 'normal',
+    textAlign: 'justify',
   },
-  descContainer: { paddingHorizontal: 15, },
+  descContainer: {paddingHorizontal: 15},
   address: {
-    color: '$tertiaryColor', paddingEnd: 5, marginTop: 5,
-    fontSize: 12, fontWeight: 'normal', textAlign: 'justify'
+    color: '$tertiaryColor',
+    paddingEnd: 5,
+    marginTop: 5,
+    fontSize: 12,
+    fontWeight: 'normal',
+    textAlign: 'justify',
   },
   logoContainer: {
     alignSelf: 'flex-start',
@@ -192,7 +217,7 @@ const styles = EStyleSheet.create({
     padding: 15,
     borderColor: '$primaryColor',
     position: 'absolute',
-    top: '22%'
+    top: '22%',
   },
   logoIcon: {
     height: 60,
@@ -201,7 +226,7 @@ const styles = EStyleSheet.create({
   iconCategory: {
     width: 20,
     height: 20,
-    alignSelf: 'center'
+    alignSelf: 'center',
   },
   containerIcon: {
     flexDirection: 'row',

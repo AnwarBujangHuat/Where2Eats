@@ -1,12 +1,12 @@
-import { View } from 'react-native';
+import {View} from 'react-native';
 import React from 'react';
-import { FloatingAction } from 'react-native-floating-action';
+import {FloatingAction} from 'react-native-floating-action';
 import Menu from '../../assets/cheeseburger.png';
 import Details from '../../assets/details.png';
 import Edit from '../../assets/edit.png';
 import EStyleSheet from 'react-native-extended-stylesheet';
-import { Colors } from '../../Colors';
-import { ConstString } from '../../Strings';
+import {Colors} from '../../Colors';
+import {ConstString} from '../../Strings';
 
 const actions = [
   {
@@ -28,7 +28,7 @@ const actions = [
     textColor: 'white',
   },
 ];
-export const ExpandableFloatingButton = ({ onPressItem }) => {
+export const ExpandableFloatingButton = ({onPressItem}) => {
   return (
     <View style={styles.fab}>
       <FloatingAction
@@ -38,7 +38,8 @@ export const ExpandableFloatingButton = ({ onPressItem }) => {
         iconWidth={28}
         iconHeight={28}
         color={Colors.primaryTextColor}
-        onPressItem={(item) => onPressItem({ item })} />
+        onPressItem={item => onPressItem({item})}
+      />
     </View>
   );
 };
@@ -47,7 +48,7 @@ const styles = EStyleSheet.create({
     backgroundColor: '$secondaryBackGroundColor',
     borderRadius: 40,
     padding: 10,
-    shadowOffset: { width: -2, height: 4 },
+    shadowOffset: {width: -2, height: 4},
     shadowColor: '$primaryColor',
     shadowOpacity: 0.2,
     shadowRadius: 3,
@@ -57,5 +58,5 @@ const styles = EStyleSheet.create({
     position: 'absolute',
     bottom: 20,
     right: -10,
-  }
+  },
 });

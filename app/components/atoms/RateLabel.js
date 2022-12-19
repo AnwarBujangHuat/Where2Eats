@@ -1,24 +1,21 @@
-import {
-  Image,
-  Text,
-  TouchableOpacity,
-  View
-} from 'react-native';
+import {Image, Text, TouchableOpacity, View} from 'react-native';
 import React from 'react';
 import startIcon from '../../assets/star.png';
 import startIcon2 from '../../assets/star2.png';
 import EStyleSheet from 'react-native-extended-stylesheet';
 
-export const RateLabel = ({ rating, goToRating }) => {
+export const RateLabel = ({rating, goToRating}) => {
   const restaurantRate = rating?.toFixed(1);
   return (
     <TouchableOpacity onPress={goToRating}>
       <View style={styles.container}>
         <Text style={styles.textRate}>{restaurantRate}</Text>
-        <Image source={rating > 4.2 ? startIcon2 : startIcon} style={styles.icon}></Image>
+        <Image
+          source={rating > 4.2 ? startIcon2 : startIcon}
+          style={styles.icon}
+        />
       </View>
     </TouchableOpacity>
-
   );
 };
 const styles = EStyleSheet.create({
@@ -41,8 +38,6 @@ const styles = EStyleSheet.create({
   textRate: {
     padding: 2,
     color: '$secondaryTextColor',
-    fontWeight: 'bold'
+    fontWeight: 'bold',
   },
 });
-
-

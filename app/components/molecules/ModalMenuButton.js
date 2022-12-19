@@ -5,15 +5,15 @@ import {
   SafeAreaView,
   Text,
   TouchableOpacity,
-  View
+  View,
 } from 'react-native';
 import Modal from 'react-native-modal';
 
 import EStyleSheet from 'react-native-extended-stylesheet';
 
-const { width } = Dimensions.get('window');
+const {width} = Dimensions.get('window');
 
-export const ModalMenuButton = ({ isModalVisible, onPress, closeModal }) => {
+export const ModalMenuButton = ({isModalVisible, onPress, closeModal}) => {
   const MENU_OPTIONS = [
     {
       id: 1,
@@ -27,39 +27,37 @@ export const ModalMenuButton = ({ isModalVisible, onPress, closeModal }) => {
       id: 3,
       title: 'Log Out',
     },
-
   ];
   return (
     <>
-      {
-        { isModalVisible } &&
+      {{isModalVisible} && (
         <SafeAreaView>
-          <Modal animationType="fade"
-                 transparent visible={isModalVisible}
-                 style={{
-                   position: 'absolute',
-                   top: 20,
-                   left: -10,
-                 }}
-                 onBackdropPress={() => closeModal()}
-          >
-            <View
-              style={styles.modalView}>
+          <Modal
+            animationType="fade"
+            transparent
+            visible={isModalVisible}
+            style={{
+              position: 'absolute',
+              top: 20,
+              left: -10,
+            }}
+            onBackdropPress={() => closeModal()}>
+            <View style={styles.modalView}>
               <FlatList
                 data={MENU_OPTIONS}
-                renderItem={({ item }) => {
+                renderItem={({item}) => {
                   return (
-                    <TouchableOpacity
-                      onPress={() => onPress(item.id)}>
+                    <TouchableOpacity onPress={() => onPress(item.id)}>
                       <Text style={styles.buttonText}>{item.title}</Text>
                     </TouchableOpacity>
                   );
                 }}
-                showsHorizontalScrollIndicator={false} />
+                showsHorizontalScrollIndicator={false}
+              />
             </View>
           </Modal>
         </SafeAreaView>
-      }
+      )}
     </>
   );
 };
@@ -79,8 +77,8 @@ const styles = EStyleSheet.create({
     fontWeight: 'normal',
   },
   image: {
-    width: width * 0.7
-    , height: 150,
+    width: width * 0.7,
+    height: 150,
     borderRadius: 10,
   },
 
@@ -88,7 +86,6 @@ const styles = EStyleSheet.create({
     height: 20,
     width: 20,
     margin: 10,
-
   },
   modalView: {
     paddingVertical: 20,
@@ -98,5 +95,4 @@ const styles = EStyleSheet.create({
     backgroundColor: '$ModalBackground',
     borderRadius: 7,
   },
-
 });

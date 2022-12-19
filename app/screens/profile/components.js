@@ -6,20 +6,19 @@ import {
   Text,
   Text as RNText,
   TouchableOpacity,
-  View
+  View,
 } from 'react-native';
-import { BackButton } from '../../components/atoms/BackButton';
-import { Colors } from '../../Colors';
+import {BackButton} from '../../components/atoms/BackButton';
+import {Colors} from '../../Colors';
 import personIcon from '../../assets/programmer.png';
-import { EditableLabel } from '../../components/atoms/EditableLabel';
-import { ModalEdit } from '../../components/molecules/ModalEdit';
+import {EditableLabel} from '../../components/atoms/EditableLabel';
+import {ModalEdit} from '../../components/molecules/ModalEdit';
 import EStyleSheet from 'react-native-extended-stylesheet';
-import { firebase } from '../../../src/firebase/config';
-import { defaultValue } from '../../store/defaultValue';
-import { ConstString } from '../../Strings';
+import {firebase} from '../../../src/firebase/config';
+import {defaultValue} from '../../store/defaultValue';
+import {ConstString} from '../../Strings';
 
 export const ProfileComponents = props => {
-
   const {
     goBackHome,
     InformationList,
@@ -28,12 +27,12 @@ export const ProfileComponents = props => {
     selectedInfo,
     closeModal,
     onDone,
-    setUpdatedInfo
+    setUpdatedInfo,
   } = props;
   const onPress = () => {
     const db = firebase.firestore();
     const batch = db.batch();
-    defaultValue.forEach((doc) => {
+    defaultValue.forEach(doc => {
       const docRef = db.collection(ConstString.RESTAURANT).doc(); //automatically generate unique id
       batch.set(docRef, doc);
     });
@@ -42,7 +41,7 @@ export const ProfileComponents = props => {
   return (
     <SafeAreaView style={styles.backGround}>
       <View style={styles.rowContainer}>
-        <BackButton onPress={goBackHome}></BackButton>
+        <BackButton onPress={goBackHome} />
         <RNText style={styles.title}>{'My Profile'}</RNText>
       </View>
       <View>
@@ -52,35 +51,45 @@ export const ProfileComponents = props => {
       </View>
       <View>
         <FlatList
-          style={{ marginTop: 15, }}
+          style={{marginTop: 15}}
           data={InformationList}
-          renderItem={({ item, index }) => {
+          renderItem={({item, index}) => {
             return (
               <EditableLabel
-                title={item.title} information={item.information} onPress={() => editInformation(item.id)}
-                icon={item.icon} index={index}
-              ></EditableLabel>);
+                title={item.title}
+                information={item.information}
+                onPress={() => editInformation(item.id)}
+                icon={item.icon}
+              />
+            );
           }}
           showsHorizontalScrollIndicator={false}
         />
-        <TouchableOpacity style={{
-          backgroundColor: Colors.primaryColor,
-          alignContent: 'center',
-          alignSelf: 'center',
-          padding: 20,
-          borderRadius: 20,
-          marginTop: 20,
-        }} onPress={onPress}
-                          disabled={true}>
-          <Text style={{ color: 'white', fontSize: 16, alignSelf: 'center' }}>My Intern is Too Lazy</Text>
+        <TouchableOpacity
+          style={{
+            backgroundColor: Colors.primaryColor,
+            alignContent: 'center',
+            alignSelf: 'center',
+            padding: 20,
+            borderRadius: 20,
+            marginTop: 20,
+          }}
+          onPress={onPress}
+          disabled={true}>
+          <Text style={{color: 'white', fontSize: 16, alignSelf: 'center'}}>
+            My Intern is Too Lazy
+          </Text>
         </TouchableOpacity>
       </View>
-      {
-        isModalVisible &&
-        <ModalEdit isModalVisible={isModalVisible} closeModal={closeModal} Title={selectedInfo}
-                   setUpdatedInfo={setUpdatedInfo}
-                   onDone={onDone} />
-      }
+      {isModalVisible && (
+        <ModalEdit
+          isModalVisible={isModalVisible}
+          closeModal={closeModal}
+          Title={selectedInfo}
+          setUpdatedInfo={setUpdatedInfo}
+          onDone={onDone}
+        />
+      )}
     </SafeAreaView>
   );
 };
@@ -107,5 +116,4 @@ const styles = EStyleSheet.create({
     borderRadius: 60,
     backgroundColor: '$secondaryBackGroundColor',
   },
-
 });

@@ -437,7 +437,7 @@ PODS:
     - React-jsi (= 0.70.6)
     - React-logger (= 0.70.6)
     - React-perflogger (= 0.70.6)
-  - RNCAsyncStorage (1.17.10):
+  - RNCAsyncStorage (1.17.11):
     - React-Core
   - RNCCheckbox (0.5.14):
     - BEMCheckBox (~> 1.4)
@@ -446,7 +446,7 @@ PODS:
     - React
   - RNDeviceInfo (10.3.0):
     - React-Core
-  - RNFastImage (8.6.1):
+  - RNFastImage (8.6.3):
     - React-Core
     - SDWebImage (~> 5.11.1)
     - SDWebImageWebPCoder (~> 0.8.4)
@@ -789,11 +789,11 @@ SPEC CHECKSUMS:
   React-RCTVibration: c75ceef7aa60a33b2d5731ebe5800ddde40cefc4
   React-runtimeexecutor: 15437b576139df27635400de0599d9844f1ab817
   ReactCommon: 349be31adeecffc7986a0de875d7fb0dcf4e251c
-  RNCAsyncStorage: 0c357f3156fcb16c8589ede67cc036330b6698ca
+  RNCAsyncStorage: 8616bd5a58af409453ea4e1b246521bb76578d60
   RNCCheckbox: 38989bbd3d7d536adf24ba26c6b3e6cefe0bea6f
   RNCMaskedView: 0e1bc4bfa8365eba5fbbb71e07fbdc0555249489
   RNDeviceInfo: 4701f0bf2a06b34654745053db0ce4cb0c53ada7
-  RNFastImage: 3207b9eb17c2425d574ca40db35185db6e324f4e
+  RNFastImage: 5c9c9fed9c076e521b3f509fe79e790418a544e8
   RNGestureHandler: 28ad20bf02257791f7f137b31beef34b9549f54b
   RNGoogleSignin: 3db2d849581299f425f5b61b90cb482a9e68c7af
   RNImageCropPicker: e641bf83ac47324994cac139bde74635ec52c17c

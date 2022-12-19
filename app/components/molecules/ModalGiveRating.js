@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, {useState} from 'react';
 import {
   Dimensions,
   SafeAreaView,
@@ -8,15 +8,20 @@ import {
   View,
 } from 'react-native';
 import EStyleSheet from 'react-native-extended-stylesheet';
-import { AirbnbRating } from 'react-native-ratings';
+import {AirbnbRating} from 'react-native-ratings';
 import Cat from '../../assets/purplecat.json';
 import LottieView from 'lottie-react-native';
 import Modal from 'react-native-modal';
 
-const { width } = Dimensions.get('window');
+const {width} = Dimensions.get('window');
 
-export const ModalGiveRating = ({ closeModal, isModalVisible, submit, userReview }) => {
-  const { review, rating, updatedAt, createdAt } = userReview || {};
+export const ModalGiveRating = ({
+  closeModal,
+  isModalVisible,
+  submit,
+  userReview,
+}) => {
+  const {review, rating, updatedAt, createdAt} = userReview || {};
   const [textReview, setReview] = useState(review);
   const [newRate, setRate] = useState(rating);
   const [isUploading, setIsUploading] = useState(false);
@@ -34,52 +39,66 @@ export const ModalGiveRating = ({ closeModal, isModalVisible, submit, userReview
   }
   return (
     <>
-      {
-        isModalVisible &&
+      {isModalVisible && (
         <SafeAreaView style={styles.screen}>
-          <Modal animationType="none"
-                 transparent visible={isModalVisible}
-                 presentationStyle="overFullScreen"
-                 style={styles.viewWrapper}>
-            {isUploading ?
+          <Modal
+            animationType="none"
+            transparent
+            visible={isModalVisible}
+            presentationStyle="overFullScreen"
+            style={styles.viewWrapper}>
+            {isUploading ? (
               <View style={styles.modalView}>
-                <LottieView style={styles.lottieButton} source={Cat} autoPlay={true}
+                <LottieView
+                  style={styles.lottieButton}
+                  source={Cat}
+                  autoPlay={true}
                 />
-                <Text style={styles.header}>{'Wait while we write your Review'}</Text>
+                <Text style={styles.header}>
+                  {'Wait while we write your Review'}
+                </Text>
               </View>
-              :
+            ) : (
               <View style={styles.modalView}>
-                <Text style={styles.header}>{'What\'s Your Review?'}</Text>
+                <Text style={styles.header}>{"What's Your Review?"}</Text>
                 <AirbnbRating
                   count={5}
                   isDisabled={false}
                   showRating={true}
-                  onFinishRating={(rate) => setRate(rate)}
-                  reviews={['Terrible', 'Hmm...', 'OK', 'Quite Good', 'Excellent']}
+                  onFinishRating={rate => setRate(rate)}
+                  reviews={[
+                    'Terrible',
+                    'Hmm...',
+                    'OK',
+                    'Quite Good',
+                    'Excellent',
+                  ]}
                   defaultRating={rating !== undefined ? rating : 1}
-                  ratingContainerStyle={{ marginVertical: 20, }}
-                  size={30} />
+                  ratingContainerStyle={{marginVertical: 20}}
+                  size={30}
+                />
                 <TextInput
                   style={styles.descriptionInput}
                   placeholder={'Enter Review'}
                   value={textReview}
                   multiline={true}
                   onChangeText={setReview}
-                  placeholderTextColor={EStyleSheet.value('$secondaryTextColor')}
+                  placeholderTextColor={EStyleSheet.value(
+                    '$secondaryTextColor',
+                  )}
                   overflow="hidden"
                   keyboardAppearance="dark"
-                  autoCorrect={false} />
+                  autoCorrect={false}
+                />
                 <Text style={styles.desc}>{status}</Text>
 
-                <View style={{
-                  flexDirection: 'row',
-                  alignSelf: 'center',
-                  marginVertical: 5,
-                }}>
-                  <TouchableOpacity
-                    style={styles.button}
-                    onPress={closeModal}
-                  >
+                <View
+                  style={{
+                    flexDirection: 'row',
+                    alignSelf: 'center',
+                    marginVertical: 5,
+                  }}>
+                  <TouchableOpacity style={styles.button} onPress={closeModal}>
                     <Text style={styles.buttonTextSpin}>Go Back</Text>
                   </TouchableOpacity>
                   <TouchableOpacity
@@ -89,11 +108,10 @@ export const ModalGiveRating = ({ closeModal, isModalVisible, submit, userReview
                   </TouchableOpacity>
                 </View>
               </View>
-            }
-
+            )}
           </Modal>
         </SafeAreaView>
-      }
+      )}
     </>
   );
 };
@@ -105,7 +123,7 @@ const styles = EStyleSheet.create({
     width: '50%',
     borderLeftColor: '$primaryColor',
     borderColor: '$secondaryBackGroundColor',
-    borderWidth: .5,
+    borderWidth: 0.5,
     textTransform: 'uppercase',
     marginTop: 15,
   },
@@ -115,7 +133,7 @@ const styles = EStyleSheet.create({
     padding: 5,
     width: '50%',
     borderColor: '$secondaryBackGroundColor',
-    borderWidth: .5,
+    borderWidth: 0.5,
     textTransform: 'uppercase',
     marginTop: 15,
   },
@@ -130,16 +148,15 @@ const styles = EStyleSheet.create({
     fontWeight: 'normal',
   },
 
-  changeButton:
-    {
-      position: 'absolute',
-      left: 0,
-      fontWeight: 'bold',
-      fontSize: 12,
-      color: 'white',
-      backgroundColor: '$primaryColor',
-      padding: 5,
-    },
+  changeButton: {
+    position: 'absolute',
+    left: 0,
+    fontWeight: 'bold',
+    fontSize: 12,
+    color: 'white',
+    backgroundColor: '$primaryColor',
+    padding: 5,
+  },
   buttonText: {
     fontSize: 16,
     color: 'white',
@@ -153,7 +170,6 @@ const styles = EStyleSheet.create({
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
-
   },
   viewWrapper: {
     flex: 1,
@@ -172,15 +188,19 @@ const styles = EStyleSheet.create({
     paddingVertical: 20,
     fontWeight: 'bold',
     color: '$primaryTextColor',
-    shadowOffset: { width: -2, height: 1 },
+    shadowOffset: {width: -2, height: 1},
     shadowColor: '$primaryColor',
     shadowOpacity: 0.1,
     alignSelf: 'center',
     shadowRadius: 2,
   },
   desc: {
-    color: '$tertiaryTextColor', paddingEnd: 5, marginTop: 5,
-    fontSize: 12, fontWeight: 'normal', textAlign: 'justify'
+    color: '$tertiaryTextColor',
+    paddingEnd: 5,
+    marginTop: 5,
+    fontSize: 12,
+    fontWeight: 'normal',
+    textAlign: 'justify',
   },
 
   descriptionInput: {
@@ -196,8 +216,8 @@ const styles = EStyleSheet.create({
     paddingBottom: 10,
   },
   lottieButton: {
-    width: width * .6,
-    height: width * .6,
+    width: width * 0.6,
+    height: width * 0.6,
     alignSelf: 'center',
   },
 });

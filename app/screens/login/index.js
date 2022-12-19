@@ -1,110 +1,111 @@
 import * as React from 'react';
-import { useState } from 'react';
+import {useState} from 'react';
 
-import { LoginComponents } from './components';
-import { ConstString } from '../../Strings';
-import {
-  useDispatch,
-  useSelector
-} from 'react-redux';
-import { firebase } from '../../../src/firebase/config';
-import { Alert } from 'react-native';
+import {LoginComponents} from './components';
+import {ConstString} from '../../Strings';
+import {useDispatch, useSelector} from 'react-redux';
+import {firebase} from '../../../src/firebase/config';
+import {Alert} from 'react-native';
 
 import {
   fetchUserInformation,
   populateUserData,
-  rememberMe
+  rememberMe,
 } from '../../store/thunks';
-import { GoogleSignin } from '../../../src/SignInOption/config';
-import { getInfo } from '../../store/selector';
+import {GoogleSignin} from '../../../src/SignInOption/config';
+import {getInfo} from '../../store/selector';
 // import { getAuth } from 'firebase-admin/auth';
 
-export const Login = ({ navigation }) => {
-  const { EMAIL, PASSWORD } = useSelector(getInfo);
+export const Login = ({navigation}) => {
+  const {EMAIL, PASSWORD} = useSelector(getInfo);
   const [Email, setEmail] = useState(EMAIL ?? '');
   const [Password, setPassword] = useState(PASSWORD ?? '');
   const [onRememberMe, setOnRememberMe] = useState(!!EMAIL);
   const dispatch = useDispatch();
-  const onChangeInputEmail = (text) => setEmail(text);
-  const onChangeInputPassword = (text) => setPassword(text);
+  const onChangeInputEmail = text => setEmail(text);
+  const onChangeInputPassword = text => setPassword(text);
   const onClickRememberMe = () => setOnRememberMe(!onRememberMe);
   const goToSignIn = () => navigation.navigate('Register');
-  const showErrorAlert = (error) => {
+  const showErrorAlert = error => {
     //Error Handling Alert
-    Alert.alert(
-      'Sorry',
-      error,
-      [
-        {
-          text: 'Okay'
-        },
-      ],
-    );
-
+    Alert.alert('Sorry', error, [
+      {
+        text: 'Okay',
+      },
+    ]);
   };
-  const populateUser = async({ uid, userInformation }) => {
+  const populateUser = async ({uid, userInformation}) => {
     //Uploading Record to Firestore
-    const { payload } = await dispatch(populateUserData({ uid, userInformation }));
-    const { result, data } = payload;
-    if (!result) return showErrorAlert(data);
+    const {payload} = await dispatch(populateUserData({uid, userInformation}));
+    const {result, data} = payload;
+    if (!result) {
+      return showErrorAlert(data);
+    }
     goToModal();
   };
-  const verifyUser = async() => {
-    const {
-      onSuccess: onSuccessAuthentication,
-      data: userData
-    } = await authenticateUser(Email, Password);
-    if (!onSuccessAuthentication) return showErrorAlert(userData);
+  const verifyUser = async () => {
+    const {onSuccess: onSuccessAuthentication, data: userData} =
+      await authenticateUser(Email, Password);
+    if (!onSuccessAuthentication) {
+      return showErrorAlert(userData);
+    }
 
-    const { uid } = userData.user;
+    const {uid} = userData.user;
     //Retrieving User Data
-    const { payload: userPayload } = await dispatch(fetchUserInformation({ uid }));
-    const { result: onSuccessUserInformation, data: userFirestoreData } = userPayload;
-    if (!onSuccessUserInformation) return showErrorAlert({ userFirestoreData });
+    const {payload: userPayload} = await dispatch(fetchUserInformation({uid}));
+    const {result: onSuccessUserInformation, data: userFirestoreData} =
+      userPayload;
+    if (!onSuccessUserInformation) {
+      return showErrorAlert({userFirestoreData});
+    }
     const userInformation = userFirestoreData;
-    await dispatch(rememberMe(onRememberMe ? { EMAIL: Email, PASSWORD: Password } : { EMAIL: '', PASSWORD: '' }));
+    await dispatch(
+      rememberMe(
+        onRememberMe
+          ? {EMAIL: Email, PASSWORD: Password}
+          : {EMAIL: '', PASSWORD: ''},
+      ),
+    );
 
     setOnRememberMe(!onRememberMe);
-    await populateUser({ uid, userInformation });
-
+    await populateUser({uid, userInformation});
   };
   const goToModal = () => navigation.navigate(ConstString.MODAL);
-  const authenticateUser = (email, password) => new Promise((resolve, reject) => {
-    firebase.auth().signInWithEmailAndPassword(email, password).
-      then(
-      (response) => {
-        resolve({ onSuccess: true, data: response });
-      },
-      () => resolve({ onSuccess: false, data: "No Record Found" })
-    );
-  });
-  const onGoogleButtonPress = async() => {
-    await GoogleSignin.hasPlayServices({ showPlayServicesUpdateDialog: true });
+  const authenticateUser = (email, password) =>
+    new Promise((resolve, reject) => {
+      firebase
+        .auth()
+        .signInWithEmailAndPassword(email, password)
+        .then(
+          response => {
+            resolve({onSuccess: true, data: response});
+          },
+          () => resolve({onSuccess: false, data: 'No Record Found'}),
+        );
+    });
+  const onGoogleButtonPress = async () => {
+    await GoogleSignin.hasPlayServices({showPlayServicesUpdateDialog: true});
     try {
-      const {
-        idToken,
-        accessToken,
-      } = await GoogleSignin.signIn();
+      const {idToken, accessToken} = await GoogleSignin.signIn();
       const credential = firebase.auth.GoogleAuthProvider.credential(
         idToken,
         accessToken,
       );
       const result = await firebase.auth().signInWithCredential(credential);
-      if (!result) return showErrorAlert('We Did not Manage to Register You');
+      if (!result) {
+        return showErrorAlert('We Did not Manage to Register You');
+      }
 
-      const { name, email, picture } = result.additionalUserInfo.profile;
-      const { uid } = result.user;
+      const {name, email, picture} = result.additionalUserInfo.profile;
+      const {uid} = result.user;
       const userInfo = {
         userId: uid,
         NAME: name,
         EMAIL: email,
-        IMAGE: picture
+        IMAGE: picture,
       };
-      await populateUser({ uid, userInformation: userInfo });
-
-    }
-    catch(error) {
-    }
+      await populateUser({uid, userInformation: userInfo});
+    } catch (error) {}
   };
   const props = {
     onChangeInputEmail,
@@ -115,10 +116,8 @@ export const Login = ({ navigation }) => {
     Password,
     onGoogleButtonPress,
     onClickRememberMe,
-    onRememberMe
+    onRememberMe,
   };
 
-  return (
-    <LoginComponents {...props} />
-  );
+  return <LoginComponents {...props} />;
 };

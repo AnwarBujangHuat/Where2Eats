@@ -1,10 +1,7 @@
-import {
-  configureStore,
-  getDefaultMiddleware
-} from '@reduxjs/toolkit';
+import {configureStore, getDefaultMiddleware} from '@reduxjs/toolkit';
 import Reducer from '../store/reducer';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import { persistReducer } from 'redux-persist';
+import {persistReducer} from 'redux-persist';
 import autoMergeLevel1 from 'reduxjs-toolkit-persist/lib/stateReconciler/autoMergeLevel1';
 
 import {
@@ -13,31 +10,24 @@ import {
   PERSIST,
   PURGE,
   REGISTER,
-  REHYDRATE
+  REHYDRATE,
 } from 'redux-persist/es/constants';
 
 const persistConfig = {
   key: 'root',
   storage: AsyncStorage,
   stateReconciler: autoMergeLevel1,
-  whitelist: ['THEME', 'EMAIL', 'PASSWORD'] // only navigation will be persisted
+  whitelist: ['THEME', 'EMAIL', 'PASSWORD'], // only navigation will be persisted
 };
 const _persistedReducer = persistReducer(persistConfig, Reducer);
 export default configureStore({
   reducer: {
-    restaurant: _persistedReducer
+    restaurant: _persistedReducer,
   },
   middleware: getDefaultMiddleware({
     serializableCheck: {
       /* ignore persistance actions */
-      ignoredActions: [
-        FLUSH,
-        REHYDRATE,
-        PAUSE,
-        PERSIST,
-        PURGE,
-        REGISTER
-      ],
+      ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
     },
   }),
 });

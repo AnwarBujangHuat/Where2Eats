@@ -6,22 +6,28 @@ import {
   Text,
   TextInput,
   TouchableOpacity,
-  View
+  View,
 } from 'react-native';
 import EStyleSheet from 'react-native-extended-stylesheet';
 
-const { width } = Dimensions.get('window');
+const {width} = Dimensions.get('window');
 
-export const ModalEdit = ({ isModalVisible, closeModal, onDone, Title, setUpdatedInfo }) => {
-
+export const ModalEdit = ({
+  isModalVisible,
+  closeModal,
+  onDone,
+  Title,
+  setUpdatedInfo,
+}) => {
   return (
     <>
-      {
-        isModalVisible &&
+      {isModalVisible && (
         <SafeAreaView style={styles.screen}>
-          <Modal animationType="slide"
-                 transparent visible={isModalVisible}
-                 presentationStyle="overFullScreen">
+          <Modal
+            animationType="slide"
+            transparent
+            visible={isModalVisible}
+            presentationStyle="overFullScreen">
             <View style={styles.viewWrapper}>
               <View style={styles.modalView}>
                 <Text style={styles.header}>{'Change ' + Title}</Text>
@@ -29,22 +35,22 @@ export const ModalEdit = ({ isModalVisible, closeModal, onDone, Title, setUpdate
                   style={styles.textInput}
                   placeholder={'Enter ' + Title}
                   clearButtonMode={'always'}
-                  placeholderTextColor={EStyleSheet.value('$secondaryTextColor')}
-                  onChangeText={(text) => setUpdatedInfo(text)}
+                  placeholderTextColor={EStyleSheet.value(
+                    '$secondaryTextColor',
+                  )}
+                  onChangeText={text => setUpdatedInfo(text)}
                   overflow="hidden"
                   keyboardAppearance="dark"
-                  autoCorrect={false} />
-                <View style={{
-                  flexDirection: 'row',
-                }}>
-                  <TouchableOpacity
-                    style={styles.button}
-                    onPress={closeModal}>
+                  autoCorrect={false}
+                />
+                <View
+                  style={{
+                    flexDirection: 'row',
+                  }}>
+                  <TouchableOpacity style={styles.button} onPress={closeModal}>
                     <Text style={styles.buttonTextSpin}>Cancel</Text>
                   </TouchableOpacity>
-                  <TouchableOpacity
-                    style={styles.buttonVisit}
-                    onPress={onDone}>
+                  <TouchableOpacity style={styles.buttonVisit} onPress={onDone}>
                     <Text style={styles.buttonTextMenu}>Done</Text>
                   </TouchableOpacity>
                 </View>
@@ -52,9 +58,8 @@ export const ModalEdit = ({ isModalVisible, closeModal, onDone, Title, setUpdate
             </View>
           </Modal>
         </SafeAreaView>
-      }
+      )}
     </>
-
   );
 };
 const styles = EStyleSheet.create({
@@ -65,7 +70,7 @@ const styles = EStyleSheet.create({
     width: '50%',
     borderColor: '$secondaryBackGroundColor',
     borderRightColor: '$primaryColor',
-    borderWidth: .5,
+    borderWidth: 0.5,
     textTransform: 'uppercase',
     marginTop: 15,
   },
@@ -75,7 +80,7 @@ const styles = EStyleSheet.create({
     padding: 5,
     width: '50%',
     borderColor: '$secondaryBackGroundColor',
-    borderWidth: .5,
+    borderWidth: 0.5,
     textTransform: 'uppercase',
     marginTop: 15,
   },
@@ -99,7 +104,7 @@ const styles = EStyleSheet.create({
     flex: 1,
     alignItems: 'center',
     backgroundColor: 'rgba(0, 0, 0, 0.2)',
-    shadowOffset: { width: -2, height: 2 },
+    shadowOffset: {width: -2, height: 2},
     shadowColor: '$primaryColor',
     shadowOpacity: 0.2,
     shadowRadius: 3,
@@ -130,7 +135,7 @@ const styles = EStyleSheet.create({
     fontSize: 16,
     fontWeight: 'bold',
     color: '$tertiaryColor',
-    shadowOffset: { width: -2, height: 1 },
+    shadowOffset: {width: -2, height: 1},
     shadowColor: '$primaryColor',
     shadowOpacity: 0.1,
     shadowRadius: 2,

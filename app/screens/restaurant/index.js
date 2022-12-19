@@ -1,24 +1,22 @@
-import React, {
-  useEffect,
-  useState
-} from 'react';
-import { ConstString } from '../../Strings';
-import { useSelector } from 'react-redux';
-import { icons, } from '../../Const';
-import { getCurrentRestaurant } from '../../store/selector';
-import { RestaurantComponents } from './components';
+import React, {useEffect, useState} from 'react';
+import {ConstString} from '../../Strings';
+import {useSelector} from 'react-redux';
+import {icons} from '../../Const';
+import {getCurrentRestaurant} from '../../store/selector';
+import {RestaurantComponents} from './components';
 
 const categories = [
-  { id: 1, item: ConstString.MAINDISH },
-  { id: 2, item: ConstString.SIDEDISH },
-  { id: 3, item: ConstString.DESSERT },
-  { id: 4, item: ConstString.APPETIZER },
-  { id: 5, item: ConstString.DRINKS }];
+  {id: 1, item: ConstString.MAINDISH},
+  {id: 2, item: ConstString.SIDEDISH},
+  {id: 3, item: ConstString.DESSERT},
+  {id: 4, item: ConstString.APPETIZER},
+  {id: 5, item: ConstString.DRINKS},
+];
 
-export const Restaurant = ({ navigation, route }) => {
-  const { id } = route.params || {};
+export const Restaurant = ({navigation, route}) => {
+  const {id} = route.params || {};
   const restaurantInfo = useSelector(getCurrentRestaurant(id));
-  const { category, food: foodItemList } = restaurantInfo;
+  const {category, food: foodItemList} = restaurantInfo;
   const [foodList, setFoodList] = useState(foodItemList);
   const [isModalVisible, setModalVisible] = useState(false);
   const [foodItem, setFoodItem] = useState();
@@ -31,33 +29,41 @@ export const Restaurant = ({ navigation, route }) => {
   }, [restaurantInfo]);
 
   useEffect(() => {
-    const tempCategory = categories.filter(category => foodList.find(food => food.category === category.item));
+    const tempCategory = categories.filter(category =>
+      foodList.find(food => food.category === category.item),
+    );
     setSelectedCategory(tempCategory);
   }, [foodList]);
 
-  const onPress = (item) => {
+  const onPress = item => {
     setFoodItem(item);
     setModalVisible(!isModalVisible);
   };
   const closePreviewModal = () => {
     setIsPreview(false);
   };
-  const menuIcon = (item) => icons[item] ?? icons?.def;
+  const menuIcon = item => icons[item] ?? icons?.def;
   const closeModal = () => setModalVisible(false);
   const openPreviewModal = () => setIsPreview(true);
-  const goToRating = () => navigation.navigate(ConstString.RATINGS, { id });
+  const goToRating = () => navigation.navigate(ConstString.RATINGS, {id});
   const onBack = () => navigation.navigate(ConstString.HOME);
-  const onPressFloatingButton = ({ item: action }) => {
+  const onPressFloatingButton = ({item: action}) => {
     //If edit then go to Edit Restaurant general Information
-    if (action === ConstString.EDIT) return navigation.navigate(ConstString.REGISTER, { id });
+    if (action === ConstString.EDIT) {
+      return navigation.navigate(ConstString.REGISTER, {id});
+    }
 
     //else go to Edit Menu Page
-    navigation.navigate(ConstString.MENU, { id });
+    navigation.navigate(ConstString.MENU, {id});
   };
   //Search
-  const onChangeText = (text) => {
-    if (!text) return setFoodList(foodItemList);
-    const updateFoodList = foodList.filter(item => item.name.toLowerCase().includes(text.toLowerCase()));
+  const onChangeText = text => {
+    if (!text) {
+      return setFoodList(foodItemList);
+    }
+    const updateFoodList = foodList.filter(item =>
+      item.name.toLowerCase().includes(text.toLowerCase()),
+    );
     setFoodList(updateFoodList);
   };
   const props = {
@@ -79,6 +85,5 @@ export const Restaurant = ({ navigation, route }) => {
     foodList,
     onChangeText,
   };
-  return (<RestaurantComponents {...props} />
-  );
+  return <RestaurantComponents {...props} />;
 };

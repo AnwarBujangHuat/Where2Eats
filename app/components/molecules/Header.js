@@ -5,37 +5,36 @@ import {
   Image,
   Text,
   TouchableOpacity,
-  View
+  View,
 } from 'react-native';
-import React, {
-  useRef,
-  useState
-} from 'react';
-import { ConstString } from '../../Strings';
+import React, {useRef, useState} from 'react';
+import {ConstString} from '../../Strings';
 import LottieView from 'lottie-react-native';
 // import ThemeButton from '../../assets/dark.json';
 import ThemeButton from '../../assets/lightNdark.json';
-import { useDispatch } from 'react-redux';
-import { changeTheme } from '../../store/thunks';
+import {useDispatch} from 'react-redux';
+import {changeTheme} from '../../store/thunks';
 import EStyleSheet from 'react-native-extended-stylesheet';
 
-const { width } = Dimensions.get('window');
+const {width} = Dimensions.get('window');
 const currentTheme = EStyleSheet.value('$theme');
 let theme;
 let color;
 
-export const Header = ({ source, onPress, reRender, title }) => {
-  const animationProgress = useRef(new Animated.Value(currentTheme === ConstString.LIGHT ? .5 : 0));
+export const Header = ({source, onPress, reRender, title}) => {
+  const animationProgress = useRef(
+    new Animated.Value(currentTheme === ConstString.LIGHT ? 0.5 : 0),
+  );
   const [isCurrentTheme, setCurrentTheme] = useState(currentTheme);
   const [isRender, setRender] = useState(false);
   const dispatch = useDispatch();
-  const onChangeTheme = async() => {
+  const onChangeTheme = async () => {
     if (isCurrentTheme === ConstString.LIGHT) {
       Animated.timing(animationProgress.current, {
         toValue: 1,
         duration: 500,
         easing: Easing.linear,
-        useNativeDriver: true
+        useNativeDriver: true,
       }).start();
       color = ConstString.DARK;
       setCurrentTheme(ConstString.DARK);
@@ -44,7 +43,7 @@ export const Header = ({ source, onPress, reRender, title }) => {
         toValue: 0.5,
         duration: 500,
         easing: Easing.linear,
-        useNativeDriver: true
+        useNativeDriver: true,
       }).start();
       color = ConstString.LIGHT;
     }
@@ -62,19 +61,20 @@ export const Header = ({ source, onPress, reRender, title }) => {
       </TouchableOpacity>
       <Text style={styles.title}>{title}</Text>
       <TouchableOpacity onPress={onChangeTheme} disabled={isRender}>
-        <LottieView style={styles.lottieButton} source={ThemeButton}
-                    progress={animationProgress.current}
+        <LottieView
+          style={styles.lottieButton}
+          source={ThemeButton}
+          progress={animationProgress.current}
         />
       </TouchableOpacity>
     </View>
-
   );
 };
 const styles = EStyleSheet.create({
   section: {
     flexDirection: 'row',
     maxHeight: width * 0.15,
-    alignItems: 'center'
+    alignItems: 'center',
   },
   icons: {
     height: 35,
@@ -83,8 +83,8 @@ const styles = EStyleSheet.create({
     borderRadius: 40,
   },
   lottieButton: {
-    height: width * .2,
-    width: width * .2,
+    height: width * 0.2,
+    width: width * 0.2,
     right: 10,
   },
   title: {
@@ -93,7 +93,6 @@ const styles = EStyleSheet.create({
     color: '$primaryTextColor',
     fontWeight: 'bold',
     marginStart: 10,
-    width: width * 0.65
+    width: width * 0.65,
   },
-
 });

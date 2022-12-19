@@ -1,24 +1,19 @@
-import {
-  Image,
-  Text,
-  TouchableOpacity,
-  View
-} from 'react-native';
+import {Image, Text, TouchableOpacity, View} from 'react-native';
 import React from 'react';
 import locationIcon from '../../assets/location.png';
 import EStyleSheet from 'react-native-extended-stylesheet';
 
-export const DescriptionLabel = ({ name, location, icon, onPress }) => {
+export const DescriptionLabel = ({name, location, icon, onPress}) => {
   return (
     <View style={styles.container}>
-      <View style={{ flexDirection: 'row' }}>
+      <View style={{flexDirection: 'row'}}>
         <Text style={styles.title}>{name}</Text>
         <TouchableOpacity onPress={onPress}>
-          <Image style={styles.icon} source={icon}></Image>
+          <Image style={styles.icon} source={icon} />
         </TouchableOpacity>
       </View>
-      <View style={{ flexDirection: 'row' }}>
-        <Image style={styles.locationIcon} source={locationIcon}></Image>
+      <View style={{flexDirection: 'row'}}>
+        <Image style={styles.locationIcon} source={locationIcon} />
         <Text style={styles.desc}>{location}</Text>
       </View>
     </View>
@@ -27,7 +22,7 @@ export const DescriptionLabel = ({ name, location, icon, onPress }) => {
 const styles = EStyleSheet.create({
   container: {
     backgroundColor: '$secondaryBackGroundColor',
-    shadowOffset: { width: -2, height: 6 },
+    shadowOffset: {width: -2, height: 6},
     shadowColor: '$primaryColor',
     shadowOpacity: 0.3,
     shadowRadius: 4,
@@ -42,12 +37,12 @@ const styles = EStyleSheet.create({
     fontSize: 20,
     fontWeight: 'bold',
     width: '88%',
-    color: '$primaryTextColor'
+    color: '$primaryTextColor',
   },
   desc: {
     color: '$secondaryTextColor',
     paddingTop: 5,
-    maxWidth:'90%',
+    maxWidth: '90%',
     fontSize: 14,
   },
   icon: {
@@ -59,6 +54,6 @@ const styles = EStyleSheet.create({
     width: 14,
     height: 14,
     marginEnd: 5,
-    marginTop:5,
-  }
+    marginTop: 5,
+  },
 });

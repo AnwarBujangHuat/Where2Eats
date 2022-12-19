@@ -1,12 +1,15 @@
-import {
-  Image,
-  TextInput,
-  View
-} from 'react-native';
+import {Image, TextInput, View} from 'react-native';
 import React from 'react';
 import EStyleSheet from 'react-native-extended-stylesheet';
 
-export const InputFieldLogins = ({ testID,onChangeText1, defvalue, source, secret, hint }) => {
+export const InputFieldLogins = ({
+  testID,
+  onChangeText1,
+  defvalue,
+  source,
+  secret,
+  hint,
+}) => {
   return (
     <View style={styles.section}>
       <Image style={styles.icons} source={source} />
@@ -16,15 +19,15 @@ export const InputFieldLogins = ({ testID,onChangeText1, defvalue, source, secre
         placeholder={hint}
         value={defvalue}
         clearButtonMode={'always'}
-        onChangeText={(text) => onChangeText1(text)}
+        onChangeText={text => onChangeText1(text)}
         overflow="hidden"
         placeholderTextColor={EStyleSheet.value('$secondaryTextColor')}
         keyboardAppearance="dark"
         secureTextEntry={secret}
         color={EStyleSheet.value('$secondaryTextColor')}
-        autoCorrect={false} />
+        autoCorrect={false}
+      />
     </View>
-
   );
 };
 const styles = EStyleSheet.create({
@@ -33,7 +36,7 @@ const styles = EStyleSheet.create({
     flexDirection: 'row',
     borderRadius: 10,
     marginVertical: 10,
-    shadowOffset: { width: -2, height: 4 },
+    shadowOffset: {width: -2, height: 4},
     shadowColor: '$primaryColor',
     shadowOpacity: 0.2,
     shadowRadius: 3,
@@ -50,7 +53,7 @@ const styles = EStyleSheet.create({
     paddingRight: 15,
     paddingBottom: 15,
     paddingLeft: 0,
-    width: '80%'
+    width: '80%',
   },
   icons: {
     flexDirection: 'row',

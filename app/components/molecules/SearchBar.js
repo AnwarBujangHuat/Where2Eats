@@ -1,17 +1,10 @@
-import {
-  Dimensions,
-  Image,
-  SafeAreaView,
-  TextInput,
-  View
-} from 'react-native';
+import {Dimensions, Image, SafeAreaView, TextInput, View} from 'react-native';
 import React from 'react';
 import EStyleSheet from 'react-native-extended-stylesheet';
 
-const { width } = Dimensions.get('window');
+const {width} = Dimensions.get('window');
 
-
-export const SearchBar = ({ onChangeText, placeholder, source }) => {
+export const SearchBar = ({onChangeText, placeholder, source}) => {
   return (
     <SafeAreaView style={styles.section}>
       <View style={styles.searchbar}>
@@ -45,7 +38,7 @@ const styles = EStyleSheet.create({
     marginVertical: 10,
     width: width - 30,
     padding: 5,
-    shadowOffset: { width: -2, height: 4 },
+    shadowOffset: {width: -2, height: 4},
     shadowColor: '$primaryColor',
     shadowOpacity: 0.2,
     shadowRadius: 3,
@@ -54,7 +47,7 @@ const styles = EStyleSheet.create({
   text: {
     color: '$primaryTextColor',
     fontSize: 14,
-    fontWeight: 'bold'
+    fontWeight: 'bold',
   },
   section: {
     flexDirection: 'row',
@@ -64,7 +57,7 @@ const styles = EStyleSheet.create({
   input: {
     fontSize: 14,
     padding: 10,
-    width: '90%'
+    width: '90%',
   },
   icons: {
     flexDirection: 'row',

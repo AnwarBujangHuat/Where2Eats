@@ -1,4 +1,4 @@
-import { ConstString } from './Strings';
+import {ConstString} from './Strings';
 import burgerIcon from './assets/cheeseburger.png';
 import malayIcon from './assets/nasi-lemak.png';
 import chineseIcon from './assets/buns.png';
@@ -34,8 +34,7 @@ export const icons = {
   [ConstString.TWITTER]: twitterIcon,
   [ConstString.FACEBOOK]: facebookIcon,
   def: burgerIcon,
-  defMenu: sideIcon
-
+  defMenu: sideIcon,
 };
 export const Const = [
   {
@@ -69,5 +68,5 @@ export const Const = [
   {
     title: ConstString.DESSERT,
     icon: fruitsIcon,
-  }
+  },
 ];

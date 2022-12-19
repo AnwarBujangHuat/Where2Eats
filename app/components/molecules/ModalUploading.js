@@ -4,7 +4,7 @@ import {
   SafeAreaView,
   Text,
   TouchableOpacity,
-  View
+  View,
 } from 'react-native';
 import EStyleSheet from 'react-native-extended-stylesheet';
 import LottieView from 'lottie-react-native';
@@ -12,13 +12,18 @@ import Modal from 'react-native-modal';
 
 import Uploading from '../../assets/uploading.json';
 import Sleepy from '../../assets/sleepycat.json';
-import { ConstString } from '../../Strings';
+import {ConstString} from '../../Strings';
 
-const { width } = Dimensions.get('window');
+const {width} = Dimensions.get('window');
 let icon;
 let text;
 let showButton = false;
-export const ModalUploading = ({ isModalVisible, closeModal, goBack, action }) => {
+export const ModalUploading = ({
+  isModalVisible,
+  closeModal,
+  goBack,
+  action,
+}) => {
   if (action === ConstString.GO_BACK) {
     icon = Sleepy;
     text = 'All Your Progress in This Page Will Be Lost';
@@ -30,35 +35,41 @@ export const ModalUploading = ({ isModalVisible, closeModal, goBack, action }) =
   }
   return (
     <>
-      {
-        isModalVisible &&
+      {isModalVisible && (
         <SafeAreaView style={styles.screen}>
-          <Modal animationType="none"
-                 transparent visible={isModalVisible}
-                 onDismiss={closeModal}
-                 style={styles.viewWrapper}>
-
+          <Modal
+            animationType="none"
+            transparent
+            visible={isModalVisible}
+            onDismiss={closeModal}
+            style={styles.viewWrapper}>
             <View style={styles.modalView}>
-              <LottieView style={styles.lottieButton} source={icon} autoPlay={true}
+              <LottieView
+                style={styles.lottieButton}
+                source={icon}
+                autoPlay={true}
               />
               <Text style={styles.header}>{text}</Text>
-              {showButton &&
-                <View style={{
-                  flex: 1,
-                  flexDirection: 'row',
-                }}>
+              {showButton && (
+                <View
+                  style={{
+                    flex: 1,
+                    flexDirection: 'row',
+                  }}>
                   <TouchableOpacity style={styles.button} onPress={goBack}>
                     <Text style={styles.buttonTextGoBack}>Go Back</Text>
                   </TouchableOpacity>
-                  <TouchableOpacity style={styles.buttonVisit} onPress={closeModal}>
+                  <TouchableOpacity
+                    style={styles.buttonVisit}
+                    onPress={closeModal}>
                     <Text style={styles.buttonTextStay}>Stay</Text>
                   </TouchableOpacity>
                 </View>
-              }
+              )}
             </View>
           </Modal>
         </SafeAreaView>
-      }
+      )}
     </>
   );
 };
@@ -78,14 +89,13 @@ const styles = EStyleSheet.create({
     margin: 10,
   },
   icon: {
-
     alignSelf: 'center',
     marginTop: 5,
     marginEnd: 5,
   },
   lottieButton: {
-    width: width * .6,
-    height: width * .6,
+    width: width * 0.6,
+    height: width * 0.6,
   },
   screen: {
     flex: 1,
@@ -98,7 +108,7 @@ const styles = EStyleSheet.create({
     alignItems: 'center',
     alignSelf: 'center',
     backgroundColor: 'rgba(0, 0, 0, 0.2)',
-    shadowOffset: { width: -2, height: 2 },
+    shadowOffset: {width: -2, height: 2},
     shadowColor: '$primaryColor',
     shadowOpacity: 0.2,
     shadowRadius: 3,
@@ -111,7 +121,7 @@ const styles = EStyleSheet.create({
     alignSelf: 'center',
     width: width * 0.8,
     backgroundColor: '$secondaryBackGroundColor',
-    borderRadius: 10
+    borderRadius: 10,
   },
   button: {
     backgroundColor: '$secondaryBackGroundColor',
@@ -120,7 +130,7 @@ const styles = EStyleSheet.create({
     width: '50%',
     borderColor: '$secondaryBackGroundColor',
     borderRightColor: '$primaryColor',
-    borderWidth: .5,
+    borderWidth: 0.5,
     textTransform: 'uppercase',
     marginTop: 15,
   },
@@ -130,7 +140,7 @@ const styles = EStyleSheet.create({
     padding: 5,
     width: '50%',
     borderColor: '$secondaryBackGroundColor',
-    borderWidth: .5,
+    borderWidth: 0.5,
     textTransform: 'uppercase',
     marginTop: 15,
   },
@@ -140,13 +150,17 @@ const styles = EStyleSheet.create({
     fontWeight: 'bold',
     textAlign: 'center',
     color: '$primaryColor',
-    width: width * .7
+    width: width * 0.7,
   },
   desc: {
-    color: '$tertiaryTextColor', paddingEnd: 5, marginTop: 5,
-    fontSize: 14, fontWeight: 'normal', textAlign: 'justify'
+    color: '$tertiaryTextColor',
+    paddingEnd: 5,
+    marginTop: 5,
+    fontSize: 14,
+    fontWeight: 'normal',
+    textAlign: 'justify',
   },
-  descContainer: { paddingHorizontal: 10, },
+  descContainer: {paddingHorizontal: 10},
   logoIcon: {
     height: 60,
     width: 60,
@@ -154,7 +168,7 @@ const styles = EStyleSheet.create({
   iconCategory: {
     width: 20,
     height: 20,
-    alignSelf: 'center'
+    alignSelf: 'center',
   },
   containerIcon: {
     flexDirection: 'row',

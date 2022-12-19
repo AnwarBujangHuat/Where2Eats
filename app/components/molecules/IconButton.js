@@ -1,21 +1,15 @@
-import {
-  Text,
-  TouchableOpacity,
-  View
-} from 'react-native';
+import {Text, TouchableOpacity, View} from 'react-native';
 import React from 'react';
 import EStyleSheet from 'react-native-extended-stylesheet';
 
-export const IconButton = ({ title, onPress, buttontitle }) => {
+export const IconButton = ({title, onPress, buttontitle}) => {
   return (
     <View style={styles.section}>
       <Text style={styles.title}>{title}</Text>
-      <TouchableOpacity
-        onPress={onPress}>
+      <TouchableOpacity onPress={onPress}>
         <Text style={styles.buttonText}>{buttontitle}</Text>
       </TouchableOpacity>
     </View>
-
   );
 };
 const styles = EStyleSheet.create({
@@ -27,10 +21,10 @@ const styles = EStyleSheet.create({
   },
   buttonText: {
     color: '$primaryTextColor',
-    textAlign: 'center'
+    textAlign: 'center',
   },
   title: {
     color: '$secondaryTextColor',
-    textAlign: 'center'
-  }
+    textAlign: 'center',
+  },
 });

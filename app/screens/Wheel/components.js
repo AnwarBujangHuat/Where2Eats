@@ -6,28 +6,21 @@ import {
   Image,
   SafeAreaView,
   Text as RNText,
-  View
+  View,
 } from 'react-native';
-import Svg, {
-  G,
-  Path,
-  Text
-} from 'react-native-svg';
-import { BackButton } from '../../components/atoms/BackButton';
-import { ItemListRestaurant } from '../../components/molecules/ItemListRestaurant';
-import { ModalWinner } from '../../components/molecules/ModalWinner';
+import Svg, {G, Path, Text} from 'react-native-svg';
+import {BackButton} from '../../components/atoms/BackButton';
+import {ItemListRestaurant} from '../../components/molecules/ItemListRestaurant';
+import {ModalWinner} from '../../components/molecules/ModalWinner';
 import * as d3Shape from 'd3-shape';
-import { colorPalette } from './ColorPalette';
-import {
-  PanGestureHandler,
-  State
-} from 'react-native-gesture-handler';
+import {colorPalette} from './ColorPalette';
+import {PanGestureHandler, State} from 'react-native-gesture-handler';
 import color from 'randomcolor';
-import { snap } from '@popmotion/popcorn';
+import {snap} from '@popmotion/popcorn';
 import EStyleSheet from 'react-native-extended-stylesheet';
 
-const { width } = Dimensions.get('screen');
-const knobFill = color({ hue: 'purple' });
+const {width} = Dimensions.get('screen');
+const knobFill = color({hue: 'purple'});
 const wheelSize = width * 0.9;
 const fontSize = 20;
 const oneTurn = 360;
@@ -59,7 +52,7 @@ export const WheelComponents = props => {
     angle = event.value;
   });
   const makeWheel = () => {
-    const data = Array.from({ length: numberOfSegments }).fill(1);
+    const data = Array.from({length: numberOfSegments}).fill(1);
     const arcs = d3Shape.pie()(data);
     const colorRepeater = Math.floor(2);
     let colorPalettes = colorPalette;
@@ -69,19 +62,23 @@ export const WheelComponents = props => {
       }
     }
     return arcs.map((arc, index) => {
-      const instance = d3Shape.arc().padAngle(0.01).outerRadius(width / 2).innerRadius(20);
+      const instance = d3Shape
+        .arc()
+        .padAngle(0.01)
+        .outerRadius(width / 2)
+        .innerRadius(20);
       return {
         path: instance(arc),
         color: colorPalettes[index],
         value: index + 1,
-        centroid: instance.centroid(arc)
+        centroid: instance.centroid(arc),
       };
     });
   };
   const _wheelPaths = makeWheel();
 
-  const _onPan = ({ nativeEvent }) => {
-    const { velocityY, velocityX } = nativeEvent;
+  const _onPan = ({nativeEvent}) => {
+    const {velocityY, velocityX} = nativeEvent;
 
     if (nativeEvent.state === State.ACTIVE) {
       velocityX > 0 ? setDirection('Left') : setDirection('Right');
@@ -91,23 +88,22 @@ export const WheelComponents = props => {
       Animated.decay(_angle, {
         velocity: velocityY / 1000,
         deceleration: 0.999,
-        useNativeDriver: true
+        useNativeDriver: true,
       }).start(() => {
-          _angle.setValue(angle % oneTurn);
-          const snapTo = snap(oneTurn / numberOfSegments);
-          Animated.timing(_angle, {
-            toValue: snapTo(angle),
-            duration: 200,
-            useNativeDriver: true
-          }).start(() => {
-            const winnerIndex = _getWinnerIndex();
-            setisEnabled(true);
-            setFinished(true);
-            setModalVisible(true);
-            setSelectedRestaurant(restaurant[winnerIndex]);
-          });
-        }
-      );
+        _angle.setValue(angle % oneTurn);
+        const snapTo = snap(oneTurn / numberOfSegments);
+        Animated.timing(_angle, {
+          toValue: snapTo(angle),
+          duration: 200,
+          useNativeDriver: true,
+        }).start(() => {
+          const winnerIndex = _getWinnerIndex();
+          setisEnabled(true);
+          setFinished(true);
+          setModalVisible(true);
+          setSelectedRestaurant(restaurant[winnerIndex]);
+        });
+      });
     }
   };
   const _getWinnerIndex = () => {
@@ -116,20 +112,21 @@ export const WheelComponents = props => {
     if (isDirection === 'Right') {
       return tempIndex;
     } else {
-      if (tempIndex !== 0) return (numberOfSegments - tempIndex);
+      if (tempIndex !== 0) {
+        return numberOfSegments - tempIndex;
+      }
       return 0;
     }
   };
   const _renderKnob = () => {
     const knobSize = 30;
-    const YOLO =
-      Animated.modulo(
-        Animated.divide(
-          Animated.modulo(Animated.subtract(_angle, angleOffset), oneTurn),
-          new Animated.Value(angleBySegment)
-        ),
-        isDirection === 'Right' ? -1 : 1
-      );
+    const YOLO = Animated.modulo(
+      Animated.divide(
+        Animated.modulo(Animated.subtract(_angle, angleOffset), oneTurn),
+        new Animated.Value(angleBySegment),
+      ),
+      isDirection === 'Right' ? -1 : 1,
+    );
 
     return (
       <Animated.View
@@ -142,18 +139,23 @@ export const WheelComponents = props => {
             {
               rotate: YOLO.interpolate({
                 inputRange: [-1, -0.5, -0.0001, 0.0001, 0.5, 1],
-                outputRange: ['0deg', '0deg', '35deg', '-35deg', '0deg', '0deg']
-              })
-            }
-          ]
-        }}
-      >
+                outputRange: [
+                  '0deg',
+                  '0deg',
+                  '35deg',
+                  '-35deg',
+                  '0deg',
+                  '0deg',
+                ],
+              }),
+            },
+          ],
+        }}>
         <Svg
           width={knobSize}
           height={(knobSize * 100) / 57}
-          viewBox={`0 0 57 100`}
-          style={{ transform: [{ translateY: 8 }] }}
-        >
+          viewBox={'0 0 57 100'}
+          style={{transform: [{translateY: 8}]}}>
           <Path
             d="M28.034,0C12.552,0,0,12.552,0,28.034S28.034,100,28.034,100s28.034-56.483,28.034-71.966S43.517,0,28.034,0z   M28.034,40.477c-6.871,0-12.442-5.572-12.442-12.442c0-6.872,5.571-12.442,12.442-12.442c6.872,0,12.442,5.57,12.442,12.442  C40.477,34.905,34.906,40.477,28.034,40.477z"
             fill={knobFill}
@@ -165,32 +167,49 @@ export const WheelComponents = props => {
   const _renderSvgWheel = () => {
     return (
       <>
-        <SafeAreaView style={{ flex: 1, }}>
+        <SafeAreaView style={{flex: 1}}>
           <View style={styles.rowContainer}>
-            <BackButton onPress={goBackHome}></BackButton>
+            <BackButton onPress={goBackHome} />
             <RNText style={styles.title}>{'Wheel Of Fortune'}</RNText>
           </View>
-          <View style={{
-            flexDirection: 'row',
-            alignContent: 'center', alignSelf: 'center', alignItems: 'center',
-          }}>
-            <Image style={{ height: 50, width: 57, resizeMode: 'cover', marginBottom: 9 }}
-                   source={{ uri: 'https://c.tenor.com/MRX_0O8RtnkAAAAi/arrow.gif' }} />
+          <View
+            style={{
+              flexDirection: 'row',
+              alignContent: 'center',
+              alignSelf: 'center',
+              alignItems: 'center',
+            }}>
+            <Image
+              style={{
+                height: 50,
+                width: 57,
+                resizeMode: 'cover',
+                marginBottom: 9,
+              }}
+              source={{uri: 'https://c.tenor.com/MRX_0O8RtnkAAAAi/arrow.gif'}}
+            />
             <RNText style={styles.title}>{'Swipe To The LEFT or RIGHT'}</RNText>
-            <Image style={{ height: 50, width: 57, transform: [{ rotate: '180deg' }], marginTop: 9 }}
-                   source={{ uri: 'https://c.tenor.com/MRX_0O8RtnkAAAAi/arrow.gif' }} />
+            <Image
+              style={{
+                height: 50,
+                width: 57,
+                transform: [{rotate: '180deg'}],
+                marginTop: 9,
+              }}
+              source={{uri: 'https://c.tenor.com/MRX_0O8RtnkAAAAi/arrow.gif'}}
+            />
           </View>
           <View style={styles.wheel}>
             {_renderKnob()}
             <Animated.View
-              style={isDirection === 'Right' ? styles.swipeRight : styles.swipeLeft}
-            >
+              style={
+                isDirection === 'Right' ? styles.swipeRight : styles.swipeLeft
+              }>
               <Svg
                 width={wheelSize}
                 height={wheelSize}
                 viewBox={`0 0 ${width} ${width}`}
-                style={{ transform: [{ rotate: `-${angleOffset}deg` }] }}
-              >
+                style={{transform: [{rotate: `-${angleOffset}deg`}]}}>
                 <G y={width / 2} x={width / 2}>
                   {_wheelPaths.map((arc, i) => {
                     const [x, y] = arc.centroid;
@@ -198,7 +217,9 @@ export const WheelComponents = props => {
                       <G key={`arc-${i}`}>
                         <Path d={arc.path} fill={arc.color} />
                         <G
-                          rotation={(i * oneTurn) / numberOfSegments + angleOffset}
+                          rotation={
+                            (i * oneTurn) / numberOfSegments + angleOffset
+                          }
                           origin={`${x}, ${y}`}>
                           <Text
                             x={x}
@@ -218,33 +239,38 @@ export const WheelComponents = props => {
             </Animated.View>
           </View>
           <FlatList
-            style={{ marginTop: 15, }}
+            style={{marginTop: 15}}
             data={restaurant}
-            renderItem={({ item, index }) => {
+            renderItem={({item, index}) => {
               return (
                 <ItemListRestaurant
-                  name={item.restaurant} category={item.category} onPress={() => onPress(index)} index={index}
-                ></ItemListRestaurant>);
+                  name={item.restaurant}
+                  category={item.category}
+                  onPress={() => onPress(index)}
+                  index={index}
+                />
+              );
             }}
             showsHorizontalScrollIndicator={false}
           />
-          {
-            isModalVisible && isEnabled &&
-            <ModalWinner closeModal={closeModal} isModalVisible={isModalVisible} goToMenu={goToMenu}
-                         selectedRestaurant={selectedRestaurant} isFinished={isFinished} />
-          }
+          {isModalVisible && isEnabled && (
+            <ModalWinner
+              closeModal={closeModal}
+              isModalVisible={isModalVisible}
+              goToMenu={goToMenu}
+              selectedRestaurant={selectedRestaurant}
+              isFinished={isFinished}
+            />
+          )}
         </SafeAreaView>
-      </ >
+      </>
     );
   };
   return (
-    <PanGestureHandler
-      onHandlerStateChange={_onPan}
-      enabled={isEnabled}>
-      <View style={styles.container}>
-        {_renderSvgWheel()}
-      </View>
-    </PanGestureHandler>);
+    <PanGestureHandler onHandlerStateChange={_onPan} enabled={isEnabled}>
+      <View style={styles.container}>{_renderSvgWheel()}</View>
+    </PanGestureHandler>
+  );
 };
 const styles = EStyleSheet.create({
   container: {
@@ -259,10 +285,10 @@ const styles = EStyleSheet.create({
       {
         rotate: Animated.multiply(_angle, -1).interpolate({
           inputRange: [-oneTurn, 0, oneTurn],
-          outputRange: [`-${oneTurn}deg`, `0deg`, `${oneTurn}deg`]
-        })
-      }
-    ]
+          outputRange: [`-${oneTurn}deg`, '0deg', `${oneTurn}deg`],
+        }),
+      },
+    ],
   },
   swipeLeft: {
     alignItems: 'center',
@@ -271,10 +297,10 @@ const styles = EStyleSheet.create({
       {
         rotate: _angle.interpolate({
           inputRange: [-oneTurn, 0, oneTurn],
-          outputRange: [`-${oneTurn}deg`, `0deg`, `${oneTurn}deg`]
-        })
-      }
-    ]
+          outputRange: [`-${oneTurn}deg`, '0deg', `${oneTurn}deg`],
+        }),
+      },
+    ],
   },
   rowContainer: {
     flexDirection: 'row',
@@ -291,7 +317,7 @@ const styles = EStyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     elevation: 5,
-    shadowOffset: { width: -2, height: 2 },
+    shadowOffset: {width: -2, height: 2},
     shadowColor: '$primaryColor',
     shadowOpacity: 0.6,
     shadowRadius: 3,

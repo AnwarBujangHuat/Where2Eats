@@ -1,20 +1,15 @@
-import {
-  Image,
-  TouchableOpacity,
-  View
-} from 'react-native';
+import {Image, TouchableOpacity, View} from 'react-native';
 import React from 'react';
 import backButton from '../../assets/back.png';
 import EStyleSheet from 'react-native-extended-stylesheet';
 
-export const BackButton = ({ onPress }) => {
+export const BackButton = ({onPress}) => {
   return (
     <View>
       <TouchableOpacity style={styles.container} onPress={onPress}>
         <Image style={styles.icons} source={backButton} />
       </TouchableOpacity>
     </View>
-
   );
 };
 const styles = EStyleSheet.create({
@@ -23,7 +18,7 @@ const styles = EStyleSheet.create({
     backgroundColor: '$secondaryBackGroundColor',
     borderRadius: 40,
     padding: 10,
-    shadowOffset: { width: -2, height: 4 },
+    shadowOffset: {width: -2, height: 4},
     shadowColor: '$primaryColor',
     shadowOpacity: 0.2,
     shadowRadius: 3,

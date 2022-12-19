@@ -1,14 +1,14 @@
-import React, { useState } from 'react';
-import { ProfileComponents } from './components';
-import { ConstString } from '../../Strings';
-import { getUser } from '../../store/selector';
+import React, {useState} from 'react';
+import {ProfileComponents} from './components';
+import {ConstString} from '../../Strings';
+import {getUser} from '../../store/selector';
 import profileIcon from '../../assets/profile.png';
 import phoneIcon from '../../assets/telephone.png';
 import emailIcon from '../../assets/email.png';
 
-import { useSelector } from 'react-redux';
+import {useSelector} from 'react-redux';
 
-export const Profile = ({ navigation }) => {
+export const Profile = ({navigation}) => {
   const goBackHome = () => navigation.navigate(ConstString.HOME);
   const [isModalVisible, setModalVisible] = useState(false);
   const [selectedInfo, setSelectedInfo] = useState('');
@@ -22,7 +22,7 @@ export const Profile = ({ navigation }) => {
   const closeModal = () => {
     setModalVisible(!isModalVisible);
   };
-  const editInformation = (id) => {
+  const editInformation = id => {
     setSelectedInfo(id);
     closeModal();
   };
@@ -31,20 +31,20 @@ export const Profile = ({ navigation }) => {
       id: 'NAME',
       title: 'User Name',
       information: User.NAME,
-      icon: profileIcon
+      icon: profileIcon,
     },
     {
       id: 'PHONE',
       title: 'Phone Number',
       information: User.PHONE,
-      icon: phoneIcon
+      icon: phoneIcon,
     },
     {
       id: 'EMAIL',
       title: 'Email Address',
       information: User.EMAIL,
-      icon: emailIcon
-    }
+      icon: emailIcon,
+    },
   ];
   const props = {
     goBackHome,
@@ -54,7 +54,7 @@ export const Profile = ({ navigation }) => {
     selectedInfo,
     onDone,
     setUpdatedInfo,
-    closeModal
+    closeModal,
   };
-  return (<ProfileComponents {...props} />);
+  return <ProfileComponents {...props} />;
 };

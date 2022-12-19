@@ -5,17 +5,17 @@ import {
   SafeAreaView,
   Text,
   TouchableOpacity,
-  View
+  View,
 } from 'react-native';
-import { Rating } from 'react-native-ratings';
+import {Rating} from 'react-native-ratings';
 import React from 'react';
-import { BackButton } from '../../components/atoms/BackButton';
+import {BackButton} from '../../components/atoms/BackButton';
 import EStyleSheet from 'react-native-extended-stylesheet';
-import { RatingCard } from '../../components/molecules/RatingCard';
+import {RatingCard} from '../../components/molecules/RatingCard';
 import addIcon from '../../assets/plus.png';
-import { ModalGiveRating, } from '../../components/molecules/ModalGiveRating';
-import { BarChart } from 'react-native-chart-kit';
-import { RatingButton } from '../../components/atoms/RatingButton';
+import {ModalGiveRating} from '../../components/molecules/ModalGiveRating';
+import {BarChart} from 'react-native-chart-kit';
+import {RatingButton} from '../../components/atoms/RatingButton';
 
 export const RatingComponents = props => {
   const {
@@ -32,37 +32,44 @@ export const RatingComponents = props => {
     restaurantList,
     ratingChipButton,
     onSelectedRating,
-    isSelectedRating
+    isSelectedRating,
   } = props;
-  const RenderItem = ({ item }) => {
+  const RenderItem = ({item}) => {
     return (
-      <RatingButton rating={item} onPress={onSelectedRating} selected={isSelectedRating} />
+      <RatingButton
+        rating={item}
+        onPress={onSelectedRating}
+        selected={isSelectedRating}
+      />
     );
   };
-  const renderRateCard = ({ item }) => {
-    return (
-      <RatingCard userReview={item} />
-    );
+  const renderRateCard = ({item}) => {
+    return <RatingCard userReview={item} />;
   };
   const SelfReview = () => {
-    return (
-      !isFirstTimeRate ?
-        <RatingCard userReview={userReview} />
-        :
-        <Text style={styles.reviewText}>No Review</Text>
+    return !isFirstTimeRate ? (
+      <RatingCard userReview={userReview} />
+    ) : (
+      <Text style={styles.reviewText}>No Review</Text>
     );
   };
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.rowContainer}>
-        <BackButton onPress={onBackButton}></BackButton>
-        <Text style={styles.header}>{restaurantInfo.restaurant + ' Customer Review'}</Text>
+        <BackButton onPress={onBackButton} />
+        <Text style={styles.header}>
+          {restaurantInfo.restaurant + ' Customer Review'}
+        </Text>
       </View>
-      <View style={{ marginHorizontal: 15 }}>
-        <View style={{ flexDirection: 'row' }}>
-          <View style={{ alignSelf: 'center', alignContent: 'center', paddingRight: 30 }}>
-            <Text style={styles.rating}> {isCurrentRating.toFixed(1)}
-            </Text>
+      <View style={{marginHorizontal: 15}}>
+        <View style={{flexDirection: 'row'}}>
+          <View
+            style={{
+              alignSelf: 'center',
+              alignContent: 'center',
+              paddingRight: 30,
+            }}>
+            <Text style={styles.rating}> {isCurrentRating.toFixed(1)}</Text>
             <Rating
               type="star"
               fractions={1}
@@ -70,27 +77,25 @@ export const RatingComponents = props => {
               readonly={true}
               showReadOnlyText={false}
               tintColor={EStyleSheet.value('$backGroundColor')}
-              style={{ paddingStart: 10 }}
+              style={{paddingStart: 10}}
               imageSize={18}
               ratingTextColor={EStyleSheet.value('$secondaryTextColor')}
             />
-            <View style={{ paddingStart: 10, }}>
-              <Text style={
-                {
+            <View style={{paddingStart: 10}}>
+              <Text
+                style={{
                   fontSize: 12,
                   color: EStyleSheet.value('$secondaryTextColor'),
                   paddingVertical: 5,
-                  alignSelf: 'flex-start'
-                }
-              }>
+                  alignSelf: 'flex-start',
+                }}>
                 {restaurantInfo.rating.length + ' Reviews'}
               </Text>
             </View>
-
           </View>
           <BarChart
             style={{
-              transform: [{ rotate: '90deg' }],
+              transform: [{rotate: '90deg'}],
               marginStart: 30,
               paddingRight: 0,
             }}
@@ -98,9 +103,9 @@ export const RatingComponents = props => {
               labels: [5, 4, 3, 2, 1],
               datasets: [
                 {
-                  data: ratingCount ?? []
-                }
-              ]
+                  data: ratingCount ?? [],
+                },
+              ],
             }}
             chartConfig={{
               backgroundGradientFrom: 'transparent',
@@ -115,7 +120,8 @@ export const RatingComponents = props => {
               fillShadowGradientFromOffset: 1,
               backgroundGradientToOpacity: 0,
               color: (opacity = 1) => EStyleSheet.value('$secondaryTextColor'),
-              labelColor: (opacity = 1) => EStyleSheet.value('$secondaryTextColor'),
+              labelColor: (opacity = 1) =>
+                EStyleSheet.value('$secondaryTextColor'),
               strokeWidth: 1,
               barPercentage: 0.4,
             }}
@@ -128,17 +134,20 @@ export const RatingComponents = props => {
           />
         </View>
 
-        <View style={{ flexDirection: 'row', marginBottom: 10, }}>
+        <View style={{flexDirection: 'row', marginBottom: 10}}>
           <Text style={styles.header}>Your Review</Text>
           <TouchableOpacity style={styles.buttonContainer} onPress={openModal}>
             <Image style={styles.addIcon} source={addIcon} />
-            <Text style={{
-              padding: 5,
-              color: 'white',
-              fontWeight: 'bold',
-              alignSelf: 'center',
-              fontSize: 12,
-            }}>{!isFirstTimeRate ? 'Update Review' : 'Add Review'}</Text>
+            <Text
+              style={{
+                padding: 5,
+                color: 'white',
+                fontWeight: 'bold',
+                alignSelf: 'center',
+                fontSize: 12,
+              }}>
+              {!isFirstTimeRate ? 'Update Review' : 'Add Review'}
+            </Text>
           </TouchableOpacity>
         </View>
         <SelfReview />
@@ -146,7 +155,7 @@ export const RatingComponents = props => {
           data={ratingChipButton}
           renderItem={RenderItem}
           horizontal={true}
-          style={{ marginVertical: 5, }}
+          style={{marginVertical: 5}}
           showsHorizontalScrollIndicator={false}
         />
         <FlatList
@@ -155,10 +164,16 @@ export const RatingComponents = props => {
           showsHorizontalScrollIndicator={false}
         />
       </View>
-      {isModalRateOpen &&
-        <ModalGiveRating closeModal={closeModal} isModalVisible={isModalRateOpen}
-                         submit={(text, newRate) => submit(text, newRate)} userReview={userReview} />}
-    </SafeAreaView>);
+      {isModalRateOpen && (
+        <ModalGiveRating
+          closeModal={closeModal}
+          isModalVisible={isModalRateOpen}
+          submit={(text, newRate) => submit(text, newRate)}
+          userReview={userReview}
+        />
+      )}
+    </SafeAreaView>
+  );
 };
 const styles = EStyleSheet.create({
   container: {
@@ -202,7 +217,7 @@ const styles = EStyleSheet.create({
     borderRadius: 10,
     width: Dimensions.get('screen').width - 30,
     textTransform: 'uppercase',
-    alignSelf: 'center'
+    alignSelf: 'center',
   },
   title: {
     fontSize: 16,
@@ -221,7 +236,7 @@ const styles = EStyleSheet.create({
     alignSelf: 'center',
     alignItems: 'center',
     backgroundColor: 'white',
-    alignContent: 'center'
+    alignContent: 'center',
   },
   reviewText: {
     fontSize: 14,
@@ -233,11 +248,12 @@ const styles = EStyleSheet.create({
     flexDirection: 'row',
     backgroundColor: '$primaryColor',
     borderRadius: 20,
-    shadowOffset: { width: -2, height: 2 },
+    shadowOffset: {width: -2, height: 2},
     shadowColor: '$primaryColor',
     shadowOpacity: 0.2,
     shadowRadius: 3,
-    right: 0, position: 'absolute',
+    right: 0,
+    position: 'absolute',
     elevation: 10,
   },
 });

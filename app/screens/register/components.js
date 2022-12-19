@@ -7,14 +7,14 @@ import {
   SafeAreaView,
   Text,
   TouchableOpacity,
-  View
+  View,
 } from 'react-native';
-import { DetailsHeader } from '../../components/molecules/DetailsHeader';
-import { Const } from '../../Const';
-import { ImageButton } from '../../components/atoms/ImageButton';
-import { InputField } from '../../components/atoms/InputField';
+import {DetailsHeader} from '../../components/molecules/DetailsHeader';
+import {Const} from '../../Const';
+import {ImageButton} from '../../components/atoms/ImageButton';
+import {InputField} from '../../components/atoms/InputField';
 import EStyleSheet from 'react-native-extended-stylesheet';
-import { ModalLocation } from '../../components/molecules/ModalLocation';
+import {ModalLocation} from '../../components/molecules/ModalLocation';
 
 export const RegisterComponents = props => {
   const {
@@ -35,32 +35,49 @@ export const RegisterComponents = props => {
     addLocation,
     openLocationModal,
     closeLocationModal,
-    isModalOpen
+    isModalOpen,
   } = props;
   return (
     <SafeAreaView style={styles.container}>
-      <DetailsHeader back={goBack} disabled={false} onPress={launchImageLibrary} image={imageUri} />
+      <DetailsHeader
+        back={goBack}
+        disabled={false}
+        onPress={launchImageLibrary}
+        image={imageUri}
+      />
       <View style={styles.inputContainer}>
         <Text style={styles.header}>{'Restaurant Name'}</Text>
-        <InputField placeholder={'Please Input Name'} multiline={false} onChange={(text) => setName(text)}
-                    value={restaurantName} />
+        <InputField
+          placeholder={'Please Input Name'}
+          multiline={false}
+          onChange={text => setName(text)}
+          value={restaurantName}
+        />
         <Text style={styles.header}>{'Description'}</Text>
-        <InputField placeholder={'Please Input Description'} multiline={true}
-                    onChange={(text) => setDescription(text)} value={restaurantDesc} />
+        <InputField
+          placeholder={'Please Input Description'}
+          multiline={true}
+          onChange={text => setDescription(text)}
+          value={restaurantDesc}
+        />
         <Text style={styles.header}>{'Category'}</Text>
         <FlatList
-          style={{ maxHeight: 60 }}
+          style={{maxHeight: 60}}
           data={Const}
           onScrollToIndexFailed={info => {
             const wait = new Promise(resolve => setTimeout(resolve, 500));
             wait.then(() => {
-              Const.current?.scrollToIndex({ index: info.index, animated: true });
+              Const.current?.scrollToIndex({index: info.index, animated: true});
             });
           }}
           initialScrollIndex={initialIndex ?? 0}
-          renderItem={({ item }) => {
+          renderItem={({item}) => {
             return (
-              <ImageButton item={item} onPress={() => categorySelected({ item })} selected={selectedTypes} />
+              <ImageButton
+                item={item}
+                onPress={() => categorySelected({item})}
+                selected={selectedTypes}
+              />
             );
           }}
           horizontal={true}
@@ -70,20 +87,32 @@ export const RegisterComponents = props => {
         <TouchableOpacity
           style={styles.buttonLocation}
           onPress={openLocationModal}>
-          <Text style={{ color: EStyleSheet.value('$primaryColor'), fontWeight: 'bold' }}>Location</Text>
+          <Text
+            style={{
+              color: EStyleSheet.value('$primaryColor'),
+              fontWeight: 'bold',
+            }}>
+            Location
+          </Text>
         </TouchableOpacity>
         <Text style={styles.desc}>{restaurantLocation}</Text>
-        <ModalLocation isModalVisible={isModalOpen} submitLocation={addLocation} closeModal={closeLocationModal} />
+        <ModalLocation
+          isModalVisible={isModalOpen}
+          submitLocation={addLocation}
+          closeModal={closeLocationModal}
+        />
       </View>
 
-      <KeyboardAvoidingView behavior={Platform.OS === 'ios' ? 'padding' : 'height'}>
+      <KeyboardAvoidingView
+        behavior={Platform.OS === 'ios' ? 'padding' : 'height'}>
         <TouchableOpacity
           style={styles.button}
           onPress={editorMode ? updateRestaurantInfo : goToMenu}>
-          <Text style={styles.buttonText}>{editorMode ? 'Update Restaurant Info' : 'goToMenu'}</Text>
+          <Text style={styles.buttonText}>
+            {editorMode ? 'Update Restaurant Info' : 'goToMenu'}
+          </Text>
         </TouchableOpacity>
       </KeyboardAvoidingView>
-
     </SafeAreaView>
   );
 };
@@ -110,7 +139,7 @@ const styles = EStyleSheet.create({
     fontWeight: 'bold',
     marginVertical: 10,
     color: '$primaryTextColor',
-    shadowOffset: { width: -2, height: 2 },
+    shadowOffset: {width: -2, height: 2},
     shadowColor: '$primaryColor',
     shadowOpacity: 0.2,
     shadowRadius: 3,

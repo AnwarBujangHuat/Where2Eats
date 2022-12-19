@@ -1,20 +1,14 @@
-import React, { useState } from 'react';
-import { HomeComponents } from './components';
-import { ConstString } from '../../Strings';
-import {
-  getRestaurant,
-  getUser,
-} from '../../store/selector';
-import {
-  useDispatch,
-  useSelector
-} from 'react-redux';
-import { PopulateRestaurantList } from '../../store/thunks';
-import { Alert } from 'react-native';
+import React, {useState} from 'react';
+import {HomeComponents} from './components';
+import {ConstString} from '../../Strings';
+import {getRestaurant, getUser} from '../../store/selector';
+import {useDispatch, useSelector} from 'react-redux';
+import {PopulateRestaurantList} from '../../store/thunks';
+import {Alert} from 'react-native';
 
-export const Home = ({ navigation }) => {
+export const Home = ({navigation}) => {
   const fetchRestaurant = useSelector(getRestaurant);
-  const { NAME: userName, IMAGE } = useSelector(getUser);
+  const {NAME: userName, IMAGE} = useSelector(getUser);
   const dispatch = useDispatch();
   const restaurant = [...fetchRestaurant];
   const [currentRestaurant, setCurrentRestaurant] = useState(restaurant);
@@ -23,41 +17,59 @@ export const Home = ({ navigation }) => {
   const [isRender, setIsRender] = useState(false);
   const [isFetching, setIsFetching] = useState(false);
 
-  const onClickCategoryChip = (category) => {
+  const onClickCategoryChip = category => {
     //check if category item is already selected
     const isRestaurantIncluded = selectedTypes.includes(category);
-    const tempSelected = isRestaurantIncluded ? selectedTypes.filter(item => item !== category) : [category, ...selectedTypes];
+    const tempSelected = isRestaurantIncluded
+      ? selectedTypes.filter(item => item !== category)
+      : [category, ...selectedTypes];
     setSelectedTypes(tempSelected);
-    if (tempSelected.length <= 0) return setCurrentRestaurant(restaurant);
+    if (tempSelected.length <= 0) {
+      return setCurrentRestaurant(restaurant);
+    }
     if (isRestaurantIncluded) {
-      const updateRestaurant = currentRestaurant.filter(currentRestaurant => currentRestaurant.category !== category);
+      const updateRestaurant = currentRestaurant.filter(
+        currentRestaurant => currentRestaurant.category !== category,
+      );
       setCurrentRestaurant(updateRestaurant);
     } else {
-      const updateRestaurant = restaurant.filter(currentRestaurant => currentRestaurant.category === category);
-      const tempRestaurant = selectedTypes.length === 0 ? [...updateRestaurant] : [...updateRestaurant, ...currentRestaurant];
+      const updateRestaurant = restaurant.filter(
+        currentRestaurant => currentRestaurant.category === category,
+      );
+      const tempRestaurant =
+        selectedTypes.length === 0
+          ? [...updateRestaurant]
+          : [...updateRestaurant, ...currentRestaurant];
       setCurrentRestaurant(tempRestaurant);
     }
   };
-  const reFresh = async() => {
+  const reFresh = async () => {
     setIsFetching(true);
     const response = await dispatch(PopulateRestaurantList());
-    const { payload } = response;
+    const {payload} = response;
     if (!payload.result) {
-      Alert.alert(payload.data,
+      Alert.alert(
+        payload.data,
         '',
-        [{
-          text: 'Ok',
-          onPress: goBack
-          ,
-        }],
-        { cancelable: false });
+        [
+          {
+            text: 'Ok',
+            onPress: goBack,
+          },
+        ],
+        {cancelable: false},
+      );
     }
     setIsFetching(false);
   };
   const goBack = () => navigation.navigate(ConstString.LOGIN);
-  const onSearch = (text) => {
-    if (!text) return setCurrentRestaurant(restaurant);
-    const updateRestaurant = restaurant.filter(item => item.restaurant.toLowerCase().includes(text.toLowerCase()));
+  const onSearch = text => {
+    if (!text) {
+      return setCurrentRestaurant(restaurant);
+    }
+    const updateRestaurant = restaurant.filter(item =>
+      item.restaurant.toLowerCase().includes(text.toLowerCase()),
+    );
     setCurrentRestaurant(updateRestaurant);
   };
   const gotoRoulette = () => {
@@ -70,9 +82,9 @@ export const Home = ({ navigation }) => {
   };
   const openMenu = () => setOpenMenu(!isOpenMenu);
   const closeModal = () => setOpenMenu(false);
-  const onNavigate = (id) => {
+  const onNavigate = id => {
     resetHome();
-    switch(id) {
+    switch (id) {
       case 1:
         navigation.navigate(ConstString.REGISTER);
         break;
@@ -85,9 +97,9 @@ export const Home = ({ navigation }) => {
     }
     closeModal();
   };
-  const goToRestaurant = (id) => {
+  const goToRestaurant = id => {
     resetHome();
-    navigation.navigate(ConstString.RESTAURANT, { id });
+    navigation.navigate(ConstString.RESTAURANT, {id});
   };
   const reRender = () => setIsRender(!isRender);
   const props = {
@@ -105,7 +117,7 @@ export const Home = ({ navigation }) => {
     reFresh,
     reRender,
     userName,
-    IMAGE
+    IMAGE,
   };
-  return (<HomeComponents{...props} />);
+  return <HomeComponents {...props} />;
 };

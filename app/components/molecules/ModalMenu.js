@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, {useState} from 'react';
 import {
   Alert,
   Dimensions,
@@ -7,43 +7,49 @@ import {
   Text,
   TextInput,
   TouchableOpacity,
-  View
+  View,
 } from 'react-native';
 import Modal from 'react-native-modal';
 import addIcon from '../../assets/plus.png';
 import EStyleSheet from 'react-native-extended-stylesheet';
-import { ConstString } from '../../Strings';
-import { launchImagePicker } from '../../ImagePicker';
+import {ConstString} from '../../Strings';
+import {launchImagePicker} from '../../ImagePicker';
 
-const { width } = Dimensions.get('window');
+const {width} = Dimensions.get('window');
 export const ModalMenu = ({
-  Category, isModalVisible, closeModal, addFoodItem, foodItem, updateFoodItem, editorMode = false
+  Category,
+  isModalVisible,
+  closeModal,
+  addFoodItem,
+  foodItem,
+  updateFoodItem,
+  editorMode = false,
 }) => {
   const [itemName, setItemName] = useState(!Category ? foodItem.name : '');
   const [itemDesc, setItemDesc] = useState(!Category ? foodItem.desc : '');
   const [itemPrice, setItemPrice] = useState(!Category ? foodItem.price : '');
-  const [imageUri, setImageUri] = useState(!Category ? foodItem.image : undefined);
+  const [imageUri, setImageUri] = useState(
+    !Category ? foodItem.image : undefined,
+  );
   let reUpload = false;
-  const showErrorAlert = ({ message }) => {
-    Alert.alert('Error',
-      message,
-      [
-        { text: 'Okay' },
-      ],
-      { cancelable: true }
-    );
+  const showErrorAlert = ({message}) => {
+    Alert.alert('Error', message, [{text: 'Okay'}], {cancelable: true});
   };
-  const launchImageLibrary = async() => {
+  const launchImageLibrary = async () => {
     const response = await launchImagePicker();
     //* Exit if response empty *//
     if (!response) {
-      return showErrorAlert({ message: 'Please Pick Image in JPG or PNG format' });
+      return showErrorAlert({
+        message: 'Please Pick Image in JPG or PNG format',
+      });
     }
 
     //* Exit if there's error *//
-    const { errorCode, assets } = response;
+    const {errorCode, assets} = response;
     if (errorCode || assets === []) {
-      return showErrorAlert({ message: 'Please Pick Image in JPG or PNG format' });
+      return showErrorAlert({
+        message: 'Please Pick Image in JPG or PNG format',
+      });
     }
 
     //* Code proccessing *//
@@ -51,10 +57,18 @@ export const ModalMenu = ({
     reUpload = true;
   };
   const addItem = () => {
+    if (
+      itemName === '' ||
+      itemDesc === '' ||
+      imageUri === undefined ||
+      itemPrice === ''
+    ) {
+      return showErrorAlert({message: 'Please Complete Input'});
+    }
 
-    if (itemName === '' || itemDesc === '' || imageUri === undefined || itemPrice === '') return showErrorAlert({ message: 'Please Complete Input' });
-
-    if (/[a-zA-Z]/.test(itemPrice)) return showErrorAlert({ message: 'Please Ensure Price is Only Numbers' });
+    if (/[a-zA-Z]/.test(itemPrice)) {
+      return showErrorAlert({message: 'Please Ensure Price is Only Numbers'});
+    }
 
     const newItem = {
       desc: itemDesc,
@@ -64,7 +78,9 @@ export const ModalMenu = ({
       category: Category ? Category : foodItem.category,
     };
     // If user add new item to menu
-    if (Category) return addFoodItem(newItem);
+    if (Category) {
+      return addFoodItem(newItem);
+    }
 
     // User update food item
     //If User change image then upload new image to Firebase storage
@@ -72,13 +88,14 @@ export const ModalMenu = ({
   };
   return (
     <>
-      {
-        { isModalVisible } &&
+      {{isModalVisible} && (
         <SafeAreaView style={styles.screen}>
-          <Modal animationType="slide"
-                 transparent visible={isModalVisible}
-                 onBackdropPress={() => closeModal()}
-                 onDismiss={closeModal}>
+          <Modal
+            animationType="slide"
+            transparent
+            visible={isModalVisible}
+            onBackdropPress={() => closeModal()}
+            onDismiss={closeModal}>
             <View style={styles.modalView}>
               <Text style={styles.header}>{'Item Name'}</Text>
               <TextInput
@@ -90,7 +107,8 @@ export const ModalMenu = ({
                 onChangeText={setItemName}
                 overflow="hidden"
                 keyboardAppearance="dark"
-                autoCorrect={false} />
+                autoCorrect={false}
+              />
               <Text style={styles.header}>{'Description'}</Text>
               <TextInput
                 style={styles.descriptionInput}
@@ -101,7 +119,8 @@ export const ModalMenu = ({
                 placeholderTextColor={EStyleSheet.value('$secondaryTextColor')}
                 overflow="hidden"
                 keyboardAppearance="dark"
-                autoCorrect={false} />
+                autoCorrect={false}
+              />
               <Text style={styles.header}>{'Price'}</Text>
               <TextInput
                 style={styles.textInput}
@@ -113,38 +132,41 @@ export const ModalMenu = ({
                 keyboardType={'numeric'}
                 overflow="hidden"
                 keyboardAppearance="dark"
-                autoCorrect={false} />
+                autoCorrect={false}
+              />
               <Text style={styles.header}>{'Add Image'}</Text>
-              <TouchableOpacity onPress={launchImageLibrary} style={styles.container}>
-                {imageUri === undefined ? <Image style={styles.icons} source={addIcon} /> :
-                  <View>
-                    <Image style={styles.image} source={{ uri: imageUri, }} />
-                    <Text style={styles.changeButton}>Change Image</Text>
-                  </View>}
-              </TouchableOpacity>
               <TouchableOpacity
-                style={styles.button}
-                onPress={addItem}>
+                onPress={launchImageLibrary}
+                style={styles.container}>
+                {imageUri === undefined ? (
+                  <Image style={styles.icons} source={addIcon} />
+                ) : (
+                  <View>
+                    <Image style={styles.image} source={{uri: imageUri}} />
+                    <Text style={styles.changeButton}>Change Image</Text>
+                  </View>
+                )}
+              </TouchableOpacity>
+              <TouchableOpacity style={styles.button} onPress={addItem}>
                 <Text style={styles.buttonText}>Add Item</Text>
               </TouchableOpacity>
             </View>
           </Modal>
         </SafeAreaView>
-      }
+      )}
     </>
   );
 };
 const styles = EStyleSheet.create({
-  changeButton:
-    {
-      position: 'absolute',
-      left: 0,
-      fontWeight: 'bold',
-      fontSize: 12,
-      color: '$primaryTextColor',
-      backgroundColor: '$secondaryBackGroundColor',
-      padding: 5,
-    },
+  changeButton: {
+    position: 'absolute',
+    left: 0,
+    fontWeight: 'bold',
+    fontSize: 12,
+    color: '$primaryTextColor',
+    backgroundColor: '$secondaryBackGroundColor',
+    padding: 5,
+  },
   button: {
     backgroundColor: '$lightPrimaryColor',
     alignItems: 'center',
@@ -163,7 +185,7 @@ const styles = EStyleSheet.create({
     backgroundColor: '$primaryColor',
     borderRadius: 10,
     marginTop: 10,
-    shadowOffset: { width: -2, height: 4 },
+    shadowOffset: {width: -2, height: 4},
     shadowColor: '$primaryColor',
     shadowOpacity: 0.2,
     shadowRadius: 3,
@@ -179,7 +201,6 @@ const styles = EStyleSheet.create({
     height: 20,
     width: 20,
     margin: 10,
-
   },
   screen: {
     flex: 1,
@@ -214,7 +235,7 @@ const styles = EStyleSheet.create({
     fontSize: 16,
     fontWeight: 'bold',
     color: '$tertiaryColor',
-    shadowOffset: { width: -2, height: 1 },
+    shadowOffset: {width: -2, height: 1},
     shadowColor: '$primaryColor',
     shadowOpacity: 0.1,
     shadowRadius: 2,

@@ -1,4 +1,5 @@
-export const ConstString = { // name it to routes
+export const ConstString = {
+  // name it to routes
   HOME: 'Home',
   LOGIN: 'Login',
   REGISTER: 'Register',
@@ -37,5 +38,5 @@ export const ConstString = { // name it to routes
   FACEBOOK: 'Facebook',
   TWITTER: 'Twitter',
   GOOGLE: 'Google',
-  LOCATION: 'Location'
+  LOCATION: 'Location',
 };

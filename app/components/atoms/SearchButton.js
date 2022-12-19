@@ -1,32 +1,27 @@
-import {
-  Dimensions,
-  Image,
-  TextInput,
-  TouchableOpacity
-} from 'react-native';
+import {Dimensions, Image, TextInput, TouchableOpacity} from 'react-native';
 import React from 'react';
 import EStyleSheet from 'react-native-extended-stylesheet';
 import searchIcon from '../../assets/search.png';
 
-const { width } = Dimensions.get('window');
+const {width} = Dimensions.get('window');
 
-export const SearchButton = ({ onPress, onChangeText, onSearch }) => {
+export const SearchButton = ({onPress, onChangeText, onSearch}) => {
   return (
     <TouchableOpacity style={styles.container} onPress={onPress}>
       <Image style={styles.icons} source={searchIcon} />
-      {onSearch &&
+      {onSearch && (
         <TextInput
           style={styles.input}
           placeholder={'Search....'}
-          onChangeText={(text) => onChangeText(text)}
+          onChangeText={text => onChangeText(text)}
           color={EStyleSheet.value('$secondaryTextColor')}
           placeholderTextColor={EStyleSheet.value('$secondaryTextColor')}
           keyboardAppearance="dark"
-          autoCorrect={false} />
-      }
+          autoCorrect={false}
+        />
+      )}
     </TouchableOpacity>
   );
-
 };
 const styles = EStyleSheet.create({
   container: {
@@ -37,7 +32,7 @@ const styles = EStyleSheet.create({
     padding: 10,
     paddingHorizontal: 10,
     marginStart: 10,
-    shadowOffset: { width: -2, height: 4 },
+    shadowOffset: {width: -2, height: 4},
     shadowColor: '$primaryColor',
     shadowOpacity: 0.2,
     shadowRadius: 3,
@@ -46,13 +41,11 @@ const styles = EStyleSheet.create({
   icons: {
     height: 20,
     width: 20,
-    tintColor: '$primaryColor'
+    tintColor: '$primaryColor',
   },
   input: {
     fontSize: 14,
-    width: width * .50,
+    width: width * 0.5,
     paddingHorizontal: 10,
   },
-
-
 });

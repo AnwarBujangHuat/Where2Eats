@@ -2,7 +2,8 @@ import * as ImagePicker from 'react-native-image-picker';
 
 export const launchImagePicker = () => {
   try {
-    return ImagePicker.launchImageLibrary({
+    return ImagePicker.launchImageLibrary(
+      {
         mediaType: 'photo',
         quality: 1,
         maxWidth: 600,
@@ -10,15 +11,16 @@ export const launchImagePicker = () => {
         skipBackup: true,
         path: 'images',
       },
-      (response) => {
+      response => {
         if (response.didCancel) {
           return 'cancel';
         }
-        return response.assets !== undefined ? response.assets[0].uri : response;
-      });
-  }
-  catch(e) {
+        return response.assets !== undefined
+          ? response.assets[0].uri
+          : response;
+      },
+    );
+  } catch (e) {
     return 'Error';
   }
 };
-

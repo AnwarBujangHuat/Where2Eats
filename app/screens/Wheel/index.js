@@ -1,9 +1,9 @@
-import React, { useState } from 'react';
-import { ConstString } from '../../Strings';
-import { WheelComponents } from './components';
+import React, {useState} from 'react';
+import {ConstString} from '../../Strings';
+import {WheelComponents} from './components';
 
 const oneTurn = 360;
-export const WheelOfFortune = ({ navigation, route }) => {
+export const WheelOfFortune = ({navigation, route}) => {
   const [isEnabled, setisEnabled] = useState(true);
   const [isDirection, setDirection] = useState('Right');
   const [isModalVisible, setModalVisible] = useState(false);
@@ -13,7 +13,7 @@ export const WheelOfFortune = ({ navigation, route }) => {
   const numberOfSegments = restaurant.length;
   const angleBySegment = oneTurn / numberOfSegments;
   const angleOffset = angleBySegment / 2;
-  const onPress = (index) => {
+  const onPress = index => {
     setSelectedRestaurant(restaurant[index]);
     setModalVisible(true);
   };
@@ -25,7 +25,7 @@ export const WheelOfFortune = ({ navigation, route }) => {
   const goToMenu = () => {
     setModalVisible(false);
     const id = selectedRestaurant.id;
-    navigation.navigate(ConstString.RESTAURANT, { id });
+    navigation.navigate(ConstString.RESTAURANT, {id});
   };
   const props = {
     restaurant,
@@ -48,8 +48,5 @@ export const WheelOfFortune = ({ navigation, route }) => {
     oneTurn,
     numberOfSegments,
   };
-  return (<WheelComponents {...props} />
-  );
+  return <WheelComponents {...props} />;
 };
-
-
