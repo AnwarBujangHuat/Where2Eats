@@ -178,7 +178,6 @@ const styles = StyleSheet.create({
     fontSize: 20,
     fontWeight: 'bold',
     color: colors.primary,
-    ...GStyles.shadowContainer,
     paddingStart: 10,
     width: '90%',
   },
