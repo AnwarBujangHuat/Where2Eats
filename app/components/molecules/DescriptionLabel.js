@@ -33,7 +33,7 @@ const styles = StyleSheet.create({
     fontSize: 20,
     fontWeight: 'bold',
     width: '88%',
-    color: colors.darkPurple,
+    color: colors.white,
   },
   desc: {
     color: colors.white,

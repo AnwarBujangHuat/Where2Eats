@@ -8,12 +8,14 @@ import {
   TextInput,
   TouchableOpacity,
   View,
+  StyleSheet,
 } from 'react-native';
 import Modal from 'react-native-modal';
 import addIcon from '../../assets/plus.png';
-import EStyleSheet from 'react-native-extended-stylesheet';
 import {ConstString} from '../../configs/Strings';
 import {launchImagePicker} from '../../ImagePicker';
+import {colors} from '../../configs/Const';
+import {GStyles} from '../../Styles';
 
 const {width} = Dimensions.get('window');
 export const ModalMenu = ({
@@ -103,7 +105,7 @@ export const ModalMenu = ({
                 placeholder={'Enter Item Name'}
                 value={itemName}
                 clearButtonMode={'always'}
-                placeholderTextColor={EStyleSheet.value('$secondaryTextColor')}
+                placeholderTextColor={colors.white}
                 onChangeText={setItemName}
                 overflow="hidden"
                 keyboardAppearance="dark"
@@ -116,7 +118,7 @@ export const ModalMenu = ({
                 multiline={true}
                 value={itemDesc}
                 onChangeText={setItemDesc}
-                placeholderTextColor={EStyleSheet.value('$secondaryTextColor')}
+                placeholderTextColor={colors.white}
                 overflow="hidden"
                 keyboardAppearance="dark"
                 autoCorrect={false}
@@ -127,7 +129,7 @@ export const ModalMenu = ({
                 placeholder={'Enter Price RM'}
                 clearButtonMode={'always'}
                 value={itemPrice}
-                placeholderTextColor={EStyleSheet.value('$secondaryTextColor')}
+                placeholderTextColor={colors.white}
                 onChangeText={setItemPrice}
                 keyboardType={'numeric'}
                 overflow="hidden"
@@ -157,18 +159,18 @@ export const ModalMenu = ({
     </>
   );
 };
-const styles = EStyleSheet.create({
+const styles = StyleSheet.create({
   changeButton: {
     position: 'absolute',
     left: 0,
     fontWeight: 'bold',
     fontSize: 12,
-    color: '$primaryTextColor',
-    backgroundColor: '$secondaryBackGroundColor',
+    color: colors.primary,
+    backgroundColor: colors.secondBg,
     padding: 5,
   },
   button: {
-    backgroundColor: '$lightPrimaryColor',
+    backgroundColor: colors.lightPurple,
     alignItems: 'center',
     padding: 10,
     borderRadius: 10,
@@ -177,19 +179,14 @@ const styles = EStyleSheet.create({
   },
   buttonText: {
     fontSize: 16,
-    color: 'white',
+    color: colors.white,
     fontWeight: 'normal',
   },
   container: {
+    ...GStyles.shadowContainer,
     alignSelf: 'flex-start',
-    backgroundColor: '$primaryColor',
     borderRadius: 10,
     marginTop: 10,
-    shadowOffset: {width: -2, height: 4},
-    shadowColor: '$primaryColor',
-    shadowOpacity: 0.2,
-    shadowRadius: 3,
-    elevation: 10,
   },
   image: {
     width: width * 0.8,
@@ -215,18 +212,18 @@ const styles = EStyleSheet.create({
     position: 'absolute',
     alignSelf: 'center',
     width: width * 0.9,
-    backgroundColor: '$backGroundColor',
+    backgroundColor: colors.bg,
     borderRadius: 7,
   },
   textInput: {
     fontSize: 14,
     fontWeight: 'normal',
     borderWidth: 1,
-    color: '$secondaryTextColor',
-    borderBottomColor: '$primaryColor',
-    borderColor: '$backGroundColor',
+    color: colors.white,
+    borderBottomColor: colors.primary,
+    borderColor: colors.secondBg,
     textAlignVertical: 'center',
-    backgroundColor: '$secondaryBackGroundColor',
+    backgroundColor: colors.secondBg,
     borderRadius: 5,
     marginBottom: 10,
     paddingVertical: 15,
@@ -234,9 +231,9 @@ const styles = EStyleSheet.create({
   header: {
     fontSize: 16,
     fontWeight: 'bold',
-    color: '$tertiaryColor',
+    color: colors.lightPurple,
     shadowOffset: {width: -2, height: 1},
-    shadowColor: '$primaryColor',
+    shadowColor: colors.primary,
     shadowOpacity: 0.1,
     shadowRadius: 2,
   },
@@ -244,11 +241,11 @@ const styles = EStyleSheet.create({
     fontSize: 14,
     fontWeight: 'normal',
     borderWidth: 1,
-    borderBottomColor: '$primaryColor',
-    color: '$secondaryTextColor',
-    borderColor: '$backGroundColor',
+    borderBottomColor: colors.primary,
+    color: colors.white,
+    borderColor: colors.bg,
     textAlignVertical: 'center',
-    backgroundColor: '$secondaryBackGroundColor',
+    backgroundColor: colors.secondBg,
     borderRadius: 5,
     marginVertical: 10,
     paddingVertical: 15,

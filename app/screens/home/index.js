@@ -1,11 +1,10 @@
 import React, {useState} from 'react';
 import {HomeComponents} from './components';
-import {ConstString} from '../../configs/Strings';
 import {getRestaurant, getUser} from '../../store/selector';
 import {useDispatch, useSelector} from 'react-redux';
 import {PopulateRestaurantList} from '../../store/thunks';
 import {Alert} from 'react-native';
-import { routes } from "../../navigation/routes";
+import {routes} from '../../navigation/routes';
 
 export const Home = ({navigation}) => {
   const fetchRestaurant = useSelector(getRestaurant);
@@ -15,7 +14,6 @@ export const Home = ({navigation}) => {
   const [currentRestaurant, setCurrentRestaurant] = useState(restaurant);
   const [selectedTypes, setSelectedTypes] = useState([]);
   const [isOpenMenu, setOpenMenu] = useState(false);
-  const [isRender, setIsRender] = useState(false);
   const [isFetching, setIsFetching] = useState(false);
 
   const onClickCategoryChip = category => {
@@ -102,7 +100,6 @@ export const Home = ({navigation}) => {
     resetHome();
     navigation.navigate(routes.RESTAURANT, {id});
   };
-  const reRender = () => setIsRender(!isRender);
   const props = {
     selectedTypes,
     currentRestaurant,
@@ -116,7 +113,6 @@ export const Home = ({navigation}) => {
     onNavigate,
     isFetching,
     reFresh,
-    reRender,
     userName,
     IMAGE,
   };

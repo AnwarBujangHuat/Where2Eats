@@ -6,13 +6,17 @@ import {
   Text,
   TouchableOpacity,
   View,
+  StyleSheet,
 } from 'react-native';
 import logoIcon from '../../assets/Logo.png';
 import locationIcon from '../../assets/location.png';
 import FastImage from 'react-native-fast-image';
-import {icons} from '../../configs/Const';
-import EStyleSheet from 'react-native-extended-stylesheet';
+import {
+  colors,
+  icons,
+} from "../../configs/Const";
 import Modal from 'react-native-modal';
+import { GStyles } from "../../Styles";
 
 const {width} = Dimensions.get('window');
 export const ModalWinner = ({
@@ -103,15 +107,15 @@ export const ModalWinner = ({
     </>
   );
 };
-const styles = EStyleSheet.create({
+const styles = StyleSheet.create({
   buttonTextSpin: {
     fontSize: 16,
-    color: '$tertiaryColor',
+    color: colors.lightPurple,
     fontWeight: 'normal',
   },
   buttonTextMenu: {
     fontSize: 16,
-    color: '$primaryColor',
+    color: colors.primary,
     fontWeight: 'normal',
   },
   container: {
@@ -138,7 +142,7 @@ const styles = EStyleSheet.create({
   title: {
     fontSize: 18,
     fontWeight: 'bold',
-    color: '$primaryColor',
+    color: colors.primary,
   },
   modalView: {
     paddingBottom: 5,
@@ -147,30 +151,25 @@ const styles = EStyleSheet.create({
     elevation: 5,
     alignSelf: 'center',
     width: width * 0.8,
-    backgroundColor: '$secondaryBackGroundColor',
-    borderRadius: 10,
-    shadowOffset: {width: -2, height: 2},
-    shadowColor: '$primaryColor',
-    shadowOpacity: 0.2,
-    shadowRadius: 3,
+    ...GStyles.shadowContainer,
   },
   button: {
-    backgroundColor: '$secondaryBackGroundColor',
+    backgroundColor: colors.secondBg,
     alignItems: 'center',
     padding: 5,
     width: '50%',
-    borderColor: '$secondaryBackGroundColor',
+    borderColor: colors.secondBg,
     borderWidth: 0.5,
     textTransform: 'uppercase',
     marginTop: 15,
   },
   buttonVisit: {
-    backgroundColor: '$secondaryBackGroundColor',
+    backgroundColor: colors.secondBg,
     alignItems: 'center',
     padding: 5,
     width: '50%',
-    borderLeftColor: '$primaryColor',
-    borderColor: '$secondaryBackGroundColor',
+    borderLeftColor: colors.primary,
+    borderColor: colors.secondBg,
     borderWidth: 0.5,
     textTransform: 'uppercase',
     marginTop: 15,
@@ -178,23 +177,20 @@ const styles = EStyleSheet.create({
   header: {
     fontSize: 20,
     fontWeight: 'bold',
-    color: '$primaryColor',
-    shadowOffset: {width: -2, height: 1},
-    shadowColor: '$primaryColor',
-    shadowOpacity: 0.1,
-    shadowRadius: 2,
+    color: colors.primary,
+    ...GStyles.shadowContainer,
     paddingStart: 10,
     width: '90%',
   },
   price: {
-    color: '$tertiaryColor',
+    color: colors.lightPurple,
     marginVertical: 5,
     fontSize: 14,
     fontWeight: 'bold',
     textAlign: 'justify',
   },
   desc: {
-    color: '$tertiaryTextColor',
+    color: colors.lightPurple,
     paddingEnd: 5,
     marginTop: 5,
     fontSize: 14,
@@ -203,7 +199,7 @@ const styles = EStyleSheet.create({
   },
   descContainer: {paddingHorizontal: 15},
   address: {
-    color: '$tertiaryColor',
+    color: colors.lightPurple,
     paddingEnd: 5,
     marginTop: 5,
     fontSize: 12,
@@ -212,10 +208,10 @@ const styles = EStyleSheet.create({
   },
   logoContainer: {
     alignSelf: 'flex-start',
-    backgroundColor: 'white',
+    backgroundColor: colors.white,
     borderRadius: 80,
     padding: 15,
-    borderColor: '$primaryColor',
+    borderColor: colors.primary,
     position: 'absolute',
     top: '22%',
   },

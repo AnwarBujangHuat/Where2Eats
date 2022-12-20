@@ -47,8 +47,8 @@ const styles = StyleSheet.create({
     minHeight: 80,
     borderRadius: 5,
     padding: 10,
-    marginHorizontal: 10,
-    alignItems: 'center',
     backgroundColor: colors.bg,
+    alignItems: 'center',
+    ...GStyles.shadowContainer,
   },
 });
