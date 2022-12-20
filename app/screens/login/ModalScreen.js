@@ -51,7 +51,7 @@ export const ModalScreen = ({navigation}) => {
 };
 export const styles = StyleSheet.create({
   screen: {
-    backgroundColor: colors.secondBg,
+    backgroundColor: colors.primary,
     justifyContent: 'center',
     flex: 1,
     alignItems: 'center',
