@@ -92,6 +92,7 @@ const styles = StyleSheet.create({
   container: {
     ...GStyles.shadowContainer,
     justifyContent: 'center',
+    borderRadius: 10,
     margin: 10,
   },
   textButton: {
@@ -102,8 +103,6 @@ const styles = StyleSheet.create({
     fontSize: 14,
   },
   card: {
-    ...GStyles.shadowContainer,
-    borderRadius: 10,
     width: 220,
     height: 260,
     alignSelf: 'baseline',

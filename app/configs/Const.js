@@ -15,7 +15,7 @@ import appetizerIcon from '../assets/appetizer.png';
 import facebookIcon from '../assets/facebook.png';
 import twitterIcon from '../assets/twitter.png';
 import googleIcon from '../assets/google.png';
-
+const theme = 0;
 export const icons = {
   [ConstString.WESTERN]: burgerIcon,
   [ConstString.MALAY]: malayIcon,
@@ -70,12 +70,22 @@ export const Const = [
     icon: fruitsIcon,
   },
 ];
+// export const colors = {
+//   black: '#000',
+//   white: '#fff',
+//   primary: '#915bff',
+//   secondBg: '#1b1424',
+//   bg: '#1A1125',
+//   darkPurple: '#9c6bff',
+//   lightPurple: '#DED8E1',
+//   offPurple: '#e2d5f0',
+// };
 export const colors = {
   black: '#000',
-  white: '#fff',
+  white: theme ? '#fff' : '#000',
   primary: '#915bff',
-  secondBg: '#1b1424',
-  bg: '#1A1125',
+  secondBg: theme ? '#1b1424' : '#fff',
+  bg: theme ? '#1A1125' : '#fefefe',
   darkPurple: '#9c6bff',
   lightPurple: '#DED8E1',
   offPurple: '#e2d5f0',
