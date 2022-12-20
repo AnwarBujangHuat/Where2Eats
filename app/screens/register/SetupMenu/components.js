@@ -7,10 +7,10 @@ import {
   Text,
   TouchableOpacity,
   View,
+  StyleSheet,
 } from 'react-native';
 import {BackButton} from '../../../components/atoms/BackButton';
 import {ConstString} from '../../../configs/Strings';
-import EStyleSheet from 'react-native-extended-stylesheet';
 import SelectBox from 'react-native-multi-selectbox';
 import {xorBy} from 'lodash';
 import addIcon from '../../../assets/plus.png';
@@ -19,6 +19,8 @@ import {ModalUploading} from '../../../components/molecules/ModalUploading';
 import {ModalMenuDetails} from '../../../components/molecules/ModalMenuDetails';
 import {FoodCard} from '../../../components/molecules/FoodCard';
 import {SearchButton} from '../../../components/atoms/SearchButton';
+import {GStyles} from '../../../Styles';
+import {colors} from '../../../configs/Const';
 
 export const SetupMenuComponents = props => {
   const {
@@ -32,7 +34,6 @@ export const SetupMenuComponents = props => {
     editorMode,
     onPressDelete,
     onPressEdit,
-    foodItemLists,
     Menu,
     uploadMenu,
     isModalVisible,
@@ -99,7 +100,7 @@ export const SetupMenuComponents = props => {
           fontSize: 16,
           fontWeight: 'bold',
           paddingStart: 15,
-          color: EStyleSheet.value('$tertiaryColor'),
+          color: colors.lightPurple,
         }}>
         Add Category
       </Text>
@@ -118,20 +119,20 @@ export const SetupMenuComponents = props => {
             setSelectedCategory(xorBy(selectedCategory, [item], 'id'))
           }
           isMulti
-          arrowIconColor={EStyleSheet.value('$primaryColor')}
-          searchIconColor={EStyleSheet.value('$primaryColor')}
-          toggleIconColor={EStyleSheet.value('$primaryColor')}
+          arrowIconColor={colors.primary}
+          searchIconColor={colors.primary}
+          toggleIconColor={colors.primary}
           multiOptionContainerStyle={{
-            backgroundColor: EStyleSheet.value('$primaryColor'),
+            backgroundColor: colors.primary,
           }}
           multiOptionsLabelStyle={{fontSize: 16, color: 'white'}}
           selectedItemStyle={{
             fontSize: 16,
-            color: EStyleSheet.value('$primaryTextColor'),
+            color: colors.white,
           }}
           optionsLabelStyle={{
             fontSize: 16,
-            color: EStyleSheet.value('$primaryTextColor'),
+            color: colors.white,
           }}
         />
       </View>
@@ -167,7 +168,7 @@ export const SetupMenuComponents = props => {
                     <Text
                       style={{
                         padding: 5,
-                        color: 'white',
+                        color: colors.white,
                         fontWeight: 'bold',
                         fontSize: 12,
                       }}>
@@ -223,25 +224,22 @@ export const SetupMenuComponents = props => {
     </SafeAreaView>
   );
 };
-const styles = EStyleSheet.create({
+const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '$backGroundColor',
+    backgroundColor: colors.bg,
   },
   label: {
     color: '$secondaryTextColor',
     fontSize: 13,
   },
   buttonContainer: {
+    ...GStyles.shadowContainer,
     padding: 7,
     alignSelf: 'center',
     flexDirection: 'row',
-    backgroundColor: '$primaryColor',
+    backgroundColor: colors.primary,
     borderRadius: 20,
-    shadowOffset: {width: -2, height: 4},
-    shadowColor: '$primaryColor',
-    shadowOpacity: 0.2,
-    shadowRadius: 3,
     elevation: 10,
   },
   icon: {
@@ -258,19 +256,16 @@ const styles = EStyleSheet.create({
   inputContainer: {
     marginTop: 10,
     marginHorizontal: 20,
-    shadowOffset: {width: -2, height: 2},
-    shadowColor: '$primaryColor',
-    shadowOpacity: 0.2,
-    shadowRadius: 3,
+    ...GStyles.shadowContainer,
   },
   header: {
     fontSize: 16,
     fontWeight: 'bold',
     margin: 10,
-    color: '$primaryTextColor',
+    color: colors.white,
   },
   button: {
-    backgroundColor: '$lightPrimaryColor',
+    backgroundColor: colors.lightPurple,
     alignItems: 'center',
     padding: 15,
     borderRadius: 10,
@@ -284,12 +279,12 @@ const styles = EStyleSheet.create({
     fontSize: 16,
     fontWeight: 'bold',
     textAlign: 'center',
-    color: '$primaryTextColor',
+    color: colors.white,
     marginStart: 10,
   },
   buttonText: {
     fontSize: 16,
-    color: 'white',
+    color: colors.white,
     fontWeight: 'bold',
   },
   rowContainer: {

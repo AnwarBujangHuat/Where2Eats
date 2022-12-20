@@ -7,6 +7,7 @@ import {
   SafeAreaView,
   Text as RNText,
   View,
+  StyleSheet,
 } from 'react-native';
 import Svg, {G, Path, Text} from 'react-native-svg';
 import {BackButton} from '../../components/atoms/BackButton';
@@ -17,7 +18,7 @@ import {colorPalette} from './ColorPalette';
 import {PanGestureHandler, State} from 'react-native-gesture-handler';
 import color from 'randomcolor';
 import {snap} from '@popmotion/popcorn';
-import EStyleSheet from 'react-native-extended-stylesheet';
+import {colors} from '../../configs/Const';
 
 const {width} = Dimensions.get('screen');
 const knobFill = color({hue: 'purple'});
@@ -272,9 +273,9 @@ export const WheelComponents = props => {
     </PanGestureHandler>
   );
 };
-const styles = EStyleSheet.create({
+const styles = StyleSheet.create({
   container: {
-    backgroundColor: '$backGroundColor',
+    backgroundColor: colors.bg,
     flex: 1,
     justifyContent: 'center',
   },
@@ -310,7 +311,7 @@ const styles = EStyleSheet.create({
   title: {
     fontSize: 16,
     fontWeight: 'bold',
-    color: '$primaryTextColor',
+    color: colors.white,
     margin: 10,
   },
   wheel: {
@@ -318,7 +319,7 @@ const styles = EStyleSheet.create({
     justifyContent: 'center',
     elevation: 5,
     shadowOffset: {width: -2, height: 2},
-    shadowColor: '$primaryColor',
+    shadowColor: colors.primary,
     shadowOpacity: 0.6,
     shadowRadius: 3,
   },

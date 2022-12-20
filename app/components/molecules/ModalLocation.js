@@ -94,7 +94,7 @@ const styles = StyleSheet.create({
     top: '33%',
   },
   button: {
-    backgroundColor: colors.secondBg,
+    backgroundColor: colors.primary,
     alignItems: 'center',
     padding: 10,
     borderRadius: 10,
@@ -135,7 +135,7 @@ const styles = StyleSheet.create({
   header: {
     fontSize: 16,
     fontWeight: 'bold',
-    color: colors.lightPurple,
+    color: colors.darkPurple,
     marginBottom: 5,
   },
   desc: {
