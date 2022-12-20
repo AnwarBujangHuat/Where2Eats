@@ -78,8 +78,8 @@ const styles = StyleSheet.create({
   container: {
     justifyContent: 'center',
     margin: 15,
+    borderRadius: 10,
     ...GStyles.shadowContainer,
-    elevation: 10,
   },
   card: {
     backgroundColor: colors.secondBg,
@@ -88,7 +88,6 @@ const styles = StyleSheet.create({
     height: 250,
     overflow: 'hidden',
     paddingBottom: 10,
-    ...GStyles.shadowContainer,
   },
   titleContainer: {
     padding: 10,

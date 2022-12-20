@@ -72,7 +72,7 @@ const styles = StyleSheet.create({
   logoContainer: {
     ...GStyles.shadowContainer,
     alignSelf: 'flex-start',
-    backgroundColor: colors.white,
+    backgroundColor: colors.secondBg,
     borderRadius: 80,
     padding: 15,
     marginStart: '3%',
