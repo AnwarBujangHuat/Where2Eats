@@ -16,7 +16,7 @@ const actions = [
     position: 2,
     color: colors.primary,
     textBackground: colors.primary,
-    textColor: colors.white,
+    textColor: 'white',
   },
   {
     text: 'Menu',
@@ -25,7 +25,7 @@ const actions = [
     position: 1,
     color: colors.primary,
     textBackground: colors.primary,
-    textColor: colors.white,
+    textColor: 'white',
   },
 ];
 export const ExpandableFloatingButton = ({onPressItem}) => {
