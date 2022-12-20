@@ -1,14 +1,15 @@
 import React from 'react';
-import {FlatList, SafeAreaView, View, StyleSheet} from 'react-native';
+import {FlatList, SafeAreaView, View} from 'react-native';
 import {Header} from '../../components/molecules/Header';
 import personIcon from '../../assets/programmer.png';
 import {SearchBar} from '../../components/molecules/SearchBar';
 import search from '../../assets/search.png';
-import {colors, Const} from '../../configs/Const';
+import {Const} from '../../configs/Const';
 import {ImageButton} from '../../components/atoms/ImageButton';
 import {RestaurantCard} from '../../components/molecules/RestaurantCard';
 import {FloatingActionButton} from '../../components/atoms/FloatingActionButtom';
 import {ModalMenuButton} from '../../components/molecules/ModalMenuButton';
+import EStyleSheet from 'react-native-extended-stylesheet';
 import TestIds from '../../../e2e/TestIDs';
 
 export const HomeComponents = props => {
@@ -25,6 +26,7 @@ export const HomeComponents = props => {
     onNavigate,
     isFetching,
     reFresh,
+    reRender,
     IMAGE,
     userName,
   } = props;
@@ -47,6 +49,7 @@ export const HomeComponents = props => {
       <Header
         source={IMAGE ? {uri: IMAGE} : personIcon}
         onPress={openMenu}
+        reRender={reRender}
         title={'Welcome Back ' + userName}
       />
       {isOpenMenu && (
@@ -92,10 +95,10 @@ export const HomeComponents = props => {
     </SafeAreaView>
   );
 };
-const styles = StyleSheet.create({
+const styles = EStyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: colors.bg,
+    backgroundColor: '$backGroundColor',
   },
   buttonContainer: {
     marginStart: 10,

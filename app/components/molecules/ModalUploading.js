@@ -5,16 +5,14 @@ import {
   Text,
   TouchableOpacity,
   View,
-  StyleSheet,
 } from 'react-native';
+import EStyleSheet from 'react-native-extended-stylesheet';
 import LottieView from 'lottie-react-native';
 import Modal from 'react-native-modal';
 
 import Uploading from '../../assets/uploading.json';
 import Sleepy from '../../assets/sleepycat.json';
 import {ConstString} from '../../configs/Strings';
-import {colors} from '../../configs/Const';
-import {GStyles} from '../../Styles';
 
 const {width} = Dimensions.get('window');
 let icon;
@@ -75,15 +73,15 @@ export const ModalUploading = ({
     </>
   );
 };
-const styles = StyleSheet.create({
+const styles = EStyleSheet.create({
   buttonTextGoBack: {
     fontSize: 16,
-    color: colors.lightPurple,
+    color: '$tertiaryColor',
     fontWeight: 'normal',
   },
   buttonTextStay: {
     fontSize: 16,
-    color: colors.primary,
+    color: '$primaryColor',
     fontWeight: 'normal',
   },
   container: {
@@ -109,7 +107,11 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
     alignSelf: 'center',
-    ...GStyles.shadowContainer,
+    backgroundColor: 'rgba(0, 0, 0, 0.2)',
+    shadowOffset: {width: -2, height: 2},
+    shadowColor: '$primaryColor',
+    shadowOpacity: 0.2,
+    shadowRadius: 3,
   },
   modalView: {
     paddingBottom: 5,
@@ -118,26 +120,26 @@ const styles = StyleSheet.create({
     position: 'absolute',
     alignSelf: 'center',
     width: width * 0.8,
-    backgroundColor: colors.secondBg,
+    backgroundColor: '$secondaryBackGroundColor',
     borderRadius: 10,
   },
   button: {
-    backgroundColor: colors.secondBg,
+    backgroundColor: '$secondaryBackGroundColor',
     alignItems: 'center',
     padding: 5,
     width: '50%',
-    borderColor: colors.secondBg,
-    borderRightColor: colors.primary,
+    borderColor: '$secondaryBackGroundColor',
+    borderRightColor: '$primaryColor',
     borderWidth: 0.5,
     textTransform: 'uppercase',
     marginTop: 15,
   },
   buttonVisit: {
-    backgroundColor: colors.secondBg,
+    backgroundColor: '$secondaryBackGroundColor',
     alignItems: 'center',
     padding: 5,
     width: '50%',
-    borderColor: colors.secondBg,
+    borderColor: '$secondaryBackGroundColor',
     borderWidth: 0.5,
     textTransform: 'uppercase',
     marginTop: 15,
@@ -147,11 +149,11 @@ const styles = StyleSheet.create({
     paddingBottom: 10,
     fontWeight: 'bold',
     textAlign: 'center',
-    color: colors.primary,
+    color: '$primaryColor',
     width: width * 0.7,
   },
   desc: {
-    color: colors.lightPurple,
+    color: '$tertiaryTextColor',
     paddingEnd: 5,
     marginTop: 5,
     fontSize: 14,

@@ -5,10 +5,10 @@ import {
   Text,
   TouchableWithoutFeedback,
   View,
-  StyleSheet,
 } from 'react-native';
-import {colors, icons} from '../../configs/Const';
-import {GStyles} from '../../Styles';
+import {icons} from '../../configs/Const';
+import EStyleSheet from 'react-native-extended-stylesheet';
+
 export const ItemListRestaurant = ({onPress, name, category, index}) => {
   return (
     <View style={styles.container}>
@@ -28,7 +28,7 @@ export const ItemListRestaurant = ({onPress, name, category, index}) => {
     </View>
   );
 };
-const styles = StyleSheet.create({
+const styles = EStyleSheet.create({
   iconCategory: {
     width: 20,
     height: 20,
@@ -39,15 +39,22 @@ const styles = StyleSheet.create({
     marginTop: 10,
     marginBottom: 5,
     alignSelf: 'center',
-    ...GStyles.shadowContainer,
+    shadowOffset: {width: -2, height: 4},
+    shadowColor: '$primaryColor',
+    shadowOpacity: 0.2,
+    shadowRadius: 3,
   },
   card: {
-    backgroundColor: colors.secondBg,
+    backgroundColor: '$secondaryBackGroundColor',
     borderRadius: 10,
     width: Dimensions.get('screen').width - 50,
     overflow: 'hidden',
     padding: 5,
-    ...GStyles.shadowContainer,
+    shadowOffset: {width: -2, height: 6},
+    shadowColor: EStyleSheet.value('$primaryColor'),
+    shadowOpacity: 0.2,
+    shadowRadius: 3,
+    elevation: 5,
   },
   titleContainer: {
     padding: 10,
@@ -56,7 +63,7 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 14,
     fontWeight: 'bold',
-    color: colors.white,
+    color: '$secondaryTextColor',
   },
   containerIcon: {
     flexDirection: 'row',

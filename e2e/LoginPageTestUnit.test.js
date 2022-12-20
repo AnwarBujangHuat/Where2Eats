@@ -1,4 +1,5 @@
 import TestIds from './TestIDs';
+
 describe('LoginPage', () => {
   beforeAll(async () => {
     await device.launchApp();
