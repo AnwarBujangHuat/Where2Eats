@@ -1,9 +1,10 @@
 import * as React from 'react';
-import {Dimensions, Text, View} from 'react-native';
-import EStyleSheet from 'react-native-extended-stylesheet';
+import {Dimensions, Text, View, StyleSheet} from 'react-native';
 import FastImage from 'react-native-fast-image';
 import defaultAvatar from '../../assets/programmer.png';
 import {RateLabel} from '../atoms/RateLabel';
+import {GStyles} from '../../Styles';
+import {colors} from '../../configs/Const';
 
 export const RatingCard = ({userReview}) => {
   const image = undefined;
@@ -49,18 +50,15 @@ export const RatingCard = ({userReview}) => {
     </View>
   );
 };
-const styles = EStyleSheet.create({
+const styles = StyleSheet.create({
   container: {
     justifyContent: 'center',
-    shadowOffset: {width: 1, height: 2},
-    shadowColor: '$primaryColor',
-    shadowOpacity: 0.2,
-    shadowRadius: 3,
+    ...GStyles.shadowContainer,
     marginVertical: 10,
     elevation: 10,
   },
   card: {
-    backgroundColor: '$secondaryBackGroundColor',
+    backgroundColor: colors.secondBg,
     borderRadius: 10,
     width: Dimensions.get('screen').width - 30,
     maxHeight: 170,
@@ -71,16 +69,16 @@ const styles = EStyleSheet.create({
   },
   timestampText: {
     fontSize: 11,
-    color: '$secondaryTextColor',
+    color: colors.white,
   },
   desc: {
-    color: '$secondaryTextColor',
+    color: colors.white,
     paddingTop: 5,
     textAlign: 'justify',
     fontSize: 14,
   },
   title: {
     fontSize: 16,
-    color: '$primaryTextColor',
+    color: colors.white,
   },
 });

@@ -6,13 +6,14 @@ import {
   TouchableOpacity,
   TouchableWithoutFeedback,
   View,
+  StyleSheet,
 } from 'react-native';
-import EStyleSheet from 'react-native-extended-stylesheet';
 import nasiAyam from '../../assets/salad.jpg';
 import edit from '../../assets/editing.png';
 import Delete from '../../assets/bin.png';
-import {Colors} from '../../configs/Colors';
 import FastImage from 'react-native-fast-image';
+import {GStyles} from '../../Styles';
+import {colors} from '../../configs/Const';
 
 export const FoodCard = ({
   onPress,
@@ -75,7 +76,7 @@ export const FoodCard = ({
     </View>
   );
 };
-const styles = EStyleSheet.create({
+const styles = StyleSheet.create({
   iconCategory: {
     width: 25,
     height: 25,
@@ -89,34 +90,25 @@ const styles = EStyleSheet.create({
     alignSelf: 'center',
   },
   container: {
+    ...GStyles.shadowContainer,
     justifyContent: 'center',
     margin: 10,
-    shadowOffset: {width: -2, height: 4},
-    shadowColor: '$primaryColor',
-    shadowOpacity: 0.2,
-    shadowRadius: 3,
-    elevation: 10,
   },
   textButton: {
     padding: 5,
-    color: 'white',
+    color: colors.white,
     fontWeight: 'bold',
     alignSelf: 'center',
     fontSize: 14,
   },
   card: {
-    backgroundColor: '$secondaryBackGroundColor',
+    ...GStyles.shadowContainer,
     borderRadius: 10,
     width: 220,
     height: 260,
     alignSelf: 'baseline',
     overflow: 'hidden',
     paddingBottom: 10,
-    shadowOffset: {width: -2, height: 4},
-    shadowColor: '$primaryColor',
-    shadowOpacity: 0.2,
-    shadowRadius: 3,
-    elevation: 5,
   },
   titleContainer: {
     padding: 10,
@@ -141,7 +133,7 @@ const styles = EStyleSheet.create({
     margin: 5,
     paddingHorizontal: 5,
     paddingVertical: 5,
-    backgroundColor: '$backGroundColor',
+    backgroundColor: colors.bg,
     alignItems: 'center',
     alignSelf: 'flex-start',
     marginStart: 10,
@@ -150,7 +142,7 @@ const styles = EStyleSheet.create({
 
   textPrice: {
     padding: 2,
-    color: '$secondaryTextColor',
+    color: colors.white,
     fontWeight: 'bold',
     fontSize: 12,
   },
@@ -159,7 +151,7 @@ const styles = EStyleSheet.create({
     paddingVertical: 5,
     paddingHorizontal: 10,
     marginStart: 5,
-    backgroundColor: Colors.primaryColor,
+    backgroundColor: colors.primary,
     borderRadius: 15,
   },
   buttonDelete: {

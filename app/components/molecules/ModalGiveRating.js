@@ -6,12 +6,14 @@ import {
   TextInput,
   TouchableOpacity,
   View,
+  StyleSheet,
 } from 'react-native';
-import EStyleSheet from 'react-native-extended-stylesheet';
 import {AirbnbRating} from 'react-native-ratings';
 import Cat from '../../assets/purplecat.json';
 import LottieView from 'lottie-react-native';
 import Modal from 'react-native-modal';
+import {colors} from '../../configs/Const';
+import {GStyles} from '../../Styles';
 
 const {width} = Dimensions.get('window');
 
@@ -83,21 +85,14 @@ export const ModalGiveRating = ({
                   value={textReview}
                   multiline={true}
                   onChangeText={setReview}
-                  placeholderTextColor={EStyleSheet.value(
-                    '$secondaryTextColor',
-                  )}
+                  placeholderTextColor={colors.white}
                   overflow="hidden"
                   keyboardAppearance="dark"
                   autoCorrect={false}
                 />
                 <Text style={styles.desc}>{status}</Text>
 
-                <View
-                  style={{
-                    flexDirection: 'row',
-                    alignSelf: 'center',
-                    marginVertical: 5,
-                  }}>
+                <View style={styles.buttonContainer}>
                   <TouchableOpacity style={styles.button} onPress={closeModal}>
                     <Text style={styles.buttonTextSpin}>Go Back</Text>
                   </TouchableOpacity>
@@ -115,36 +110,41 @@ export const ModalGiveRating = ({
     </>
   );
 };
-const styles = EStyleSheet.create({
+const styles = StyleSheet.create({
+  buttonContainer: {
+    flexDirection: 'row',
+    alignSelf: 'center',
+    marginVertical: 5,
+  },
   buttonVisit: {
-    backgroundColor: '$secondaryBackGroundColor',
+    backgroundColor: colors.secondBg,
     alignItems: 'center',
     padding: 5,
     width: '50%',
-    borderLeftColor: '$primaryColor',
-    borderColor: '$secondaryBackGroundColor',
+    borderLeftColor: colors.primary,
+    borderColor: colors.secondBg,
     borderWidth: 0.5,
     textTransform: 'uppercase',
     marginTop: 15,
   },
   button: {
-    backgroundColor: '$secondaryBackGroundColor',
+    backgroundColor: colors.secondBg,
     alignItems: 'center',
     padding: 5,
     width: '50%',
-    borderColor: '$secondaryBackGroundColor',
+    borderColor: colors.secondBg,
     borderWidth: 0.5,
     textTransform: 'uppercase',
     marginTop: 15,
   },
   buttonTextSpin: {
     fontSize: 16,
-    color: '$tertiaryColor',
+    color: colors.lightPurple,
     fontWeight: 'normal',
   },
   buttonTextMenu: {
     fontSize: 16,
-    color: '$primaryColor',
+    color: colors.primary,
     fontWeight: 'normal',
   },
 
@@ -154,12 +154,12 @@ const styles = EStyleSheet.create({
     fontWeight: 'bold',
     fontSize: 12,
     color: 'white',
-    backgroundColor: '$primaryColor',
+    backgroundColor: colors.primary,
     padding: 5,
   },
   buttonText: {
     fontSize: 16,
-    color: 'white',
+    color: colors.white,
     fontWeight: 'normal',
   },
   container: {
@@ -180,22 +180,19 @@ const styles = EStyleSheet.create({
     position: 'absolute',
     alignSelf: 'center',
     width: width * 0.9,
-    backgroundColor: '$secondaryBackGroundColor',
+    backgroundColor: colors.secondBg,
     borderRadius: 7,
   },
   header: {
+    ...GStyles.shadowContainer,
     fontSize: 18,
     paddingVertical: 20,
     fontWeight: 'bold',
-    color: '$primaryTextColor',
-    shadowOffset: {width: -2, height: 1},
-    shadowColor: '$primaryColor',
-    shadowOpacity: 0.1,
+    color: colors.primary,
     alignSelf: 'center',
-    shadowRadius: 2,
   },
   desc: {
-    color: '$tertiaryTextColor',
+    color: colors.lightPurple,
     paddingEnd: 5,
     marginTop: 5,
     fontSize: 12,
@@ -207,11 +204,11 @@ const styles = EStyleSheet.create({
     fontSize: 14,
     fontWeight: 'normal',
     borderWidth: 1,
-    borderBottomColor: '$primaryColor',
-    color: '$secondaryTextColor',
+    borderBottomColor: colors.primary,
+    color: colors.white,
     borderColor: 'transparent',
     textAlignVertical: 'center',
-    backgroundColor: '$secondaryBackGroundColor',
+    backgroundColor: colors.secondBg,
     paddingTop: 20,
     paddingBottom: 10,
   },

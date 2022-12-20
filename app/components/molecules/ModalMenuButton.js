@@ -6,11 +6,10 @@ import {
   Text,
   TouchableOpacity,
   View,
+  StyleSheet,
 } from 'react-native';
 import Modal from 'react-native-modal';
-
-import EStyleSheet from 'react-native-extended-stylesheet';
-
+import {colors} from '../../configs/Const';
 const {width} = Dimensions.get('window');
 
 export const ModalMenuButton = ({isModalVisible, onPress, closeModal}) => {
@@ -35,12 +34,7 @@ export const ModalMenuButton = ({isModalVisible, onPress, closeModal}) => {
           <Modal
             animationType="fade"
             transparent
-            visible={isModalVisible}
-            style={{
-              position: 'absolute',
-              top: 20,
-              left: -10,
-            }}
+            isVisible={isModalVisible}
             onBackdropPress={() => closeModal()}>
             <View style={styles.modalView}>
               <FlatList
@@ -61,9 +55,9 @@ export const ModalMenuButton = ({isModalVisible, onPress, closeModal}) => {
     </>
   );
 };
-const styles = EStyleSheet.create({
+const styles = StyleSheet.create({
   button: {
-    backgroundColor: '$lightPrimaryColor',
+    backgroundColor: colors.lightPurple,
     alignItems: 'center',
     padding: 10,
     borderRadius: 10,
@@ -73,7 +67,7 @@ const styles = EStyleSheet.create({
   buttonText: {
     fontSize: 16,
     padding: 10,
-    color: '$primaryTextColor',
+    color: colors.white,
     fontWeight: 'normal',
   },
   image: {
@@ -92,7 +86,7 @@ const styles = EStyleSheet.create({
     justifyContent: 'center',
     radius: 20,
     elevation: 5,
-    backgroundColor: '$ModalBackground',
+    backgroundColor: colors.secondBg,
     borderRadius: 7,
   },
 });

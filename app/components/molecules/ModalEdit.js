@@ -7,8 +7,10 @@ import {
   TextInput,
   TouchableOpacity,
   View,
+  StyleSheet,
 } from 'react-native';
-import EStyleSheet from 'react-native-extended-stylesheet';
+import {colors} from '../../configs/Const';
+import {GStyles} from '../../Styles';
 
 const {width} = Dimensions.get('window');
 
@@ -35,9 +37,7 @@ export const ModalEdit = ({
                   style={styles.textInput}
                   placeholder={'Enter ' + Title}
                   clearButtonMode={'always'}
-                  placeholderTextColor={EStyleSheet.value(
-                    '$secondaryTextColor',
-                  )}
+                  placeholderTextColor={colors.white}
                   onChangeText={text => setUpdatedInfo(text)}
                   overflow="hidden"
                   keyboardAppearance="dark"
@@ -62,36 +62,36 @@ export const ModalEdit = ({
     </>
   );
 };
-const styles = EStyleSheet.create({
+const styles = StyleSheet.create({
   button: {
-    backgroundColor: '$secondaryBackGroundColor',
+    backgroundColor: colors.secondBg,
     alignItems: 'center',
     padding: 5,
     width: '50%',
-    borderColor: '$secondaryBackGroundColor',
-    borderRightColor: '$primaryColor',
+    borderColor: colors.secondBg,
+    borderRightColor: colors.primary,
     borderWidth: 0.5,
     textTransform: 'uppercase',
     marginTop: 15,
   },
   buttonVisit: {
-    backgroundColor: '$secondaryBackGroundColor',
+    backgroundColor: colors.secondBg,
     alignItems: 'center',
     padding: 5,
     width: '50%',
-    borderColor: '$secondaryBackGroundColor',
+    borderColor: colors.secondBg,
     borderWidth: 0.5,
     textTransform: 'uppercase',
     marginTop: 15,
   },
   buttonTextSpin: {
     fontSize: 16,
-    color: '$tertiaryColor',
+    color: colors.lightPurple,
     fontWeight: 'normal',
   },
   buttonTextMenu: {
     fontSize: 16,
-    color: '$primaryColor',
+    color: colors.primary,
     fontWeight: 'normal',
   },
   screen: {
@@ -102,12 +102,9 @@ const styles = EStyleSheet.create({
   },
   viewWrapper: {
     flex: 1,
+    ...GStyles.shadowContainer,
     alignItems: 'center',
     backgroundColor: 'rgba(0, 0, 0, 0.2)',
-    shadowOffset: {width: -2, height: 2},
-    shadowColor: '$primaryColor',
-    shadowOpacity: 0.2,
-    shadowRadius: 3,
   },
   modalView: {
     padding: 20,
@@ -115,18 +112,18 @@ const styles = EStyleSheet.create({
     position: 'absolute',
     alignSelf: 'center',
     width: width * 0.8,
-    backgroundColor: '$secondaryBackGroundColor',
+    backgroundColor: colors.secondBg,
     borderRadius: 7,
   },
   textInput: {
     fontSize: 14,
     fontWeight: 'normal',
     borderWidth: 1,
-    color: '$secondaryTextColor',
-    borderBottomColor: '$primaryColor',
-    borderColor: '$backGroundColor',
+    color: colors.white,
+    borderBottomColor: colors.primary,
+    borderColor: colors.secondBg,
     textAlignVertical: 'center',
-    backgroundColor: '$secondaryBackGroundColor',
+    backgroundColor: colors.secondBg,
     borderRadius: 5,
     marginBottom: 10,
     paddingVertical: 15,
@@ -134,21 +131,18 @@ const styles = EStyleSheet.create({
   header: {
     fontSize: 16,
     fontWeight: 'bold',
-    color: '$tertiaryColor',
-    shadowOffset: {width: -2, height: 1},
-    shadowColor: '$primaryColor',
-    shadowOpacity: 0.1,
-    shadowRadius: 2,
+    ...GStyles.shadowContainer,
+    color: colors.lightPurple,
   },
   descriptionInput: {
     fontSize: 14,
     fontWeight: 'normal',
     borderWidth: 1,
-    borderBottomColor: '$primaryColor',
-    color: '$secondaryTextColor',
-    borderColor: '$backGroundColor',
+    borderBottomColor: colors.primary,
+    color: colors.white,
+    borderColor: colors.bg,
     textAlignVertical: 'center',
-    backgroundColor: '$secondaryBackGroundColor',
+    backgroundColor: colors.secondBg,
     borderRadius: 5,
     marginVertical: 10,
     paddingVertical: 15,
