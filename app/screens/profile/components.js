@@ -7,16 +7,16 @@ import {
   Text as RNText,
   TouchableOpacity,
   View,
+  StyleSheet,
 } from 'react-native';
 import {BackButton} from '../../components/atoms/BackButton';
-import {Colors} from '../../configs/Colors';
 import personIcon from '../../assets/programmer.png';
 import {EditableLabel} from '../../components/atoms/EditableLabel';
 import {ModalEdit} from '../../components/molecules/ModalEdit';
-import EStyleSheet from 'react-native-extended-stylesheet';
 import {firebase} from '../../../src/firebase/config';
 import {defaultValue} from '../../store/defaultValue';
 import {ConstString} from '../../configs/Strings';
+import {colors} from '../../configs/Const';
 
 export const ProfileComponents = props => {
   const {
@@ -67,7 +67,7 @@ export const ProfileComponents = props => {
         />
         <TouchableOpacity
           style={{
-            backgroundColor: Colors.primaryColor,
+            backgroundColor: colors.primary,
             alignContent: 'center',
             alignSelf: 'center',
             padding: 20,
@@ -76,7 +76,8 @@ export const ProfileComponents = props => {
           }}
           onPress={onPress}
           disabled={true}>
-          <Text style={{color: 'white', fontSize: 16, alignSelf: 'center'}}>
+          <Text
+            style={{color: colors.white, fontSize: 16, alignSelf: 'center'}}>
             My Intern is Too Lazy
           </Text>
         </TouchableOpacity>
@@ -93,9 +94,9 @@ export const ProfileComponents = props => {
     </SafeAreaView>
   );
 };
-const styles = EStyleSheet.create({
+const styles = StyleSheet.create({
   backGround: {
-    backgroundColor: '$backGroundColor',
+    backgroundColor: colors.bg,
     flex: 1,
   },
   rowContainer: {
@@ -106,7 +107,7 @@ const styles = EStyleSheet.create({
   title: {
     fontSize: 16,
     fontWeight: 'bold',
-    color: '$primaryTextColor',
+    color: colors.white,
     margin: 10,
   },
   profileImage: {
@@ -114,6 +115,6 @@ const styles = EStyleSheet.create({
     height: 120,
     width: 120,
     borderRadius: 60,
-    backgroundColor: '$secondaryBackGroundColor',
+    backgroundColor: colors.secondBg,
   },
 });
