@@ -7,7 +7,7 @@ export const ImageButton = ({onPress, item, selected}) => {
   let backGroundColor = selected.includes(item.title)
     ? colors.primary
     : colors.secondBg;
-  let color = selected.includes(item.title) ? colors.white : colors.primary;
+  let color = selected.includes(item.title) ? 'white' : colors.primary;
   return (
     <View>
       <TouchableOpacity
