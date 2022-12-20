@@ -1,10 +1,11 @@
 import React, {useEffect, useState} from 'react';
 import {RatingComponents} from './components';
-import {ConstString} from '../../Strings';
+import {ConstString} from '../../configs/Strings';
 import {useDispatch, useSelector} from 'react-redux';
 import {getCurrentRestaurant, getUser} from '../../store/selector';
 import {Alert} from 'react-native';
 import {updateRating} from '../../store/thunks';
+import {routes} from '../../navigation/routes';
 
 export const Ratings = ({navigation, route}) => {
   const ratingChipButton = ['All', '1', '2', '3', '4', '5'];
@@ -51,13 +52,15 @@ export const Ratings = ({navigation, route}) => {
       setFirstTime(false);
       setUserReview(userReviews);
     }
-    getTotalCount(restaurantInfo.rating);
+    if (restaurantInfo?.rating) {
+      getTotalCount(restaurantInfo.rating);
+    }
     if (index > -1) {
       restaurantsRating.splice(index, 2);
     }
     setRestaurantRemove(restaurantsRating);
   }, [restaurantInfo]);
-  const onBackButton = () => navigation.navigate(ConstString.RESTAURANT, {id});
+  const onBackButton = () => navigation.navigate(routes.RESTAURANT, {id});
   const openModal = () => {
     setModalRate(true);
   };
@@ -79,7 +82,7 @@ export const Ratings = ({navigation, route}) => {
       userId: ID,
       userName: NAME,
       review: text,
-      rating: parseInt(newRate),
+      rating: parseInt(newRate ?? 0),
       createdAt: isFirstTimeRate ? currentDate : userReview.createdAt,
       updatedAt: isFirstTimeRate ? '' : currentDate,
     };

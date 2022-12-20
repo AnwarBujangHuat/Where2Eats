@@ -1,10 +1,10 @@
 import React, {useState} from 'react';
-import {ConstString} from '../../Strings';
+import {ConstString} from '../../configs/Strings';
 import {RegisterComponents} from './components';
 import {launchImagePicker} from '../../ImagePicker';
 import {useDispatch, useSelector} from 'react-redux';
 import {getCurrentRestaurant, getUser} from '../../store/selector';
-import {Const} from '../../Const';
+import {Const} from '../../configs/Const';
 import {Alert} from 'react-native';
 import {updateRestaurantInfoFirestore} from '../../store/thunks';
 import {firebase} from '../../../src/firebase/config';

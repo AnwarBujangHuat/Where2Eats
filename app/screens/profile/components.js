@@ -9,14 +9,14 @@ import {
   View,
 } from 'react-native';
 import {BackButton} from '../../components/atoms/BackButton';
-import {Colors} from '../../Colors';
+import {Colors} from '../../configs/Colors';
 import personIcon from '../../assets/programmer.png';
 import {EditableLabel} from '../../components/atoms/EditableLabel';
 import {ModalEdit} from '../../components/molecules/ModalEdit';
 import EStyleSheet from 'react-native-extended-stylesheet';
 import {firebase} from '../../../src/firebase/config';
 import {defaultValue} from '../../store/defaultValue';
-import {ConstString} from '../../Strings';
+import {ConstString} from '../../configs/Strings';
 
 export const ProfileComponents = props => {
   const {

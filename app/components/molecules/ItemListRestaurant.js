@@ -6,7 +6,7 @@ import {
   TouchableWithoutFeedback,
   View,
 } from 'react-native';
-import {icons} from '../../Const';
+import {icons} from '../../configs/Const';
 import EStyleSheet from 'react-native-extended-stylesheet';
 
 export const ItemListRestaurant = ({onPress, name, category, index}) => {

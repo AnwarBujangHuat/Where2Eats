@@ -1,7 +1,7 @@
 import {createAsyncThunk} from '@reduxjs/toolkit';
 import {firebase} from '../../src/firebase/config';
 import {arrayRemove, arrayUnion} from 'firebase/firestore';
-import {ConstString} from '../Strings';
+import {ConstString} from '../configs/Strings';
 
 const restaurantCollectionRef = firebase
   .firestore()

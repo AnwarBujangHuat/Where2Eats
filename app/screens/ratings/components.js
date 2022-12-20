@@ -34,6 +34,7 @@ export const RatingComponents = props => {
     onSelectedRating,
     isSelectedRating,
   } = props;
+  const {ratings} = restaurantInfo;
   const RenderItem = ({item}) => {
     return (
       <RatingButton
@@ -89,7 +90,7 @@ export const RatingComponents = props => {
                   paddingVertical: 5,
                   alignSelf: 'flex-start',
                 }}>
-                {restaurantInfo.rating.length + ' Reviews'}
+                {ratings?.length ?? 0 + ' Reviews'}
               </Text>
             </View>
           </View>
@@ -240,7 +241,7 @@ const styles = EStyleSheet.create({
   },
   reviewText: {
     fontSize: 14,
-    color: 'white',
+    color: '$secondaryTextColor',
     fontWeight: 'bold',
   },
   buttonContainer: {

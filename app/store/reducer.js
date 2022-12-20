@@ -12,7 +12,7 @@ import {
   updateRestaurantInfoFirestore,
   updateUserFCM,
 } from './thunks';
-import {ConstString} from '../Strings';
+import {ConstString} from '../configs/Strings';
 
 export const restaurantAdapter = createEntityAdapter({
   sortComparer: (a, b) => a.restaurant.localeCompare(b.restaurant),

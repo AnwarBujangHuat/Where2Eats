@@ -1,10 +1,11 @@
 import React, {useState} from 'react';
 import {HomeComponents} from './components';
-import {ConstString} from '../../Strings';
+import {ConstString} from '../../configs/Strings';
 import {getRestaurant, getUser} from '../../store/selector';
 import {useDispatch, useSelector} from 'react-redux';
 import {PopulateRestaurantList} from '../../store/thunks';
 import {Alert} from 'react-native';
+import { routes } from "../../navigation/routes";
 
 export const Home = ({navigation}) => {
   const fetchRestaurant = useSelector(getRestaurant);
@@ -62,7 +63,7 @@ export const Home = ({navigation}) => {
     }
     setIsFetching(false);
   };
-  const goBack = () => navigation.navigate(ConstString.LOGIN);
+  const goBack = () => navigation.navigate(routes.LOGIN);
   const onSearch = text => {
     if (!text) {
       return setCurrentRestaurant(restaurant);
@@ -74,7 +75,7 @@ export const Home = ({navigation}) => {
   };
   const gotoRoulette = () => {
     resetHome();
-    navigation.navigate(ConstString.ROULETTE, currentRestaurant);
+    navigation.navigate(routes.ROULETTE, currentRestaurant);
   };
   const resetHome = () => {
     setSelectedTypes([]);
@@ -86,20 +87,20 @@ export const Home = ({navigation}) => {
     resetHome();
     switch (id) {
       case 1:
-        navigation.navigate(ConstString.REGISTER);
+        navigation.navigate(routes.REGISTER);
         break;
       case 2:
-        navigation.navigate(ConstString.PROFILE);
+        navigation.navigate(routes.PROFILE);
         break;
       case 3:
-        navigation.navigate(ConstString.LOGIN);
+        navigation.navigate(routes.LOGIN);
         break;
     }
     closeModal();
   };
   const goToRestaurant = id => {
     resetHome();
-    navigation.navigate(ConstString.RESTAURANT, {id});
+    navigation.navigate(routes.RESTAURANT, {id});
   };
   const reRender = () => setIsRender(!isRender);
   const props = {

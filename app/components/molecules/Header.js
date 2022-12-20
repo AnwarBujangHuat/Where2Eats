@@ -8,7 +8,7 @@ import {
   View,
 } from 'react-native';
 import React, {useRef, useState} from 'react';
-import {ConstString} from '../../Strings';
+import {ConstString} from '../../configs/Strings';
 import LottieView from 'lottie-react-native';
 // import ThemeButton from '../../assets/dark.json';
 import ThemeButton from '../../assets/lightNdark.json';

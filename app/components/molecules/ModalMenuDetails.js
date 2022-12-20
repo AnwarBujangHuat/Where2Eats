@@ -11,7 +11,7 @@ import Modal from 'react-native-modal';
 
 import nasiAyam from '../../assets/NasiAyam.jpg';
 import EStyleSheet from 'react-native-extended-stylesheet';
-import {Colors} from '../../Colors';
+import {Colors} from '../../configs/Colors';
 
 const {width} = Dimensions.get('window');
 

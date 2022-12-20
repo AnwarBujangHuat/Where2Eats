@@ -4,13 +4,13 @@ import {Header} from '../../components/molecules/Header';
 import personIcon from '../../assets/programmer.png';
 import {SearchBar} from '../../components/molecules/SearchBar';
 import search from '../../assets/search.png';
-import {Const} from '../../Const';
+import {Const} from '../../configs/Const';
 import {ImageButton} from '../../components/atoms/ImageButton';
 import {RestaurantCard} from '../../components/molecules/RestaurantCard';
 import {FloatingActionButton} from '../../components/atoms/FloatingActionButtom';
 import {ModalMenuButton} from '../../components/molecules/ModalMenuButton';
 import EStyleSheet from 'react-native-extended-stylesheet';
-import TestIds from '../../TestIDs';
+import TestIds from '../../../e2e/TestIDs';
 
 export const HomeComponents = props => {
   const {

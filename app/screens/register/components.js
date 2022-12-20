@@ -10,7 +10,7 @@ import {
   View,
 } from 'react-native';
 import {DetailsHeader} from '../../components/molecules/DetailsHeader';
-import {Const} from '../../Const';
+import {Const} from '../../configs/Const';
 import {ImageButton} from '../../components/atoms/ImageButton';
 import {InputField} from '../../components/atoms/InputField';
 import EStyleSheet from 'react-native-extended-stylesheet';

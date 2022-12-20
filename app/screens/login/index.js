@@ -2,7 +2,7 @@ import * as React from 'react';
 import {useState} from 'react';
 
 import {LoginComponents} from './components';
-import {ConstString} from '../../Strings';
+import {ConstString} from '../../configs/Strings';
 import {useDispatch, useSelector} from 'react-redux';
 import {firebase} from '../../../src/firebase/config';
 import {Alert} from 'react-native';
@@ -14,6 +14,7 @@ import {
 } from '../../store/thunks';
 import {GoogleSignin} from '../../../src/SignInOption/config';
 import {getInfo} from '../../store/selector';
+import {routes} from '../../navigation/routes';
 // import { getAuth } from 'firebase-admin/auth';
 
 export const Login = ({navigation}) => {
@@ -25,7 +26,7 @@ export const Login = ({navigation}) => {
   const onChangeInputEmail = text => setEmail(text);
   const onChangeInputPassword = text => setPassword(text);
   const onClickRememberMe = () => setOnRememberMe(!onRememberMe);
-  const goToSignIn = () => navigation.navigate('Register');
+  const goToSignIn = () => navigation.navigate(routes.REGISTER);
   const showErrorAlert = error => {
     //Error Handling Alert
     Alert.alert('Sorry', error, [
@@ -70,7 +71,7 @@ export const Login = ({navigation}) => {
     setOnRememberMe(!onRememberMe);
     await populateUser({uid, userInformation});
   };
-  const goToModal = () => navigation.navigate(ConstString.MODAL);
+  const goToModal = () => navigation.navigate(routes.MODAL);
   const authenticateUser = (email, password) =>
     new Promise((resolve, reject) => {
       firebase

@@ -11,7 +11,7 @@ import EStyleSheet from 'react-native-extended-stylesheet';
 import nasiAyam from '../../assets/salad.jpg';
 import edit from '../../assets/editing.png';
 import Delete from '../../assets/bin.png';
-import {Colors} from '../../Colors';
+import {Colors} from '../../configs/Colors';
 import FastImage from 'react-native-fast-image';
 
 export const FoodCard = ({

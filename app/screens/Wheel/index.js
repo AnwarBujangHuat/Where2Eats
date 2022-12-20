@@ -1,6 +1,7 @@
 import React, {useState} from 'react';
-import {ConstString} from '../../Strings';
+import {ConstString} from '../../configs/Strings';
 import {WheelComponents} from './components';
+import { routes } from "../../navigation/routes";
 
 const oneTurn = 360;
 export const WheelOfFortune = ({navigation, route}) => {
@@ -25,7 +26,7 @@ export const WheelOfFortune = ({navigation, route}) => {
   const goToMenu = () => {
     setModalVisible(false);
     const id = selectedRestaurant.id;
-    navigation.navigate(ConstString.RESTAURANT, {id});
+    navigation.navigate(routes.RESTAURANT, {id});
   };
   const props = {
     restaurant,

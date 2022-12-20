@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import {Alert} from 'react-native';
-import {ConstString} from '../../../Strings';
+import {ConstString} from '../../../configs/Strings';
 import {useDispatch, useSelector} from 'react-redux';
 import {
   addFoodItemFirebase,
@@ -8,10 +8,11 @@ import {
   removeFoodItemFirebase,
   updateFoodItemFirebase,
 } from '../../../store/thunks';
-import {icons} from '../../../Const';
+import {icons} from '../../../configs/Const';
 import {firebase} from '../../../../src/firebase/config';
 import {getCurrentRestaurant} from '../../../store/selector';
 import {SetupMenuComponents} from './components';
+import { routes } from "../../../navigation/routes";
 
 export const SetupMenu = ({navigation, route}) => {
   const dispatch = useDispatch();
@@ -136,7 +137,7 @@ export const SetupMenu = ({navigation, route}) => {
       return showAlert(ConstString.ADD, item.restaurant, ConstString.FAILED);
     }
     setActionModal(false);
-    navigation.navigate(ConstString.HOME);
+    navigation.navigate(routes.HOME);
   };
   //Upload Image to Firebase
   const uploadAsFile = async (
