@@ -10,10 +10,10 @@ import React from 'react';
 import {BackButton} from '../atoms/BackButton';
 import addImage from '../../assets/addImage.png';
 import logoIcon from '../../assets/Logo.png';
-
 import {RateLabel} from '../atoms/RateLabel';
-import {Colors} from '../../configs/Colors';
 import {SearchButton} from '../atoms/SearchButton';
+import {GStyles} from '../../Styles';
+import {colors} from '../../configs/Const';
 
 const {width} = Dimensions.get('window');
 
@@ -70,16 +70,12 @@ const styles = StyleSheet.create({
     marginTop: 10,
   },
   logoContainer: {
+    ...GStyles.shadowContainer,
     alignSelf: 'flex-start',
-    backgroundColor: 'white',
+    backgroundColor: colors.white,
     borderRadius: 80,
     padding: 15,
     marginStart: '3%',
-    elevation: 5,
-    shadowOffset: {width: -2, height: -4},
-    shadowColor: '$primaryColor',
-    shadowOpacity: 0.1,
-    shadowRadius: 2,
     marginTop: 90,
   },
   container: {
@@ -90,9 +86,9 @@ const styles = StyleSheet.create({
       width: 0,
       height: 3,
     },
-    shadowColor: Colors.primaryColor,
+    shadowColor: colors.primary,
     shadowOpacity: 0.2,
-    borderBottomColor: Colors.primaryColor,
+    borderBottomColor: colors.primary,
     elevation: 10,
   },
   icons: {

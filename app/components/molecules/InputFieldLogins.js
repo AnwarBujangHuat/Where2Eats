@@ -19,7 +19,7 @@ export const InputFieldLogins = ({
         style={styles.input}
         placeholder={hint}
         value={defvalue}
-        clearButtonMode={'while-editing'}
+        clearButtonMode={'always'}
         onChangeText={text => onChangeText1(text)}
         overflow="hidden"
         placeholderTextColor={colors.white}
@@ -44,7 +44,7 @@ const styles = StyleSheet.create({
     fontWeight: 'normal',
     marginHorizontal: 10,
     textAlignVertical: 'center',
-    backgroundColor: colors.secondBg,
+    backgroundColor: colors.bg,
     marginVertical: 2,
     paddingTop: 15,
     paddingRight: 15,
@@ -55,7 +55,7 @@ const styles = StyleSheet.create({
   icons: {
     flexDirection: 'row',
     alignSelf: 'center',
-    tintColor: colors.primary,
+    tintColor: colors.white,
     height: 25,
     width: 25,
     margin: 10,

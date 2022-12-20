@@ -70,3 +70,12 @@ export const Const = [
     icon: fruitsIcon,
   },
 ];
+export const colors = {
+  black: '#000',
+  white: '#fff',
+  primary: '#915bff',
+  secondBg: '#1b1424',
+  bg: '#1A1125',
+  lightPurple: '#DED8E1',
+  offPurple: '#e2d5f0',
+};
