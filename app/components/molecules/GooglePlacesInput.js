@@ -1,6 +1,5 @@
 import React from 'react';
 import {GooglePlacesAutocomplete} from 'react-native-google-places-autocomplete';
-import EStyleSheet from 'react-native-extended-stylesheet';
 import {Dimensions} from 'react-native';
 
 const {width} = Dimensions.get('window');
