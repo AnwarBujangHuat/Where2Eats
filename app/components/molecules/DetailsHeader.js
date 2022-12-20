@@ -9,11 +9,11 @@ import {
 import React from 'react';
 import {BackButton} from '../atoms/BackButton';
 import addImage from '../../assets/addImage.png';
-import logoIcon from '../../assets/allfood.png';
+import logoIcon from '../../assets/Logo.png';
+
 import {RateLabel} from '../atoms/RateLabel';
+import {Colors} from '../../configs/Colors';
 import {SearchButton} from '../atoms/SearchButton';
-import {GStyles} from '../../Styles';
-import {colors} from '../../configs/Const';
 
 const {width} = Dimensions.get('window');
 
@@ -70,12 +70,16 @@ const styles = StyleSheet.create({
     marginTop: 10,
   },
   logoContainer: {
-    ...GStyles.shadowContainer,
     alignSelf: 'flex-start',
-    backgroundColor: colors.secondBg,
+    backgroundColor: 'white',
     borderRadius: 80,
-    padding: 10,
+    padding: 15,
     marginStart: '3%',
+    elevation: 5,
+    shadowOffset: {width: -2, height: -4},
+    shadowColor: '$primaryColor',
+    shadowOpacity: 0.1,
+    shadowRadius: 2,
     marginTop: 90,
   },
   container: {
@@ -86,13 +90,13 @@ const styles = StyleSheet.create({
       width: 0,
       height: 3,
     },
-    shadowColor: colors.primary,
+    shadowColor: Colors.primaryColor,
     shadowOpacity: 0.2,
-    borderBottomColor: colors.primary,
+    borderBottomColor: Colors.primaryColor,
     elevation: 10,
   },
   icons: {
-    height: 90,
-    width: 90,
+    height: 80,
+    width: 80,
   },
 });

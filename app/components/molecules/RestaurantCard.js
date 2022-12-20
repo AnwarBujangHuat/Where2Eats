@@ -5,14 +5,13 @@ import {
   Text,
   TouchableWithoutFeedback,
   View,
-  StyleSheet,
 } from 'react-native';
 import {RateLabel} from '../atoms/RateLabel';
 import locationIcon from '../../assets/location.png';
-import {colors, icons} from '../../configs/Const';
+import {icons} from '../../configs/Const';
+import EStyleSheet from 'react-native-extended-stylesheet';
 import addImage from '../../assets/addImage.png';
 import FastImage from 'react-native-fast-image';
-import {GStyles} from '../../Styles';
 
 export const RestaurantCard = ({
   onPress,
@@ -62,7 +61,7 @@ export const RestaurantCard = ({
     </View>
   );
 };
-const styles = StyleSheet.create({
+const styles = EStyleSheet.create({
   icon: {
     width: 11,
     height: 11,
@@ -78,30 +77,38 @@ const styles = StyleSheet.create({
   container: {
     justifyContent: 'center',
     margin: 15,
-    borderRadius: 10,
-    ...GStyles.shadowContainer,
+    shadowOffset: {width: -2, height: 4},
+    shadowColor: '$primaryColor',
+    shadowOpacity: 0.2,
+    shadowRadius: 3,
+    elevation: 10,
   },
   card: {
-    backgroundColor: colors.secondBg,
+    backgroundColor: '$secondaryBackGroundColor',
     borderRadius: 10,
     width: Dimensions.get('screen').width - 30,
     height: 250,
     overflow: 'hidden',
     paddingBottom: 10,
+    shadowOffset: {width: -2, height: 4},
+    shadowColor: '$primaryColor',
+    shadowOpacity: 0.2,
+    shadowRadius: 3,
+    elevation: 10,
   },
   titleContainer: {
     padding: 10,
     width: '90%',
   },
   desc: {
-    color: colors.white,
+    color: '$secondaryTextColor',
     paddingTop: 5,
     fontSize: 12,
   },
   title: {
     fontSize: 18,
     fontWeight: 'bold',
-    color: colors.darkPurple,
+    color: '$primaryTextColor',
   },
   containerIcon: {
     flexDirection: 'row',

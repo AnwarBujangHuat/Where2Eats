@@ -7,16 +7,16 @@ import {
   Text as RNText,
   TouchableOpacity,
   View,
-  StyleSheet,
 } from 'react-native';
 import {BackButton} from '../../components/atoms/BackButton';
+import {Colors} from '../../configs/Colors';
 import personIcon from '../../assets/programmer.png';
 import {EditableLabel} from '../../components/atoms/EditableLabel';
 import {ModalEdit} from '../../components/molecules/ModalEdit';
+import EStyleSheet from 'react-native-extended-stylesheet';
 import {firebase} from '../../../src/firebase/config';
 import {defaultValue} from '../../store/defaultValue';
 import {ConstString} from '../../configs/Strings';
-import {colors} from '../../configs/Const';
 
 export const ProfileComponents = props => {
   const {
@@ -29,15 +29,15 @@ export const ProfileComponents = props => {
     onDone,
     setUpdatedInfo,
   } = props;
-  // const onPress = () => {
-  //   const db = firebase.firestore();
-  //   const batch = db.batch();
-  //   defaultValue.forEach(doc => {
-  //     const docRef = db.collection(ConstString.RESTAURANT).doc(); //automatically generate unique id
-  //     batch.set(docRef, doc);
-  //   });
-  //   batch.commit().then(() => console.log('Congrats'));
-  // };
+  const onPress = () => {
+    const db = firebase.firestore();
+    const batch = db.batch();
+    defaultValue.forEach(doc => {
+      const docRef = db.collection(ConstString.RESTAURANT).doc(); //automatically generate unique id
+      batch.set(docRef, doc);
+    });
+    batch.commit().then(() => console.log('Congrats'));
+  };
   return (
     <SafeAreaView style={styles.backGround}>
       <View style={styles.rowContainer}>
@@ -65,22 +65,21 @@ export const ProfileComponents = props => {
           }}
           showsHorizontalScrollIndicator={false}
         />
-        {/*<TouchableOpacity*/}
-        {/*  style={{*/}
-        {/*    backgroundColor: colors.primary,*/}
-        {/*    alignContent: 'center',*/}
-        {/*    alignSelf: 'center',*/}
-        {/*    padding: 20,*/}
-        {/*    borderRadius: 20,*/}
-        {/*    marginTop: 20,*/}
-        {/*  }}*/}
-        {/*  onPress={onPress}*/}
-        {/*  disabled={true}>*/}
-        {/*  <Text*/}
-        {/*    style={{color: colors.white, fontSize: 16, alignSelf: 'center'}}>*/}
-        {/*    My Intern is Too Lazy*/}
-        {/*  </Text>*/}
-        {/*</TouchableOpacity>*/}
+        <TouchableOpacity
+          style={{
+            backgroundColor: Colors.primaryColor,
+            alignContent: 'center',
+            alignSelf: 'center',
+            padding: 20,
+            borderRadius: 20,
+            marginTop: 20,
+          }}
+          onPress={onPress}
+          disabled={true}>
+          <Text style={{color: 'white', fontSize: 16, alignSelf: 'center'}}>
+            My Intern is Too Lazy
+          </Text>
+        </TouchableOpacity>
       </View>
       {isModalVisible && (
         <ModalEdit
@@ -94,9 +93,9 @@ export const ProfileComponents = props => {
     </SafeAreaView>
   );
 };
-const styles = StyleSheet.create({
+const styles = EStyleSheet.create({
   backGround: {
-    backgroundColor: colors.bg,
+    backgroundColor: '$backGroundColor',
     flex: 1,
   },
   rowContainer: {
@@ -107,7 +106,7 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 16,
     fontWeight: 'bold',
-    color: colors.white,
+    color: '$primaryTextColor',
     margin: 10,
   },
   profileImage: {
@@ -115,6 +114,6 @@ const styles = StyleSheet.create({
     height: 120,
     width: 120,
     borderRadius: 60,
-    backgroundColor: colors.secondBg,
+    backgroundColor: '$secondaryBackGroundColor',
   },
 });

@@ -6,18 +6,16 @@ import {
   Text,
   TouchableOpacity,
   View,
-  StyleSheet,
 } from 'react-native';
 import {Rating} from 'react-native-ratings';
 import React from 'react';
 import {BackButton} from '../../components/atoms/BackButton';
+import EStyleSheet from 'react-native-extended-stylesheet';
 import {RatingCard} from '../../components/molecules/RatingCard';
 import addIcon from '../../assets/plus.png';
 import {ModalGiveRating} from '../../components/molecules/ModalGiveRating';
 import {BarChart} from 'react-native-chart-kit';
 import {RatingButton} from '../../components/atoms/RatingButton';
-import {colors} from '../../configs/Const';
-import {GStyles} from '../../Styles';
 
 export const RatingComponents = props => {
   const {
@@ -36,7 +34,7 @@ export const RatingComponents = props => {
     onSelectedRating,
     isSelectedRating,
   } = props;
-  const {rating} = restaurantInfo;
+  const {ratings} = restaurantInfo;
   const RenderItem = ({item}) => {
     return (
       <RatingButton
@@ -79,20 +77,20 @@ export const RatingComponents = props => {
               startingValue={isCurrentRating}
               readonly={true}
               showReadOnlyText={false}
-              tintColor={colors.bg}
+              tintColor={EStyleSheet.value('$backGroundColor')}
               style={{paddingStart: 10}}
               imageSize={18}
-              ratingTextColor={colors.white}
+              ratingTextColor={EStyleSheet.value('$secondaryTextColor')}
             />
             <View style={{paddingStart: 10}}>
               <Text
                 style={{
                   fontSize: 12,
-                  color: colors.white,
+                  color: EStyleSheet.value('$secondaryTextColor'),
                   paddingVertical: 5,
                   alignSelf: 'flex-start',
                 }}>
-                {rating?.length + ' Reviews'}
+                {ratings?.length ?? 0 + ' Reviews'}
               </Text>
             </View>
           </View>
@@ -114,16 +112,17 @@ export const RatingComponents = props => {
               backgroundGradientFrom: 'transparent',
               backgroundGradientFromOpacity: 0,
               backgroundGradientTo: 'transparent',
-              fillShadowGradient: colors.white,
-              fillShadowGradientFrom: colors.white,
+              fillShadowGradient: EStyleSheet.value('$secondaryTextColor'),
+              fillShadowGradientFrom: EStyleSheet.value('$secondaryTextColor'),
               fillShadowGradientFromOpacity: 1,
               fillShadowGradientOpacity: 1,
-              fillShadowGradientTo: colors.white,
+              fillShadowGradientTo: EStyleSheet.value('$secondaryTextColor'),
               fillShadowGradientToOffset: 1,
               fillShadowGradientFromOffset: 1,
               backgroundGradientToOpacity: 0,
-              color: (opacity = 1) => colors.white,
-              labelColor: (opacity = 1) => colors.white,
+              color: (opacity = 1) => EStyleSheet.value('$secondaryTextColor'),
+              labelColor: (opacity = 1) =>
+                EStyleSheet.value('$secondaryTextColor'),
               strokeWidth: 1,
               barPercentage: 0.4,
             }}
@@ -177,13 +176,13 @@ export const RatingComponents = props => {
     </SafeAreaView>
   );
 };
-const styles = StyleSheet.create({
+const styles = EStyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: colors.bg,
+    backgroundColor: '$backGroundColor',
   },
   label: {
-    color: colors.white,
+    color: '$secondaryTextColor',
     fontSize: 13,
   },
   icon: {
@@ -201,19 +200,19 @@ const styles = StyleSheet.create({
     fontSize: 17,
     fontWeight: 'bold',
     alignSelf: 'center',
-    color: colors.primary,
+    color: '$primaryTextColor',
   },
   rating: {
     fontSize: 60,
-    color: colors.white,
+    color: '$secondaryTextColor',
   },
   reviewHeader: {
     fontSize: 18,
     fontWeight: 'bold',
-    color: colors.white,
+    color: '$primaryTextColor',
   },
   button: {
-    backgroundColor: colors.lightPurple,
+    backgroundColor: '$lightPrimaryColor',
     alignItems: 'center',
     padding: 12,
     borderRadius: 10,
@@ -225,7 +224,7 @@ const styles = StyleSheet.create({
     fontSize: 16,
     fontWeight: 'bold',
     textAlign: 'center',
-    color: colors.white,
+    color: '$primaryTextColor',
     alignSelf: 'center',
     marginStart: 10,
   },
@@ -237,20 +236,25 @@ const styles = StyleSheet.create({
   ratingContainer: {
     alignSelf: 'center',
     alignItems: 'center',
-    backgroundColor: colors.white,
+    backgroundColor: 'white',
     alignContent: 'center',
   },
   reviewText: {
     fontSize: 14,
-    color: colors.white,
+    color: '$secondaryTextColor',
     fontWeight: 'bold',
   },
   buttonContainer: {
-    ...GStyles.shadowContainer,
     padding: 5,
     flexDirection: 'row',
+    backgroundColor: '$primaryColor',
     borderRadius: 20,
+    shadowOffset: {width: -2, height: 2},
+    shadowColor: '$primaryColor',
+    shadowOpacity: 0.2,
+    shadowRadius: 3,
     right: 0,
     position: 'absolute',
+    elevation: 10,
   },
 });

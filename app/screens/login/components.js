@@ -1,22 +1,16 @@
 import * as React from 'react';
-import {
-  Image,
-  SafeAreaView,
-  Text,
-  TouchableOpacity,
-  View,
-  StyleSheet,
-} from 'react-native';
+import {Image, SafeAreaView, Text, TouchableOpacity, View} from 'react-native';
 import CheckBox from '@react-native-community/checkbox';
-import Logo from '../../assets/allfood.png';
+import Logo from '../../assets/Logo.png';
 import {InputFieldLogins} from '../../components/molecules/InputFieldLogins';
 import email from '../../assets/email.png';
 import password from '../../assets/password.png';
 import {IconButton} from '../../components/molecules/IconButton';
+import {Colors} from '../../configs/Colors';
+import EStyleSheet from 'react-native-extended-stylesheet';
 import {SocialButton} from '../../components/atoms/SocialButton';
 import {ConstString} from '../../configs/Strings';
 import TestIDs from '../../../e2e/TestIDs';
-import {colors} from '../../configs/Const';
 
 export const LoginComponents = props => {
   const {
@@ -57,15 +51,22 @@ export const LoginComponents = props => {
           <CheckBox
             testID={TestIDs.BtnRememberMe}
             value={onRememberMe}
-            onCheckColor={colors.primary}
-            tintColor={colors.primary}
-            onTintColor={colors.primary}
+            onCheckColor={Colors.primaryColor}
+            tintColor={Colors.primaryColor}
+            onTintColor={Colors.primaryColor}
             boxType={'square'}
-            tintColors={colors.primary}
+            tintColors={Colors.primaryColor}
             onValueChange={onClickRememberMe}
             style={{height: 15, width: 15}}
           />
-          <Text style={styles.text}>Remember Me</Text>
+          <Text
+            style={{
+              color: EStyleSheet.value('$secondaryTextColor'),
+              textAlign: 'center',
+              marginStart: 10,
+            }}>
+            Remember Me
+          </Text>
         </View>
         <TouchableOpacity
           testID={TestIDs.BtnDone}
@@ -74,7 +75,7 @@ export const LoginComponents = props => {
           <Text style={{color: 'white', textAlign: 'center'}}>Login</Text>
         </TouchableOpacity>
         <TouchableOpacity style={styles.buttonForPass}>
-          <Text style={{color: colors.primary, textAlign: 'center'}}>
+          <Text style={{color: Colors.primaryColor, textAlign: 'center'}}>
             Forget Password
           </Text>
         </TouchableOpacity>
@@ -92,27 +93,23 @@ export const LoginComponents = props => {
     </SafeAreaView>
   );
 };
-const styles = StyleSheet.create({
-  text: {
-    color: colors.white,
-    textAlign: 'center',
-    marginStart: 10,
-  },
+const styles = EStyleSheet.create({
   logo: {
     height: 100,
     width: 100,
     alignSelf: 'center',
     alignItems: 'center',
+    borderRadius: 10,
     margin: 30,
   },
   container: {
     flex: 1,
-    backgroundColor: colors.bg,
+    backgroundColor: '$backGroundColor',
   },
   title: {
     fontWeight: 'normal',
     fontSize: 20,
-    color: colors.white,
+    color: '$primaryTextColor',
     marginVertical: 10,
   },
   inputContainer: {
@@ -121,7 +118,7 @@ const styles = StyleSheet.create({
   },
   buttonDone: {
     alignItems: 'center',
-    backgroundColor: colors.primary,
+    backgroundColor: '$primaryColor',
     borderRadius: 10,
     padding: 15,
     marginTop: 20,

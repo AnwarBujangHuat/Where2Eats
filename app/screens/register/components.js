@@ -8,15 +8,12 @@ import {
   Text,
   TouchableOpacity,
   View,
-  StyleSheet,
 } from 'react-native';
 import {DetailsHeader} from '../../components/molecules/DetailsHeader';
-import {
-  colors,
-  Const,
-} from "../../configs/Const";
+import {Const} from '../../configs/Const';
 import {ImageButton} from '../../components/atoms/ImageButton';
 import {InputField} from '../../components/atoms/InputField';
+import EStyleSheet from 'react-native-extended-stylesheet';
 import {ModalLocation} from '../../components/molecules/ModalLocation';
 
 export const RegisterComponents = props => {
@@ -92,7 +89,7 @@ export const RegisterComponents = props => {
           onPress={openLocationModal}>
           <Text
             style={{
-              color: colors.primary,
+              color: EStyleSheet.value('$primaryColor'),
               fontWeight: 'bold',
             }}>
             Location
@@ -112,16 +109,16 @@ export const RegisterComponents = props => {
           style={styles.button}
           onPress={editorMode ? updateRestaurantInfo : goToMenu}>
           <Text style={styles.buttonText}>
-            {editorMode ? 'Update Restaurant Info' : 'Go To Menu'}
+            {editorMode ? 'Update Restaurant Info' : 'goToMenu'}
           </Text>
         </TouchableOpacity>
       </KeyboardAvoidingView>
     </SafeAreaView>
   );
 };
-const styles = StyleSheet.create({
+const styles = EStyleSheet.create({
   container: {
-    backgroundColor: colors.bg,
+    backgroundColor: '$backGroundColor',
     flex: 1,
   },
   descriptionInput: {
@@ -129,10 +126,10 @@ const styles = StyleSheet.create({
     fontWeight: 'normal',
     borderWidth: 1,
     paddingHorizontal: 5,
-    borderBottomColor: colors.primary,
-    borderColor: colors.white,
+    borderBottomColor: '$primaryColor',
+    borderColor: 'white',
     textAlignVertical: 'center',
-    backgroundColor: colors.white,
+    backgroundColor: 'white',
     borderRadius: 5,
     marginVertical: 10,
     paddingVertical: 15,
@@ -141,14 +138,14 @@ const styles = StyleSheet.create({
     fontSize: 16,
     fontWeight: 'bold',
     marginVertical: 10,
-    color: colors.darkPurple,
+    color: '$primaryTextColor',
     shadowOffset: {width: -2, height: 2},
-    shadowColor: colors.primary,
+    shadowColor: '$primaryColor',
     shadowOpacity: 0.2,
     shadowRadius: 3,
   },
   button: {
-    backgroundColor: colors.primary,
+    backgroundColor: '$lightPrimaryColor',
     alignItems: 'center',
     padding: 15,
     borderRadius: 5,
@@ -160,11 +157,11 @@ const styles = StyleSheet.create({
   },
   buttonText: {
     fontSize: 16,
-    color: colors.white,
+    color: 'white',
     fontWeight: 'bold',
   },
   buttonLocation: {
-    borderColor: colors.lightPurple,
+    borderColor: '$lightPrimaryColor',
     borderWidth: 1,
     alignItems: 'center',
     padding: 15,
@@ -177,7 +174,7 @@ const styles = StyleSheet.create({
     marginHorizontal: 15,
   },
   desc: {
-    color: colors.white,
+    color: '$secondaryTextColor',
     paddingTop: 5,
     fontSize: 12,
     marginVertical: 5,

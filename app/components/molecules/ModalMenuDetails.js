@@ -5,13 +5,14 @@ import {
   Text,
   TouchableOpacity,
   View,
-  StyleSheet,
 } from 'react-native';
 import FastImage from 'react-native-fast-image';
 import Modal from 'react-native-modal';
+
 import nasiAyam from '../../assets/NasiAyam.jpg';
-import {colors} from '../../configs/Const';
-import {GStyles} from '../../Styles';
+import EStyleSheet from 'react-native-extended-stylesheet';
+import {Colors} from '../../configs/Colors';
+
 const {width} = Dimensions.get('window');
 
 export const ModalMenuDetails = ({closeModal, isModalVisible, foodItem}) => {
@@ -23,7 +24,7 @@ export const ModalMenuDetails = ({closeModal, isModalVisible, foodItem}) => {
           <Modal
             animationType="none"
             transparent
-            isVisible={isModalVisible}
+            visible={isModalVisible}
             presentationStyle="overFullScreen"
             onBackdropPress={closeModal}
             onDismiss={closeModal}>
@@ -58,7 +59,7 @@ export const ModalMenuDetails = ({closeModal, isModalVisible, foodItem}) => {
                 onPress={closeModal}>
                 <Text
                   style={{
-                    color: colors.primary,
+                    color: Colors.primaryColor,
                     fontSize: 18,
                     alignSelf: 'center',
                   }}>
@@ -73,19 +74,19 @@ export const ModalMenuDetails = ({closeModal, isModalVisible, foodItem}) => {
     </>
   );
 };
-const styles = StyleSheet.create({
+const styles = EStyleSheet.create({
   changeButton: {
     position: 'absolute',
     left: 0,
     fontWeight: 'bold',
     fontSize: 12,
-    color: colors.white,
-    backgroundColor: colors.primary,
+    color: 'white',
+    backgroundColor: '$primaryColor',
     padding: 5,
   },
   buttonText: {
     fontSize: 16,
-    color: colors.white,
+    color: 'white',
     fontWeight: 'normal',
   },
   container: {
@@ -111,22 +112,30 @@ const styles = StyleSheet.create({
     width: width * 0.8,
     backgroundColor: '$backGroundColor',
     borderRadius: 10,
-    ...GStyles.shadowContainer,
+    shadowOffset: {width: -2, height: 6},
+    shadowColor: EStyleSheet.value('$primaryColor'),
+    shadowOpacity: 0.2,
+    shadowRadius: 3,
+    elevation: 10,
   },
   header: {
     fontSize: 18,
-    fontWeight: '800',
-    color: colors.primary,
+    fontWeight: 'bold',
+    color: '$primaryTextColor',
+    shadowOffset: {width: -2, height: 1},
+    shadowColor: '$primaryColor',
+    shadowOpacity: 0.1,
+    shadowRadius: 2,
   },
   price: {
-    color: colors.lightPurple,
+    color: '$tertiaryTextColor',
     marginVertical: 5,
     fontSize: 14,
     fontWeight: 'bold',
     textAlign: 'justify',
   },
   desc: {
-    color: colors.lightPurple,
+    color: '$tertiaryTextColor',
     paddingEnd: 5,
     marginTop: 5,
     fontSize: 14,
