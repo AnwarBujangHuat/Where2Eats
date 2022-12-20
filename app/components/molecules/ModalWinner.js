@@ -6,14 +6,13 @@ import {
   Text,
   TouchableOpacity,
   View,
-  StyleSheet,
 } from 'react-native';
-import logoIcon from '../../assets/allfood.png';
+import logoIcon from '../../assets/Logo.png';
 import locationIcon from '../../assets/location.png';
 import FastImage from 'react-native-fast-image';
-import {colors, icons} from '../../configs/Const';
+import {icons} from '../../configs/Const';
+import EStyleSheet from 'react-native-extended-stylesheet';
 import Modal from 'react-native-modal';
-import {GStyles} from '../../Styles';
 
 const {width} = Dimensions.get('window');
 export const ModalWinner = ({
@@ -37,7 +36,6 @@ export const ModalWinner = ({
             animationType="none"
             transparent
             visible={isModalVisible}
-            onBackdropPress={closeModal}
             presentationStyle="overFullScreen"
             style={styles.viewWrapper}>
             <View style={styles.modalView}>
@@ -105,15 +103,15 @@ export const ModalWinner = ({
     </>
   );
 };
-const styles = StyleSheet.create({
+const styles = EStyleSheet.create({
   buttonTextSpin: {
     fontSize: 16,
-    color: colors.lightPurple,
+    color: '$tertiaryColor',
     fontWeight: 'normal',
   },
   buttonTextMenu: {
     fontSize: 16,
-    color: colors.primary,
+    color: '$primaryColor',
     fontWeight: 'normal',
   },
   container: {
@@ -140,7 +138,7 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 18,
     fontWeight: 'bold',
-    color: colors.primary,
+    color: '$primaryColor',
   },
   modalView: {
     paddingBottom: 5,
@@ -149,25 +147,30 @@ const styles = StyleSheet.create({
     elevation: 5,
     alignSelf: 'center',
     width: width * 0.8,
-    ...GStyles.shadowContainer,
+    backgroundColor: '$secondaryBackGroundColor',
+    borderRadius: 10,
+    shadowOffset: {width: -2, height: 2},
+    shadowColor: '$primaryColor',
+    shadowOpacity: 0.2,
+    shadowRadius: 3,
   },
   button: {
-    backgroundColor: colors.secondBg,
+    backgroundColor: '$secondaryBackGroundColor',
     alignItems: 'center',
     padding: 5,
     width: '50%',
-    borderColor: colors.secondBg,
+    borderColor: '$secondaryBackGroundColor',
     borderWidth: 0.5,
     textTransform: 'uppercase',
     marginTop: 15,
   },
   buttonVisit: {
-    backgroundColor: colors.secondBg,
+    backgroundColor: '$secondaryBackGroundColor',
     alignItems: 'center',
     padding: 5,
     width: '50%',
-    borderLeftColor: colors.primary,
-    borderColor: colors.secondBg,
+    borderLeftColor: '$primaryColor',
+    borderColor: '$secondaryBackGroundColor',
     borderWidth: 0.5,
     textTransform: 'uppercase',
     marginTop: 15,
@@ -175,19 +178,23 @@ const styles = StyleSheet.create({
   header: {
     fontSize: 20,
     fontWeight: 'bold',
-    color: colors.primary,
+    color: '$primaryColor',
+    shadowOffset: {width: -2, height: 1},
+    shadowColor: '$primaryColor',
+    shadowOpacity: 0.1,
+    shadowRadius: 2,
     paddingStart: 10,
     width: '90%',
   },
   price: {
-    color: colors.lightPurple,
+    color: '$tertiaryColor',
     marginVertical: 5,
     fontSize: 14,
     fontWeight: 'bold',
     textAlign: 'justify',
   },
   desc: {
-    color: colors.lightPurple,
+    color: '$tertiaryTextColor',
     paddingEnd: 5,
     marginTop: 5,
     fontSize: 14,
@@ -196,7 +203,7 @@ const styles = StyleSheet.create({
   },
   descContainer: {paddingHorizontal: 15},
   address: {
-    color: colors.lightPurple,
+    color: '$tertiaryColor',
     paddingEnd: 5,
     marginTop: 5,
     fontSize: 12,
@@ -205,15 +212,16 @@ const styles = StyleSheet.create({
   },
   logoContainer: {
     alignSelf: 'flex-start',
-    backgroundColor: colors.white,
+    backgroundColor: 'white',
     borderRadius: 80,
-    borderColor: colors.primary,
+    padding: 15,
+    borderColor: '$primaryColor',
     position: 'absolute',
     top: '22%',
   },
   logoIcon: {
-    height: 90,
-    width: 90,
+    height: 60,
+    width: 60,
   },
   iconCategory: {
     width: 20,

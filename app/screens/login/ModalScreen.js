@@ -1,13 +1,14 @@
 import * as React from 'react';
 import {useEffect} from 'react';
-import {Alert, Dimensions, SafeAreaView, StyleSheet} from 'react-native';
+import {Alert, Dimensions, SafeAreaView} from 'react-native';
+import {Colors} from '../../configs/Colors';
+import {ConstString} from '../../configs/Strings';
 import {PopulateRestaurantList} from '../../store/thunks';
 import {useDispatch} from 'react-redux';
 import LottieView from 'lottie-react-native';
 import Welcome from '../../assets/welcome.json';
 import TestIDs from '../../../e2e/TestIDs';
-import {routes} from '../../navigation/routes';
-import {colors} from '../../configs/Const';
+import { routes } from "../../navigation/routes";
 
 const {width} = Dimensions.get('window');
 
@@ -37,7 +38,15 @@ export const ModalScreen = ({navigation}) => {
   }, []);
 
   return (
-    <SafeAreaView testID={TestIDs.ModalScreen} style={styles.screen}>
+    <SafeAreaView
+      testID={TestIDs.ModalScreen}
+      style={{
+        backgroundColor: Colors.secondaryPurple,
+        justifyContent: 'center',
+        flex: 1,
+        alignItems: 'center',
+        alignContent: 'center',
+      }}>
       <LottieView
         source={Welcome}
         autoPlay={true}
@@ -49,12 +58,3 @@ export const ModalScreen = ({navigation}) => {
     </SafeAreaView>
   );
 };
-export const styles = StyleSheet.create({
-  screen: {
-    backgroundColor: colors.primary,
-    justifyContent: 'center',
-    flex: 1,
-    alignItems: 'center',
-    alignContent: 'center',
-  },
-});

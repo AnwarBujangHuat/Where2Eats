@@ -7,10 +7,10 @@ import {
   Text,
   TouchableOpacity,
   View,
-  StyleSheet,
 } from 'react-native';
 import {BackButton} from '../../../components/atoms/BackButton';
 import {ConstString} from '../../../configs/Strings';
+import EStyleSheet from 'react-native-extended-stylesheet';
 import SelectBox from 'react-native-multi-selectbox';
 import {xorBy} from 'lodash';
 import addIcon from '../../../assets/plus.png';
@@ -19,8 +19,6 @@ import {ModalUploading} from '../../../components/molecules/ModalUploading';
 import {ModalMenuDetails} from '../../../components/molecules/ModalMenuDetails';
 import {FoodCard} from '../../../components/molecules/FoodCard';
 import {SearchButton} from '../../../components/atoms/SearchButton';
-import {GStyles} from '../../../Styles';
-import {colors} from '../../../configs/Const';
 
 export const SetupMenuComponents = props => {
   const {
@@ -34,6 +32,7 @@ export const SetupMenuComponents = props => {
     editorMode,
     onPressDelete,
     onPressEdit,
+    foodItemLists,
     Menu,
     uploadMenu,
     isModalVisible,
@@ -100,16 +99,16 @@ export const SetupMenuComponents = props => {
           fontSize: 16,
           fontWeight: 'bold',
           paddingStart: 15,
-          color: colors.lightPurple,
+          color: EStyleSheet.value('$tertiaryColor'),
         }}>
         Add Category
       </Text>
       <View style={styles.inputContainer}>
         <SelectBox
-          textColor={colors.white}
           label="Select Menu Category"
           options={categories}
           labelStyle={styles.label}
+          inputFilterStyle={styles.label}
           listEmptyLabelStyle={styles.label}
           selectedValues={selectedCategory}
           onMultiSelect={item =>
@@ -119,20 +118,20 @@ export const SetupMenuComponents = props => {
             setSelectedCategory(xorBy(selectedCategory, [item], 'id'))
           }
           isMulti
-          arrowIconColor={colors.primary}
-          searchIconColor={colors.primary}
-          toggleIconColor={colors.primary}
+          arrowIconColor={EStyleSheet.value('$primaryColor')}
+          searchIconColor={EStyleSheet.value('$primaryColor')}
+          toggleIconColor={EStyleSheet.value('$primaryColor')}
           multiOptionContainerStyle={{
-            backgroundColor: colors.primary,
+            backgroundColor: EStyleSheet.value('$primaryColor'),
           }}
-          multiOptionsLabelStyle={{fontSize: 16, color: colors.white}}
+          multiOptionsLabelStyle={{fontSize: 16, color: 'white'}}
           selectedItemStyle={{
             fontSize: 16,
-            color: colors.white,
+            color: EStyleSheet.value('$primaryTextColor'),
           }}
           optionsLabelStyle={{
             fontSize: 16,
-            color: colors.white,
+            color: EStyleSheet.value('$primaryTextColor'),
           }}
         />
       </View>
@@ -168,7 +167,7 @@ export const SetupMenuComponents = props => {
                     <Text
                       style={{
                         padding: 5,
-                        color: colors.white,
+                        color: 'white',
                         fontWeight: 'bold',
                         fontSize: 12,
                       }}>
@@ -224,22 +223,25 @@ export const SetupMenuComponents = props => {
     </SafeAreaView>
   );
 };
-const styles = StyleSheet.create({
+const styles = EStyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: colors.bg,
+    backgroundColor: '$backGroundColor',
   },
   label: {
-    color: colors.white,
+    color: '$secondaryTextColor',
     fontSize: 13,
   },
   buttonContainer: {
-    ...GStyles.shadowContainer,
     padding: 7,
     alignSelf: 'center',
     flexDirection: 'row',
-    backgroundColor: colors.primary,
+    backgroundColor: '$primaryColor',
     borderRadius: 20,
+    shadowOffset: {width: -2, height: 4},
+    shadowColor: '$primaryColor',
+    shadowOpacity: 0.2,
+    shadowRadius: 3,
     elevation: 10,
   },
   icon: {
@@ -256,16 +258,19 @@ const styles = StyleSheet.create({
   inputContainer: {
     marginTop: 10,
     marginHorizontal: 20,
-    backgroundColor: colors.bg,
+    shadowOffset: {width: -2, height: 2},
+    shadowColor: '$primaryColor',
+    shadowOpacity: 0.2,
+    shadowRadius: 3,
   },
   header: {
     fontSize: 16,
     fontWeight: 'bold',
     margin: 10,
-    color: colors.white,
+    color: '$primaryTextColor',
   },
   button: {
-    backgroundColor: colors.lightPurple,
+    backgroundColor: '$lightPrimaryColor',
     alignItems: 'center',
     padding: 15,
     borderRadius: 10,
@@ -279,12 +284,12 @@ const styles = StyleSheet.create({
     fontSize: 16,
     fontWeight: 'bold',
     textAlign: 'center',
-    color: colors.white,
+    color: '$primaryTextColor',
     marginStart: 10,
   },
   buttonText: {
     fontSize: 16,
-    color: colors.white,
+    color: 'white',
     fontWeight: 'bold',
   },
   rowContainer: {

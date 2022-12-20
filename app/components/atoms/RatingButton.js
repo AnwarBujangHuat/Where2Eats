@@ -1,16 +1,31 @@
-import {Image, Text, TouchableOpacity, View, StyleSheet} from 'react-native';
+import {Image, Text, TouchableOpacity, View} from 'react-native';
 import React from 'react';
+import {Colors} from '../../configs/Colors';
+import EStyleSheet from 'react-native-extended-stylesheet';
 import star from '../../assets/star2.png';
-import {colors} from '../../configs/Const';
-import {GStyles} from '../../Styles';
 
 export const RatingButton = ({onPress, rating, selected}) => {
-  let backGroundColor = rating === selected ? colors.primary : colors.secondBg;
-  let color = rating === selected ? colors.white : colors.primary;
+  let backGroundColor =
+    rating === selected
+      ? '#894eff'
+      : EStyleSheet.value('$secondaryBackGroundColor');
+  let color = rating === selected ? Colors.whitTextColor : Colors.primaryColor;
   return (
     <View>
       <TouchableOpacity
-        style={{...styles.inputContainer, backgroundColor: backGroundColor}}
+        style={{
+          flexDirection: 'row',
+          borderRadius: 20,
+          margin: 5,
+          padding: 10,
+          backgroundColor: backGroundColor,
+          shadowOffset: {width: -2, height: 3},
+          shadowColor: EStyleSheet.value('$primaryColor'),
+          shadowOpacity: 0.2,
+          shadowRadius: 3,
+          elevation: 5,
+          alignItems: 'center',
+        }}
         onPress={() => onPress(rating)}>
         <Image source={star} style={styles.icon} />
         <Text
@@ -25,15 +40,7 @@ export const RatingButton = ({onPress, rating, selected}) => {
     </View>
   );
 };
-const styles = StyleSheet.create({
-  inputContainer: {
-    ...GStyles.shadowContainer,
-    flexDirection: 'row',
-    borderRadius: 20,
-    margin: 5,
-    padding: 10,
-    alignItems: 'center',
-  },
+const styles = EStyleSheet.create({
   icon: {
     width: 20,
     height: 20,

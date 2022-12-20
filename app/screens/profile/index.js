@@ -1,12 +1,13 @@
 import React, {useState} from 'react';
 import {ProfileComponents} from './components';
+import {ConstString} from '../../configs/Strings';
 import {getUser} from '../../store/selector';
 import profileIcon from '../../assets/profile.png';
 import phoneIcon from '../../assets/telephone.png';
 import emailIcon from '../../assets/email.png';
 
 import {useSelector} from 'react-redux';
-import {routes} from '../../navigation/routes';
+import { routes } from "../../navigation/routes";
 
 export const Profile = ({navigation}) => {
   const goBackHome = () => navigation.navigate(routes.HOME);
