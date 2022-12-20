@@ -3453,11 +3453,6 @@ crypto-random-string@^2.0.0:
   resolved "https://registry.yarnpkg.com/crypto-random-string/-/crypto-random-string-2.0.0.tgz#ef2a7a966ec11083388369baa02ebead229b30d5"
   integrity sha512-v1plID3y9r/lPhviJ1wrXpLeyUIGAZ2SHNYTEapm7/8A9nLPoyvVp3RK/EPFqn5kEznyWgYZNsRtYYIWbuG8KA==
 
-css-mediaquery@^0.1.2:
-  version "0.1.2"
-  resolved "https://registry.npmjs.org/css-mediaquery/-/css-mediaquery-0.1.2.tgz"
-  integrity sha512-COtn4EROW5dBGlE/4PiKnh6rZpAPxDeFLaEEwt4i10jpDMFt2EhQGS79QmmrO+iKCHv0PU/HrOWEhijFd1x99Q==
-
 css-select@^5.1.0:
   version "5.1.0"
   resolved "https://registry.npmjs.org/css-select/-/css-select-5.1.0.tgz"
@@ -6820,11 +6815,6 @@ object-keys@^1.1.1:
   resolved "https://registry.npmjs.org/object-keys/-/object-keys-1.1.1.tgz"
   integrity sha512-NuAESUOUMrlIXOfHKzD6bpPu3tYt3xvjNdRIQ+FeT0lNb4K8WR70CaDxhuNguS2XG+GjkyMwOzsN5ZktImfhLA==
 
-object-resolve-path@^1.1.0:
-  version "1.1.1"
-  resolved "https://registry.npmjs.org/object-resolve-path/-/object-resolve-path-1.1.1.tgz"
-  integrity sha512-SnDr0lPbDWDB8s6qbWAcDs2dZ4G7niCJpxihaf5g6wluZQd3yHtN4ApwoKz7pLdMnRlGrdXslO57MulC+h3Neg==
-
 object-visit@^1.0.0:
   version "1.0.1"
   resolved "https://registry.npmjs.org/object-visit/-/object-visit-1.0.1.tgz"
@@ -7389,14 +7379,6 @@ react-native-dynamic-search-bar@^2.0.2:
   version "2.0.2"
   resolved "https://registry.npmjs.org/react-native-dynamic-search-bar/-/react-native-dynamic-search-bar-2.0.2.tgz"
   integrity sha512-VOJf43hwfA5TRmYPTmPd5+unosruKXxVL41vP/AaofMrYM90hen0LOgGxUkZquqjg/nQidv/PsQhzOx02orE7w==
-
-react-native-extended-stylesheet@^0.12.0:
-  version "0.12.0"
-  resolved "https://registry.yarnpkg.com/react-native-extended-stylesheet/-/react-native-extended-stylesheet-0.12.0.tgz#ebacf22d78a8e2173bdef2a08cbf1acba4dc051f"
-  integrity sha512-y4MEI+a9F8qtAKEjxKbwqotJg1FqKfl6vaiF25ULZ/VGkWI4GNTnsFunU9x6B3XJ6ly1E8O9fybO63u6UazL/A==
-  dependencies:
-    css-mediaquery "^0.1.2"
-    object-resolve-path "^1.1.0"
 
 react-native-fast-image@^8.6.1:
   version "8.6.3"

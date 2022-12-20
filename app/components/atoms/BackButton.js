@@ -1,7 +1,7 @@
-import {Image, TouchableOpacity, View} from 'react-native';
+import {Image, TouchableOpacity, View, StyleSheet} from 'react-native';
 import React from 'react';
 import backButton from '../../assets/back.png';
-import EStyleSheet from 'react-native-extended-stylesheet';
+import {GStyles} from '../../Styles';
 
 export const BackButton = ({onPress}) => {
   return (
@@ -12,17 +12,12 @@ export const BackButton = ({onPress}) => {
     </View>
   );
 };
-const styles = EStyleSheet.create({
+const styles = StyleSheet.create({
   container: {
+    ...GStyles.shadowContainer,
     alignSelf: 'flex-start',
-    backgroundColor: '$secondaryBackGroundColor',
     borderRadius: 40,
     padding: 10,
-    shadowOffset: {width: -2, height: 4},
-    shadowColor: '$primaryColor',
-    shadowOpacity: 0.2,
-    shadowRadius: 3,
-    elevation: 10,
     marginStart: 10,
   },
   icons: {

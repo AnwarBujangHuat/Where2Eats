@@ -1,7 +1,6 @@
-import {Text, TouchableOpacity, View} from 'react-native';
+import {Text, TouchableOpacity, View, StyleSheet} from 'react-native';
 import React from 'react';
-import EStyleSheet from 'react-native-extended-stylesheet';
-
+import {colors} from '../../configs/Const';
 export const IconButton = ({title, onPress, buttontitle}) => {
   return (
     <View style={styles.section}>
@@ -12,7 +11,7 @@ export const IconButton = ({title, onPress, buttontitle}) => {
     </View>
   );
 };
-const styles = EStyleSheet.create({
+const styles = StyleSheet.create({
   section: {
     flexDirection: 'row',
     borderRadius: 10,
@@ -20,11 +19,11 @@ const styles = EStyleSheet.create({
     alignSelf: 'center',
   },
   buttonText: {
-    color: '$primaryTextColor',
+    color: colors.white,
     textAlign: 'center',
   },
   title: {
-    color: '$secondaryTextColor',
+    color: colors.white,
     textAlign: 'center',
   },
 });

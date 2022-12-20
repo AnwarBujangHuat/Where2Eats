@@ -1,9 +1,8 @@
-import {Dimensions, Image, Text, TouchableOpacity, View} from 'react-native';
+import {StyleSheet, Image, Text, TouchableOpacity, View} from 'react-native';
 import React from 'react';
 import editIcon from '../../assets/editing.png';
-import EStyleSheet from 'react-native-extended-stylesheet';
-
-const {width} = Dimensions.get('window');
+import {colors} from '../../configs/Const';
+import {GStyles} from '../../Styles';
 
 export const EditableLabel = ({onPress, title, information, icon}) => {
   return (
@@ -21,21 +20,21 @@ export const EditableLabel = ({onPress, title, information, icon}) => {
     </View>
   );
 };
-const styles = EStyleSheet.create({
+const styles = StyleSheet.create({
   icon: {
     width: 20,
     height: 20,
     marginVertical: 10,
     marginHorizontal: 5,
-    tintColor: '$primaryColor',
+    tintColor: colors.primary,
   },
   header: {
-    color: '$secondaryTextColor',
+    color: colors.white,
     fontSize: 12,
     marginBottom: 5,
   },
   information: {
-    color: '$primaryTextColor',
+    color: colors.white,
     fontSize: 16,
   },
   textContainer: {
@@ -48,12 +47,8 @@ const styles = EStyleSheet.create({
     minHeight: 80,
     borderRadius: 5,
     padding: 10,
-    backgroundColor: '$backGroundColor',
-    shadowOffset: {width: -2, height: 2},
-    shadowColor: '$primaryColor',
-    shadowOpacity: 0.2,
-    shadowRadius: 3,
-    elevation: 5,
+    backgroundColor: colors.bg,
     alignItems: 'center',
+    ...GStyles.shadowContainer,
   },
 });

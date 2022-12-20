@@ -26,7 +26,6 @@ export const HomeComponents = props => {
     onNavigate,
     isFetching,
     reFresh,
-    reRender,
     IMAGE,
     userName,
   } = props;
@@ -49,7 +48,6 @@ export const HomeComponents = props => {
       <Header
         source={IMAGE ? {uri: IMAGE} : personIcon}
         onPress={openMenu}
-        reRender={reRender}
         title={'Welcome Back ' + userName}
       />
       {isOpenMenu && (

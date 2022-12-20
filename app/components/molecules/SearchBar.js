@@ -1,6 +1,14 @@
-import {Dimensions, Image, SafeAreaView, TextInput, View} from 'react-native';
+import {
+  Dimensions,
+  Image,
+  SafeAreaView,
+  TextInput,
+  View,
+  StyleSheet,
+} from 'react-native';
 import React from 'react';
-import EStyleSheet from 'react-native-extended-stylesheet';
+import {colors} from '../../configs/Const';
+import {GStyles} from '../../Styles';
 
 const {width} = Dimensions.get('window');
 
@@ -13,10 +21,10 @@ export const SearchBar = ({onChangeText, placeholder, source}) => {
           style={styles.input}
           placeholder={placeholder}
           clearButtonMode={'while-editing'}
-          placeholderTextColor={EStyleSheet.value('$primaryTextColor')}
+          placeholderTextColor={colors.white}
           onChangeText={onChangeText}
           autoCorrect={false}
-          color={EStyleSheet.value('$primaryTextColor')}
+          color={colors.white}
           overflow="hidden"
           keyboardAppearance="dark"
         />
@@ -30,22 +38,17 @@ export const SearchBar = ({onChangeText, placeholder, source}) => {
     </SafeAreaView>
   );
 };
-const styles = EStyleSheet.create({
+const styles = StyleSheet.create({
   searchbar: {
-    backgroundColor: '$secondaryBackGroundColor',
+    ...GStyles.shadowContainer,
     flexDirection: 'row',
     borderRadius: 10,
     marginVertical: 10,
     width: width - 30,
     padding: 5,
-    shadowOffset: {width: -2, height: 4},
-    shadowColor: '$primaryColor',
-    shadowOpacity: 0.2,
-    shadowRadius: 3,
-    elevation: 10,
   },
   text: {
-    color: '$primaryTextColor',
+    color: colors.primary,
     fontSize: 14,
     fontWeight: 'bold',
   },
@@ -67,6 +70,6 @@ const styles = EStyleSheet.create({
     marginTop: 10,
     marginBottom: 10,
     marginLeft: 10,
-    tintColor: '$primaryColor',
+    tintColor: colors.primary,
   },
 });

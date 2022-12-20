@@ -1,8 +1,8 @@
-import {Image, Text, TouchableOpacity, View} from 'react-native';
+import {Image, Text, TouchableOpacity, View, StyleSheet} from 'react-native';
 import React from 'react';
 import startIcon from '../../assets/star.png';
 import startIcon2 from '../../assets/star2.png';
-import EStyleSheet from 'react-native-extended-stylesheet';
+import {colors} from '../../configs/Const';
 
 export const RateLabel = ({rating, goToRating}) => {
   const restaurantRate = rating?.toFixed(1);
@@ -18,7 +18,7 @@ export const RateLabel = ({rating, goToRating}) => {
     </TouchableOpacity>
   );
 };
-const styles = EStyleSheet.create({
+const styles = StyleSheet.create({
   icon: {
     width: 15,
     height: 15,
@@ -29,7 +29,7 @@ const styles = EStyleSheet.create({
     margin: 5,
     paddingHorizontal: 5,
     paddingVertical: 5,
-    backgroundColor: '$backGroundColor',
+    backgroundColor: colors.bg,
     alignItems: 'center',
     alignSelf: 'flex-start',
     marginStart: 10,
@@ -37,7 +37,7 @@ const styles = EStyleSheet.create({
   },
   textRate: {
     padding: 2,
-    color: '$secondaryTextColor',
+    color: colors.white,
     fontWeight: 'bold',
   },
 });
