@@ -4,8 +4,11 @@ import {
   TouchableOpacity,
   View,
   StyleSheet,
+  Text,
 } from 'react-native';
 import React from 'react';
+import {ConstString} from '../../configs/Strings';
+import {colors} from '../../configs/Const';
 
 const {width} = Dimensions.get('window');
 
@@ -15,6 +18,7 @@ export const Header = ({source, onPress, title}) => {
       <TouchableOpacity onPress={onPress}>
         <Image style={styles.icons} source={source} />
       </TouchableOpacity>
+      <Text style={styles.title}>{ConstString.QUOTES}</Text>
     </View>
   );
 };
@@ -27,7 +31,12 @@ const styles = StyleSheet.create({
   icons: {
     height: 35,
     width: 35,
-    marginStart: 20,
+    marginHorizontal: 20,
     borderRadius: 40,
+  },
+  title: {
+    fontSize: 15,
+    color: colors.white,
+    fontWeight: 'bold',
   },
 });

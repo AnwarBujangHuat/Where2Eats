@@ -1,15 +1,14 @@
 import React from 'react';
-import {FlatList, SafeAreaView, View} from 'react-native';
+import {FlatList, SafeAreaView, View, StyleSheet} from 'react-native';
 import {Header} from '../../components/molecules/Header';
 import personIcon from '../../assets/programmer.png';
 import {SearchBar} from '../../components/molecules/SearchBar';
 import search from '../../assets/search.png';
-import {Const} from '../../configs/Const';
+import {colors, Const} from '../../configs/Const';
 import {ImageButton} from '../../components/atoms/ImageButton';
 import {RestaurantCard} from '../../components/molecules/RestaurantCard';
 import {FloatingActionButton} from '../../components/atoms/FloatingActionButtom';
 import {ModalMenuButton} from '../../components/molecules/ModalMenuButton';
-import EStyleSheet from 'react-native-extended-stylesheet';
 import TestIds from '../../../e2e/TestIDs';
 
 export const HomeComponents = props => {
@@ -93,10 +92,10 @@ export const HomeComponents = props => {
     </SafeAreaView>
   );
 };
-const styles = EStyleSheet.create({
+const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '$backGroundColor',
+    backgroundColor: colors.bg,
   },
   buttonContainer: {
     marginStart: 10,

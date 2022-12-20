@@ -55,7 +55,7 @@ const styles = StyleSheet.create({
   icons: {
     flexDirection: 'row',
     alignSelf: 'center',
-    tintColor: colors.white,
+    tintColor: colors.primary,
     height: 25,
     width: 25,
     margin: 10,

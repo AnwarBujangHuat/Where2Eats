@@ -1,12 +1,7 @@
-import {
-  Image,
-  Text,
-  TouchableOpacity,
-  View,
-  StyleSheet,
-} from 'react-native';
+import {Image, Text, TouchableOpacity, View, StyleSheet} from 'react-native';
 import React from 'react';
 import {colors, icons} from '../../configs/Const';
+import {GStyles} from '../../Styles';
 
 export const SocialButton = ({tesId, onPress, icon}) => {
   return (
@@ -29,6 +24,7 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
   },
   buttonContainer: {
+    ...GStyles.shadowContainer,
     flexDirection: 'row',
     borderRadius: 20,
     marginTop: 15,

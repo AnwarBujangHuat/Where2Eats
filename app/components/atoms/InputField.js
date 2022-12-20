@@ -12,7 +12,7 @@ export const InputField = ({placeholder, multiline, onChange, value}) => {
       multiline={multiline}
       onChangeText={text => onChange(text)}
       overflow="hidden"
-      color={colors.secondBg}
+      color={colors.white}
       placeholderTextColor={colors.white}
       keyboardAppearance="dark"
       autoCorrect={false}

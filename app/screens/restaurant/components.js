@@ -1,12 +1,19 @@
 import React from 'react';
-import {FlatList, Image, SafeAreaView, Text, View} from 'react-native';
+import {
+  FlatList,
+  Image,
+  SafeAreaView,
+  Text,
+  View,
+  StyleSheet,
+} from 'react-native';
 import {DetailsHeader} from '../../components/molecules/DetailsHeader';
 import {DescriptionLabel} from '../../components/molecules/DescriptionLabel';
 import {FoodCard} from '../../components/molecules/FoodCard';
 import {ModalMenuDetails} from '../../components/molecules/ModalMenuDetails';
-import EStyleSheet from 'react-native-extended-stylesheet';
 import {ModalWinner} from '../../components/molecules/ModalWinner';
 import {ExpandableFloatingButton} from '../../components/atoms/ExpandableFloatingButton';
+import {colors} from '../../configs/Const';
 
 export const RestaurantComponents = props => {
   const {
@@ -27,7 +34,7 @@ export const RestaurantComponents = props => {
     foodList,
     onChangeText,
   } = props;
-  const {restaurant, address, rate, image, food: foodItemList} = restaurantInfo;
+  const {restaurant, address, rate, image} = restaurantInfo;
   const renderItem = ({item}) => {
     return (
       <FoodCard
@@ -107,9 +114,9 @@ export const RestaurantComponents = props => {
     </SafeAreaView>
   );
 };
-const styles = EStyleSheet.create({
+const styles = StyleSheet.create({
   container: {
-    backgroundColor: '$backGroundColor',
+    backgroundColor: colors.bg,
     paddingBottom: 20,
     flex: 1,
   },
@@ -117,11 +124,11 @@ const styles = EStyleSheet.create({
     fontSize: 18,
     fontWeight: 'bold',
     margin: 10,
-    color: '$primaryTextColor',
+    color: colors.darkPurple,
   },
   fabText: {
     padding: 5,
-    color: '$secondaryTextColor',
+    color: colors.white,
     fontWeight: 'bold',
     alignSelf: 'center',
     fontSize: 14,

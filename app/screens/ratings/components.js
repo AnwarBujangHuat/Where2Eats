@@ -6,16 +6,18 @@ import {
   Text,
   TouchableOpacity,
   View,
+  StyleSheet,
 } from 'react-native';
 import {Rating} from 'react-native-ratings';
 import React from 'react';
 import {BackButton} from '../../components/atoms/BackButton';
-import EStyleSheet from 'react-native-extended-stylesheet';
 import {RatingCard} from '../../components/molecules/RatingCard';
 import addIcon from '../../assets/plus.png';
 import {ModalGiveRating} from '../../components/molecules/ModalGiveRating';
 import {BarChart} from 'react-native-chart-kit';
 import {RatingButton} from '../../components/atoms/RatingButton';
+import { colors } from "../../configs/Const";
+import { GStyles } from "../../Styles";
 
 export const RatingComponents = props => {
   const {
@@ -77,7 +79,7 @@ export const RatingComponents = props => {
               startingValue={isCurrentRating}
               readonly={true}
               showReadOnlyText={false}
-              tintColor={EStyleSheet.value('$backGroundColor')}
+              tintColor={EStyleSheet.value(colors.bg)}
               style={{paddingStart: 10}}
               imageSize={18}
               ratingTextColor={EStyleSheet.value('$secondaryTextColor')}
@@ -112,17 +114,16 @@ export const RatingComponents = props => {
               backgroundGradientFrom: 'transparent',
               backgroundGradientFromOpacity: 0,
               backgroundGradientTo: 'transparent',
-              fillShadowGradient: EStyleSheet.value('$secondaryTextColor'),
-              fillShadowGradientFrom: EStyleSheet.value('$secondaryTextColor'),
+              fillShadowGradient: colors.white,
+              fillShadowGradientFrom: colors.white,
               fillShadowGradientFromOpacity: 1,
               fillShadowGradientOpacity: 1,
-              fillShadowGradientTo: EStyleSheet.value('$secondaryTextColor'),
+              fillShadowGradientTo: colors.white,
               fillShadowGradientToOffset: 1,
               fillShadowGradientFromOffset: 1,
               backgroundGradientToOpacity: 0,
-              color: (opacity = 1) => EStyleSheet.value('$secondaryTextColor'),
-              labelColor: (opacity = 1) =>
-                EStyleSheet.value('$secondaryTextColor'),
+              color: (opacity = 1) => colors.white,
+              labelColor: (opacity = 1) => colors.white,
               strokeWidth: 1,
               barPercentage: 0.4,
             }}
@@ -176,13 +177,13 @@ export const RatingComponents = props => {
     </SafeAreaView>
   );
 };
-const styles = EStyleSheet.create({
+const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '$backGroundColor',
+    backgroundColor: colors.bg,
   },
   label: {
-    color: '$secondaryTextColor',
+    color: colors.white,
     fontSize: 13,
   },
   icon: {
@@ -200,19 +201,19 @@ const styles = EStyleSheet.create({
     fontSize: 17,
     fontWeight: 'bold',
     alignSelf: 'center',
-    color: '$primaryTextColor',
+    color: colors.primary,
   },
   rating: {
     fontSize: 60,
-    color: '$secondaryTextColor',
+    color: colors.white,
   },
   reviewHeader: {
     fontSize: 18,
     fontWeight: 'bold',
-    color: '$primaryTextColor',
+    color: colors.white,
   },
   button: {
-    backgroundColor: '$lightPrimaryColor',
+    backgroundColor: colors.lightPurple,
     alignItems: 'center',
     padding: 12,
     borderRadius: 10,
@@ -224,7 +225,7 @@ const styles = EStyleSheet.create({
     fontSize: 16,
     fontWeight: 'bold',
     textAlign: 'center',
-    color: '$primaryTextColor',
+    color: colors.white,
     alignSelf: 'center',
     marginStart: 10,
   },
@@ -236,25 +237,20 @@ const styles = EStyleSheet.create({
   ratingContainer: {
     alignSelf: 'center',
     alignItems: 'center',
-    backgroundColor: 'white',
+    backgroundColor: colors.white,
     alignContent: 'center',
   },
   reviewText: {
     fontSize: 14,
-    color: '$secondaryTextColor',
+    color: colors.white,
     fontWeight: 'bold',
   },
   buttonContainer: {
+    ...GStyles.shadowContainer,
     padding: 5,
     flexDirection: 'row',
-    backgroundColor: '$primaryColor',
     borderRadius: 20,
-    shadowOffset: {width: -2, height: 2},
-    shadowColor: '$primaryColor',
-    shadowOpacity: 0.2,
-    shadowRadius: 3,
     right: 0,
     position: 'absolute',
-    elevation: 10,
   },
 });
