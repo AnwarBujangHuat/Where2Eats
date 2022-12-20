@@ -1,6 +1,6 @@
 import {Image, Text, TouchableOpacity, View} from 'react-native';
 import React from 'react';
-import {Colors} from '../../Colors';
+import {Colors} from '../../configs/Colors';
 import EStyleSheet from 'react-native-extended-stylesheet';
 import star from '../../assets/star2.png';
 

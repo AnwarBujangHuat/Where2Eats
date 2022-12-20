@@ -1,14 +1,6 @@
 export const ConstString = {
-  // name it to routes
-  HOME: 'Home',
-  LOGIN: 'Login',
-  REGISTER: 'Register',
   RESTAURANT: 'Restaurants',
-  ROULETTE: 'Roulette',
-  PROFILE: 'Profile',
-  BOTTOM: 'Bottom',
   MENU: 'Menu',
-  RATINGS: 'Ratings',
   QUOTES: 'What would you like to eat today?',
   MENU_BOOK: 'Setup Your Menu Book',
   WESTERN: 'Western',

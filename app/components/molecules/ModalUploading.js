@@ -12,7 +12,7 @@ import Modal from 'react-native-modal';
 
 import Uploading from '../../assets/uploading.json';
 import Sleepy from '../../assets/sleepycat.json';
-import {ConstString} from '../../Strings';
+import {ConstString} from '../../configs/Strings';
 
 const {width} = Dimensions.get('window');
 let icon;

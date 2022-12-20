@@ -1,4 +1,4 @@
-import {ConstString} from '../Strings';
+import {ConstString} from '../configs/Strings';
 import {
   Home,
   Login,
@@ -12,6 +12,7 @@ import {
 } from '../screens';
 import * as React from 'react';
 import {createStackNavigator} from '@react-navigation/stack';
+import { routes } from "./routes";
 
 const Stack = createStackNavigator();
 export const NavStack = () => {
@@ -23,14 +24,14 @@ export const NavStack = () => {
   return (
     <Stack.Navigator
       // initialRouteName={ConstString.REGISTER}
-      initialRouteName={ConstString.LOGIN}
+      initialRouteName={routes.LOGIN}
       screenOptions={{
         headerShown: false,
         gestureEnabled: false,
       }}>
-      <Stack.Screen name={ConstString.LOGIN} component={Login} options={{}} />
+      <Stack.Screen name={routes.LOGIN} component={Login} options={{}} />
       <Stack.Screen
-        name={ConstString.MODAL}
+        name={routes.MODAL}
         component={ModalScreen}
         options={{
           presentation: 'transparentModal',
@@ -39,16 +40,16 @@ export const NavStack = () => {
       />
       {/*<Stack.Screen name={ConstString.BOTTOM} component={BottomNavigationBar} />*/}
       <Stack.Screen
-        name={ConstString.HOME}
+        name={routes.HOME}
         component={Home}
         options={{cardStyleInterpolator: forFade}}
       />
-      <Stack.Screen name={ConstString.REGISTER} component={Register} />
-      <Stack.Screen name={ConstString.RESTAURANT} component={Restaurant} />
-      <Stack.Screen name={ConstString.ROULETTE} component={WheelOfFortune} />
-      <Stack.Screen name={ConstString.MENU} component={SetupMenu} />
-      <Stack.Screen name={ConstString.PROFILE} component={Profile} />
-      <Stack.Screen name={ConstString.RATINGS} component={Ratings} />
+      <Stack.Screen name={routes.REGISTER} component={Register} />
+      <Stack.Screen name={routes.RESTAURANT} component={Restaurant} />
+      <Stack.Screen name={routes.ROULETTE} component={WheelOfFortune} />
+      <Stack.Screen name={routes.MENU} component={SetupMenu} />
+      <Stack.Screen name={routes.PROFILE} component={Profile} />
+      <Stack.Screen name={routes.RATINGS} component={Ratings} />
     </Stack.Navigator>
   );
 };

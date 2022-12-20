@@ -5,8 +5,8 @@ import {useSelector} from 'react-redux';
 import {StatusBar} from 'react-native';
 import {getTheme} from './app/store/selector';
 import EStyleSheet from 'react-native-extended-stylesheet';
-import {ConstString} from './app/Strings';
-import {DarkTheme, LightTheme} from './app/Colors';
+import {ConstString} from './app/configs/Strings';
+import {DarkTheme, LightTheme} from './app/configs/Colors';
 
 export default function App() {
   const theme = useSelector(getTheme);

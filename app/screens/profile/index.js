@@ -1,15 +1,16 @@
 import React, {useState} from 'react';
 import {ProfileComponents} from './components';
-import {ConstString} from '../../Strings';
+import {ConstString} from '../../configs/Strings';
 import {getUser} from '../../store/selector';
 import profileIcon from '../../assets/profile.png';
 import phoneIcon from '../../assets/telephone.png';
 import emailIcon from '../../assets/email.png';
 
 import {useSelector} from 'react-redux';
+import { routes } from "../../navigation/routes";
 
 export const Profile = ({navigation}) => {
-  const goBackHome = () => navigation.navigate(ConstString.HOME);
+  const goBackHome = () => navigation.navigate(routes.HOME);
   const [isModalVisible, setModalVisible] = useState(false);
   const [selectedInfo, setSelectedInfo] = useState('');
   const [updatedInfo, setUpdatedInfo] = useState('');

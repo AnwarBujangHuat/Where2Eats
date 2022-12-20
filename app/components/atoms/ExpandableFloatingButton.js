@@ -5,8 +5,8 @@ import Menu from '../../assets/cheeseburger.png';
 import Details from '../../assets/details.png';
 import Edit from '../../assets/edit.png';
 import EStyleSheet from 'react-native-extended-stylesheet';
-import {Colors} from '../../Colors';
-import {ConstString} from '../../Strings';
+import {Colors} from '../../configs/Colors';
+import {ConstString} from '../../configs/Strings';
 
 const actions = [
   {

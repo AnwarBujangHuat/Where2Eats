@@ -1,9 +1,9 @@
 import {Dimensions, Image, Text, TouchableOpacity, View} from 'react-native';
 import React from 'react';
 import EStyleSheet from 'react-native-extended-stylesheet';
-import {icons} from '../../Const';
-import {Colors} from '../../Colors';
-import TestIDs from '../../TestIDs';
+import {icons} from '../../configs/Const';
+import {Colors} from '../../configs/Colors';
+import TestIDs from '../../../e2e/TestIDs';
 
 const {width} = Dimensions.get('window');
 
