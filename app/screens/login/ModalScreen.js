@@ -1,13 +1,14 @@
 import * as React from 'react';
 import {useEffect} from 'react';
 import {Alert, Dimensions, SafeAreaView} from 'react-native';
-import {Colors} from '../../Colors';
-import {ConstString} from '../../Strings';
+import {Colors} from '../../configs/Colors';
+import {ConstString} from '../../configs/Strings';
 import {PopulateRestaurantList} from '../../store/thunks';
 import {useDispatch} from 'react-redux';
 import LottieView from 'lottie-react-native';
 import Welcome from '../../assets/welcome.json';
-import TestIDs from '../../TestIDs';
+import TestIDs from '../../../e2e/TestIDs';
+import { routes } from "../../navigation/routes";
 
 const {width} = Dimensions.get('window');
 
@@ -23,13 +24,13 @@ export const ModalScreen = ({navigation}) => {
         [
           {
             text: 'OK',
-            onPress: () => navigation.navigate(ConstString.LOGIN),
+            onPress: () => navigation.navigate(routes.LOGIN),
           },
         ],
         {cancelable: true},
       );
     }
-    setTimeout(() => navigation.navigate(ConstString.HOME), 1000);
+    setTimeout(() => navigation.navigate(routes.HOME), 1000);
   };
 
   useEffect(() => {

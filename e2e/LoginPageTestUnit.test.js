@@ -1,4 +1,4 @@
-import TestIds from '../app/TestIDs';
+import TestIds from './TestIDs';
 
 describe('LoginPage', () => {
   beforeAll(async () => {

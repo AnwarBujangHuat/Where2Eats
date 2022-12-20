@@ -12,7 +12,7 @@ import {
 import Modal from 'react-native-modal';
 import addIcon from '../../assets/plus.png';
 import EStyleSheet from 'react-native-extended-stylesheet';
-import {ConstString} from '../../Strings';
+import {ConstString} from '../../configs/Strings';
 import {launchImagePicker} from '../../ImagePicker';
 
 const {width} = Dimensions.get('window');

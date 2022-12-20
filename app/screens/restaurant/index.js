@@ -1,9 +1,10 @@
 import React, {useEffect, useState} from 'react';
-import {ConstString} from '../../Strings';
+import {ConstString} from '../../configs/Strings';
 import {useSelector} from 'react-redux';
-import {icons} from '../../Const';
+import {icons} from '../../configs/Const';
 import {getCurrentRestaurant} from '../../store/selector';
 import {RestaurantComponents} from './components';
+import { routes } from "../../navigation/routes";
 
 const categories = [
   {id: 1, item: ConstString.MAINDISH},
@@ -45,16 +46,16 @@ export const Restaurant = ({navigation, route}) => {
   const menuIcon = item => icons[item] ?? icons?.def;
   const closeModal = () => setModalVisible(false);
   const openPreviewModal = () => setIsPreview(true);
-  const goToRating = () => navigation.navigate(ConstString.RATINGS, {id});
-  const onBack = () => navigation.navigate(ConstString.HOME);
+  const goToRating = () => navigation.navigate(routes.RATINGS, {id});
+  const onBack = () => navigation.navigate(routes.HOME);
   const onPressFloatingButton = ({item: action}) => {
     //If edit then go to Edit Restaurant general Information
     if (action === ConstString.EDIT) {
-      return navigation.navigate(ConstString.REGISTER, {id});
+      return navigation.navigate(routes.REGISTER, {id});
     }
 
     //else go to Edit Menu Page
-    navigation.navigate(ConstString.MENU, {id});
+    navigation.navigate(routes.MENU, {id});
   };
   //Search
   const onChangeText = text => {

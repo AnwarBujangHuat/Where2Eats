@@ -12,7 +12,7 @@ import addImage from '../../assets/addImage.png';
 import logoIcon from '../../assets/Logo.png';
 
 import {RateLabel} from '../atoms/RateLabel';
-import {Colors} from '../../Colors';
+import {Colors} from '../../configs/Colors';
 import {SearchButton} from '../atoms/SearchButton';
 
 const {width} = Dimensions.get('window');

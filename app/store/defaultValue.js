@@ -1,4 +1,4 @@
-import {ConstString} from '../Strings';
+import {ConstString} from '../configs/Strings';
 
 export const defaultValue = [
   {

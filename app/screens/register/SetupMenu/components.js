@@ -9,7 +9,7 @@ import {
   View,
 } from 'react-native';
 import {BackButton} from '../../../components/atoms/BackButton';
-import {ConstString} from '../../../Strings';
+import {ConstString} from '../../../configs/Strings';
 import EStyleSheet from 'react-native-extended-stylesheet';
 import SelectBox from 'react-native-multi-selectbox';
 import {xorBy} from 'lodash';

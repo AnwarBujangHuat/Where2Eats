@@ -5,8 +5,8 @@ export const routes = {
   RESTAURANT: 'Restaurants',
   ROULETTE: 'Roulette',
   PROFILE: 'Profile',
+  RATINGS: 'Ratings',
   BOTTOM: 'Bottom',
   MENU: 'Menu',
-  RATINGS: 'Ratings',
   MODAL: 'Modal',
 };

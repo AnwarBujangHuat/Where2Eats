@@ -6,11 +6,11 @@ import {InputFieldLogins} from '../../components/molecules/InputFieldLogins';
 import email from '../../assets/email.png';
 import password from '../../assets/password.png';
 import {IconButton} from '../../components/molecules/IconButton';
-import {Colors} from '../../Colors';
+import {Colors} from '../../configs/Colors';
 import EStyleSheet from 'react-native-extended-stylesheet';
 import {SocialButton} from '../../components/atoms/SocialButton';
-import {ConstString} from '../../Strings';
-import TestIDs from '../../TestIDs';
+import {ConstString} from '../../configs/Strings';
+import TestIDs from '../../../e2e/TestIDs';
 
 export const LoginComponents = props => {
   const {
@@ -45,7 +45,7 @@ export const LoginComponents = props => {
           defvalue={Password}
           onChangeText1={onChangeInputPassword}
           source={password}
-          secret={false}
+          secret={true}
         />
         <View style={styles.checkboxContainer}>
           <CheckBox
