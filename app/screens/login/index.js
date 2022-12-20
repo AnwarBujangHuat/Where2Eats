@@ -2,7 +2,6 @@ import * as React from 'react';
 import {useState} from 'react';
 
 import {LoginComponents} from './components';
-import {ConstString} from '../../configs/Strings';
 import {useDispatch, useSelector} from 'react-redux';
 import {firebase} from '../../../src/firebase/config';
 import {Alert} from 'react-native';

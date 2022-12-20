@@ -114,14 +114,14 @@ const styles = StyleSheet.create({
     padding: 10,
   },
   desc: {
-    color: '$secondaryTextColor',
+    color: colors.white,
     paddingTop: 5,
     fontSize: 12,
   },
   title: {
     fontSize: 18,
     fontWeight: 'bold',
-    color: '$primaryTextColor',
+    color: colors.darkPurple,
   },
   containerIcon: {
     flexDirection: 'row',

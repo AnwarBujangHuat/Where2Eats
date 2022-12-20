@@ -12,7 +12,7 @@ import {icons} from '../../../configs/Const';
 import {firebase} from '../../../../src/firebase/config';
 import {getCurrentRestaurant} from '../../../store/selector';
 import {SetupMenuComponents} from './components';
-import { routes } from "../../../navigation/routes";
+import {routes} from '../../../navigation/routes';
 
 export const SetupMenu = ({navigation, route}) => {
   const dispatch = useDispatch();

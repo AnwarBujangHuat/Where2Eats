@@ -9,13 +9,10 @@ import {
 } from 'react-native';
 import {RateLabel} from '../atoms/RateLabel';
 import locationIcon from '../../assets/location.png';
-import {
-  colors,
-  icons,
-} from "../../configs/Const";
+import {colors, icons} from '../../configs/Const';
 import addImage from '../../assets/addImage.png';
 import FastImage from 'react-native-fast-image';
-import { GStyles } from "../../Styles";
+import {GStyles} from '../../Styles';
 
 export const RestaurantCard = ({
   onPress,
@@ -105,7 +102,7 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 18,
     fontWeight: 'bold',
-    color: colors.white,
+    color: colors.darkPurple,
   },
   containerIcon: {
     flexDirection: 'row',
