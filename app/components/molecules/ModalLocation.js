@@ -5,12 +5,13 @@ import {
   Text,
   TouchableOpacity,
   View,
+  StyleSheet,
 } from 'react-native';
 import Modal from 'react-native-modal';
-import EStyleSheet from 'react-native-extended-stylesheet';
 import GooglePlacesInput from './GooglePlacesInput';
 import MapView, {Marker} from 'react-native-maps';
-import {Colors} from '../../configs/Colors';
+import {colors} from '../../configs/Const';
+import {GStyles} from '../../Styles';
 
 const {width} = Dimensions.get('window');
 
@@ -54,14 +55,7 @@ export const ModalLocation = ({submitLocation, isModalVisible, closeModal}) => {
                 <GooglePlacesInput onResult={onResult} />
               </View>
               <MapView
-                style={{
-                  height: 280,
-                  width: 300,
-                  zIndex: 0,
-                  alignSelf: 'center',
-                  position: 'absolute',
-                  top: '33%',
-                }}
+                style={styles.mapView}
                 ref={mapRef}
                 initialRegion={{
                   latitude: 3.16,
@@ -71,7 +65,7 @@ export const ModalLocation = ({submitLocation, isModalVisible, closeModal}) => {
                 }}
                 liteMode={true}>
                 <Marker
-                  pinColor={Colors.primaryColor}
+                  pinColor={colors.primary}
                   coordinate={{
                     latitude: latLong.latitude,
                     longitude: latLong.longitude,
@@ -90,9 +84,17 @@ export const ModalLocation = ({submitLocation, isModalVisible, closeModal}) => {
     </>
   );
 };
-const styles = EStyleSheet.create({
+const styles = StyleSheet.create({
+  mapView: {
+    height: 280,
+    width: 300,
+    zIndex: 0,
+    alignSelf: 'center',
+    position: 'absolute',
+    top: '33%',
+  },
   button: {
-    backgroundColor: '$lightPrimaryColor',
+    backgroundColor: colors.secondBg,
     alignItems: 'center',
     padding: 10,
     borderRadius: 10,
@@ -106,14 +108,9 @@ const styles = EStyleSheet.create({
   },
   container: {
     alignSelf: 'flex-start',
-    backgroundColor: '$primaryColor',
     borderRadius: 10,
     marginTop: 10,
-    shadowOffset: {width: -2, height: 4},
-    shadowColor: '$primaryColor',
-    shadowOpacity: 0.2,
-    shadowRadius: 3,
-    elevation: 10,
+    ...GStyles.shadowContainer,
   },
   screen: {
     flex: 1,
@@ -125,13 +122,12 @@ const styles = EStyleSheet.create({
 
   modalView: {
     padding: 20,
-    // height:width*.3,
     height: 500,
     justifyContent: 'center',
     position: 'absolute',
     alignSelf: 'center',
     width: width * 0.9,
-    backgroundColor: '$backGroundColor',
+    backgroundColor: colors.bg,
     // backgroundColor: '$primaryColor',
     borderRadius: 7,
   },
@@ -139,11 +135,11 @@ const styles = EStyleSheet.create({
   header: {
     fontSize: 16,
     fontWeight: 'bold',
-    color: '$tertiaryColor',
+    color: colors.lightPurple,
     marginBottom: 5,
   },
   desc: {
-    color: '$secondaryTextColor',
+    color: colors.white,
     fontSize: 14,
     height: 50,
     marginBottom: 10,

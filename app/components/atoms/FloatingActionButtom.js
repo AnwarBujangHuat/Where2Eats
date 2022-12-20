@@ -1,8 +1,8 @@
-import {Image, TouchableOpacity, View} from 'react-native';
+import {Image, TouchableOpacity, View, StyleSheet} from 'react-native';
 import React from 'react';
 import rouletteIcon from '../../assets/bet.png';
-
-import EStyleSheet from 'react-native-extended-stylesheet';
+import {colors} from '../../configs/Const';
+import {GStyles} from '../../Styles';
 
 export const FloatingActionButton = ({onPress}) => {
   return (
@@ -12,27 +12,23 @@ export const FloatingActionButton = ({onPress}) => {
           source={rouletteIcon}
           style={styles.addIcon}
           size={25}
-          color="white"
+          color={colors.white}
         />
       </TouchableOpacity>
     </View>
   );
 };
-const styles = EStyleSheet.create({
+const styles = StyleSheet.create({
   addIcon: {
     padding: 15,
     height: 50,
     width: 50,
   },
   fabContainer: {
-    backgroundColor: '$secondaryBackGroundColor',
+    ...GStyles.shadowContainer,
+    backgroundColor: colors.secondBg,
     borderRadius: 40,
     padding: 10,
-    shadowOffset: {width: -2, height: 4},
-    shadowColor: '$primaryColor',
-    shadowOpacity: 0.2,
-    shadowRadius: 3,
-    elevation: 10,
   },
   fab: {
     position: 'absolute',

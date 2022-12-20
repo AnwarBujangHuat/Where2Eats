@@ -1,7 +1,8 @@
-import {Image, Text, TouchableOpacity, View} from 'react-native';
+import {Image, Text, TouchableOpacity, View, StyleSheet} from 'react-native';
 import React from 'react';
 import locationIcon from '../../assets/location.png';
-import EStyleSheet from 'react-native-extended-stylesheet';
+import {GStyles} from '../../Styles';
+import {colors} from '../../configs/Const';
 
 export const DescriptionLabel = ({name, location, icon, onPress}) => {
   return (
@@ -19,28 +20,23 @@ export const DescriptionLabel = ({name, location, icon, onPress}) => {
     </View>
   );
 };
-const styles = EStyleSheet.create({
+const styles = StyleSheet.create({
   container: {
-    backgroundColor: '$secondaryBackGroundColor',
-    shadowOffset: {width: -2, height: 6},
-    shadowColor: '$primaryColor',
-    shadowOpacity: 0.3,
-    shadowRadius: 4,
+    ...GStyles.shadowContainer,
     paddingTop: 40,
     paddingBottom: 20,
     paddingStart: 15,
     marginBottom: 15,
     zIndex: 0,
-    elevation: 15,
   },
   title: {
     fontSize: 20,
     fontWeight: 'bold',
     width: '88%',
-    color: '$primaryTextColor',
+    color: colors.white,
   },
   desc: {
-    color: '$secondaryTextColor',
+    color: colors.white,
     paddingTop: 5,
     maxWidth: '90%',
     fontSize: 14,
