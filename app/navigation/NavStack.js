@@ -12,7 +12,7 @@ import {
 } from '../screens';
 import * as React from 'react';
 import {createStackNavigator} from '@react-navigation/stack';
-import { routes } from "./routes";
+import {routes} from './routes';
 
 const Stack = createStackNavigator();
 export const NavStack = () => {
@@ -39,11 +39,7 @@ export const NavStack = () => {
         }}
       />
       {/*<Stack.Screen name={ConstString.BOTTOM} component={BottomNavigationBar} />*/}
-      <Stack.Screen
-        name={routes.HOME}
-        component={Home}
-        options={{cardStyleInterpolator: forFade}}
-      />
+      <Stack.Screen name={routes.HOME} component={Home} />
       <Stack.Screen name={routes.REGISTER} component={Register} />
       <Stack.Screen name={routes.RESTAURANT} component={Restaurant} />
       <Stack.Screen name={routes.ROULETTE} component={WheelOfFortune} />

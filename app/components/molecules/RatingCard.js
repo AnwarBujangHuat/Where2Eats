@@ -11,41 +11,31 @@ export const RatingCard = ({userReview}) => {
   const {userName, review, rating, createdAt, updatedAt} = userReview || {};
   return (
     <View style={styles.container}>
-      <View style={styles.card}>
-        <View
-          style={{flexDirection: 'row', alignItems: 'center', marginStart: 5}}>
-          <FastImage
-            source={
-              image
-                ? {
-                    uri: image,
-                    priority: FastImage.priority.high,
-                  }
-                : defaultAvatar
-            }
-            style={{
-              height: 35,
-              width: 35,
-              marginBottom: 5,
-              marginHorizontal: 10,
-              borderRadius: 20,
-              resizeMode: 'contain',
-            }}
-          />
-          <View style={{flexDirection: 'column', width: '65%'}}>
-            <Text style={styles.title}>{userName}</Text>
-            <Text style={styles.timestampText}>
-              {updatedAt !== ''
-                ? 'Updated At: ' + updatedAt
-                : 'Created At: ' + createdAt}
-            </Text>
-          </View>
-          <RateLabel rating={rating} />
+      <View
+        style={{flexDirection: 'row', alignItems: 'center', marginStart: 5}}>
+        <FastImage
+          source={
+            image
+              ? {
+                  uri: image,
+                  priority: FastImage.priority.high,
+                }
+              : defaultAvatar
+          }
+          style={styles.userImage}
+        />
+        <View style={{flexDirection: 'column', width: '65%'}}>
+          <Text style={styles.title}>{userName}</Text>
+          <Text style={styles.timestampText}>
+            {updatedAt !== ''
+              ? 'Updated At: ' + updatedAt
+              : 'Created At: ' + createdAt}
+          </Text>
         </View>
-
-        <View style={styles.descriptionContainer}>
-          <Text style={styles.desc}>{review}</Text>
-        </View>
+        <RateLabel rating={rating} />
+      </View>
+      <View style={styles.descriptionContainer}>
+        <Text style={styles.desc}>{review}</Text>
       </View>
     </View>
   );
@@ -55,11 +45,6 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     ...GStyles.shadowContainer,
     marginVertical: 10,
-    elevation: 10,
-  },
-  card: {
-    backgroundColor: colors.secondBg,
-    borderRadius: 10,
     width: Dimensions.get('screen').width - 30,
     maxHeight: 170,
   },
@@ -80,5 +65,13 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 16,
     color: colors.white,
+  },
+  userImage: {
+    height: 35,
+    width: 35,
+    marginBottom: 5,
+    marginHorizontal: 10,
+    borderRadius: 20,
+    resizeMode: 'contain',
   },
 });
