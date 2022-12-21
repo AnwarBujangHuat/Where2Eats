@@ -109,7 +109,6 @@ export const SetupMenuComponents = props => {
           label="Select Menu Category"
           options={categories}
           labelStyle={styles.label}
-          inputFilterStyle={styles.label}
           listEmptyLabelStyle={styles.label}
           selectedValues={selectedCategory}
           onMultiSelect={item =>
@@ -125,7 +124,7 @@ export const SetupMenuComponents = props => {
           multiOptionContainerStyle={{
             backgroundColor: colors.primary,
           }}
-          multiOptionsLabelStyle={{fontSize: 16, color: 'white'}}
+          multiOptionsLabelStyle={{fontSize: 16, color: colors.white}}
           selectedItemStyle={{
             fontSize: 16,
             color: colors.white,
@@ -230,7 +229,7 @@ const styles = StyleSheet.create({
     backgroundColor: colors.bg,
   },
   label: {
-    color: '$secondaryTextColor',
+    color: colors.white,
     fontSize: 13,
   },
   buttonContainer: {
@@ -256,7 +255,7 @@ const styles = StyleSheet.create({
   inputContainer: {
     marginTop: 10,
     marginHorizontal: 20,
-    ...GStyles.shadowContainer,
+    backgroundColor: colors.bg,
   },
   header: {
     fontSize: 16,
