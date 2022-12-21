@@ -1,7 +1,6 @@
 import React from 'react';
 import {GooglePlacesAutocomplete} from 'react-native-google-places-autocomplete';
 import {Dimensions} from 'react-native';
-import {apiKey} from '../../../secret';
 
 const {width} = Dimensions.get('window');
 
@@ -24,7 +23,7 @@ const GooglePlacesInput = ({onResult}) => {
         onResult({data: data, details: details});
       }}
       query={{
-        key: apiKey,
+        key: '-',
       }}
     />
   );
