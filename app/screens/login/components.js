@@ -103,7 +103,6 @@ const styles = StyleSheet.create({
     width: 100,
     alignSelf: 'center',
     alignItems: 'center',
-    borderRadius: 10,
     margin: 30,
   },
   container: {

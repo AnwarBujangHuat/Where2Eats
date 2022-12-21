@@ -16,8 +16,8 @@ import addIcon from '../../assets/plus.png';
 import {ModalGiveRating} from '../../components/molecules/ModalGiveRating';
 import {BarChart} from 'react-native-chart-kit';
 import {RatingButton} from '../../components/atoms/RatingButton';
-import { colors } from "../../configs/Const";
-import { GStyles } from "../../Styles";
+import {colors} from '../../configs/Const';
+import {GStyles} from '../../Styles';
 
 export const RatingComponents = props => {
   const {
@@ -36,7 +36,7 @@ export const RatingComponents = props => {
     onSelectedRating,
     isSelectedRating,
   } = props;
-  const {ratings} = restaurantInfo;
+  const {rating} = restaurantInfo;
   const RenderItem = ({item}) => {
     return (
       <RatingButton
@@ -79,20 +79,20 @@ export const RatingComponents = props => {
               startingValue={isCurrentRating}
               readonly={true}
               showReadOnlyText={false}
-              tintColor={EStyleSheet.value(colors.bg)}
+              tintColor={colors.bg}
               style={{paddingStart: 10}}
               imageSize={18}
-              ratingTextColor={EStyleSheet.value('$secondaryTextColor')}
+              ratingTextColor={colors.white}
             />
             <View style={{paddingStart: 10}}>
               <Text
                 style={{
                   fontSize: 12,
-                  color: EStyleSheet.value('$secondaryTextColor'),
+                  color: colors.white,
                   paddingVertical: 5,
                   alignSelf: 'flex-start',
                 }}>
-                {ratings?.length ?? 0 + ' Reviews'}
+                {rating?.length + ' Reviews'}
               </Text>
             </View>
           </View>
