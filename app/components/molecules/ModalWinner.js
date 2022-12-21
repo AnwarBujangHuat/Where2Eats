@@ -37,6 +37,7 @@ export const ModalWinner = ({
             animationType="none"
             transparent
             visible={isModalVisible}
+            onBackdropPress={closeModal}
             presentationStyle="overFullScreen"
             style={styles.viewWrapper}>
             <View style={styles.modalView}>
