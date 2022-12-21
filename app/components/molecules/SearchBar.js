@@ -9,6 +9,7 @@ import {
 import React from 'react';
 import {colors} from '../../configs/Const';
 import {GStyles} from '../../Styles';
+import TestIDs from '../../../e2e/TestIDs';
 
 const {width} = Dimensions.get('window');
 
@@ -18,6 +19,7 @@ export const SearchBar = ({onChangeText, placeholder, source}) => {
       <View style={styles.searchbar}>
         <Image style={styles.icons} source={source} />
         <TextInput
+          testID={TestIDs.SearchBar}
           style={styles.input}
           placeholder={placeholder}
           clearButtonMode={'while-editing'}
