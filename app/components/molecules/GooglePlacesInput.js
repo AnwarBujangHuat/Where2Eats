@@ -23,7 +23,7 @@ const GooglePlacesInput = ({onResult}) => {
         onResult({data: data, details: details});
       }}
       query={{
-        key: 'AIzaSyCHCZuPLY7PuyG4vBTDYbQfsa2ZNEHwpRs',
+        key: '-',
       }}
     />
   );
