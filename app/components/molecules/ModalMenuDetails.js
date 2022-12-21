@@ -115,12 +115,8 @@ const styles = StyleSheet.create({
   },
   header: {
     fontSize: 18,
-    fontWeight: 'bold',
-    color: colors.white,
-    shadowOffset: {width: -2, height: 1},
-    shadowColor: colors.primary,
-    shadowOpacity: 0.1,
-    shadowRadius: 2,
+    fontWeight: '800',
+    color: colors.primary,
   },
   price: {
     color: colors.lightPurple,
