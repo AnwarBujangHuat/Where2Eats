@@ -106,6 +106,7 @@ export const SetupMenuComponents = props => {
       </Text>
       <View style={styles.inputContainer}>
         <SelectBox
+          textColor={colors.white}
           label="Select Menu Category"
           options={categories}
           labelStyle={styles.label}
