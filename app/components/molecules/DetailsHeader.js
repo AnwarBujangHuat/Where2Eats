@@ -9,7 +9,7 @@ import {
 import React from 'react';
 import {BackButton} from '../atoms/BackButton';
 import addImage from '../../assets/addImage.png';
-import logoIcon from '../../assets/Logo.png';
+import logoIcon from '../../assets/allfood.png';
 import {RateLabel} from '../atoms/RateLabel';
 import {SearchButton} from '../atoms/SearchButton';
 import {GStyles} from '../../Styles';
@@ -74,7 +74,7 @@ const styles = StyleSheet.create({
     alignSelf: 'flex-start',
     backgroundColor: colors.secondBg,
     borderRadius: 80,
-    padding: 15,
+    padding: 10,
     marginStart: '3%',
     marginTop: 90,
   },
@@ -92,7 +92,7 @@ const styles = StyleSheet.create({
     elevation: 10,
   },
   icons: {
-    height: 80,
-    width: 80,
+    height: 90,
+    width: 90,
   },
 });
