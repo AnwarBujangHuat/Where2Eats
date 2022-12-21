@@ -8,7 +8,7 @@ import {
   StyleSheet,
 } from 'react-native';
 import CheckBox from '@react-native-community/checkbox';
-import Logo from '../../assets/Logo.png';
+import Logo from '../../assets/allfood.png';
 import {InputFieldLogins} from '../../components/molecules/InputFieldLogins';
 import email from '../../assets/email.png';
 import password from '../../assets/password.png';

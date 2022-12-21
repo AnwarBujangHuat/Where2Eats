@@ -15,6 +15,12 @@
 		22FE1C7B7E342ACBF6F929CC /* libPods-Where2Eat-Where2EatTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 265213646B2900380A39D1DD /* libPods-Where2Eat-Where2EatTests.a */; };
 		81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */; };
 		C3801E412925CD4A0003F301 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = C3801E402925CD4A0003F301 /* GoogleService-Info.plist */; };
+		C3CC7FC12952A14A00ED033C /* ProximaNovaSoftW03-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C3CC7FBE2952A14A00ED033C /* ProximaNovaSoftW03-Regular.ttf */; };
+		C3CC7FC22952A14A00ED033C /* ProximaNovaSoftW03-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C3CC7FBE2952A14A00ED033C /* ProximaNovaSoftW03-Regular.ttf */; };
+		C3CC7FC32952A14A00ED033C /* GothamRoundedBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C3CC7FBF2952A14A00ED033C /* GothamRoundedBold.ttf */; };
+		C3CC7FC42952A14A00ED033C /* GothamRoundedBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C3CC7FBF2952A14A00ED033C /* GothamRoundedBold.ttf */; };
+		C3CC7FC52952A14A00ED033C /* ProximaNovaSoftW03-Semibold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C3CC7FC02952A14A00ED033C /* ProximaNovaSoftW03-Semibold.ttf */; };
+		C3CC7FC62952A14A00ED033C /* ProximaNovaSoftW03-Semibold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C3CC7FC02952A14A00ED033C /* ProximaNovaSoftW03-Semibold.ttf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -45,6 +51,9 @@
 		81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = Where2Eat/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		89C6BE57DB24E9ADA2F236DE /* Pods-Where2Eat-Where2EatTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Where2Eat-Where2EatTests.release.xcconfig"; path = "Target Support Files/Pods-Where2Eat-Where2EatTests/Pods-Where2Eat-Where2EatTests.release.xcconfig"; sourceTree = "<group>"; };
 		C3801E402925CD4A0003F301 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "Where2Eat/GoogleService-Info.plist"; sourceTree = "<group>"; };
+		C3CC7FBE2952A14A00ED033C /* ProximaNovaSoftW03-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "ProximaNovaSoftW03-Regular.ttf"; sourceTree = "<group>"; };
+		C3CC7FBF2952A14A00ED033C /* GothamRoundedBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = GothamRoundedBold.ttf; sourceTree = "<group>"; };
+		C3CC7FC02952A14A00ED033C /* ProximaNovaSoftW03-Semibold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "ProximaNovaSoftW03-Semibold.ttf"; sourceTree = "<group>"; };
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
@@ -88,6 +97,7 @@
 		13B07FAE1A68108700A75B9A /* Where2Eat */ = {
 			isa = PBXGroup;
 			children = (
+				C3CC7FBB2952A10800ED033C /* assets */,
 				C3801E402925CD4A0003F301 /* GoogleService-Info.plist */,
 				13B07FAF1A68108700A75B9A /* AppDelegate.h */,
 				13B07FB01A68108700A75B9A /* AppDelegate.mm */,
@@ -149,6 +159,32 @@
 				89C6BE57DB24E9ADA2F236DE /* Pods-Where2Eat-Where2EatTests.release.xcconfig */,
 			);
 			path = Pods;
+			sourceTree = "<group>";
+		};
+		C3CC7FBB2952A10800ED033C /* assets */ = {
+			isa = PBXGroup;
+			children = (
+				C3CC7FBD2952A11900ED033C /* fonts */,
+				C3CC7FBC2952A11200ED033C /* New Group */,
+			);
+			name = assets;
+			sourceTree = "<group>";
+		};
+		C3CC7FBC2952A11200ED033C /* New Group */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = "New Group";
+			sourceTree = "<group>";
+		};
+		C3CC7FBD2952A11900ED033C /* fonts */ = {
+			isa = PBXGroup;
+			children = (
+				C3CC7FBF2952A14A00ED033C /* GothamRoundedBold.ttf */,
+				C3CC7FBE2952A14A00ED033C /* ProximaNovaSoftW03-Regular.ttf */,
+				C3CC7FC02952A14A00ED033C /* ProximaNovaSoftW03-Semibold.ttf */,
+			);
+			name = fonts;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -238,6 +274,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C3CC7FC22952A14A00ED033C /* ProximaNovaSoftW03-Regular.ttf in Resources */,
+				C3CC7FC62952A14A00ED033C /* ProximaNovaSoftW03-Semibold.ttf in Resources */,
+				C3CC7FC42952A14A00ED033C /* GothamRoundedBold.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -245,9 +284,12 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C3CC7FC32952A14A00ED033C /* GothamRoundedBold.ttf in Resources */,
+				C3CC7FC52952A14A00ED033C /* ProximaNovaSoftW03-Semibold.ttf in Resources */,
 				81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */,
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
 				C3801E412925CD4A0003F301 /* GoogleService-Info.plist in Resources */,
+				C3CC7FC12952A14A00ED033C /* ProximaNovaSoftW03-Regular.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

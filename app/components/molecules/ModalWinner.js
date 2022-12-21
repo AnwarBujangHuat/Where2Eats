@@ -8,15 +8,12 @@ import {
   View,
   StyleSheet,
 } from 'react-native';
-import logoIcon from '../../assets/Logo.png';
+import logoIcon from '../../assets/allfood.png';
 import locationIcon from '../../assets/location.png';
 import FastImage from 'react-native-fast-image';
-import {
-  colors,
-  icons,
-} from "../../configs/Const";
+import {colors, icons} from '../../configs/Const';
 import Modal from 'react-native-modal';
-import { GStyles } from "../../Styles";
+import {GStyles} from '../../Styles';
 
 const {width} = Dimensions.get('window');
 export const ModalWinner = ({
@@ -209,14 +206,13 @@ const styles = StyleSheet.create({
     alignSelf: 'flex-start',
     backgroundColor: colors.white,
     borderRadius: 80,
-    padding: 15,
     borderColor: colors.primary,
     position: 'absolute',
     top: '22%',
   },
   logoIcon: {
-    height: 60,
-    width: 60,
+    height: 90,
+    width: 90,
   },
   iconCategory: {
     width: 20,

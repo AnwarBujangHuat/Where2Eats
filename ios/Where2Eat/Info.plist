@@ -51,13 +51,13 @@
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string></string>
 	<key>NSPhotoLibraryAddUsageDescription</key>
-	<string>Your app adds photos to the user's photo library</string>
+	<string>Your app adds photos to the user&apos;s photo library</string>
 	<key>NSPhotoLibraryUsageDescription</key>
 	<string>To choose photos from your library to upload</string>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>
 	<key>UIRequiredDeviceCapabilities</key>
-    <array>
+	<array>
 		<string>armv7</string>
 	</array>
 	<key>UISupportedInterfaceOrientations</key>
@@ -68,5 +68,13 @@
 	</array>
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<false/>
+	<key>UIAppFonts</key>
+	<array>
+		<string>GothamRoundedBold.ttf</string>
+		<string>ProximaNovaSoftW03-Semibold.ttf</string>
+		<string>ProximaNovaSoftW03-Regular.ttf</string>
+	</array>
+	<key>LSApplicationCategoryType</key>
+	<string></string>
 </dict>
 </plist>
