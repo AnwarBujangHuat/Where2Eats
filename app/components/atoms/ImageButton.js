@@ -2,6 +2,7 @@ import {Image, Text, TouchableOpacity, View, StyleSheet} from 'react-native';
 import React from 'react';
 import {colors} from '../../configs/Const';
 import {GStyles} from '../../Styles';
+import TestIDs from '../../../e2e/TestIDs';
 
 export const ImageButton = ({onPress, item, selected}) => {
   let backGroundColor = selected.includes(item.title)
@@ -11,6 +12,7 @@ export const ImageButton = ({onPress, item, selected}) => {
   return (
     <View>
       <TouchableOpacity
+        testID={TestIDs.BtnChip}
         style={{...styles.buttonContainer, backgroundColor: backGroundColor}}
         onPress={onPress}>
         <Image source={item.icon} style={styles.icon} />

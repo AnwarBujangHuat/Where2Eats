@@ -6,5 +6,9 @@ const TestIds = {
   BtnSignInGoogle: 'ButtonSignInGoogle',
   ModalScreen: 'ModalScreen',
   Home: 'Home',
+  SearchBar: 'IFSearch',
+  BtnChip: 'ChipButton',
+  BtnMenu: 'MenuButton',
+  BtnRoulette: 'RoulButton'
 };
 export default TestIds;
