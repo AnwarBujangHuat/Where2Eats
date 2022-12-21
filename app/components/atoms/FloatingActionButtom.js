@@ -3,11 +3,15 @@ import React from 'react';
 import rouletteIcon from '../../assets/bet.png';
 import {colors} from '../../configs/Const';
 import {GStyles} from '../../Styles';
+import TestIDs from '../../../e2e/TestIDs';
 
 export const FloatingActionButton = ({onPress}) => {
   return (
     <View style={styles.fab}>
-      <TouchableOpacity style={styles.fabContainer} onPress={onPress}>
+      <TouchableOpacity
+        testID={TestIDs.BtnRoulette}
+        style={styles.fabContainer}
+        onPress={onPress}>
         <Image
           source={rouletteIcon}
           style={styles.addIcon}
