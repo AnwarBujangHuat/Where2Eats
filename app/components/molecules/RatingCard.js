@@ -45,7 +45,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     ...GStyles.shadowContainer,
     marginVertical: 10,
-    width: Dimensions.get('screen').width - 30,
+    width: Dimensions.get('screen').width - 35,
     maxHeight: 170,
   },
   descriptionContainer: {
