@@ -15,7 +15,7 @@ import appetizerIcon from '../assets/appetizer.png';
 import facebookIcon from '../assets/facebook.png';
 import twitterIcon from '../assets/twitter.png';
 import googleIcon from '../assets/google.png';
-const theme = 0;
+const theme = 1;
 export const icons = {
   [ConstString.WESTERN]: burgerIcon,
   [ConstString.MALAY]: malayIcon,
@@ -80,11 +80,27 @@ export const Const = [
 //   lightPurple: '#DED8E1',
 //   offPurple: '#e2d5f0',
 // };
+// export const colorsLight ={
+//   primaryColor: '#7835FF',
+//   secondaryColor: '#05000f',
+//   tertiaryColor: '#6d5a75',
+//   lightPrimaryColor: '#894eff',
+//   whitTextColor: '#fff',
+//   primaryTextColor: '#7835FF',
+//   secondaryTextColor: '#1a004f',
+//   tertiaryTextColor: '#6d5a75',
+//   backGroundColor: '#fefefe',
+//   secondaryBackGroundColor: '#fff',
+//   greyBackground: '#F5F5F5',
+//   lightBackground: '#f4eafe',
+//   secondaryPurple: '#8e7dc4',
+// }
 export const colors = {
   black: '#000',
   white: theme ? '#fff' : '#000',
   primary: '#915bff',
-  secondBg: theme ? '#1b1424' : '#fff',
+  secondBg: theme ? '#1C1424' : '#fff',
+  // secondBg: theme ? '#1b1424' : '#fff',
   bg: theme ? '#1A1125' : '#fefefe',
   darkPurple: '#9c6bff',
   lightPurple: '#DED8E1',
