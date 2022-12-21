@@ -5,6 +5,7 @@ import {useDispatch, useSelector} from 'react-redux';
 import {PopulateRestaurantList} from '../../store/thunks';
 import {Alert} from 'react-native';
 import {routes} from '../../navigation/routes';
+import firebase from 'firebase/compat/app';
 
 export const Home = ({navigation}) => {
   const fetchRestaurant = useSelector(getRestaurant);
@@ -79,6 +80,15 @@ export const Home = ({navigation}) => {
     setSelectedTypes([]);
     setCurrentRestaurant(restaurant);
   };
+  const logOut = () => {
+    firebase
+      .auth()
+      .signOut()
+      .then(
+        () => navigation.navigate(routes.LOGIN),
+        () => Alert.alert('error logging out'),
+      );
+  };
   const openMenu = () => setOpenMenu(!isOpenMenu);
   const closeModal = () => setOpenMenu(false);
   const onNavigate = id => {
@@ -91,7 +101,7 @@ export const Home = ({navigation}) => {
         navigation.navigate(routes.PROFILE);
         break;
       case 3:
-        navigation.navigate(routes.LOGIN);
+        logOut();
         break;
     }
     closeModal();

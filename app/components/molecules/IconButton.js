@@ -6,7 +6,7 @@ export const IconButton = ({title, onPress, buttontitle}) => {
     <View style={styles.section}>
       <Text style={styles.title}>{title}</Text>
       <TouchableOpacity onPress={onPress}>
-        <Text style={styles.buttonText}>{buttontitle}</Text>
+        <Text style={styles.buttonText}>{' ' + buttontitle}</Text>
       </TouchableOpacity>
     </View>
   );
@@ -19,7 +19,7 @@ const styles = StyleSheet.create({
     alignSelf: 'center',
   },
   buttonText: {
-    color: colors.white,
+    color: colors.primary,
     textAlign: 'center',
   },
   title: {
