@@ -3,11 +3,12 @@ import 'firebase/compat/auth';
 
 import 'firebase/compat/firestore';
 import 'firebase/compat/storage';
+import {apiKey} from '../../secret';
 
 require('firebase/compat/auth');
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
 const firebaseConfig = {
-  apiKey: 'AIzaSyCHCZuPLY7PuyG4vBTDYbQfsa2ZNEHwpRs',
+  apiKey: apiKey,
   authDomain: 'where2eat-e075f.firebaseapp.com',
   databaseURL:
     'https://where2eat-e075f-default-rtdb.asia-southeast1.firebasedatabase.app',
