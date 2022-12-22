@@ -1,7 +1,7 @@
 export const ConstString = {
   RESTAURANT: 'Restaurants',
   MENU: 'Menu',
-  QUOTES: 'What would you like to eat today?',
+  QUOTES: 'What do you like to eat today?',
   MENU_BOOK: 'Setup Your Menu Book',
   WESTERN: 'Western',
   MALAY: 'Malay',
