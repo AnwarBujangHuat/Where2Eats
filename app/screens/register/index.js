@@ -166,7 +166,7 @@ export const Register = ({navigation, route}) => {
         );
       });
     } else {
-      showAlert('Missing File' + category);
+      showAlert('Missing File' + uri);
     }
   };
   const addLocation = location => {
