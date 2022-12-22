@@ -23,7 +23,7 @@ target 'Where2Eat' do
   )
 
   pod 'RNSVG', :path => '../node_modules/react-native-svg'
-  pod 'RNSecureRandom', :path => '../node_modules/react-native-securerandom'
+
   target 'Where2EatTests' do
     inherit! :complete
 #     use_frameworks!
