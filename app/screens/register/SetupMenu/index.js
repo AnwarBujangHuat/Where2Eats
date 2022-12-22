@@ -13,6 +13,7 @@ import {firebase} from '../../../../src/firebase/config';
 import {getCurrentRestaurant} from '../../../store/selector';
 import {SetupMenuComponents} from './components';
 import {routes} from '../../../navigation/routes';
+import {generateSecureRandom} from 'react-native-securerandom';
 
 export const SetupMenu = ({navigation, route}) => {
   const dispatch = useDispatch();
@@ -36,7 +37,6 @@ export const SetupMenu = ({navigation, route}) => {
   const [isActionModalVisible, setActionModal] = useState(false);
   const [onSearch, setOnSearch] = useState(false);
   const [Category, setCategory] = useState('');
-  const [isSuccessful, setIsSuccessful] = useState(true);
   const [Menu, setMenu] = useState([]);
 
   useEffect(() => {
@@ -85,13 +85,13 @@ export const SetupMenu = ({navigation, route}) => {
   const closeModal = () => setModalVisible(false);
   const closeActionModal = () => setActionModal(false);
   const menuIcon = item => icons[item] ?? icons?.def;
-  const generateId = () => {
-    const id = () => {
-      return Math.floor((1 + Math.random()) * 0x10000)
-        .toString(16)
-        .substring(1);
-    };
-    return id() + id();
+  const generateId = async () => {
+    // eslint-disable-next-line no-shadow
+    let id = [];
+    await generateSecureRandom(3).then(randomBytes => {
+      id = randomBytes;
+    });
+    return id.join('');
   };
   const showMenuDetails = item => {
     setSelectedFoodItem(item);
@@ -155,8 +155,7 @@ export const SetupMenu = ({navigation, route}) => {
       const imageIndex = imageName?.indexOf('media.jpg');
       const name = imageName
         ? imageName.slice(imageIndex - 8, imageIndex) + 'media.jpg'
-        : generateId() + 'media.jpg';
-      // const date = '_' + new Date().getTime();
+        : (await generateId()) + 'media.jpg';
       const restaurantName = editorMode
         ? restaurantInfo.restaurant
         : item.restaurant;
@@ -380,7 +379,6 @@ export const SetupMenu = ({navigation, route}) => {
     updateFoodItem,
     closeActionModal,
     goBack,
-    isSuccessful,
     closeMenuDetails,
     action,
     onSearch,

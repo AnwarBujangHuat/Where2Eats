@@ -3,7 +3,7 @@ package com.where2eat;
 import com.facebook.react.ReactActivity;
 import com.facebook.react.ReactActivityDelegate;
 import com.facebook.react.ReactRootView;
-
+import net.rhogan.rnsecurerandom.RNSecureRandomPackage;
 public class MainActivity extends ReactActivity {
 
   /**

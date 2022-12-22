@@ -46,7 +46,6 @@ export const SetupMenuComponents = props => {
     updateFoodItem,
     closeActionModal,
     goBack,
-    isSuccessful,
     closeMenuDetails,
     onSearch,
     onChangeText,
@@ -211,7 +210,6 @@ export const SetupMenuComponents = props => {
           closeModal={closeActionModal}
           action={action}
           goBack={goBack}
-          isSuccess={isSuccessful}
         />
       )}
       {isModalMenuVisible && (
