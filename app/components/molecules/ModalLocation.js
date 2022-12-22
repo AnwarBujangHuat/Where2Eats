@@ -74,7 +74,9 @@ export const ModalLocation = ({submitLocation, isModalVisible, closeModal}) => {
               </MapView>
               <TouchableOpacity
                 style={styles.button}
-                onPress={() => submitLocation(location)}>
+                onPress={() =>
+                  submitLocation({location: location, latlong: latLong})
+                }>
                 <Text style={styles.buttonText}>Add Location</Text>
               </TouchableOpacity>
             </View>
