@@ -1,5 +1,5 @@
-import { colors } from "./configs/Const";
-import { StyleSheet } from "react-native";
+import { colors } from './configs/Const';
+import { StyleSheet } from 'react-native';
 
 export const GStyles = StyleSheet.create({
   shadowContainer: {

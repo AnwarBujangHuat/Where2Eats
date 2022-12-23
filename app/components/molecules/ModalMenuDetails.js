@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react';
 import {
   Dimensions,
   SafeAreaView,
@@ -6,14 +6,14 @@ import {
   Text,
   TouchableOpacity,
   View,
-} from "react-native";
-import FastImage from "react-native-fast-image";
-import Modal from "react-native-modal";
-import nasiAyam from "../../assets/NasiAyam.jpg";
-import { colors } from "../../configs/Const";
-import { GStyles } from "../../Styles";
+} from 'react-native';
+import FastImage from 'react-native-fast-image';
+import Modal from 'react-native-modal';
+import nasiAyam from '../../assets/NasiAyam.jpg';
+import { colors } from '../../configs/Const';
+import { GStyles } from '../../Styles';
 
-const { width } = Dimensions.get("window");
+const { width } = Dimensions.get('window');
 
 export const ModalMenuDetails = ({ closeModal, isModalVisible, foodItem }) => {
   const { image, name, price, desc } = foodItem;
@@ -34,9 +34,9 @@ export const ModalMenuDetails = ({ closeModal, isModalVisible, foodItem }) => {
                 source={
                   image !== undefined
                     ? {
-                      uri: image,
-                      priority: FastImage.priority.high,
-                    }
+                        uri: image,
+                        priority: FastImage.priority.high,
+                      }
                     : nasiAyam
                 }
                 style={{
@@ -45,14 +45,14 @@ export const ModalMenuDetails = ({ closeModal, isModalVisible, foodItem }) => {
               />
               <View style={styles.container}>
                 <Text style={styles.header}>{name}</Text>
-                <Text style={styles.price}>{"RM" + price}</Text>
+                <Text style={styles.price}>{'RM' + price}</Text>
                 <Text style={styles.desc}>{desc}</Text>
               </View>
               <TouchableOpacity
                 style={{
-                  backgroundColor: "transparent",
-                  alignContent: "center",
-                  alignSelf: "center",
+                  backgroundColor: 'transparent',
+                  alignContent: 'center',
+                  alignSelf: 'center',
                   paddingTop: 5,
                   minHeight: 30,
                 }}
@@ -61,7 +61,7 @@ export const ModalMenuDetails = ({ closeModal, isModalVisible, foodItem }) => {
                   style={{
                     color: colors.primary,
                     fontSize: 18,
-                    alignSelf: "center",
+                    alignSelf: 'center',
                   }}>
                   OK
                 </Text>
@@ -76,9 +76,9 @@ export const ModalMenuDetails = ({ closeModal, isModalVisible, foodItem }) => {
 };
 const styles = StyleSheet.create({
   changeButton: {
-    position: "absolute",
+    position: 'absolute',
     left: 0,
-    fontWeight: "bold",
+    fontWeight: 'bold',
     fontSize: 12,
     color: colors.white,
     backgroundColor: colors.primary,
@@ -87,10 +87,10 @@ const styles = StyleSheet.create({
   buttonText: {
     fontSize: 16,
     color: colors.white,
-    fontWeight: "normal",
+    fontWeight: 'normal',
   },
   container: {
-    alignSelf: "flex-start",
+    alignSelf: 'flex-start',
     margin: 10,
   },
   icons: {
@@ -100,15 +100,15 @@ const styles = StyleSheet.create({
   },
   screen: {
     flex: 1,
-    alignItems: "center",
-    justifyContent: "center",
-    backgroundColor: "transparent",
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: 'transparent',
   },
   modalView: {
     paddingBottom: 10,
-    justifyContent: "center",
-    position: "absolute",
-    alignSelf: "center",
+    justifyContent: 'center',
+    position: 'absolute',
+    alignSelf: 'center',
     width: width * 0.8,
     backgroundColor: colors.secondBg,
     borderRadius: 10,
@@ -116,22 +116,22 @@ const styles = StyleSheet.create({
   },
   header: {
     fontSize: 18,
-    fontWeight: "800",
+    fontWeight: '800',
     color: colors.primary,
   },
   price: {
     color: colors.lightPurple,
     marginVertical: 5,
     fontSize: 14,
-    fontWeight: "bold",
-    textAlign: "justify",
+    fontWeight: 'bold',
+    textAlign: 'justify',
   },
   desc: {
     color: colors.lightPurple,
     paddingEnd: 5,
     marginTop: 5,
     fontSize: 14,
-    fontWeight: "normal",
-    textAlign: "justify",
+    fontWeight: 'normal',
+    textAlign: 'justify',
   },
 });

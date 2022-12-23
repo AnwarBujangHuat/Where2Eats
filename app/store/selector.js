@@ -1,5 +1,5 @@
-import { createSelector } from "@reduxjs/toolkit";
-import { restaurantAdapter } from "./reducer";
+import { createSelector } from '@reduxjs/toolkit';
+import { restaurantAdapter } from './reducer';
 
 const { selectAll, selectById, selectTotal } = restaurantAdapter.getSelectors(
   state => state,

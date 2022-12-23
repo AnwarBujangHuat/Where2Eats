@@ -1,22 +1,22 @@
-import React, { useState } from "react";
-import { ProfileComponents } from "./components";
-import { getUser } from "../../store/selector";
-import profileIcon from "../../assets/profile.png";
-import phoneIcon from "../../assets/telephone.png";
-import emailIcon from "../../assets/email.png";
+import React, { useState } from 'react';
+import { ProfileComponents } from './components';
+import { getUser } from '../../store/selector';
+import profileIcon from '../../assets/profile.png';
+import phoneIcon from '../../assets/telephone.png';
+import emailIcon from '../../assets/email.png';
 
-import { useSelector } from "react-redux";
-import { routes } from "../../navigation/routes";
+import { useSelector } from 'react-redux';
+import { routes } from '../../navigation/routes';
 
 export const Profile = ({ navigation }) => {
   const goBackHome = () => navigation.navigate(routes.HOME);
   const [isModalVisible, setModalVisible] = useState(false);
-  const [selectedInfo, setSelectedInfo] = useState("");
-  const [updatedInfo, setUpdatedInfo] = useState("");
+  const [selectedInfo, setSelectedInfo] = useState('');
+  const [updatedInfo, setUpdatedInfo] = useState('');
 
   const User = useSelector(getUser);
   const onDone = () => {
-    console.log("updated " + updatedInfo);
+    console.log('updated ' + updatedInfo);
     closeModal();
   };
   const closeModal = () => {
@@ -28,20 +28,20 @@ export const Profile = ({ navigation }) => {
   };
   const InformationList = [
     {
-      id: "NAME",
-      title: "User Name",
+      id: 'NAME',
+      title: 'User Name',
       information: User.NAME,
       icon: profileIcon,
     },
     {
-      id: "PHONE",
-      title: "Phone Number",
+      id: 'PHONE',
+      title: 'Phone Number',
       information: User.PHONE,
       icon: phoneIcon,
     },
     {
-      id: "EMAIL",
-      title: "Email Address",
+      id: 'EMAIL',
+      title: 'Email Address',
       information: User.EMAIL,
       icon: emailIcon,
     },

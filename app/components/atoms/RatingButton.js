@@ -1,14 +1,8 @@
-import {
-  Image,
-  StyleSheet,
-  Text,
-  TouchableOpacity,
-  View,
-} from "react-native";
-import React from "react";
-import star from "../../assets/star2.png";
-import { colors } from "../../configs/Const";
-import { GStyles } from "../../Styles";
+import { Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import React from 'react';
+import star from '../../assets/star2.png';
+import { colors } from '../../configs/Const';
+import { GStyles } from '../../Styles';
 
 export const RatingButton = ({ onPress, rating, selected }) => {
   let backGroundColor = rating === selected ? colors.primary : colors.secondBg;
@@ -23,9 +17,9 @@ export const RatingButton = ({ onPress, rating, selected }) => {
           style={{
             padding: 5,
             color: color,
-            fontWeight: "bold",
+            fontWeight: 'bold',
           }}>
-          {rating + " Rating"}
+          {rating + ' Rating'}
         </Text>
       </TouchableOpacity>
     </View>
@@ -34,11 +28,11 @@ export const RatingButton = ({ onPress, rating, selected }) => {
 const styles = StyleSheet.create({
   inputContainer: {
     ...GStyles.shadowContainer,
-    flexDirection: "row",
+    flexDirection: 'row',
     borderRadius: 20,
     margin: 5,
     padding: 10,
-    alignItems: "center",
+    alignItems: 'center',
   },
   icon: {
     width: 20,

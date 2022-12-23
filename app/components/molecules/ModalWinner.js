@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react';
 import {
   Dimensions,
   Image,
@@ -7,18 +7,15 @@ import {
   Text,
   TouchableOpacity,
   View,
-} from "react-native";
-import logoIcon from "../../assets/allfood.png";
-import locationIcon from "../../assets/location.png";
-import FastImage from "react-native-fast-image";
-import {
-  colors,
-  icons,
-} from "../../configs/Const";
-import Modal from "react-native-modal";
-import { GStyles } from "../../Styles";
+} from 'react-native';
+import logoIcon from '../../assets/allfood.png';
+import locationIcon from '../../assets/location.png';
+import FastImage from 'react-native-fast-image';
+import { colors, icons } from '../../configs/Const';
+import Modal from 'react-native-modal';
+import { GStyles } from '../../Styles';
 
-const { width } = Dimensions.get("window");
+const { width } = Dimensions.get('window');
 export const ModalWinner = ({
   isModalVisible,
   closeModal,
@@ -48,20 +45,20 @@ export const ModalWinner = ({
                 source={
                   image !== undefined
                     ? {
-                      uri: image,
-                      priority: FastImage.priority.high,
-                    }
+                        uri: image,
+                        priority: FastImage.priority.high,
+                      }
                     : {
-                      uri: "https://mir-s3-cdn-cf.behance.net/project_modules/max_1200/5eeea355389655.59822ff824b72.gif",
-                    }
+                        uri: 'https://mir-s3-cdn-cf.behance.net/project_modules/max_1200/5eeea355389655.59822ff824b72.gif',
+                      }
                 }
                 style={{
                   height: 200,
-                  resizeMode: "contain",
+                  resizeMode: 'contain',
                 }}
               />
 
-              <View style={{ flexDirection: "row", paddingVertical: 10 }}>
+              <View style={{ flexDirection: 'row', paddingVertical: 10 }}>
                 <Text style={styles.header}>{restaurant}</Text>
                 <Image
                   source={category ? icons[category] : icons.def}
@@ -71,7 +68,7 @@ export const ModalWinner = ({
 
               <View style={styles.descContainer}>
                 <Text style={styles.desc}>
-                  {category + " - " + description}
+                  {category + ' - ' + description}
                 </Text>
                 <View style={styles.containerIcon}>
                   <Image style={styles.icon} source={locationIcon} />
@@ -82,12 +79,12 @@ export const ModalWinner = ({
               <View
                 style={{
                   flex: 1,
-                  flexDirection: "row",
-                  alignSelf: "center",
+                  flexDirection: 'row',
+                  alignSelf: 'center',
                 }}>
                 <TouchableOpacity style={styles.button} onPress={spinAgain}>
                   <Text style={styles.buttonTextSpin}>
-                    {isFinished ? "Spin Again" : "Go Back"}
+                    {isFinished ? 'Spin Again' : 'Go Back'}
                   </Text>
                 </TouchableOpacity>
                 {!isPreview && (
@@ -112,90 +109,90 @@ const styles = StyleSheet.create({
   buttonTextSpin: {
     fontSize: 16,
     color: colors.lightPurple,
-    fontWeight: "normal",
+    fontWeight: 'normal',
   },
   buttonTextMenu: {
     fontSize: 16,
     color: colors.primary,
-    fontWeight: "normal",
+    fontWeight: 'normal',
   },
   container: {
-    alignSelf: "flex-start",
+    alignSelf: 'flex-start',
     margin: 10,
   },
   icon: {
     width: 11,
     height: 11,
-    alignSelf: "center",
+    alignSelf: 'center',
     marginTop: 5,
     marginEnd: 5,
   },
   screen: {
     flex: 1,
-    alignItems: "center",
-    justifyContent: "center",
-    backgroundColor: "transparent",
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: 'transparent',
   },
   viewWrapper: {
     flex: 1,
-    alignItems: "center",
+    alignItems: 'center',
   },
   title: {
     fontSize: 18,
-    fontWeight: "bold",
+    fontWeight: 'bold',
     color: colors.primary,
   },
   modalView: {
     paddingBottom: 5,
-    justifyContent: "center",
-    position: "absolute",
+    justifyContent: 'center',
+    position: 'absolute',
     elevation: 5,
-    alignSelf: "center",
+    alignSelf: 'center',
     width: width * 0.8,
     ...GStyles.shadowContainer,
   },
   button: {
     backgroundColor: colors.secondBg,
-    alignItems: "center",
+    alignItems: 'center',
     padding: 5,
-    width: "50%",
+    width: '50%',
     borderColor: colors.secondBg,
     borderWidth: 0.5,
-    textTransform: "uppercase",
+    textTransform: 'uppercase',
     marginTop: 15,
   },
   buttonVisit: {
     backgroundColor: colors.secondBg,
-    alignItems: "center",
+    alignItems: 'center',
     padding: 5,
-    width: "50%",
+    width: '50%',
     borderLeftColor: colors.primary,
     borderColor: colors.secondBg,
     borderWidth: 0.5,
-    textTransform: "uppercase",
+    textTransform: 'uppercase',
     marginTop: 15,
   },
   header: {
     fontSize: 20,
-    fontWeight: "bold",
+    fontWeight: 'bold',
     color: colors.primary,
     paddingStart: 10,
-    width: "90%",
+    width: '90%',
   },
   price: {
     color: colors.lightPurple,
     marginVertical: 5,
     fontSize: 14,
-    fontWeight: "bold",
-    textAlign: "justify",
+    fontWeight: 'bold',
+    textAlign: 'justify',
   },
   desc: {
     color: colors.lightPurple,
     paddingEnd: 5,
     marginTop: 5,
     fontSize: 14,
-    fontWeight: "normal",
-    textAlign: "justify",
+    fontWeight: 'normal',
+    textAlign: 'justify',
   },
   descContainer: { paddingHorizontal: 15 },
   address: {
@@ -203,16 +200,16 @@ const styles = StyleSheet.create({
     paddingEnd: 5,
     marginTop: 5,
     fontSize: 12,
-    fontWeight: "normal",
-    textAlign: "justify",
+    fontWeight: 'normal',
+    textAlign: 'justify',
   },
   logoContainer: {
-    alignSelf: "flex-start",
+    alignSelf: 'flex-start',
     backgroundColor: colors.white,
     borderRadius: 80,
     borderColor: colors.primary,
-    position: "absolute",
-    top: "22%",
+    position: 'absolute',
+    top: '22%',
   },
   logoIcon: {
     height: 90,
@@ -221,10 +218,10 @@ const styles = StyleSheet.create({
   iconCategory: {
     width: 20,
     height: 20,
-    alignSelf: "center",
+    alignSelf: 'center',
   },
   containerIcon: {
-    flexDirection: "row",
+    flexDirection: 'row',
     marginTop: 5,
     paddingBottom: 5,
   },

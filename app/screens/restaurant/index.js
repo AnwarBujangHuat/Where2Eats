@@ -1,13 +1,10 @@
-import React, {
-  useEffect,
-  useState,
-} from "react";
-import { ConstString } from "../../configs/Strings";
-import { useSelector } from "react-redux";
-import { icons } from "../../configs/Const";
-import { getCurrentRestaurant } from "../../store/selector";
-import { RestaurantComponents } from "./components";
-import { routes } from "../../navigation/routes";
+import React, { useEffect, useState } from 'react';
+import { ConstString } from '../../configs/Strings';
+import { useSelector } from 'react-redux';
+import { icons } from '../../configs/Const';
+import { getCurrentRestaurant } from '../../store/selector';
+import { RestaurantComponents } from './components';
+import { routes } from '../../navigation/routes';
 
 const categories = [
   { id: 1, item: ConstString.MAINDISH },

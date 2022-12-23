@@ -1,19 +1,13 @@
-import React, { useState } from "react";
-import { ConstString } from "../../configs/Strings";
-import { RegisterComponents } from "./components";
-import { launchImagePicker } from "../../ImagePicker";
-import {
-  useDispatch,
-  useSelector,
-} from "react-redux";
-import {
-  getCurrentRestaurant,
-  getUser,
-} from "../../store/selector";
-import { Const } from "../../configs/Const";
-import { Alert } from "react-native";
-import { updateRestaurantInfoFirestore } from "../../store/thunks";
-import { firebase } from "../../../src/firebase/config";
+import React, { useState } from 'react';
+import { ConstString } from '../../configs/Strings';
+import { RegisterComponents } from './components';
+import { launchImagePicker } from '../../ImagePicker';
+import { useDispatch, useSelector } from 'react-redux';
+import { getCurrentRestaurant, getUser } from '../../store/selector';
+import { Const } from '../../configs/Const';
+import { Alert } from 'react-native';
+import { updateRestaurantInfoFirestore } from '../../store/thunks';
+import { firebase } from '../../../src/firebase/config';
 
 let initialIndex = 0;
 export const Register = ({ navigation, route }) => {
@@ -27,10 +21,10 @@ export const Register = ({ navigation, route }) => {
     restaurantInfo?.category ?? ConstString.WESTERN,
   );
   const [restaurantName, setRestaurantName] = useState(
-    restaurantInfo?.restaurant ?? "",
+    restaurantInfo?.restaurant ?? '',
   );
   const [restaurantDesc, setRestaurantDesc] = useState(
-    restaurantInfo?.description ?? "",
+    restaurantInfo?.description ?? '',
   );
   const [imageUri, setImageUri] = useState(restaurantInfo?.image ?? undefined);
   const [restaurantLocation, setRestaurantLocation] = useState(
@@ -54,21 +48,21 @@ export const Register = ({ navigation, route }) => {
       createdAt: new Date().toLocaleString(),
       food: [],
     };
-    restaurantName === "" ||
-    restaurantDesc === "" ||
-    restaurantLocation === "" ||
+    restaurantName === '' ||
+    restaurantDesc === '' ||
+    restaurantLocation === '' ||
     imageUri === undefined
-      ? alert("Please Fill in All Information")
+      ? alert('Please Fill in All Information')
       : navigation.navigate(ConstString.MENU, { item, id });
   };
-  const launchImageLibrary = async() => {
+  const launchImageLibrary = async () => {
     const response = await launchImagePicker();
     //* Exit if response empty *//
     if (!response) {
       return Alert.alert(
-        "Please Pick Image in JPG or PNG format",
-        "",
-        [{ text: "Okay" }],
+        'Please Pick Image in JPG or PNG format',
+        '',
+        [{ text: 'Okay' }],
         { cancelable: true },
       );
     }
@@ -77,9 +71,9 @@ export const Register = ({ navigation, route }) => {
     const { errorCode, assets } = response;
     if (errorCode || assets === []) {
       return Alert.alert(
-        "Please Pick Image in JPG or PNG format",
-        "",
-        [{ text: "Okay" }],
+        'Please Pick Image in JPG or PNG format',
+        '',
+        [{ text: 'Okay' }],
         { cancelable: true },
       );
     }
@@ -91,35 +85,35 @@ export const Register = ({ navigation, route }) => {
   const showAlert = result => {
     result === ConstString.SUCCESS
       ? Alert.alert(
-        "Congratulation",
-        "Restaurant Information is Successfully Updated",
-        [
-          {
-            onPress: () => navigation.goBack({ id }),
-            text: "Okay",
-          },
-        ],
-      )
+          'Congratulation',
+          'Restaurant Information is Successfully Updated',
+          [
+            {
+              onPress: () => navigation.goBack({ id }),
+              text: 'Okay',
+            },
+          ],
+        )
       : //Error Handling Alert
-      Alert.alert(
-        "Sorry",
-        "We did not manage to update Restaurant Information",
-        [
-          {
-            onPress: () => navigation.goBack({ id }),
-            text: "Okay",
-          },
-        ],
-      );
+        Alert.alert(
+          'Sorry',
+          'We did not manage to update Restaurant Information',
+          [
+            {
+              onPress: () => navigation.goBack({ id }),
+              text: 'Okay',
+            },
+          ],
+        );
   };
   const goBack = () => {
     navigation.goBack({ id });
   };
-  const updateRestaurantInfo = async() => {
+  const updateRestaurantInfo = async () => {
     let image = restaurantInfo?.image;
     //Upload Image if image change
     if (!reUpload) {
-      const imageUploadResult = await uploadAsFile(imageUri, "profile");
+      const imageUploadResult = await uploadAsFile(imageUri, 'profile');
       const { data } = imageUploadResult;
       image = data;
     }
@@ -143,36 +137,36 @@ export const Register = ({ navigation, route }) => {
   const setName = text => setRestaurantName(text);
   const setDescription = text => setRestaurantDesc(text);
   const categorySelected = ({ item }) => setSelectedTypes(item.title);
-  const uploadAsFile = async(uri, folder, progressCallback) => {
+  const uploadAsFile = async (uri, folder, progressCallback) => {
     if (uri !== undefined) {
       const response = await fetch(uri);
       const blob = await response.blob();
-      const name = "profilemedia.jpg";
-      const pathName = restaurantName + "/" + folder + "/" + name;
+      const name = 'profilemedia.jpg';
+      const pathName = restaurantName + '/' + folder + '/' + name;
       const metadata = {
-        contentType: "image/jpeg",
+        contentType: 'image/jpeg',
       };
       const ref = firebase.storage().ref().child(pathName);
       const task = ref.put(blob, metadata);
       return new Promise((resolve, reject) => {
         task.on(
-          "state_changed",
+          'state_changed',
           snapshot => {
             progressCallback &&
-            progressCallback(snapshot.bytesTransferred / snapshot.totalBytes);
+              progressCallback(snapshot.bytesTransferred / snapshot.totalBytes);
           },
           error => {
             reject(error);
           },
           () => {
             task.snapshot.ref.getDownloadURL().then(fileUrl => {
-              resolve({ type: "profile", data: fileUrl });
+              resolve({ type: 'profile', data: fileUrl });
             });
           },
         );
       });
     } else {
-      showAlert("Missing File" + uri);
+      showAlert('Missing File' + uri);
     }
   };
   // eslint-disable-next-line no-shadow

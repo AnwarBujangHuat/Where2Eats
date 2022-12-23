@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react';
 import {
   Dimensions,
   FlatList,
@@ -9,15 +9,12 @@ import {
   Text,
   TouchableOpacity,
   View,
-} from "react-native";
-import { DetailsHeader } from "../../components/molecules/DetailsHeader";
-import {
-  colors,
-  Const,
-} from "../../configs/Const";
-import { ImageButton } from "../../components/atoms/ImageButton";
-import { InputField } from "../../components/atoms/InputField";
-import { ModalLocation } from "../../components/molecules/ModalLocation";
+} from 'react-native';
+import { DetailsHeader } from '../../components/molecules/DetailsHeader';
+import { colors, Const } from '../../configs/Const';
+import { ImageButton } from '../../components/atoms/ImageButton';
+import { InputField } from '../../components/atoms/InputField';
+import { ModalLocation } from '../../components/molecules/ModalLocation';
 
 export const RegisterComponents = props => {
   const {
@@ -49,28 +46,31 @@ export const RegisterComponents = props => {
         image={imageUri}
       />
       <View style={styles.inputContainer}>
-        <Text style={styles.header}>{"Restaurant Name"}</Text>
+        <Text style={styles.header}>{'Restaurant Name'}</Text>
         <InputField
-          placeholder={"Please Input Name"}
+          placeholder={'Please Input Name'}
           multiline={false}
           onChange={text => setName(text)}
           value={restaurantName}
         />
-        <Text style={styles.header}>{"Description"}</Text>
+        <Text style={styles.header}>{'Description'}</Text>
         <InputField
-          placeholder={"Please Input Description"}
+          placeholder={'Please Input Description'}
           multiline={true}
           onChange={text => setDescription(text)}
           value={restaurantDesc}
         />
-        <Text style={styles.header}>{"Category"}</Text>
+        <Text style={styles.header}>{'Category'}</Text>
         <FlatList
           style={{ maxHeight: 60 }}
           data={Const}
           onScrollToIndexFailed={info => {
             const wait = new Promise(resolve => setTimeout(resolve, 500));
             wait.then(() => {
-              Const.current?.scrollToIndex({ index: info.index, animated: true });
+              Const.current?.scrollToIndex({
+                index: info.index,
+                animated: true,
+              });
             });
           }}
           initialScrollIndex={initialIndex ?? 0}
@@ -86,14 +86,14 @@ export const RegisterComponents = props => {
           horizontal={true}
           showsHorizontalScrollIndicator={false}
         />
-        <Text style={styles.header}>{"Location"}</Text>
+        <Text style={styles.header}>{'Location'}</Text>
         <TouchableOpacity
           style={styles.buttonLocation}
           onPress={openLocationModal}>
           <Text
             style={{
               color: colors.primary,
-              fontWeight: "bold",
+              fontWeight: 'bold',
             }}>
             Location
           </Text>
@@ -107,12 +107,12 @@ export const RegisterComponents = props => {
       </View>
 
       <KeyboardAvoidingView
-        behavior={Platform.OS === "ios" ? "padding" : "height"}>
+        behavior={Platform.OS === 'ios' ? 'padding' : 'height'}>
         <TouchableOpacity
           style={styles.button}
           onPress={editorMode ? updateRestaurantInfo : goToMenu}>
           <Text style={styles.buttonText}>
-            {editorMode ? "Update Restaurant Info" : "Go To Menu"}
+            {editorMode ? 'Update Restaurant Info' : 'Go To Menu'}
           </Text>
         </TouchableOpacity>
       </KeyboardAvoidingView>
@@ -126,12 +126,12 @@ const styles = StyleSheet.create({
   },
   descriptionInput: {
     fontSize: 14,
-    fontWeight: "normal",
+    fontWeight: 'normal',
     borderWidth: 1,
     paddingHorizontal: 5,
     borderBottomColor: colors.primary,
     borderColor: colors.white,
-    textAlignVertical: "center",
+    textAlignVertical: 'center',
     backgroundColor: colors.white,
     borderRadius: 5,
     marginVertical: 10,
@@ -139,7 +139,7 @@ const styles = StyleSheet.create({
   },
   header: {
     fontSize: 16,
-    fontWeight: "bold",
+    fontWeight: 'bold',
     marginVertical: 10,
     color: colors.darkPurple,
     shadowOffset: { width: -2, height: 2 },
@@ -149,11 +149,11 @@ const styles = StyleSheet.create({
   },
   button: {
     backgroundColor: colors.primary,
-    alignItems: "center",
+    alignItems: 'center',
     padding: 15,
     borderRadius: 5,
-    width: Dimensions.get("screen").width - 30,
-    textTransform: "uppercase",
+    width: Dimensions.get('screen').width - 30,
+    textTransform: 'uppercase',
     bottom: 10,
     // position: 'absolute',
     marginHorizontal: 15,
@@ -161,19 +161,19 @@ const styles = StyleSheet.create({
   buttonText: {
     fontSize: 16,
     color: colors.white,
-    fontWeight: "bold",
+    fontWeight: 'bold',
   },
   buttonLocation: {
     borderColor: colors.lightPurple,
     borderWidth: 1,
-    alignItems: "center",
+    alignItems: 'center',
     padding: 15,
     borderRadius: 5,
-    textTransform: "uppercase",
+    textTransform: 'uppercase',
   },
   inputContainer: {
     marginTop: 30,
-    height: "60%",
+    height: '60%',
     marginHorizontal: 15,
   },
   desc: {

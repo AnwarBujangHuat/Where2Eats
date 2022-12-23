@@ -70,9 +70,9 @@ export const SetupMenuComponents = props => {
   const renderMenu = category => {
     return editorMode
       ? //if Restaurant Exist and in Editor Mode then filter existing MENU
-      foodList.filter(foods => foods.category === category)
+        foodList.filter(foods => foods.category === category)
       : //First time Create and not Editor Mode then show temp menu
-      Menu.filter(foods => foods.category === category);
+        Menu.filter(foods => foods.category === category);
   };
   const renderSelectedCategory = () => {
     //Sort Category based on id to maintain order {Main Dish, Side Dish, Dessert, Appetizer, Drinks }

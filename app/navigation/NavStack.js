@@ -8,10 +8,10 @@ import {
   Restaurant,
   SetupMenu,
   WheelOfFortune,
-} from "../screens";
-import * as React from "react";
-import { createStackNavigator } from "@react-navigation/stack";
-import { routes } from "./routes";
+} from '../screens';
+import * as React from 'react';
+import { createStackNavigator } from '@react-navigation/stack';
+import { routes } from './routes';
 
 const Stack = createStackNavigator();
 export const NavStack = () => {
@@ -33,7 +33,7 @@ export const NavStack = () => {
         name={routes.MODAL}
         component={ModalScreen}
         options={{
-          presentation: "transparentModal",
+          presentation: 'transparentModal',
           cardStyleInterpolator: forFade,
         }}
       />

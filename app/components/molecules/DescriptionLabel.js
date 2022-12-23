@@ -1,25 +1,19 @@
-import {
-  Image,
-  StyleSheet,
-  Text,
-  TouchableOpacity,
-  View,
-} from "react-native";
-import React from "react";
-import locationIcon from "../../assets/location.png";
-import { GStyles } from "../../Styles";
-import { colors } from "../../configs/Const";
+import { Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import React from 'react';
+import locationIcon from '../../assets/location.png';
+import { GStyles } from '../../Styles';
+import { colors } from '../../configs/Const';
 
 export const DescriptionLabel = ({ name, location, icon, onPress }) => {
   return (
     <View style={styles.container}>
-      <View style={{ flexDirection: "row" }}>
+      <View style={{ flexDirection: 'row' }}>
         <Text style={styles.title}>{name}</Text>
         <TouchableOpacity onPress={onPress}>
           <Image style={styles.icon} source={icon} />
         </TouchableOpacity>
       </View>
-      <View style={{ flexDirection: "row" }}>
+      <View style={{ flexDirection: 'row' }}>
         <Image style={styles.locationIcon} source={locationIcon} />
         <Text style={styles.desc}>{location}</Text>
       </View>
@@ -37,20 +31,20 @@ const styles = StyleSheet.create({
   },
   title: {
     fontSize: 20,
-    fontWeight: "bold",
-    width: "88%",
+    fontWeight: 'bold',
+    width: '88%',
     color: colors.darkPurple,
   },
   desc: {
     color: colors.white,
     paddingTop: 5,
-    maxWidth: "90%",
+    maxWidth: '90%',
     fontSize: 14,
   },
   icon: {
     width: 25,
     height: 25,
-    alignSelf: "center",
+    alignSelf: 'center',
   },
   locationIcon: {
     width: 14,

@@ -1,7 +1,4 @@
-import {
-  createEntityAdapter,
-  createSlice,
-} from '@reduxjs/toolkit';
+import { createEntityAdapter, createSlice } from '@reduxjs/toolkit';
 import {
   addFoodItemFirebase,
   AddOne,
@@ -65,23 +62,29 @@ export const Reducer = createSlice({
       return state;
     });
 
-    builder.addCase(addFoodItemFirebase.fulfilled, (state, { meta, payload }) => {
-      const { id: restaurantId, foodItem } = payload.data;
-      const restaurantFoodList = [
-        ...state.RESTAURANT.entities[restaurantId].food,
-        foodItem,
-      ];
-      restaurantAdapter.updateOne(state.RESTAURANT, {
-        id: restaurantId,
-        changes: {
-          food: restaurantFoodList,
-        },
-      });
-      return state;
-    });
-    builder.addCase(addFoodItemFirebase.rejected, (state, { meta, payload }) => {
-      console.log({ path: 'reducer AddFoodItemFirebase', data: payload });
-    });
+    builder.addCase(
+      addFoodItemFirebase.fulfilled,
+      (state, { meta, payload }) => {
+        const { id: restaurantId, foodItem } = payload.data;
+        const restaurantFoodList = [
+          ...state.RESTAURANT.entities[restaurantId].food,
+          foodItem,
+        ];
+        restaurantAdapter.updateOne(state.RESTAURANT, {
+          id: restaurantId,
+          changes: {
+            food: restaurantFoodList,
+          },
+        });
+        return state;
+      },
+    );
+    builder.addCase(
+      addFoodItemFirebase.rejected,
+      (state, { meta, payload }) => {
+        console.log({ path: 'reducer AddFoodItemFirebase', data: payload });
+      },
+    );
 
     builder.addCase(updateRating.fulfilled, (state, { meta, payload }) => {
       const {

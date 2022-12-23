@@ -1,17 +1,17 @@
-import React, {useEffect, useState} from 'react';
-import {RatingComponents} from './components';
-import {ConstString} from '../../configs/Strings';
-import {useDispatch, useSelector} from 'react-redux';
-import {getCurrentRestaurant, getUser} from '../../store/selector';
-import {Alert} from 'react-native';
-import {updateRating} from '../../store/thunks';
-import {routes} from '../../navigation/routes';
+import React, { useEffect, useState } from 'react';
+import { RatingComponents } from './components';
+import { ConstString } from '../../configs/Strings';
+import { useDispatch, useSelector } from 'react-redux';
+import { getCurrentRestaurant, getUser } from '../../store/selector';
+import { Alert } from 'react-native';
+import { updateRating } from '../../store/thunks';
+import { routes } from '../../navigation/routes';
 
-export const Ratings = ({navigation, route}) => {
+export const Ratings = ({ navigation, route }) => {
   const ratingChipButton = ['All', '1', '2', '3', '4', '5'];
-  const {id} = route.params || {};
+  const { id } = route.params || {};
   const dispatch = useDispatch();
-  const {NAME, ID} = useSelector(getUser);
+  const { NAME, ID } = useSelector(getUser);
   const restaurantInfo = useSelector(getCurrentRestaurant(id));
   const restaurantsRating = [...(restaurantInfo.rating ?? [])];
   const [restaurantRemove, setRestaurantRemove] = useState([]);
@@ -61,7 +61,7 @@ export const Ratings = ({navigation, route}) => {
     }
     setRestaurantRemove(restaurantsRating);
   }, [restaurantInfo]);
-  const onBackButton = () => navigation.navigate(routes.RESTAURANT, {id});
+  const onBackButton = () => navigation.navigate(routes.RESTAURANT, { id });
   const openModal = () => {
     setModalRate(true);
   };
@@ -72,8 +72,8 @@ export const Ratings = ({navigation, route}) => {
       Alert.alert(
         'Something Went Wrong While Writing Your Review',
         'Opps',
-        {text: 'OK'},
-        {cancelable: true},
+        { text: 'OK' },
+        { cancelable: true },
       );
     }
   };
@@ -97,9 +97,9 @@ export const Ratings = ({navigation, route}) => {
 
     //dispatch call to update firebase and redux
     const result = await dispatch(
-      updateRating({id, userReview, userReviewResult, avg, index}),
+      updateRating({ id, userReview, userReviewResult, avg, index }),
     );
-    const {error} = result;
+    const { error } = result;
     //check error then Failed
     closeModal(error ? ConstString.FAILED : ConstString.SUCCESS);
   };

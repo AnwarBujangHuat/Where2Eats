@@ -52,9 +52,7 @@ export const DetailsHeader = ({
             {rate && <RateLabel rating={rating} goToRating={goToRating} />}
           </View>
 
-          <TouchableOpacity
-            style={styles.logoContainer}
-            disabled={disabled}>
+          <TouchableOpacity style={styles.logoContainer} disabled={disabled}>
             <Image style={styles.icons} source={logoIcon} />
           </TouchableOpacity>
         </ImageBackground>

@@ -13,9 +13,9 @@ export const launchImagePicker = () =>
       },
       response => {
         if (response.didCancel) {
-          reject({result: 'cancel'});
+          reject({ result: 'cancel' });
         }
-        return resolve({result: response});
+        return resolve({ result: response });
       },
     )
       .then(r => reject('Error'))

@@ -1,23 +1,15 @@
-import React from "react";
-import {
-  FlatList,
-  SafeAreaView,
-  StyleSheet,
-  View,
-} from "react-native";
-import { Header } from "../../components/molecules/Header";
-import personIcon from "../../assets/programmer.png";
-import { SearchBar } from "../../components/molecules/SearchBar";
-import search from "../../assets/search.png";
-import {
-  colors,
-  Const,
-} from "../../configs/Const";
-import { ImageButton } from "../../components/atoms/ImageButton";
-import { RestaurantCard } from "../../components/molecules/RestaurantCard";
-import { FloatingActionButton } from "../../components/atoms/FloatingActionButtom";
-import { ModalMenuButton } from "../../components/molecules/ModalMenuButton";
-import TestIds from "../../../e2e/TestIDs";
+import React from 'react';
+import { FlatList, SafeAreaView, StyleSheet, View } from 'react-native';
+import { Header } from '../../components/molecules/Header';
+import personIcon from '../../assets/programmer.png';
+import { SearchBar } from '../../components/molecules/SearchBar';
+import search from '../../assets/search.png';
+import { colors, Const } from '../../configs/Const';
+import { ImageButton } from '../../components/atoms/ImageButton';
+import { RestaurantCard } from '../../components/molecules/RestaurantCard';
+import { FloatingActionButton } from '../../components/atoms/FloatingActionButtom';
+import { ModalMenuButton } from '../../components/molecules/ModalMenuButton';
+import TestIds from '../../../e2e/TestIDs';
 
 export const HomeComponents = props => {
   const {
@@ -55,7 +47,7 @@ export const HomeComponents = props => {
       <Header
         source={IMAGE ? { uri: IMAGE } : personIcon}
         onPress={openMenu}
-        title={"Welcome Back " + userName}
+        title={'Welcome Back ' + userName}
       />
       {isOpenMenu && (
         <ModalMenuButton
@@ -65,7 +57,7 @@ export const HomeComponents = props => {
         />
       )}
       <SearchBar
-        placeholder={"Search"}
+        placeholder={'Search'}
         onChangeText={onSearch}
         source={search}
       />

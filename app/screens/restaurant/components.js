@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react';
 import {
   FlatList,
   Image,
@@ -6,14 +6,14 @@ import {
   StyleSheet,
   Text,
   View,
-} from "react-native";
-import { DetailsHeader } from "../../components/molecules/DetailsHeader";
-import { DescriptionLabel } from "../../components/molecules/DescriptionLabel";
-import { FoodCard } from "../../components/molecules/FoodCard";
-import { ModalMenuDetails } from "../../components/molecules/ModalMenuDetails";
-import { ModalWinner } from "../../components/molecules/ModalWinner";
-import { ExpandableFloatingButton } from "../../components/atoms/ExpandableFloatingButton";
-import { colors } from "../../configs/Const";
+} from 'react-native';
+import { DetailsHeader } from '../../components/molecules/DetailsHeader';
+import { DescriptionLabel } from '../../components/molecules/DescriptionLabel';
+import { FoodCard } from '../../components/molecules/FoodCard';
+import { ModalMenuDetails } from '../../components/molecules/ModalMenuDetails';
+import { ModalWinner } from '../../components/molecules/ModalWinner';
+import { ExpandableFloatingButton } from '../../components/atoms/ExpandableFloatingButton';
+import { colors } from '../../configs/Const';
 
 export const RestaurantComponents = props => {
   const {
@@ -76,8 +76,8 @@ export const RestaurantComponents = props => {
             <>
               <View
                 style={{
-                  flexDirection: "row",
-                  alignItems: "center",
+                  flexDirection: 'row',
+                  alignItems: 'center',
                   marginBottom: 10,
                 }}>
                 <Text style={styles.header}>{category}</Text>
@@ -122,20 +122,20 @@ const styles = StyleSheet.create({
   },
   header: {
     fontSize: 18,
-    fontWeight: "bold",
+    fontWeight: 'bold',
     margin: 10,
     color: colors.darkPurple,
   },
   fabText: {
     padding: 5,
     color: colors.white,
-    fontWeight: "bold",
-    alignSelf: "center",
+    fontWeight: 'bold',
+    alignSelf: 'center',
     fontSize: 14,
   },
   icon: {
     width: 20,
     height: 20,
-    alignSelf: "center",
+    alignSelf: 'center',
   },
 });

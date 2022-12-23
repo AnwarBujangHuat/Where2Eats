@@ -1,34 +1,31 @@
-import {
-  StyleSheet,
-  View,
-} from "react-native";
-import React from "react";
-import { FloatingAction } from "react-native-floating-action";
-import Menu from "../../assets/cheeseburger.png";
-import Details from "../../assets/details.png";
-import Edit from "../../assets/edit.png";
-import { ConstString } from "../../configs/Strings";
-import { colors } from "../../configs/Const";
-import { GStyles } from "../../Styles";
+import { StyleSheet, View } from 'react-native';
+import React from 'react';
+import { FloatingAction } from 'react-native-floating-action';
+import Menu from '../../assets/cheeseburger.png';
+import Details from '../../assets/details.png';
+import Edit from '../../assets/edit.png';
+import { ConstString } from '../../configs/Strings';
+import { colors } from '../../configs/Const';
+import { GStyles } from '../../Styles';
 
 const actions = [
   {
-    text: "Restaurant Details",
+    text: 'Restaurant Details',
     icon: Details,
     name: ConstString.EDIT,
     position: 2,
     color: colors.primary,
     textBackground: colors.primary,
-    textColor: "white",
+    textColor: 'white',
   },
   {
-    text: "Menu",
+    text: 'Menu',
     icon: Menu,
     name: ConstString.MENU,
     position: 1,
     color: colors.primary,
     textBackground: colors.primary,
-    textColor: "white",
+    textColor: 'white',
   },
 ];
 export const ExpandableFloatingButton = ({ onPressItem }) => {
@@ -53,7 +50,7 @@ const styles = StyleSheet.create({
     padding: 10,
   },
   fab: {
-    position: "absolute",
+    position: 'absolute',
     bottom: 20,
     right: -10,
   },

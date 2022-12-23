@@ -8,11 +8,11 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
-import {BackButton} from '../../components/atoms/BackButton';
+import { BackButton } from '../../components/atoms/BackButton';
 import personIcon from '../../assets/programmer.png';
-import {EditableLabel} from '../../components/atoms/EditableLabel';
-import {ModalEdit} from '../../components/molecules/ModalEdit';
-import {colors} from '../../configs/Const';
+import { EditableLabel } from '../../components/atoms/EditableLabel';
+import { ModalEdit } from '../../components/molecules/ModalEdit';
+import { colors } from '../../configs/Const';
 
 export const ProfileComponents = props => {
   const {
@@ -38,9 +38,9 @@ export const ProfileComponents = props => {
       </View>
       <View>
         <FlatList
-          style={{marginTop: 15}}
+          style={{ marginTop: 15 }}
           data={InformationList}
-          renderItem={({item, index}) => {
+          renderItem={({ item, index }) => {
             return (
               <EditableLabel
                 title={item.title}

@@ -1,4 +1,4 @@
-import * as React from "react";
+import * as React from 'react';
 import {
   Image,
   SafeAreaView,
@@ -6,17 +6,17 @@ import {
   Text,
   TouchableOpacity,
   View,
-} from "react-native";
-import CheckBox from "@react-native-community/checkbox";
-import Logo from "../../assets/allfood.png";
-import { InputFieldLogins } from "../../components/molecules/InputFieldLogins";
-import email from "../../assets/email.png";
-import password from "../../assets/password.png";
-import { IconButton } from "../../components/molecules/IconButton";
-import { SocialButton } from "../../components/atoms/SocialButton";
-import { ConstString } from "../../configs/Strings";
-import TestIDs from "../../../e2e/TestIDs";
-import { colors } from "../../configs/Const";
+} from 'react-native';
+import CheckBox from '@react-native-community/checkbox';
+import Logo from '../../assets/allfood.png';
+import { InputFieldLogins } from '../../components/molecules/InputFieldLogins';
+import email from '../../assets/email.png';
+import password from '../../assets/password.png';
+import { IconButton } from '../../components/molecules/IconButton';
+import { SocialButton } from '../../components/atoms/SocialButton';
+import { ConstString } from '../../configs/Strings';
+import TestIDs from '../../../e2e/TestIDs';
+import { colors } from '../../configs/Const';
 
 export const LoginComponents = props => {
   const {
@@ -39,7 +39,7 @@ export const LoginComponents = props => {
         <Text style={styles.title}>Sign In</Text>
         <InputFieldLogins
           testID={TestIDs.IFEmail}
-          hint={"Email"}
+          hint={'Email'}
           defvalue={Email}
           onChangeText1={onChangeInputEmail}
           source={email}
@@ -47,7 +47,7 @@ export const LoginComponents = props => {
         />
         <InputFieldLogins
           testID={TestIDs.IFPassword}
-          hint={"Password"}
+          hint={'Password'}
           defvalue={Password}
           onChangeText1={onChangeInputPassword}
           source={password}
@@ -60,7 +60,7 @@ export const LoginComponents = props => {
             onCheckColor={colors.primary}
             tintColor={colors.primary}
             onTintColor={colors.primary}
-            boxType={"square"}
+            boxType={'square'}
             tintColors={colors.primary}
             onValueChange={onClickRememberMe}
             style={{ height: 15, width: 15 }}
@@ -71,10 +71,10 @@ export const LoginComponents = props => {
           testID={TestIDs.BtnDone}
           style={styles.buttonDone}
           onPress={verifyUser}>
-          <Text style={{ color: "white", textAlign: "center" }}>Login</Text>
+          <Text style={{ color: 'white', textAlign: 'center' }}>Login</Text>
         </TouchableOpacity>
         <TouchableOpacity style={styles.buttonForPass}>
-          <Text style={{ color: colors.primary, textAlign: "center" }}>
+          <Text style={{ color: colors.primary, textAlign: 'center' }}>
             Forget Password
           </Text>
         </TouchableOpacity>
@@ -95,14 +95,14 @@ export const LoginComponents = props => {
 const styles = StyleSheet.create({
   text: {
     color: colors.white,
-    textAlign: "center",
+    textAlign: 'center',
     marginStart: 10,
   },
   logo: {
     height: 100,
     width: 100,
-    alignSelf: "center",
-    alignItems: "center",
+    alignSelf: 'center',
+    alignItems: 'center',
     margin: 30,
   },
   container: {
@@ -110,7 +110,7 @@ const styles = StyleSheet.create({
     backgroundColor: colors.bg,
   },
   title: {
-    fontWeight: "normal",
+    fontWeight: 'normal',
     fontSize: 20,
     color: colors.white,
     marginVertical: 10,
@@ -120,22 +120,22 @@ const styles = StyleSheet.create({
     marginHorizontal: 30,
   },
   buttonDone: {
-    alignItems: "center",
+    alignItems: 'center',
     backgroundColor: colors.primary,
     borderRadius: 10,
     padding: 15,
     marginTop: 20,
   },
   buttonForPass: {
-    alignItems: "center",
+    alignItems: 'center',
     borderRadius: 10,
     padding: 15,
     marginTop: 10,
   },
   checkboxContainer: {
-    flexDirection: "row",
+    flexDirection: 'row',
     margin: 5,
-    alignItems: "center",
+    alignItems: 'center',
   },
   label: {
     margin: 8,

@@ -1,30 +1,30 @@
-import React, {useEffect, useState} from 'react';
-import {Alert} from 'react-native';
-import {ConstString} from '../../../configs/Strings';
-import {useDispatch, useSelector} from 'react-redux';
+import React, { useEffect, useState } from 'react';
+import { Alert } from 'react-native';
+import { ConstString } from '../../../configs/Strings';
+import { useDispatch, useSelector } from 'react-redux';
 import {
   addFoodItemFirebase,
   AddOne,
   removeFoodItemFirebase,
   updateFoodItemFirebase,
 } from '../../../store/thunks';
-import {icons} from '../../../configs/Const';
-import {firebase} from '../../../../src/firebase/config';
-import {getCurrentRestaurant} from '../../../store/selector';
-import {SetupMenuComponents} from './components';
-import {routes} from '../../../navigation/routes';
-import {v4 as uuid} from 'uuid';
+import { icons } from '../../../configs/Const';
+import { firebase } from '../../../../src/firebase/config';
+import { getCurrentRestaurant } from '../../../store/selector';
+import { SetupMenuComponents } from './components';
+import { routes } from '../../../navigation/routes';
+import { v4 as uuid } from 'uuid';
 
-export const SetupMenu = ({navigation, route}) => {
+export const SetupMenu = ({ navigation, route }) => {
   const dispatch = useDispatch();
   const categories = [
-    {id: 1, item: ConstString.MAINDISH},
-    {id: 2, item: ConstString.SIDEDISH},
-    {id: 3, item: ConstString.DESSERT},
-    {id: 4, item: ConstString.APPETIZER},
-    {id: 5, item: ConstString.DRINKS},
+    { id: 1, item: ConstString.MAINDISH },
+    { id: 2, item: ConstString.SIDEDISH },
+    { id: 3, item: ConstString.DESSERT },
+    { id: 4, item: ConstString.APPETIZER },
+    { id: 5, item: ConstString.DRINKS },
   ];
-  const {item, id} = route.params || {};
+  const { item, id } = route.params || {};
   const editorMode = !!id;
   let action; //clear - on back
   const restaurantInfo = useSelector(getCurrentRestaurant(id));
@@ -80,7 +80,7 @@ export const SetupMenu = ({navigation, route}) => {
   const goBack = () => {
     closeActionModal();
     closeModal();
-    navigation.goBack({id});
+    navigation.goBack({ id });
   };
   const closeModal = () => setModalVisible(false);
   const closeActionModal = () => setActionModal(false);
@@ -96,7 +96,7 @@ export const SetupMenu = ({navigation, route}) => {
     setActionModal(true);
     action = ConstString.UPLOADING;
     const resultUploadImageProfile = await uploadAsFile(item.image, 'profile');
-    const {data, error} = resultUploadImageProfile;
+    const { data, error } = resultUploadImageProfile;
     if (error) {
       return showAlert(ConstString.ADD, 'Profile Image', ConstString.FAILED);
     }
@@ -112,7 +112,7 @@ export const SetupMenu = ({navigation, route}) => {
           0,
           foodItem,
         );
-        const {data, error} = resultUploadImage;
+        const { data, error } = resultUploadImage;
         if (error) {
           return showAlert(ConstString.ADD, foodItem.name, ConstString.FAILED);
         }
@@ -124,7 +124,7 @@ export const SetupMenu = ({navigation, route}) => {
   const uploadFinish = async () => {
     item.food = Menu;
     const addRestaurantResult = await dispatch(AddOne(item));
-    const {result} = addRestaurantResult;
+    const { result } = addRestaurantResult;
     if (result) {
       return showAlert(ConstString.ADD, item.restaurant, ConstString.FAILED);
     }
@@ -173,9 +173,9 @@ export const SetupMenu = ({navigation, route}) => {
           () => {
             task.snapshot.ref.getDownloadURL().then(fileUrl => {
               if (folder === 'profile') {
-                resolve({type: 'profile', data: fileUrl});
+                resolve({ type: 'profile', data: fileUrl });
               } else {
-                resolve({type: 'menu', data: fileUrl});
+                resolve({ type: 'menu', data: fileUrl });
               }
             });
           },
@@ -187,7 +187,7 @@ export const SetupMenu = ({navigation, route}) => {
   };
 
   //Add New Food Item
-  const onPressAdd = ({item: category}) => {
+  const onPressAdd = ({ item: category }) => {
     setModalVisible(true);
     setCategory(category);
   };
@@ -204,12 +204,12 @@ export const SetupMenu = ({navigation, route}) => {
         0,
         foodItem,
       );
-      const {data} = resultUploadImage;
+      const { data } = resultUploadImage;
       foodItem.image = data;
       const resultUploadFoodItem = await dispatch(
-        addFoodItemFirebase({id, foodItem}),
+        addFoodItemFirebase({ id, foodItem }),
       );
-      const {payload} = resultUploadFoodItem;
+      const { payload } = resultUploadFoodItem;
       //If fail to add Firestore
       if (!payload.result) {
         return showAlert(ConstString.ADD, foodItem.name, ConstString.FAILED);
@@ -243,9 +243,9 @@ export const SetupMenu = ({navigation, route}) => {
       //no need to upload new image
       if (reUpload) {
         const updateFoodItemResult = await dispatch(
-          updateFoodItemFirebase({id, foodItem, initialFoodItem, index}),
+          updateFoodItemFirebase({ id, foodItem, initialFoodItem, index }),
         );
-        const {payload} = updateFoodItemResult;
+        const { payload } = updateFoodItemResult;
 
         //If fail to update Firestore
         if (!payload.result) {
@@ -267,14 +267,14 @@ export const SetupMenu = ({navigation, route}) => {
           foodItem,
           initialFoodItem.image,
         );
-        const {data} = resultUploadImage;
+        const { data } = resultUploadImage;
         foodItem.image = data;
 
         //upload new food Item to firestore
         const resultUploadFoodItem = await dispatch(
-          updateFoodItemFirebase({id, foodItem, initialFoodItem, index}),
+          updateFoodItemFirebase({ id, foodItem, initialFoodItem, index }),
         );
-        const {payload} = resultUploadFoodItem;
+        const { payload } = resultUploadFoodItem;
 
         //If fail to update Firestore
         if (!payload.result) {
@@ -301,9 +301,9 @@ export const SetupMenu = ({navigation, route}) => {
           onPress: () => removeFoodItem(id, item),
           style: 'destructive',
         },
-        {text: 'Cancel'},
+        { text: 'Cancel' },
       ],
-      {cancelable: true},
+      { cancelable: true },
     );
   };
   const removeFoodItem = async (id, foodItem) => {
@@ -316,9 +316,9 @@ export const SetupMenu = ({navigation, route}) => {
     } else {
       const restaurantName = restaurantInfo?.restaurant;
       const resultRemoveFoodItem = await dispatch(
-        removeFoodItemFirebase({id, foodItem, index, restaurantName}),
+        removeFoodItemFirebase({ id, foodItem, index, restaurantName }),
       );
-      const {payload} = resultRemoveFoodItem;
+      const { payload } = resultRemoveFoodItem;
       //If fail to add Firestore
       if (!payload.result) {
         return showAlert(ConstString.DELETE, foodItem.name, ConstString.FAILED);

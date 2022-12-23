@@ -5,13 +5,13 @@ import {
   StyleSheet,
   TextInput,
   View,
-} from "react-native";
-import React from "react";
-import { colors } from "../../configs/Const";
-import { GStyles } from "../../Styles";
-import TestIDs from "../../../e2e/TestIDs";
+} from 'react-native';
+import React from 'react';
+import { colors } from '../../configs/Const';
+import { GStyles } from '../../Styles';
+import TestIDs from '../../../e2e/TestIDs';
 
-const { width } = Dimensions.get("window");
+const { width } = Dimensions.get('window');
 
 export const SearchBar = ({ onChangeText, placeholder, source }) => {
   return (
@@ -22,7 +22,7 @@ export const SearchBar = ({ onChangeText, placeholder, source }) => {
           testID={TestIDs.SearchBar}
           style={styles.input}
           placeholder={placeholder}
-          clearButtonMode={"while-editing"}
+          clearButtonMode={'while-editing'}
           placeholderTextColor={colors.white}
           onChangeText={onChangeText}
           autoCorrect={false}
@@ -43,7 +43,7 @@ export const SearchBar = ({ onChangeText, placeholder, source }) => {
 const styles = StyleSheet.create({
   searchbar: {
     ...GStyles.shadowContainer,
-    flexDirection: "row",
+    flexDirection: 'row',
     borderRadius: 10,
     marginVertical: 10,
     width: width - 30,
@@ -52,21 +52,21 @@ const styles = StyleSheet.create({
   text: {
     color: colors.primary,
     fontSize: 14,
-    fontWeight: "bold",
+    fontWeight: 'bold',
   },
   section: {
-    flexDirection: "row",
-    alignItems: "center",
+    flexDirection: 'row',
+    alignItems: 'center',
     marginHorizontal: 15,
   },
   input: {
     fontSize: 14,
     padding: 10,
-    width: "90%",
+    width: '90%',
   },
   icons: {
-    flexDirection: "row",
-    alignSelf: "center",
+    flexDirection: 'row',
+    alignSelf: 'center',
     height: 20,
     width: 20,
     marginTop: 10,
