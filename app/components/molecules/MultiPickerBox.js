@@ -18,6 +18,7 @@ import {
 } from 'lodash';
 import Toggle from '../atoms/Toggle';
 import { colors } from '../../configs/Const';
+import { v4 as uuid } from 'uuid';
 
 const hitSlop = { top: 14, bottom: 14, left: 14, right: 14 };
 
@@ -265,7 +266,7 @@ function SelectBox ({
   );
 
   function keyExtractor () {
-    return (o) => `${o.id}-${Math.random()}`;
+    return (item) => `${item.id}-${uuid()}`;
   }
 
   function kSelectedItemStyle () {
