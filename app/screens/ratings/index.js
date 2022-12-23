@@ -45,7 +45,8 @@ export const Ratings = ({navigation, route}) => {
         temp.push(totalCount);
       }
     });
-    setRatingCount(temp.reverse());
+    const reverseCount = [...temp].reverse();
+    setRatingCount(reverseCount);
   };
   useEffect(() => {
     if (userReviews) {

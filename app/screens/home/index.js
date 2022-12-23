@@ -1,15 +1,21 @@
-import React, {useState} from 'react';
-import {HomeComponents} from './components';
-import {getRestaurant, getUser} from '../../store/selector';
-import {useDispatch, useSelector} from 'react-redux';
-import {PopulateRestaurantList} from '../../store/thunks';
-import {Alert} from 'react-native';
-import {routes} from '../../navigation/routes';
+import React, { useState } from 'react';
+import { HomeComponents } from './components';
+import {
+  getRestaurant,
+  getUser,
+} from '../../store/selector';
+import {
+  useDispatch,
+  useSelector,
+} from 'react-redux';
+import { PopulateRestaurantList } from '../../store/thunks';
+import { Alert } from 'react-native';
+import { routes } from '../../navigation/routes';
 import firebase from 'firebase/compat/app';
 
-export const Home = ({navigation}) => {
+export const Home = ({ navigation }) => {
   const fetchRestaurant = useSelector(getRestaurant);
-  const {NAME: userName, IMAGE} = useSelector(getUser);
+  const { NAME: userName, IMAGE } = useSelector(getUser);
   const dispatch = useDispatch();
   const restaurant = [...fetchRestaurant];
   const [currentRestaurant, setCurrentRestaurant] = useState(restaurant);
@@ -43,10 +49,10 @@ export const Home = ({navigation}) => {
       setCurrentRestaurant(tempRestaurant);
     }
   };
-  const reFresh = async () => {
+  const reFresh = async() => {
     setIsFetching(true);
     const response = await dispatch(PopulateRestaurantList());
-    const {payload} = response;
+    const { payload } = response;
     if (!payload.result) {
       Alert.alert(
         payload.data,
@@ -57,7 +63,7 @@ export const Home = ({navigation}) => {
             onPress: goBack,
           },
         ],
-        {cancelable: false},
+        { cancelable: false },
       );
     }
     setIsFetching(false);
@@ -81,13 +87,10 @@ export const Home = ({navigation}) => {
     setCurrentRestaurant(restaurant);
   };
   const logOut = () => {
-    firebase
-      .auth()
-      .signOut()
-      .then(
-        () => navigation.navigate(routes.LOGIN),
-        () => Alert.alert('error logging out'),
-      );
+    firebase.auth().signOut().then(
+      () => navigation.navigate(routes.LOGIN),
+      () => Alert.alert('error logging out'),
+    );
   };
   const openMenu = () => setOpenMenu(!isOpenMenu);
   const closeModal = () => setOpenMenu(false);
@@ -108,7 +111,7 @@ export const Home = ({navigation}) => {
   };
   const goToRestaurant = id => {
     resetHome();
-    navigation.navigate(routes.RESTAURANT, {id});
+    navigation.navigate(routes.RESTAURANT, { id });
   };
   const props = {
     selectedTypes,

@@ -13,7 +13,7 @@ import {firebase} from '../../../../src/firebase/config';
 import {getCurrentRestaurant} from '../../../store/selector';
 import {SetupMenuComponents} from './components';
 import {routes} from '../../../navigation/routes';
-import {generateSecureRandom} from 'react-native-securerandom';
+import {v4 as uuid} from 'uuid';
 
 export const SetupMenu = ({navigation, route}) => {
   const dispatch = useDispatch();
@@ -85,14 +85,6 @@ export const SetupMenu = ({navigation, route}) => {
   const closeModal = () => setModalVisible(false);
   const closeActionModal = () => setActionModal(false);
   const menuIcon = item => icons[item] ?? icons?.def;
-  const generateId = async () => {
-    // eslint-disable-next-line no-shadow
-    let id = [];
-    await generateSecureRandom(3).then(randomBytes => {
-      id = randomBytes;
-    });
-    return id.join('');
-  };
   const showMenuDetails = item => {
     setSelectedFoodItem(item);
     setIsModalMenuVisible(true);
@@ -155,7 +147,7 @@ export const SetupMenu = ({navigation, route}) => {
       const imageIndex = imageName?.indexOf('media.jpg');
       const name = imageName
         ? imageName.slice(imageIndex - 8, imageIndex) + 'media.jpg'
-        : (await generateId()) + 'media.jpg';
+        : uuid() + 'media.jpg';
       const restaurantName = editorMode
         ? restaurantInfo.restaurant
         : item.restaurant;
@@ -182,10 +174,8 @@ export const SetupMenu = ({navigation, route}) => {
             task.snapshot.ref.getDownloadURL().then(fileUrl => {
               if (folder === 'profile') {
                 resolve({type: 'profile', data: fileUrl});
-                // item.image = fileUrl;
               } else {
                 resolve({type: 'menu', data: fileUrl});
-                // Menu[index].image = fileUrl;
               }
             });
           },
@@ -240,9 +230,10 @@ export const SetupMenu = ({navigation, route}) => {
     const index = foodItemLists.indexOf(initialFoodItem);
     //New restaurant update temp Menu
     if (!editorMode) {
+      const tempMenu = [...Menu];
       const menuIndex = Menu.indexOf(initialFoodItem);
-      Menu[menuIndex] = foodItem;
-      setMenu(Menu);
+      tempMenu[menuIndex] = foodItem;
+      setMenu(tempMenu);
       closeModal();
     }
     //update firestore Menu

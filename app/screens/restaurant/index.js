@@ -1,23 +1,26 @@
-import React, {useEffect, useState} from 'react';
-import {ConstString} from '../../configs/Strings';
-import {useSelector} from 'react-redux';
-import {icons} from '../../configs/Const';
-import {getCurrentRestaurant} from '../../store/selector';
-import {RestaurantComponents} from './components';
-import {routes} from '../../navigation/routes';
+import React, {
+  useEffect,
+  useState,
+} from "react";
+import { ConstString } from "../../configs/Strings";
+import { useSelector } from "react-redux";
+import { icons } from "../../configs/Const";
+import { getCurrentRestaurant } from "../../store/selector";
+import { RestaurantComponents } from "./components";
+import { routes } from "../../navigation/routes";
 
 const categories = [
-  {id: 1, item: ConstString.MAINDISH},
-  {id: 2, item: ConstString.SIDEDISH},
-  {id: 3, item: ConstString.DESSERT},
-  {id: 4, item: ConstString.APPETIZER},
-  {id: 5, item: ConstString.DRINKS},
+  { id: 1, item: ConstString.MAINDISH },
+  { id: 2, item: ConstString.SIDEDISH },
+  { id: 3, item: ConstString.DESSERT },
+  { id: 4, item: ConstString.APPETIZER },
+  { id: 5, item: ConstString.DRINKS },
 ];
 
-export const Restaurant = ({navigation, route}) => {
-  const {id} = route.params || {};
+export const Restaurant = ({ navigation, route }) => {
+  const { id } = route.params || {};
   const restaurantInfo = useSelector(getCurrentRestaurant(id));
-  const {category, food: foodItemList} = restaurantInfo;
+  const { category, food: foodItemList } = restaurantInfo;
   const [foodList, setFoodList] = useState(foodItemList);
   const [isModalVisible, setModalVisible] = useState(false);
   const [foodItem, setFoodItem] = useState();
@@ -46,16 +49,16 @@ export const Restaurant = ({navigation, route}) => {
   const menuIcon = item => icons[item] ?? icons?.def;
   const closeModal = () => setModalVisible(false);
   const openPreviewModal = () => setIsPreview(true);
-  const goToRating = () => navigation.navigate(routes.RATINGS, {id});
+  const goToRating = () => navigation.navigate(routes.RATINGS, { id });
   const onBack = () => navigation.navigate(routes.HOME);
-  const onPressFloatingButton = ({item: action}) => {
+  const onPressFloatingButton = ({ item: action }) => {
     //If edit then go to Edit Restaurant general Information
     if (action === ConstString.EDIT) {
-      return navigation.navigate(routes.REGISTER, {id});
+      return navigation.navigate(routes.REGISTER, { id });
     }
 
     //else go to Edit Menu Page
-    navigation.navigate(routes.MENU, {id});
+    navigation.navigate(routes.MENU, { id });
   };
   //Search
   const onChangeText = text => {

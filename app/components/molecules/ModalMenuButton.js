@@ -1,35 +1,36 @@
-import React from 'react';
+import React from "react";
 import {
   Dimensions,
   FlatList,
   SafeAreaView,
+  StyleSheet,
   Text,
   TouchableOpacity,
   View,
-  StyleSheet,
-} from 'react-native';
-import Modal from 'react-native-modal';
-import {colors} from '../../configs/Const';
-const {width} = Dimensions.get('window');
+} from "react-native";
+import Modal from "react-native-modal";
+import { colors } from "../../configs/Const";
 
-export const ModalMenuButton = ({isModalVisible, onPress, closeModal}) => {
+const { width } = Dimensions.get("window");
+
+export const ModalMenuButton = ({ isModalVisible, onPress, closeModal }) => {
   const MENU_OPTIONS = [
     {
       id: 1,
-      title: 'Register New Restaurant',
+      title: "Register New Restaurant",
     },
     {
       id: 2,
-      title: 'Profile',
+      title: "Profile",
     },
     {
       id: 3,
-      title: 'Log Out',
+      title: "Log Out",
     },
   ];
   return (
     <>
-      {{isModalVisible} && (
+      {{ isModalVisible } && (
         <SafeAreaView>
           <Modal
             animationType="fade"
@@ -39,7 +40,7 @@ export const ModalMenuButton = ({isModalVisible, onPress, closeModal}) => {
             <View style={styles.modalView}>
               <FlatList
                 data={MENU_OPTIONS}
-                renderItem={({item}) => {
+                renderItem={({ item }) => {
                   return (
                     <TouchableOpacity onPress={() => onPress(item.id)}>
                       <Text style={styles.buttonText}>{item.title}</Text>
@@ -58,17 +59,17 @@ export const ModalMenuButton = ({isModalVisible, onPress, closeModal}) => {
 const styles = StyleSheet.create({
   button: {
     backgroundColor: colors.lightPurple,
-    alignItems: 'center',
+    alignItems: "center",
     padding: 10,
     borderRadius: 10,
-    textTransform: 'uppercase',
+    textTransform: "uppercase",
     marginTop: 15,
   },
   buttonText: {
     fontSize: 16,
     padding: 10,
     color: colors.white,
-    fontWeight: 'normal',
+    fontWeight: "normal",
   },
   image: {
     width: width * 0.7,
@@ -83,7 +84,7 @@ const styles = StyleSheet.create({
   },
   modalView: {
     paddingVertical: 20,
-    justifyContent: 'center',
+    justifyContent: "center",
     radius: 20,
     elevation: 5,
     backgroundColor: colors.secondBg,

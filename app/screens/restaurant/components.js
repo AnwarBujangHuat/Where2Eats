@@ -1,19 +1,19 @@
-import React from 'react';
+import React from "react";
 import {
   FlatList,
   Image,
   SafeAreaView,
+  StyleSheet,
   Text,
   View,
-  StyleSheet,
-} from 'react-native';
-import {DetailsHeader} from '../../components/molecules/DetailsHeader';
-import {DescriptionLabel} from '../../components/molecules/DescriptionLabel';
-import {FoodCard} from '../../components/molecules/FoodCard';
-import {ModalMenuDetails} from '../../components/molecules/ModalMenuDetails';
-import {ModalWinner} from '../../components/molecules/ModalWinner';
-import {ExpandableFloatingButton} from '../../components/atoms/ExpandableFloatingButton';
-import {colors} from '../../configs/Const';
+} from "react-native";
+import { DetailsHeader } from "../../components/molecules/DetailsHeader";
+import { DescriptionLabel } from "../../components/molecules/DescriptionLabel";
+import { FoodCard } from "../../components/molecules/FoodCard";
+import { ModalMenuDetails } from "../../components/molecules/ModalMenuDetails";
+import { ModalWinner } from "../../components/molecules/ModalWinner";
+import { ExpandableFloatingButton } from "../../components/atoms/ExpandableFloatingButton";
+import { colors } from "../../configs/Const";
 
 export const RestaurantComponents = props => {
   const {
@@ -34,8 +34,8 @@ export const RestaurantComponents = props => {
     foodList,
     onChangeText,
   } = props;
-  const {restaurant, address, rate, image} = restaurantInfo;
-  const renderItem = ({item}) => {
+  const { restaurant, address, rate, image } = restaurantInfo;
+  const renderItem = ({ item }) => {
     return (
       <FoodCard
         onPress={() => onPress(item)}
@@ -70,14 +70,14 @@ export const RestaurantComponents = props => {
       <FlatList
         data={selectedCategory}
         keyExtractor={item => item.id}
-        renderItem={({item}) => {
+        renderItem={({ item }) => {
           const category = item.item;
           return (
             <>
               <View
                 style={{
-                  flexDirection: 'row',
-                  alignItems: 'center',
+                  flexDirection: "row",
+                  alignItems: "center",
                   marginBottom: 10,
                 }}>
                 <Text style={styles.header}>{category}</Text>
@@ -122,20 +122,20 @@ const styles = StyleSheet.create({
   },
   header: {
     fontSize: 18,
-    fontWeight: 'bold',
+    fontWeight: "bold",
     margin: 10,
     color: colors.darkPurple,
   },
   fabText: {
     padding: 5,
     color: colors.white,
-    fontWeight: 'bold',
-    alignSelf: 'center',
+    fontWeight: "bold",
+    alignSelf: "center",
     fontSize: 14,
   },
   icon: {
     width: 20,
     height: 20,
-    alignSelf: 'center',
+    alignSelf: "center",
   },
 });

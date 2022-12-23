@@ -1,4 +1,7 @@
-import {createEntityAdapter, createSlice} from '@reduxjs/toolkit';
+import {
+  createEntityAdapter,
+  createSlice,
+} from '@reduxjs/toolkit';
 import {
   addFoodItemFirebase,
   AddOne,
@@ -10,9 +13,8 @@ import {
   updateFoodItemFirebase,
   updateRating,
   updateRestaurantInfoFirestore,
-  updateUserFCM,
 } from './thunks';
-import {ConstString} from '../configs/Strings';
+import { ConstString } from '../configs/Strings';
 
 export const restaurantAdapter = createEntityAdapter({
   sortComparer: (a, b) => a.restaurant.localeCompare(b.restaurant),
@@ -37,35 +39,34 @@ export const Reducer = createSlice({
     restaurantUpdated: restaurantAdapter.updateOne,
   },
   extraReducers: builder => {
-    builder.addCase(PopulateRestaurantList.fulfilled, (state, {payload}) => {
-      const {restaurantList} = payload;
-      // restaurantAdapter.addOne(state.RESTAURANT, defaultValue[0]);
+    builder.addCase(PopulateRestaurantList.fulfilled, (state, { payload }) => {
+      const { restaurantList } = payload;
       restaurantAdapter.upsertMany(state.RESTAURANT, restaurantList);
       return state;
     });
-    builder.addCase(PopulateRestaurantList.rejected, (state, {payload}) => {
+    builder.addCase(PopulateRestaurantList.rejected, (state, { payload }) => {
       //Check if Restaurant List Is Empty
       if (state.RESTAURANT?.length < 0) {
         return restaurantAdapter.addOne(state.RESTAURANT, payload);
       }
       return state;
     });
-    builder.addCase(AddOne.fulfilled, (state, {meta, payload}) => {
-      const {id, data} = payload;
-      const temp = {id: id, ...data};
+    builder.addCase(AddOne.fulfilled, (state, { meta, payload }) => {
+      const { id, data } = payload;
+      const temp = { id: id, ...data };
       restaurantAdapter.addOne(state.RESTAURANT, temp);
       return state;
     });
     builder.addCase(AddOne.rejected, (state, payload) => {
-      console.log({path: 'store-addOne-rejected', state, payload});
+      console.log({ path: 'store-addOne-rejected', state, payload });
     });
-    builder.addCase(changeTheme.fulfilled, (state, {payload}) => {
+    builder.addCase(changeTheme.fulfilled, (state, { payload }) => {
       state.THEME = payload;
       return state;
     });
 
-    builder.addCase(addFoodItemFirebase.fulfilled, (state, {meta, payload}) => {
-      const {id: restaurantId, foodItem} = payload.data;
+    builder.addCase(addFoodItemFirebase.fulfilled, (state, { meta, payload }) => {
+      const { id: restaurantId, foodItem } = payload.data;
       const restaurantFoodList = [
         ...state.RESTAURANT.entities[restaurantId].food,
         foodItem,
@@ -78,11 +79,11 @@ export const Reducer = createSlice({
       });
       return state;
     });
-    builder.addCase(addFoodItemFirebase.rejected, (state, {meta, payload}) => {
-      console.log({path: 'reducer AddFoodItemFirebase', data: 'failed'});
+    builder.addCase(addFoodItemFirebase.rejected, (state, { meta, payload }) => {
+      console.log({ path: 'reducer AddFoodItemFirebase', data: payload });
     });
 
-    builder.addCase(updateRating.fulfilled, (state, {meta, payload}) => {
+    builder.addCase(updateRating.fulfilled, (state, { meta, payload }) => {
       const {
         id: restaurantId,
         avg: rate,
@@ -112,8 +113,8 @@ export const Reducer = createSlice({
     builder.addCase(updateRating.rejected, (state, payload) => {});
     builder.addCase(
       removeFoodItemFirebase.fulfilled,
-      (state, {meta, payload}) => {
-        const {id, index} = payload.data;
+      (state, { meta, payload }) => {
+        const { id, index } = payload.data;
         const foodArray = [...state.RESTAURANT.entities[id].food];
         if (index > -1) {
           foodArray.splice(index, 1);
@@ -128,7 +129,7 @@ export const Reducer = createSlice({
     );
     builder.addCase(
       updateRestaurantInfoFirestore.fulfilled,
-      (state, {meta, payload}) => {
+      (state, { meta, payload }) => {
         const {
           id,
           restaurantName,
@@ -152,25 +153,11 @@ export const Reducer = createSlice({
 
     builder.addCase(
       updateRestaurantInfoFirestore.rejected,
-      (state, {meta, payload}) => {},
+      (state, { meta, payload }) => {},
     );
-    builder.addCase(updateUserFCM.fulfilled, (state, {meta, payload}) => {
-      const {userToken: token, userInformation, userId: uid} = payload.data;
-      const {NAME, AGE, EMAIL, IMAGE} = userInformation;
-      state.FCMTOKEN = token;
-      state.USER = {
-        ID: uid,
-        NAME: NAME,
-        AGE: AGE,
-        EMAIL: EMAIL,
-        IMAGE: IMAGE,
-      };
-      return state;
-    });
-
-    builder.addCase(populateUserData.fulfilled, (state, {meta, payload}) => {
-      const {userInformation, uid} = payload.data;
-      const {NAME, AGE, EMAIL, IMAGE} = userInformation;
+    builder.addCase(populateUserData.fulfilled, (state, { meta, payload }) => {
+      const { userInformation, uid } = payload.data;
+      const { NAME, AGE, EMAIL, IMAGE } = userInformation;
       state.USER = {
         ID: uid,
         NAME: NAME,
@@ -182,13 +169,13 @@ export const Reducer = createSlice({
     });
 
     builder.addCase(removeFoodItemFirebase.rejected, (state, payload) => {
-      console.log({path: 'store-removeOne-rejected', state, payload});
+      console.log({ path: 'store-removeOne-rejected', payload });
     });
 
     builder.addCase(
       updateFoodItemFirebase.fulfilled,
-      (state, {meta, payload}) => {
-        const {id: restaurantId, foodItem, index} = payload.data;
+      (state, { meta, payload }) => {
+        const { id: restaurantId, foodItem, index } = payload.data;
         const foodItemList = [...state.RESTAURANT.entities[restaurantId].food];
         let updatedFoodItemList = foodItemList;
         //if Exist then Replace
@@ -209,8 +196,8 @@ export const Reducer = createSlice({
     );
     builder.addCase(updateFoodItemFirebase.rejected, (state, payload) => {});
 
-    builder.addCase(rememberMe.fulfilled, (state, {meta, payload}) => {
-      const {EMAIL, PASSWORD} = payload;
+    builder.addCase(rememberMe.fulfilled, (state, { meta, payload }) => {
+      const { EMAIL, PASSWORD } = payload;
       state.PASSWORD = PASSWORD;
       state.EMAIL = EMAIL;
 

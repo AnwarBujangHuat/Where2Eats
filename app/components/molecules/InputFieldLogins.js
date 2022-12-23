@@ -1,7 +1,12 @@
-import {Image, TextInput, View, StyleSheet} from 'react-native';
-import React from 'react';
-import {colors} from '../../configs/Const';
-import {GStyles} from '../../Styles';
+import {
+  Image,
+  StyleSheet,
+  TextInput,
+  View,
+} from "react-native";
+import React from "react";
+import { colors } from "../../configs/Const";
+import { GStyles } from "../../Styles";
 
 export const InputFieldLogins = ({
   testID,
@@ -19,7 +24,7 @@ export const InputFieldLogins = ({
         style={styles.input}
         placeholder={hint}
         value={defvalue}
-        clearButtonMode={'while-editing'}
+        clearButtonMode={"while-editing"}
         onChangeText={text => onChangeText1(text)}
         overflow="hidden"
         placeholderTextColor={colors.white}
@@ -35,26 +40,26 @@ const styles = StyleSheet.create({
   section: {
     backgroundColor: colors.bg,
     ...GStyles.shadowContainer,
-    flexDirection: 'row',
+    flexDirection: "row",
     borderRadius: 10,
     marginVertical: 10,
   },
   input: {
     fontSize: 14,
-    fontWeight: 'normal',
+    fontWeight: "normal",
     marginHorizontal: 10,
-    textAlignVertical: 'center',
+    textAlignVertical: "center",
     backgroundColor: colors.secondBg,
     marginVertical: 2,
     paddingTop: 15,
     paddingRight: 15,
     paddingBottom: 15,
     paddingLeft: 0,
-    width: '80%',
+    width: "80%",
   },
   icons: {
-    flexDirection: 'row',
-    alignSelf: 'center',
+    flexDirection: "row",
+    alignSelf: "center",
     tintColor: colors.primary,
     height: 25,
     width: 25,

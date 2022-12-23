@@ -1,4 +1,3 @@
-import {ConstString} from '../configs/Strings';
 import {
   Home,
   Login,
@@ -9,14 +8,14 @@ import {
   Restaurant,
   SetupMenu,
   WheelOfFortune,
-} from '../screens';
-import * as React from 'react';
-import {createStackNavigator} from '@react-navigation/stack';
-import {routes} from './routes';
+} from "../screens";
+import * as React from "react";
+import { createStackNavigator } from "@react-navigation/stack";
+import { routes } from "./routes";
 
 const Stack = createStackNavigator();
 export const NavStack = () => {
-  const forFade = ({current}) => ({
+  const forFade = ({ current }) => ({
     cardStyle: {
       opacity: current.progress,
     },
@@ -34,7 +33,7 @@ export const NavStack = () => {
         name={routes.MODAL}
         component={ModalScreen}
         options={{
-          presentation: 'transparentModal',
+          presentation: "transparentModal",
           cardStyleInterpolator: forFade,
         }}
       />

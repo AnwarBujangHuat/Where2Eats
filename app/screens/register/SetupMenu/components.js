@@ -4,23 +4,23 @@ import {
   FlatList,
   Image,
   SafeAreaView,
+  StyleSheet,
   Text,
   TouchableOpacity,
   View,
-  StyleSheet,
 } from 'react-native';
-import {BackButton} from '../../../components/atoms/BackButton';
-import {ConstString} from '../../../configs/Strings';
-import SelectBox from 'react-native-multi-selectbox';
-import {xorBy} from 'lodash';
+import { BackButton } from '../../../components/atoms/BackButton';
+import { ConstString } from '../../../configs/Strings';
+import { xorBy } from 'lodash';
 import addIcon from '../../../assets/plus.png';
-import {ModalMenu} from '../../../components/molecules/ModalMenu';
-import {ModalUploading} from '../../../components/molecules/ModalUploading';
-import {ModalMenuDetails} from '../../../components/molecules/ModalMenuDetails';
-import {FoodCard} from '../../../components/molecules/FoodCard';
-import {SearchButton} from '../../../components/atoms/SearchButton';
-import {GStyles} from '../../../Styles';
-import {colors} from '../../../configs/Const';
+import { ModalMenu } from '../../../components/molecules/ModalMenu';
+import { ModalUploading } from '../../../components/molecules/ModalUploading';
+import { ModalMenuDetails } from '../../../components/molecules/ModalMenuDetails';
+import { FoodCard } from '../../../components/molecules/FoodCard';
+import { SearchButton } from '../../../components/atoms/SearchButton';
+import { GStyles } from '../../../Styles';
+import { colors } from '../../../configs/Const';
+import MultiPickerBox from '../../../components/molecules/MultiPickerBox';
 
 export const SetupMenuComponents = props => {
   const {
@@ -53,7 +53,7 @@ export const SetupMenuComponents = props => {
     foodList,
     action,
   } = props;
-  const renderItem = ({item}) => {
+  const renderItem = ({ item }) => {
     return (
       <FoodCard
         onPress={() => showMenuDetails(item)}
@@ -70,9 +70,9 @@ export const SetupMenuComponents = props => {
   const renderMenu = category => {
     return editorMode
       ? //if Restaurant Exist and in Editor Mode then filter existing MENU
-        foodList.filter(foods => foods.category === category)
+      foodList.filter(foods => foods.category === category)
       : //First time Create and not Editor Mode then show temp menu
-        Menu.filter(foods => foods.category === category);
+      Menu.filter(foods => foods.category === category);
   };
   const renderSelectedCategory = () => {
     //Sort Category based on id to maintain order {Main Dish, Side Dish, Dessert, Appetizer, Drinks }
@@ -104,7 +104,7 @@ export const SetupMenuComponents = props => {
         Add Category
       </Text>
       <View style={styles.inputContainer}>
-        <SelectBox
+        <MultiPickerBox
           textColor={colors.white}
           label="Select Menu Category"
           options={categories}
@@ -124,7 +124,7 @@ export const SetupMenuComponents = props => {
           multiOptionContainerStyle={{
             backgroundColor: colors.primary,
           }}
-          multiOptionsLabelStyle={{fontSize: 16, color: colors.white}}
+          multiOptionsLabelStyle={{ fontSize: 16, color: colors.white }}
           selectedItemStyle={{
             fontSize: 16,
             color: colors.white,
@@ -138,8 +138,8 @@ export const SetupMenuComponents = props => {
       <FlatList
         data={renderSelectedCategory()}
         keyExtractor={item => item.id}
-        style={{marginTop: 10}}
-        renderItem={({item}) => {
+        style={{ marginTop: 10 }}
+        renderItem={({ item }) => {
           const category = item.item;
           return (
             <>
@@ -161,7 +161,7 @@ export const SetupMenuComponents = props => {
                   <TouchableOpacity
                     style={styles.buttonContainer}
                     onPress={() => {
-                      onPressAdd({item: category});
+                      onPressAdd({ item: category });
                     }}>
                     <Image style={styles.addIcon} source={addIcon} />
                     <Text

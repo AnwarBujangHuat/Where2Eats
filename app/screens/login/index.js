@@ -14,7 +14,6 @@ import {
 import {GoogleSignin} from '../../../src/SignInOption/config';
 import {getInfo} from '../../store/selector';
 import {routes} from '../../navigation/routes';
-// import { getAuth } from 'firebase-admin/auth';
 
 export const Login = ({navigation}) => {
   const {EMAIL, PASSWORD} = useSelector(getInfo);
@@ -35,12 +34,7 @@ export const Login = ({navigation}) => {
     ]);
   };
   const populateUser = async ({uid, userInformation}) => {
-    //Uploading Record to Firestore
-    const {payload} = await dispatch(populateUserData({uid, userInformation}));
-    const {result, data} = payload;
-    if (!result) {
-      return showErrorAlert(data);
-    }
+    dispatch(populateUserData({uid, userInformation}));
     goToModal();
   };
   const verifyUser = async () => {

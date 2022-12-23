@@ -1,21 +1,27 @@
 import * as React from 'react';
-import {useEffect} from 'react';
-import {Alert, Dimensions, SafeAreaView, StyleSheet} from 'react-native';
-import {PopulateRestaurantList} from '../../store/thunks';
-import {useDispatch} from 'react-redux';
+import { useEffect } from 'react';
+import {
+  Alert,
+  Dimensions,
+  SafeAreaView,
+  StyleSheet,
+} from 'react-native';
+import { PopulateRestaurantList } from '../../store/thunks';
+import { useDispatch } from 'react-redux';
 import LottieView from 'lottie-react-native';
 import Welcome from '../../assets/welcome.json';
 import TestIDs from '../../../e2e/TestIDs';
-import {routes} from '../../navigation/routes';
-import {colors} from '../../configs/Const';
+import { routes } from '../../navigation/routes';
+import { colors } from '../../configs/Const';
 
-const {width} = Dimensions.get('window');
+const { width } = Dimensions.get('window');
 
-export const ModalScreen = ({navigation}) => {
+export const ModalScreen = ({ navigation }) => {
   const dispatch = useDispatch();
-  const fetch = async () => {
+
+  const fetch = async() => {
     const response = await dispatch(PopulateRestaurantList());
-    const {payload} = response;
+    const { payload } = response;
     if (!payload.result) {
       return Alert.alert(
         'Opps',
@@ -26,12 +32,11 @@ export const ModalScreen = ({navigation}) => {
             onPress: () => navigation.navigate(routes.LOGIN),
           },
         ],
-        {cancelable: true},
+        { cancelable: true },
       );
     }
     setTimeout(() => navigation.navigate(routes.HOME), 1000);
   };
-
   useEffect(() => {
     fetch().then();
   }, []);

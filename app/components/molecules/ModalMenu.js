@@ -1,23 +1,23 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import {
   Alert,
   Dimensions,
   Image,
   SafeAreaView,
+  StyleSheet,
   Text,
   TextInput,
   TouchableOpacity,
   View,
-  StyleSheet,
 } from 'react-native';
 import Modal from 'react-native-modal';
 import addIcon from '../../assets/plus.png';
-import {ConstString} from '../../configs/Strings';
-import {launchImagePicker} from '../../ImagePicker';
-import {colors} from '../../configs/Const';
-import {GStyles} from '../../Styles';
+import { ConstString } from '../../configs/Strings';
+import { launchImagePicker } from '../../ImagePicker';
+import { colors } from '../../configs/Const';
+import { GStyles } from '../../Styles';
 
-const {width} = Dimensions.get('window');
+const { width } = Dimensions.get('window');
 export const ModalMenu = ({
   Category,
   isModalVisible,
@@ -34,20 +34,20 @@ export const ModalMenu = ({
     !Category ? foodItem.image : undefined,
   );
   let reUpload = false;
-  const showErrorAlert = ({message}) => {
-    Alert.alert('Error', message, [{text: 'Okay'}], {cancelable: true});
+  const showErrorAlert = ({ message }) => {
+    Alert.alert('Error', message, [{ text: 'Okay' }], { cancelable: true });
   };
-  const launchImageLibrary = async () => {
-    const response = await launchImagePicker();
+  const launchImageLibrary = async() => {
+    const { result } = await launchImagePicker();
     //* Exit if response empty *//
-    if (!response) {
+    if (!result) {
       return showErrorAlert({
         message: 'Please Pick Image in JPG or PNG format',
       });
     }
 
     //* Exit if there's error *//
-    const {errorCode, assets} = response;
+    const { errorCode, assets } = result;
     if (errorCode || assets === []) {
       return showErrorAlert({
         message: 'Please Pick Image in JPG or PNG format',
@@ -65,11 +65,11 @@ export const ModalMenu = ({
       imageUri === undefined ||
       itemPrice === ''
     ) {
-      return showErrorAlert({message: 'Please Complete Input'});
+      return showErrorAlert({ message: 'Please Complete Input' });
     }
 
     if (/[a-zA-Z]/.test(itemPrice)) {
-      return showErrorAlert({message: 'Please Ensure Price is Only Numbers'});
+      return showErrorAlert({ message: 'Please Ensure Price is Only Numbers' });
     }
 
     const newItem = {
@@ -90,7 +90,7 @@ export const ModalMenu = ({
   };
   return (
     <>
-      {{isModalVisible} && (
+      {{ isModalVisible } && (
         <SafeAreaView style={styles.screen}>
           <Modal
             animationType="slide"
@@ -144,7 +144,7 @@ export const ModalMenu = ({
                   <Image style={styles.icons} source={addIcon} />
                 ) : (
                   <View>
-                    <Image style={styles.image} source={{uri: imageUri}} />
+                    <Image style={styles.image} source={{ uri: imageUri }} />
                     <Text style={styles.changeButton}>Change Image</Text>
                   </View>
                 )}
@@ -170,7 +170,7 @@ const styles = StyleSheet.create({
     padding: 5,
   },
   button: {
-    backgroundColor: colors.lightPurple,
+    backgroundColor: colors.primary,
     alignItems: 'center',
     padding: 10,
     borderRadius: 10,
@@ -184,6 +184,7 @@ const styles = StyleSheet.create({
   },
   container: {
     ...GStyles.shadowContainer,
+    backgroundColor: colors.primary,
     alignSelf: 'flex-start',
     borderRadius: 10,
     marginTop: 10,
@@ -207,12 +208,12 @@ const styles = StyleSheet.create({
   },
 
   modalView: {
+    ...GStyles.shadowContainer,
     padding: 20,
     justifyContent: 'center',
     position: 'absolute',
     alignSelf: 'center',
     width: width * 0.9,
-    backgroundColor: colors.bg,
     borderRadius: 7,
   },
   textInput: {
@@ -232,7 +233,7 @@ const styles = StyleSheet.create({
     fontSize: 16,
     fontWeight: 'bold',
     color: colors.lightPurple,
-    shadowOffset: {width: -2, height: 1},
+    shadowOffset: { width: -2, height: 1 },
     shadowColor: colors.primary,
     shadowOpacity: 0.1,
     shadowRadius: 2,

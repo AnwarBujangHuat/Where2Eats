@@ -1,9 +1,12 @@
-import React from 'react';
+import React from "react";
 
-import {TextInput, StyleSheet} from 'react-native';
-import {colors} from '../../configs/Const';
+import {
+  StyleSheet,
+  TextInput,
+} from "react-native";
+import { colors } from "../../configs/Const";
 
-export const InputField = ({placeholder, multiline, onChange, value}) => {
+export const InputField = ({ placeholder, multiline, onChange, value }) => {
   return (
     <TextInput
       style={styles.input}
@@ -22,12 +25,12 @@ export const InputField = ({placeholder, multiline, onChange, value}) => {
 const styles = StyleSheet.create({
   input: {
     fontSize: 14,
-    fontWeight: 'normal',
+    fontWeight: "normal",
     borderWidth: 1,
     paddingHorizontal: 5,
     borderBottomColor: colors.primary,
     borderColor: colors.secondBg,
-    textAlignVertical: 'center',
+    textAlignVertical: "center",
     backgroundColor: colors.secondBg,
     borderRadius: 5,
     paddingVertical: 15,

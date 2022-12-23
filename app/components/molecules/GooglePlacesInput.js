@@ -1,11 +1,11 @@
-import React from 'react';
-import {GooglePlacesAutocomplete} from 'react-native-google-places-autocomplete';
-import {Dimensions} from 'react-native';
-import {apiKey} from '../../../secret';
+import React from "react";
+import { GooglePlacesAutocomplete } from "react-native-google-places-autocomplete";
+import { Dimensions } from "react-native";
+import { apiKey } from "../../../secret";
 
-const {width} = Dimensions.get('window');
+const { width } = Dimensions.get("window");
 
-const GooglePlacesInput = ({onResult}) => {
+const GooglePlacesInput = ({ onResult }) => {
   return (
     <GooglePlacesAutocomplete
       styles={{
@@ -14,14 +14,14 @@ const GooglePlacesInput = ({onResult}) => {
         },
         textInput: {
           height: 38,
-          color: '#5d5d5d',
+          color: "#5d5d5d",
           fontSize: 16,
         },
       }}
       placeholder="Searches"
       fetchDetails={true}
       onPress={(data, details = false) => {
-        onResult({data: data, details: details});
+        onResult({ data: data, details: details });
       }}
       query={{
         key: apiKey,

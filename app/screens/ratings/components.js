@@ -3,21 +3,21 @@ import {
   FlatList,
   Image,
   SafeAreaView,
+  StyleSheet,
   Text,
   TouchableOpacity,
   View,
-  StyleSheet,
-} from 'react-native';
-import {Rating} from 'react-native-ratings';
-import React from 'react';
-import {BackButton} from '../../components/atoms/BackButton';
-import {RatingCard} from '../../components/molecules/RatingCard';
-import addIcon from '../../assets/plus.png';
-import {ModalGiveRating} from '../../components/molecules/ModalGiveRating';
-import {BarChart} from 'react-native-chart-kit';
-import {RatingButton} from '../../components/atoms/RatingButton';
-import {colors} from '../../configs/Const';
-import {GStyles} from '../../Styles';
+} from "react-native";
+import { Rating } from "react-native-ratings";
+import React from "react";
+import { BackButton } from "../../components/atoms/BackButton";
+import { RatingCard } from "../../components/molecules/RatingCard";
+import addIcon from "../../assets/plus.png";
+import { ModalGiveRating } from "../../components/molecules/ModalGiveRating";
+import { BarChart } from "react-native-chart-kit";
+import { RatingButton } from "../../components/atoms/RatingButton";
+import { colors } from "../../configs/Const";
+import { GStyles } from "../../Styles";
 
 export const RatingComponents = props => {
   const {
@@ -36,8 +36,8 @@ export const RatingComponents = props => {
     onSelectedRating,
     isSelectedRating,
   } = props;
-  const {rating} = restaurantInfo;
-  const RenderItem = ({item}) => {
+  const { rating } = restaurantInfo;
+  const RenderItem = ({ item }) => {
     return (
       <RatingButton
         rating={item}
@@ -46,7 +46,7 @@ export const RatingComponents = props => {
       />
     );
   };
-  const renderRateCard = ({item}) => {
+  const renderRateCard = ({ item }) => {
     return <RatingCard userReview={item} />;
   };
   const SelfReview = () => {
@@ -61,15 +61,15 @@ export const RatingComponents = props => {
       <View style={styles.rowContainer}>
         <BackButton onPress={onBackButton} />
         <Text style={styles.header}>
-          {restaurantInfo.restaurant + ' Customer Review'}
+          {restaurantInfo.restaurant + " Customer Review"}
         </Text>
       </View>
-      <View style={{marginHorizontal: 15}}>
-        <View style={{flexDirection: 'row'}}>
+      <View style={{ marginHorizontal: 15 }}>
+        <View style={{ flexDirection: "row" }}>
           <View
             style={{
-              alignSelf: 'center',
-              alignContent: 'center',
+              alignSelf: "center",
+              alignContent: "center",
               paddingRight: 30,
             }}>
             <Text style={styles.rating}> {isCurrentRating.toFixed(1)}</Text>
@@ -80,25 +80,25 @@ export const RatingComponents = props => {
               readonly={true}
               showReadOnlyText={false}
               tintColor={colors.bg}
-              style={{paddingStart: 10}}
+              style={{ paddingStart: 10 }}
               imageSize={18}
               ratingTextColor={colors.white}
             />
-            <View style={{paddingStart: 10}}>
+            <View style={{ paddingStart: 10 }}>
               <Text
                 style={{
                   fontSize: 12,
                   color: colors.white,
                   paddingVertical: 5,
-                  alignSelf: 'flex-start',
+                  alignSelf: "flex-start",
                 }}>
-                {rating?.length + ' Reviews'}
+                {rating?.length + " Reviews"}
               </Text>
             </View>
           </View>
           <BarChart
             style={{
-              transform: [{rotate: '90deg'}],
+              transform: [{ rotate: "90deg" }],
               marginStart: 30,
               paddingRight: 0,
             }}
@@ -111,9 +111,9 @@ export const RatingComponents = props => {
               ],
             }}
             chartConfig={{
-              backgroundGradientFrom: 'transparent',
+              backgroundGradientFrom: "transparent",
               backgroundGradientFromOpacity: 0,
-              backgroundGradientTo: 'transparent',
+              backgroundGradientTo: "transparent",
               fillShadowGradient: colors.white,
               fillShadowGradientFrom: colors.white,
               fillShadowGradientFromOpacity: 1,
@@ -136,19 +136,19 @@ export const RatingComponents = props => {
           />
         </View>
 
-        <View style={{flexDirection: 'row', marginBottom: 10}}>
+        <View style={{ flexDirection: "row", marginBottom: 10 }}>
           <Text style={styles.header}>Your Review</Text>
           <TouchableOpacity style={styles.buttonContainer} onPress={openModal}>
             <Image style={styles.addIcon} source={addIcon} />
             <Text
               style={{
                 padding: 5,
-                color: 'white',
-                fontWeight: 'bold',
-                alignSelf: 'center',
+                color: "white",
+                fontWeight: "bold",
+                alignSelf: "center",
                 fontSize: 12,
               }}>
-              {!isFirstTimeRate ? 'Update Review' : 'Add Review'}
+              {!isFirstTimeRate ? "Update Review" : "Add Review"}
             </Text>
           </TouchableOpacity>
         </View>
@@ -157,7 +157,7 @@ export const RatingComponents = props => {
           data={ratingChipButton}
           renderItem={RenderItem}
           horizontal={true}
-          style={{marginVertical: 5}}
+          style={{ marginVertical: 5 }}
           showsHorizontalScrollIndicator={false}
         />
         <FlatList
@@ -189,18 +189,18 @@ const styles = StyleSheet.create({
   icon: {
     width: 25,
     height: 25,
-    alignSelf: 'center',
+    alignSelf: "center",
   },
   addIcon: {
     width: 10,
     height: 10,
     marginStart: 5,
-    alignSelf: 'center',
+    alignSelf: "center",
   },
   header: {
     fontSize: 17,
-    fontWeight: 'bold',
-    alignSelf: 'center',
+    fontWeight: "bold",
+    alignSelf: "center",
     color: colors.primary,
   },
   rating: {
@@ -209,48 +209,48 @@ const styles = StyleSheet.create({
   },
   reviewHeader: {
     fontSize: 18,
-    fontWeight: 'bold',
+    fontWeight: "bold",
     color: colors.white,
   },
   button: {
     backgroundColor: colors.lightPurple,
-    alignItems: 'center',
+    alignItems: "center",
     padding: 12,
     borderRadius: 10,
-    width: Dimensions.get('screen').width - 30,
-    textTransform: 'uppercase',
-    alignSelf: 'center',
+    width: Dimensions.get("screen").width - 30,
+    textTransform: "uppercase",
+    alignSelf: "center",
   },
   title: {
     fontSize: 16,
-    fontWeight: 'bold',
-    textAlign: 'center',
+    fontWeight: "bold",
+    textAlign: "center",
     color: colors.white,
-    alignSelf: 'center',
+    alignSelf: "center",
     marginStart: 10,
   },
   rowContainer: {
     marginTop: 10,
-    flexDirection: 'row',
-    alignContent: 'center',
+    flexDirection: "row",
+    alignContent: "center",
   },
   ratingContainer: {
-    alignSelf: 'center',
-    alignItems: 'center',
+    alignSelf: "center",
+    alignItems: "center",
     backgroundColor: colors.white,
-    alignContent: 'center',
+    alignContent: "center",
   },
   reviewText: {
     fontSize: 14,
     color: colors.white,
-    fontWeight: 'bold',
+    fontWeight: "bold",
   },
   buttonContainer: {
     ...GStyles.shadowContainer,
     padding: 5,
-    flexDirection: 'row',
+    flexDirection: "row",
     borderRadius: 20,
     right: 0,
-    position: 'absolute',
+    position: "absolute",
   },
 });

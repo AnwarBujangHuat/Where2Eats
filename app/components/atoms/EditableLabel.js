@@ -1,10 +1,15 @@
-import {StyleSheet, Image, Text, TouchableOpacity, View} from 'react-native';
-import React from 'react';
-import editIcon from '../../assets/editing.png';
-import {colors} from '../../configs/Const';
-import {GStyles} from '../../Styles';
+import {
+  Image,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
+} from "react-native";
+import React from "react";
+import editIcon from "../../assets/editing.png";
+import { colors } from "../../configs/Const";
 
-export const EditableLabel = ({onPress, title, information, icon}) => {
+export const EditableLabel = ({ onPress, title, information, icon }) => {
   return (
     <View>
       <View style={styles.label}>
@@ -39,16 +44,16 @@ const styles = StyleSheet.create({
   },
   textContainer: {
     paddingStart: 10,
-    width: '80%',
-    alignContent: 'center',
+    width: "80%",
+    alignContent: "center",
   },
   label: {
-    flexDirection: 'row',
+    flexDirection: "row",
     minHeight: 80,
     borderRadius: 5,
     padding: 10,
     marginHorizontal: 10,
-    alignItems: 'center',
+    alignItems: "center",
     backgroundColor: colors.bg,
   },
 });

@@ -3,19 +3,15 @@ import {
   FlatList,
   Image,
   SafeAreaView,
-  Text,
+  StyleSheet,
   Text as RNText,
   TouchableOpacity,
   View,
-  StyleSheet,
 } from 'react-native';
 import {BackButton} from '../../components/atoms/BackButton';
 import personIcon from '../../assets/programmer.png';
 import {EditableLabel} from '../../components/atoms/EditableLabel';
 import {ModalEdit} from '../../components/molecules/ModalEdit';
-import {firebase} from '../../../src/firebase/config';
-import {defaultValue} from '../../store/defaultValue';
-import {ConstString} from '../../configs/Strings';
 import {colors} from '../../configs/Const';
 
 export const ProfileComponents = props => {
@@ -29,15 +25,6 @@ export const ProfileComponents = props => {
     onDone,
     setUpdatedInfo,
   } = props;
-  // const onPress = () => {
-  //   const db = firebase.firestore();
-  //   const batch = db.batch();
-  //   defaultValue.forEach(doc => {
-  //     const docRef = db.collection(ConstString.RESTAURANT).doc(); //automatically generate unique id
-  //     batch.set(docRef, doc);
-  //   });
-  //   batch.commit().then(() => console.log('Congrats'));
-  // };
   return (
     <SafeAreaView style={styles.backGround}>
       <View style={styles.rowContainer}>
@@ -65,22 +52,6 @@ export const ProfileComponents = props => {
           }}
           showsHorizontalScrollIndicator={false}
         />
-        {/*<TouchableOpacity*/}
-        {/*  style={{*/}
-        {/*    backgroundColor: colors.primary,*/}
-        {/*    alignContent: 'center',*/}
-        {/*    alignSelf: 'center',*/}
-        {/*    padding: 20,*/}
-        {/*    borderRadius: 20,*/}
-        {/*    marginTop: 20,*/}
-        {/*  }}*/}
-        {/*  onPress={onPress}*/}
-        {/*  disabled={true}>*/}
-        {/*  <Text*/}
-        {/*    style={{color: colors.white, fontSize: 16, alignSelf: 'center'}}>*/}
-        {/*    My Intern is Too Lazy*/}
-        {/*  </Text>*/}
-        {/*</TouchableOpacity>*/}
       </View>
       {isModalVisible && (
         <ModalEdit

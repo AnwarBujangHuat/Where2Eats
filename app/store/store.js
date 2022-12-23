@@ -1,7 +1,9 @@
-import {configureStore, getDefaultMiddleware} from '@reduxjs/toolkit';
+import {
+  configureStore,
+} from '@reduxjs/toolkit';
 import Reducer from '../store/reducer';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import {persistReducer} from 'redux-persist';
+import { persistReducer } from 'redux-persist';
 import autoMergeLevel1 from 'reduxjs-toolkit-persist/lib/stateReconciler/autoMergeLevel1';
 
 import {
@@ -24,9 +26,8 @@ export default configureStore({
   reducer: {
     restaurant: _persistedReducer,
   },
-  middleware: getDefaultMiddleware({
+  middleware: (getDefaultMiddleware) => getDefaultMiddleware({
     serializableCheck: {
-      /* ignore persistance actions */
       ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
     },
   }),

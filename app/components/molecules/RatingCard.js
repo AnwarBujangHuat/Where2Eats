@@ -1,35 +1,40 @@
-import * as React from 'react';
-import {Dimensions, Text, View, StyleSheet} from 'react-native';
-import FastImage from 'react-native-fast-image';
-import defaultAvatar from '../../assets/programmer.png';
-import {RateLabel} from '../atoms/RateLabel';
-import {GStyles} from '../../Styles';
-import {colors} from '../../configs/Const';
+import * as React from "react";
+import {
+  Dimensions,
+  StyleSheet,
+  Text,
+  View,
+} from "react-native";
+import FastImage from "react-native-fast-image";
+import defaultAvatar from "../../assets/programmer.png";
+import { RateLabel } from "../atoms/RateLabel";
+import { GStyles } from "../../Styles";
+import { colors } from "../../configs/Const";
 
-export const RatingCard = ({userReview}) => {
+export const RatingCard = ({ userReview }) => {
   const image = undefined;
-  const {userName, review, rating, createdAt, updatedAt} = userReview || {};
+  const { userName, review, rating, createdAt, updatedAt } = userReview || {};
   return (
     <View style={styles.container}>
       <View
-        style={{flexDirection: 'row', alignItems: 'center', marginStart: 5}}>
+        style={{ flexDirection: "row", alignItems: "center", marginStart: 5 }}>
         <FastImage
           source={
             image
               ? {
-                  uri: image,
-                  priority: FastImage.priority.high,
-                }
+                uri: image,
+                priority: FastImage.priority.high,
+              }
               : defaultAvatar
           }
           style={styles.userImage}
         />
-        <View style={{flexDirection: 'column', width: '65%'}}>
+        <View style={{ flexDirection: "column", width: "65%" }}>
           <Text style={styles.title}>{userName}</Text>
           <Text style={styles.timestampText}>
-            {updatedAt !== ''
-              ? 'Updated At: ' + updatedAt
-              : 'Created At: ' + createdAt}
+            {updatedAt !== ""
+              ? "Updated At: " + updatedAt
+              : "Created At: " + createdAt}
           </Text>
         </View>
         <RateLabel rating={rating} />
@@ -42,10 +47,10 @@ export const RatingCard = ({userReview}) => {
 };
 const styles = StyleSheet.create({
   container: {
-    justifyContent: 'center',
+    justifyContent: "center",
     ...GStyles.shadowContainer,
     marginVertical: 10,
-    width: Dimensions.get('screen').width - 35,
+    width: Dimensions.get("screen").width - 35,
     maxHeight: 170,
   },
   descriptionContainer: {
@@ -59,7 +64,7 @@ const styles = StyleSheet.create({
   desc: {
     color: colors.white,
     paddingTop: 5,
-    textAlign: 'justify',
+    textAlign: "justify",
     fontSize: 14,
   },
   title: {
@@ -72,6 +77,6 @@ const styles = StyleSheet.create({
     marginBottom: 5,
     marginHorizontal: 10,
     borderRadius: 20,
-    resizeMode: 'contain',
+    resizeMode: "contain",
   },
 });

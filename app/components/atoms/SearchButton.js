@@ -1,25 +1,25 @@
 import {
   Dimensions,
   Image,
+  StyleSheet,
   TextInput,
   TouchableOpacity,
-  StyleSheet,
-} from 'react-native';
-import React from 'react';
-import searchIcon from '../../assets/search.png';
-import {colors} from '../../configs/Const';
-import {GStyles} from '../../Styles';
+} from "react-native";
+import React from "react";
+import searchIcon from "../../assets/search.png";
+import { colors } from "../../configs/Const";
+import { GStyles } from "../../Styles";
 
-const {width} = Dimensions.get('window');
+const { width } = Dimensions.get("window");
 
-export const SearchButton = ({onPress, onChangeText, onSearch}) => {
+export const SearchButton = ({ onPress, onChangeText, onSearch }) => {
   return (
     <TouchableOpacity style={styles.container} onPress={onPress}>
       <Image style={styles.icons} source={searchIcon} />
       {onSearch && (
         <TextInput
           style={styles.input}
-          placeholder={'Search....'}
+          placeholder={"Search...."}
           onChangeText={text => onChangeText(text)}
           color={colors.white}
           placeholderTextColor={colors.white}
@@ -33,9 +33,9 @@ export const SearchButton = ({onPress, onChangeText, onSearch}) => {
 const styles = StyleSheet.create({
   container: {
     backgroundColor: colors.secondBg,
-    flexDirection: 'row',
+    flexDirection: "row",
     borderRadius: 20,
-    alignItems: 'center',
+    alignItems: "center",
     padding: 10,
     paddingHorizontal: 10,
     marginStart: 10,

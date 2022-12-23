@@ -1,22 +1,22 @@
-import React from 'react';
+import React from "react";
 import {
   Dimensions,
   SafeAreaView,
+  StyleSheet,
   Text,
   TouchableOpacity,
   View,
-  StyleSheet,
-} from 'react-native';
-import LottieView from 'lottie-react-native';
-import Modal from 'react-native-modal';
+} from "react-native";
+import LottieView from "lottie-react-native";
+import Modal from "react-native-modal";
 
-import Uploading from '../../assets/uploading.json';
-import Sleepy from '../../assets/sleepycat.json';
-import {ConstString} from '../../configs/Strings';
-import {colors} from '../../configs/Const';
-import {GStyles} from '../../Styles';
+import Uploading from "../../assets/uploading.json";
+import Sleepy from "../../assets/sleepycat.json";
+import { ConstString } from "../../configs/Strings";
+import { colors } from "../../configs/Const";
+import { GStyles } from "../../Styles";
 
-const {width} = Dimensions.get('window');
+const { width } = Dimensions.get("window");
 let icon;
 let text;
 let showButton = false;
@@ -28,11 +28,11 @@ export const ModalUploading = ({
 }) => {
   if (action === ConstString.GO_BACK) {
     icon = Sleepy;
-    text = 'All Your Progress in This Page Will Be Lost';
+    text = "All Your Progress in This Page Will Be Lost";
     showButton = true;
   } else {
     icon = Uploading;
-    text = 'Please Wait While We Upload your Photos';
+    text = "Please Wait While We Upload your Photos";
     showButton = false;
   }
   return (
@@ -56,7 +56,7 @@ export const ModalUploading = ({
                 <View
                   style={{
                     flex: 1,
-                    flexDirection: 'row',
+                    flexDirection: "row",
                   }}>
                   <TouchableOpacity style={styles.button} onPress={goBack}>
                     <Text style={styles.buttonTextGoBack}>Go Back</Text>
@@ -79,19 +79,19 @@ const styles = StyleSheet.create({
   buttonTextGoBack: {
     fontSize: 16,
     color: colors.lightPurple,
-    fontWeight: 'normal',
+    fontWeight: "normal",
   },
   buttonTextStay: {
     fontSize: 16,
     color: colors.primary,
-    fontWeight: 'normal',
+    fontWeight: "normal",
   },
   container: {
-    alignSelf: 'flex-start',
+    alignSelf: "flex-start",
     margin: 10,
   },
   icon: {
-    alignSelf: 'center',
+    alignSelf: "center",
     marginTop: 5,
     marginEnd: 5,
   },
@@ -101,52 +101,52 @@ const styles = StyleSheet.create({
   },
   screen: {
     flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
-    backgroundColor: 'transparent',
+    alignItems: "center",
+    justifyContent: "center",
+    backgroundColor: "transparent",
   },
   viewWrapper: {
     flex: 1,
-    alignItems: 'center',
-    alignSelf: 'center',
+    alignItems: "center",
+    alignSelf: "center",
     ...GStyles.shadowContainer,
   },
   modalView: {
     paddingBottom: 5,
-    justifyContent: 'center',
-    alignItems: 'center',
-    position: 'absolute',
-    alignSelf: 'center',
+    justifyContent: "center",
+    alignItems: "center",
+    position: "absolute",
+    alignSelf: "center",
     width: width * 0.8,
     backgroundColor: colors.secondBg,
     borderRadius: 10,
   },
   button: {
     backgroundColor: colors.secondBg,
-    alignItems: 'center',
+    alignItems: "center",
     padding: 5,
-    width: '50%',
+    width: "50%",
     borderColor: colors.secondBg,
     borderRightColor: colors.primary,
     borderWidth: 0.5,
-    textTransform: 'uppercase',
+    textTransform: "uppercase",
     marginTop: 15,
   },
   buttonVisit: {
     backgroundColor: colors.secondBg,
-    alignItems: 'center',
+    alignItems: "center",
     padding: 5,
-    width: '50%',
+    width: "50%",
     borderColor: colors.secondBg,
     borderWidth: 0.5,
-    textTransform: 'uppercase',
+    textTransform: "uppercase",
     marginTop: 15,
   },
   header: {
     fontSize: 17,
     paddingBottom: 10,
-    fontWeight: 'bold',
-    textAlign: 'center',
+    fontWeight: "bold",
+    textAlign: "center",
     color: colors.primary,
     width: width * 0.7,
   },
@@ -155,10 +155,10 @@ const styles = StyleSheet.create({
     paddingEnd: 5,
     marginTop: 5,
     fontSize: 14,
-    fontWeight: 'normal',
-    textAlign: 'justify',
+    fontWeight: "normal",
+    textAlign: "justify",
   },
-  descContainer: {paddingHorizontal: 10},
+  descContainer: { paddingHorizontal: 10 },
   logoIcon: {
     height: 60,
     width: 60,
@@ -166,10 +166,10 @@ const styles = StyleSheet.create({
   iconCategory: {
     width: 20,
     height: 20,
-    alignSelf: 'center',
+    alignSelf: "center",
   },
   containerIcon: {
-    flexDirection: 'row',
+    flexDirection: "row",
     marginTop: 5,
   },
 });

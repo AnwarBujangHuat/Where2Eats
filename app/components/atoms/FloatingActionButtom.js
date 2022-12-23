@@ -1,11 +1,16 @@
-import {Image, TouchableOpacity, View, StyleSheet} from 'react-native';
-import React from 'react';
-import rouletteIcon from '../../assets/bet.png';
-import {colors} from '../../configs/Const';
-import {GStyles} from '../../Styles';
-import TestIDs from '../../../e2e/TestIDs';
+import {
+  Image,
+  StyleSheet,
+  TouchableOpacity,
+  View,
+} from "react-native";
+import React from "react";
+import rouletteIcon from "../../assets/bet.png";
+import { colors } from "../../configs/Const";
+import { GStyles } from "../../Styles";
+import TestIDs from "../../../e2e/TestIDs";
 
-export const FloatingActionButton = ({onPress}) => {
+export const FloatingActionButton = ({ onPress }) => {
   return (
     <View style={styles.fab}>
       <TouchableOpacity
@@ -35,7 +40,7 @@ const styles = StyleSheet.create({
     padding: 10,
   },
   fab: {
-    position: 'absolute',
+    position: "absolute",
     bottom: 30,
     right: 20,
   },

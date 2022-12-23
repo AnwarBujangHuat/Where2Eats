@@ -7,15 +7,15 @@ import {
   View,
 } from 'react-native';
 import React from 'react';
-import {BackButton} from '../atoms/BackButton';
+import { BackButton } from '../atoms/BackButton';
 import addImage from '../../assets/addImage.png';
 import logoIcon from '../../assets/allfood.png';
-import {RateLabel} from '../atoms/RateLabel';
-import {SearchButton} from '../atoms/SearchButton';
-import {GStyles} from '../../Styles';
-import {colors} from '../../configs/Const';
+import { RateLabel } from '../atoms/RateLabel';
+import { SearchButton } from '../atoms/SearchButton';
+import { GStyles } from '../../Styles';
+import { colors } from '../../configs/Const';
 
-const {width} = Dimensions.get('window');
+const { width } = Dimensions.get('window');
 
 export const DetailsHeader = ({
   image,
@@ -29,18 +29,17 @@ export const DetailsHeader = ({
   onChangeText,
   onPressSearch,
 }) => {
-  const changeLogo = () => {};
   return (
     <View style={styles.container}>
       <TouchableOpacity onPress={onPress} disabled={disabled}>
         <ImageBackground
-          source={image !== undefined ? {uri: image} : addImage} //image ? image : addImage
+          source={image !== undefined ? { uri: image } : addImage} //image ? image : addImage
           style={{
             height: '100%',
             resizeMode: 'cover',
           }}>
           <View style={styles.rowContainer}>
-            <View style={{width: width * 0.8, flexDirection: 'row'}}>
+            <View style={{ width: width * 0.8, flexDirection: 'row' }}>
               <BackButton onPress={back} />
               {disabled && (
                 <SearchButton
@@ -55,8 +54,7 @@ export const DetailsHeader = ({
 
           <TouchableOpacity
             style={styles.logoContainer}
-            disabled={disabled}
-            onPress={changeLogo}>
+            disabled={disabled}>
             <Image style={styles.icons} source={logoIcon} />
           </TouchableOpacity>
         </ImageBackground>

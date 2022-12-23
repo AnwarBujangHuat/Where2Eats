@@ -1,8 +1,8 @@
 import * as ImagePicker from 'react-native-image-picker';
 
-export const launchImagePicker = () => {
-  try {
-    return ImagePicker.launchImageLibrary(
+export const launchImagePicker = () =>
+  new Promise((resolve, reject) => {
+    ImagePicker.launchImageLibrary(
       {
         mediaType: 'photo',
         quality: 1,
@@ -13,14 +13,11 @@ export const launchImagePicker = () => {
       },
       response => {
         if (response.didCancel) {
-          return 'cancel';
+          reject({result: 'cancel'});
         }
-        return response.assets !== undefined
-          ? response.assets[0].uri
-          : response;
+        return resolve({result: response});
       },
-    );
-  } catch (e) {
-    return 'Error';
-  }
-};
+    )
+      .then(r => reject('Error'))
+      .catch();
+  });
