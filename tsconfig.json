@@ -40,11 +40,12 @@
     "noImplicitReturns": false,
     "typeRoots": [
       "./node_modules/@types",
-      "src/@types"
+      "custom_typings"
     ]
   },
   "include": [
-    "src"
+    "src",
+    "./src/**/*.tsx"
   ],
   "exclude": [
     "build",
