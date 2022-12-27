@@ -1,9 +1,14 @@
 import * as React from 'react';
-import { Dimensions, StyleSheet, Text, View } from 'react-native';
+import {
+  Dimensions,
+  StyleSheet,
+  Text,
+  View,
+} from 'react-native';
 import FastImage from 'react-native-fast-image';
 import defaultAvatar from '../../assets/programmer.png';
 import { RateLabel } from '../atoms/RateLabel';
-import { GStyles } from '../../Styles';
+import { GStyles } from 'styles';
 import { colors } from '../../configs/Const';
 
 export const RatingCard = ({ userReview }) => {
@@ -17,9 +22,9 @@ export const RatingCard = ({ userReview }) => {
           source={
             image
               ? {
-                  uri: image,
-                  priority: FastImage.priority.high,
-                }
+                uri: image,
+                priority: FastImage.priority.high,
+              }
               : defaultAvatar
           }
           style={styles.userImage}

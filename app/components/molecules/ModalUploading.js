@@ -14,7 +14,7 @@ import Uploading from '../../assets/uploading.json';
 import Sleepy from '../../assets/sleepycat.json';
 import { ConstString } from '../../configs/Strings';
 import { colors } from '../../configs/Const';
-import { GStyles } from '../../Styles';
+import { GStyles } from 'styles';
 
 const { width } = Dimensions.get('window');
 let icon;

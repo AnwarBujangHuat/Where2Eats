@@ -1,7 +1,6 @@
-import { Image, StyleSheet, TouchableOpacity, View } from 'react-native';
-import React from 'react';
-import backButton from '../../assets/back.png';
-import { GStyles } from '../../Styles';
+import { Image, StyleSheet, TouchableOpacity, View } from "react-native";
+import backButton from "assets/images/back.png";
+import { GStyles } from "../../styles";
 
 export const BackButton = ({ onPress }) => {
   return (
@@ -15,13 +14,13 @@ export const BackButton = ({ onPress }) => {
 const styles = StyleSheet.create({
   container: {
     ...GStyles.shadowContainer,
-    alignSelf: 'flex-start',
+    alignSelf: "flex-start",
     borderRadius: 40,
     padding: 10,
-    marginStart: 10,
+    marginStart: 10
   },
   icons: {
     height: 20,
-    width: 20,
-  },
+    width: 20
+  }
 });

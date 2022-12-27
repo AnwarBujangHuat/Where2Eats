@@ -1,0 +1,58 @@
+{
+  "compilerOptions": {
+    "baseUrl": "./app",
+    "paths": {
+      "apis": [
+        "./apis"
+      ],
+      "components": [
+        "./components"
+      ],
+      "configs": [
+        "./configs"
+      ],
+      "constants": [
+        "./constants"
+      ],
+      "hooks": [
+        "./hooks"
+      ],
+      "navigations": [
+        "./navigations"
+      ],
+      "screens": [
+        "./screens"
+      ],
+      "stores": [
+        "./stores"
+      ],
+      "utils": [
+        "./utils"
+      ],
+      "assets": [
+        "./assets"
+      ],
+      "atoms": [
+        "./components/atoms"
+      ],
+      "molecules": [
+        "./components/molecules"
+      ],
+      "organisms": [
+        "./components/organisms"
+      ],
+      "templates": [
+        "./components/templates"
+      ],
+      "styles": [
+        "./styles"
+      ],
+      "auth": [
+        "./auth"
+      ],
+      "softToken": [
+        "./softToken"
+      ]
+    }
+  }
+}

@@ -13,7 +13,7 @@ import Cat from '../../assets/purplecat.json';
 import LottieView from 'lottie-react-native';
 import Modal from 'react-native-modal';
 import { colors } from '../../configs/Const';
-import { GStyles } from '../../Styles';
+import { GStyles } from 'styles';
 
 const { width } = Dimensions.get('window');
 
@@ -62,7 +62,7 @@ export const ModalGiveRating = ({
               </View>
             ) : (
               <View style={styles.modalView}>
-                <Text style={styles.header}>{"What's Your Review?"}</Text>
+                <Text style={styles.header}>{'What\'s Your Review?'}</Text>
                 <AirbnbRating
                   count={5}
                   isDisabled={false}

@@ -1,7 +1,13 @@
-import { Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import {
+  Image,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
+} from 'react-native';
 import React from 'react';
 import locationIcon from '../../assets/location.png';
-import { GStyles } from '../../Styles';
+import { GStyles } from 'styles';
 import { colors } from '../../configs/Const';
 
 export const DescriptionLabel = ({ name, location, icon, onPress }) => {

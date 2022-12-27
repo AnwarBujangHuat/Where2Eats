@@ -12,7 +12,7 @@ import addImage from '../../assets/addImage.png';
 import logoIcon from '../../assets/allfood.png';
 import { RateLabel } from '../atoms/RateLabel';
 import { SearchButton } from '../atoms/SearchButton';
-import { GStyles } from '../../Styles';
+import { GStyles } from 'styles';
 import { colors } from '../../configs/Const';
 
 const { width } = Dimensions.get('window');

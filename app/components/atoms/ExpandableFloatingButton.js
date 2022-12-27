@@ -1,4 +1,7 @@
-import { StyleSheet, View } from 'react-native';
+import {
+  StyleSheet,
+  View,
+} from 'react-native';
 import React from 'react';
 import { FloatingAction } from 'react-native-floating-action';
 import Menu from '../../assets/cheeseburger.png';
@@ -6,7 +9,7 @@ import Details from '../../assets/details.png';
 import Edit from '../../assets/edit.png';
 import { ConstString } from '../../configs/Strings';
 import { colors } from '../../configs/Const';
-import { GStyles } from '../../Styles';
+import { GStyles } from 'styles';
 
 const actions = [
   {

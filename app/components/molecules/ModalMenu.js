@@ -15,7 +15,7 @@ import addIcon from '../../assets/plus.png';
 import { ConstString } from '../../configs/Strings';
 import { launchImagePicker } from '../../ImagePicker';
 import { colors } from '../../configs/Const';
-import { GStyles } from '../../Styles';
+import { GStyles } from 'styles';
 
 const { width } = Dimensions.get('window');
 export const ModalMenu = ({
@@ -47,7 +47,7 @@ export const ModalMenu = ({
     }
 
     //* Exit if there's error *//
-    const { errorCode, assets } = result;
+    const { errorCode, assets } = result[0];
     if (errorCode || assets === []) {
       return showErrorAlert({
         message: 'Please Pick Image in JPG or PNG format',
