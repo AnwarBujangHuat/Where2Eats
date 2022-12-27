@@ -1,5 +1,5 @@
-import { colors } from './configs/Const';
-import { StyleSheet } from 'react-native';
+import { colors } from "./Const";
+import { StyleSheet } from "react-native";
 
 export const GStyles = StyleSheet.create({
   shadowContainer: {
@@ -8,6 +8,6 @@ export const GStyles = StyleSheet.create({
     shadowColor: colors.primary,
     shadowOpacity: 0.2,
     shadowRadius: 3,
-    elevation: 10,
-  },
+    elevation: 10
+  }
 });

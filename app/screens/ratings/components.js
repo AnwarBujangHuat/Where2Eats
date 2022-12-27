@@ -17,7 +17,7 @@ import { ModalGiveRating } from '../../components/molecules/ModalGiveRating';
 import { BarChart } from 'react-native-chart-kit';
 import { RatingButton } from '../../components/atoms/RatingButton';
 import { colors } from '../../configs/Const';
-import { GStyles } from '../../styles';
+import { GStyles } from '../../configs/styles';
 
 export const RatingComponents = props => {
   const {

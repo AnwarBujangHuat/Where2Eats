@@ -8,7 +8,7 @@ import {
 import FastImage from 'react-native-fast-image';
 import defaultAvatar from '../../assets/images/programmer.png';
 import { RateLabel } from '../atoms/RateLabel';
-import { GStyles } from '../../styles';
+import { GStyles } from '../../configs/styles';
 import { colors } from '../../configs/Const';
 
 export const RatingCard = ({ userReview }) => {

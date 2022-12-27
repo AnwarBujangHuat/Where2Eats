@@ -14,7 +14,7 @@ import Uploading from '../../assets/lottie/uploading.json';
 import Sleepy from '../../assets/lottie/sleepycat.json';
 import { ConstString } from '../../configs/Strings';
 import { colors } from '../../configs/Const';
-import { GStyles } from '../../styles';
+import { GStyles } from '../../configs/styles';
 
 const { width } = Dimensions.get('window');
 let icon;

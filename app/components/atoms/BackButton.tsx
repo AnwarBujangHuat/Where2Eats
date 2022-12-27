@@ -1,6 +1,6 @@
 import { Image, StyleSheet, TouchableOpacity, View } from "react-native";
-import backButton from "../../assets/images/back.png";
-import { GStyles } from "../../styles";
+import backButton from "assets/images/back.png";
+import { GStyles } from "../../configs/styles";
 import React from "react";
 
 export const BackButton = ({ onPress }) => {

@@ -11,7 +11,7 @@ import {
   colors,
   icons,
 } from '../../configs/Const';
-import { GStyles } from '../../styles';
+import { GStyles } from '../../configs/styles';
 
 export const ItemListRestaurant = ({ onPress, name, category, index }) => {
   return (

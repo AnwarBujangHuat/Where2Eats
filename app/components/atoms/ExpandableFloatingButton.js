@@ -9,7 +9,7 @@ import Details from '../../assets/images/details.png';
 import Edit from '../../assets/images/edit.png';
 import { ConstString } from '../../configs/Strings';
 import { colors } from '../../configs/Const';
-import { GStyles } from '../../styles';
+import { GStyles } from '../../configs/styles';
 
 const actions = [
   {
