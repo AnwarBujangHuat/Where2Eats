@@ -1,5 +1,5 @@
 import { Image, StyleSheet, TouchableOpacity, View } from "react-native";
-import backButton from "assets/images/back.png";
+import backButton from "../../assets/images/back.png";
 import { GStyles } from "../../configs/styles";
 import React from "react";
 

@@ -13,17 +13,6 @@
     "strict": true,
     "target": "esnext",
     "baseUrl": "./app",
-    "paths": {
-      "*": [
-        "*"
-      ],
-      "assets": [
-        "./assets"
-      ],
-      "components": [
-        "./components"
-      ]
-    },
     "resolveJsonModule": true,
     "skipLibCheck": true,
     "forceConsistentCasingInFileNames": true,
@@ -40,11 +29,11 @@
     "noImplicitReturns": false,
     "typeRoots": [
       "./node_modules/@types",
-      "custom_typings"
+      "index.d.ts"
     ]
   },
   "include": [
-    "src",
+    "./index.d.ts",
     "./src/**/*.tsx"
   ],
   "exclude": [
