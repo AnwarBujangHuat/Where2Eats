@@ -10,7 +10,7 @@ import {
   View,
 } from 'react-native';
 import { colors } from '../../configs/Const';
-import { GStyles } from 'styles';
+import { GStyles } from '../../styles';
 
 const { width } = Dimensions.get('window');
 

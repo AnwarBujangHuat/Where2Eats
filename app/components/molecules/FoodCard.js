@@ -8,11 +8,11 @@ import {
   TouchableWithoutFeedback,
   View,
 } from 'react-native';
-import nasiAyam from '../../assets/salad.jpg';
-import edit from '../../assets/editing.png';
-import Delete from '../../assets/bin.png';
+import nasiAyam from '../../assets/images/salad.jpg';
+import edit from '../../assets/images/editing.png';
+import Delete from '../../assets/images/bin.png';
 import FastImage from 'react-native-fast-image';
-import { GStyles } from 'styles';
+import { GStyles } from '../../styles';
 import { colors } from '../../configs/Const';
 
 export const FoodCard = ({

@@ -8,14 +8,14 @@ import {
   View,
 } from 'react-native';
 import { RateLabel } from '../atoms/RateLabel';
-import locationIcon from '../../assets/location.png';
+import locationIcon from '../../assets/images/location.png';
 import {
   colors,
   icons,
 } from '../../configs/Const';
-import addImage from '../../assets/addImage.png';
+import addImage from '../../assets/images/addImage.png';
 import FastImage from 'react-native-fast-image';
-import { GStyles } from 'styles';
+import { GStyles } from '../../styles';
 
 export const RestaurantCard = ({
   onPress,

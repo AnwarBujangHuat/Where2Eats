@@ -8,15 +8,15 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
-import logoIcon from '../../assets/allfood.png';
-import locationIcon from '../../assets/location.png';
+import logoIcon from '../../assets/images/allfood.png';
+import locationIcon from '../../assets/images/location.png';
 import FastImage from 'react-native-fast-image';
 import {
   colors,
   icons,
 } from '../../configs/Const';
 import Modal from 'react-native-modal';
-import { GStyles } from 'styles';
+import { GStyles } from '../../styles';
 
 const { width } = Dimensions.get('window');
 export const ModalWinner = ({

@@ -5,9 +5,9 @@ import {
   View,
 } from 'react-native';
 import React from 'react';
-import rouletteIcon from '../../assets/bet.png';
+import rouletteIcon from '../../assets/images/bet.png';
 import { colors } from '../../configs/Const';
-import { GStyles } from 'styles';
+import { GStyles } from '../../styles';
 import TestIDs from '../../../e2e/TestIDs';
 
 export const FloatingActionButton = ({ onPress }) => {

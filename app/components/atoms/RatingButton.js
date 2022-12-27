@@ -6,9 +6,9 @@ import {
   View,
 } from 'react-native';
 import React from 'react';
-import star from '../../assets/star2.png';
+import star from '../../assets/images/star2.png';
 import { colors } from '../../configs/Const';
-import { GStyles } from 'styles';
+import { GStyles } from '../../styles';
 
 export const RatingButton = ({ onPress, rating, selected }) => {
   let backGroundColor = rating === selected ? colors.primary : colors.secondBg;

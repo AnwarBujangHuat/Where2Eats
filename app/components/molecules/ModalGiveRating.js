@@ -9,11 +9,11 @@ import {
   View,
 } from 'react-native';
 import { AirbnbRating } from 'react-native-ratings';
-import Cat from '../../assets/purplecat.json';
+import Cat from '../../assets/lottie/purplecat.json';
 import LottieView from 'lottie-react-native';
 import Modal from 'react-native-modal';
 import { colors } from '../../configs/Const';
-import { GStyles } from 'styles';
+import { GStyles } from '../../styles';
 
 const { width } = Dimensions.get('window');
 

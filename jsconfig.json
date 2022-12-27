@@ -44,9 +44,6 @@
       "templates": [
         "./components/templates"
       ],
-      "styles": [
-        "./styles"
-      ],
       "auth": [
         "./auth"
       ],

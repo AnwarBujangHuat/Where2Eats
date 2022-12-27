@@ -6,8 +6,8 @@ import {
   View,
 } from 'react-native';
 import React from 'react';
-import locationIcon from '../../assets/location.png';
-import { GStyles } from 'styles';
+import locationIcon from '../../assets/images/location.png';
+import { GStyles } from '../../styles';
 import { colors } from '../../configs/Const';
 
 export const DescriptionLabel = ({ name, location, icon, onPress }) => {

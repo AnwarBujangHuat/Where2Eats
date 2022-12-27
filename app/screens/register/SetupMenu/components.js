@@ -12,13 +12,13 @@ import {
 import { BackButton } from '../../../components/atoms/BackButton';
 import { ConstString } from '../../../configs/Strings';
 import { xorBy } from 'lodash';
-import addIcon from '../../../assets/plus.png';
+import addIcon from '../../../assets/images/plus.png';
 import { ModalMenu } from '../../../components/molecules/ModalMenu';
 import { ModalUploading } from '../../../components/molecules/ModalUploading';
 import { ModalMenuDetails } from '../../../components/molecules/ModalMenuDetails';
 import { FoodCard } from '../../../components/molecules/FoodCard';
 import { SearchButton } from '../../../components/atoms/SearchButton';
-import { GStyles } from 'styles';
+import { GStyles } from '../../../styles';
 import { colors } from '../../../configs/Const';
 import MultiPickerBox from '../../../components/molecules/MultiPickerBox';
 
