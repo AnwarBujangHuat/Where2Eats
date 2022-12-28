@@ -35,7 +35,7 @@ export const ModalMenuButton = ({ isModalVisible, onPress, closeModal }) => {
           <Modal
             animationType="fade"
             transparent
-            isVisible={isModalVisible}
+            Visible={isModalVisible}
             onBackdropPress={() => closeModal()}>
             <View style={styles.modalView}>
               <FlatList

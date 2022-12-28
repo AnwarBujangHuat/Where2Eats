@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
 import {
   Alert,
   Dimensions,
@@ -8,66 +8,70 @@ import {
   Text,
   TextInput,
   TouchableOpacity,
-  View,
-} from 'react-native';
-import Modal from 'react-native-modal';
-import { ConstString } from '../../configs/Strings';
-import { launchImagePicker } from '../../ImagePicker';
-import { colors } from '../../configs/Const';
-import { GStyles } from '../../configs/styles';
+  View
+} from "react-native";
+import Modal from "react-native-modal";
+import { ConstString } from "../../configs/Strings";
+import { launchImagePicker } from "../../ImagePicker";
+import { colors } from "../../configs/Const";
+import { GStyles } from "../../configs/styles";
 
-const { width } = Dimensions.get('window');
+const { width } = Dimensions.get("window");
+export type image = {
+  fileName: string,
+  type: string,
+  uri: string,
+  request: number,
+};
+
 export const ModalMenu = ({
-  Category,
-  isModalVisible,
-  closeModal,
-  addFoodItem,
-  foodItem,
-  updateFoodItem,
-}) => {
-  const [itemName, setItemName] = useState(!Category ? foodItem.name : '');
-  const [itemDesc, setItemDesc] = useState(!Category ? foodItem.desc : '');
-  const [itemPrice, setItemPrice] = useState(!Category ? foodItem.price : '');
+                            Category,
+                            isModalVisible,
+                            closeModal,
+                            addFoodItem,
+                            foodItem,
+                            updateFoodItem
+                          }) => {
+  const [itemName, setItemName] = useState(!Category ? foodItem.name : "");
+  const [itemDesc, setItemDesc] = useState(!Category ? foodItem.desc : "");
+  const [itemPrice, setItemPrice] = useState(!Category ? foodItem.price : "");
   const [imageUri, setImageUri] = useState(
-    !Category ? foodItem.image : undefined,
+    !Category ? foodItem.image : undefined
   );
   let reUpload = false;
   const showErrorAlert = ({ message }) => {
-    Alert.alert('Error', message, [{ text: 'Okay' }], { cancelable: true });
+    Alert.alert("Error", message, [{ text: "Okay" }], { cancelable: true });
   };
-  const launchImageLibrary = async() => {
-    const { result, request } = await launchImagePicker();
+  const launchImageLibrary = async () => {
+    const { uri, fileName, type, request }: image = await launchImagePicker();
     //* Exit if response empty *//
     if (!request) {
       return showErrorAlert({
-        message: 'Please Pick Image in JPG or PNG format',
+        message: "Please Pick Image in JPG or PNG format"
       });
     }
 
     //* Exit if there's error *//
-    const { assets } = result[0];
-    if (assets === []) {
+    if (type !== "image/jpg" && type !== "image/png" && type !== "image/gif") {
       return showErrorAlert({
-        message: 'Please Pick Image in JPG or PNG format',
+        message: "Please Pick Image in JPG or PNG format"
       });
     }
-
-    //* Code proccessing *//
-    setImageUri(assets[0].uri);
+    setImageUri(uri);
     reUpload = true;
   };
   const addItem = () => {
     if (
-      itemName === '' ||
-      itemDesc === '' ||
+      itemName === "" ||
+      itemDesc === "" ||
       imageUri === undefined ||
-      itemPrice === ''
+      itemPrice === ""
     ) {
-      return showErrorAlert({ message: 'Please Complete Input' });
+      return showErrorAlert({ message: "Please Complete Input" });
     }
 
     if (/[a-zA-Z]/.test(itemPrice)) {
-      return showErrorAlert({ message: 'Please Ensure Price is Only Numbers' });
+      return showErrorAlert({ message: "Please Ensure Price is Only Numbers" });
     }
 
     const newItem = {
@@ -75,7 +79,7 @@ export const ModalMenu = ({
       image: imageUri,
       name: itemName,
       price: itemPrice,
-      category: Category ? Category : foodItem.category,
+      category: Category ? Category : foodItem.category
     };
     // If user add new item to menu
     if (Category) {
@@ -95,21 +99,21 @@ export const ModalMenu = ({
             onBackdropPress={() => closeModal()}
             onDismiss={closeModal}>
             <View style={styles.modalView}>
-              <Text style={styles.header}>{'Item Name'}</Text>
+              <Text style={styles.header}>{"Item Name"}</Text>
               <TextInput
                 style={styles.textInput}
-                placeholder={'Enter Item Name'}
+                placeholder={"Enter Item Name"}
                 value={itemName}
-                clearButtonMode={'always'}
+                clearButtonMode={"always"}
                 placeholderTextColor={colors.white}
                 onChangeText={setItemName}
                 keyboardAppearance="dark"
                 autoCorrect={false}
               />
-              <Text style={styles.header}>{'Description'}</Text>
+              <Text style={styles.header}>{"Description"}</Text>
               <TextInput
                 style={styles.descriptionInput}
-                placeholder={'Enter Description'}
+                placeholder={"Enter Description"}
                 multiline={true}
                 value={itemDesc}
                 onChangeText={setItemDesc}
@@ -117,24 +121,24 @@ export const ModalMenu = ({
                 keyboardAppearance="dark"
                 autoCorrect={false}
               />
-              <Text style={styles.header}>{'Price'}</Text>
+              <Text style={styles.header}>{"Price"}</Text>
               <TextInput
                 style={styles.textInput}
-                placeholder={'Enter Price RM'}
-                clearButtonMode={'always'}
+                placeholder={"Enter Price RM"}
+                clearButtonMode={"always"}
                 value={itemPrice}
                 placeholderTextColor={colors.white}
                 onChangeText={setItemPrice}
-                keyboardType={'numeric'}
+                keyboardType={"numeric"}
                 keyboardAppearance="dark"
                 autoCorrect={false}
               />
-              <Text style={styles.header}>{'Add Image'}</Text>
+              <Text style={styles.header}>{"Add Image"}</Text>
               <TouchableOpacity
                 onPress={launchImageLibrary}
                 style={styles.container}>
                 {imageUri === undefined ? (
-                  <Image style={styles.icons} source={require('../../assets/images/plus.png')} />
+                  <Image style={styles.icons} source={require("../../assets/images/plus.png")} />
                 ) : (
                   <View>
                     <Image style={styles.image} source={{ uri: imageUri }} />
@@ -154,94 +158,94 @@ export const ModalMenu = ({
 };
 const styles = StyleSheet.create({
   changeButton: {
-    position: 'absolute',
+    position: "absolute",
     left: 0,
-    fontWeight: 'bold',
+    fontWeight: "bold",
     fontSize: 12,
     color: colors.primary,
     backgroundColor: colors.secondBg,
-    padding: 5,
+    padding: 5
   },
   button: {
     backgroundColor: colors.primary,
-    alignItems: 'center',
+    alignItems: "center",
     padding: 10,
     borderRadius: 10,
-    textTransform: 'uppercase',
-    marginTop: 15,
+    textTransform: "uppercase",
+    marginTop: 15
   },
   buttonText: {
     fontSize: 16,
     color: colors.white,
-    fontWeight: 'normal',
+    fontWeight: "normal"
   },
   container: {
     ...GStyles.shadowContainer,
     backgroundColor: colors.primary,
-    alignSelf: 'flex-start',
+    alignSelf: "flex-start",
     borderRadius: 10,
-    marginTop: 10,
+    marginTop: 10
   },
   image: {
     width: width * 0.8,
     height: 180,
-    borderRadius: 10,
+    borderRadius: 10
   },
 
   icons: {
     height: 20,
     width: 20,
-    margin: 10,
+    margin: 10
   },
   screen: {
     flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
-    backgroundColor: 'transparent',
+    alignItems: "center",
+    justifyContent: "center",
+    backgroundColor: "transparent"
   },
 
   modalView: {
     ...GStyles.shadowContainer,
     padding: 20,
-    justifyContent: 'center',
-    position: 'absolute',
-    alignSelf: 'center',
+    justifyContent: "center",
+    position: "absolute",
+    alignSelf: "center",
     width: width * 0.9,
-    borderRadius: 7,
+    borderRadius: 7
   },
   textInput: {
     fontSize: 14,
-    fontWeight: 'normal',
+    fontWeight: "normal",
     borderWidth: 1,
     color: colors.white,
     borderBottomColor: colors.primary,
     borderColor: colors.secondBg,
-    textAlignVertical: 'center',
+    textAlignVertical: "center",
     backgroundColor: colors.secondBg,
     borderRadius: 5,
     marginBottom: 10,
-    paddingVertical: 15,
+    paddingVertical: 15
   },
   header: {
     fontSize: 16,
-    fontWeight: 'bold',
+    fontWeight: "bold",
     color: colors.lightPurple,
     shadowOffset: { width: -2, height: 1 },
     shadowColor: colors.primary,
     shadowOpacity: 0.1,
-    shadowRadius: 2,
+    shadowRadius: 2
   },
   descriptionInput: {
     fontSize: 14,
-    fontWeight: 'normal',
+    fontWeight: "normal",
     borderWidth: 1,
     borderBottomColor: colors.primary,
     color: colors.white,
     borderColor: colors.bg,
-    textAlignVertical: 'center',
+    textAlignVertical: "center",
     backgroundColor: colors.secondBg,
     borderRadius: 5,
     marginVertical: 10,
-    paddingVertical: 15,
-  },
+    paddingVertical: 15
+  }
 });
