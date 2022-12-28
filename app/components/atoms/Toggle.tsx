@@ -6,8 +6,9 @@ import Icon from "./Icon";
 function Toggle({ onTouch, checked, iconColor = colors.primary }) {
   return (
     <TouchableOpacity onPress={onTouch} hitSlop={{ top: 10, bottom: 10, left: 10, right: 10 }}>
-      <Icon name={checked ? "deleteCircle" : "addCircle"} fill={iconColor} viewBox={"0 0 12 9"} height={12}
-            width={9}></Icon>
+      <Icon name={checked ? "deleteCircle" : "addCircle"} fill={iconColor} viewBox={checked ? "0 0 22 22" : "0 0 23 23"}
+            height={checked ? 22 : 20}
+            width={checked ? 22 : 24}></Icon>
     </TouchableOpacity>
   );
 }

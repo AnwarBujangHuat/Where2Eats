@@ -10,6 +10,6 @@ export const launchImagePicker = () =>
         maxHeight: 300
       }
     )
-      .catch(e => reject({ result: 0 }))
-      .then(r => resolve({ result: r }))
+      .catch(e => reject({ result: [], request: 0 }))
+      .then(r => resolve({ result: r, request: 1 }))
   );

@@ -122,7 +122,7 @@ function SelectBox({
           style={{ marginLeft: 15 }}
           hitSlop={hitSlop}
           onPress={onPressItem()}>
-          <Icon name="closeCircle" fill="#fff" width={21} height={21} viewBox={"0 0 12 9"} />
+          <Icon name="closeCircle" fill="#fff" width={24} height={22} viewBox={"0 0 23 23"} />
         </TouchableOpacity>
       </View>
     );
@@ -245,8 +245,8 @@ function SelectBox({
               <Icon
                 name={showOptions ? "upArrow" : "downArrow"}
                 fill={arrowIconColor}
-                viewBox={"0 0 12 9"} height={12}
-                width={9}
+                viewBox={null} height={null}
+                width={null}
               />
             )}
           </TouchableOpacity>
@@ -317,8 +317,8 @@ function SelectBox({
               {...searchInputProps}
             />
             <Icon name="searchBoxIcon" fill={searchIconColor}
-                  viewBox={"0 0 12 9"} height={12}
-                  width={9} />
+                  viewBox={"0 0 18 16"} height={16}
+                  width={18} />
           </View>
         )}
         <ScrollView keyboardShouldPersistTaps="always" />

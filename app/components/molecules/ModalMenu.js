@@ -11,7 +11,6 @@ import {
   View,
 } from 'react-native';
 import Modal from 'react-native-modal';
-import addIcon from '../../assets/images/plus.png';
 import { ConstString } from '../../configs/Strings';
 import { launchImagePicker } from '../../ImagePicker';
 import { colors } from '../../configs/Const';
@@ -25,7 +24,6 @@ export const ModalMenu = ({
   addFoodItem,
   foodItem,
   updateFoodItem,
-  editorMode = false,
 }) => {
   const [itemName, setItemName] = useState(!Category ? foodItem.name : '');
   const [itemDesc, setItemDesc] = useState(!Category ? foodItem.desc : '');
@@ -38,17 +36,17 @@ export const ModalMenu = ({
     Alert.alert('Error', message, [{ text: 'Okay' }], { cancelable: true });
   };
   const launchImageLibrary = async() => {
-    const { result } = await launchImagePicker();
+    const { result, request } = await launchImagePicker();
     //* Exit if response empty *//
-    if (!result) {
+    if (!request) {
       return showErrorAlert({
         message: 'Please Pick Image in JPG or PNG format',
       });
     }
 
     //* Exit if there's error *//
-    const { errorCode, assets } = result[0];
-    if (errorCode || assets === []) {
+    const { assets } = result[0];
+    if (assets === []) {
       return showErrorAlert({
         message: 'Please Pick Image in JPG or PNG format',
       });
@@ -93,9 +91,7 @@ export const ModalMenu = ({
       {{ isModalVisible } && (
         <SafeAreaView style={styles.screen}>
           <Modal
-            animationType="slide"
-            transparent
-            visible={isModalVisible}
+            isVisible={isModalVisible}
             onBackdropPress={() => closeModal()}
             onDismiss={closeModal}>
             <View style={styles.modalView}>
@@ -107,7 +103,6 @@ export const ModalMenu = ({
                 clearButtonMode={'always'}
                 placeholderTextColor={colors.white}
                 onChangeText={setItemName}
-                overflow="hidden"
                 keyboardAppearance="dark"
                 autoCorrect={false}
               />
@@ -119,7 +114,6 @@ export const ModalMenu = ({
                 value={itemDesc}
                 onChangeText={setItemDesc}
                 placeholderTextColor={colors.white}
-                overflow="hidden"
                 keyboardAppearance="dark"
                 autoCorrect={false}
               />
@@ -132,7 +126,6 @@ export const ModalMenu = ({
                 placeholderTextColor={colors.white}
                 onChangeText={setItemPrice}
                 keyboardType={'numeric'}
-                overflow="hidden"
                 keyboardAppearance="dark"
                 autoCorrect={false}
               />
@@ -141,7 +134,7 @@ export const ModalMenu = ({
                 onPress={launchImageLibrary}
                 style={styles.container}>
                 {imageUri === undefined ? (
-                  <Image style={styles.icons} source={addIcon} />
+                  <Image style={styles.icons} source={require('../../assets/images/plus.png')} />
                 ) : (
                   <View>
                     <Image style={styles.image} source={{ uri: imageUri }} />
