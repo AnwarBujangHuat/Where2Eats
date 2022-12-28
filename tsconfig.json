@@ -1,44 +1,33 @@
 {
   "compilerOptions": {
-    "allowJs": true,
-    "allowSyntheticDefaultImports": true,
-    "esModuleInterop": true,
-    "isolatedModules": true,
-    "jsx": "react",
+    "target": "es6",
     "lib": [
-      "ESNext"
+      "dom",
+      "dom.iterable",
+      "es2017"
     ],
-    "moduleResolution": "node",
-    "noEmit": true,
-    "strict": true,
-    "target": "esnext",
-    "baseUrl": "./app",
-    "resolveJsonModule": true,
-    "skipLibCheck": true,
+    "allowJs": true,
+    "skipLibCheck": false,
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
+    "strict": false,
     "forceConsistentCasingInFileNames": true,
-    "declaration": true,
-    "declarationMap": true,
+    "module": "esnext",
+    "moduleResolution": "node",
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "noEmit": true,
+    "jsx": "preserve",
     "pretty": true,
-    "noImplicitAny": false,
-    "removeComments": true,
-    "emitDecoratorMetadata": true,
-    "experimentalDecorators": true,
-    "strictPropertyInitialization": false,
-    "strictNullChecks": true,
-    "downlevelIteration": true,
-    "noImplicitReturns": false,
+    "preserveConstEnums": true,
     "typeRoots": [
       "./node_modules/@types",
-      "index.d.ts"
+      "src/global.d.ts"
     ]
+    // ? Babel Plugin Module Resolver
   },
   "include": [
-    "./index.d.ts",
-    "./src/**/*.tsx"
-  ],
-  "exclude": [
-    "build",
-    "node_modules",
-    "babel.config.js"
+    "src/global.d.ts",
+    "src/*"
   ]
 }

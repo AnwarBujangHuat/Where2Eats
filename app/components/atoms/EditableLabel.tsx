@@ -1,13 +1,6 @@
-import {
-  Image,
-  StyleSheet,
-  Text,
-  TouchableOpacity,
-  View,
-} from 'react-native';
-import React from 'react';
-import editIcon from '../../assets/images/editing.png';
-import { colors } from '../../configs/Const';
+import { Image, StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import React from "react";
+import { colors } from "../../configs/Const";
 
 export const EditableLabel = ({ onPress, title, information, icon }) => {
   return (
@@ -19,7 +12,7 @@ export const EditableLabel = ({ onPress, title, information, icon }) => {
           <Text style={styles.information}>{information}</Text>
         </View>
         <TouchableOpacity onPress={onPress}>
-          <Image style={styles.icon} source={editIcon} />
+          <Image style={styles.icon} source={require("../../assets/images/edit.png")} />
         </TouchableOpacity>
       </View>
     </View>
@@ -31,29 +24,29 @@ const styles = StyleSheet.create({
     height: 20,
     marginVertical: 10,
     marginHorizontal: 5,
-    tintColor: colors.primary,
+    tintColor: colors.primary
   },
   header: {
     color: colors.white,
     fontSize: 12,
-    marginBottom: 5,
+    marginBottom: 5
   },
   information: {
     color: colors.white,
-    fontSize: 16,
+    fontSize: 16
   },
   textContainer: {
     paddingStart: 10,
-    width: '80%',
-    alignContent: 'center',
+    width: "80%",
+    alignContent: "center"
   },
   label: {
-    flexDirection: 'row',
+    flexDirection: "row",
     minHeight: 80,
     borderRadius: 5,
     padding: 10,
     marginHorizontal: 10,
-    alignItems: 'center',
-    backgroundColor: colors.bg,
-  },
+    alignItems: "center",
+    backgroundColor: colors.bg
+  }
 });

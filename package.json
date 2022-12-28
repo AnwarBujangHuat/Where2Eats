@@ -6,6 +6,7 @@
     "e2e/"
   ],
   "scripts": {
+    "postinstall": "patch-package",
     "android": "react-native run-android",
     "ios": "react-native run-ios",
     "start": "react-native start",
@@ -24,6 +25,8 @@
     "@react-navigation/native": "^6.0.12",
     "@react-navigation/stack": "^6.2.3",
     "@reduxjs/toolkit": "^1.8.5",
+    "@types/lodash": "^4.14.191",
+    "@types/uuid": "^9.0.0",
     "babel-plugin-module-resolver": "^4.1.0",
     "base-64": "^1.0.0",
     "blob": "^0.1.0",
@@ -35,6 +38,8 @@
     "lodash": "^4.17.21",
     "lodash.xorby": "^4.7.0",
     "lottie-react-native": "^5.1.4",
+    "patch-package": "^6.5.0",
+    "postinstall-postinstall": "^2.1.0",
     "randomcolor": "^0.6.2",
     "react": "18.1.0",
     "react-dom": "^18.2.0",

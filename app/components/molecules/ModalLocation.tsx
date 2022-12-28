@@ -1,28 +1,28 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
 import {
   Dimensions,
   SafeAreaView,
   StyleSheet,
   Text,
   TouchableOpacity,
-  View,
-} from 'react-native';
-import Modal from 'react-native-modal';
-import GooglePlacesInput from './GooglePlacesInput';
-import MapView, { Marker } from 'react-native-maps';
-import { colors } from '../../configs/Const';
-import { GStyles } from '../../configs/styles';
+  View
+} from "react-native";
+import Modal from "react-native-modal";
+import GooglePlacesInput from "./GooglePlacesInput";
+import MapView, { Marker } from "react-native-maps";
+import { colors } from "../../configs/Const";
+import { GStyles } from "../../configs/styles";
 
-const { width } = Dimensions.get('window');
+const { width } = Dimensions.get("window");
 
 export const ModalLocation = ({
-  submitLocation,
-  isModalVisible,
-  closeModal,
-}) => {
-  const [location, setLocation] = useState('Restaurant Location');
+                                submitLocation,
+                                isModalVisible,
+                                closeModal
+                              }) => {
+  const [location, setLocation] = useState("Restaurant Location");
   const [latLong, setLatLong] = useState({ latitude: 3.16, longitude: 101.73 });
-  const mapRef = React.createRef();
+  const mapRef = React.createRef<MapView | null>();
   const onResult = ({ data, details }) => {
     const { location: locInfo } = details.geometry;
     const latitude = locInfo.lat;
@@ -31,7 +31,7 @@ export const ModalLocation = ({
       latitude,
       longitude,
       latitudeDelta: 0.001,
-      longitudeDelta: 0.001,
+      longitudeDelta: 0.001
     });
     setLatLong({ latitude: latitude, longitude: longitude });
     setLocation(data.description);
@@ -41,9 +41,8 @@ export const ModalLocation = ({
       {{ isModalVisible } && (
         <SafeAreaView style={styles.screen}>
           <Modal
-            animationType="slide"
-            transparent
-            visible={isModalVisible}
+            animationIn="fadeIn"
+            isVisible={isModalVisible}
             onBackdropPress={() => closeModal()}
             onDismiss={closeModal}>
             <View style={styles.modalView}>
@@ -52,9 +51,9 @@ export const ModalLocation = ({
                   width: 300,
                   height: 390,
                   zIndex: 2,
-                  alignSelf: 'center',
+                  alignSelf: "center"
                 }}>
-                <Text style={styles.header}>{'Pick Restaurant Location'}</Text>
+                <Text style={styles.header}>{"Pick Restaurant Location"}</Text>
                 <Text style={styles.desc}>{location}</Text>
                 <GooglePlacesInput onResult={onResult} />
               </View>
@@ -65,14 +64,14 @@ export const ModalLocation = ({
                   latitude: 3.16,
                   longitude: 101.73,
                   latitudeDelta: 0.001,
-                  longitudeDelta: 0.001,
+                  longitudeDelta: 0.001
                 }}
                 liteMode={true}>
                 <Marker
                   pinColor={colors.primary}
                   coordinate={{
                     latitude: latLong.latitude,
-                    longitude: latLong.longitude,
+                    longitude: latLong.longitude
                   }}
                 />
               </MapView>
@@ -95,59 +94,59 @@ const styles = StyleSheet.create({
     height: 280,
     width: 300,
     zIndex: 0,
-    alignSelf: 'center',
-    position: 'absolute',
-    top: '33%',
+    alignSelf: "center",
+    position: "absolute",
+    top: "33%"
   },
   button: {
     backgroundColor: colors.primary,
-    alignItems: 'center',
+    alignItems: "center",
     padding: 10,
     borderRadius: 10,
-    textTransform: 'uppercase',
-    marginTop: 40,
+    textTransform: "uppercase",
+    marginTop: 40
   },
   buttonText: {
     fontSize: 16,
-    color: 'white',
-    fontWeight: 'normal',
+    color: "white",
+    fontWeight: "normal"
   },
   container: {
-    alignSelf: 'flex-start',
+    alignSelf: "flex-start",
     borderRadius: 10,
     marginTop: 10,
-    ...GStyles.shadowContainer,
+    ...GStyles.shadowContainer
   },
   screen: {
     flex: 1,
-    alignItems: 'center',
+    alignItems: "center",
     marginBottom: 0,
-    justifyContent: 'center',
-    backgroundColor: 'transparent',
+    justifyContent: "center",
+    backgroundColor: "transparent"
   },
 
   modalView: {
     padding: 20,
     height: 500,
-    justifyContent: 'center',
-    position: 'absolute',
-    alignSelf: 'center',
+    justifyContent: "center",
+    position: "absolute",
+    alignSelf: "center",
     width: width * 0.9,
     backgroundColor: colors.bg,
     // backgroundColor: '$primaryColor',
-    borderRadius: 7,
+    borderRadius: 7
   },
 
   header: {
     fontSize: 16,
-    fontWeight: 'bold',
+    fontWeight: "bold",
     color: colors.darkPurple,
-    marginBottom: 5,
+    marginBottom: 5
   },
   desc: {
     color: colors.white,
     fontSize: 14,
     height: 50,
-    marginBottom: 10,
-  },
+    marginBottom: 10
+  }
 });

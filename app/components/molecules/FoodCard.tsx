@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 import {
   Image,
   ImageBackground,
@@ -6,64 +6,61 @@ import {
   Text,
   TouchableOpacity,
   TouchableWithoutFeedback,
-  View,
-} from 'react-native';
-import nasiAyam from '../../assets/images/salad.jpg';
-import edit from '../../assets/images/editing.png';
-import Delete from '../../assets/images/bin.png';
-import FastImage from 'react-native-fast-image';
-import { GStyles } from '../../configs/styles';
-import { colors } from '../../configs/Const';
+  View
+} from "react-native";
+import FastImage from "react-native-fast-image";
+import { GStyles } from "../../configs/styles";
+import { colors } from "../../configs/Const";
 
 export const FoodCard = ({
-  onPress,
-  name,
-  price,
-  image,
-  desc,
-  editable = false,
-  onPressDelete,
-  onPressEdit,
-}) => {
+                           onPress,
+                           name,
+                           price,
+                           image,
+                           desc,
+                           editable = false,
+                           onPressDelete,
+                           onPressEdit
+                         }) => {
   return (
     <View style={styles.container}>
       <TouchableWithoutFeedback onPress={onPress}>
         <View style={styles.card}>
           <View>
             <ImageBackground
-              source={image !== undefined ? { uri: image } : nasiAyam}
+              source={image !== undefined ? { uri: image } : require("../../assets/images/salad.jpg")}
               style={{ height: 160 }}
               resizeMode={FastImage.resizeMode.cover}
               blurRadius={editable ? 10 : 0}>
               <View style={styles.containerPrice}>
-                <Text style={styles.textPrice}>{'RM ' + price}</Text>
+                <Text style={styles.textPrice}>{"RM " + price}</Text>
               </View>
               {editable && (
                 <View
                   style={{
-                    flexDirection: 'row',
+                    flexDirection: "row",
                     paddingVertical: 5,
                     marginTop: 20,
-                    alignSelf: 'center',
+                    alignSelf: "center"
                   }}>
                   <TouchableOpacity
                     style={styles.buttonDelete}
                     onPress={onPressDelete}>
-                    <Image style={styles.iconButton} source={Delete} />
+                    <Image style={styles.iconButton} source={require("../../assets/images/bin.png")} />
                     <Text style={styles.textButton}>Delete</Text>
                   </TouchableOpacity>
 
                   <TouchableOpacity
                     style={styles.buttonEdit}
                     onPress={onPressEdit}>
-                    <Image style={styles.iconButton} source={edit} />
+                    <Image style={styles.iconButton} source={require("../../assets/images/editing.png")} />
                     <Text style={styles.textButton}>Edits</Text>
                   </TouchableOpacity>
                 </View>
               )}
             </ImageBackground>
           </View>
-          <View style={{ flexDirection: 'row' }}>
+          <View style={{ flexDirection: "row" }}>
             <View style={styles.titleContainer}>
               <Text style={styles.title}>{name}</Text>
               <Text numberOfLines={3} style={styles.desc}>
@@ -80,85 +77,85 @@ const styles = StyleSheet.create({
   iconCategory: {
     width: 25,
     height: 25,
-    alignSelf: 'center',
+    alignSelf: "center"
   },
   iconButton: {
     width: 16,
     height: 16,
-    tintColor: 'white',
+    tintColor: "white",
     marginStart: 5,
-    alignSelf: 'center',
+    alignSelf: "center"
   },
   container: {
     ...GStyles.shadowContainer,
-    justifyContent: 'center',
+    justifyContent: "center",
     borderRadius: 10,
-    margin: 10,
+    margin: 10
   },
   textButton: {
     padding: 5,
     color: colors.white,
-    fontWeight: 'bold',
-    alignSelf: 'center',
-    fontSize: 14,
+    fontWeight: "bold",
+    alignSelf: "center",
+    fontSize: 14
   },
   card: {
     width: 220,
     height: 260,
-    alignSelf: 'baseline',
-    overflow: 'hidden',
-    paddingBottom: 10,
+    alignSelf: "baseline",
+    overflow: "hidden",
+    paddingBottom: 10
   },
   titleContainer: {
-    padding: 10,
+    padding: 10
   },
   desc: {
     color: colors.white,
     paddingTop: 5,
-    fontSize: 12,
+    fontSize: 12
   },
   title: {
     fontSize: 18,
-    fontWeight: 'bold',
-    color: colors.darkPurple,
+    fontWeight: "bold",
+    color: colors.darkPurple
   },
   containerIcon: {
-    flexDirection: 'row',
-    marginTop: 5,
+    flexDirection: "row",
+    marginTop: 5
   },
   containerPrice: {
-    flexDirection: 'row',
+    flexDirection: "row",
     borderRadius: 20,
     margin: 5,
     paddingHorizontal: 5,
     paddingVertical: 5,
     backgroundColor: colors.bg,
-    alignItems: 'center',
-    alignSelf: 'flex-start',
+    alignItems: "center",
+    alignSelf: "flex-start",
     marginStart: 10,
-    marginTop: 5,
+    marginTop: 5
   },
 
   textPrice: {
     padding: 2,
     color: colors.white,
-    fontWeight: 'bold',
-    fontSize: 12,
+    fontWeight: "bold",
+    fontSize: 12
   },
   buttonEdit: {
-    flexDirection: 'row',
+    flexDirection: "row",
     paddingVertical: 5,
     paddingHorizontal: 10,
     marginStart: 5,
     backgroundColor: colors.primary,
-    borderRadius: 15,
+    borderRadius: 15
   },
   buttonDelete: {
-    flexDirection: 'row',
+    flexDirection: "row",
     paddingVertical: 5,
     paddingHorizontal: 10,
     marginEnd: 5,
-    backgroundColor: 'red',
-    borderRadius: 15,
-  },
+    backgroundColor: "red",
+    borderRadius: 15
+  }
 });

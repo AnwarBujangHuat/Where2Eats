@@ -40,11 +40,11 @@ describe('RememberMe', () => {
     await element(by.id(TestIds.IFPassword)).clearText();
     await element(by.id(TestIds.IFPassword)).typeText('123456');
     await element(by.id(TestIds.BtnDone)).tap();
-    // await waitFor(element(by.id(TestIds.Home))).toBeVisible().withTimeout(200);
+    // await waitFor(element(by.id(TestIDs.Home))).toBeVisible().withTimeout(200);
   });
   it('successful Login with Stored Credentials', async() => {
     await element(by.id(TestIds.BtnDone)).tap();
-    // await expect(element(by.id(TestIds.Home))).toBeVisible();
+    // await expect(element(by.id(TestIDs.Home))).toBeVisible();
   });
   it('clear Credentials', async() => {
     await element(by.id(TestIds.BtnRememberMe)).tap();

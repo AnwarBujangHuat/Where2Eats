@@ -1,10 +1,13 @@
 import * as React from 'react';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import { Home, Login } from '../../screens';
+import {
+  Home,
+  Login,
+} from '../../screens';
 
 const Tab = createBottomTabNavigator();
 
-export default function BottomNavigationBar() {
+export default function BottomNavigationBar () {
   return (
     <Tab.Navigator
       screenOptions={{

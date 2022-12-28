@@ -1,53 +1,39 @@
-import React, { memo, useMemo, useState } from 'react';
-import {
-  FlatList,
-  ScrollView,
-  Text,
-  TextInput,
-  TouchableOpacity,
-  View,
-} from 'react-native';
-import Icon from '../atoms/Icon';
-import { find, isEmpty } from 'lodash';
-import Toggle from '../atoms/Toggle';
-import { colors } from '../../configs/Const';
-import { v4 as uuid } from 'uuid';
+import React, { memo, useMemo, useState } from "react";
+import { FlatList, ScrollView, Text, TextInput, TouchableOpacity, View } from "react-native";
+import Icon from "../atoms/Icon";
+import { find, isEmpty } from "lodash";
+import Toggle from "../atoms/Toggle";
+import { colors } from "../../configs/Const";
+import { v4 as uuid } from "uuid";
 
 const hitSlop = { top: 14, bottom: 14, left: 14, right: 14 };
-
-const kOptionsHeight = { width: '100%', maxHeight: 180 };
-
-const kOptionListViewStyle = {
-  width: '100%',
-  alignItems: 'center',
-  paddingVertical: 4,
-};
+const kOptionsHeight = { width: "100%", maxHeight: 180 };
 const renderItemStyle = { flexShrink: 1 };
 
 function SelectBox({
-  labelStyle,
-  containerStyle,
-  inputFilterContainerStyle,
-  inputFilterStyle,
-  optionsLabelStyle,
-  optionContainerStyle,
-  multiOptionContainerStyle,
-  multiOptionsLabelStyle,
-  multiListEmptyLabelStyle,
-  listEmptyLabelStyle,
-  selectedItemStyle,
-  listEmptyText = 'No results found',
-  ...props
-}) {
-  const [inputValue, setInputValue] = useState('');
+                     labelStyle,
+                     containerStyle,
+                     inputFilterContainerStyle,
+                     inputFilterStyle,
+                     optionsLabelStyle,
+                     optionContainerStyle,
+                     multiOptionContainerStyle,
+                     multiOptionsLabelStyle,
+                     multiListEmptyLabelStyle,
+                     listEmptyLabelStyle,
+                     selectedItemStyle,
+                     listEmptyText = "No results found",
+                     ...props
+                   }) {
+  const [inputValue, setInputValue] = useState("");
 
   const [showOptions, setShowOptions] = useState(false);
 
   function renderLabel(item) {
     const kOptionsLabelStyle = {
       fontSize: 17,
-      color: 'rgba(60, 60, 67, 0.6)',
-      ...optionsLabelStyle,
+      color: "rgba(60, 60, 67, 0.6)",
+      ...optionsLabelStyle
     };
     return <Text style={kOptionsLabelStyle}>{item}</Text>;
   }
@@ -55,16 +41,16 @@ function SelectBox({
   function renderItem({ item }) {
     const { isMulti, onChange, onMultiSelect, selectedValues } = props;
     const kOptionContainerStyle = {
-      borderColor: '#dadada',
+      borderColor: "#dadada",
       borderBottomWidth: 1,
-      width: '100%',
-      flexDirection: 'row',
-      alignItems: 'center',
-      background: '#fff',
+      width: "100%",
+      flexDirection: "row",
+      alignItems: "center",
+      background: "#fff",
       paddingVertical: 12,
       paddingRight: 10,
-      justifyContent: 'space-between',
-      ...optionContainerStyle,
+      justifyContent: "space-between",
+      ...optionContainerStyle
     };
     return (
       <View style={kOptionContainerStyle}>
@@ -112,22 +98,22 @@ function SelectBox({
     const { onTapClose, options } = props;
     const label = find(options, o => o.id === item.id);
     const kMultiOptionContainerStyle = {
-      flexDirection: 'row',
+      flexDirection: "row",
       borderRadius: 20,
       paddingVertical: 5,
       paddingRight: 5,
       paddingLeft: 10,
       marginRight: 4,
-      alignItems: 'center',
-      justifyContent: 'center',
+      alignItems: "center",
+      justifyContent: "center",
       backgroundColor: colors.primary,
       flexGrow: 1,
-      ...multiOptionContainerStyle,
+      ...multiOptionContainerStyle
     };
     const kMultiOptionsLabelStyle = {
       fontSize: 10,
       color: colors.white,
-      ...multiOptionsLabelStyle,
+      ...multiOptionsLabelStyle
     };
     return (
       <View style={kMultiOptionContainerStyle}>
@@ -136,7 +122,7 @@ function SelectBox({
           style={{ marginLeft: 15 }}
           hitSlop={hitSlop}
           onPress={onPressItem()}>
-          <Icon name="closeCircle" fill="#fff" width={21} height={21} />
+          <Icon name="closeCircle" fill="#fff" width={21} height={21} viewBox={"0 0 12 9"} />
         </TouchableOpacity>
       </View>
     );
@@ -149,9 +135,9 @@ function SelectBox({
   const {
     selectIcon,
     label,
-    inputPlaceholder = 'Select',
+    inputPlaceholder = "Select",
     hideInputFilter,
-    width = '100%',
+    width = "100%",
     isMulti,
     options,
     value,
@@ -161,27 +147,26 @@ function SelectBox({
     toggleIconColor = colors.primary,
     searchInputProps,
     multiSelectInputFieldProps,
-    listOptionProps = {},
+    listOptionProps = {}
   } = props;
   const filteredSuggestions = useMemo(
     () =>
       options.filter(
         suggestion =>
-          suggestion.item.toLowerCase().indexOf(inputValue.toLowerCase()) > -1,
+          suggestion.item.toLowerCase().indexOf(inputValue.toLowerCase()) > -1
       ),
-    [inputValue, options],
+    [inputValue, options]
   );
 
   function multiListEmptyComponent() {
     const kMultiListEmptyLabelStyle = {
       fontSize: 17,
-      color: 'rgba(60, 60, 67, 0.3)',
-      ...multiListEmptyLabelStyle,
+      color: "rgba(60, 60, 67, 0.3)",
+      ...multiListEmptyLabelStyle
     };
     return (
       <TouchableOpacity
-        width="100%"
-        style={{ flexGrow: 1, width: '100%' }}
+        style={{ flexGrow: 1, width: "100%" }}
         hitSlop={hitSlop}
         onPress={onPressShowOptions()}>
         <Text style={kMultiListEmptyLabelStyle}>{inputPlaceholder}</Text>
@@ -192,11 +177,15 @@ function SelectBox({
   function optionListEmpty() {
     const kListEmptyLabelStyle = {
       fontSize: 17,
-      color: 'rgba(60, 60, 67, 0.6)',
-      ...listEmptyLabelStyle,
+      color: "rgba(60, 60, 67, 0.6)",
+      ...listEmptyLabelStyle
     };
     return (
-      <View style={kOptionListViewStyle}>
+      <View style={{
+        width: "100%",
+        alignItems: "center",
+        paddingVertical: 4
+      }}>
         <Text style={kListEmptyLabelStyle}>{listEmptyText}</Text>
       </View>
     );
@@ -204,27 +193,27 @@ function SelectBox({
 
   const kLabelStyle = {
     fontSize: 12,
-    color: 'rgba(60, 60, 67, 0.6)',
+    color: "rgba(60, 60, 67, 0.6)",
     paddingBottom: 4,
-    ...labelStyle,
+    ...labelStyle
   };
 
   const kContainerStyle = {
-    flexDirection: 'row',
-    width: '100%',
-    borderColor: '#ddd',
+    flexDirection: "row",
+    width: "100%",
+    borderColor: "#ddd",
     borderBottomWidth: 1,
     paddingTop: 6,
     paddingRight: 20,
     paddingBottom: 8,
-    ...containerStyle,
+    ...containerStyle
   };
 
   return (
     <>
       <View
         style={{
-          width,
+          width
         }}>
         <Text style={kLabelStyle}>{label}</Text>
         <View style={kContainerStyle}>
@@ -254,8 +243,10 @@ function SelectBox({
               selectIcon
             ) : (
               <Icon
-                name={showOptions ? 'upArrow' : 'downArrow'}
+                name={showOptions ? "upArrow" : "downArrow"}
                 fill={arrowIconColor}
+                viewBox={"0 0 12 9"} height={12}
+                width={9}
               />
             )}
           </TouchableOpacity>
@@ -289,21 +280,21 @@ function SelectBox({
   function kSelectedItemStyle() {
     return {
       fontSize: 17,
-      color: isEmpty(value.item) ? 'rgba(60, 60, 67, 0.3)' : colors.white,
-      ...selectedItemStyle,
+      color: isEmpty(value.item) ? "rgba(60, 60, 67, 0.3)" : colors.white,
+      ...selectedItemStyle
     };
   }
 
   function HeaderComponent() {
     const kInputFilterContainerStyle = {
-      width: '100%',
+      width: "100%",
       borderBottomWidth: 1,
-      borderBottomColor: '#ddd',
-      flexDirection: 'row',
-      alignItems: 'center',
+      borderBottomColor: "#ddd",
+      flexDirection: "row",
+      alignItems: "center",
       paddingRight: 18,
-      justifyContent: 'space-between',
-      ...inputFilterContainerStyle,
+      justifyContent: "space-between",
+      ...inputFilterContainerStyle
     };
     const kInputFilterStyle = {
       paddingVertical: 14,
@@ -311,7 +302,7 @@ function SelectBox({
       color: colors.white,
       fontSize: 12,
       flexGrow: 1,
-      ...inputFilterStyle,
+      ...inputFilterStyle
     };
     return (
       <>
@@ -325,7 +316,9 @@ function SelectBox({
               placeholderTextColor={colors.white}
               {...searchInputProps}
             />
-            <Icon name="searchBoxIcon" fill={searchIconColor} />
+            <Icon name="searchBoxIcon" fill={searchIconColor}
+                  viewBox={"0 0 12 9"} height={12}
+                  width={9} />
           </View>
         )}
         <ScrollView keyboardShouldPersistTaps="always" />

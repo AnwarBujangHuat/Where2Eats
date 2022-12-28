@@ -1,4 +1,7 @@
-import { createEntityAdapter, createSlice } from '@reduxjs/toolkit';
+import {
+  createEntityAdapter,
+  createSlice,
+} from '@reduxjs/toolkit';
 import {
   addFoodItemFirebase,
   AddOne,

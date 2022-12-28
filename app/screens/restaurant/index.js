@@ -1,4 +1,7 @@
-import React, { useEffect, useState } from 'react';
+import React, {
+  useEffect,
+  useState,
+} from 'react';
 import { ConstString } from '../../configs/Strings';
 import { useSelector } from 'react-redux';
 import { icons } from '../../configs/Const';

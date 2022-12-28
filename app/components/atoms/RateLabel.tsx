@@ -1,14 +1,6 @@
-import {
-  Image,
-  StyleSheet,
-  Text,
-  TouchableOpacity,
-  View,
-} from 'react-native';
-import React from 'react';
-import startIcon from '../../assets/images/star.png';
-import startIcon2 from '../../assets/images/star2.png';
-import { colors } from '../../configs/Const';
+import { Image, StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import React from "react";
+import { colors } from "../../configs/Const";
 
 export const RateLabel = ({ rating, goToRating }) => {
   const restaurantRate = rating?.toFixed(1);
@@ -17,7 +9,7 @@ export const RateLabel = ({ rating, goToRating }) => {
       <View style={styles.container}>
         <Text style={styles.textRate}>{restaurantRate}</Text>
         <Image
-          source={rating > 4.2 ? startIcon2 : startIcon}
+          source={rating > 4.2 ? require("../../assets/images/star2.png") : require("../../assets/images/star.png")}
           style={styles.icon}
         />
       </View>
@@ -27,23 +19,23 @@ export const RateLabel = ({ rating, goToRating }) => {
 const styles = StyleSheet.create({
   icon: {
     width: 15,
-    height: 15,
+    height: 15
   },
   container: {
-    flexDirection: 'row',
+    flexDirection: "row",
     borderRadius: 20,
     margin: 5,
     paddingHorizontal: 5,
     paddingVertical: 5,
     backgroundColor: colors.bg,
-    alignItems: 'center',
-    alignSelf: 'flex-start',
+    alignItems: "center",
+    alignSelf: "flex-start",
     marginStart: 10,
-    marginTop: 5,
+    marginTop: 5
   },
   textRate: {
     padding: 2,
     color: colors.white,
-    fontWeight: 'bold',
-  },
+    fontWeight: "bold"
+  }
 });

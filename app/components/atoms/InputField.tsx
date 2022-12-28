@@ -1,7 +1,7 @@
-import React from 'react';
+import React from "react";
 
-import { StyleSheet, TextInput } from 'react-native';
-import { colors } from '../../configs/Const';
+import { StyleSheet, TextInput } from "react-native";
+import { colors } from "../../configs/Const";
 
 export const InputField = ({ placeholder, multiline, onChange, value }) => {
   return (
@@ -11,8 +11,6 @@ export const InputField = ({ placeholder, multiline, onChange, value }) => {
       value={value}
       multiline={multiline}
       onChangeText={text => onChange(text)}
-      overflow="hidden"
-      color={colors.white}
       placeholderTextColor={colors.white}
       keyboardAppearance="dark"
       autoCorrect={false}
@@ -22,14 +20,15 @@ export const InputField = ({ placeholder, multiline, onChange, value }) => {
 const styles = StyleSheet.create({
   input: {
     fontSize: 14,
-    fontWeight: 'normal',
+    fontWeight: "normal",
+    color: colors.white,
     borderWidth: 1,
     paddingHorizontal: 5,
     borderBottomColor: colors.primary,
     borderColor: colors.secondBg,
-    textAlignVertical: 'center',
+    textAlignVertical: "center",
     backgroundColor: colors.secondBg,
     borderRadius: 5,
-    paddingVertical: 15,
-  },
+    paddingVertical: 15
+  }
 });
