@@ -5,10 +5,10 @@ import {
   StyleSheet,
   View,
 } from 'react-native';
-import { Header } from 'components/molecules/Header';
-import personIcon from 'assets/images/programmer.png';
-import { SearchBar } from 'components/molecules/SearchBar';
-import search from 'assets/images/search.png';
+import { Header } from '../../components/molecules/Header';
+import personIcon from '../../assets/images/programmer.png';
+import { SearchBar } from '../../components/molecules/SearchBar';
+import search from '../../assets/images/search.png';
 import {
   colors,
   Const,

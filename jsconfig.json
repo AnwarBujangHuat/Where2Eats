@@ -3,32 +3,35 @@
     "baseUrl": ".",
     "paths": {
       "images/*": [
-        "./app/assets/images/*"
+        "./assets/images/*"
       ],
       "lottie/*": [
-        "./app/assets/lottie/*"
+        "./assets/lottie/*"
       ],
       "atoms/*": [
-        "./app/components/atoms/*"
+        "./components/atoms/*"
       ],
       "molecules/*": [
-        "./app/components/molecules/*"
+        "./components/molecules/*"
       ],
       "config/*": [
-        "./app/config/*"
+        "./config/*"
       ],
       "model/*": [
-        "./app/model/*"
+        "./model/*"
       ],
       "navigation/*": [
-        "./app/navigation/*"
+        "./navigation/*"
       ],
       "screens/*": [
-        "./app/screens/*"
+        "./screens/*"
       ],
       "store/*": [
-        "./app/store/*"
+        "./store/*"
       ]
     }
-  }
+  },
+  "exclude": [
+    "node_modules"
+  ]
 }
