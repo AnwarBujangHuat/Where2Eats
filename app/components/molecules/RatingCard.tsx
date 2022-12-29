@@ -7,8 +7,8 @@ import {
 } from "react-native";
 import FastImage from "react-native-fast-image";
 import { RateLabel } from "../atoms/RateLabel";
-import { GStyles } from "../../configs/styles";
-import { colors } from "../../configs/Const";
+import { GStyles } from "configs/styles";
+import { colors } from "configs/Const";
 
 export const RatingCard = ({ userReview }) => {
   const image = undefined;

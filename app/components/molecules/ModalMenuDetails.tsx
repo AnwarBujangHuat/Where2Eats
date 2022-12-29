@@ -9,9 +9,9 @@ import {
 } from "react-native";
 import FastImage from "react-native-fast-image";
 import Modal from "react-native-modal";
-import { colors } from "../../configs/Const";
-import { GStyles } from "../../configs/styles";
-import { foodItem } from "../../model/foodItem";
+import { colors } from "configs/Const";
+import { GStyles } from "configs/styles";
+import { foodItem } from "model/foodItem";
 
 const { width } = Dimensions.get("window");
 

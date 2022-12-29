@@ -1,9 +1,9 @@
 import { StyleSheet, View } from "react-native";
 import React from "react";
 import { FloatingAction } from "react-native-floating-action";
-import { ConstString } from "../..//configs/Strings";
-import { colors, icons } from "../../configs/Const";
-import { GStyles } from "../../configs/styles";
+import { ConstString } from "configs/Strings";
+import { colors, icons } from "configs/Const";
+import { GStyles } from "configs/styles";
 
 const actions = [
   {

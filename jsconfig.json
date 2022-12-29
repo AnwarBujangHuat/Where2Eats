@@ -1,54 +1,33 @@
 {
   "compilerOptions": {
-    "baseUrl": "./app",
+    "baseUrl": ".",
     "paths": {
-      "apis": [
-        "./apis"
+      "images/*": [
+        "./app/assets/images/*"
       ],
-      "components": [
-        "./components"
+      "lottie/*": [
+        "./app/assets/lottie/*"
       ],
-      "configs": [
-        "./configs"
+      "atoms/*": [
+        "./app/components/atoms/*"
       ],
-      "constants": [
-        "./constants"
+      "molecules/*": [
+        "./app/components/molecules/*"
       ],
-      "hooks": [
-        "./hooks"
+      "config/*": [
+        "./app/config/*"
       ],
-      "navigations": [
-        "./navigations"
+      "model/*": [
+        "./app/model/*"
       ],
-      "screens": [
-        "./screens"
+      "navigation/*": [
+        "./app/navigation/*"
       ],
-      "stores": [
-        "./stores"
+      "screens/*": [
+        "./app/screens/*"
       ],
-      "utils": [
-        "./utils"
-      ],
-      "assets": [
-        "./assets"
-      ],
-      "atoms": [
-        "./components/atoms"
-      ],
-      "molecules": [
-        "./components/molecules"
-      ],
-      "organisms": [
-        "./components/organisms"
-      ],
-      "templates": [
-        "./components/templates"
-      ],
-      "auth": [
-        "./auth"
-      ],
-      "softToken": [
-        "./softToken"
+      "store/*": [
+        "./app/store/*"
       ]
     }
   }

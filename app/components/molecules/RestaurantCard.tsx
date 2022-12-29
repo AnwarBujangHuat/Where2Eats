@@ -7,13 +7,13 @@ import {
   TouchableWithoutFeedback,
   View
 } from "react-native";
-import { RateLabel } from "../atoms/RateLabel";
+import { RateLabel } from "atoms/RateLabel";
 import {
   colors,
   icons
-} from "../../configs/Const";
+} from "configs/Const";
 import FastImage from "react-native-fast-image";
-import { GStyles } from "../../configs/styles";
+import { GStyles } from "configs/styles";
 
 export const RestaurantCard = ({
                                  onPress,

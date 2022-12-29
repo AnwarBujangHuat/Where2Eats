@@ -9,10 +9,10 @@ import {
 import {
   getCurrentRestaurant,
   getUser,
-} from '../../store/selector';
+} from 'store/selector';
 import { Const } from '../../configs/Const';
 import { Alert } from 'react-native';
-import { updateRestaurantInfoFirestore } from '../../store/thunks';
+import { updateRestaurantInfoFirestore } from 'store/thunks';
 import { firebase } from '../../../src/firebase/config';
 
 let initialIndex = 0;

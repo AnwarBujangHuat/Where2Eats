@@ -9,18 +9,18 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
-import { BackButton } from '../../../components/atoms/BackButton';
-import { ConstString } from '../../../configs/Strings';
+import { BackButton } from 'atoms/BackButton';
+import { ConstString } from 'configs/Strings';
 import { xorBy } from 'lodash';
 import addIcon from '../../../assets/images/plus.png';
-import { ModalMenu } from '../../../components/molecules/ModalMenu';
-import { ModalUploading } from '../../../components/molecules/ModalUploading';
-import { ModalMenuDetails } from '../../../components/molecules/ModalMenuDetails';
-import { FoodCard } from '../../../components/molecules/FoodCard';
-import { SearchButton } from '../../../components/atoms/SearchButton';
-import { GStyles } from '../../../configs/styles';
-import { colors } from '../../../configs/Const';
-import MultiPickerBox from '../../../components/molecules/MultiPickerBox';
+import { ModalMenu } from 'molecules/ModalMenu';
+import { ModalUploading } from 'molecules/ModalUploading';
+import { ModalMenuDetails } from 'molecules/ModalMenuDetails';
+import { FoodCard } from 'molecules/FoodCard';
+import { SearchButton } from 'atoms/SearchButton';
+import { GStyles } from 'configs/styles';
+import { colors } from 'configs/Const';
+import MultiPickerBox from 'molecules/MultiPickerBox';
 
 export const SetupMenuComponents = props => {
   const {

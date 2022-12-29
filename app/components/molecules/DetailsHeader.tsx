@@ -10,8 +10,8 @@ import React from "react";
 import { BackButton } from "atoms/BackButton";
 import { RateLabel } from "atoms/RateLabel";
 import { SearchButton } from "atoms/SearchButton";
-import { GStyles } from "../../configs/styles";
-import { colors } from "../../configs/Const";
+import { GStyles } from "configs/styles";
+import { colors } from "configs/Const";
 
 const { width } = Dimensions.get("window");
 

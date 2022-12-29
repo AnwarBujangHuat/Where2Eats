@@ -11,11 +11,11 @@ import {
   View
 } from "react-native";
 import Modal from "react-native-modal";
-import { ConstString } from "../../configs/Strings";
+import { ConstString } from "configs/Strings";
 import { launchImagePicker } from "../../ImagePicker";
-import { colors } from "../../configs/Const";
-import { GStyles } from "../../configs/styles";
-import { image } from "../../model/image";
+import { colors } from "configs/Const";
+import { GStyles } from "configs/styles";
+import { image } from "model/image";
 
 const { width } = Dimensions.get("window");
 export const ModalMenu = ({

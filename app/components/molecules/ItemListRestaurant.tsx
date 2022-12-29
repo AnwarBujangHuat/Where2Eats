@@ -1,26 +1,26 @@
-import * as React from 'react';
+import * as React from "react";
 import {
   Dimensions,
   Image,
   StyleSheet,
   Text,
   TouchableWithoutFeedback,
-  View,
-} from 'react-native';
+  View
+} from "react-native";
 import {
   colors,
-  icons,
-} from '../../configs/Const';
-import { GStyles } from '../../configs/styles';
+  icons
+} from "configs/Const";
+import { GStyles } from "configs/styles";
 
 export const ItemListRestaurant = ({ onPress, name, category, index }) => {
   return (
     <View style={styles.container}>
       <TouchableWithoutFeedback onPress={onPress}>
         <View style={styles.card}>
-          <View style={{ flexDirection: 'row' }}>
+          <View style={{ flexDirection: "row" }}>
             <View style={styles.titleContainer}>
-              <Text style={styles.title}>{index + 1 + '. ' + name}</Text>
+              <Text style={styles.title}>{index + 1 + ". " + name}</Text>
             </View>
             <Image
               source={category ? icons[category] : icons.def}
@@ -36,34 +36,34 @@ const styles = StyleSheet.create({
   iconCategory: {
     width: 20,
     height: 20,
-    alignSelf: 'center',
+    alignSelf: "center"
   },
   container: {
-    justifyContent: 'center',
+    justifyContent: "center",
     marginTop: 10,
     marginBottom: 5,
-    alignSelf: 'center',
-    ...GStyles.shadowContainer,
+    alignSelf: "center",
+    ...GStyles.shadowContainer
   },
   card: {
     backgroundColor: colors.secondBg,
     borderRadius: 10,
-    width: Dimensions.get('screen').width - 50,
-    overflow: 'hidden',
+    width: Dimensions.get("screen").width - 50,
+    overflow: "hidden",
     padding: 5,
-    ...GStyles.shadowContainer,
+    ...GStyles.shadowContainer
   },
   titleContainer: {
     padding: 10,
-    width: '90%',
+    width: "90%"
   },
   title: {
     fontSize: 14,
-    fontWeight: 'bold',
-    color: colors.white,
+    fontWeight: "bold",
+    color: colors.white
   },
   containerIcon: {
-    flexDirection: 'row',
-    marginTop: 5,
-  },
+    flexDirection: "row",
+    marginTop: 5
+  }
 });

@@ -10,11 +10,11 @@ import {
 import LottieView from "lottie-react-native";
 import Modal from "react-native-modal";
 
-import Uploading from "../../assets/lottie/uploading.json";
-import Sleepy from "../../assets/lottie/sleepycat.json";
-import { ConstString } from "../../configs/Strings";
-import { colors } from "../../configs/Const";
-import { GStyles } from "../../configs/styles";
+import Uploading from "assets/lottie/uploading.json";
+import Sleepy from "assets/lottie/sleepycat.json";
+import { ConstString } from "configs/Strings";
+import { colors } from "configs/Const";
+import { GStyles } from "configs/styles";
 
 const { width } = Dimensions.get("window");
 let icon;

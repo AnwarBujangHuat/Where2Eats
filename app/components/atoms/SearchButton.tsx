@@ -1,7 +1,7 @@
 import { Dimensions, Image, StyleSheet, TextInput, TouchableOpacity } from "react-native";
 import React from "react";
-import { colors } from "../../configs/Const";
-import { GStyles } from "../../configs/styles";
+import { colors } from "configs/Const";
+import { GStyles } from "configs/styles";
 
 const { width } = Dimensions.get("window");
 

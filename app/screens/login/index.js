@@ -13,10 +13,10 @@ import {
   fetchUserInformation,
   populateUserData,
   rememberMe,
-} from '../../store/thunks';
+} from 'store/thunks';
 import { GoogleSignin } from '../../../src/SignInOption/config';
-import { getInfo } from '../../store/selector';
-import { routes } from '../../navigation/routes';
+import { getInfo } from 'store/selector';
+import { routes } from 'navigation/routes';
 
 export const Login = ({ navigation }) => {
   const { EMAIL, PASSWORD } = useSelector(getInfo);

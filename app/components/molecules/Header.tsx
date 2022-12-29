@@ -4,14 +4,14 @@ import {
   StyleSheet,
   Text,
   TouchableOpacity,
-  View,
-} from 'react-native';
-import React from 'react';
-import { ConstString } from '../../configs/Strings';
-import { colors } from '../../configs/Const';
-import TestIDs from '../../../e2e/TestIDs';
+  View
+} from "react-native";
+import React from "react";
+import { ConstString } from "configs/Strings";
+import { colors } from "configs/Const";
+import TestIDs from "../../../e2e/TestIDs";
 
-const { width } = Dimensions.get('window');
+const { width } = Dimensions.get("window");
 
 export const Header = ({ source, onPress, title }) => {
   return (
@@ -25,19 +25,19 @@ export const Header = ({ source, onPress, title }) => {
 };
 const styles = StyleSheet.create({
   section: {
-    flexDirection: 'row',
+    flexDirection: "row",
     maxHeight: width * 0.15,
-    alignItems: 'center',
+    alignItems: "center"
   },
   icons: {
     height: 35,
     width: 35,
     marginHorizontal: 20,
-    borderRadius: 40,
+    borderRadius: 40
   },
   title: {
     fontSize: 15,
     color: colors.white,
-    fontWeight: 'bold',
-  },
+    fontWeight: "bold"
+  }
 });

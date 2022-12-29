@@ -1,7 +1,7 @@
 import { Image, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import React from "react";
-import { colors, icons } from "../../configs/Const";
-import { GStyles } from "../../configs/styles";
+import { colors, icons } from "configs/Const";
+import { GStyles } from "configs/styles";
 
 export const SocialButton = ({ tesId, onPress, icon }) => {
   return (

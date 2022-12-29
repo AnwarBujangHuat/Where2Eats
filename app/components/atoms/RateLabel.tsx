@@ -1,6 +1,6 @@
 import { Image, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import React from "react";
-import { colors } from "../../configs/Const";
+import { colors } from "configs/Const";
 
 export const RateLabel = ({ rating, goToRating }) => {
   const restaurantRate = rating?.toFixed(1);

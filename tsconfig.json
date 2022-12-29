@@ -5,8 +5,29 @@
       "images/*": [
         "./assets/images/*"
       ],
+      "lottie/*": [
+        "./assets/lottie/*"
+      ],
       "atoms/*": [
         "./components/atoms/*"
+      ],
+      "molecules/*": [
+        "./components/molecules/*"
+      ],
+      "config/*": [
+        "./config/*"
+      ],
+      "model/*": [
+        "./model/*"
+      ],
+      "navigation/*": [
+        "./navigation/*"
+      ],
+      "screens/*": [
+        "./screens/*"
+      ],
+      "store/*": [
+        "./store/*"
       ]
     },
     "target": "esnext",

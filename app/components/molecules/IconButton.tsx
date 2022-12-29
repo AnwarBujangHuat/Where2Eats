@@ -2,34 +2,34 @@ import {
   StyleSheet,
   Text,
   TouchableOpacity,
-  View,
-} from 'react-native';
-import React from 'react';
-import { colors } from '../../configs/Const';
+  View
+} from "react-native";
+import React from "react";
+import { colors } from "configs/Const";
 
 export const IconButton = ({ title, onPress, buttontitle }) => {
   return (
     <View style={styles.section}>
       <Text style={styles.title}>{title}</Text>
       <TouchableOpacity onPress={onPress}>
-        <Text style={styles.buttonText}>{' ' + buttontitle}</Text>
+        <Text style={styles.buttonText}>{" " + buttontitle}</Text>
       </TouchableOpacity>
     </View>
   );
 };
 const styles = StyleSheet.create({
   section: {
-    flexDirection: 'row',
+    flexDirection: "row",
     borderRadius: 10,
     marginVertical: 10,
-    alignSelf: 'center',
+    alignSelf: "center"
   },
   buttonText: {
     color: colors.primary,
-    textAlign: 'center',
+    textAlign: "center"
   },
   title: {
     color: colors.white,
-    textAlign: 'center',
-  },
+    textAlign: "center"
+  }
 });

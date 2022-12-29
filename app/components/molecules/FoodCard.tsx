@@ -9,8 +9,8 @@ import {
   View
 } from "react-native";
 import FastImage from "react-native-fast-image";
-import { GStyles } from "../../configs/styles";
-import { colors } from "../../configs/Const";
+import { GStyles } from "configs/styles";
+import { colors } from "configs/Const";
 
 export const FoodCard = ({
                            onPress,
