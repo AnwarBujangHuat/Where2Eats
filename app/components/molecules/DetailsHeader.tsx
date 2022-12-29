@@ -7,9 +7,9 @@ import {
   View
 } from "react-native";
 import React from "react";
-import { BackButton } from "../atoms/BackButton";
-import { RateLabel } from "../atoms/RateLabel";
-import { SearchButton } from "../atoms/SearchButton";
+import { BackButton } from "atoms/BackButton";
+import { RateLabel } from "atoms/RateLabel";
+import { SearchButton } from "atoms/SearchButton";
 import { GStyles } from "../../configs/styles";
 import { colors } from "../../configs/Const";
 

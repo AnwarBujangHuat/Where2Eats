@@ -1,5 +1,14 @@
 {
   "compilerOptions": {
+    "baseUrl": "./app",
+    "paths": {
+      "images/*": [
+        "./assets/images/*"
+      ],
+      "atoms/*": [
+        "./components/atoms/*"
+      ]
+    },
     "target": "esnext",
     "lib": [
       "dom",
