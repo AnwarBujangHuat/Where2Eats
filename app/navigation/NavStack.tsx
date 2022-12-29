@@ -7,34 +7,28 @@ import {
   Register,
   Restaurant,
   SetupMenu,
-  WheelOfFortune,
-} from '../screens';
-import * as React from 'react';
-import { createStackNavigator } from '@react-navigation/stack';
-import { routes } from './routes';
+  WheelOfFortune
+} from "../screens";
+import * as React from "react";
+import { routes } from "../navigation/routes";
+import { createStackNavigator } from "@react-navigation/stack";
 
 const Stack = createStackNavigator();
 export const NavStack = () => {
-  const forFade = ({ current }) => ({
-    cardStyle: {
-      opacity: current.progress,
-    },
-  });
   return (
     <Stack.Navigator
       // initialRouteName={ConstString.REGISTER}
       initialRouteName={routes.LOGIN}
       screenOptions={{
         headerShown: false,
-        gestureEnabled: false,
+        gestureEnabled: false
       }}>
       <Stack.Screen name={routes.LOGIN} component={Login} options={{}} />
       <Stack.Screen
         name={routes.MODAL}
         component={ModalScreen}
         options={{
-          presentation: 'transparentModal',
-          cardStyleInterpolator: forFade,
+          presentation: "transparentModal"
         }}
       />
       {/*<Stack.Screen name={ConstString.BOTTOM} component={BottomNavigationBar} />*/}

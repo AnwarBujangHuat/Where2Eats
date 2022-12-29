@@ -1,31 +1,29 @@
-import * as React from 'react';
+import * as React from "react";
 import {
   Dimensions,
   Image,
   StyleSheet,
   Text,
   TouchableWithoutFeedback,
-  View,
-} from 'react-native';
-import { RateLabel } from '../atoms/RateLabel';
-import locationIcon from '../../assets/images/location.png';
+  View
+} from "react-native";
+import { RateLabel } from "../atoms/RateLabel";
 import {
   colors,
-  icons,
-} from '../../configs/Const';
-import addImage from '../../assets/images/addImage.png';
-import FastImage from 'react-native-fast-image';
-import { GStyles } from '../../configs/styles';
+  icons
+} from "../../configs/Const";
+import FastImage from "react-native-fast-image";
+import { GStyles } from "../../configs/styles";
 
 export const RestaurantCard = ({
-  onPress,
-  name,
-  category,
-  address,
-  description,
-  rate,
-  image,
-}) => {
+                                 onPress,
+                                 name,
+                                 category,
+                                 address,
+                                 description,
+                                 rate,
+                                 image
+                               }) => {
   return (
     <View style={styles.container}>
       <TouchableWithoutFeedback onPress={onPress}>
@@ -36,22 +34,22 @@ export const RestaurantCard = ({
                 image
                   ? {
                     uri: image,
-                    priority: FastImage.priority.normal,
+                    priority: FastImage.priority.normal
                   }
-                  : addImage
+                  : require("../../assets/images/addImage.png")
               }
-              style={{ height: 140, marginBottom: 5, resizeMode: 'contain' }}>
-              <RateLabel rating={rate} />
+              style={{ height: 140, marginBottom: 5 }}>
+              <RateLabel rating={rate} goToRating={undefined} />
             </FastImage>
           </View>
-          <View style={{ flexDirection: 'row' }}>
+          <View style={{ flexDirection: "row" }}>
             <View style={styles.titleContainer}>
               <Text style={styles.title}>{name}</Text>
               <Text numberOfLines={2} style={styles.desc}>
-                {category + ' - ' + description}
+                {category + " - " + description}
               </Text>
               <View style={styles.containerIcon}>
-                <Image style={styles.icon} source={locationIcon} />
+                <Image style={styles.icon} source={require("../../assets/images/location.png")} />
                 <Text style={styles.desc}>{address}</Text>
               </View>
             </View>
@@ -69,45 +67,45 @@ const styles = StyleSheet.create({
   icon: {
     width: 11,
     height: 11,
-    alignSelf: 'center',
+    alignSelf: "center",
     marginTop: 5,
-    marginEnd: 5,
+    marginEnd: 5
   },
   iconCategory: {
     width: 25,
     height: 25,
-    alignSelf: 'center',
+    alignSelf: "center"
   },
   container: {
-    justifyContent: 'center',
+    justifyContent: "center",
     margin: 15,
     borderRadius: 10,
-    ...GStyles.shadowContainer,
+    ...GStyles.shadowContainer
   },
   card: {
     backgroundColor: colors.secondBg,
     borderRadius: 10,
-    width: Dimensions.get('screen').width - 30,
+    width: Dimensions.get("screen").width - 30,
     height: 250,
-    overflow: 'hidden',
-    paddingBottom: 10,
+    overflow: "hidden",
+    paddingBottom: 10
   },
   titleContainer: {
     padding: 10,
-    width: '90%',
+    width: "90%"
   },
   desc: {
     color: colors.white,
     paddingTop: 5,
-    fontSize: 12,
+    fontSize: 12
   },
   title: {
     fontSize: 18,
-    fontWeight: 'bold',
-    color: colors.darkPurple,
+    fontWeight: "bold",
+    color: colors.darkPurple
   },
   containerIcon: {
-    flexDirection: 'row',
-    marginTop: 5,
-  },
+    flexDirection: "row",
+    marginTop: 5
+  }
 });

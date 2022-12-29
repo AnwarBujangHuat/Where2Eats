@@ -1,29 +1,28 @@
-import React from 'react';
+import React from "react";
 import {
   Dimensions,
   SafeAreaView,
   StyleSheet,
   Text,
   TouchableOpacity,
-  View,
-} from 'react-native';
-import FastImage from 'react-native-fast-image';
-import Modal from 'react-native-modal';
-import nasiAyam from '../../assets/images/NasiAyam.jpg';
-import { colors } from '../../configs/Const';
-import { GStyles } from '../../configs/styles';
+  View
+} from "react-native";
+import FastImage from "react-native-fast-image";
+import Modal from "react-native-modal";
+import { colors } from "../../configs/Const";
+import { GStyles } from "../../configs/styles";
+import { foodItem } from "../../model/foodItem";
 
-const { width } = Dimensions.get('window');
+const { width } = Dimensions.get("window");
 
-export const ModalMenuDetails = ({ closeModal, isModalVisible, foodItem }) => {
-  const { image, name, price, desc } = foodItem;
+export const ModalMenuDetails = ({ closeModal, isModalVisible, foodItem: item }) => {
+  const { image, name, price, desc }: foodItem = item;
   return (
     <>
       {isModalVisible && (
         <SafeAreaView style={styles.screen}>
           <Modal
-            animationType="none"
-            transparent
+            animationIn={"slideInUp"}
             isVisible={isModalVisible}
             presentationStyle="overFullScreen"
             onBackdropPress={closeModal}
@@ -35,33 +34,33 @@ export const ModalMenuDetails = ({ closeModal, isModalVisible, foodItem }) => {
                   image !== undefined
                     ? {
                       uri: image,
-                      priority: FastImage.priority.high,
+                      priority: FastImage.priority.high
                     }
-                    : nasiAyam
+                    : require("../../assets/images/NasiAyam.jpg")
                 }
                 style={{
-                  height: 270,
+                  height: 270
                 }}
               />
               <View style={styles.container}>
                 <Text style={styles.header}>{name}</Text>
-                <Text style={styles.price}>{'RM' + price}</Text>
+                <Text style={styles.price}>{"RM" + price}</Text>
                 <Text style={styles.desc}>{desc}</Text>
               </View>
               <TouchableOpacity
                 style={{
-                  backgroundColor: 'transparent',
-                  alignContent: 'center',
-                  alignSelf: 'center',
+                  backgroundColor: "transparent",
+                  alignContent: "center",
+                  alignSelf: "center",
                   paddingTop: 5,
-                  minHeight: 30,
+                  minHeight: 30
                 }}
                 onPress={closeModal}>
                 <Text
                   style={{
                     color: colors.primary,
                     fontSize: 18,
-                    alignSelf: 'center',
+                    alignSelf: "center"
                   }}>
                   OK
                 </Text>
@@ -76,62 +75,62 @@ export const ModalMenuDetails = ({ closeModal, isModalVisible, foodItem }) => {
 };
 const styles = StyleSheet.create({
   changeButton: {
-    position: 'absolute',
+    position: "absolute",
     left: 0,
-    fontWeight: 'bold',
+    fontWeight: "bold",
     fontSize: 12,
     color: colors.white,
     backgroundColor: colors.primary,
-    padding: 5,
+    padding: 5
   },
   buttonText: {
     fontSize: 16,
     color: colors.white,
-    fontWeight: 'normal',
+    fontWeight: "normal"
   },
   container: {
-    alignSelf: 'flex-start',
-    margin: 10,
+    alignSelf: "flex-start",
+    margin: 10
   },
   icons: {
     height: 20,
     width: 20,
-    margin: 10,
+    margin: 10
   },
   screen: {
     flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
-    backgroundColor: 'transparent',
+    alignItems: "center",
+    justifyContent: "center",
+    backgroundColor: "transparent"
   },
   modalView: {
     paddingBottom: 10,
-    justifyContent: 'center',
-    position: 'absolute',
-    alignSelf: 'center',
+    justifyContent: "center",
+    position: "absolute",
+    alignSelf: "center",
     width: width * 0.8,
     backgroundColor: colors.secondBg,
     borderRadius: 10,
-    ...GStyles.shadowContainer,
+    ...GStyles.shadowContainer
   },
   header: {
     fontSize: 18,
-    fontWeight: '800',
-    color: colors.primary,
+    fontWeight: "800",
+    color: colors.primary
   },
   price: {
     color: colors.lightPurple,
     marginVertical: 5,
     fontSize: 14,
-    fontWeight: 'bold',
-    textAlign: 'justify',
+    fontWeight: "bold",
+    textAlign: "justify"
   },
   desc: {
     color: colors.lightPurple,
     paddingEnd: 5,
     marginTop: 5,
     fontSize: 14,
-    fontWeight: 'normal',
-    textAlign: 'justify',
-  },
+    fontWeight: "normal",
+    textAlign: "justify"
+  }
 });

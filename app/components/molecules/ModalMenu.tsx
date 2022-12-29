@@ -15,15 +15,9 @@ import { ConstString } from "../../configs/Strings";
 import { launchImagePicker } from "../../ImagePicker";
 import { colors } from "../../configs/Const";
 import { GStyles } from "../../configs/styles";
+import { image } from "../../model/image";
 
 const { width } = Dimensions.get("window");
-export type image = {
-  fileName: any,
-  type: string,
-  uri: string,
-  request: number,
-};
-
 export const ModalMenu = ({
                             Category,
                             isModalVisible,
@@ -32,10 +26,10 @@ export const ModalMenu = ({
                             foodItem,
                             updateFoodItem
                           }) => {
-  const [itemName, setItemName] = useState(!Category ? foodItem.name : "");
-  const [itemDesc, setItemDesc] = useState(!Category ? foodItem.desc : "");
-  const [itemPrice, setItemPrice] = useState(!Category ? foodItem.price : "");
-  const [imageUri, setImageUri] = useState(
+  const [itemName, setItemName] = React.useState<string>(!Category ? foodItem.name : "");
+  const [itemDesc, setItemDesc] = React.useState<string>(!Category ? foodItem.desc : "");
+  const [itemPrice, setItemPrice] = React.useState<number>(!Category ? foodItem.price : "");
+  const [imageUri, setImageUri] = React.useState<string>(
     !Category ? foodItem.image : undefined
   );
   let reUpload = false;
@@ -60,20 +54,19 @@ export const ModalMenu = ({
     setImageUri(uri);
     reUpload = true;
   };
+  const checkPrice = (i) => {
+    if (/[a-zA-Z]/.test(i)) showErrorAlert({ message: "Please Ensure Price is Only Numbers" });
+    else setItemPrice(i);
+  };
   const addItem = () => {
     if (
-      itemName === "" ||
-      itemDesc === "" ||
-      imageUri === undefined ||
-      itemPrice === ""
+      !itemName ||
+      !itemDesc ||
+      !imageUri ||
+      !itemPrice
     ) {
       return showErrorAlert({ message: "Please Complete Input" });
     }
-
-    if (/[a-zA-Z]/.test(itemPrice)) {
-      return showErrorAlert({ message: "Please Ensure Price is Only Numbers" });
-    }
-
     const newItem = {
       desc: itemDesc,
       image: imageUri,
@@ -126,9 +119,9 @@ export const ModalMenu = ({
                 style={styles.textInput}
                 placeholder={"Enter Price RM"}
                 clearButtonMode={"always"}
-                value={itemPrice}
+                value={itemPrice.toString()}
                 placeholderTextColor={colors.white}
-                onChangeText={setItemPrice}
+                onChangeText={(i) => checkPrice(i)}
                 keyboardType={"numeric"}
                 keyboardAppearance="dark"
                 autoCorrect={false}

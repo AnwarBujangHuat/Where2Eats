@@ -1,15 +1,14 @@
-import * as React from 'react';
+import * as React from "react";
 import {
   Dimensions,
   StyleSheet,
   Text,
-  View,
-} from 'react-native';
-import FastImage from 'react-native-fast-image';
-import defaultAvatar from '../../assets/images/programmer.png';
-import { RateLabel } from '../atoms/RateLabel';
-import { GStyles } from '../../configs/styles';
-import { colors } from '../../configs/Const';
+  View
+} from "react-native";
+import FastImage from "react-native-fast-image";
+import { RateLabel } from "../atoms/RateLabel";
+import { GStyles } from "../../configs/styles";
+import { colors } from "../../configs/Const";
 
 export const RatingCard = ({ userReview }) => {
   const image = undefined;
@@ -17,27 +16,27 @@ export const RatingCard = ({ userReview }) => {
   return (
     <View style={styles.container}>
       <View
-        style={{ flexDirection: 'row', alignItems: 'center', marginStart: 5 }}>
+        style={{ flexDirection: "row", alignItems: "center", marginStart: 5 }}>
         <FastImage
           source={
             image
               ? {
                 uri: image,
-                priority: FastImage.priority.high,
+                priority: FastImage.priority.high
               }
-              : defaultAvatar
+              : require("../../assets/images/programmer.png")
           }
           style={styles.userImage}
         />
-        <View style={{ flexDirection: 'column', width: '65%' }}>
+        <View style={{ flexDirection: "column", width: "65%" }}>
           <Text style={styles.title}>{userName}</Text>
           <Text style={styles.timestampText}>
-            {updatedAt !== ''
-              ? 'Updated At: ' + updatedAt
-              : 'Created At: ' + createdAt}
+            {updatedAt !== ""
+              ? "Updated At: " + updatedAt
+              : "Created At: " + createdAt}
           </Text>
         </View>
-        <RateLabel rating={rating} />
+        <RateLabel rating={rating} goToRating={undefined} />
       </View>
       <View style={styles.descriptionContainer}>
         <Text style={styles.desc}>{review}</Text>
@@ -47,29 +46,29 @@ export const RatingCard = ({ userReview }) => {
 };
 const styles = StyleSheet.create({
   container: {
-    justifyContent: 'center',
+    justifyContent: "center",
     ...GStyles.shadowContainer,
     marginVertical: 10,
-    width: Dimensions.get('screen').width - 35,
-    maxHeight: 170,
+    width: Dimensions.get("screen").width - 35,
+    maxHeight: 170
   },
   descriptionContainer: {
     padding: 10,
-    marginBottom: 10,
+    marginBottom: 10
   },
   timestampText: {
     fontSize: 11,
-    color: colors.white,
+    color: colors.white
   },
   desc: {
     color: colors.white,
     paddingTop: 5,
-    textAlign: 'justify',
-    fontSize: 14,
+    textAlign: "justify",
+    fontSize: 14
   },
   title: {
     fontSize: 16,
-    color: colors.white,
+    color: colors.white
   },
   userImage: {
     height: 35,
@@ -77,6 +76,6 @@ const styles = StyleSheet.create({
     marginBottom: 5,
     marginHorizontal: 10,
     borderRadius: 20,
-    resizeMode: 'contain',
-  },
+    resizeMode: "contain"
+  }
 });

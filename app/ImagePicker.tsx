@@ -1,5 +1,6 @@
 import * as ImagePicker from "react-native-image-picker";
-import { image } from "././components/molecules/ModalMenu";
+import { image } from "./model/image";
+
 
 export const launchImagePicker = () =>
   new Promise<image>(async (resolve, reject) =>

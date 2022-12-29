@@ -25,6 +25,7 @@
     "@react-navigation/native": "^6.0.12",
     "@react-navigation/stack": "^6.2.3",
     "@reduxjs/toolkit": "^1.8.5",
+    "@types/": "react-navigation/stack",
     "@types/lodash": "^4.14.191",
     "@types/uuid": "^9.0.0",
     "babel-plugin-module-resolver": "^4.1.0",

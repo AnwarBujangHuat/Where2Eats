@@ -1,6 +1,6 @@
 import * as React from "react";
 import { NavigationContainer } from "@react-navigation/native";
-import { NavStack } from "./app/navigation/NavStack";
+import { NavStack } from "app/navigation/NavStack";
 import { StatusBar } from "react-native";
 
 export default function App() {
