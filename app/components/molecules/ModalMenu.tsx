@@ -18,7 +18,7 @@ import { GStyles } from "../../configs/styles";
 
 const { width } = Dimensions.get("window");
 export type image = {
-  fileName: string,
+  fileName: any,
   type: string,
   uri: string,
   request: number,
