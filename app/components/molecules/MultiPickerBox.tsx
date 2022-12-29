@@ -1,8 +1,8 @@
 import React, { memo, useMemo, useState } from "react";
 import { FlatList, ScrollView, Text, TextInput, TouchableOpacity, View } from "react-native";
-import Icon from "atoms/Icon";
+import Icon from "../atoms/Icon";
 import { find, isEmpty } from "lodash";
-import Toggle from "atoms/Toggle";
+import Toggle from "../atoms/Toggle";
 import { colors } from "configs/Const";
 import { v4 as uuid } from "uuid";
 

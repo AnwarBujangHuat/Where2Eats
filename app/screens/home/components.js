@@ -12,11 +12,11 @@ import search from '../../assets/images/search.png';
 import {
   colors,
   Const,
-} from 'configs/Const';
-import { ImageButton } from 'components/atoms/ImageButton';
-import { RestaurantCard } from 'components/molecules/RestaurantCard';
-import { FloatingActionButton } from 'components/atoms/FloatingActionButtom';
-import { ModalMenuButton } from 'components/molecules/ModalMenuButton';
+} from '../../configs/Const';
+import { ImageButton } from '../../components/atoms/ImageButton';
+import { RestaurantCard } from '../../components/molecules/RestaurantCard';
+import { FloatingActionButton } from '../../components/atoms/FloatingActionButtom';
+import { ModalMenuButton } from '../../components/molecules/ModalMenuButton';
 import TestIds from '../../../e2e/TestIDs';
 
 export const HomeComponents = props => {

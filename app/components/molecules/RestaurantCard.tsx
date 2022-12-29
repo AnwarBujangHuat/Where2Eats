@@ -7,7 +7,7 @@ import {
   TouchableWithoutFeedback,
   View
 } from "react-native";
-import { RateLabel } from "atoms/RateLabel";
+import { RateLabel } from "../atoms/RateLabel";
 import {
   colors,
   icons

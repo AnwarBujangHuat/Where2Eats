@@ -3,14 +3,14 @@ import { HomeComponents } from './components';
 import {
   getRestaurant,
   getUser,
-} from 'store/selector';
+} from '../../store/selector';
 import {
   useDispatch,
   useSelector,
 } from 'react-redux';
-import { PopulateRestaurantList } from 'store/thunks';
+import { PopulateRestaurantList } from '../../store/thunks';
 import { Alert } from 'react-native';
-import { routes } from 'navigation/routes';
+import { routes } from '../../navigation/routes';
 import firebase from 'firebase/compat/app';
 
 export const Home = ({ navigation }) => {

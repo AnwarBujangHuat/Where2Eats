@@ -11,10 +11,10 @@ import {
 import {
   getCurrentRestaurant,
   getUser,
-} from 'store/selector';
+} from '../../store/selector';
 import { Alert } from 'react-native';
-import { updateRating } from 'store/thunks';
-import { routes } from 'navigation/routes';
+import { updateRating } from '../../store/thunks';
+import { routes } from '../../navigation/routes';
 
 export const Ratings = ({ navigation, route }) => {
   const ratingChipButton = ['All', '1', '2', '3', '4', '5'];
