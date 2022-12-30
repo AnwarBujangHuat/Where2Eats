@@ -1,5 +1,8 @@
 export type rating = {
-  id: string,
-  avg: number,
-  userReviewResult: string[],
+  userId: string,
+  userName: string,
+  review: string,
+  rating: number,
+  createdAt: string,
+  updatedAt: string,
 };

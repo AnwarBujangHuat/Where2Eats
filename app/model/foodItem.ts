@@ -1,6 +1,7 @@
 export interface foodItem {
-  image: string,
   name: string,
   price: number,
-  desc: string
+  desc: string,
+  image: string,
+  category: string,
 }
