@@ -7,21 +7,7 @@ module.exports = {
     [
       'module-resolver',
       {
-        root: ['./app'],
-        alias: {
-          /**
-           * Regular expression is used to match all files inside `./src` directory and map each `.src/folder/[..]` to `~folder/[..]` path
-           */
-          'images': './assets/images',
-          'lottie': './assets/lottie',
-          'atoms': './components/atoms',
-          'molecules': './components/molecules',
-          'config': './configs',
-          'model': './model',
-          'navigation': './navigation',
-          'screens': './screens',
-          'store': './store',
-        },
+        root: './app',
         extensions: [
           '.ios.js',
           '.android.js',
@@ -31,6 +17,18 @@ module.exports = {
           '.ts',
           '.native.js',
         ],
+        alias: {
+          images: '.app/assets/images',
+          lottie: '.app/assets/lottie',
+          atoms: '.app/components/atoms',
+          molecules: '.app/components/molecules',
+          config: '.app/configs',
+          assets: '.app/assets',
+          model: '.app/model',
+          navigation: '.app/navigation',
+          screens: '.app/screens',
+          store: '.app/store',
+        },
       },
     ],
   ],

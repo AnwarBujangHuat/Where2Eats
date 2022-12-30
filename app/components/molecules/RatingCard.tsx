@@ -6,7 +6,7 @@ import {
   View
 } from "react-native";
 import FastImage from "react-native-fast-image";
-import { RateLabel } from "components/atoms/RateLabel";
+import { RateLabel } from "atoms/RateLabel";
 import { GStyles } from "configs/styles";
 import { colors } from "configs/Const";
 
