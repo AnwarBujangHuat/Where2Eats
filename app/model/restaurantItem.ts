@@ -1,7 +1,7 @@
-import { rating } from "../model/ratingItem";
-import { foodItem } from "../model/foodItem";
+import type { rating } from "../model/ratingItem";
+import type { foodItem } from "../model/foodItem";
 
-export type restaurant = {
+export interface restaurant {
   id: string,
   restaurant: string,
   category: string,
@@ -13,4 +13,4 @@ export type restaurant = {
   createdAt: string,
   rating: rating[],
   food: foodItem[],
-};
+}
