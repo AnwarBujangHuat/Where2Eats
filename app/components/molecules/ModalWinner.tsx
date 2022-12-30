@@ -12,7 +12,7 @@ import FastImage from "react-native-fast-image";
 import {
   colors,
   icons
-} from "../../configs/Const";
+} from "configs/Const";
 import Modal from "react-native-modal";
 import { GStyles } from "configs/styles";
 
