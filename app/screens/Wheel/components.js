@@ -3,7 +3,6 @@ import {
   Animated,
   Dimensions,
   FlatList,
-  Image,
   SafeAreaView,
   StyleSheet,
   Text as RNText,
@@ -14,9 +13,9 @@ import Svg, {
   Path,
   Text,
 } from 'react-native-svg';
-import { BackButton } from '../../components/atoms/BackButton';
-import { ItemListRestaurant } from '../../components/molecules/ItemListRestaurant';
-import { ModalWinner } from '../../components/molecules/ModalWinner';
+import { BackButton } from 'atoms/BackButton';
+import { ItemListRestaurant } from 'molecules/ItemListRestaurant';
+import { ModalWinner } from 'molecules/ModalWinner';
 import * as d3Shape from 'd3-shape';
 import { colorPalette } from './ColorPalette';
 import {
@@ -25,9 +24,10 @@ import {
 } from 'react-native-gesture-handler';
 import color from 'randomcolor';
 import { snap } from '@popmotion/popcorn';
-import { colors } from '../../configs/Const';
+import { colors } from 'configs/Const';
 import LottieView from 'lottie-react-native';
-import arrow from '../../assets/lottie/arrows.json';
+import arrow from 'lottie/arrows.json';
+import { GStyles } from 'configs/styles';
 
 const { width } = Dimensions.get('screen');
 const knobFill = color({ hue: 'purple' });
@@ -181,6 +181,7 @@ export const WheelComponents = props => {
           <View
             style={{
               flexDirection: 'row',
+              alignContent: 'center',
               alignSelf: 'center',
               alignItems: 'center',
             }}>
@@ -275,8 +276,7 @@ export const WheelComponents = props => {
 };
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: colors.bg,
-    flex: 1,
+    ...GStyles.screens,
     justifyContent: 'center',
   },
   swipeRight: {
