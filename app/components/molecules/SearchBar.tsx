@@ -6,7 +6,7 @@ import {
   TextInput,
   View
 } from "react-native";
-import React from "react";
+import * as React from "react";
 import { colors } from "configs/Const";
 import { GStyles } from "configs/styles";
 import TestIDs from "../../../e2e/TestIDs";

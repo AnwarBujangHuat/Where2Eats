@@ -17,6 +17,7 @@ import Modal from "react-native-modal";
 import { GStyles } from "configs/styles";
 
 const { width } = Dimensions.get("window");
+//Todo add type and interface
 export const ModalWinner = ({
                               isModalVisible,
                               closeModal,
