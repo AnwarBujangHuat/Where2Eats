@@ -1,51 +1,38 @@
 {
   "compilerOptions": {
-    "baseUrl": "./app",
+    "baseUrl": ".",
     "paths": {
-      "images": [
-        "./assets/images"
+      "images/*": [
+        "./app/assets/images/*"
       ],
-      "lottie": [
-        "./assets/lottie"
+      "lottie/*": [
+        "./app/assets/lottie/*"
       ],
-      "atoms": [
-        "./components/atoms"
+      "atoms/*": [
+        "./app/components/atoms/*"
       ],
-      "molecules": [
-        "./components/molecules"
+      "molecules/*": [
+        "./app/components/molecules/*"
       ],
-      "config": [
-        "./config"
+      "configs/*": [
+        "./app/configs/*"
       ],
-      "model": [
-        "./model"
+      "model/*": [
+        "./app/model/*"
       ],
-      "navigation": [
-        "./navigation"
+      "navigation/*": [
+        "./app/navigation/*"
       ],
-      "screens": [
-        "./screens"
+      "screens/*": [
+        "./app/screens/*"
       ],
-      "store": [
-        "./store"
-      ],
-      "assets": [
-        "./assets"
+      "store/*": [
+        "./app/store/*"
       ]
-    },
-    "target": "esnext",
-    "lib": [
-      "dom",
-      "dom.iterable",
-      "es2017"
-    ],
-    "filesGlob": [
-      "*.ts",
-      "*.tsx"
-    ]
+    }
   },
-  "include": [
-    "src/global.d.ts",
-    "src"
+  "exclude": [
+    "node_modules"
   ]
 }
+
