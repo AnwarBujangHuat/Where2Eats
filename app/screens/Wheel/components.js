@@ -27,7 +27,7 @@ import color from 'randomcolor';
 import { snap } from '@popmotion/popcorn';
 import { colors } from '../../configs/Const';
 import LottieView from 'lottie-react-native';
-import arrow from '../../assets/lottie/arrow.json'
+import arrow from '../../assets/lottie/arrows.json';
 
 const { width } = Dimensions.get('screen');
 const knobFill = color({ hue: 'purple' });
@@ -181,25 +181,21 @@ export const WheelComponents = props => {
           <View
             style={{
               flexDirection: 'row',
-              alignContent: 'center',
               alignSelf: 'center',
               alignItems: 'center',
             }}>
-            <Image
-              style={{
-                height: 50,
-                width: 57,
-                resizeMode: 'cover',
-                marginBottom: 9,
-              }}
-              source={{ uri: 'https://c.tenor.com/MRX_0O8RtnkAAAAi/arrow.gif' }}
-            />
+            <LottieView source={arrow} autoPlay={true} style={{
+              height: 60,
+              width: 60,
+              paddingBottom: 5,
+              transform: [{ rotate: '90deg' }],
+            }} />
             <RNText style={styles.title}>{'Swipe To The LEFT or RIGHT'}</RNText>
             <LottieView source={arrow} autoPlay={true} style={{
-              height: 50,
-              width: 57,
+              height: 60,
+              width: 60,
+              marginTop: -5,
               transform: [{ rotate: '180deg' }],
-              marginTop: 9,
             }}>
 
             </LottieView>
