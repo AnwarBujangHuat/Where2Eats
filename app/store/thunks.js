@@ -195,7 +195,8 @@ export const removeFoodItemFirebase = createAsyncThunk(
         foodItem,
         restaurantName,
       );
-      const { onSuccess: onSuccessRemoveImage } = resultRemoveImage;
+      const { onSuccess: onSuccessRemoveImage, data } = resultRemoveImage;
+      console.log(data);
       if (!onSuccessRemoveImage) {
         return rejectWithValue({
           result: onSuccessRemoveImage,
@@ -218,6 +219,9 @@ const requestRemoveFoodItem = (id, foodItem) =>
     ).catch();
   });
 
+//Todo fix remove firebase image;
+// LOG  [FirebaseError: Firebase Storage: Object 'Authenticated User/menu/Side Dish/137ce50emedia.jpg' does not exist. (storage/object-not-found)]
+
 const requestDeleteFoodItemImage = (id, foodItem, restaurantName) =>
   new Promise((resolve, reject) => {
     const imageName = foodItem.image;
@@ -226,8 +230,8 @@ const requestDeleteFoodItemImage = (id, foodItem, restaurantName) =>
     const image = imageName.slice(imageIndex - 8, imageIndex) + 'media.jpg';
     firebase.storage().ref().child(pathName + image).delete().then(
       () => resolve({ onSuccess: true }),
-      () => resolve({ onSuccess: false }),
-    ).catch();
+      (r) => resolve({ onSuccess: false, data: r }),
+    ).catch(e => console.log(e));
   });
 
 export const updateRestaurantInfoFirestore = createAsyncThunk(
