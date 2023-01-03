@@ -221,7 +221,7 @@ const requestRemoveFoodItem = (id, foodItem) =>
 
 //Todo fix remove firebase image;
 // LOG  [FirebaseError: Firebase Storage: Object 'Authenticated User/menu/Side Dish/137ce50emedia.jpg' does not exist. (storage/object-not-found)]
-
+//actual ID: 1db17707-ebff-4427-a32a-a7a0137ce50emedia.jpg
 const requestDeleteFoodItemImage = (id, foodItem, restaurantName) =>
   new Promise((resolve, reject) => {
     const imageName = foodItem.image;
