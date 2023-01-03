@@ -8,10 +8,10 @@
       "lottie": [
         "./assets/lottie"
       ],
-      "atoms": [
+      "atoms/*": [
         "./components/atoms"
       ],
-      "molecules": [
+      "molecules/*": [
         "./components/molecules"
       ],
       "config": [
