@@ -10,14 +10,15 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
-import { DetailsHeader } from '../../components/molecules/DetailsHeader';
+import { DetailsHeader } from 'molecules/DetailsHeader';
 import {
   colors,
   Const,
-} from '../../configs/Const';
-import { ImageButton } from '../../components/atoms/ImageButton';
-import { InputField } from '../../components/atoms/InputField';
-import { ModalLocation } from '../../components/molecules/ModalLocation';
+} from 'configs/Const';
+import { ImageButton } from 'atoms/ImageButton';
+import { InputField } from 'atoms/InputField';
+import { ModalLocation } from 'molecules/ModalLocation';
+import { GStyles } from 'configs/styles';
 
 export const RegisterComponents = props => {
   const {
@@ -41,7 +42,7 @@ export const RegisterComponents = props => {
     isModalOpen,
   } = props;
   return (
-    <SafeAreaView style={styles.container}>
+    <SafeAreaView style={GStyles.screens}>
       <DetailsHeader
         back={goBack}
         disabled={false}
@@ -123,10 +124,6 @@ export const RegisterComponents = props => {
   );
 };
 const styles = StyleSheet.create({
-  container: {
-    backgroundColor: colors.bg,
-    flex: 1,
-  },
   descriptionInput: {
     fontSize: 14,
     fontWeight: 'normal',

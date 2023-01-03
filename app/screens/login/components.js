@@ -8,15 +8,16 @@ import {
   View,
 } from 'react-native';
 import CheckBox from '@react-native-community/checkbox';
-import Logo from 'assets/images/allfood.png';
-import { InputFieldLogins } from '../../components/molecules/InputFieldLogins';
-import email from 'assets/images/email.png';
-import password from 'assets/images/password.png';
-import { IconButton } from '../../components/molecules/IconButton';
-import { SocialButton } from '../../components/atoms/SocialButton';
-import { ConstString } from '../../configs/Strings';
+import Logo from 'images/allfood.png';
+import { InputFieldLogins } from 'molecules/InputFieldLogins';
+import email from 'images/email.png';
+import password from 'images/password.png';
+import { IconButton } from 'molecules/IconButton';
+import { SocialButton } from 'atoms/SocialButton';
+import { ConstString } from 'configs/Strings';
 import TestIDs from '../../../e2e/TestIDs';
-import { colors } from '../../configs/Const';
+import { colors } from 'configs/Const';
+import { GStyles } from 'configs/styles';
 
 export const LoginComponents = props => {
   const {
@@ -31,7 +32,7 @@ export const LoginComponents = props => {
     onRememberMe,
   } = props;
   return (
-    <SafeAreaView style={styles.container}>
+    <SafeAreaView style={GStyles.screens}>
       <TouchableOpacity>
         <Image source={Logo} style={styles.logo} />
       </TouchableOpacity>
@@ -105,10 +106,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     margin: 30,
   },
-  container: {
-    flex: 1,
-    backgroundColor: colors.bg,
-  },
+
   title: {
     fontWeight: 'normal',
     fontSize: 20,

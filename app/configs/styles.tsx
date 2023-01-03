@@ -1,4 +1,4 @@
-import { colors } from "../configs/Const";
+import { colors } from "./Const";
 import { StyleSheet } from "react-native";
 
 export const GStyles = StyleSheet.create({
@@ -9,5 +9,15 @@ export const GStyles = StyleSheet.create({
     shadowOpacity: 0.2,
     shadowRadius: 3,
     elevation: 10
+  },
+  screens: {
+    backgroundColor: colors.bg,
+    flex: 1
+  },
+  titleText: {
+    fontSize: 16,
+    fontWeight: "bold",
+    color: colors.white
   }
+
 });

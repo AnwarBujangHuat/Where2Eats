@@ -8,11 +8,12 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
-import { BackButton } from '../../components/atoms/BackButton';
-import personIcon from '../../assets/images/programmer.png';
-import { EditableLabel } from '../../components/atoms/EditableLabel';
-import { ModalEdit } from '../../components/molecules/ModalEdit';
-import { colors } from '../../configs/Const';
+import { BackButton } from 'atoms/BackButton';
+import personIcon from 'images/programmer.png';
+import { EditableLabel } from 'atoms/EditableLabel';
+import { ModalEdit } from 'molecules/ModalEdit';
+import { colors } from 'configs/Const';
+import { GStyles } from 'configs/styles';
 
 export const ProfileComponents = props => {
   const {
@@ -26,7 +27,7 @@ export const ProfileComponents = props => {
     setUpdatedInfo,
   } = props;
   return (
-    <SafeAreaView style={styles.backGround}>
+    <SafeAreaView style={GStyles.screens}>
       <View style={styles.rowContainer}>
         <BackButton onPress={goBackHome} />
         <RNText style={styles.title}>{'My Profile'}</RNText>
@@ -66,19 +67,13 @@ export const ProfileComponents = props => {
   );
 };
 const styles = StyleSheet.create({
-  backGround: {
-    backgroundColor: colors.bg,
-    flex: 1,
-  },
   rowContainer: {
     flexDirection: 'row',
     alignContent: 'flex-start',
     paddingVertical: 10,
   },
   title: {
-    fontSize: 16,
-    fontWeight: 'bold',
-    color: colors.white,
+    ...GStyles.titleText,
     margin: 10,
   },
   profileImage: {
