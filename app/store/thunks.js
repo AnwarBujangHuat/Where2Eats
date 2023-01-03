@@ -4,14 +4,14 @@ import {
   arrayRemove,
   arrayUnion,
 } from 'firebase/firestore';
-import { ConstString } from '../configs/Strings';
+import { ConstString } from 'configs/Strings';
 
 const restaurantCollectionRef = firebase.firestore().collection(ConstString.RESTAURANT);
 const errorObj = {
   id: 0,
   restaurant: 'Error While Loading Restaurant List',
   category: ConstString.WESTERN,
-  address: 'Please Contac Dev or Retry',
+  address: 'Please Contact Dev or Retry',
   description: 'Error While Loading Restaurant Info',
   rate: 4.6,
   image: 'https://wallpaperaccess.com/full/4334504.jpg',
@@ -39,7 +39,7 @@ const requestFetchRestaurantList = () =>
         const temp = { id: documentSnapshot.id, ...documentSnapshot.data() };
         restaurant.push(temp);
       });
-    }).catch(e => myResolve({ onSuccess: false, data: 'Cannot Retrieve Data' })).then(
+    }).catch(() => myResolve({ onSuccess: false, data: 'Cannot Retrieve Data' })).then(
       () =>
         myResolve({
           onSuccess: true,
@@ -116,7 +116,8 @@ const requestUpdateRestaurant = (id, field, value) =>
     restaurantCollectionRef.doc(id).update(field, value).then(
       () => myResolve({ onSuccess: true }),
       () => myResolve({ onSuccess: false }),
-    ).catch();
+    ).catch(e => myResolve({ onSuccess: false, data: e }));
+
   });
 
 export const updateFoodItemFirebase = createAsyncThunk(
@@ -152,7 +153,8 @@ const requestUpdateFoodItem = (id, action) =>
     restaurantCollectionRef.doc(id).update('food', action).then(
       () => resolve({ onSuccess: true }),
       () => resolve({ onSuccess: false }),
-    ).catch();
+    ).catch(e => reject({ onSuccess: false, data: e }));
+
   });
 
 export const addFoodItemFirebase = createAsyncThunk(
@@ -216,11 +218,12 @@ const requestRemoveFoodItem = (id, foodItem) =>
     restaurantCollectionRef.doc(id).update('food', arrayRemove(foodItem)).then(
       () => resolve({ onSuccess: true }),
       () => resolve({ onSuccess: false }),
-    ).catch();
+    ).catch(e => reject({ onSuccess: false, data: e }));
+
   });
 
 //Todo fix remove firebase image;
-// LOG  [FirebaseError: Firebase Storage: Object 'Authenticated User/menu/Side Dish/137ce50emedia.jpg' does not exist. (storage/object-not-found)]
+//LOG  [FirebaseError: Firebase Storage: Object 'Authenticated User/menu/Side Dish/137ce50emedia.jpg' does not exist. (storage/object-not-found)]
 //actual ID: 1db17707-ebff-4427-a32a-a7a0137ce50emedia.jpg
 const requestDeleteFoodItemImage = (id, foodItem, restaurantName) =>
   new Promise((resolve, reject) => {
@@ -231,7 +234,7 @@ const requestDeleteFoodItemImage = (id, foodItem, restaurantName) =>
     firebase.storage().ref().child(pathName + image).delete().then(
       () => resolve({ onSuccess: true }),
       (r) => resolve({ onSuccess: false, data: r }),
-    ).catch(e => console.log(e));
+    ).catch(e => reject({ onSuccess: false, data: e }));
   });
 
 export const updateRestaurantInfoFirestore = createAsyncThunk(
@@ -282,7 +285,8 @@ const requestUpdateRestaurantInfo = (
     }).then(
       () => resolve({ onSuccess: true }),
       () => resolve({ onSuccess: false }),
-    ).catch();
+    ).catch(e => reject({ onSuccess: false, data: e }));
+
   });
 
 export const fetchUserInformation = createAsyncThunk(
