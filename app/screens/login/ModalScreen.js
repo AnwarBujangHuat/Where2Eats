@@ -6,7 +6,7 @@ import {
   SafeAreaView,
   StyleSheet,
 } from 'react-native';
-import { PopulateRestaurantList } from '../../store/thunks';
+import { PopulateRestaurantList } from 'store/thunks';
 import { useDispatch } from 'react-redux';
 import LottieView from 'lottie-react-native';
 import Welcome from '../../assets/lottie/welcome.json';

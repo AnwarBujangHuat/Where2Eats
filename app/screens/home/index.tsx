@@ -1,17 +1,19 @@
-import React, { useState } from 'react';
-import { HomeComponents } from './components';
+import React, { useState } from "react";
+import { HomeComponents } from "./components";
 import {
   getRestaurant,
-  getUser,
-} from '../../store/selector';
+  getUser
+} from "store/selector";
 import {
   useDispatch,
-  useSelector,
-} from 'react-redux';
-import { PopulateRestaurantList } from '../../store/thunks';
-import { Alert } from 'react-native';
-import { routes } from '../../navigation/routes';
-import firebase from 'firebase/compat/app';
+  useSelector
+} from "react-redux";
+import { PopulateRestaurantList } from "app/store/thunks";
+import { Alert } from "react-native";
+import { routes } from "navigation/routes";
+import firebase from "firebase/compat/app";
+import type { resResult, restaurant as restaurantModal } from "app/model/restaurantItem";
+import type { error } from "app/model/error";
 
 export const Home = ({ navigation }) => {
   const fetchRestaurant = useSelector(getRestaurant);
@@ -35,12 +37,12 @@ export const Home = ({ navigation }) => {
     }
     if (isRestaurantIncluded) {
       const updateRestaurant = currentRestaurant.filter(
-        currentRestaurant => currentRestaurant.category !== category,
+        currentRestaurant => currentRestaurant.category !== category
       );
       setCurrentRestaurant(updateRestaurant);
     } else {
       const updateRestaurant = restaurant.filter(
-        currentRestaurant => currentRestaurant.category === category,
+        currentRestaurant => currentRestaurant.category === category
       );
       const tempRestaurant =
         selectedTypes.length === 0
@@ -49,21 +51,23 @@ export const Home = ({ navigation }) => {
       setCurrentRestaurant(tempRestaurant);
     }
   };
-  const reFresh = async() => {
+
+  const reFresh = async () => {
     setIsFetching(true);
-    const response = await dispatch(PopulateRestaurantList());
-    const { payload } = response;
-    if (!payload.result) {
+
+    const { payload }: any = await dispatch(PopulateRestaurantList());
+    const { result, data }: resResult = payload;
+    if (!result) {
       Alert.alert(
-        payload.data,
-        '',
+        data,
+        "",
         [
           {
-            text: 'Ok',
-            onPress: goBack,
-          },
+            text: "Ok",
+            onPress: goBack
+          }
         ],
-        { cancelable: false },
+        { cancelable: false }
       );
     }
     setIsFetching(false);
@@ -74,7 +78,7 @@ export const Home = ({ navigation }) => {
       return setCurrentRestaurant(restaurant);
     }
     const updateRestaurant = restaurant.filter(item =>
-      item.restaurant.toLowerCase().includes(text.toLowerCase()),
+      item.restaurant.toLowerCase().includes(text.toLowerCase())
     );
     setCurrentRestaurant(updateRestaurant);
   };
@@ -89,7 +93,7 @@ export const Home = ({ navigation }) => {
   const logOut = () => {
     firebase.auth().signOut().then(
       () => navigation.navigate(routes.LOGIN),
-      () => Alert.alert('error logging out'),
+      () => Alert.alert("error logging out")
     );
   };
   const openMenu = () => setOpenMenu(!isOpenMenu);
@@ -127,7 +131,7 @@ export const Home = ({ navigation }) => {
     isFetching,
     reFresh,
     userName,
-    IMAGE,
+    IMAGE
   };
   return <HomeComponents {...props} />;
 };

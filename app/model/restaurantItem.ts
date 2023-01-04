@@ -14,3 +14,8 @@ export interface restaurant {
   rating: rating[],
   food: foodItem[],
 }
+
+export interface resResult {
+  result: boolean,
+  data: restaurant[]
+}

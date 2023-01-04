@@ -2,7 +2,7 @@
  * @format
  */
 import * as React from 'react';
-// Add this line to your `index.js`
+// Add this line to your `index.tsx`
 import 'react-native-get-random-values';
 import { AppRegistry } from 'react-native';
 import App from './App';

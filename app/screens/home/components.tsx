@@ -1,24 +1,22 @@
-import React from 'react';
+import React from "react";
 import {
   FlatList,
   SafeAreaView,
   StyleSheet,
-  View,
-} from 'react-native';
-import { Header } from 'molecules/Header';
-import personIcon from 'images/programmer.png';
-import { SearchBar } from 'molecules/SearchBar';
-import search from 'images/search.png';
+  View
+} from "react-native";
+import { Header } from "molecules/Header";
+import { SearchBar } from "molecules/SearchBar";
 import {
   colors,
-  Const,
-} from 'configs/Const';
-import { ImageButton } from 'atoms/ImageButton';
-import { RestaurantCard } from 'molecules/RestaurantCard';
-import { FloatingActionButton } from 'atoms/FloatingActionButtom';
-import { ModalMenuButton } from 'molecules/ModalMenuButton';
-import TestIds from '../../../e2e/TestIDs';
-import { GStyles } from 'configs/styles';
+  Const
+} from "configs/Const";
+import { ImageButton } from "atoms/ImageButton";
+import { RestaurantCard } from "molecules/RestaurantCard";
+import { FloatingActionButton } from "atoms/FloatingActionButtom";
+import { ModalMenuButton } from "molecules/ModalMenuButton";
+import TestIds from "../../../e2e/TestIDs";
+import { GStyles } from "configs/styles";
 
 export const HomeComponents = props => {
   const {
@@ -35,7 +33,7 @@ export const HomeComponents = props => {
     isFetching,
     reFresh,
     IMAGE,
-    userName,
+    userName
   } = props;
   const renderItem = ({ item }) => {
     return (
@@ -54,9 +52,9 @@ export const HomeComponents = props => {
   return (
     <SafeAreaView testID={TestIds.Home} style={GStyles.screens}>
       <Header
-        source={IMAGE ? { uri: IMAGE } : personIcon}
+        source={IMAGE ? { uri: IMAGE } : require("images/programmer.png")}
         onPress={openMenu}
-        title={'Welcome Back ' + userName}
+        title={"Welcome Back " + userName}
       />
       {isOpenMenu && (
         <ModalMenuButton
@@ -66,9 +64,9 @@ export const HomeComponents = props => {
         />
       )}
       <SearchBar
-        placeholder={'Search'}
+        placeholder={"Search"}
         onChangeText={onSearch}
-        source={search}
+        source={require("images/search.png")}
       />
       <View style={styles.buttonContainer}>
         <FlatList
@@ -103,6 +101,6 @@ export const HomeComponents = props => {
 };
 const styles = StyleSheet.create({
   buttonContainer: {
-    marginStart: 10,
-  },
+    marginStart: 10
+  }
 });

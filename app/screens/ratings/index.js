@@ -13,7 +13,7 @@ import {
   getUser,
 } from '../../store/selector';
 import { Alert } from 'react-native';
-import { updateRating } from '../../store/thunks';
+import { updateRating } from 'store/thunks';
 import { routes } from '../../navigation/routes';
 
 export const Ratings = ({ navigation, route }) => {

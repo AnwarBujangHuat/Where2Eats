@@ -13,7 +13,7 @@ import {
   AddOne,
   removeFoodItemFirebase,
   updateFoodItemFirebase,
-} from '../../../store/thunks';
+} from 'store/thunks';
 import { icons } from '../../../configs/Const';
 import { firebase } from '../../../../src/firebase/config';
 import { getCurrentRestaurant } from '../../../store/selector';
