@@ -9,10 +9,11 @@ import FastImage from "react-native-fast-image";
 import { RateLabel } from "atoms/RateLabel";
 import { GStyles } from "configs/styles";
 import { colors } from "configs/Const";
-//Todo introduce types/interface
+import type { rating } from "app/model/ratingItem";
+
 export const RatingCard = ({ userReview }) => {
   const image = undefined;
-  const { userName, review, rating, createdAt, updatedAt } = userReview || {};
+  const { userName, review, rating, createdAt, updatedAt }: rating = userReview || {};
   return (
     <View style={styles.container}>
       <View

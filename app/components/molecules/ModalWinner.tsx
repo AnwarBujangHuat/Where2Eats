@@ -15,9 +15,9 @@ import {
 } from "configs/Const";
 import Modal from "react-native-modal";
 import { GStyles } from "configs/styles";
+import type { restaurant } from "app/model/restaurantItem";
 
 const { width } = Dimensions.get("window");
-//Todo add type and interface
 export const ModalWinner = ({
                               isModalVisible,
                               closeModal,
@@ -26,7 +26,7 @@ export const ModalWinner = ({
                               isFinished,
                               isPreview
                             }) => {
-  const { restaurant, description, address, category, image } =
+  const { restaurant, description, address, category, image }: restaurant =
     selectedRestaurant;
   const spinAgain = () => {
     closeModal();
