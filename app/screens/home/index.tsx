@@ -13,7 +13,6 @@ import { Alert } from "react-native";
 import { routes } from "navigation/routes";
 import firebase from "firebase/compat/app";
 import type { resResult, restaurant as restaurantModal } from "app/model/restaurantItem";
-import type { error } from "app/model/error";
 
 export const Home = ({ navigation }) => {
   const fetchRestaurant = useSelector(getRestaurant);
@@ -55,11 +54,12 @@ export const Home = ({ navigation }) => {
   const reFresh = async () => {
     setIsFetching(true);
 
-    const { payload }: any = await dispatch(PopulateRestaurantList());
-    const { result, data }: resResult = payload;
+    // @ts-ignore
+    const response = await dispatch(PopulateRestaurantList());
+    const { result, data }: resResult = response.payload;
     if (!result) {
       Alert.alert(
-        data,
+        "error",
         "",
         [
           {
