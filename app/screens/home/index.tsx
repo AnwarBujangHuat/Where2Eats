@@ -5,6 +5,9 @@ import {
   getUser
 } from "store/selector";
 import {
+  AppDispatch
+} from "store/store";
+import {
   useDispatch,
   useSelector
 } from "react-redux";
@@ -17,7 +20,7 @@ import type { resResult, restaurant as restaurantModal } from "app/model/restaur
 export const Home = ({ navigation }) => {
   const fetchRestaurant = useSelector(getRestaurant);
   const { NAME: userName, IMAGE } = useSelector(getUser);
-  const dispatch = useDispatch();
+  const dispatch = useDispatch<AppDispatch>();
   const restaurant = [...fetchRestaurant];
   const [currentRestaurant, setCurrentRestaurant] = useState(restaurant);
   const [selectedTypes, setSelectedTypes] = useState([]);
@@ -54,9 +57,8 @@ export const Home = ({ navigation }) => {
   const reFresh = async () => {
     setIsFetching(true);
 
-    // @ts-ignore
     const response = await dispatch(PopulateRestaurantList());
-    const { result, data }: resResult = response.payload;
+    const { result, data } = response.payload as resResult;
     if (!result) {
       Alert.alert(
         "error",

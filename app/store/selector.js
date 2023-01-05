@@ -33,3 +33,4 @@ export const getInfo = createSelector(
     PASSWORD: items.PASSWORD,
   }),
 );
+

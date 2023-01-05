@@ -21,7 +21,7 @@ const persistConfig = {
 };
 const _persistedReducer = persistReducer(persistConfig, Reducer);
 
-export default configureStore({
+const store = configureStore({
   reducer: {
     restaurant: _persistedReducer
   },
@@ -32,3 +32,8 @@ export default configureStore({
       }
     })
 });
+
+export type AppDispatch = typeof store.dispatch
+
+
+export default store;

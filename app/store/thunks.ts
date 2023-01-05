@@ -28,7 +28,7 @@ export const PopulateRestaurantList = createAsyncThunk(
       return rejectWithValue({ result: false, data: data });
     }
     //send Restaurant Array
-    return { result: true, restaurantList: data };
+    return { result: true, restaurantList: data } as resResult;
   }
 );
 
