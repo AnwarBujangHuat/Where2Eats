@@ -15,17 +15,19 @@ import { PopulateRestaurantList } from "app/store/thunks";
 import { Alert } from "react-native";
 import { routes } from "navigation/routes";
 import firebase from "firebase/compat/app";
-import type { resResult, restaurant as restaurantModal } from "app/model/restaurantItem";
+import type { resResult, restaurant } from "app/model/restaurantItem";
+import { foodItem } from "app/model/foodItem";
+import { user } from "app/model/user";
 
 export const Home = ({ navigation }) => {
   const fetchRestaurant = useSelector(getRestaurant);
-  const { NAME: userName, IMAGE } = useSelector(getUser);
+  const { NAME: userName, IMAGE }: user = useSelector(getUser);
   const dispatch = useDispatch<AppDispatch>();
-  const restaurant = [...fetchRestaurant];
-  const [currentRestaurant, setCurrentRestaurant] = useState(restaurant);
-  const [selectedTypes, setSelectedTypes] = useState([]);
-  const [isOpenMenu, setOpenMenu] = useState(false);
-  const [isFetching, setIsFetching] = useState(false);
+  const restaurant: restaurant[] = [...fetchRestaurant];
+  const [currentRestaurant, setCurrentRestaurant] = useState<restaurant[]>(restaurant);
+  const [selectedTypes, setSelectedTypes] = useState<foodItem[]>([]);
+  const [isOpenMenu, setOpenMenu] = useState<Boolean>(false);
+  const [isFetching, setIsFetching] = useState<Boolean>(false);
 
   const onClickCategoryChip = category => {
     //check if category item is already selected
@@ -58,7 +60,7 @@ export const Home = ({ navigation }) => {
     setIsFetching(true);
 
     const response = await dispatch(PopulateRestaurantList());
-    const { result, data } = response.payload as resResult;
+    const { result } = response.payload as resResult;
     if (!result) {
       Alert.alert(
         "error",

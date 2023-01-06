@@ -6,6 +6,8 @@ import {
 } from "firebase/firestore";
 import { ConstString } from "configs/Strings";
 import { resResult } from "model/restaurantItem";
+import { rating } from "app/model/ratingItem";
+import { foodItem } from "app/model/foodItem";
 
 const restaurantCollectionRef = firebase.firestore().collection(ConstString.RESTAURANT);
 const errorObj = {
@@ -22,13 +24,14 @@ const errorObj = {
 };
 export const PopulateRestaurantList = createAsyncThunk(
   "getRestaurantList",
-  async (request: void, { dispatch, rejectWithValue }) => {
+  async (request, { dispatch, rejectWithValue }) => {
     const { result: onSuccess, data }: any = await requestFetchRestaurantList();
     if (!onSuccess) {
       return rejectWithValue({ result: false, data: data });
     }
     //send Restaurant Array
-    return { result: true, restaurantList: data } as resResult;
+    const response = { result: true, data: data };
+    return response as resResult;
   }
 );
 
@@ -53,7 +56,7 @@ const requestFetchRestaurantList = () =>
 export const AddOne = createAsyncThunk(
   "AddOneRestaurant",
   async (request, { dispatch, rejectWithValue }) => {
-    const { onSuccess, data } = await addOne(request);
+    const { onSuccess, data } = await addOne(request) as { onSuccess: boolean, data: any };
     if (!onSuccess) rejectWithValue(data);
     return { onSuccess, data };
   }
@@ -76,8 +79,16 @@ export const changeTheme = createAsyncThunk(
 
 export const updateRating = createAsyncThunk(
   "AddNewRating",
-  async (request, { dispatch, rejectWithValue }) => {
-    const { id, userReview, userReviewResult, avg } = request;
+  async (request: { id: string, userReview: string, userReviewResult: string, avg: number }, {
+    dispatch,
+    rejectWithValue
+  }) => {
+    const {
+      id,
+      userReview,
+      userReviewResult,
+      avg
+    } = request;
 
     // Guard Clause Technique
     //* Remove old review *//
@@ -86,18 +97,18 @@ export const updateRating = createAsyncThunk(
       id,
       "rating",
       arrayRemove(review)
-    );
+    ) as { onSuccess: boolean };
     if (!successRemove) {
       return rejectWithValue({ errorMessage: "error removing review" });
     } // handle error
 
     //* Add new review *//
-    const result = await userReviewResult ?? "";
+    const result = userReviewResult ?? "";
     const { onSuccess: successUpdate } = await requestUpdateRestaurant(
       id,
       "rating",
       arrayUnion(result)
-    );
+    ) as { onSuccess: boolean };
     if (!successUpdate) {
       return rejectWithValue({ errorMessage: "error adding review" });
     } // handle error
@@ -108,7 +119,7 @@ export const updateRating = createAsyncThunk(
       id,
       "rate",
       average
-    );
+    ) as { onSuccess: boolean };
     if (!successUpdateAvg) {
       return rejectWithValue({ errorMessage: "error updating new average" });
     } // handle error
@@ -127,13 +138,14 @@ const requestUpdateRestaurant = (id, field, value) =>
 
 export const updateFoodItemFirebase = createAsyncThunk(
   "UpdateFoodItem",
-  async (request, { dispatch, rejectWithValue }) => {
+  async (request: { id: string, foodItem: any, initialFoodItem: any }
+    , { dispatch, rejectWithValue }) => {
     const { id, foodItem, initialFoodItem } = request;
     const resultRemove = await requestUpdateFoodItem(
       id,
       arrayRemove(initialFoodItem !== undefined ? initialFoodItem : "")
     );
-    const { onSuccess: onSuccessRemove } = resultRemove;
+    const { onSuccess: onSuccessRemove } = resultRemove as { onSuccess: boolean };
     if (!onSuccessRemove) {
       return rejectWithValue({
         result: onSuccessRemove,
@@ -142,7 +154,7 @@ export const updateFoodItemFirebase = createAsyncThunk(
     }
 
     const resultAdd = await requestUpdateFoodItem(id, arrayUnion(foodItem));
-    const { onSuccess: onSuccessAdd } = resultAdd;
+    const { onSuccess: onSuccessAdd } = resultAdd as { onSuccess: boolean };
     if (!onSuccessAdd) {
       return rejectWithValue({
         result: onSuccessAdd,
@@ -164,10 +176,10 @@ const requestUpdateFoodItem = (id, action) =>
 
 export const addFoodItemFirebase = createAsyncThunk(
   "AddFoodItem",
-  async (request, { dispatch, rejectWithValue }) => {
+  async (request: { id: string, foodItem: foodItem }, { dispatch, rejectWithValue }) => {
     const { id, foodItem } = request;
     const result = await requestAddNewFoodItem(id, foodItem);
-    const { onSuccess } = result;
+    const { onSuccess } = result as { onSuccess: boolean };
     if (!onSuccess) {
       return rejectWithValue({ result: onSuccess });
     }
@@ -185,11 +197,11 @@ const requestAddNewFoodItem = (id, foodItem) =>
 
 export const removeFoodItemFirebase = createAsyncThunk(
   "RemoveFoodItem",
-  async (request, { dispatch, rejectWithValue }) => {
+  async (request: { id: string, foodItem: foodItem, restaurantName: string }, { dispatch, rejectWithValue }) => {
     try {
       const { id, foodItem, restaurantName } = request;
       const resultRemove = await requestRemoveFoodItem(id, foodItem);
-      const { onSuccess } = resultRemove;
+      const { onSuccess } = resultRemove as { onSuccess: boolean };
       if (!onSuccess) {
         return rejectWithValue({
           result: onSuccess,
@@ -202,7 +214,7 @@ export const removeFoodItemFirebase = createAsyncThunk(
         foodItem,
         restaurantName
       );
-      const { onSuccess: onSuccessRemoveImage, data } = resultRemoveImage;
+      const { onSuccess: onSuccessRemoveImage, data } = resultRemoveImage as { onSuccess: boolean, data: any };
       console.log(data);
       if (!onSuccessRemoveImage) {
         return rejectWithValue({
@@ -243,7 +255,14 @@ const requestDeleteFoodItemImage = (id, foodItem, restaurantName) =>
 
 export const updateRestaurantInfoFirestore = createAsyncThunk(
   "updateRestaurant",
-  async (request, { dispatch, rejectWithValue }) => {
+  async (request: {
+    id: string,
+    restaurantName: string,
+    selectedTypes: string,
+    restaurantLocation: string,
+    restaurantDesc: string,
+    image: string
+  }, { dispatch, rejectWithValue }) => {
     const {
       id,
       restaurantName,
@@ -260,7 +279,7 @@ export const updateRestaurantInfoFirestore = createAsyncThunk(
       restaurantLocation,
       restaurantDesc,
       image
-    );
+    ) as { onSuccess: boolean };
     if (!successUpdateInfo) {
       return rejectWithValue({
         result: successUpdateInfo,
@@ -295,10 +314,10 @@ const requestUpdateRestaurantInfo = (
 
 export const fetchUserInformation = createAsyncThunk(
   "fetchUserInfo",
-  async (request, { dispatch, rejectWithValue }) => {
+  async (request: { uid: string }, { dispatch, rejectWithValue }) => {
     const { uid } = request;
     const { onSuccess: userExistInDatabase, data: userData } =
-      await getUserInformation(uid);
+      await getUserInformation(uid) as { onSuccess: boolean, data: any };
     if (!userExistInDatabase) {
       return rejectWithValue({
         result: false,
