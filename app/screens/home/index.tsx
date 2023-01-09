@@ -5,7 +5,7 @@ import {
   getUser
 } from "store/selector";
 import {
-  AppDispatch
+  AppDispatch, useAppDispatch
 } from "store/store";
 import {
   useDispatch,
@@ -22,7 +22,7 @@ import { user } from "model/user";
 export const Home = ({ navigation }) => {
   const fetchRestaurant = useSelector(getRestaurant);
   const { NAME: userName, IMAGE }: user = useSelector(getUser);
-  const dispatch = useDispatch<AppDispatch>();
+  const dispatch = useAppDispatch();
   const restaurant: restaurant[] = [...fetchRestaurant];
   const [currentRestaurant, setCurrentRestaurant] = useState<restaurant[]>(restaurant);
   const [selectedTypes, setSelectedTypes] = useState<foodItem[]>([]);
