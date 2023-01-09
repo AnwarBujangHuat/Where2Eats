@@ -1,6 +1,6 @@
 import { ConstString } from "./Strings";
 
-const theme = 1;
+const theme = 0;
 export const icons = {
   [ConstString.WESTERN]: require("../assets/images/cheeseburger.png"),
   [ConstString.MALAY]: require("../assets/images/nasi-lemak.png"),
