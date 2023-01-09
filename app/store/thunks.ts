@@ -72,7 +72,7 @@ const addOne = async (restaurant) =>
 
 export const changeTheme = createAsyncThunk(
   "ChangeAppTheme",
-  async (request, { dispatch, rejectWithValue }) => {
+  async (request) => {
     return request;
   }
 );

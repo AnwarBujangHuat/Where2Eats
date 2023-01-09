@@ -92,7 +92,7 @@ export const HomeComponents = props => {
         maxToRenderPerBatch={4}
         initialNumToRender={3}
         removeClippedSubviews={true}
-        keyExtractor={(item, index) => index}
+        keyExtractor={(item, index) => index + item}
         showsHorizontalScrollIndicator={false}
       />
       <FloatingActionButton onPress={gotoRoulette} />

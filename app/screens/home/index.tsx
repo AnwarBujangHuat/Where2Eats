@@ -11,13 +11,13 @@ import {
   useDispatch,
   useSelector
 } from "react-redux";
-import { PopulateRestaurantList } from "app/store/thunks";
+import { PopulateRestaurantList } from "store/thunks";
 import { Alert } from "react-native";
 import { routes } from "navigation/routes";
 import firebase from "firebase/compat/app";
-import type { resResult, restaurant } from "app/model/restaurantItem";
-import { foodItem } from "app/model/foodItem";
-import { user } from "app/model/user";
+import type { resResult, restaurant } from "model/restaurantItem";
+import { foodItem } from "model/foodItem";
+import { user } from "model/user";
 
 export const Home = ({ navigation }) => {
   const fetchRestaurant = useSelector(getRestaurant);
